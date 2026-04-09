@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax's ADHD Daily Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS — Edit these to change everything
+   ═══════════════════════════════════════════════ */
+:root {
+  /* Page */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 14mm;
+
+  /* Colors — Warm stone palette */
+  --bg: #FAF8F5;
+  --surface: #F3F0EB;
+  --surface-alt: #EDE9E3;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A4A;
+  --ink-3: #8A8580;
+  --rule: #D9D4CD;
+  --rule-light: #E8E4DE;
+
+  --accent: #C45D3E;       /* terracotta */
+  --accent-soft: #F2D8CC;
+  --green: #5E8B6A;        /* sage */
+  --green-soft: #D4E4D8;
+  --blue: #4A6FA5;         /* steel */
+  --blue-soft: #D3DEF0;
+  --amber: #C4933F;        /* warm amber */
+  --amber-soft: #F0E4C8;
+  --dark: #2C2825;
+  --cream: #FFF8F0;
+
+  /* Typography */
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing (4pt grid) */
+  --s1: 2mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
+  --s6: 14mm;
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & PAGE SETUP
+   ═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E0DDD8;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  color: var(--ink);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--bg);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  @page { size: A4; margin: 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════ */
+.page-title {
+  font-family: var(--font-display);
+  font-size: 18pt;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.page-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 7.5pt;
+  color: var(--ink-3);
+  margin-top: 1.5mm;
+}
+.page-num {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--ink-3);
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE HEADER
+   ═══════════════════════════════════════════════ */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: var(--s3);
+  border-top: 3px solid var(--accent);
+  padding-top: var(--s3);
+  flex-shrink: 0;
+}
+
+/* Date row */
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+  padding: var(--s2) 0;
+  border-bottom: 0.3px solid var(--rule);
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+  font-size: 7.5pt;
+  color: var(--ink-3);
+}
+.date-row label { font-weight: 500; }
+.date-row .field {
+  border-bottom: 0.5px solid var(--rule);
+  min-width: 22mm;
+  height: 4.5mm;
+  display: inline-block;
+}
+.day-circles {
+  display: flex;
+  gap: 2mm;
+}
+.day-circle {
+  width: 5.5mm;
+  height: 5.5mm;
+  border-radius: 50%;
+  border: 0.5px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5.5pt;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION LABELS
+   ═══════════════════════════════════════════════ */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: var(--s2);
+  margin-top: var(--s4);
+}
+.section-label:first-child,
+.section-label.no-top { margin-top: 0; }
+
+.section-dot {
+  width: 3mm;
+  height: 3mm;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.section-dot.green { background: var(--green); }
+.section-dot.blue { background: var(--blue); }
+.section-dot.amber { background: var(--amber); }
+
+.section-title {
+  font-weight: 700;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.section-source {
+  font-style: italic;
+  font-size: 6pt;
+  color: var(--ink-3);
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════════ */
+
+/* Checkbox */
+.cb {
+  display: inline-flex;
+  align-items: center;
+  gap: 2mm;
+  font-size: 8pt;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+.cb::before {
+  content: '';
+  width: 3.5mm;
+  height: 3.5mm;
+  border: 0.5px solid var(--rule);
+  border-radius: 0.7mm;
+  flex-shrink: 0;
+  background: var(--bg);
+}
+.cb-sm::before { width: 2.8mm; height: 2.8mm; }
+
+/* Inline field (dotted underline) */
+.field-line {
+  border-bottom: 0.5px dotted var(--rule-light);
+  min-width: 18mm;
+  display: inline-block;
+  height: 4mm;
+  vertical-align: baseline;
+}
+.field-line.wide { min-width: 35mm; }
+.field-line.xwide { min-width: 55mm; }
+
+/* Rating circles */
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--s2);
+}
+.rating-label {
+  width: 22mm;
+  font-size: 7.5pt;
+  color: var(--ink-2);
+  flex-shrink: 0;
+}
+.rating-circles {
+  display: flex;
+  gap: 1mm;
+}
+.rating-circle {
+  width: 4mm;
+  height: 4mm;
+  border-radius: 50%;
+  border: 0.4px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 4pt;
+  color: var(--ink-3);
+}
+
+/* Pill / priority badge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 6mm;
+  height: 6mm;
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-size: 7pt;
+  flex-shrink: 0;
+}
+.pill.accent { background: var(--accent); }
+.pill.blue { background: var(--blue); }
+.pill.green { background: var(--green); }
+.pill.amber { background: var(--amber); }
+.pill.muted { background: var(--surface-alt); color: var(--ink-3); }
+
+/* Card / box */
+.card {
+  background: var(--surface);
+  border-radius: 2.5mm;
+  padding: var(--s2) var(--s3);
+}
+.card.cream { background: var(--cream); }
+.card.green-soft { background: var(--green-soft); }
+.card.blue-soft { background: var(--blue-soft); }
+.card.amber-soft { background: var(--amber-soft); }
+.card.accent-soft { background: var(--accent-soft); }
+.card.bordered { border: 0.4px solid var(--rule-light); }
+
+.card-title {
+  font-weight: 700;
+  font-size: 7pt;
+  margin-bottom: var(--s1);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.card-title.accent { color: var(--accent); }
+.card-title.green { color: var(--green); }
+.card-title.blue { color: var(--blue); }
+.card-title.amber { color: var(--amber); }
+
+/* Table */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7pt;
+}
+.tbl thead th {
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 6.5pt;
+  padding: 1.5mm 2mm;
+  text-align: left;
+}
+.tbl thead th:first-child { border-radius: 1.5mm 0 0 1.5mm; }
+.tbl thead th:last-child { border-radius: 0 1.5mm 1.5mm 0; }
+.tbl tbody td {
+  padding: 2mm 2mm;
+  border-bottom: 0.3px dotted var(--rule-light);
+  vertical-align: middle;
+}
+.tbl tbody tr:nth-child(even) { background: var(--surface); }
+
+/* Two-column layout */
+.cols {
+  display: flex;
+  gap: var(--s4);
+}
+.col { flex: 1; min-width: 0; }
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+/* Big 3 task row */
+.big3-row {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  margin-bottom: var(--s2);
+}
+.big3-task {
+  flex: 1;
+  border-bottom: 0.5px dotted var(--rule-light);
+  min-height: 4.5mm;
+}
+.big3-predict {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  color: var(--ink-3);
+  text-align: center;
+  width: 16mm;
+  flex-shrink: 0;
+}
+.big3-predict .val {
+  border-bottom: 0.5px solid var(--rule);
+  display: block;
+  min-height: 4mm;
+  margin-top: 0.5mm;
+}
+
+/* Time block */
+.time-block {
+  flex: 1;
+  background: var(--surface);
+  border-radius: 2mm;
+  border: 0.4px solid var(--rule-light);
+  padding: var(--s2) var(--s2);
+  font-size: 7pt;
+}
+.time-block:nth-child(2) { background: var(--cream); }
+.time-block .block-title {
+  font-weight: 700;
+  font-size: 7.5pt;
+  margin-bottom: var(--s1);
+}
+.time-block .block-field {
+  display: flex;
+  gap: 1.5mm;
+  margin-bottom: 1.5mm;
+  color: var(--ink-3);
+  font-size: 6.5pt;
+}
+.time-block .block-field .field-line { min-width: 14mm; }
+.time-block .block-status {
+  display: flex;
+  gap: 2.5mm;
+  font-size: 6pt;
+  color: var(--ink-3);
+  margin-top: var(--s1);
+}
+.time-block .block-status .cb::before { width: 2.5mm; height: 2.5mm; }
+
+/* Quote banner */
+.quote-banner {
+  background: var(--dark);
+  border-radius: 3mm;
+  padding: var(--s2) var(--s3);
+  text-align: center;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+.quote-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 8pt;
+  color: var(--accent-soft);
+}
+.quote-author {
+  font-size: 6pt;
+  color: #9A9590;
+  margin-top: 1mm;
+}
+
+/* Habit tracker row */
+.habit-row {
+  display: flex;
+  align-items: center;
+  padding: 1.2mm 0;
+  font-size: 7.5pt;
+}
+.habit-row:nth-child(odd) { background: var(--surface); border-radius: 1mm; padding-left: 2mm; padding-right: 2mm; }
+.habit-row:nth-child(even) { padding-left: 2mm; padding-right: 2mm; }
+.habit-name { flex: 1; color: var(--ink-2); }
+.habit-name .cb::before { margin-right: 0; }
+
+/* Scorecard grid for weekly */
+.score-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6.5pt;
+}
+.score-grid thead th {
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 600;
+  padding: 1.5mm 1mm;
+  text-align: center;
+  font-size: 6pt;
+}
+.score-grid thead th:first-child { text-align: left; padding-left: 2mm; border-radius: 1.5mm 0 0 1.5mm; }
+.score-grid thead th:last-child { border-radius: 0 1.5mm 1.5mm 0; }
+.score-grid tbody td {
+  padding: 1.5mm 1mm;
+  text-align: center;
+  border-bottom: 0.3px dotted var(--rule-light);
+}
+.score-grid tbody td:first-child { text-align: left; padding-left: 2mm; font-size: 6.5pt; color: var(--ink-2); }
+.score-grid tbody tr:nth-child(even) { background: var(--surface); }
+.score-grid .score-box {
+  width: 3.5mm;
+  height: 3.5mm;
+  border: 0.4px solid var(--rule);
+  border-radius: 0.5mm;
+  display: inline-block;
+}
+
+/* Dotted writing line */
+.write-line {
+  border-bottom: 0.5px dotted var(--rule-light);
+  height: 5mm;
+  margin-bottom: 1mm;
+}
+
+/* Mood graph placeholder */
+.mood-graph {
+  background: var(--surface);
+  border: 0.4px solid var(--rule-light);
+  border-radius: 2mm;
+  padding: var(--s2);
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  height: 38mm;
+  position: relative;
+}
+.mood-graph .y-axis {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  height: 100%;
+  width: 8mm;
+  flex-shrink: 0;
+}
+.mood-graph .y-label {
+  font-family: var(--font-mono);
+  font-size: 4.5pt;
+  color: var(--ink-3);
+  text-align: right;
+  padding-right: 1.5mm;
+}
+.mood-graph .graph-area {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 100%;
+  border-left: 0.3px solid var(--rule);
+  border-bottom: 0.3px solid var(--rule);
+  position: relative;
+}
+.mood-graph .day-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+.mood-graph .day-dot {
+  width: 5mm;
+  height: 5mm;
+  border: 0.6px solid var(--accent-soft);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.mood-graph .day-label {
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--ink-2);
+  position: absolute;
+  bottom: -5mm;
+}
+/* Gridlines */
+.mood-graph .graph-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to top, transparent, transparent calc(10% - 0.15px), var(--rule-light) calc(10% - 0.15px), var(--rule-light) 10%);
+}
+
+/* Content area to push quote banner down */
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Smaller helper text */
+.helper {
+  font-style: italic;
+  font-size: 6.5pt;
+  color: var(--ink-3);
+  margin-bottom: var(--s2);
+}
+
+/* Triple column for thought check */
+.triple-col {
+  display: flex;
+  gap: var(--s2);
+}
+.triple-col .col-card {
+  flex: 1;
+  border-radius: 2mm;
+  border: 0.4px solid var(--rule-light);
+  padding: var(--s2);
+  min-height: 22mm;
+}
+.triple-col .col-card h4 {
+  font-size: 7pt;
+  font-weight: 700;
+  margin-bottom: 1mm;
+}
+.triple-col .col-card p {
+  font-size: 5.5pt;
+  font-style: italic;
+  color: var(--ink-3);
+  margin-bottom: var(--s2);
+}
+
+/* Jar level inline */
+.jar-row {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  font-size: 7pt;
+  color: var(--ink-2);
+  margin-bottom: 1.5mm;
+}
+.jar-row .cb-sm { font-size: 6pt; gap: 1mm; }
+
+/* Reflection boxes */
+.reflect-box {
+  flex: 1;
+  border-radius: 2mm;
+  padding: var(--s2) var(--s3);
+  min-height: 26mm;
+}
+.reflect-box.wins { background: var(--green-soft); }
+.reflect-box.fails { background: #F8EBE7; }
+.reflect-line {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  margin-bottom: 2mm;
+  font-size: 7pt;
+}
+.reflect-num { font-weight: 600; width: 3mm; }
+.reflect-line .field-line { flex: 1; }
+
+/* Break-it-down steps */
+.step-row {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 2mm;
+}
+.step-num {
+  width: 5mm;
+  height: 5mm;
+  border-radius: 50%;
+  background: var(--amber);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6pt;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-row .field-line { flex: 1; }
+
+/* Compact spacing utils */
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: var(--s1) !important; }
+.mt-2 { margin-top: var(--s2) !important; }
+.mt-3 { margin-top: var(--s3) !important; }
+.mt-4 { margin-top: var(--s4) !important; }
+.mb-1 { margin-bottom: var(--s1) !important; }
+.mb-2 { margin-bottom: var(--s2) !important; }
+.mb-3 { margin-bottom: var(--s3) !important; }
+.gap-sm { gap: var(--s2) !important; }
+.text-muted { color: var(--ink-3); }
+.text-sm { font-size: 6.5pt; }
+.text-xs { font-size: 5.5pt; }
+.text-accent { color: var(--accent); }
+.text-green { color: var(--green); }
+.text-blue { color: var(--blue); }
+.text-amber { color: var(--amber); }
+.italic { font-style: italic; }
+.bold { font-weight: 700; }
+.mono { font-family: var(--font-mono); }
+.serif { font-family: var(--font-display); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 1: MORNING LAUNCH PAD
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Morning Launch Pad</div>
+      <div class="page-subtitle">Wake · Meds · Check-in · Plan · Go</div>
+    </div>
+    <div class="page-num">01 / 05</div>
+  </div>
+
+  <div class="date-row">
+    <label>Date</label><span class="field"></span>
+    <label>Day</label>
+    <div class="day-circles">
+      <div class="day-circle">M</div><div class="day-circle">T</div><div class="day-circle">W</div>
+      <div class="day-circle">T</div><div class="day-circle">F</div><div class="day-circle">S</div><div class="day-circle">S</div>
+    </div>
+    <label>Woke at</label><span class="field" style="min-width:14mm"></span>
+    <label>Target</label><span class="field" style="min-width:14mm"></span>
+  </div>
+
+  <div class="page-content">
+    <div class="cols">
+      <!-- LEFT COLUMN -->
+      <div class="col">
+        <div class="section-label no-top">
+          <div class="section-dot"></div>
+          <div class="section-title">Wake-Up Sequence</div>
+        </div>
+        <div class="checklist">
+          <label class="cb">Took morning meds</label>
+          <label class="cb">Drank a glass of water</label>
+          <label class="cb">Opened curtains / sunlight</label>
+          <label class="cb">Brushed teeth</label>
+          <label class="cb">Got dressed (not PJs)</label>
+        </div>
+
+        <div class="card bordered mt-3">
+          <div class="card-title accent">💊 Medication Log</div>
+          <div style="display:grid; grid-template-columns: 1fr auto; gap: 1mm 3mm; font-size: 7pt; color: var(--ink-2);">
+            <span>Dexbutrin (45+105)</span><span class="mono text-muted text-xs">☐ AM &ensp; ☐ PM</span>
+            <span>Inspiral-SR 10mg</span><span class="mono text-muted text-xs">☐ ×2AM &ensp; ☐ ×1PM</span>
+            <span>Amlokind AT</span><span class="mono text-muted text-xs">☐ Taken</span>
+            <span>Rosuvastatin 10mg</span><span class="mono text-muted text-xs">☐ Taken</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col">
+        <div class="section-label no-top">
+          <div class="section-dot blue"></div>
+          <div class="section-title">Morning Check-In</div>
+        </div>
+        <div class="rating-row"><span class="rating-label">Mood</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+        <div class="rating-row"><span class="rating-label">Energy</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+        <div class="rating-row"><span class="rating-label">Anxiety</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+        <div class="rating-row"><span class="rating-label">Sleep quality</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+
+        <div class="card cream bordered mt-2">
+          <div class="card-title green">🫙 Body Scan <span class="text-muted italic text-xs" style="font-weight:400">(Shreya's homework)</span></div>
+          <div class="jar-row"><span>Jar level:</span> <label class="cb-sm cb">Empty</label> <label class="cb-sm cb">¼</label> <label class="cb-sm cb">½</label> <label class="cb-sm cb">¾</label> <label class="cb-sm cb">Full</label></div>
+          <div class="jar-row"><span>Chest weight (kg):</span> <span class="field-line"></span></div>
+          <div class="jar-row"><span>Breath:</span> <label class="cb-sm cb">Shallow</label> <label class="cb-sm cb">Normal</label> <label class="cb-sm cb">Deep</label></div>
+        </div>
+
+        <div class="card green-soft mt-2" style="padding: var(--s2) var(--s3);">
+          <span style="font-weight:600; font-size:7.5pt; color: var(--green);">Today I want to feel:</span>
+          <span class="field-line wide"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BIG 3 -->
+    <div class="section-label" style="border-top: 0.3px solid var(--rule); padding-top: var(--s3);">
+      <div class="section-dot"></div>
+      <div class="section-title">Today's Big 3 — not 10, not 5, just 3</div>
+    </div>
+    <div class="helper">If you do ONLY these, today was a win. (Barkley: externalize → write it down)</div>
+
+    <div class="big3-row">
+      <div class="pill accent">1</div>
+      <div class="big3-task"></div>
+      <div class="big3-predict">Predict<br>diff%<div class="val"></div></div>
+      <div class="big3-predict">Actual<br>diff%<div class="val"></div></div>
+    </div>
+    <div class="big3-row">
+      <div class="pill blue">2</div>
+      <div class="big3-task"></div>
+      <div class="big3-predict">Predict<br>diff%<div class="val"></div></div>
+      <div class="big3-predict">Actual<br>diff%<div class="val"></div></div>
+    </div>
+    <div class="big3-row">
+      <div class="pill green">3</div>
+      <div class="big3-task"></div>
+      <div class="big3-predict">Predict<br>diff%<div class="val"></div></div>
+      <div class="big3-predict">Actual<br>diff%<div class="val"></div></div>
+    </div>
+
+    <!-- Implementation Intention -->
+    <div class="card bordered mt-2">
+      <div class="card-title accent">⚡ Implementation Intention <span class="text-muted italic text-xs" style="font-weight:400">(Atomic Habits)</span></div>
+      <div style="font-size: 8pt; color: var(--ink-2);">
+        I will <span class="field-line xwide"></span> at <span class="field-line"></span> in <span class="field-line wide"></span>
+      </div>
+      <div class="text-muted italic text-xs mt-1">Habit stack: "After I [current habit], I will [new habit]." → "After I pour my coffee, I will open study notes."</div>
+    </div>
+
+    <!-- Time Blocks -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Time Blocks — make time physical</div>
+      <div class="section-source">(Barkley: externalize time)</div>
+    </div>
+    <div class="helper">Don't plan every hour. Just anchor 2–3 work chunks. Mark actual start after.</div>
+    <div class="cols gap-sm">
+      <div class="time-block">
+        <div class="block-title">Block 1</div>
+        <div class="block-field"><span>Time:</span> <span class="field-line"></span></div>
+        <div class="block-field"><span>Task:</span> <span class="field-line" style="flex:1"></span></div>
+        <div class="block-field"><span>Started at:</span> <span class="field-line"></span></div>
+        <div class="block-status"><label class="cb cb-sm">Done</label> <label class="cb cb-sm">Partial</label> <label class="cb cb-sm">No</label></div>
+      </div>
+      <div class="time-block">
+        <div class="block-title">Block 2</div>
+        <div class="block-field"><span>Time:</span> <span class="field-line"></span></div>
+        <div class="block-field"><span>Task:</span> <span class="field-line" style="flex:1"></span></div>
+        <div class="block-field"><span>Started at:</span> <span class="field-line"></span></div>
+        <div class="block-status"><label class="cb cb-sm">Done</label> <label class="cb cb-sm">Partial</label> <label class="cb cb-sm">No</label></div>
+      </div>
+      <div class="time-block">
+        <div class="block-title">Block 3</div>
+        <div class="block-field"><span>Time:</span> <span class="field-line"></span></div>
+        <div class="block-field"><span>Task:</span> <span class="field-line" style="flex:1"></span></div>
+        <div class="block-field"><span>Started at:</span> <span class="field-line"></span></div>
+        <div class="block-status"><label class="cb cb-sm">Done</label> <label class="cb cb-sm">Partial</label> <label class="cb cb-sm">No</label></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-banner">
+    <div class="quote-text">"Motivation follows action, not vice versa."</div>
+    <div class="quote-author">— David Burns</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 2: DAILY BATTLE LOG
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Daily Battle Log</div>
+      <div class="page-subtitle">Track what actually happens. No judgment, just data.</div>
+    </div>
+    <div class="page-num">02 / 05</div>
+  </div>
+
+  <div class="date-row">
+    <label>Date</label><span class="field"></span>
+    <label>Day</label>
+    <div class="day-circles">
+      <div class="day-circle">M</div><div class="day-circle">T</div><div class="day-circle">W</div>
+      <div class="day-circle">T</div><div class="day-circle">F</div><div class="day-circle">S</div><div class="day-circle">S</div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <!-- Distraction Log -->
+    <div class="section-label no-top">
+      <div class="section-dot"></div>
+      <div class="section-title">Distraction Log — catch it, name it, return</div>
+      <div class="section-source">(Safren: distractibility delay)</div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:12%">Time</th><th style="width:30%">What pulled me away</th><th style="width:30%">Was supposed to do</th><th style="width:15%">Returned?</th><th style="width:13%">Lost (min)</th></tr></thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Anti-Procrastination -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Anti-Procrastination Sheet — predicted vs actual</div>
+      <div class="section-source">(Burns CBT)</div>
+    </div>
+    <div class="helper">Before starting: predict difficulty (0–100%). After: record actual. You'll be surprised.</div>
+    <table class="tbl">
+      <thead><tr><th style="width:36%">Task / step</th><th>Predict difficulty%</th><th>Predict satisfy%</th><th>Actual difficulty%</th><th>Actual satisfy%</th></tr></thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Midday check + Wins -->
+    <div class="cols mt-4">
+      <div class="col">
+        <div class="section-label no-top">
+          <div class="section-dot green"></div>
+          <div class="section-title">Midday Body Check</div>
+        </div>
+        <div class="card cream bordered">
+          <div class="jar-row"><span style="font-weight:500">Time:</span> <span class="field-line"></span></div>
+          <div class="jar-row"><span>Jar level:</span> <label class="cb cb-sm">Empty</label> <label class="cb cb-sm">¼</label> <label class="cb cb-sm">½</label> <label class="cb cb-sm">¾</label> <label class="cb cb-sm">Full</label></div>
+          <div class="jar-row"><span>Chest weight (kg):</span> <span class="field-line"></span></div>
+          <div class="jar-row"><span>Feeling:</span> <span class="field-line wide"></span></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="section-label no-top">
+          <div class="section-dot green"></div>
+          <div class="section-title">Wins — no matter how small</div>
+        </div>
+        <div class="card green-soft" style="min-height: 28mm;">
+          <div style="display:flex;flex-direction:column;gap:2mm;">
+            <div style="display:flex;gap:2mm;align-items:center;font-size:7pt;"><span class="bold text-green">1.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+            <div style="display:flex;gap:2mm;align-items:center;font-size:7pt;"><span class="bold text-green">2.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+            <div style="display:flex;gap:2mm;align-items:center;font-size:7pt;"><span class="bold text-green">3.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+            <div style="display:flex;gap:2mm;align-items:center;font-size:7pt;"><span class="bold text-green">4.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+            <div style="display:flex;gap:2mm;align-items:center;font-size:7pt;"><span class="bold text-green">5.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2-Second Pause Log -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">2-Second Pause Log — before phone/cig: pause, notice, ask why</div>
+      <div class="section-source">(Shreya)</div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th style="width:12%">Time</th><th style="width:28%">Reached for what?</th><th style="width:18%">Did you pause?</th><th style="width:22%">Body feeling</th><th style="width:20%">Why?</th></tr></thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote-banner">
+    <div class="quote-text">"ADHD is a disorder of performance, not knowledge."</div>
+    <div class="quote-author">— Russell Barkley</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 3: TASK BOARD (NEW)
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Task Board</div>
+      <div class="page-subtitle">Dump it all here. Prioritize. Then do one thing.</div>
+    </div>
+    <div class="page-num">03 / 05</div>
+  </div>
+
+  <div class="date-row">
+    <label>Date</label><span class="field"></span>
+    <label>Day</label>
+    <div class="day-circles">
+      <div class="day-circle">M</div><div class="day-circle">T</div><div class="day-circle">W</div>
+      <div class="day-circle">T</div><div class="day-circle">F</div><div class="day-circle">S</div><div class="day-circle">S</div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <!-- Brain Dump -->
+    <div class="section-label no-top">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Brain Dump — get it out of your head onto paper</div>
+      <div class="section-source">(Barkley: externalize working memory)</div>
+    </div>
+    <div class="cols gap-sm">
+      <div class="card bordered" style="min-height: 36mm;">
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      </div>
+      <div class="card bordered" style="min-height: 36mm;">
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- Prioritized Tasks -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">Prioritized Tasks — A = must do &ensp; B = should do &ensp; C = could do</div>
+      <div class="section-source">(Safren: A-B-C triage)</div>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:6%">Pri</th>
+          <th style="width:42%">Task</th>
+          <th style="width:16%">Deadline</th>
+          <th style="width:22%">First tiny step</th>
+          <th style="width:14%; text-align:center">Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="pill accent" style="width:5mm;height:5mm;font-size:6pt;">A</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+        <tr><td><span class="pill accent" style="width:5mm;height:5mm;font-size:6pt;">A</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+        <tr><td><span class="pill accent" style="width:5mm;height:5mm;font-size:6pt;">A</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+        <tr style="border-top: 0.6px solid var(--accent-soft);"><td><span class="pill amber" style="width:5mm;height:5mm;font-size:6pt;">B</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+        <tr><td><span class="pill amber" style="width:5mm;height:5mm;font-size:6pt;">B</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+        <tr><td><span class="pill amber" style="width:5mm;height:5mm;font-size:6pt;">B</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+        <tr style="border-top: 0.6px solid var(--amber-soft);"><td><span class="pill blue" style="width:5mm;height:5mm;font-size:6pt;">C</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+        <tr><td><span class="pill blue" style="width:5mm;height:5mm;font-size:6pt;">C</span></td><td></td><td></td><td></td><td style="text-align:center"><label class="cb cb-sm" style="justify-content:center"></label></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Break it down -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Stuck? Break it down — the task you're avoiding</div>
+      <div class="section-source">(Burns: "Little Steps for Little Feet")</div>
+    </div>
+    <div class="card amber-soft bordered">
+      <div style="font-size:7.5pt; color:var(--ink-2); margin-bottom: var(--s2);">
+        The task I'm avoiding: <span class="field-line xwide"></span>
+      </div>
+      <div style="font-weight:600; font-size:7pt; margin-bottom: var(--s2); color: var(--amber);">Break into tiny steps (2 min each):</div>
+      <div class="step-row"><div class="step-num">1</div><span class="field-line" style="flex:1"></span></div>
+      <div class="step-row"><div class="step-num">2</div><span class="field-line" style="flex:1"></span></div>
+      <div class="step-row"><div class="step-num">3</div><span class="field-line" style="flex:1"></span></div>
+      <div class="step-row"><div class="step-num">4</div><span class="field-line" style="flex:1"></span></div>
+      <div class="step-row"><div class="step-num">5</div><span class="field-line" style="flex:1"></span></div>
+    </div>
+
+    <!-- If-Then Rescue -->
+    <div class="card bordered mt-3">
+      <div class="card-title accent">🚨 If-Then Rescue Plan <span class="text-muted italic text-xs" style="font-weight:400">(for when you get pulled away)</span></div>
+      <div style="font-size:7.5pt; color:var(--ink-2);">
+        If I catch myself on YouTube/Reddit/scrolling → <strong>5-4-3-2-1</strong> count back, say <em>"not now"</em> aloud, return.
+      </div>
+      <div style="font-size:7.5pt; color:var(--ink-2); margin-top:var(--s1);">
+        My reward after finishing one task: <span class="field-line wide"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-banner">
+    <div class="quote-text">"You don't have to feel like it. You just have to start."</div>
+    <div class="quote-author">— Two-Minute Rule (James Clear)</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 4: EVENING WIND-DOWN
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Evening Wind-Down</div>
+      <div class="page-subtitle">Review · Reflect · Reset · Rest</div>
+    </div>
+    <div class="page-num">04 / 05</div>
+  </div>
+
+  <div class="date-row">
+    <label>Date</label><span class="field"></span>
+    <label>Day</label>
+    <div class="day-circles">
+      <div class="day-circle">M</div><div class="day-circle">T</div><div class="day-circle">W</div>
+      <div class="day-circle">T</div><div class="day-circle">F</div><div class="day-circle">S</div><div class="day-circle">S</div>
+    </div>
+    <label>Filling at</label><span class="field" style="min-width:14mm"></span>
+  </div>
+
+  <div class="page-content">
+    <div class="cols">
+      <!-- LEFT: Evening check-in -->
+      <div class="col">
+        <div class="section-label no-top">
+          <div class="section-dot blue"></div>
+          <div class="section-title">Evening Check-In</div>
+        </div>
+        <div class="rating-row"><span class="rating-label">Mood now</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+        <div class="rating-row"><span class="rating-label">Energy</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+        <div class="rating-row"><span class="rating-label">Productivity</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+        <div class="rating-row"><span class="rating-label">Self-kindness</span><div class="rating-circles"><div class="rating-circle">1</div><div class="rating-circle">2</div><div class="rating-circle">3</div><div class="rating-circle">4</div><div class="rating-circle">5</div><div class="rating-circle">6</div><div class="rating-circle">7</div><div class="rating-circle">8</div><div class="rating-circle">9</div><div class="rating-circle">10</div></div></div>
+
+        <div class="card cream bordered mt-1">
+          <div class="card-title green">🫙 Evening Body Scan</div>
+          <div class="jar-row"><span>Jar:</span> <label class="cb cb-sm">E</label> <label class="cb cb-sm">¼</label> <label class="cb cb-sm">½</label> <label class="cb cb-sm">¾</label> <label class="cb cb-sm">F</label></div>
+          <div class="jar-row"><span>Chest weight:</span> <span class="field-line"></span> kg</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Big 3 review -->
+      <div class="col">
+        <div class="section-label no-top">
+          <div class="section-dot"></div>
+          <div class="section-title">Did I do my Big 3?</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--s2);">
+          <div style="display:flex;align-items:center;gap:2mm;"><span class="pill accent">1</span> <label class="cb cb-sm">Done</label> <label class="cb cb-sm">Partial</label> <label class="cb cb-sm">Skipped</label></div>
+          <div style="display:flex;align-items:center;gap:2mm;"><span class="pill blue">2</span> <label class="cb cb-sm">Done</label> <label class="cb cb-sm">Partial</label> <label class="cb cb-sm">Skipped</label></div>
+          <div style="display:flex;align-items:center;gap:2mm;"><span class="pill green">3</span> <label class="cb cb-sm">Done</label> <label class="cb cb-sm">Partial</label> <label class="cb cb-sm">Skipped</label></div>
+        </div>
+        <div class="mt-2" style="font-style:italic;font-size:6.5pt;color:var(--ink-3);">If skipped — no shame. What got in the way?</div>
+        <div class="write-line mt-1"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- Habit Tracker -->
+    <div class="section-label" style="border-top: 0.3px solid var(--rule); padding-top: var(--s3);">
+      <div class="section-dot green"></div>
+      <div class="section-title">Daily Habits — just check it off, don't break the chain</div>
+      <div class="section-source">(Clear: tiny version counts)</div>
+    </div>
+    <div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">💊 Meds taken (all doses)</label></span></div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">🚶 200 steps/hour (Dr. Joshi)</label></span></div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">💧 Water (4+ glasses)</label></span></div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">🛏️ In bed by target time</label></span></div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">📵 Phone away 30 min before bed</label></span></div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">📖 Read 1 page (anything)</label></span></div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">🧘 1 mindful moment (hold object, look out)</label></span></div>
+      <div class="habit-row"><span class="habit-name"><label class="cb">✍️ Filled this journal</label></span></div>
+    </div>
+
+    <!-- Thought Check -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Thought Check — catch one unhelpful thought</div>
+      <div class="section-source">(Burns: Triple Column)</div>
+    </div>
+    <div class="triple-col">
+      <div class="col-card" style="background: var(--surface);">
+        <h4>The thought</h4>
+        <p>What my mind said</p>
+        <div class="write-line"></div><div class="write-line"></div>
+      </div>
+      <div class="col-card" style="background: var(--amber-soft);">
+        <h4 class="text-amber">Distortion</h4>
+        <p>All-or-nothing? Fortune telling? Should statements?</p>
+        <div class="write-line"></div><div class="write-line"></div>
+      </div>
+      <div class="col-card" style="background: var(--green-soft);">
+        <h4 class="text-green">Reframe</h4>
+        <p>What would I tell a friend?</p>
+        <div class="write-line"></div><div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- Self-compassion + Tomorrow -->
+    <div class="cols mt-3 gap-sm">
+      <div class="card accent-soft bordered">
+        <div class="card-title accent">Self-Compassion</div>
+        <div style="font-size:7pt;color:var(--ink-2);margin-bottom:var(--s1);">One kind thing I can say to myself:</div>
+        <div class="write-line"></div><div class="write-line"></div>
+        <div class="serif italic text-xs text-muted mt-2">"This is a moment of suffering. May I be kind to myself."</div>
+      </div>
+      <div class="card blue-soft bordered">
+        <div class="card-title blue">Tomorrow's Anchor</div>
+        <div style="font-size:7pt;color:var(--ink-2);">Tomorrow's #1 task: <span class="field-line wide"></span></div>
+        <div style="font-size:7pt;color:var(--ink-2);margin-top:1.5mm;">Start at <span class="field-line"></span> in <span class="field-line"></span></div>
+        <div style="font-size:6pt;color:var(--ink-3);margin-top:var(--s2);font-weight:500;">Set up tonight:</div>
+        <div style="display:flex;gap:3mm;margin-top:1mm;"><label class="cb cb-sm" style="font-size:5.5pt">Close tabs</label> <label class="cb cb-sm" style="font-size:5.5pt">Open study material</label> <label class="cb cb-sm" style="font-size:5.5pt">Charge</label></div>
+      </div>
+    </div>
+
+    <!-- Sleep -->
+    <div class="card bordered mt-2" style="display:flex; gap:4mm; flex-wrap:wrap; align-items:center;">
+      <span class="bold text-blue" style="font-size:7pt;">😴 SLEEP</span>
+      <span style="font-size:7pt;color:var(--ink-2);">Target bedtime: <span class="field-line"></span></span>
+      <label class="cb cb-sm" style="font-size:6.5pt">Screen off 30min before</label>
+      <label class="cb cb-sm" style="font-size:6.5pt">Clonotril 0.25 (SOS)</label>
+      <label class="cb cb-sm" style="font-size:6.5pt">Room dark</label>
+      <label class="cb cb-sm" style="font-size:6.5pt">Clothes laid out</label>
+    </div>
+  </div>
+
+  <div class="quote-banner">
+    <div class="quote-text">"You showed up today. That's everything."</div>
+    <div class="quote-author">— Keep going</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 5: WEEKLY REVIEW
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Weekly Review</div>
+      <div class="page-subtitle">Every Sunday: look back, adjust, keep going.</div>
+    </div>
+    <div class="page-num">05 / 05</div>
+  </div>
+
+  <div class="date-row">
+    <label>Week of</label><span class="field"></span>
+    <label>to</label><span class="field"></span>
+  </div>
+
+  <div class="page-content">
+    <!-- Mood Graph -->
+    <div class="section-label no-top">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Week at a Glance — plot daily mood (1–10)</div>
+    </div>
+    <div class="mood-graph">
+      <div class="y-axis">
+        <span class="y-label">0</span><span class="y-label">2</span><span class="y-label">4</span><span class="y-label">6</span><span class="y-label">8</span><span class="y-label">10</span>
+      </div>
+      <div class="graph-area">
+        <div class="day-col"><div class="day-dot"></div><span class="day-label">Mon</span></div>
+        <div class="day-col"><div class="day-dot"></div><span class="day-label">Tue</span></div>
+        <div class="day-col"><div class="day-dot"></div><span class="day-label">Wed</span></div>
+        <div class="day-col"><div class="day-dot"></div><span class="day-label">Thu</span></div>
+        <div class="day-col"><div class="day-dot"></div><span class="day-label">Fri</span></div>
+        <div class="day-col"><div class="day-dot"></div><span class="day-label">Sat</span></div>
+        <div class="day-col"><div class="day-dot"></div><span class="day-label">Sun</span></div>
+      </div>
+    </div>
+
+    <!-- Habit Scorecard -->
+    <div class="section-label">
+      <div class="section-dot green"></div>
+      <div class="section-title">Habit Scorecard — how many days this week?</div>
+    </div>
+    <table class="score-grid">
+      <thead>
+        <tr><th style="width:36%">Habit</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th><th style="width:8%">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>💊 Meds (all doses)</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+        <tr><td>🚶 Movement / steps</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+        <tr><td>💧 Water 4+ glasses</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+        <tr><td>🛏️ Bedtime on target</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+        <tr><td>📵 Screen-free before bed</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+        <tr><td>✍️ Journal filled</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+        <tr><td>🧘 Mindful moment</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+        <tr><td>📖 Read 1 page</td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td><span class="score-box"></span></td><td>/7</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Reflection -->
+    <div class="cols mt-4 gap-sm">
+      <div>
+        <div class="section-label no-top">
+          <div class="section-dot green"></div>
+          <div class="section-title">What worked</div>
+        </div>
+        <div class="reflect-box wins">
+          <div class="reflect-line"><span class="reflect-num text-green">1.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+          <div class="reflect-line"><span class="reflect-num text-green">2.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+          <div class="reflect-line"><span class="reflect-num text-green">3.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+          <div class="reflect-line"><span class="reflect-num text-green">4.</span><span class="field-line" style="flex:1;border-color:#B5D4BB"></span></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label no-top">
+          <div class="section-dot"></div>
+          <div class="section-title">What didn't work</div>
+        </div>
+        <div class="reflect-box fails">
+          <div class="reflect-line"><span class="reflect-num text-accent">1.</span><span class="field-line" style="flex:1;border-color:var(--accent-soft)"></span></div>
+          <div class="reflect-line"><span class="reflect-num text-accent">2.</span><span class="field-line" style="flex:1;border-color:var(--accent-soft)"></span></div>
+          <div class="reflect-line"><span class="reflect-num text-accent">3.</span><span class="field-line" style="flex:1;border-color:var(--accent-soft)"></span></div>
+          <div class="reflect-line"><span class="reflect-num text-accent">4.</span><span class="field-line" style="flex:1;border-color:var(--accent-soft)"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- One Adjustment -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Next Week: One Adjustment</div>
+    </div>
+    <div class="card amber-soft bordered">
+      <div style="font-size:7.5pt;color:var(--ink-2);">What one thing will I change? <span class="field-line xwide"></span></div>
+      <div style="font-size:7.5pt;color:var(--ink-2);margin-top:var(--s2);">
+        After <span class="field-line wide"></span>, I will <span class="field-line wide"></span> at <span class="field-line"></span> in <span class="field-line"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-banner">
+    <div class="quote-text">"Never miss twice. A bad week doesn't erase a good day."</div>
+    <div class="quote-author">— James Clear</div>
+  </div>
+</div>
+
+</body>
+</html>
