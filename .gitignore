@@ -37,3 +37,4 @@ coverage/
 assets/fonts/*.ttf
 assets/fonts/*.otf
 output/
+.superpowers/
