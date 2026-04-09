@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=210mm, initial-scale=1" />
+  <title>Eisenhower Matrix</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Shared base styles -->
+  <link rel="stylesheet" href="_base.css" />
+
+  <style>
+    /* ─── Eisenhower Matrix – page-specific styles ─── */
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3mm;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ─── Quadrant base ─── */
+    .quadrant {
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ─── Q1 — Do First ─── */
+    .quadrant.q1 {
+      border-top: 2.5px solid var(--accent);
+      background: var(--accent-soft);
+    }
+    .quadrant.q1 .q-header { background: var(--accent); }
+
+    /* ─── Q2 — Schedule ─── */
+    .quadrant.q2 {
+      border-top: 2.5px solid var(--blue);
+      background: var(--blue-soft);
+    }
+    .quadrant.q2 .q-header { background: var(--blue); }
+
+    /* ─── Q3 — Delegate ─── */
+    .quadrant.q3 {
+      border-top: 2.5px solid var(--amber);
+      background: var(--amber-soft);
+    }
+    .quadrant.q3 .q-header { background: var(--amber); }
+
+    /* ─── Q4 — Eliminate ─── */
+    .quadrant.q4 {
+      border-top: 2.5px solid var(--ink-3);
+      background: var(--surface);
+    }
+    .quadrant.q4 .q-header { background: var(--ink-3); }
+
+    /* ─── Quadrant header bar ─── */
+    .q-header {
+      border-radius: 1.5mm;
+      padding: 1.5mm var(--s2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--s2);
+      flex-shrink: 0;
+    }
+    .q-header-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #fff;
+    }
+    .q-header-sub {
+      font-family: var(--font-body);
+      font-size: 6pt;
+      color: rgba(255,255,255,0.75);
+      font-style: italic;
+    }
+
+    /* ─── Checkbox task lines inside quadrants ─── */
+    .q-items {
+      list-style: none;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5mm;
+    }
+    .q-item {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      padding: 0.8mm 0;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+    }
+    .q-item-num {
+      font-family: var(--font-mono);
+      font-size: 6pt;
+      color: var(--ink-3);
+      min-width: 3mm;
+      text-align: right;
+    }
+    .q-item-box {
+      width: 3.5mm;
+      height: 3.5mm;
+      border: 0.5px solid var(--rule);
+      border-radius: 0.7mm;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.55);
+    }
+    .q-item-line {
+      flex: 1;
+      border-bottom: 0.5px dotted var(--rule);
+      height: 4mm;
+    }
+
+    /* ─── Priority strip ─── */
+    .priority-strip {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      padding: var(--s2) 0;
+      margin-top: var(--s2);
+      border-top: 0.3px solid var(--rule);
+      flex-shrink: 0;
+    }
+    .priority-strip label {
+      font-weight: 700;
+      font-size: 7.5pt;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .priority-strip .field-line {
+      flex: 1;
+      min-width: 0;
+      display: block;
+      height: 5mm;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ═══ Header ═══ -->
+    <header class="page-header">
+      <div>
+        <h1 class="page-title">Eisenhower Matrix</h1>
+        <p class="page-subtitle">Urgent vs. Important — decide, don't react</p>
+      </div>
+    </header>
+
+    <!-- ═══ Date Row ═══ -->
+    <div class="date-row">
+      <label>Date</label>
+      <span class="field" style="min-width: 30mm;"></span>
+    </div>
+
+    <!-- ═══ 2×2 Matrix Grid ═══ -->
+    <div class="matrix-grid">
+
+      <!-- Q1 · Do First · Urgent + Important -->
+      <div class="quadrant q1">
+        <div class="q-header">
+          <span class="q-header-title">Do First</span>
+          <span class="q-header-sub">Urgent + Important</span>
+        </div>
+        <ul class="q-items">
+          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+        </ul>
+      </div>
+
+      <!-- Q2 · Schedule · Not Urgent + Important -->
+      <div class="quadrant q2">
+        <div class="q-header">
+          <span class="q-header-title">Schedule</span>
+          <span class="q-header-sub">Not Urgent + Important</span>
+        </div>
+        <ul class="q-items">
+          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+        </ul>
+      </div>
+
+      <!-- Q3 · Delegate · Urgent + Not Important -->
+      <div class="quadrant q3">
+        <div class="q-header">
+          <span class="q-header-title">Delegate</span>
+          <span class="q-header-sub">Urgent + Not Important</span>
+        </div>
+        <ul class="q-items">
+          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+        </ul>
+      </div>
+
+      <!-- Q4 · Eliminate · Not Urgent + Not Important -->
+      <div class="quadrant q4">
+        <div class="q-header">
+          <span class="q-header-title">Eliminate</span>
+          <span class="q-header-sub">Not Urgent + Not Important</span>
+        </div>
+        <ul class="q-items">
+          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
+        </ul>
+      </div>
+
+    </div><!-- /.matrix-grid -->
+
+    <!-- ═══ Priority Strip ═══ -->
+    <div class="priority-strip">
+      <label>Today's #1 Priority:</label>
+      <span class="field-line"></span>
+    </div>
+
+    <!-- ═══ Quote Banner ═══ -->
+    <div class="quote-banner">
+      <div class="quote-text">"What is important is seldom urgent and what is urgent is seldom important."</div>
+      <div class="quote-author">— Dwight D. Eisenhower</div>
+    </div>
+
+  </div><!-- /.page -->
+</body>
+</html>

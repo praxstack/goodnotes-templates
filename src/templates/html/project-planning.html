@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Project Planner — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Project Info Strip ─── */
+    .project-info {
+      display: flex;
+      align-items: center;
+      gap: 5mm;
+      flex-wrap: wrap;
+      padding: var(--s2) 0;
+      border-bottom: 0.3px solid var(--rule);
+      margin-bottom: var(--s3);
+      flex-shrink: 0;
+      font-size: 7.5pt;
+      color: var(--ink-3);
+    }
+    .project-info .info-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5mm;
+    }
+    .project-info label {
+      font-weight: 500;
+      font-size: 7pt;
+      white-space: nowrap;
+    }
+    .project-info .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 22mm;
+      height: 4.5mm;
+      display: inline-block;
+    }
+    .project-info .field.wide {
+      min-width: 40mm;
+    }
+
+    /* ─── Objective card ─── */
+    .objective-card {
+      background: var(--accent-soft);
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+    }
+
+    /* ─── Milestone table tweaks ─── */
+    .grid-table .col-milestone { width: 45%; text-align: left; }
+    .grid-table .col-owner { width: 18%; text-align: left; }
+    .grid-table .col-due { width: 17%; }
+    .grid-table .col-status { width: 20%; }
+    .grid-table td.left { text-align: left; }
+
+    .status-circle {
+      width: 4mm;
+      height: 4mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--rule);
+      display: inline-block;
+      background: var(--bg);
+    }
+
+    /* ─── Tasks 2-column ─── */
+    .tasks-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s2) var(--s4);
+    }
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+      height: 5mm;
+    }
+    .task-item::before {
+      content: '';
+      width: 3.5mm;
+      height: 3.5mm;
+      border: 0.5px solid var(--rule);
+      border-radius: 0.7mm;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .task-item .line {
+      flex: 1;
+      border-bottom: 0.4px dotted var(--rule-light);
+      height: 3.5mm;
+    }
+
+    /* ─── Risks card ─── */
+    .risks-card {
+      background: var(--amber-soft);
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+    }
+    .risk-item {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+      height: 5.5mm;
+    }
+    .risk-item::before {
+      content: '';
+      width: 3.5mm;
+      height: 3.5mm;
+      border: 0.5px solid var(--amber);
+      border-radius: 0.7mm;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .risk-item .line {
+      flex: 1;
+      border-bottom: 0.4px dotted var(--rule-light);
+      height: 3.5mm;
+    }
+
+    /* ─── Progress bar ─── */
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+    .progress-bar {
+      display: flex;
+      gap: 0;
+      flex: 1;
+      height: 4mm;
+      border-radius: 1.2mm;
+      overflow: hidden;
+      border: 0.4px solid var(--rule);
+    }
+    .progress-segment {
+      flex: 1;
+      border-right: 0.4px solid var(--rule);
+      background: var(--bg);
+    }
+    .progress-segment:last-child {
+      border-right: none;
+    }
+    .progress-label {
+      font-size: 7pt;
+      color: var(--ink-3);
+      font-weight: 500;
+      white-space: nowrap;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5mm;
+    }
+    .progress-label .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 10mm;
+      height: 4mm;
+      display: inline-block;
+    }
+
+    /* ─── Review date ─── */
+    .review-row {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      margin-top: var(--s3);
+      padding-top: var(--s2);
+      border-top: 0.3px solid var(--rule);
+      font-size: 7.5pt;
+      color: var(--ink-3);
+      flex-shrink: 0;
+    }
+    .review-row label {
+      font-weight: 500;
+      font-size: 7pt;
+    }
+    .review-row .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 28mm;
+      height: 4.5mm;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Project Planner</div>
+        <div class="page-subtitle">Break it down. Build it up.</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. PROJECT INFO STRIP
+         ══════════════════════════════════════════════════════════ -->
+    <div class="project-info">
+      <div class="info-item"><label>Project:</label><span class="field wide"></span></div>
+      <div class="info-item"><label>Start:</label><span class="field"></span></div>
+      <div class="info-item"><label>Deadline:</label><span class="field"></span></div>
+      <div class="info-item"><label>Status:</label><span class="field"></span></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. OBJECTIVE
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label no-top">
+      <div class="section-dot"></div>
+      <div class="section-title">Objective</div>
+    </div>
+
+    <div class="objective-card">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. KEY MILESTONES
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Key Milestones</div>
+    </div>
+
+    <table class="grid-table">
+      <thead>
+        <tr>
+          <th class="col-milestone">Milestone</th>
+          <th class="col-owner">Owner</th>
+          <th class="col-due">Due Date</th>
+          <th class="col-status">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="left"></td><td class="left"></td><td></td><td><span class="status-circle"></span></td></tr>
+        <tr><td class="left"></td><td class="left"></td><td></td><td><span class="status-circle"></span></td></tr>
+        <tr><td class="left"></td><td class="left"></td><td></td><td><span class="status-circle"></span></td></tr>
+        <tr><td class="left"></td><td class="left"></td><td></td><td><span class="status-circle"></span></td></tr>
+        <tr><td class="left"></td><td class="left"></td><td></td><td><span class="status-circle"></span></td></tr>
+        <tr><td class="left"></td><td class="left"></td><td></td><td><span class="status-circle"></span></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. TASKS THIS WEEK
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot green"></div>
+      <div class="section-title">Tasks This Week</div>
+    </div>
+
+    <div class="tasks-cols">
+      <div class="task-item"><span class="line"></span></div>
+      <div class="task-item"><span class="line"></span></div>
+      <div class="task-item"><span class="line"></span></div>
+      <div class="task-item"><span class="line"></span></div>
+      <div class="task-item"><span class="line"></span></div>
+      <div class="task-item"><span class="line"></span></div>
+      <div class="task-item"><span class="line"></span></div>
+      <div class="task-item"><span class="line"></span></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. RISKS & BLOCKERS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Risks &amp; Blockers</div>
+    </div>
+
+    <div class="risks-card">
+      <div class="risk-item"><span class="line"></span></div>
+      <div class="risk-item"><span class="line"></span></div>
+      <div class="risk-item"><span class="line"></span></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         7. RESOURCES NEEDED
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">Resources Needed</div>
+    </div>
+
+    <div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         8. PROGRESS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot green"></div>
+      <div class="section-title">Progress</div>
+    </div>
+
+    <div class="progress-row">
+      <div class="progress-bar">
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+      </div>
+      <div class="progress-label">
+        <span>% Complete:</span><span class="field"></span>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         9. NEXT REVIEW DATE
+         ══════════════════════════════════════════════════════════ -->
+    <div class="review-row">
+      <label>Next Review Date:</label><span class="field"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         10. QUOTE BANNER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="quote-banner">
+      <div class="quote-text">"Plans are nothing; planning is everything."</div>
+      <div class="quote-author">— Dwight D. Eisenhower</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

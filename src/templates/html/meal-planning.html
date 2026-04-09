@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meal Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Meal Planner — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Meal Grid (CSS Grid) ─── */
+    .meal-grid {
+      display: grid;
+      grid-template-columns: 18mm repeat(4, 1fr);
+      grid-template-rows: auto repeat(7, 18mm);
+      gap: 1mm;
+      width: 100%;
+    }
+
+    .meal-grid-header {
+      background: var(--ink);
+      color: var(--bg);
+      font-weight: 600;
+      font-size: 6pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      padding: 1.5mm 1mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .meal-grid-header:first-child {
+      border-radius: 1.5mm 0 0 1.5mm;
+    }
+    .meal-grid-header:last-child {
+      border-radius: 0 1.5mm 1.5mm 0;
+    }
+
+    .meal-day-label {
+      font-weight: 600;
+      font-size: 7pt;
+      color: var(--ink-2);
+      display: flex;
+      align-items: center;
+      padding-left: 1mm;
+    }
+    .meal-day-label:nth-child(even) {
+      /* alternating row tint applied via nth-child on cells */
+    }
+
+    .meal-cell {
+      background: var(--surface);
+      border-radius: 1.5mm;
+      padding: 1.5mm 2mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5mm;
+    }
+    /* Alternate row tint */
+    .meal-row-even .meal-cell {
+      background: var(--surface-alt);
+    }
+    .meal-row-even .meal-day-label {
+      background: transparent;
+    }
+
+    .meal-cell .mini-line {
+      border-bottom: 0.4px dotted var(--rule-light);
+      height: 3.5mm;
+    }
+
+    /* ─── Grocery List ─── */
+    .grocery-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s3);
+    }
+    .grocery-item {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+      height: 5mm;
+    }
+    .grocery-item::before {
+      content: '';
+      width: 3mm;
+      height: 3mm;
+      border: 0.5px solid var(--rule);
+      border-radius: 0.6mm;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .grocery-item .line {
+      flex: 1;
+      border-bottom: 0.4px dotted var(--rule-light);
+      height: 3.5mm;
+    }
+
+    /* ─── Water Goal ─── */
+    .water-row {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+    }
+    .water-row label {
+      font-weight: 600;
+      font-size: 7pt;
+      color: var(--ink-3);
+      white-space: nowrap;
+    }
+    .water-circles {
+      display: flex;
+      gap: 2mm;
+    }
+    .water-circle {
+      width: 4.5mm;
+      height: 4.5mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--blue);
+      background: var(--bg);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Meal Planner</div>
+        <div class="page-subtitle">Nourish your body. Plan your week.</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. WEEK-OF ROW
+         ══════════════════════════════════════════════════════════ -->
+    <div class="date-row">
+      <label>Week of:</label><span class="field wide"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. MAIN MEAL GRID
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label no-top">
+      <div class="section-dot"></div>
+      <div class="section-title">Weekly Meals</div>
+    </div>
+
+    <div class="meal-grid">
+      <!-- Header row -->
+      <div class="meal-grid-header">Day</div>
+      <div class="meal-grid-header">Breakfast</div>
+      <div class="meal-grid-header">Lunch</div>
+      <div class="meal-grid-header">Dinner</div>
+      <div class="meal-grid-header">Snacks</div>
+
+      <!-- Monday -->
+      <div class="meal-day-label">Mon</div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+
+      <!-- Tuesday -->
+      <div class="meal-day-label meal-row-even">Tue</div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+
+      <!-- Wednesday -->
+      <div class="meal-day-label">Wed</div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+
+      <!-- Thursday -->
+      <div class="meal-day-label meal-row-even">Thu</div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+
+      <!-- Friday -->
+      <div class="meal-day-label">Fri</div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+
+      <!-- Saturday -->
+      <div class="meal-day-label meal-row-even">Sat</div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
+
+      <!-- Sunday -->
+      <div class="meal-day-label">Sun</div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+      <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. GROCERY LIST
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot green"></div>
+      <div class="section-title">Grocery List</div>
+    </div>
+
+    <div class="grocery-cols">
+      <div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+      </div>
+      <div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="line"></span></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. MEAL PREP NOTES
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Meal Prep Notes</div>
+    </div>
+
+    <div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. WATER GOAL
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Hydration</div>
+    </div>
+
+    <div class="water-row">
+      <label>Water Goal:</label>
+      <div class="water-circles">
+        <div class="water-circle"></div>
+        <div class="water-circle"></div>
+        <div class="water-circle"></div>
+        <div class="water-circle"></div>
+        <div class="water-circle"></div>
+        <div class="water-circle"></div>
+        <div class="water-circle"></div>
+        <div class="water-circle"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         7. QUOTE BANNER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="quote-banner">
+      <div class="quote-text">"Let food be thy medicine and medicine be thy food."</div>
+      <div class="quote-author">— Hippocrates</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

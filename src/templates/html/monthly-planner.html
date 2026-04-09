@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monthly Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Monthly Planner — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Month/Year row ─── */
+    .month-row {
+      display: flex;
+      align-items: center;
+      gap: 6mm;
+      padding: var(--s2) 0;
+      border-bottom: 0.3px solid var(--rule);
+      margin-bottom: var(--s3);
+      flex-shrink: 0;
+      font-size: 7.5pt;
+      color: var(--ink-3);
+    }
+    .month-row label {
+      font-weight: 500;
+    }
+    .month-row .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 28mm;
+      height: 4.5mm;
+      display: inline-block;
+    }
+    .month-row .field.narrow {
+      min-width: 16mm;
+    }
+
+    /* ─── Calendar Grid ─── */
+    .calendar-wrapper {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .calendar-grid {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0.5mm;
+      table-layout: fixed;
+    }
+    .calendar-grid thead th {
+      font-family: var(--font-mono);
+      font-size: 6pt;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-3);
+      text-align: center;
+      padding: 1.5mm 0;
+    }
+    .calendar-grid tbody td {
+      background: var(--surface);
+      border-radius: 1.5mm;
+      width: 24mm;
+      height: 22mm;
+      vertical-align: top;
+      padding: 1mm 1.5mm;
+      position: relative;
+    }
+    .calendar-grid tbody td.empty {
+      background: transparent;
+    }
+    .cal-day-num {
+      font-family: var(--font-mono);
+      font-size: 6pt;
+      font-weight: 500;
+      color: var(--ink-3);
+      line-height: 1;
+    }
+
+    /* ─── Monthly Goals — 2-column layout ─── */
+    .goals-section {
+      margin-top: var(--s3);
+      flex-shrink: 0;
+    }
+    .goals-grid {
+      display: flex;
+      gap: var(--s4);
+    }
+    .goals-col {
+      flex: 1;
+    }
+    .goals-col .card {
+      height: 100%;
+    }
+    .goals-col .cb {
+      display: flex;
+      margin-bottom: 1.5mm;
+    }
+    .goals-col .cb:last-child {
+      margin-bottom: 0;
+    }
+    .focus-item {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+      margin-bottom: 1.5mm;
+    }
+    .focus-item:last-child {
+      margin-bottom: 0;
+    }
+    .focus-num {
+      font-family: var(--font-display);
+      font-size: 10pt;
+      color: var(--accent);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 5mm;
+      text-align: center;
+    }
+    .focus-line {
+      flex: 1;
+      border-bottom: 0.5px dotted var(--rule-light);
+      height: 5mm;
+    }
+
+    /* ─── Notes ─── */
+    .notes-section {
+      margin-top: var(--s3);
+      flex-shrink: 0;
+    }
+
+    /* ─── Print ─── */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    @media print {
+      body { background: white; }
+      .page { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Monthly Planner</div>
+        <div class="page-subtitle">See the big picture. Plan with intention.</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. MONTH / YEAR ROW
+         ══════════════════════════════════════════════════════════ -->
+    <div class="month-row">
+      <label>Month:</label><span class="field"></span>
+      <label>Year:</label><span class="field narrow"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. CALENDAR GRID — 7 cols (Mon–Sun) × 6 rows
+         ══════════════════════════════════════════════════════════ -->
+    <div class="calendar-wrapper">
+      <table class="calendar-grid">
+        <thead>
+          <tr>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1 -->
+          <tr>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td><span class="cal-day-num">1</span></td>
+            <td><span class="cal-day-num">2</span></td>
+          </tr>
+          <!-- Row 2 -->
+          <tr>
+            <td><span class="cal-day-num">3</span></td>
+            <td><span class="cal-day-num">4</span></td>
+            <td><span class="cal-day-num">5</span></td>
+            <td><span class="cal-day-num">6</span></td>
+            <td><span class="cal-day-num">7</span></td>
+            <td><span class="cal-day-num">8</span></td>
+            <td><span class="cal-day-num">9</span></td>
+          </tr>
+          <!-- Row 3 -->
+          <tr>
+            <td><span class="cal-day-num">10</span></td>
+            <td><span class="cal-day-num">11</span></td>
+            <td><span class="cal-day-num">12</span></td>
+            <td><span class="cal-day-num">13</span></td>
+            <td><span class="cal-day-num">14</span></td>
+            <td><span class="cal-day-num">15</span></td>
+            <td><span class="cal-day-num">16</span></td>
+          </tr>
+          <!-- Row 4 -->
+          <tr>
+            <td><span class="cal-day-num">17</span></td>
+            <td><span class="cal-day-num">18</span></td>
+            <td><span class="cal-day-num">19</span></td>
+            <td><span class="cal-day-num">20</span></td>
+            <td><span class="cal-day-num">21</span></td>
+            <td><span class="cal-day-num">22</span></td>
+            <td><span class="cal-day-num">23</span></td>
+          </tr>
+          <!-- Row 5 -->
+          <tr>
+            <td><span class="cal-day-num">24</span></td>
+            <td><span class="cal-day-num">25</span></td>
+            <td><span class="cal-day-num">26</span></td>
+            <td><span class="cal-day-num">27</span></td>
+            <td><span class="cal-day-num">28</span></td>
+            <td><span class="cal-day-num">29</span></td>
+            <td><span class="cal-day-num">30</span></td>
+          </tr>
+          <!-- Row 6 -->
+          <tr>
+            <td><span class="cal-day-num">31</span></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. MONTHLY GOALS — 2 columns
+         ══════════════════════════════════════════════════════════ -->
+    <div class="goals-section">
+      <div class="section-label">
+        <span class="section-dot"></span>
+        <span class="section-title">Monthly Goals</span>
+      </div>
+      <div class="goals-grid">
+        <!-- Left column: Goals -->
+        <div class="goals-col">
+          <div class="card">
+            <div class="card-title">Goals</div>
+            <div class="cb"><span class="field-line wide"></span></div>
+            <div class="cb"><span class="field-line wide"></span></div>
+            <div class="cb"><span class="field-line wide"></span></div>
+            <div class="cb"><span class="field-line wide"></span></div>
+            <div class="cb"><span class="field-line wide"></span></div>
+          </div>
+        </div>
+        <!-- Right column: Focus Areas -->
+        <div class="goals-col">
+          <div class="card accent-soft">
+            <div class="card-title">Focus Areas</div>
+            <div class="focus-item"><span class="focus-num">1</span><span class="focus-line"></span></div>
+            <div class="focus-item"><span class="focus-num">2</span><span class="focus-line"></span></div>
+            <div class="focus-item"><span class="focus-num">3</span><span class="focus-line"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. NOTES
+         ══════════════════════════════════════════════════════════ -->
+    <div class="notes-section">
+      <div class="section-label">
+        <span class="section-dot blue"></span>
+        <span class="section-title">Notes</span>
+      </div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. QUOTE BANNER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="quote-banner">
+      <div class="quote-text">"A goal without a plan is just a wish."</div>
+      <div class="quote-author">— Antoine de Saint-Exupéry</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monthly Mood Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Mood Tracker — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Mood Legend ─── */
+    .mood-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5mm;
+      padding: var(--s2) 0;
+      margin-bottom: var(--s3);
+      flex-shrink: 0;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5mm;
+      font-size: 6.5pt;
+      color: var(--ink-2);
+    }
+    .legend-circle {
+      width: 4mm;
+      height: 4mm;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-emoji {
+      font-size: 8pt;
+      line-height: 1;
+    }
+
+    /* ─── Calendar Grid ─── */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1mm;
+      flex: 1;
+      min-height: 0;
+    }
+    .cal-header {
+      background: var(--ink);
+      color: var(--bg);
+      font-weight: 600;
+      font-size: 6pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: 1.5mm 0;
+      border-radius: 1.5mm;
+    }
+    .day-cell {
+      background: var(--surface);
+      border-radius: 2mm;
+      padding: 1.2mm 1.5mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 0;
+    }
+    .day-num {
+      font-size: 5.5pt;
+      font-weight: 500;
+      color: var(--ink-3);
+      align-self: flex-start;
+      line-height: 1;
+    }
+    .mood-circle {
+      width: 10mm;
+      height: 10mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--rule);
+      background: var(--bg);
+      margin: auto 0;
+      flex-shrink: 0;
+    }
+    .day-notes {
+      width: 100%;
+      border-bottom: 0.4px dotted var(--rule-light);
+      height: 3mm;
+      margin-top: auto;
+    }
+
+    /* ─── Monthly Summary ─── */
+    .summary-section {
+      display: flex;
+      gap: var(--s4);
+      margin-top: var(--s3);
+      flex-shrink: 0;
+    }
+    .summary-left,
+    .summary-right {
+      flex: 1;
+    }
+    .summary-field {
+      display: flex;
+      align-items: baseline;
+      gap: 2mm;
+      font-size: 7pt;
+      color: var(--ink-2);
+      margin-bottom: 2mm;
+    }
+    .summary-field label {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .summary-field .field-val {
+      flex: 1;
+      border-bottom: 0.5px solid var(--rule);
+      height: 4.5mm;
+    }
+    .patterns-label {
+      font-weight: 700;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-2);
+      margin-bottom: var(--s1);
+    }
+
+    /* ─── Self-Care Wins ─── */
+    .selfcare-section {
+      margin-top: var(--s3);
+      flex-shrink: 0;
+    }
+    .selfcare-items {
+      display: flex;
+      gap: 5mm;
+      margin-top: var(--s1);
+    }
+    .selfcare-item {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Mood Tracker</div>
+        <div class="page-subtitle">Notice patterns. Understand yourself.</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. MONTH / YEAR ROW
+         ══════════════════════════════════════════════════════════ -->
+    <div class="date-row">
+      <label>Month:</label><span class="field"></span>
+      <label>Year:</label><span class="field"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. MOOD LEGEND
+         ══════════════════════════════════════════════════════════ -->
+    <div class="mood-legend">
+      <div class="legend-item">
+        <span class="legend-emoji">😤</span>
+        <span class="legend-circle" style="background: var(--accent);"></span>
+        <span>Awful</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-emoji">😕</span>
+        <span class="legend-circle" style="background: var(--amber);"></span>
+        <span>Low</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-emoji">😐</span>
+        <span class="legend-circle" style="background: var(--rule);"></span>
+        <span>Meh</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-emoji">🙂</span>
+        <span class="legend-circle" style="background: var(--blue);"></span>
+        <span>Good</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-emoji">🤩</span>
+        <span class="legend-circle" style="background: var(--green);"></span>
+        <span>Great</span>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. CALENDAR GRID (7 cols × 5 rows + header)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="calendar-grid">
+      <!-- Day-of-week headers -->
+      <div class="cal-header">Mon</div>
+      <div class="cal-header">Tue</div>
+      <div class="cal-header">Wed</div>
+      <div class="cal-header">Thu</div>
+      <div class="cal-header">Fri</div>
+      <div class="cal-header">Sat</div>
+      <div class="cal-header">Sun</div>
+
+      <!-- Row 1: Days 1–7 -->
+      <div class="day-cell"><span class="day-num">1</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">2</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">3</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">4</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">5</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">6</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">7</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+
+      <!-- Row 2: Days 8–14 -->
+      <div class="day-cell"><span class="day-num">8</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">9</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">10</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">11</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">12</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">13</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">14</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+
+      <!-- Row 3: Days 15–21 -->
+      <div class="day-cell"><span class="day-num">15</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">16</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">17</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">18</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">19</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">20</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">21</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+
+      <!-- Row 4: Days 22–28 -->
+      <div class="day-cell"><span class="day-num">22</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">23</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">24</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">25</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">26</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">27</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">28</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+
+      <!-- Row 5: Days 29–31 + empty -->
+      <div class="day-cell"><span class="day-num">29</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">30</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell"><span class="day-num">31</span><div class="mood-circle"></div><div class="day-notes"></div></div>
+      <div class="day-cell" style="background: transparent; border: none;"></div>
+      <div class="day-cell" style="background: transparent; border: none;"></div>
+      <div class="day-cell" style="background: transparent; border: none;"></div>
+      <div class="day-cell" style="background: transparent; border: none;"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. MONTHLY SUMMARY (2 columns)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Monthly Summary</div>
+    </div>
+
+    <div class="summary-section">
+      <div class="summary-left card">
+        <div class="summary-field"><label>Average mood:</label><span class="field-val"></span></div>
+        <div class="summary-field"><label>Best day:</label><span class="field-val"></span></div>
+        <div class="summary-field"><label>Hardest day:</label><span class="field-val"></span></div>
+      </div>
+      <div class="summary-right card">
+        <div class="patterns-label">Mood patterns I noticed:</div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. SELF-CARE WINS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="selfcare-section">
+      <div class="section-label no-top">
+        <div class="section-dot green"></div>
+        <div class="section-title">Self-Care Wins</div>
+      </div>
+      <div class="selfcare-items">
+        <div class="selfcare-item"><span class="cb"></span><span class="field-line wide"></span></div>
+        <div class="selfcare-item"><span class="cb"></span><span class="field-line wide"></span></div>
+        <div class="selfcare-item"><span class="cb"></span><span class="field-line wide"></span></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         7. QUOTE BANNER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="quote-banner">
+      <div class="quote-text">"Feelings are just visitors. Let them come and go."</div>
+      <div class="quote-author">— Mooji</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

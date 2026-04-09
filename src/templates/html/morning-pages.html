@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morning Pages</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Morning Pages — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Faint freewriting lines ─── */
+    .freewrite-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .freewrite-line {
+      border-bottom: 0.3px dotted var(--rule-light);
+      height: 6mm;
+      flex-shrink: 0;
+    }
+
+    /* ─── Continuation header (pages 2 & 3) ─── */
+    .continuation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: var(--s2);
+      margin-bottom: var(--s2);
+      border-bottom: 0.3px solid var(--rule-light);
+      flex-shrink: 0;
+    }
+    .continuation-label {
+      font-family: var(--font-mono);
+      font-size: 6.5pt;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── Bottom quote on page 3 ─── */
+    .morning-quote {
+      margin-top: auto;
+      padding-top: var(--s3);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PAGE 1 — Title + freewriting lines
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <!-- 1. Header -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Morning Pages</div>
+        <div class="page-subtitle">Clear the mind. Three pages of stream-of-consciousness.</div>
+      </div>
+    </header>
+
+    <!-- 2. Date row -->
+    <div class="date-row">
+      <label>Date</label><span class="field"></span>
+      <label>Day</label><span class="field"></span>
+    </div>
+
+    <!-- 3. Freewriting lines (~30) -->
+    <div class="freewrite-lines">
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PAGE 2 — Continuation
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <!-- Continuation header -->
+    <div class="continuation-header">
+      <span class="continuation-label">Morning Pages</span>
+      <span class="page-num">2 / 3</span>
+    </div>
+
+    <!-- Freewriting lines (~32) -->
+    <div class="freewrite-lines">
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PAGE 3 — Continuation + closing quote
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <!-- Continuation header -->
+    <div class="continuation-header">
+      <span class="continuation-label">Morning Pages</span>
+      <span class="page-num">3 / 3</span>
+    </div>
+
+    <!-- Freewriting lines (~32) -->
+    <div class="freewrite-lines">
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+      <div class="freewrite-line"></div>
+    </div>
+
+    <!-- Closing quote -->
+    <div class="quote-banner morning-quote">
+      <div class="quote-text">"Once we get those muddy, maddening, confusing thoughts on the page, we face our day with clearer eyes."</div>
+      <div class="quote-author">— Julia Cameron</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
