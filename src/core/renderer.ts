@@ -19,6 +19,7 @@ import { batchRenderStickers } from './png-renderer.js';
 import { getMonthNames, getDayNames } from '../utils/locale.js';
 import type { SupportedLocale } from '../utils/locale.js';
 import type { Theme, PaperSize, Orientation } from '../types/index.js';
+import { generateDailyYearPlanner } from '../templates/planners/daily-year.js';
 
 export interface GenerationOptions {
   themes: string[];
@@ -233,6 +234,58 @@ export async function runGeneration(options: GenerationOptions): Promise<void> {
       }
     }
     console.log(`  Done: ${fileCount - stickersBefore} sticker PNGs\n`);
+  }
+
+  // ─── Generate Templates (HTML → Puppeteer → PDF) ────────────
+  if (options.generateTemplates) {
+    console.log('📄 Generating templates...');
+    const templatesBefore = fileCount;
+
+    // ADHD Daily Year Planner
+    const adhd_template = path.resolve('examples/prax-journal/prax_adhd_planner.html');
+    try {
+      await fs.access(adhd_template);
+
+      for (const theme of themes) {
+        const filename = `adhd-daily-planner-${options.year}-${theme.id}.pdf`;
+        const outputPath = path.join(options.outputDir, 'templates', filename);
+
+        console.log(`  📅 ${theme.name} — ${options.year} full year planner...`);
+
+        try {
+          const result = await generateDailyYearPlanner({
+            templatePath: adhd_template,
+            theme,
+            dimensions: dims,
+            year: options.year,
+            locale: options.locale,
+            outputPath,
+            onProgress: options.verbose
+              ? (phase, detail) => console.log(`    [${phase}] ${detail}`)
+              : undefined,
+          });
+
+          fileCount++;
+          totalSize += result.fileSize;
+          manifest.push({
+            file: path.relative(options.outputDir, outputPath),
+            category: 'templates',
+            type: 'adhd-daily-year',
+            theme: theme.id,
+            size: result.fileSize,
+            pages: result.totalPages,
+          });
+
+          console.log(`  ✓ ${filename} (${result.totalPages} pages, ${(result.fileSize / 1024 / 1024).toFixed(1)} MB, ${(result.generationTime / 1000).toFixed(1)}s)`);
+        } catch (err) {
+          console.error(`  ✗ ${filename}: ${err instanceof Error ? err.message : err}`);
+        }
+      }
+    } catch {
+      console.log('  ⚠ ADHD planner template not found at examples/prax-journal/prax_adhd_planner.html — skipping');
+    }
+
+    console.log(`  Done: ${fileCount - templatesBefore} template PDFs\n`);
   }
 
   // ─── Write Manifest ─────────────────────────────────────────

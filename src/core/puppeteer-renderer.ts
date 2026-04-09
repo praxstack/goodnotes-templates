@@ -102,6 +102,12 @@ export interface PuppeteerRenderOptions {
   dimensions: PageDimensions;
   /** Optional: inline HTML string instead of file path */
   htmlContent?: string;
+  /**
+   * Multi-page mode: let CSS @page rules and page-break-after control
+   * page size and breaks. Don't pass explicit width/height to page.pdf().
+   * Required for documents with multiple CSS pages (e.g., full year planner).
+   */
+  multiPage?: boolean;
 }
 
 /**
@@ -144,24 +150,40 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
 
   try {
     // Load the HTML content
+    // Increase timeout for large multi-page documents (100+ pages)
+    const timeout = options.multiPage ? 120000 : 30000;
     await page.setContent(html, {
       waitUntil: 'networkidle0',
-      timeout: 30000,
+      timeout,
     });
 
     // Wait for fonts to load
     await page.evaluate(() => document.fonts.ready);
 
-    // Generate PDF (Puppeteer needs inches: 1pt = 1/72 inch)
-    const widthInches = dimensions.width / 72;
-    const heightInches = dimensions.height / 72;
-    const pdfBuffer = await page.pdf({
-      width: `${widthInches}in`,
-      height: `${heightInches}in`,
-      printBackground: true,
-      preferCSSPageSize: true,
-      margin: { top: 0, right: 0, bottom: 0, left: 0 },
-    });
+    // Generate PDF
+    let pdfBuffer: Uint8Array;
+
+    if (options.multiPage) {
+      // Multi-page mode: let CSS @page { size } and page-break-after
+      // control page breaks. The HTML template must have @page rules.
+      // This is required for documents with many CSS .page divs.
+      pdfBuffer = await page.pdf({
+        preferCSSPageSize: true,
+        printBackground: true,
+        margin: { top: 0, right: 0, bottom: 0, left: 0 },
+      });
+    } else {
+      // Single-page mode: explicit dimensions (Puppeteer needs inches: 1pt = 1/72 inch)
+      const widthInches = dimensions.width / 72;
+      const heightInches = dimensions.height / 72;
+      pdfBuffer = await page.pdf({
+        width: `${widthInches}in`,
+        height: `${heightInches}in`,
+        printBackground: true,
+        preferCSSPageSize: true,
+        margin: { top: 0, right: 0, bottom: 0, left: 0 },
+      });
+    }
 
     return Buffer.from(pdfBuffer);
   } finally {
