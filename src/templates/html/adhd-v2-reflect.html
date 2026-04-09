@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Planner v2 — Reflect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   ADHD PLANNER v2 — PAGE 2: REFLECT
+   
+   Evening wind-down page. CBT thought-check,
+   self-care audit, gratitude + free-write.
+   Pairs with Page 1 "Today".
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 14mm;
+  --bg: #FAF8F5;
+  --surface: #F3F0EB;
+  --surface-alt: #EDE9E3;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A4A;
+  --ink-3: #8A8580;
+  --rule: #D9D4CD;
+  --rule-light: #E8E4DE;
+  --accent: #C45D3E;
+  --accent-soft: #F2D8CC;
+  --green: #5E8B6A;
+  --green-soft: #D4E4D8;
+  --blue: #4A6FA5;
+  --blue-soft: #D3DEF0;
+  --amber: #C4933F;
+  --amber-soft: #F0E4C8;
+  --dark: #2C2825;
+  --cream: #FFF8F0;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --s1: 2mm; --s2: 3mm; --s3: 5mm; --s4: 7mm; --s5: 10mm; --s6: 14mm;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E0DDD8;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  color: var(--ink);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--bg);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-top: 3px solid var(--blue);
+  padding-top: var(--s3);
+  flex-shrink: 0;
+}
+.header-left .title {
+  font-family: var(--font-display);
+  font-size: 16pt;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.header-left .subtitle {
+  font-style: italic;
+  font-size: 7pt;
+  color: var(--ink-3);
+  margin-top: 1mm;
+}
+.date-block {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--ink-3);
+}
+.date-block .date-field {
+  border-bottom: 0.5px solid var(--rule);
+  min-width: 28mm;
+  height: 4.5mm;
+  display: inline-block;
+}
+
+/* ─── Section titles ─── */
+.section-title {
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+
+/* ─── Circle option ─── */
+.circle {
+  width: 4.5mm;
+  height: 4.5mm;
+  border-radius: 50%;
+  border: 0.5px solid var(--rule);
+  flex-shrink: 0;
+  background: var(--bg);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ─── Dotted write-line ─── */
+.write-line {
+  flex: 1;
+  border-bottom: 0.3px dotted var(--rule-light);
+  min-height: 5.5mm;
+}
+
+/* ─── Card base ─── */
+.card {
+  border-radius: 2.5mm;
+  padding: var(--s3);
+}
+.card--amber  { background: var(--amber-soft); }
+.card--green  { background: var(--green-soft); }
+.card--accent { background: var(--accent-soft); }
+
+/* ─── ⚡ Energy ─── */
+.energy-row {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  flex-shrink: 0;
+}
+.energy-row .label {
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.energy-bars {
+  display: flex;
+  gap: 1.5mm;
+}
+.energy-bar {
+  width: 12mm;
+  height: 5mm;
+  border: 0.5px solid var(--rule);
+  border-radius: 3px;
+  background: var(--bg);
+}
+
+/* ─── 🏃 Movement ─── */
+.movement-row {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.movement-row .label {
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.movement-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 1mm;
+  font-size: 7.5pt;
+  color: var(--ink-2);
+}
+.movement-option .sep {
+  color: var(--rule);
+  margin: 0 0.5mm;
+}
+.movement-other-line {
+  border-bottom: 0.3px dotted var(--rule-light);
+  width: 14mm;
+  display: inline-block;
+}
+.movement-feel {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  font-size: 7.5pt;
+  color: var(--ink-2);
+  margin-left: auto;
+}
+.movement-feel .write-line { min-width: 30mm; }
+
+/* ─── 🧠 Thought Check ─── */
+.thought-check .card-title {
+  color: var(--amber);
+}
+.thought-prompt {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+  margin-top: var(--s2);
+}
+.thought-prompt .prompt-label {
+  font-size: 7.5pt;
+  color: var(--ink-2);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* ─── 🌱 Self-Care Check ─── */
+.self-care .card-title {
+  color: var(--green);
+}
+.self-care-items {
+  display: flex;
+  gap: var(--s4);
+  margin-top: var(--s2);
+  flex-wrap: wrap;
+}
+.self-care-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5mm;
+  font-size: 7.5pt;
+  color: var(--ink-2);
+}
+
+/* ─── Gratitude / Win / Proud ─── */
+.gwp-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  flex-shrink: 0;
+}
+.gwp-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+}
+.gwp-row .gwp-label {
+  font-size: 8pt;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* ─── → Tomorrow ─── */
+.tomorrow {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+}
+.tomorrow .tomorrow-label {
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* ─── ✍️ Free Write ─── */
+.free-write {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.free-write .hint {
+  font-size: 7pt;
+  font-style: italic;
+  color: var(--ink-3);
+  margin-bottom: var(--s2);
+}
+.free-write-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.free-write-line {
+  border-bottom: 0.3px dotted var(--rule-light);
+  height: 5.5mm;
+}
+
+/* ─── Footer ─── */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 6.5pt;
+  color: var(--ink-3);
+  flex-shrink: 0;
+  padding-top: var(--s2);
+  border-top: 0.5px solid var(--rule-light);
+}
+.footer .sign-off {
+  font-style: italic;
+}
+.footer .page-num {
+  font-family: var(--font-mono);
+}
+</style>
+</head>
+<body>
+
+<div class="page" data-template="adhd-v2-reflect">
+
+  <!-- ─── 1. Header ─── -->
+  <header class="header">
+    <div class="header-left">
+      <div class="title">Reflect</div>
+      <div class="subtitle">Notice. Learn. Be kind to yourself.</div>
+    </div>
+    <div class="date-block">
+      <span data-inject="date"><span class="date-field"></span></span>
+    </div>
+  </header>
+
+  <!-- ─── 2. ⚡ Energy ─── -->
+  <section class="energy-row">
+    <span class="label">⚡ Energy:</span>
+    <div class="energy-bars">
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+    </div>
+  </section>
+
+  <!-- ─── 3. 🏃 Movement ─── -->
+  <section class="movement-row">
+    <span class="label">🏃 Movement:</span>
+    <span class="movement-option"><span class="circle"></span> Walk</span>
+    <span class="movement-option sep">·</span>
+    <span class="movement-option"><span class="circle"></span> Run</span>
+    <span class="movement-option sep">·</span>
+    <span class="movement-option"><span class="circle"></span> Gym</span>
+    <span class="movement-option sep">·</span>
+    <span class="movement-option"><span class="circle"></span> Yoga</span>
+    <span class="movement-option sep">·</span>
+    <span class="movement-option"><span class="circle"></span> Other: <span class="movement-other-line"></span></span>
+    <span class="movement-feel">How I feel after: <span class="write-line"></span></span>
+  </section>
+
+  <!-- ─── 4. 🧠 Thought Check ─── -->
+  <section class="thought-check card card--amber">
+    <div class="section-title card-title">🧠 Thought Check</div>
+    <div class="thought-prompt">
+      <span class="prompt-label">My brain is telling me:</span>
+      <span class="write-line"></span>
+    </div>
+    <div class="thought-prompt">
+      <span class="prompt-label">Is that actually true?</span>
+      <span class="write-line"></span>
+    </div>
+    <div class="thought-prompt">
+      <span class="prompt-label">A kinder way to see it:</span>
+      <span class="write-line"></span>
+    </div>
+  </section>
+
+  <!-- ─── 5. 🌱 Self-Care Check ─── -->
+  <section class="self-care card card--green">
+    <div class="section-title card-title">🌱 Self-Care Check</div>
+    <div class="self-care-items">
+      <span class="self-care-item"><span class="circle"></span> Ate something</span>
+      <span class="self-care-item"><span class="circle"></span> Went outside</span>
+      <span class="self-care-item"><span class="circle"></span> Something fun</span>
+      <span class="self-care-item"><span class="circle"></span> Kind to myself</span>
+    </div>
+  </section>
+
+  <!-- ─── 6. Gratitude / Win / Proud ─── -->
+  <section class="gwp-rows">
+    <div class="gwp-row">
+      <span class="gwp-label">🙏 Grateful for:</span>
+      <span class="write-line"></span>
+    </div>
+    <div class="gwp-row">
+      <span class="gwp-label">🏆 Win today:</span>
+      <span class="write-line"></span>
+    </div>
+    <div class="gwp-row">
+      <span class="gwp-label">💪 Proud of:</span>
+      <span class="write-line"></span>
+    </div>
+  </section>
+
+  <!-- ─── 7. → Tomorrow ─── -->
+  <section class="tomorrow card card--accent">
+    <div class="tomorrow">
+      <span class="tomorrow-label">→ Tomorrow's priority:</span>
+      <span class="write-line"></span>
+    </div>
+  </section>
+
+  <!-- ─── 8. ✍️ Free Write ─── -->
+  <section class="free-write">
+    <div class="hint">✍️ say anything, or leave it blank</div>
+    <div class="free-write-lines">
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+    </div>
+  </section>
+
+  <!-- ─── 9. Footer ─── -->
+  <footer class="footer">
+    <span class="sign-off">You showed up. That counts.</span>
+    <span class="page-num" data-inject="page-num">2 / 2</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
