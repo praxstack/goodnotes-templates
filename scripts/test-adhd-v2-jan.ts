@@ -63,12 +63,24 @@ async function main() {
     `<div class="month-tab${i === 0 ? ' active' : ''}" data-month="${i+1}">${m}</div>`
   ).join('')}</div>`;
   
-  // Extract page content from each template
-  function extractPageDiv(html: string): string {
+  // Extract the FULL body content from each template (everything between <body> and </body>)
+  function extractBodyContent(html: string): string {
     const bodyIdx = html.indexOf('<body');
     const bodyEnd = html.indexOf('>', bodyIdx) + 1;
     const closeBodyIdx = html.indexOf('</body>');
     return html.substring(bodyEnd, closeBodyIdx).trim();
+  }
+  
+  // Pre-extract the body HTML for each template type (includes <div class="page">...</div>)
+  const todayBody = extractBodyContent(todayHTML);
+  const reflectBody = extractBodyContent(reflectHTML);
+  const weeklyBody = extractBodyContent(weeklyHTML);
+  const monthlyBody = extractBodyContent(monthlyHTML);
+  
+  // For each page, we inject the tab bar INSIDE the existing .page div (after opening tag)
+  function injectTabBar(pageHTML: string, tabBar: string): string {
+    // Insert tab bar right after <div class="page"...>
+    return pageHTML.replace(/<div class="page"([^>]*)>/, `<div class="page"$1>${tabBar}`);
   }
   
   let pageCount = 0;
@@ -76,18 +88,18 @@ async function main() {
   for (const day of janDays) {
     const pagesInDay = 2 + (day.isSunday ? 1 : 0) + (day.isLastDay ? 1 : 0);
     
-    // Today page
-    let todayPage = extractPageDiv(todayHTML);
+    // Today page — use the FULL page div from today template
+    let todayPage = todayBody;
     todayPage = todayPage.replace(/data-inject="date">[^<]*/g, `data-inject="date">${day.dateLabel} ${year}`);
     todayPage = todayPage.replace(/data-inject="page-num">[^<]*/g, `data-inject="page-num">${day.dateLabel} · 1/${pagesInDay}`);
-    pages.push(`<div class="page">${tabBarHTML}${todayPage.replace(/<div class="page"[^>]*>/, '').replace(/<\/div>\s*$/, '')}</div>`);
+    pages.push(injectTabBar(todayPage, tabBarHTML));
     pageCount++;
     
-    // Reflect page
-    let reflectPage = extractPageDiv(reflectHTML);
+    // Reflect page — use the FULL page div from reflect template  
+    let reflectPage = reflectBody;
     reflectPage = reflectPage.replace(/data-inject="date">[^<]*/g, `data-inject="date">${day.dateLabel} ${year}`);
     reflectPage = reflectPage.replace(/data-inject="page-num">[^<]*/g, `data-inject="page-num">${day.dateLabel} · 2/${pagesInDay}`);
-    pages.push(`<div class="page">${tabBarHTML}${reflectPage.replace(/<div class="page"[^>]*>/, '').replace(/<\/div>\s*$/, '')}</div>`);
+    pages.push(injectTabBar(reflectPage, tabBarHTML));
     pageCount++;
     
     // Weekly review on Sunday
@@ -97,17 +109,17 @@ async function main() {
       weekStartDate.setDate(weekStartDate.getDate() - 6);
       const weekStart = `${weekStartDate.getDate()} ${monthNames[weekStartDate.getMonth()]}`;
       
-      let weeklyPage = extractPageDiv(weeklyHTML);
+      let weeklyPage = weeklyBody;
       weeklyPage = weeklyPage.replace(/data-inject="week-date">[^<]*/g, `data-inject="week-date">${weekStart} – ${weekEnd}`);
-      pages.push(`<div class="page">${tabBarHTML}${weeklyPage.replace(/<div class="page"[^>]*>/, '').replace(/<\/div>\s*$/, '')}</div>`);
+      pages.push(injectTabBar(weeklyPage, tabBarHTML));
       pageCount++;
     }
     
     // Monthly review on last day
     if (day.isLastDay) {
-      let monthlyPage = extractPageDiv(monthlyHTML);
+      let monthlyPage = monthlyBody;
       monthlyPage = monthlyPage.replace(/data-inject="month-name">[^<]*/g, `data-inject="month-name">${monthNamesLong[0]} ${year}`);
-      pages.push(`<div class="page">${tabBarHTML}${monthlyPage.replace(/<div class="page"[^>]*>/, '').replace(/<\/div>\s*$/, '')}</div>`);
+      pages.push(injectTabBar(monthlyPage, tabBarHTML));
       pageCount++;
     }
   }
@@ -115,15 +127,39 @@ async function main() {
   console.log(`  📋 ${pageCount} pages built for January`);
   
   // Build complete HTML document
-  // Use today template's head as base (has all the CSS)
-  const headEnd = todayHTML.indexOf('</head>');
-  const headHTML = todayHTML.substring(0, headEnd);
+  // CRITICAL: merge CSS from ALL 4 templates — each has its own unique classes.
+  // Only using Today's <head> strips styling from Reflect/Weekly/Monthly pages.
+  function extractStyleBlocks(html: string): string {
+    const styles: string[] = [];
+    const re = /<style[^>]*>([\s\S]*?)<\/style>/g;
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      styles.push(m[1]);
+    }
+    return styles.join('\n\n');
+  }
   
-  const fullHTML = `${headHTML}
+  const todayCSS = extractStyleBlocks(todayHTML);
+  const reflectCSS = extractStyleBlocks(reflectHTML);
+  const weeklyCSS = extractStyleBlocks(weeklyHTML);
+  const monthlyCSS = extractStyleBlocks(monthlyHTML);
+  
+  const fullHTML = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHD v2 — January ${year}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style id="today-css">${todayCSS}</style>
+    <style id="reflect-css">${reflectCSS}</style>
+    <style id="weekly-css">${weeklyCSS}</style>
+    <style id="monthly-css">${monthlyCSS}</style>
     <style id="month-tabs">${tabBarCSS}</style>
     <style id="multipage-print">
       @page { size: A4 portrait; margin: 0; }
-      body { background: white; }
+      body { background: white; margin: 0; padding: 0; }
       .page { margin: 0; box-shadow: none; page-break-after: always; page-break-inside: avoid; }
       .page:last-child { page-break-after: auto; }
     </style>
