@@ -1,0 +1,78 @@
+{
+  "name": "goodnotes-templates",
+  "version": "1.0.0",
+  "description": "Programmatically generate high-quality digital planning templates, stickers, and page assets optimized for GoodNotes and similar digital note-taking apps",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "goodnotes-templates": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/cli/index.ts",
+    "start": "tsx src/cli/index.ts",
+    "generate": "tsx src/cli/index.ts generate --all",
+    "generate:templates": "tsx src/cli/index.ts generate --templates",
+    "generate:stickers": "tsx src/cli/index.ts generate --stickers",
+    "generate:pages": "tsx src/cli/index.ts generate --pages",
+    "preview": "tsx src/cli/index.ts preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:visual": "vitest run --config vitest.visual.config.ts",
+    "lint": "eslint src/ --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,css,html}\"",
+    "clean": "rm -rf dist output/*",
+    "fonts:download": "tsx scripts/download-fonts.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "goodnotes",
+    "templates",
+    "digital-planner",
+    "pdf",
+    "stickers",
+    "notability",
+    "noteshelf",
+    "collanote",
+    "ipad",
+    "planner",
+    "journal",
+    "tracker",
+    "digital-planning"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/goodnotes-templates"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "pdfkit": "^0.15.1",
+    "puppeteer": "^23.11.1",
+    "sharp": "^0.33.5",
+    "@svgdotjs/svg.js": "^3.2.4",
+    "svgdom": "^0.1.23",
+    "commander": "^12.1.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.1.1",
+    "glob": "^11.0.0",
+    "handlebars": "^4.7.8",
+    "fontkit": "^2.0.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "tsx": "^4.19.2",
+    "vitest": "^2.1.8",
+    "@types/node": "^22.10.2",
+    "@types/pdfkit": "^0.13.5",
+    "eslint": "^9.16.0",
+    "prettier": "^3.4.2",
+    "looks-same": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0"
+  }
+}
