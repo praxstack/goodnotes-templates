@@ -33,8 +33,10 @@ export async function startPreviewServer(outputDir: string, port: number): Promi
     }
 
     // Serve static files from output dir
-    const filePath = path.join(absDir, decodeURIComponent(url.pathname));
-    if (!filePath.startsWith(absDir)) {
+    // Use path.resolve to normalize any '..' segments, then check prefix
+    const decoded = decodeURIComponent(url.pathname).replace(/^\/+/, '');
+    const filePath = path.resolve(absDir, decoded);
+    if (!filePath.startsWith(absDir + path.sep) && filePath !== absDir) {
       res.writeHead(403);
       res.end('Forbidden');
       return;
@@ -89,17 +91,21 @@ async function generateGalleryHTML(outputDir: string): Promise<string> {
 
   await scan(outputDir);
 
+  // HTML-escape to prevent XSS from filenames
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
   const sections = Object.entries(categories).sort().map(([cat, files]) => {
     const items = files.sort().map(f => {
       const ext = path.extname(f).toLowerCase();
-      const name = path.basename(f);
+      const name = esc(path.basename(f));
+      const href = encodeURI(`/${f}`);
       if (ext === '.png' || ext === '.svg') {
-        return `<div class="card"><img src="/${f}" alt="${name}" loading="lazy" /><span>${name}</span></div>`;
+        return `<div class="card"><img src="${href}" alt="${name}" loading="lazy" /><span>${name}</span></div>`;
       }
-      return `<div class="card pdf"><a href="/${f}" target="_blank">📄 ${name}</a></div>`;
+      return `<div class="card pdf"><a href="${href}" target="_blank">📄 ${name}</a></div>`;
     }).join('\n');
 
-    return `<section><h2>${cat} (${files.length})</h2><div class="grid">${items}</div></section>`;
+    return `<section><h2>${esc(cat)} (${files.length})</h2><div class="grid">${items}</div></section>`;
   }).join('\n');
 
   return `<!DOCTYPE html>

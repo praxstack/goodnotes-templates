@@ -28,7 +28,6 @@ import { mergePDFs, postProcessPDF } from '../../core/pdf-postprocess.js';
 import {
   getMonthNames,
   getDayNames,
-  getDaysInMonth,
   isLeapYear,
   type SupportedLocale,
 } from '../../utils/locale.js';
@@ -196,20 +195,18 @@ function injectDailyPageData(
     `<label>Date</label><span class="field" style="border-bottom-color: transparent; font-size: 7pt; font-weight: 500; color: var(--ink-2)">${entry.dateLabel} ${entry.year}</span>`
   );
 
-  // 3. Highlight the current day circle
-  const dayLetters = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-  // JS dayOfWeek: 0=Sun, 1=Mon...6=Sat
-  // Circle order: M T W T F S S → indices 0-6 map to Mon-Sun
+  // 3. Highlight the current day circle by position (not letter)
+  // Day circles: M T W T F S S — letters duplicate (T for Tue/Thu, S for Sat/Sun)
+  // so we use a positional counter to highlight the correct Nth circle
   const activeIdx = entry.dayOfWeek === 0 ? 6 : entry.dayOfWeek - 1;
-
-  dayLetters.forEach((letter, i) => {
-    if (i === activeIdx) {
-      // Add active styling to the matching circle
-      html = html.replace(
-        new RegExp(`<div class="day-circle">${letter}</div>`, ''),
-        `<div class="day-circle" style="background: var(--accent); color: white; border-color: var(--accent); font-weight: 700">${letter}</div>`
-      );
+  let circleCount = 0;
+  html = html.replace(/<div class="day-circle">(.*?)<\/div>/g, (match, letter) => {
+    const isActive = circleCount === activeIdx;
+    circleCount++;
+    if (isActive) {
+      return `<div class="day-circle" style="background: var(--accent); color: white; border-color: var(--accent); font-weight: 700">${letter}</div>`;
     }
+    return match;
   });
 
   return html;
@@ -589,36 +586,38 @@ export async function generateDailyYearPlanner(
   const monthResults: MonthPages[] = [];
   const monthNames = getMonthNames(locale, 'long');
 
-  for (let m = 1; m <= 12; m++) {
-    const days = grouped.get(m) || [];
-    const monthName = monthNames[m - 1];
-    log('render', `${monthName} (${days.length} days)...`);
+  try {
+    for (let m = 1; m <= 12; m++) {
+      const days = grouped.get(m) || [];
+      const monthName = monthNames[m - 1];
+      log('render', `${monthName} (${days.length} days)...`);
 
-    const { html, pageCount } = buildMonthHTML(parsed, days, m, locale, year);
+      const { html, pageCount } = buildMonthHTML(parsed, days, m, locale, year);
 
-    // Render to PDF via Puppeteer with theme injection
-    // multiPage: true → uses CSS @page rules for page breaks instead of
-    // explicit width/height, so each .page div becomes a separate PDF page
-    const buffer = await renderHTMLToPDF({
-      htmlPath: templatePath, // not used since we pass htmlContent
-      theme,
-      dimensions,
-      htmlContent: html,
-      multiPage: true,
-    });
+      // Render to PDF via Puppeteer with theme injection
+      // multiPage: true → uses CSS @page rules for page breaks instead of
+      // explicit width/height, so each .page div becomes a separate PDF page
+      const buffer = await renderHTMLToPDF({
+        htmlPath: templatePath, // not used since we pass htmlContent
+        theme,
+        dimensions,
+        htmlContent: html,
+        multiPage: true,
+      });
 
-    monthResults.push({
-      month: m,
-      monthName,
-      pageCount,
-      buffer,
-    });
+      monthResults.push({
+        month: m,
+        monthName,
+        pageCount,
+        buffer,
+      });
 
-    log('render', `  ✓ ${monthName}: ${pageCount} pages (${(buffer.length / 1024 / 1024).toFixed(1)} MB)`);
+      log('render', `  ✓ ${monthName}: ${pageCount} pages (${(buffer.length / 1024 / 1024).toFixed(1)} MB)`);
+    }
+  } finally {
+    // Always close browser, even if a month render throws
+    await closeBrowser();
   }
-
-  // Close browser after all months are rendered
-  await closeBrowser();
 
   // ── Step 4: Merge Monthly PDFs ─────────────────────────────
   log('merge', 'Merging 12 monthly PDFs...');

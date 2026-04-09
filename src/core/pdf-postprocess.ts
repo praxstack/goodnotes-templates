@@ -65,12 +65,12 @@ export async function addHyperlinks(
   const pages = doc.getPages();
 
   for (const link of links) {
-    if (link.sourcePageIndex >= pages.length) {
-      console.warn(`Hyperlink skipped: source page ${link.sourcePageIndex} out of range (${pages.length} pages)`);
+    if (link.sourcePageIndex < 0 || link.sourcePageIndex >= pages.length) {
+      console.warn(`Hyperlink skipped: source page ${link.sourcePageIndex} out of range (0-${pages.length - 1})`);
       continue;
     }
-    if (link.destinationPageIndex >= pages.length) {
-      console.warn(`Hyperlink skipped: dest page ${link.destinationPageIndex} out of range (${pages.length} pages)`);
+    if (link.destinationPageIndex < 0 || link.destinationPageIndex >= pages.length) {
+      console.warn(`Hyperlink skipped: dest page ${link.destinationPageIndex} out of range (0-${pages.length - 1})`);
       continue;
     }
 
@@ -151,7 +151,11 @@ export async function addBookmarks(
     parentRef: any
   ): { ref: any; dict: PDFDict } {
     const ref = doc.context.nextRef();
-    const page = pages[Math.min(bookmark.pageIndex, pages.length - 1)];
+    const clampedIdx = Math.max(0, Math.min(bookmark.pageIndex, pages.length - 1));
+    if (bookmark.pageIndex !== clampedIdx) {
+      console.warn(`Bookmark "${bookmark.title}": pageIndex ${bookmark.pageIndex} clamped to ${clampedIdx} (${pages.length} pages)`);
+    }
+    const page = pages[clampedIdx];
 
     const dest = PDFArray.withContext(doc.context);
     dest.push(page.ref);
