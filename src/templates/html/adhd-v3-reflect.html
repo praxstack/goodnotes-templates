@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Planner v3 — Reflect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   ADHD PLANNER v3 — "Reflect" Evening Page
+   Soft UI Evolution  •  Calming Lavender  •  WCAG AA+
+
+   Design: Evolved neumorphism with improved contrast
+   Fonts:  Lora (headings) + Raleway (body)
+   Icons:  Inline SVG only — no emoji
+
+   Research-backed (CBT + ADHD):
+   ✦ CBT thought-check reframe
+   ✦ Self-care audit (low-bar wins)
+   ✦ Gratitude ≠ toxic positivity — real reflection
+   ✦ Permission to leave blank always present
+   ✦ Gentle, non-judgmental copy
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Page geometry */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 14mm;
+
+  /* Soft UI Evolution palette — Mental Health */
+  --primary:    #8B5CF6;   /* calming lavender       */
+  --secondary:  #C4B5FD;   /* light lavender          */
+  --accent:     #059669;   /* wellness green           */
+  --bg:         #FAF5FF;   /* page background          */
+  --card:       #FFFFFF;   /* white card surface       */
+  --text:       #4C1D95;   /* deep purple text         */
+  --text-body:  #5B21B6;   /* body text                */
+  --text-muted: #7C3AED;   /* muted text               */
+  --muted:      #EDEFF9;   /* muted fill               */
+  --border:     #EDE9FE;   /* border / rule             */
+  --amber:      #D97706;   /* thought-check CBT         */
+  --coral:      #E11D48;   /* gentle warmth / tomorrow  */
+
+  /* Semantic aliases */
+  --rule:        var(--border);
+  --rule-light:  #F3EDFF;
+  --ink:         var(--text);
+  --ink-2:       var(--text-body);
+  --ink-3:       var(--text-muted);
+
+  /* Typography */
+  --font-display: 'Lora', Georgia, serif;
+  --font-body:    'Raleway', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --s1: 2mm; --s2: 3mm; --s3: 5mm; --s4: 7mm; --s5: 10mm; --s6: 14mm;
+
+  /* Soft UI shadows */
+  --shadow-card:  0 2px 8px rgba(139,92,246,0.06), 0 1px 3px rgba(139,92,246,0.04);
+  --shadow-inset: inset 0 1px 2px rgba(139,92,246,0.06);
+  --shadow-page:  0 4px 24px rgba(139,92,246,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #EDE9FE;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  color: var(--ink);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Page container ─── */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--bg);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  border-radius: 2px;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; border-radius: 0; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Shared SVG icon sizing ─── */
+.icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon-sm {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════
+   1. HEADER
+   ═══════════════════════════════════════════════ */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: var(--s3);
+  flex-shrink: 0;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 2px 2px 0 0;
+}
+.header-left .title {
+  font-family: var(--font-display);
+  font-size: 18pt;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.header-left .subtitle {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 7.5pt;
+  color: var(--text-muted);
+  margin-top: 1.5mm;
+  letter-spacing: 0.01em;
+}
+.date-block {
+  text-align: right;
+  font-family: var(--font-body);
+  font-size: 7pt;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.date-field {
+  border-bottom: 0.5px solid var(--border);
+  min-width: 30mm;
+  height: 4.5mm;
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════
+   2. ENERGY
+   ═══════════════════════════════════════════════ */
+.energy-row {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  flex-shrink: 0;
+}
+.energy-row .label {
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+.energy-bars {
+  display: flex;
+  gap: 2mm;
+}
+.energy-bar {
+  width: 14mm;
+  height: 5.5mm;
+  border: 0.5px solid var(--border);
+  border-radius: 2.5px;
+  background: var(--card);
+  box-shadow: var(--shadow-inset);
+}
+
+/* ═══════════════════════════════════════════════
+   3. MOVEMENT
+   ═══════════════════════════════════════════════ */
+.movement-section {
+  flex-shrink: 0;
+}
+.movement-row {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  flex-wrap: wrap;
+}
+.movement-row .label {
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+.movement-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5mm;
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.movement-sep {
+  color: var(--border);
+  font-size: 7pt;
+}
+.circle {
+  width: 4.5mm;
+  height: 4.5mm;
+  border-radius: 50%;
+  border: 0.6px solid var(--secondary);
+  flex-shrink: 0;
+  background: var(--card);
+  box-shadow: var(--shadow-inset);
+  display: inline-block;
+  vertical-align: middle;
+}
+.other-line {
+  border-bottom: 0.4px dotted var(--rule-light);
+  width: 16mm;
+  display: inline-block;
+}
+.feel-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  margin-top: var(--s1);
+}
+.feel-row .feel-label {
+  font-size: 7.5pt;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════
+   SHARED: write-line, card, section-title
+   ═══════════════════════════════════════════════ */
+.write-line {
+  flex: 1;
+  border-bottom: 0.4px dotted var(--rule-light);
+  min-height: 6mm;
+}
+
+.card {
+  border-radius: 10px;
+  padding: var(--s3);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+
+.section-title {
+  font-family: var(--font-body);
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+
+/* ═══════════════════════════════════════════════
+   4. THOUGHT CHECK (CBT — amber tint)
+   ═══════════════════════════════════════════════ */
+.thought-check {
+  background: rgba(217, 119, 6, 0.08);
+  border: 0.5px solid rgba(217, 119, 6, 0.15);
+}
+.thought-check .section-title {
+  color: var(--amber);
+}
+.thought-prompt {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+  margin-top: var(--s2);
+}
+.thought-prompt .prompt-label {
+  font-size: 7.5pt;
+  font-weight: 500;
+  color: #92400E;
+  white-space: nowrap;
+}
+.thought-check .write-line {
+  border-bottom-color: rgba(217, 119, 6, 0.2);
+}
+
+/* ═══════════════════════════════════════════════
+   5. SELF-CARE CHECK (green tint)
+   ═══════════════════════════════════════════════ */
+.self-care {
+  background: rgba(5, 150, 105, 0.08);
+  border: 0.5px solid rgba(5, 150, 105, 0.15);
+}
+.self-care .section-title {
+  color: var(--accent);
+}
+.self-care-items {
+  display: flex;
+  gap: var(--s4);
+  margin-top: var(--s2);
+  flex-wrap: wrap;
+}
+.self-care-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5mm;
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: #065F46;
+}
+.self-care .circle {
+  border-color: rgba(5, 150, 105, 0.4);
+}
+
+/* ═══════════════════════════════════════════════
+   6. GRATITUDE / WIN / PROUD
+   ═══════════════════════════════════════════════ */
+.gwp-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  flex-shrink: 0;
+}
+.gwp-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+}
+.gwp-row .gwp-label {
+  font-size: 8pt;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+
+/* ═══════════════════════════════════════════════
+   7. TOMORROW'S PRIORITY (coral tint)
+   ═══════════════════════════════════════════════ */
+.tomorrow-card {
+  background: rgba(225, 29, 72, 0.06);
+  border: 0.5px solid rgba(225, 29, 72, 0.12);
+}
+.tomorrow-inner {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+}
+.tomorrow-inner .tomorrow-label {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--coral);
+  white-space: nowrap;
+}
+.tomorrow-card .write-line {
+  border-bottom-color: rgba(225, 29, 72, 0.2);
+}
+
+/* ═══════════════════════════════════════════════
+   8. FREE WRITE
+   ═══════════════════════════════════════════════ */
+.free-write {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.free-write-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 1mm;
+}
+.free-write-title {
+  font-family: var(--font-display);
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--ink);
+}
+.free-write .hint {
+  font-size: 6.5pt;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-bottom: var(--s2);
+}
+.free-write-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.free-write-line {
+  border-bottom: 0.3px dotted var(--rule-light);
+  min-height: 6mm;
+}
+
+/* ═══════════════════════════════════════════════
+   9. FOOTER
+   ═══════════════════════════════════════════════ */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 6.5pt;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding-top: var(--s2);
+  border-top: 0.5px solid var(--rule-light);
+}
+.footer .sign-off {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+.footer .page-num {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 6pt;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PAGE — REFLECT  ·  Evening Wind-Down
+     Soft UI Evolution  ·  ADHD Planner v3
+     ════════════════════════════════════════════════════════════════ -->
+<div class="page" data-template="adhd-v3-reflect">
+
+  <!-- ─── 1. HEADER ─── -->
+  <header class="header">
+    <div class="header-left">
+      <div class="title">Reflect</div>
+      <div class="subtitle">Notice. Learn. Be kind to yourself.</div>
+    </div>
+    <div class="date-block">
+      <span data-inject="date"><span class="date-field"></span></span>
+    </div>
+  </header>
+
+  <!-- ─── 2. ENERGY ─── -->
+  <section class="energy-row" aria-label="Energy level">
+    <span class="label">
+      <!-- SVG: Lightning bolt -->
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Energy:
+    </span>
+    <div class="energy-bars">
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+      <div class="energy-bar"></div>
+    </div>
+  </section>
+
+  <!-- ─── 3. MOVEMENT ─── -->
+  <section class="movement-section" aria-label="Movement tracker">
+    <div class="movement-row">
+      <span class="label">
+        <!-- SVG: Running person -->
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="4" r="2"/><path d="M15.59 13.51l2.41 4.49h3m-9-8l-2-4-7 3.5 2 2.5"/><path d="M3.5 21.5l4-7 4.5 1.5 3.5-5"/></svg>
+        Movement:
+      </span>
+      <span class="movement-option"><span class="circle"></span> Walk</span>
+      <span class="movement-sep">·</span>
+      <span class="movement-option"><span class="circle"></span> Run</span>
+      <span class="movement-sep">·</span>
+      <span class="movement-option"><span class="circle"></span> Gym</span>
+      <span class="movement-sep">·</span>
+      <span class="movement-option"><span class="circle"></span> Yoga</span>
+      <span class="movement-sep">·</span>
+      <span class="movement-option"><span class="circle"></span> Other: <span class="other-line"></span></span>
+    </div>
+    <div class="feel-row">
+      <span class="feel-label">How I feel after:</span>
+      <span class="write-line"></span>
+    </div>
+  </section>
+
+  <!-- ─── 4. THOUGHT CHECK (CBT) ─── -->
+  <section class="card thought-check" aria-label="CBT thought check">
+    <div class="section-title">
+      <!-- SVG: Brain -->
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 4.42 2.65A4.5 4.5 0 0 1 20 9a4 4 0 0 1-.68 7.74A5 5 0 0 1 12 22"/><path d="M12 2a5 5 0 0 0-4.42 2.65A4.5 4.5 0 0 0 4 9a4 4 0 0 0 .68 7.74A5 5 0 0 0 12 22"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+      THOUGHT CHECK
+    </div>
+    <div class="thought-prompt">
+      <span class="prompt-label">My brain is telling me:</span>
+      <span class="write-line"></span>
+    </div>
+    <div class="thought-prompt">
+      <span class="prompt-label">Is that actually true?</span>
+      <span class="write-line"></span>
+    </div>
+    <div class="thought-prompt">
+      <span class="prompt-label">A kinder way to see it:</span>
+      <span class="write-line"></span>
+    </div>
+  </section>
+
+  <!-- ─── 5. SELF-CARE CHECK ─── -->
+  <section class="card self-care" aria-label="Self-care check">
+    <div class="section-title">
+      <!-- SVG: Seedling / sprout -->
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10"/><path d="M6 14c0-3.31 2.69-6 6-6"/><path d="M18 10c0 3.31-2.69 6-6 6"/><path d="M12 10c2-4 6-4 8-2 0 0-2 4-8 2"/><path d="M12 10c-2-4-6-4-8-2 0 0 2 4 8 2"/></svg>
+      SELF-CARE CHECK
+    </div>
+    <div class="self-care-items">
+      <span class="self-care-item"><span class="circle"></span> Ate something</span>
+      <span class="self-care-item"><span class="circle"></span> Went outside</span>
+      <span class="self-care-item"><span class="circle"></span> Something fun</span>
+      <span class="self-care-item"><span class="circle"></span> Kind to myself</span>
+    </div>
+  </section>
+
+  <!-- ─── 6. GRATITUDE / WIN / PROUD ─── -->
+  <section class="gwp-rows" aria-label="Gratitude, wins, and pride">
+    <div class="gwp-row">
+      <span class="gwp-label">
+        <!-- SVG: Heart -->
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Grateful for:
+      </span>
+      <span class="write-line"></span>
+    </div>
+    <div class="gwp-row">
+      <span class="gwp-label">
+        <!-- SVG: Trophy -->
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        Win today:
+      </span>
+      <span class="write-line"></span>
+    </div>
+    <div class="gwp-row">
+      <span class="gwp-label">
+        <!-- SVG: Flex / strong arm -->
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14s1-2 4-2 4 4 7 4 4-2 4-2"/><path d="M10.1 8.3C10.5 6.4 12 5 14 5c2.2 0 4 1.8 4 4 0 .9-.3 1.7-.8 2.4"/><path d="M7.5 12.5c-.5-1.1-.5-2.5.4-3.5 1-1.2 2.7-1.5 4-1"/></svg>
+        Proud of:
+      </span>
+      <span class="write-line"></span>
+    </div>
+  </section>
+
+  <!-- ─── 7. TOMORROW'S PRIORITY ─── -->
+  <section class="card tomorrow-card" aria-label="Tomorrow's priority">
+    <div class="tomorrow-inner">
+      <span class="tomorrow-label">→ Tomorrow's priority:</span>
+      <span class="write-line"></span>
+    </div>
+  </section>
+
+  <!-- ─── 8. FREE WRITE ─── -->
+  <section class="free-write" aria-label="Free write space">
+    <div class="free-write-header">
+      <!-- SVG: Pen / pencil -->
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+      <span class="free-write-title">Free Write</span>
+    </div>
+    <div class="hint">say anything, or leave it blank</div>
+    <div class="free-write-lines">
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+      <div class="free-write-line"></div>
+    </div>
+  </section>
+
+  <!-- ─── 9. FOOTER ─── -->
+  <footer class="footer">
+    <span class="sign-off">You showed up. That counts.</span>
+    <span class="page-num" data-inject="page-num"></span>
+  </footer>
+
+</div>
+
+</body>
+</html>
