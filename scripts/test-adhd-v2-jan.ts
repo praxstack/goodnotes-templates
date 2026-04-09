@@ -135,26 +135,94 @@ async function main() {
   
   // Render
   console.log('  🖨  Rendering PDF...');
+  let pdfBuffer: Buffer;
   try {
-    const buffer = await renderHTMLToPDF({
+    pdfBuffer = await renderHTMLToPDF({
       htmlPath: 'src/templates/html/adhd-v2-today.html',
       theme,
       dimensions: dims,
       htmlContent: fullHTML,
       multiPage: true,
     });
-    
-    const outputDir = 'output/templates';
-    await fs.mkdir(outputDir, { recursive: true });
-    const outputPath = path.join(outputDir, `adhd-v2-jan-${year}-${themeName}.pdf`);
-    await fs.writeFile(outputPath, buffer);
-    
-    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-    console.log(`\n  ✅ ${outputPath}`);
-    console.log(`     ${pageCount} pages, ${(buffer.length / 1024 / 1024).toFixed(1)} MB, ${elapsed}s\n`);
+    console.log(`     Raw PDF: ${(pdfBuffer.length / 1024 / 1024).toFixed(1)} MB`);
   } finally {
     await closeBrowser();
   }
+
+  // ─── Post-process: add hyperlinks + bookmarks + metadata ────
+  console.log('  🔗 Adding hyperlinks + bookmarks...');
+  
+  // Build month tab hyperlinks for every page
+  // Tab bar: 12 equally-spaced tabs at top of page
+  // For January-only test, all tabs link to page 0 (only January exists)
+  const margin = 39.7; // 14mm in points
+  const tabBarHeight = 18;
+  const contentWidth = dims.width - 2 * margin;
+  const tabWidth = contentWidth / 12;
+  
+  const hyperlinks: Array<{sourcePageIndex: number; rect: [number, number, number, number]; destinationPageIndex: number}> = [];
+  for (let pageIdx = 0; pageIdx < pageCount; pageIdx++) {
+    for (let month = 1; month <= 12; month++) {
+      // For January-only: all tabs link to page 0
+      const destPage = 0;
+      const x = margin + (month - 1) * tabWidth;
+      hyperlinks.push({
+        sourcePageIndex: pageIdx,
+        rect: [x, margin, tabWidth, tabBarHeight],
+        destinationPageIndex: destPage,
+      });
+    }
+  }
+  console.log(`     ${hyperlinks.length} hyperlinks (${pageCount} pages × 12 tabs)`);
+  
+  // Build bookmarks for GoodNotes sidebar
+  const dayBookmarks: Array<{title: string; pageIndex: number}> = [];
+  let bkPageIdx = 0;
+  for (const day of janDays) {
+    dayBookmarks.push({ title: `${day.dateLabel} — Today`, pageIndex: bkPageIdx });
+    bkPageIdx++;
+    dayBookmarks.push({ title: `${day.dateLabel} — Reflect`, pageIndex: bkPageIdx });
+    bkPageIdx++;
+    if (day.isSunday) {
+      dayBookmarks.push({ title: `Weekly Review (${day.dateLabel})`, pageIndex: bkPageIdx });
+      bkPageIdx++;
+    }
+    if (day.isLastDay) {
+      dayBookmarks.push({ title: `Monthly Review — January`, pageIndex: bkPageIdx });
+      bkPageIdx++;
+    }
+  }
+  
+  const bookmarks = [{
+    title: `📅 January ${year} ADHD v2 Planner`,
+    pageIndex: 0,
+    children: dayBookmarks,
+  }];
+  console.log(`     ${dayBookmarks.length} bookmarks`);
+  
+  // Apply post-processing
+  pdfBuffer = await postProcessPDF(pdfBuffer, {
+    metadata: {
+      title: `ADHD v2 Planner — January ${year}`,
+      author: 'goodnotes-templates',
+      subject: `January ${year} daily planner — ${theme.name} theme`,
+      keywords: ['planner', 'adhd', 'daily', 'goodnotes', theme.id, String(year)],
+      creator: 'goodnotes-templates v1.0.0',
+      producer: 'pdf-lib + Puppeteer',
+    },
+    hyperlinks,
+    bookmarks,
+  });
+  
+  const outputDir = 'output/templates';
+  await fs.mkdir(outputDir, { recursive: true });
+  const outputPath = path.join(outputDir, `adhd-v2-jan-${year}-${themeName}.pdf`);
+  await fs.writeFile(outputPath, pdfBuffer);
+  
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+  console.log(`\n  ✅ ${outputPath}`);
+  console.log(`     ${pageCount} pages, ${(pdfBuffer.length / 1024 / 1024).toFixed(1)} MB, ${elapsed}s`);
+  console.log(`     ✓ ${hyperlinks.length} hyperlinks, ${dayBookmarks.length} bookmarks, metadata added\n`);
 }
 
 main().catch(err => { console.error('❌', err); process.exit(1); });

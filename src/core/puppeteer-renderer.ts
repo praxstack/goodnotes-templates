@@ -53,28 +53,59 @@ export async function closeBrowser(): Promise<void> {
  * Generate CSS variable overrides to theme an HTML template.
  * Injects the theme's colors and fonts as CSS custom properties.
  */
+/**
+ * Semantic color defaults — these provide the green/blue/amber/accent
+ * colors that templates rely on for meaning (green=health, blue=info,
+ * amber=warning/thought). Theme injection overrides structural colors
+ * (bg, surface, ink, rule) but PRESERVES semantic colors unless the
+ * theme explicitly provides them via `extra`.
+ *
+ * This is the critical fix: previously ALL semantic colors were mapped
+ * to generic theme.colors.primary/secondary which collapsed 7 distinct
+ * colors into 2-3, making everything look flat and monochrome.
+ */
+const SEMANTIC_DEFAULTS = {
+  light: {
+    green: '#5E8B6A', greenSoft: '#D4E4D8',
+    blue: '#4A6FA5', blueSoft: '#D3DEF0',
+    amber: '#C4933F', amberSoft: '#F0E4C8',
+    accentSoft: '#F2D8CC',
+  },
+  dark: {
+    green: '#6AAF7E', greenSoft: 'rgba(94, 139, 106, 0.2)',
+    blue: '#6CA0D4', blueSoft: 'rgba(74, 111, 165, 0.2)',
+    amber: '#D4A94F', amberSoft: 'rgba(196, 147, 63, 0.2)',
+    accentSoft: 'rgba(196, 93, 62, 0.2)',
+  },
+};
+
 function generateThemeCSS(theme: Theme): string {
+  const sem = theme.isDark ? SEMANTIC_DEFAULTS.dark : SEMANTIC_DEFAULTS.light;
+  const extra = theme.colors.extra || {};
+
   return `
     :root {
-      /* Theme: ${theme.name} */
+      /* Theme: ${theme.name} — structural overrides */
       --bg: ${theme.colors.background};
-      --surface: ${theme.colors.secondary};
-      --surface-alt: ${theme.colors.muted};
+      --surface: ${theme.colors.surface || theme.colors.secondary};
+      --surface-alt: ${theme.isDark ? (theme.colors.surface || theme.colors.secondary) : theme.colors.muted};
       --ink: ${theme.colors.text};
       --ink-2: ${theme.colors.text}CC;
       --ink-3: ${theme.colors.muted};
       --rule: ${theme.lineColor};
-      --rule-light: ${theme.colors.secondary};
+      --rule-light: ${theme.isDark ? theme.lineColor + '80' : theme.colors.secondary};
       --accent: ${theme.colors.accent};
-      --accent-soft: ${theme.colors.secondary};
-      --green: ${theme.colors.primary};
-      --green-soft: ${theme.colors.secondary};
-      --blue: ${theme.colors.accent};
-      --blue-soft: ${theme.colors.secondary};
-      --amber: ${theme.colors.primary};
-      --amber-soft: ${theme.colors.secondary};
       --dark: ${theme.colors.text};
       --cream: ${theme.colors.background};
+
+      /* Semantic colors — preserved from template defaults, themed for dark mode */
+      --green: ${extra.green || sem.green};
+      --green-soft: ${extra.greenSoft || sem.greenSoft};
+      --blue: ${extra.blue || sem.blue};
+      --blue-soft: ${extra.blueSoft || sem.blueSoft};
+      --amber: ${extra.amber || sem.amber};
+      --amber-soft: ${extra.amberSoft || sem.amberSoft};
+      --accent-soft: ${extra.accentSoft || sem.accentSoft};
 
       /* Theme colors (direct) */
       --theme-primary: ${theme.colors.primary};
