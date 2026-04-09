@@ -31,6 +31,10 @@ export const STICKER_SIZES = {
   'weather-icon': { width: 150, height: 150 },
   'star-rating': { width: 350, height: 80 },
   'arrow': { width: 120, height: 120 },
+  'cbt-thought-check': { width: 944, height: 590 },
+  'cbt-reframe': { width: 944, height: 236 },
+  'self-compassion-card': { width: 944, height: 295 },
+  'permission-card': { width: 944, height: 236 },
 } as const;
 
 export type StickerType = keyof typeof STICKER_SIZES;
@@ -65,6 +69,10 @@ export function generateStickerSVG(
     case 'weather-icon': return generateWeatherIcon(size.width, size.height, theme, variant);
     case 'star-rating': return generateStarRating(size.width, size.height, theme, variant);
     case 'arrow': return generateArrow(size.width, size.height, theme, variant);
+    case 'cbt-thought-check': return generateCBTThoughtCheck(size.width, size.height, theme);
+    case 'cbt-reframe': return generateCBTReframe(size.width, size.height, theme);
+    case 'self-compassion-card': return generateSelfCompassionCard(size.width, size.height, theme);
+    case 'permission-card': return generatePermissionCard(size.width, size.height, theme);
   }
 }
 
@@ -306,5 +314,145 @@ function generateArrow(w: number, h: number, theme: Theme, variant: number): str
       <line x1="${cx}" y1="${cy + 30}" x2="${cx}" y2="${cy - 30}" stroke="${theme.colors.primary}" stroke-width="6" stroke-linecap="round" />
       <polyline points="${cx - 18},${cy - 12} ${cx},${cy - 35} ${cx + 18},${cy - 12}" fill="none" stroke="${theme.colors.primary}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
     </g>
+  `);
+}
+
+// ─── CBT / Self-Compassion Sticker Generators (ADHD Planner v2) ─
+
+function generateCBTThoughtCheck(w: number, h: number, theme: Theme): string {
+  const r = theme.borderRadius;
+  const pad = 40;
+  const bodyFont = theme.fonts.body.family;
+  const bodyWeight = theme.fonts.body.weight;
+  const accentColor = theme.colors.accent;
+  const secondaryColor = theme.colors.secondary;
+  const textColor = theme.colors.text;
+  const mutedColor = theme.colors.muted;
+  const titleBarH = 72;
+  const rowStartY = titleBarH + pad + 10;
+  const rowHeight = 130;
+  const lineInset = 260;
+  const lineEnd = w - pad - 10;
+
+  const prompts = [
+    { label: 'My brain says:' },
+    { label: 'Is that true?' },
+    { label: 'A kinder take:' },
+  ];
+
+  const rows = prompts.map((p, i) => {
+    const y = rowStartY + i * rowHeight;
+    const textY = y + 32;
+    const lineY = y + 48;
+    return `
+      <text x="${pad + 10}" y="${textY}" font-family="${bodyFont}, sans-serif" font-weight="${bodyWeight}" font-size="28" fill="${textColor}" opacity="0.85">${p.label}</text>
+      <line x1="${lineInset}" y1="${lineY}" x2="${lineEnd}" y2="${lineY}" stroke="${mutedColor}" stroke-width="2" stroke-dasharray="6,5" opacity="0.5" />
+    `;
+  }).join('');
+
+  return svgWrap(w, h, `
+    <defs>
+      <filter id="cbt-shadow">
+        <feDropShadow dx="0" dy="3" stdDeviation="6" flood-opacity="0.1" />
+      </filter>
+    </defs>
+    <rect x="6" y="6" width="${w - 12}" height="${h - 12}" rx="${r}" ry="${r}" fill="${secondaryColor}" filter="url(#cbt-shadow)" />
+    <rect x="6" y="6" width="${w - 12}" height="${h - 12}" rx="${r}" ry="${r}" fill="none" stroke="${mutedColor}" stroke-width="1.5" opacity="0.35" />
+    <rect x="6" y="6" width="${w - 12}" height="${titleBarH}" rx="${r}" ry="0" fill="${accentColor}" opacity="0.15" />
+    <text x="${w / 2}" y="${titleBarH / 2 + 12}" text-anchor="middle" font-family="${bodyFont}, sans-serif" font-weight="700" font-size="34" fill="${accentColor}">\u{1F9E0} Thought Check</text>
+    ${rows}
+  `);
+}
+
+function generateCBTReframe(w: number, h: number, theme: Theme): string {
+  const r = Math.max(theme.borderRadius, h / 2);
+  const pad = 32;
+  const bodyFont = theme.fonts.body.family;
+  const bodyWeight = theme.fonts.body.weight;
+  const accentColor = theme.colors.accent;
+  const secondaryColor = theme.colors.secondary;
+  const textColor = theme.colors.text;
+  const mutedColor = theme.colors.muted;
+  const midX = w / 2;
+  const cy = h / 2;
+  const lineLen = 200;
+
+  // Left section: Thought
+  const thoughtLabelX = pad + 10;
+  const thoughtLineX1 = thoughtLabelX + 170;
+  const thoughtLineX2 = thoughtLineX1 + lineLen;
+
+  // Arrow in the middle
+  const arrowX = midX;
+
+  // Right section: Reframe
+  const reframeLabelX = midX + 40;
+  const reframeLineX1 = reframeLabelX + 180;
+  const reframeLineX2 = reframeLineX1 + lineLen;
+
+  return svgWrap(w, h, `
+    <defs>
+      <filter id="reframe-shadow">
+        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.08" />
+      </filter>
+    </defs>
+    <rect x="4" y="4" width="${w - 8}" height="${h - 8}" rx="${r}" ry="${r}" fill="${secondaryColor}" filter="url(#reframe-shadow)" />
+    <rect x="4" y="4" width="${w - 8}" height="${h - 8}" rx="${r}" ry="${r}" fill="none" stroke="${mutedColor}" stroke-width="1.5" opacity="0.3" />
+    <text x="${thoughtLabelX}" y="${cy + 8}" font-family="${bodyFont}, sans-serif" font-weight="${bodyWeight}" font-size="26" fill="${textColor}">\u{1F4AD} Thought:</text>
+    <line x1="${thoughtLineX1}" y1="${cy + 10}" x2="${thoughtLineX2}" y2="${cy + 10}" stroke="${mutedColor}" stroke-width="2" stroke-dasharray="6,5" opacity="0.5" />
+    <text x="${arrowX}" y="${cy + 10}" text-anchor="middle" font-family="${bodyFont}, sans-serif" font-weight="700" font-size="30" fill="${accentColor}">\u2192</text>
+    <text x="${reframeLabelX}" y="${cy + 8}" font-family="${bodyFont}, sans-serif" font-weight="${bodyWeight}" font-size="26" fill="${textColor}">\u{1F331} Reframe:</text>
+    <line x1="${reframeLineX1}" y1="${cy + 10}" x2="${reframeLineX2}" y2="${cy + 10}" stroke="${mutedColor}" stroke-width="2" stroke-dasharray="6,5" opacity="0.5" />
+  `);
+}
+
+function generateSelfCompassionCard(w: number, h: number, theme: Theme): string {
+  const r = theme.borderRadius;
+  const pad = 40;
+  const bodyFont = theme.fonts.body.family;
+  const bodyWeight = theme.fonts.body.weight;
+  const textColor = theme.colors.text;
+  const mutedColor = theme.colors.muted;
+  const secondaryColor = theme.colors.secondary;
+  const accentColor = theme.colors.accent;
+  const cy = h / 2;
+  const lineY = cy + 52;
+
+  // SVG heart path centred at (pad+39, cy-8)
+  const heartCx = pad + 39;
+  const heartCy = cy - 8;
+
+  return svgWrap(w, h, `
+    <defs>
+      <filter id="compassion-shadow">
+        <feDropShadow dx="0" dy="3" stdDeviation="6" flood-opacity="0.1" />
+      </filter>
+    </defs>
+    <rect x="6" y="6" width="${w - 12}" height="${h - 12}" rx="${r}" ry="${r}" fill="${secondaryColor}" filter="url(#compassion-shadow)" />
+    <rect x="6" y="6" width="${w - 12}" height="${h - 12}" rx="${r}" ry="${r}" fill="none" stroke="${mutedColor}" stroke-width="1.5" opacity="0.3" />
+    <path d="M${heartCx},${heartCy + 18} C${heartCx - 20},${heartCy + 4} ${heartCx - 20},${heartCy - 14} ${heartCx - 10},${heartCy - 18} C${heartCx - 4},${heartCy - 22} ${heartCx},${heartCy - 16} ${heartCx},${heartCy - 10} C${heartCx},${heartCy - 16} ${heartCx + 4},${heartCy - 22} ${heartCx + 10},${heartCy - 18} C${heartCx + 20},${heartCy - 14} ${heartCx + 20},${heartCy + 4} ${heartCx},${heartCy + 18} Z" fill="${accentColor}" opacity="0.55" />
+    <text x="${pad + 80}" y="${cy + 4}" font-family="${bodyFont}, sans-serif" font-weight="${bodyWeight}" font-size="26" fill="${textColor}" opacity="0.85">I&#x2019;m being too hard on myself about:</text>
+    <line x1="${pad + 20}" y1="${lineY}" x2="${w - pad - 10}" y2="${lineY}" stroke="${mutedColor}" stroke-width="2" stroke-dasharray="6,5" opacity="0.45" />
+  `);
+}
+
+function generatePermissionCard(w: number, h: number, theme: Theme): string {
+  const r = theme.borderRadius;
+  const bodyFont = theme.fonts.body.family;
+  const secondaryColor = theme.colors.secondary;
+  const mutedColor = theme.colors.muted;
+  const cy = h / 2;
+
+  return svgWrap(w, h, `
+    <defs>
+      <filter id="permission-shadow">
+        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.08" />
+      </filter>
+    </defs>
+    <rect x="4" y="4" width="${w - 8}" height="${h - 8}" rx="${r}" ry="${r}" fill="${secondaryColor}" filter="url(#permission-shadow)" />
+    <rect x="4" y="4" width="${w - 8}" height="${h - 8}" rx="${r}" ry="${r}" fill="none" stroke="${mutedColor}" stroke-width="1.5" opacity="0.25" />
+    <text x="48" y="${cy + 8}" font-family="${bodyFont}, sans-serif" font-size="28" fill="${mutedColor}" opacity="0.7">\u2726</text>
+    <text x="${w / 2}" y="${cy + 8}" text-anchor="middle" font-family="${bodyFont}, sans-serif" font-weight="500" font-size="26" fill="${mutedColor}" opacity="0.8">It\u2019s okay to leave parts blank. Showing up is the win.</text>
+    <text x="${w - 48}" y="${cy + 8}" text-anchor="end" font-family="${bodyFont}, sans-serif" font-size="28" fill="${mutedColor}" opacity="0.7">\u2726</text>
   `);
 }
