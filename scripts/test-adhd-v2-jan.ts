@@ -59,8 +59,11 @@ async function main() {
     .month-tab.active { background: var(--accent); color: white; }
   `;
   
+  // Use <a> tags for tabs — Puppeteer converts these to native PDF links automatically.
+  // This is MORE RELIABLE than adding /GoTo annotations post-hoc with pdf-lib.
+  // Each tab links to an anchor (#month-N) that we place at the start of each month section.
   const tabBarHTML = `<div class="month-tab-bar">${monthNames.map((m, i) => 
-    `<div class="month-tab${i === 0 ? ' active' : ''}" data-month="${i+1}">${m}</div>`
+    `<a href="#month-${i+1}" class="month-tab${i === 0 ? ' active' : ''}" style="text-decoration:none;color:inherit;">${m}</a>`
   ).join('')}</div>`;
   
   // Extract the FULL body content from each template (everything between <body> and </body>)
@@ -92,7 +95,13 @@ async function main() {
     let todayPage = todayBody;
     todayPage = todayPage.replace(/data-inject="date">[^<]*/g, `data-inject="date">${day.dateLabel} ${year}`);
     todayPage = todayPage.replace(/data-inject="page-num">[^<]*/g, `data-inject="page-num">${day.dateLabel} · 1/${pagesInDay}`);
-    pages.push(injectTabBar(todayPage, tabBarHTML));
+    // Add month anchor on first day of each month (for tab bar navigation)
+    const monthAnchor = day.day === 1 ? `<span id="month-1" style="position:absolute;top:0;"></span>` : '';
+    // Add day anchor for bookmarks
+    const dayAnchor = `<span id="day-${day.day}" style="position:absolute;top:0;"></span>`;
+    let todayWithAnchors = injectTabBar(todayPage, tabBarHTML);
+    todayWithAnchors = todayWithAnchors.replace(/<div class="page"([^>]*)>/, `<div class="page"$1>${monthAnchor}${dayAnchor}`);
+    pages.push(todayWithAnchors);
     pageCount++;
     
     // Reflect page — use the FULL page div from reflect template  
