@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gratitude Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Gratitude Journal — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Day circles ─── */
+    .day-circles {
+      display: flex;
+      gap: 2mm;
+    }
+    .day-circle {
+      width: 5.5mm;
+      height: 5.5mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5.5pt;
+      font-weight: 500;
+      color: var(--ink-3);
+    }
+
+    /* ─── Affirmation card ─── */
+    .affirmation-card {
+      background: var(--accent-soft);
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+      margin-top: var(--s3);
+    }
+    .affirmation-card .card-title {
+      font-weight: 700;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: var(--s1);
+    }
+
+    /* ─── Gratitude numbered sections ─── */
+    .gratitudes {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s2);
+      margin-top: var(--s3);
+    }
+    .gratitude-item {
+      display: flex;
+      gap: var(--s2);
+      align-items: flex-start;
+    }
+    .number-circle {
+      width: 5.5mm;
+      height: 5.5mm;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6.5pt;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.5mm;
+    }
+    .gratitude-card {
+      flex: 1;
+      background: var(--green-soft);
+      border-radius: 2.5mm;
+      padding: var(--s1) var(--s3);
+    }
+    .gratitude-card .card-label {
+      font-size: 6.5pt;
+      color: var(--green);
+      font-style: italic;
+      margin-bottom: 1mm;
+    }
+
+    /* ─── Intention section ─── */
+    .intention {
+      margin-top: var(--s3);
+    }
+    .intention-label {
+      font-size: 7pt;
+      color: var(--ink-2);
+      font-style: italic;
+      margin-bottom: 1.5mm;
+    }
+
+    /* ─── Evening reflection columns ─── */
+    .reflection-cols {
+      display: flex;
+      gap: var(--s4);
+      margin-top: var(--s2);
+    }
+    .reflection-col {
+      flex: 1;
+    }
+    .reflection-col .col-label {
+      font-weight: 700;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-2);
+      margin-bottom: var(--s1);
+    }
+
+    /* ─── Mood check row ─── */
+    .mood-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5mm;
+      margin-top: var(--s2);
+    }
+    .mood-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1mm;
+    }
+    .mood-circle {
+      width: 6mm;
+      height: 6mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--rule);
+      background: var(--bg);
+    }
+    .mood-emoji {
+      font-size: 8pt;
+      line-height: 1;
+    }
+    .mood-label {
+      font-size: 5.5pt;
+      color: var(--ink-3);
+    }
+
+    /* ─── Highlight line ─── */
+    .highlight {
+      margin-top: var(--s3);
+    }
+    .highlight-label {
+      font-size: 7pt;
+      color: var(--ink-2);
+      font-style: italic;
+      margin-bottom: 1.5mm;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Daily Gratitude</div>
+        <div class="page-subtitle">What you focus on expands</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. DATE ROW
+         ══════════════════════════════════════════════════════════ -->
+    <div class="date-row">
+      <label>Date</label><span class="field"></span>
+      <div class="day-circles">
+        <div class="day-circle">M</div>
+        <div class="day-circle">T</div>
+        <div class="day-circle">W</div>
+        <div class="day-circle">T</div>
+        <div class="day-circle">F</div>
+        <div class="day-circle">S</div>
+        <div class="day-circle">S</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. MORNING AFFIRMATION
+         ══════════════════════════════════════════════════════════ -->
+    <div class="affirmation-card">
+      <div class="card-title">Today's Affirmation</div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. THREE GRATITUDES
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot green"></div>
+      <div class="section-title">Three Gratitudes</div>
+    </div>
+
+    <div class="gratitudes">
+      <!-- Gratitude 1 -->
+      <div class="gratitude-item">
+        <div class="number-circle">1</div>
+        <div class="gratitude-card">
+          <div class="card-label">I am grateful for...</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+      </div>
+      <!-- Gratitude 2 -->
+      <div class="gratitude-item">
+        <div class="number-circle">2</div>
+        <div class="gratitude-card">
+          <div class="card-label">I am grateful for...</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+      </div>
+      <!-- Gratitude 3 -->
+      <div class="gratitude-item">
+        <div class="number-circle">3</div>
+        <div class="gratitude-card">
+          <div class="card-label">I am grateful for...</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. DAILY INTENTION
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">Daily Intention</div>
+    </div>
+
+    <div class="intention">
+      <div class="intention-label">My intention for today is...</div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. EVENING REFLECTION (2 columns)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Evening Reflection</div>
+    </div>
+
+    <div class="reflection-cols">
+      <div class="reflection-col">
+        <div class="col-label">What went well today?</div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+      <div class="reflection-col">
+        <div class="col-label">What could I improve?</div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         7. MOOD CHECK
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Mood Check</div>
+    </div>
+
+    <div class="mood-row">
+      <div class="mood-item">
+        <div class="mood-emoji">😢</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Low</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-emoji">😐</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Meh</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-emoji">🙂</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">OK</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-emoji">😊</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Good</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-emoji">🤩</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Great</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         8. HIGHLIGHT OF THE DAY
+         ══════════════════════════════════════════════════════════ -->
+    <div class="highlight">
+      <div class="highlight-label">The best moment today was:</div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         9. QUOTE BANNER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="quote-banner">
+      <div class="quote-text">"Gratitude turns what we have into enough."</div>
+      <div class="quote-author">— Aesop</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

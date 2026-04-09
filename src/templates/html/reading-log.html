@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Reading Log — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Currently Reading card ─── */
+    .currently-reading {
+      background: var(--accent-soft);
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+      margin-bottom: var(--s3);
+    }
+    .currently-reading .card-title {
+      font-weight: 700;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: var(--s2);
+    }
+    .cr-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s1) var(--s4);
+      font-size: 7.5pt;
+      color: var(--ink-2);
+      align-items: baseline;
+    }
+    .cr-field {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5mm;
+    }
+    .cr-field label {
+      font-weight: 500;
+      font-size: 7pt;
+      color: var(--ink-3);
+      white-space: nowrap;
+    }
+    .cr-field .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 18mm;
+      height: 4.5mm;
+      display: inline-block;
+    }
+    .cr-field .field.wide {
+      min-width: 50mm;
+    }
+    .cr-field .field.narrow {
+      min-width: 10mm;
+    }
+
+    /* ─── Progress bar ─── */
+    .progress-bar {
+      display: flex;
+      gap: 0;
+      margin-top: var(--s2);
+      height: 3mm;
+      border-radius: 1mm;
+      overflow: hidden;
+      border: 0.4px solid var(--rule);
+    }
+    .progress-segment {
+      flex: 1;
+      border-right: 0.4px solid var(--rule);
+      background: var(--bg);
+    }
+    .progress-segment:last-child {
+      border-right: none;
+    }
+
+    /* ─── Book log table tweaks ─── */
+    .grid-table .col-num { width: 5mm; }
+    .grid-table .col-title { width: 32mm; text-align: left; }
+    .grid-table .col-author { width: 26mm; text-align: left; }
+    .grid-table .col-date { width: 16mm; }
+    .grid-table .col-rating { width: 18mm; }
+    .grid-table .col-notes { text-align: left; }
+
+    .grid-table td.left { text-align: left; }
+
+    .stars {
+      font-size: 7pt;
+      color: var(--rule);
+      letter-spacing: 0.3mm;
+    }
+
+    /* ─── Reading Stats ─── */
+    .stats-cols {
+      display: flex;
+      gap: var(--s4);
+      margin-top: var(--s2);
+    }
+    .stats-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s1);
+    }
+    .stat-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+    }
+    .stat-item label {
+      font-weight: 500;
+      font-size: 7pt;
+      color: var(--ink-3);
+      white-space: nowrap;
+    }
+    .stat-item .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 18mm;
+      height: 4.5mm;
+      display: inline-block;
+      flex: 1;
+    }
+
+    /* ─── Genre breakdown mini-table ─── */
+    .genre-label {
+      font-weight: 500;
+      font-size: 7pt;
+      color: var(--ink-3);
+      margin-bottom: var(--s1);
+    }
+    .genre-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7pt;
+    }
+    .genre-table td {
+      padding: 1mm 2mm;
+      border-bottom: 0.3px dotted var(--rule-light);
+    }
+    .genre-table td:first-child {
+      color: var(--ink-2);
+    }
+    .genre-table td:last-child {
+      width: 12mm;
+      text-align: center;
+      border-left: 0.3px dotted var(--rule-light);
+    }
+
+    /* ─── Notes section ─── */
+    .notes-section {
+      margin-top: var(--s3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Reading Log</div>
+        <div class="page-subtitle">A reader lives a thousand lives before he dies</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. DATE RANGE ROW
+         ══════════════════════════════════════════════════════════ -->
+    <div class="date-row">
+      <label>From:</label><span class="field"></span>
+      <label>To:</label><span class="field"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. CURRENTLY READING
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label no-top">
+      <div class="section-dot"></div>
+      <div class="section-title">Currently Reading</div>
+    </div>
+
+    <div class="currently-reading">
+      <div class="cr-fields">
+        <div class="cr-field"><label>Title:</label><span class="field wide"></span></div>
+        <div class="cr-field"><label>Author:</label><span class="field"></span></div>
+        <div class="cr-field"><label>Started:</label><span class="field"></span></div>
+        <div class="cr-field"><label>Pages:</label><span class="field narrow"></span> / <span class="field narrow"></span></div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+        <div class="progress-segment"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. BOOK LOG TABLE
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Book Log</div>
+    </div>
+
+    <table class="grid-table">
+      <thead>
+        <tr>
+          <th class="col-num">#</th>
+          <th class="col-title">Title</th>
+          <th class="col-author">Author</th>
+          <th class="col-date">Start</th>
+          <th class="col-date">Finish</th>
+          <th class="col-rating">Rating</th>
+          <th class="col-notes">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+        <tr>
+          <td>2</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+        <tr>
+          <td>3</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+        <tr>
+          <td>4</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+        <tr>
+          <td>5</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+        <tr>
+          <td>6</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+        <tr>
+          <td>7</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+        <tr>
+          <td>8</td><td class="left"></td><td class="left"></td><td></td><td></td>
+          <td><span class="stars">☆☆☆☆☆</span></td><td class="left"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. READING STATS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot green"></div>
+      <div class="section-title">Reading Stats</div>
+    </div>
+
+    <div class="stats-cols">
+      <div class="stats-col">
+        <div class="stat-item"><label>Books completed this month:</label><span class="field"></span></div>
+        <div class="stat-item"><label>Pages read:</label><span class="field"></span></div>
+        <div class="stat-item"><label>Avg pages/day:</label><span class="field"></span></div>
+      </div>
+      <div class="stats-col">
+        <div class="stat-item"><label>Favorite book:</label><span class="field"></span></div>
+        <div class="genre-label">Genre breakdown:</div>
+        <table class="genre-table">
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. NOTES / REVIEWS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Notes / Reviews</div>
+    </div>
+
+    <div class="notes-section">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         7. QUOTE BANNER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="quote-banner">
+      <div class="quote-text">"The more that you read, the more things you will know. The more that you learn, the more places you'll go."</div>
+      <div class="quote-author">— Dr. Seuss</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

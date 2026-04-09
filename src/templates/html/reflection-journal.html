@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reflection Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Reflection Journal — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Checkbox + write-line combo ─── */
+    .cb-line {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      height: 5mm;
+      margin-bottom: 1mm;
+    }
+    .cb-line .cb { flex-shrink: 0; }
+    .cb-line .write-line {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    /* ─── Inline label before write lines ─── */
+    .inline-label {
+      font-size: 7pt;
+      font-style: italic;
+      color: var(--ink-3);
+      margin-bottom: 1.5mm;
+    }
+
+    /* ─── Rating row ─── */
+    .rating-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s2);
+    }
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+    }
+    .rating-label {
+      font-weight: 600;
+      min-width: 12mm;
+    }
+    .rating-options {
+      display: flex;
+      gap: 3mm;
+      align-items: center;
+    }
+    .rating-option {
+      display: flex;
+      align-items: center;
+      gap: 0.8mm;
+      font-size: 7pt;
+      color: var(--ink-3);
+    }
+    .rating-circle {
+      width: 4mm;
+      height: 4mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--rule);
+      background: var(--bg);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Reflection Journal</div>
+        <div class="page-subtitle">Look back. Learn forward.</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. DATE ROW
+         ══════════════════════════════════════════════════════════ -->
+    <div class="date-row">
+      <label>Date</label><span class="field"></span>
+      <label>Day</label><span class="field"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. TODAY'S WINS (green-soft card)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label no-top">
+      <div class="section-dot green"></div>
+      <div class="section-title">Today's Wins</div>
+    </div>
+
+    <div class="card green-soft">
+      <div class="cb-line">
+        <span class="cb"></span>
+        <div class="write-line"></div>
+      </div>
+      <div class="cb-line">
+        <span class="cb"></span>
+        <div class="write-line"></div>
+      </div>
+      <div class="cb-line">
+        <span class="cb"></span>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. WHAT CHALLENGED ME (amber-soft card)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">What Challenged Me</div>
+    </div>
+
+    <div class="card amber-soft">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. WHAT I LEARNED (blue-soft card)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">What I Learned</div>
+    </div>
+
+    <div class="card blue-soft">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. GRATITUDE MOMENT
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">Gratitude Moment</div>
+    </div>
+
+    <div class="inline-label">I'm thankful for:</div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         7. ENERGY & MOOD
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Energy &amp; Mood</div>
+    </div>
+
+    <div class="rating-section">
+      <div class="rating-row">
+        <span class="rating-label">Energy:</span>
+        <div class="rating-options">
+          <div class="rating-option"><span class="rating-circle"></span>1</div>
+          <div class="rating-option"><span class="rating-circle"></span>2</div>
+          <div class="rating-option"><span class="rating-circle"></span>3</div>
+          <div class="rating-option"><span class="rating-circle"></span>4</div>
+          <div class="rating-option"><span class="rating-circle"></span>5</div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Mood:</span>
+        <div class="rating-options">
+          <div class="rating-option"><span class="rating-circle"></span>1</div>
+          <div class="rating-option"><span class="rating-circle"></span>2</div>
+          <div class="rating-option"><span class="rating-circle"></span>3</div>
+          <div class="rating-option"><span class="rating-circle"></span>4</div>
+          <div class="rating-option"><span class="rating-circle"></span>5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         8. TOMORROW'S INTENTION (accent-soft card)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">Tomorrow's Intention</div>
+    </div>
+
+    <div class="card accent-soft">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         9. FREE WRITE
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Free Write</div>
+    </div>
+
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         10. QUOTE BANNER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="quote-banner">
+      <div class="quote-text">"We do not learn from experience… we learn from reflecting on experience."</div>
+      <div class="quote-author">— John Dewey</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

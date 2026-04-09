@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eat the Frog — Daily Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS — Edit these to change everything
+   ═══════════════════════════════════════════════ */
+:root {
+  /* Page */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 14mm;
+
+  /* Colors — Warm stone palette */
+  --bg: #FAF8F5;
+  --surface: #F3F0EB;
+  --surface-alt: #EDE9E3;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A4A;
+  --ink-3: #8A8580;
+  --rule: #D9D4CD;
+  --rule-light: #E8E4DE;
+
+  --accent: #C45D3E;       /* terracotta */
+  --accent-soft: #F2D8CC;
+  --green: #5E8B6A;        /* sage */
+  --green-soft: #D4E4D8;
+  --blue: #4A6FA5;         /* steel */
+  --blue-soft: #D3DEF0;
+  --amber: #C4933F;        /* warm amber */
+  --amber-soft: #F0E4C8;
+  --dark: #2C2825;
+  --cream: #FFF8F0;
+
+  /* Typography */
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing (4pt grid) */
+  --s1: 2mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
+  --s6: 14mm;
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & PAGE SETUP
+   ═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E0DDD8;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  color: var(--ink);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--bg);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════ */
+.page-title {
+  font-family: var(--font-display);
+  font-size: 18pt;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.page-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 7.5pt;
+  color: var(--ink-3);
+  margin-top: 1.5mm;
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE HEADER
+   ═══════════════════════════════════════════════ */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: var(--s3);
+  border-top: 3px solid var(--accent);
+  padding-top: var(--s3);
+  flex-shrink: 0;
+}
+
+/* Date row */
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+  padding: var(--s2) 0;
+  border-bottom: 0.3px solid var(--rule);
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+  font-size: 7.5pt;
+  color: var(--ink-3);
+}
+.date-row label { font-weight: 500; }
+.date-row .field {
+  border-bottom: 0.5px solid var(--rule);
+  min-width: 22mm;
+  height: 4.5mm;
+  display: inline-block;
+}
+.day-circles {
+  display: flex;
+  gap: 2mm;
+}
+.day-circle {
+  width: 5.5mm;
+  height: 5.5mm;
+  border-radius: 50%;
+  border: 0.5px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5.5pt;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION LABELS
+   ═══════════════════════════════════════════════ */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: var(--s2);
+  margin-top: var(--s4);
+}
+.section-label:first-child,
+.section-label.no-top { margin-top: 0; }
+
+.section-dot {
+  width: 3mm;
+  height: 3mm;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.section-dot.green { background: var(--green); }
+.section-dot.blue { background: var(--blue); }
+.section-dot.amber { background: var(--amber); }
+
+.section-title {
+  font-weight: 700;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+/* ═══════════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════════ */
+
+/* Checkbox */
+.cb {
+  display: inline-flex;
+  align-items: center;
+  gap: 2mm;
+  font-size: 8pt;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+.cb::before {
+  content: '';
+  width: 3.5mm;
+  height: 3.5mm;
+  border: 0.5px solid var(--rule);
+  border-radius: 0.7mm;
+  flex-shrink: 0;
+  background: var(--bg);
+}
+
+/* Inline field (dotted underline) */
+.field-line {
+  border-bottom: 0.5px dotted var(--rule-light);
+  min-width: 18mm;
+  display: inline-block;
+  height: 4mm;
+  vertical-align: baseline;
+}
+.field-line.wide { min-width: 35mm; }
+.field-line.xwide { min-width: 55mm; }
+
+/* Card / box */
+.card {
+  background: var(--surface);
+  border-radius: 2.5mm;
+  padding: var(--s2) var(--s3);
+}
+.card.green-soft { background: var(--green-soft); }
+.card.blue-soft { background: var(--blue-soft); }
+.card.amber-soft { background: var(--amber-soft); }
+.card.accent-soft { background: var(--accent-soft); }
+
+.card-title {
+  font-weight: 700;
+  font-size: 7pt;
+  margin-bottom: var(--s1);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.card-title.green { color: var(--green); }
+.card-title.amber { color: var(--amber); }
+
+/* Dotted writing line */
+.write-line {
+  border-bottom: 0.5px dotted var(--rule-light);
+  height: 5mm;
+  margin-bottom: 1mm;
+}
+
+/* Quote banner */
+.quote-banner {
+  background: var(--dark);
+  border-radius: 3mm;
+  padding: var(--s2) var(--s3);
+  text-align: center;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+.quote-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 8pt;
+  color: var(--accent-soft);
+}
+.quote-author {
+  font-size: 6pt;
+  color: var(--ink-3);
+  margin-top: 1mm;
+}
+
+/* Two-column layout */
+.cols {
+  display: flex;
+  gap: var(--s4);
+}
+.col { flex: 1; min-width: 0; }
+
+/* Content area to push quote banner down */
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+/* Radio circle */
+.radio {
+  width: 3.5mm;
+  height: 3.5mm;
+  border-radius: 50%;
+  border: 0.5px solid var(--rule);
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   EAT THE FROG — CUSTOM STYLES
+   ═══════════════════════════════════════════════ */
+
+/* Frog card */
+.frog-card {
+  display: flex;
+  gap: var(--s3);
+  align-items: flex-start;
+}
+.frog-icon {
+  font-size: 20pt;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1mm;
+}
+.frog-body { flex: 1; }
+.frog-label {
+  font-weight: 700;
+  font-size: 8pt;
+  color: var(--green);
+  margin-bottom: var(--s2);
+}
+.frog-meta {
+  display: flex;
+  gap: var(--s4);
+  align-items: center;
+  font-size: 7pt;
+  color: var(--ink-2);
+  margin-top: var(--s1);
+}
+.frog-meta label { font-weight: 600; }
+
+/* Priority sub-group */
+.priority-group-title {
+  font-weight: 700;
+  font-size: 7pt;
+  color: var(--ink);
+  margin-bottom: 1.5mm;
+  letter-spacing: 0.02em;
+}
+.priority-group {
+  margin-bottom: var(--s3);
+}
+.priority-group:last-child { margin-bottom: 0; }
+
+/* Time block row */
+.tb-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 1.8mm 0;
+  border-bottom: 0.3px dotted var(--rule-light);
+  font-size: 7.5pt;
+}
+.tb-row:last-child { border-bottom: none; }
+.tb-label {
+  font-weight: 600;
+  font-size: 6.5pt;
+  color: var(--ink-2);
+  width: 24mm;
+  flex-shrink: 0;
+}
+.tb-time {
+  border-bottom: 0.5px solid var(--rule);
+  width: 16mm;
+  height: 4mm;
+  flex-shrink: 0;
+}
+.tb-task {
+  flex: 1;
+  border-bottom: 0.5px dotted var(--rule-light);
+  height: 4mm;
+}
+
+/* Review row */
+.review-row {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  font-size: 7.5pt;
+  color: var(--ink-2);
+  margin-bottom: 2mm;
+}
+.review-row label { font-weight: 500; }
+.review-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 1mm;
+  font-size: 7pt;
+  color: var(--ink-3);
+}
+
+/* Utilities */
+.mt-2 { margin-top: var(--s2) !important; }
+.mt-3 { margin-top: var(--s3) !important; }
+.text-muted { color: var(--ink-3); }
+.text-xs { font-size: 5.5pt; }
+.mono { font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     EAT THE FROG — DAILY PLANNER
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- ─── 1. Header ─── -->
+  <div class="page-header">
+    <div>
+      <div class="page-title">Eat the Frog</div>
+      <div class="page-subtitle">Do the hardest thing first. Everything else is downhill.</div>
+    </div>
+  </div>
+
+  <!-- ─── 2. Date Row ─── -->
+  <div class="date-row">
+    <label>Date</label><span class="field"></span>
+    <label>Day</label>
+    <div class="day-circles">
+      <div class="day-circle">M</div><div class="day-circle">T</div><div class="day-circle">W</div>
+      <div class="day-circle">T</div><div class="day-circle">F</div><div class="day-circle">S</div><div class="day-circle">S</div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ─── 3. The Frog Section ─── -->
+    <div class="section-label no-top">
+      <div class="section-dot green"></div>
+      <div class="section-title">The Frog</div>
+    </div>
+    <div class="card green-soft">
+      <div class="frog-card">
+        <div class="frog-icon">🐸</div>
+        <div class="frog-body">
+          <div class="frog-label">TODAY'S FROG — My #1 most important task:</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+          <div class="frog-meta">
+            <label>Why this matters:</label>
+            <span class="field-line" style="flex:1"></span>
+          </div>
+          <div class="frog-meta">
+            <label>Deadline:</label>
+            <span class="field-line wide"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 4. ABCDE Priority List ─── -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">ABCDE Priority List</div>
+    </div>
+    <div class="cols">
+      <!-- Left column -->
+      <div class="col">
+        <div class="priority-group">
+          <div class="priority-group-title">A — Must Do</div>
+          <div class="checklist">
+            <label class="cb"><span class="field-line" style="min-width:60mm"></span></label>
+            <label class="cb"><span class="field-line" style="min-width:60mm"></span></label>
+            <label class="cb"><span class="field-line" style="min-width:60mm"></span></label>
+          </div>
+        </div>
+        <div class="priority-group">
+          <div class="priority-group-title">B — Should Do</div>
+          <div class="checklist">
+            <label class="cb"><span class="field-line" style="min-width:60mm"></span></label>
+            <label class="cb"><span class="field-line" style="min-width:60mm"></span></label>
+            <label class="cb"><span class="field-line" style="min-width:60mm"></span></label>
+          </div>
+        </div>
+      </div>
+      <!-- Right column -->
+      <div class="col">
+        <div class="priority-group">
+          <div class="priority-group-title">C — Nice to Do</div>
+          <div class="checklist">
+            <label class="cb"><span class="field-line" style="min-width:55mm"></span></label>
+            <label class="cb"><span class="field-line" style="min-width:55mm"></span></label>
+          </div>
+        </div>
+        <div class="priority-group">
+          <div class="priority-group-title">D — Delegate</div>
+          <div class="checklist">
+            <label class="cb"><span class="field-line" style="min-width:55mm"></span></label>
+            <label class="cb"><span class="field-line" style="min-width:55mm"></span></label>
+          </div>
+        </div>
+        <div class="priority-group">
+          <div class="priority-group-title">E — Eliminate</div>
+          <div class="checklist">
+            <label class="cb"><span class="field-line" style="min-width:55mm"></span></label>
+            <label class="cb"><span class="field-line" style="min-width:55mm"></span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 5. Time Blocks ─── -->
+    <div class="section-label">
+      <div class="section-dot blue"></div>
+      <div class="section-title">Time Blocks</div>
+    </div>
+    <div class="card" style="padding: var(--s2) var(--s3);">
+      <div class="tb-row">
+        <span class="tb-label">🌅 Frog Time (AM)</span>
+        <span class="tb-time"></span>
+        <span class="tb-task"></span>
+        <label class="cb" style="font-size:6.5pt;">Done</label>
+      </div>
+      <div class="tb-row">
+        <span class="tb-label">🎯 Deep Work</span>
+        <span class="tb-time"></span>
+        <span class="tb-task"></span>
+        <label class="cb" style="font-size:6.5pt;">Done</label>
+      </div>
+      <div class="tb-row">
+        <span class="tb-label">📧 Admin / Email</span>
+        <span class="tb-time"></span>
+        <span class="tb-task"></span>
+        <label class="cb" style="font-size:6.5pt;">Done</label>
+      </div>
+      <div class="tb-row">
+        <span class="tb-label">🌙 Wrap Up</span>
+        <span class="tb-time"></span>
+        <span class="tb-task"></span>
+        <label class="cb" style="font-size:6.5pt;">Done</label>
+      </div>
+    </div>
+
+    <!-- ─── 6. Resistance Check ─── -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Resistance Check</div>
+    </div>
+    <div class="card amber-soft">
+      <div style="display:flex; gap:var(--s2); align-items:center; font-size:7.5pt; color:var(--ink-2); margin-bottom:2mm;">
+        <label style="font-weight:600; flex-shrink:0;">Procrastination trigger:</label>
+        <span class="field-line" style="flex:1"></span>
+      </div>
+      <div style="display:flex; gap:var(--s2); align-items:center; font-size:7.5pt; color:var(--ink-2);">
+        <label style="font-weight:600; flex-shrink:0;">Strategy to push through:</label>
+        <span class="field-line" style="flex:1"></span>
+      </div>
+    </div>
+
+    <!-- ─── 7. End of Day Review ─── -->
+    <div class="section-label">
+      <div class="section-dot green"></div>
+      <div class="section-title">End of Day Review</div>
+    </div>
+    <div class="review-row">
+      <label>Did I eat my frog?</label>
+      <span class="review-option"><span class="radio"></span> Yes</span>
+      <span class="review-option"><span class="radio"></span> No</span>
+    </div>
+    <div class="review-row">
+      <label>Energy level:</label>
+      <span class="review-option"><span class="radio"></span> 1</span>
+      <span class="review-option"><span class="radio"></span> 2</span>
+      <span class="review-option"><span class="radio"></span> 3</span>
+      <span class="review-option"><span class="radio"></span> 4</span>
+      <span class="review-option"><span class="radio"></span> 5</span>
+    </div>
+    <div class="review-row">
+      <label>Tomorrow's frog:</label>
+      <span class="field-line" style="flex:1"></span>
+    </div>
+
+  </div>
+
+  <!-- ─── 8. Quote Banner ─── -->
+  <div class="quote-banner">
+    <div class="quote-text">"If you have to eat a live frog, do it first thing in the morning and nothing worse will happen to you the rest of the day."</div>
+    <div class="quote-author">— Mark Twain</div>
+  </div>
+
+</div>
+
+</body>
+</html>

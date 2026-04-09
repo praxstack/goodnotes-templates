@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Recipe Card — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Info strip ─── */
+    .info-strip {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s2);
+      margin-bottom: var(--s3);
+    }
+    .info-field {
+      display: flex;
+      align-items: baseline;
+      gap: 2mm;
+    }
+    .info-field label {
+      font-weight: 600;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+    .info-field label.large-label {
+      font-size: 9pt;
+      font-family: var(--font-display);
+      color: var(--ink);
+    }
+    .info-field .field-line {
+      flex: 1;
+    }
+
+    /* ─── Quick stats row ─── */
+    .stats-row {
+      display: flex;
+      gap: var(--s2);
+      margin-bottom: var(--s3);
+    }
+    .stat-card {
+      flex: 1;
+      background: var(--surface);
+      border-radius: 2.5mm;
+      padding: var(--s1) var(--s2);
+      text-align: center;
+    }
+    .stat-card label {
+      font-weight: 700;
+      font-size: 6pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-3);
+      display: block;
+      margin-bottom: 1mm;
+    }
+    .stat-card .field-line {
+      min-width: 0;
+      width: 100%;
+      display: block;
+    }
+
+    /* ─── Ingredient checkbox items ─── */
+    .ingredient-item {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+      height: 5.5mm;
+    }
+    .ingredient-item .cb-box {
+      width: 3mm;
+      height: 3mm;
+      border: 0.5px solid var(--rule);
+      border-radius: 0.6mm;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .ingredient-item .line {
+      flex: 1;
+      border-bottom: 0.4px dotted var(--rule-light);
+      height: 3.5mm;
+    }
+
+    /* ─── Directions numbered list ─── */
+    .direction-item {
+      display: flex;
+      gap: 2mm;
+      align-items: flex-start;
+      margin-bottom: var(--s1);
+    }
+    .step-num {
+      width: 4.5mm;
+      height: 4.5mm;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6pt;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.5mm;
+    }
+    .direction-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .direction-lines .write-line {
+      height: 4.5mm;
+      margin-bottom: 0;
+    }
+
+    /* ─── Rating row ─── */
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: var(--s4);
+      font-size: 7.5pt;
+      color: var(--ink-2);
+    }
+    .stars {
+      font-size: 11pt;
+      letter-spacing: 1.5mm;
+      color: var(--amber);
+    }
+    .make-again {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+    }
+    .make-again .radio {
+      display: inline-flex;
+      align-items: center;
+      gap: 1mm;
+    }
+    .make-again .radio-circle {
+      width: 3.5mm;
+      height: 3.5mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--rule);
+      background: var(--bg);
+    }
+
+    /* ─── Tags row ─── */
+    .tags-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2mm;
+      font-size: 7.5pt;
+      color: var(--ink-2);
+    }
+    .tags-row label {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tags-row .write-line {
+      flex: 1;
+    }
+
+    /* ─── Photo placeholder ─── */
+    .photo-placeholder {
+      width: 40mm;
+      height: 40mm;
+      border: 1px dashed var(--rule);
+      border-radius: 2.5mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .photo-placeholder span {
+      font-size: 6.5pt;
+      color: var(--ink-3);
+      font-style: italic;
+    }
+
+    /* ─── Column layout for ingredients/directions ─── */
+    .recipe-cols {
+      display: flex;
+      gap: var(--s4);
+      flex: 1;
+      min-height: 0;
+    }
+    .recipe-col-left {
+      flex: 0 0 38%;
+      display: flex;
+      flex-direction: column;
+    }
+    .recipe-col-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header class="page-header">
+      <div>
+        <div class="page-title">Recipe Card</div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. INFO STRIP
+         ══════════════════════════════════════════════════════════ -->
+    <div class="info-strip">
+      <div class="info-field">
+        <label class="large-label">Recipe Name:</label>
+        <div class="field-line wide"></div>
+      </div>
+      <div class="info-field">
+        <label>Source / By:</label>
+        <div class="field-line wide"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. QUICK STATS ROW
+         ══════════════════════════════════════════════════════════ -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <label>Prep</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="stat-card">
+        <label>Cook</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="stat-card">
+        <label>Total</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="stat-card">
+        <label>Servings</label>
+        <div class="field-line"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4 & 5. INGREDIENTS (left) + DIRECTIONS (right)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="recipe-cols">
+
+      <!-- ── Ingredients (left ~40%) ── -->
+      <div class="recipe-col-left">
+        <div class="section-label no-top">
+          <div class="section-dot green"></div>
+          <div class="section-title">Ingredients</div>
+        </div>
+
+        <div class="card green-soft" style="flex:1;">
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+          <div class="ingredient-item"><div class="cb-box"></div><span class="line"></span></div>
+        </div>
+      </div>
+
+      <!-- ── Directions (right ~60%) ── -->
+      <div class="recipe-col-right">
+        <div class="section-label no-top">
+          <div class="section-dot"></div>
+          <div class="section-title">Directions</div>
+        </div>
+
+        <div style="flex:1;">
+          <div class="direction-item">
+            <div class="step-num">1</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">2</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">3</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">4</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">5</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">6</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">7</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">8</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">9</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+          <div class="direction-item">
+            <div class="step-num">10</div>
+            <div class="direction-lines"><div class="write-line"></div><div class="write-line"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         6. NOTES
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot amber"></div>
+      <div class="section-title">Notes</div>
+    </div>
+
+    <div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         7. RATING
+         ══════════════════════════════════════════════════════════ -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <div class="section-title">Rating</div>
+    </div>
+
+    <div class="rating-row">
+      <div class="stars">☆☆☆☆☆</div>
+      <div class="make-again">
+        Would make again:
+        <span class="radio"><span class="radio-circle"></span> Yes</span>
+        <span class="radio"><span class="radio-circle"></span> No</span>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         8. TAGS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="tags-row" style="margin-top: var(--s3);">
+      <label>Tags:</label>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         9. PHOTO / SKETCH PLACEHOLDER
+         ══════════════════════════════════════════════════════════ -->
+    <div class="photo-placeholder" style="margin-top: var(--s3);">
+      <span>Photo / Sketch</span>
+    </div>
+
+  </div>
+
+</body>
+</html>

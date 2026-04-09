@@ -20,6 +20,8 @@ import { getMonthNames, getDayNames } from '../utils/locale.js';
 import type { SupportedLocale } from '../utils/locale.js';
 import type { Theme, PaperSize, Orientation } from '../types/index.js';
 import { generateDailyYearPlanner } from '../templates/planners/daily-year.js';
+import { TEMPLATE_REGISTRY } from '../templates/registry.js';
+import { renderHTMLToPDF, closeBrowser } from './puppeteer-renderer.js';
 
 export interface GenerationOptions {
   themes: string[];
@@ -283,6 +285,50 @@ export async function runGeneration(options: GenerationOptions): Promise<void> {
       }
     } catch {
       console.log('  ⚠ ADHD planner template not found at examples/prax-journal/prax_adhd_planner.html — skipping');
+    }
+
+    // ── Single-page HTML templates from registry ─────────────
+    console.log('  📋 Rendering single-page templates...');
+
+    try {
+      for (const template of TEMPLATE_REGISTRY) {
+        for (const theme of themes) {
+          const filename = `${template.id}-${theme.id}.pdf`;
+          const outputPath = path.join(options.outputDir, 'templates', filename);
+
+          try {
+            const buffer = await renderHTMLToPDF({
+              htmlPath: template.htmlPath,
+              theme,
+              dimensions: dims,
+              multiPage: template.multiPage,
+            });
+
+            await fs.mkdir(path.dirname(outputPath), { recursive: true });
+            await fs.writeFile(outputPath, buffer);
+            const size = buffer.length;
+            fileCount++;
+            totalSize += size;
+
+            manifest.push({
+              file: path.relative(options.outputDir, outputPath),
+              category: 'templates',
+              type: template.id,
+              theme: theme.id,
+              size,
+              pages: template.pageCount,
+            });
+
+            if (options.verbose) {
+              console.log(`  ✓ ${filename} (${(size / 1024).toFixed(1)} KB)`);
+            }
+          } catch (err) {
+            console.error(`  ✗ ${filename}: ${err instanceof Error ? err.message : err}`);
+          }
+        }
+      }
+    } finally {
+      await closeBrowser();
     }
 
     console.log(`  Done: ${fileCount - templatesBefore} template PDFs\n`);

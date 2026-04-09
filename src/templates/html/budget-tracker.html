@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=210mm, initial-scale=1" />
+  <title>Budget Tracker</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Shared base styles -->
+  <link rel="stylesheet" href="_base.css" />
+
+  <style>
+    /* ─── Budget Tracker – page-specific styles ─── */
+
+    /* ─── Section cards ─── */
+    .budget-section {
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+      margin-bottom: var(--s2);
+    }
+    .budget-section.green-soft { background: var(--green-soft); }
+    .budget-section.surface { background: var(--surface); }
+
+    .budget-section-label {
+      font-weight: 700;
+      font-size: 6.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-bottom: 1.5mm;
+      display: flex;
+      align-items: center;
+      gap: 1.5mm;
+    }
+    .budget-section-label .dot {
+      width: 2.5mm; height: 2.5mm; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .budget-section-label .dot.green { background: var(--green); }
+    .budget-section-label .dot.ink { background: var(--ink-2); }
+
+    /* ─── Budget tables ─── */
+    .budget-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 6.5pt;
+    }
+    .budget-table th {
+      background: var(--ink);
+      color: var(--bg);
+      font-weight: 600;
+      font-size: 5.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 1.2mm 2mm;
+      text-align: center;
+    }
+    .budget-table th:first-child {
+      text-align: left;
+      border-radius: 1.5mm 0 0 1.5mm;
+    }
+    .budget-table th:last-child {
+      border-radius: 0 1.5mm 1.5mm 0;
+    }
+    .budget-table td {
+      padding: 1mm 2mm;
+      text-align: center;
+      border-bottom: 0.3px dotted var(--rule-light);
+      height: 5mm;
+    }
+    .budget-table td:first-child {
+      text-align: left;
+      color: var(--ink-2);
+      font-family: var(--font-body);
+      font-size: 6.5pt;
+    }
+    /* Number columns use mono font */
+    .budget-table td.num {
+      font-family: var(--font-mono);
+      font-size: 6.5pt;
+      color: var(--ink-2);
+    }
+    .budget-table tr.total-row td {
+      border-top: 0.8px solid var(--ink-3);
+      border-bottom: none;
+      font-weight: 700;
+      color: var(--ink);
+      padding-top: 1.5mm;
+    }
+    .budget-table tr.total-row td.num {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ─── Summary strip ─── */
+    .summary-strip {
+      display: flex;
+      gap: 3mm;
+      margin-top: var(--s2);
+      flex-shrink: 0;
+    }
+    .summary-card {
+      flex: 1;
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+    }
+    .summary-card.blue-soft { background: var(--blue-soft); }
+    .summary-card.amber-soft { background: var(--amber-soft); }
+
+    .summary-card-title {
+      font-weight: 700;
+      font-size: 6pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      margin-bottom: 1.5mm;
+    }
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 6.5pt;
+      color: var(--ink-2);
+      margin-bottom: 1mm;
+    }
+    .summary-row label {
+      font-weight: 500;
+    }
+    .summary-row .summary-field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 22mm;
+      height: 4mm;
+      display: inline-block;
+      font-family: var(--font-mono);
+    }
+    .summary-row.emphasis label {
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .summary-row.emphasis .summary-field {
+      border-bottom-width: 1px;
+      border-bottom-color: var(--ink);
+    }
+
+    /* ─── Progress circles ─── */
+    .progress-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 6.5pt;
+      color: var(--ink-2);
+      margin-top: 1mm;
+    }
+    .progress-row label {
+      font-weight: 500;
+    }
+    .progress-circles {
+      display: flex;
+      gap: 2mm;
+      align-items: center;
+    }
+    .progress-circle {
+      width: 5mm; height: 5mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--amber);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 4pt;
+      color: var(--ink-3);
+    }
+
+    /* ─── Month/Year row ─── */
+    .month-year-row {
+      display: flex;
+      align-items: center;
+      gap: 6mm;
+      padding: var(--s2) 0;
+      border-bottom: 0.3px solid var(--rule);
+      margin-bottom: var(--s3);
+      flex-shrink: 0;
+      font-size: 7.5pt;
+      color: var(--ink-3);
+    }
+    .month-year-row label {
+      font-weight: 500;
+    }
+    .month-year-row .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 28mm;
+      height: 4.5mm;
+      display: inline-block;
+    }
+
+    /* ─── Layout ─── */
+    .page-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    /* ─── Expenses grid (two columns) ─── */
+    .expenses-grid {
+      display: flex;
+      gap: 3mm;
+    }
+    .expenses-grid .budget-section {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ═══ Header ═══ -->
+    <header class="page-header">
+      <div>
+        <h1 class="page-title">Monthly Budget</h1>
+        <p class="page-subtitle">Track every dollar. Own your finances.</p>
+      </div>
+    </header>
+
+    <!-- ═══ Month / Year Row ═══ -->
+    <div class="month-year-row">
+      <label>Month:</label>
+      <span class="field"></span>
+      <label>Year:</label>
+      <span class="field" style="min-width: 18mm;"></span>
+    </div>
+
+    <div class="page-content">
+
+      <!-- ═══ Income Section ═══ -->
+      <div class="budget-section green-soft">
+        <div class="budget-section-label">
+          <span class="dot green"></span>
+          Income
+        </div>
+        <table class="budget-table">
+          <thead>
+            <tr>
+              <th style="width: 42%;">Source</th>
+              <th style="width: 30%;">Amount</th>
+              <th style="width: 28%;">Date Received</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td><td class="num"></td><td class="num"></td></tr>
+            <tr><td></td><td class="num"></td><td class="num"></td></tr>
+            <tr><td></td><td class="num"></td><td class="num"></td></tr>
+            <tr><td></td><td class="num"></td><td class="num"></td></tr>
+            <tr class="total-row">
+              <td style="font-weight: 700;">Total</td>
+              <td class="num"></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ═══ Fixed & Variable Expenses (side by side) ═══ -->
+      <div class="expenses-grid">
+
+        <!-- Fixed Expenses -->
+        <div class="budget-section surface">
+          <div class="budget-section-label">
+            <span class="dot ink"></span>
+            Fixed Expenses
+          </div>
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th style="width: 32%;">Category</th>
+                <th style="width: 22%;">Budgeted</th>
+                <th style="width: 22%;">Actual</th>
+                <th style="width: 24%;">Difference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Housing</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Utilities</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Insurance</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Transportation</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Subscriptions</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Debt Payments</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr class="total-row">
+                <td>Total</td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Variable Expenses -->
+        <div class="budget-section surface">
+          <div class="budget-section-label">
+            <span class="dot ink"></span>
+            Variable Expenses
+          </div>
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th style="width: 32%;">Category</th>
+                <th style="width: 22%;">Budgeted</th>
+                <th style="width: 22%;">Actual</th>
+                <th style="width: 24%;">Difference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Groceries</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Dining Out</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Entertainment</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Shopping</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td>Personal Care</td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+              <tr class="total-row">
+                <td>Total</td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /.expenses-grid -->
+
+      <!-- ═══ Summary Strip ═══ -->
+      <div class="summary-strip">
+
+        <!-- Left: Totals -->
+        <div class="summary-card blue-soft">
+          <div class="summary-card-title">Summary</div>
+          <div class="summary-row">
+            <label>Total Income:</label>
+            <span class="summary-field"></span>
+          </div>
+          <div class="summary-row">
+            <label>Total Expenses:</label>
+            <span class="summary-field"></span>
+          </div>
+          <div class="summary-row emphasis">
+            <label>Net Savings:</label>
+            <span class="summary-field"></span>
+          </div>
+        </div>
+
+        <!-- Right: Savings Goal -->
+        <div class="summary-card amber-soft">
+          <div class="summary-card-title">Savings Goal</div>
+          <div class="summary-row">
+            <label>Savings Goal:</label>
+            <span class="summary-field"></span>
+          </div>
+          <div class="summary-row">
+            <label>Actual Saved:</label>
+            <span class="summary-field"></span>
+          </div>
+          <div class="progress-row">
+            <label>Progress:</label>
+            <div class="progress-circles">
+              <div class="progress-circle">0%</div>
+              <div class="progress-circle">25</div>
+              <div class="progress-circle">50</div>
+              <div class="progress-circle">75</div>
+              <div class="progress-circle">100</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.summary-strip -->
+
+    </div><!-- /.page-content -->
+
+    <!-- ═══ Quote Banner ═══ -->
+    <div class="quote-banner">
+      <div class="quote-text">"Do not save what is left after spending, but spend what is left after saving."</div>
+      <div class="quote-author">— Warren Buffett</div>
+    </div>
+
+  </div><!-- /.page -->
+</body>
+</html>

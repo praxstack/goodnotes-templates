@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cornell Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_base.css" />
+  <style>
+    /* ═══════════════════════════════════════════════
+       Cornell Notes — template-specific styles
+       ═══════════════════════════════════════════════ */
+
+    /* ─── Header fields row ─── */
+    .header-fields {
+      display: flex;
+      align-items: center;
+      gap: 5mm;
+      font-size: 7.5pt;
+      color: var(--ink-3);
+    }
+    .header-fields label {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .header-fields .field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 28mm;
+      height: 4.5mm;
+      display: inline-block;
+    }
+
+    /* ─── Main body: cue + notes columns ─── */
+    .cornell-body {
+      flex: 7;
+      display: flex;
+      min-height: 0;
+      border: 0.3px solid var(--rule);
+      border-radius: 2mm;
+      overflow: hidden;
+    }
+
+    /* Cue column (left, 30%) */
+    .cue-column {
+      flex: 0 0 30%;
+      background: var(--surface);
+      padding: var(--s2) var(--s3);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Vertical divider between cue and notes */
+    .cue-column::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 100%;
+      border-right: 0.3px solid var(--rule);
+    }
+
+    .column-label {
+      font-weight: 700;
+      font-size: 6.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-3);
+      margin-bottom: var(--s2);
+      flex-shrink: 0;
+    }
+
+    .cue-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .cue-line {
+      border-bottom: 0.3px dotted var(--rule-light);
+      height: 7mm;
+      flex-shrink: 0;
+    }
+
+    /* Notes column (right, 70%) */
+    .notes-column {
+      flex: 1;
+      background: var(--bg);
+      padding: var(--s2) var(--s3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .note-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .note-line {
+      border-bottom: 0.3px dotted var(--rule-light);
+      height: 5mm;
+      flex-shrink: 0;
+    }
+
+    /* ─── Summary section (bottom ~20%) ─── */
+    .cornell-summary {
+      flex: 2;
+      background: var(--blue-soft);
+      border-radius: 2mm;
+      padding: var(--s2) var(--s3);
+      margin-top: var(--s3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .summary-line {
+      border-bottom: 0.3px dotted var(--rule-light);
+      height: 5mm;
+      flex-shrink: 0;
+    }
+
+    /* ─── Footer ─── */
+    .cornell-footer {
+      text-align: center;
+      font-size: 6pt;
+      color: var(--ink-3);
+      padding-top: var(--s2);
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ── Header Strip ── -->
+    <header class="page-header">
+      <h1 class="page-title">Cornell Notes</h1>
+      <div class="header-fields">
+        <label>Subject:</label><span class="field"></span>
+        <label>Date:</label><span class="field"></span>
+        <label>Topic:</label><span class="field"></span>
+      </div>
+    </header>
+
+    <!-- ── Main Body: Cue Column + Notes Column ── -->
+    <div class="cornell-body">
+
+      <!-- Left: Cue / Key-Points Column (30%) -->
+      <div class="cue-column">
+        <div class="column-label">Key Points / Questions</div>
+        <div class="cue-lines">
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+          <div class="cue-line"></div>
+        </div>
+      </div>
+
+      <!-- Right: Notes Column (70%) -->
+      <div class="notes-column">
+        <div class="column-label">Notes</div>
+        <div class="note-lines">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Summary Section ── -->
+    <div class="cornell-summary">
+      <div class="column-label">Summary</div>
+      <div class="summary-lines">
+        <div class="summary-line"></div>
+        <div class="summary-line"></div>
+        <div class="summary-line"></div>
+        <div class="summary-line"></div>
+        <div class="summary-line"></div>
+        <div class="summary-line"></div>
+      </div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <footer class="cornell-footer">
+      Review within 24 hours &bull; Recite from cue column &bull; Reflect on learning
+    </footer>
+
+  </div>
+
+</body>
+</html>
