@@ -107,10 +107,78 @@ Redesign of the ADHD daily planner from 5 pages/day (overwhelming) to a **2-page
 - Month tab navigation bar on every page (hyperlinked in PDF)
 - Bookmarks: Year → Month → Day (same structure as v1)
 
+## Sticker Mode: CBT Thought Check Card
+
+The CBT Thought Check should also be available as a **standalone PNG sticker** (SVG-rendered at 300 DPI) so users can paste it anywhere in GoodNotes, not just on the daily page.
+
+**Sticker variants:**
+- `cbt-thought-check` — Full 3-prompt card ("brain says → true? → kinder")
+- `cbt-reframe` — Compact 1-line version ("Thought → Reframe")
+- `self-compassion-card` — "I'm being too hard on myself about:" + line
+- `permission-card` — "It's okay to leave parts blank" standalone
+
+Generate as SVG → PNG at 300 DPI via Sharp (same pipeline as existing stickers). Each sticker themed via CSS variables for all 8 themes.
+
+## Exercise Logging (added per feedback)
+
+Add a minimal exercise line to Page 2 "Reflect", between Energy and CBT Thought Check:
+
+- **🏃 Movement:** — Inline: "What:" field (short) + "How I feel after:" field (short)
+- NOT a full exercise log — just "walked 10 min" + "calmer" level of detail
+- Circle-based if possible: ○ Walk · ○ Run · ○ Gym · ○ Yoga · ○ Other: ___
+
+## Date Injection Strategy (technical detail)
+
+To avoid breaking UI/UX when injecting dates:
+
+1. **Use dedicated data attributes**, not regex on visible text:
+   ```html
+   <span data-inject="date"></span>
+   <span data-inject="day-name"></span>
+   <span data-inject="page-num"></span>
+   ```
+2. **Inject via DOM manipulation in Puppeteer** (not string replacement):
+   ```js
+   await page.evaluate((date, pageNum) => {
+     document.querySelectorAll('[data-inject="date"]').forEach(el => el.textContent = date);
+     document.querySelectorAll('[data-inject="page-num"]').forEach(el => el.textContent = pageNum);
+   }, dateStr, pageNumStr);
+   ```
+3. **Benefits:** No regex breakage, no CSS corruption, works regardless of HTML formatting
+4. **Fallback:** If Puppeteer DOM injection is too slow for 794 pages, use targeted string replacement with unique placeholder tokens: `{{DATE}}`, `{{PAGE_NUM}}`, `{{DAY_NAME}}` — these are unlikely to collide with CSS/HTML
+
+## Dark Mode Design Considerations
+
+Dark mode needs special thought — it's not just "invert colors":
+
+1. **Backgrounds:** Dark bg (#1E1E2E) with slightly lighter surface cards (#2A2A3A)
+2. **Text:** Off-white (#E0E0E0), not pure white (reduces eye strain at night)
+3. **Accent colors:** Must remain visible on dark — increase saturation slightly
+4. **Emoji rendering:** Emojis look different on dark backgrounds — test all 5 mood emojis
+5. **Dotted lines:** Use lighter rule colors on dark (rgba(255,255,255,0.15)) — too dark and they disappear, too bright and they're distracting
+6. **Cards:** Slightly elevated from background (not bordered) — use subtle elevation shadow instead of border
+7. **Permission banner:** Invert — dark green on lighter green-tinted surface, not the other way
+8. **Test with midnight theme specifically** — it has unique color mapping
+
+### Color variable mapping for dark themes:
+```css
+/* Dark theme example */
+--bg: #1E1E2E;
+--surface: #2A2A3A;
+--ink: #E0E0E0;
+--ink-2: #B0B0B0;
+--ink-3: #707080;
+--rule: #3A3A4A;
+--rule-light: #2E2E3E;
+--accent-soft: rgba(196, 93, 62, 0.2);  /* transparent, not opaque pastel */
+--green-soft: rgba(94, 139, 106, 0.2);
+--blue-soft: rgba(74, 111, 165, 0.2);
+--amber-soft: rgba(196, 147, 63, 0.2);
+```
+
 ## Not In Scope
 
 - Time blocking (hourly slots) — too structured for ADHD
 - Detailed meal tracking — keep it to "ate something" circle
-- Exercise logging — moved to separate fitness-log template
 - Detailed sleep analysis — just hours + quality 1-5
 - Multiple frog tasks — only ONE frog per day (that's the point)
