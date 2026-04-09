@@ -62,6 +62,44 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
     pageCount: 1,
   },
 
+  // ─── ADHD v2 Planner (expanded 4-page set) ─────────────────
+  {
+    id: 'adhd-v2-today',
+    name: 'ADHD v2 Today',
+    category: 'planner' as const,
+    description: 'Productivity page — Frog, Rule of 3, Focus, Pomodoro, Brain Dump',
+    htmlPath: path.join(HTML_DIR, 'adhd-v2-today.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
+    id: 'adhd-v2-reflect',
+    name: 'ADHD v2 Reflect',
+    category: 'planner' as const,
+    description: 'Feelings page — CBT thought check, self-care, gratitude, free write',
+    htmlPath: path.join(HTML_DIR, 'adhd-v2-reflect.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
+    id: 'adhd-v2-weekly',
+    name: 'ADHD v2 Weekly',
+    category: 'planner' as const,
+    description: 'Weekly review — mood map, win counter, patterns, self-compassion',
+    htmlPath: path.join(HTML_DIR, 'adhd-v2-weekly.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
+    id: 'adhd-v2-monthly',
+    name: 'ADHD v2 Monthly',
+    category: 'planner' as const,
+    description: 'Monthly review — stats, mood trend, biggest win, one focus',
+    htmlPath: path.join(HTML_DIR, 'adhd-v2-monthly.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+
   // ─── Planners ──────────────────────────────────────────────
   {
     id: 'eat-the-frog',
