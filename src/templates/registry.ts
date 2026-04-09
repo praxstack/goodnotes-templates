@@ -33,6 +33,35 @@ export interface TemplateEntry {
  * All registered templates. Order matters for output organization.
  */
 export const TEMPLATE_REGISTRY: TemplateEntry[] = [
+  // ─── ADHD Gentle Planner (CBT-informed) ────────────────────
+  {
+    id: 'adhd-gentle-daily',
+    name: 'ADHD Gentle Daily',
+    category: 'planner',
+    description: 'CBT-informed daily page for ADHD + depression + anxiety — 1 page, 5 min',
+    htmlPath: path.join(HTML_DIR, 'adhd-gentle-daily.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
+    id: 'adhd-gentle-weekly',
+    name: 'ADHD Gentle Weekly',
+    category: 'planner',
+    description: 'Weekly review with mood map, win counter, self-compassion check',
+    htmlPath: path.join(HTML_DIR, 'adhd-gentle-weekly.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
+    id: 'adhd-gentle-monthly',
+    name: 'ADHD Gentle Monthly',
+    category: 'planner',
+    description: 'Monthly celebration — stats, mood trend, biggest win, one focus',
+    htmlPath: path.join(HTML_DIR, 'adhd-gentle-monthly.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+
   // ─── Planners ──────────────────────────────────────────────
   {
     id: 'eat-the-frog',

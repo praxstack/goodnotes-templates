@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADHD Gentle Weekly Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --page-w: 210mm;
+      --page-h: 297mm;
+      --margin: 14mm;
+      --bg: #FAF8F5;
+      --surface: #F3F0EB;
+      --surface-alt: #EDE9E3;
+      --ink: #1A1A1A;
+      --ink-2: #4A4A4A;
+      --ink-3: #8A8580;
+      --rule: #D9D4CD;
+      --rule-light: #E8E4DE;
+      --accent: #C45D3E;
+      --accent-soft: #F2D8CC;
+      --green: #5E8B6A;
+      --green-soft: #D4E4D8;
+      --blue: #4A6FA5;
+      --blue-soft: #D3DEF0;
+      --amber: #C4933F;
+      --amber-soft: #F0E4C8;
+      --dark: #2C2825;
+      --cream: #FFF8F0;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --s1: 2mm;
+      --s2: 3mm;
+      --s3: 5mm;
+      --s4: 7mm;
+      --s5: 10mm;
+      --s6: 14mm;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #E0DDD8;
+      font-family: var(--font-body);
+      font-size: 8.5pt;
+      color: var(--ink);
+      line-height: 1.35;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: var(--page-w);
+      height: var(--page-h);
+      background: var(--bg);
+      margin: 10mm auto;
+      padding: var(--margin);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s3);
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-top: 3px solid var(--blue);
+      padding-top: var(--s3);
+      flex-shrink: 0;
+    }
+
+    .title {
+      font-family: var(--font-display);
+      font-size: 16pt;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-style: italic;
+      font-size: 7pt;
+      color: var(--ink-3);
+      margin-top: 1mm;
+    }
+
+    .date-block {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 7pt;
+      color: var(--ink-3);
+    }
+
+    .date-field {
+      border-bottom: 0.5px solid var(--rule);
+      min-width: 28mm;
+      height: 4.5mm;
+      display: inline-block;
+    }
+
+    .permission {
+      background: var(--blue-soft);
+      border-radius: 2.5mm;
+      padding: var(--s2) var(--s3);
+      text-align: center;
+      font-size: 7pt;
+      color: var(--blue);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--s2);
+    }
+
+    .card {
+      border-radius: 2.5mm;
+      padding: var(--s3);
+    }
+
+    .write-line {
+      border-bottom: 0.5px dotted var(--rule-light);
+      height: 5.5mm;
+      margin-bottom: 1mm;
+    }
+
+    /* Week mood row */
+    .week-mood {
+      display: flex;
+      gap: 2mm;
+      flex-shrink: 0;
+    }
+
+    .day-mood {
+      flex: 1;
+      background: var(--surface);
+      border-radius: 2mm;
+      padding: var(--s2);
+      text-align: center;
+    }
+
+    .day-mood .day-name {
+      font-size: 6pt;
+      font-weight: 700;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    .day-mood .mood-circle {
+      width: 8mm;
+      height: 8mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--rule);
+      margin: 0 auto;
+      background: var(--bg);
+    }
+
+    /* Two cols */
+    .two-cols {
+      display: flex;
+      gap: var(--s4);
+      flex: 1;
+      min-height: 0;
+    }
+
+    .col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s3);
+    }
+
+    /* Win counter */
+    .win-counter {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      background: var(--green-soft);
+      border-radius: 2.5mm;
+      padding: var(--s3);
+      flex-shrink: 0;
+    }
+
+    .win-counter .win-label {
+      font-size: 7.5pt;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .win-counter .win-circles {
+      display: flex;
+      gap: 2mm;
+    }
+
+    .win-counter .win-dot {
+      width: 6mm;
+      height: 6mm;
+      border-radius: 50%;
+      border: 0.5px solid var(--green);
+      background: var(--bg);
+    }
+
+    .compassion-card {
+      background: var(--accent-soft);
+      border-radius: 2.5mm;
+      padding: var(--s3);
+      flex-shrink: 0;
+    }
+
+    .compassion-card .label {
+      font-size: 7pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1mm;
+    }
+
+    .compassion-card .field {
+      border-bottom: 0.5px dotted var(--rule-light);
+      height: 5mm;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      padding-top: var(--s2);
+      border-top: 0.3px solid var(--rule-light);
+    }
+
+    .footer-left {
+      font-size: 5.5pt;
+      color: var(--ink-3);
+      font-style: italic;
+    }
+
+    .footer-right {
+      font-family: var(--font-mono);
+      font-size: 5.5pt;
+      color: var(--ink-3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════════════════════
+     WEEKLY REVIEW — Not a performance eval. Self-care.
+     ════════════════════════════════════════════════════════════ -->
+  <div class="page">
+
+    <div class="header">
+      <div>
+        <div class="title">This Week</div>
+        <div class="subtitle">Not a performance review. Just noticing.</div>
+      </div>
+      <div class="date-block">
+        <div>Week of <span class="date-field"></span></div>
+      </div>
+    </div>
+
+    <div class="permission">✦ A bad week doesn't erase a good day. Progress isn't linear. ✦</div>
+
+    <!-- Mood map — color circles for each day -->
+    <div>
+      <div class="section-title" style="color: var(--blue);">Week Mood Map</div>
+      <div class="week-mood">
+        <div class="day-mood">
+          <div class="day-name">Mon</div>
+          <div class="mood-circle"></div>
+        </div>
+        <div class="day-mood">
+          <div class="day-name">Tue</div>
+          <div class="mood-circle"></div>
+        </div>
+        <div class="day-mood">
+          <div class="day-name">Wed</div>
+          <div class="mood-circle"></div>
+        </div>
+        <div class="day-mood">
+          <div class="day-name">Thu</div>
+          <div class="mood-circle"></div>
+        </div>
+        <div class="day-mood">
+          <div class="day-name">Fri</div>
+          <div class="mood-circle"></div>
+        </div>
+        <div class="day-mood">
+          <div class="day-name">Sat</div>
+          <div class="mood-circle"></div>
+        </div>
+        <div class="day-mood">
+          <div class="day-name">Sun</div>
+          <div class="mood-circle"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Win counter -->
+    <div class="win-counter">
+      <div class="win-label">🏆 Days I showed up:</div>
+      <div class="win-circles">
+        <div class="win-dot"></div>
+        <div class="win-dot"></div>
+        <div class="win-dot"></div>
+        <div class="win-dot"></div>
+        <div class="win-dot"></div>
+        <div class="win-dot"></div>
+        <div class="win-dot"></div>
+      </div>
+      <div style="font-size: 6pt; color: var(--ink-3); margin-left: auto;">/ 7</div>
+    </div>
+
+    <!-- Two columns -->
+    <div class="two-cols">
+      <div class="col">
+        <div class="card" style="background: var(--green-soft); flex: 1;">
+          <div class="section-title" style="color: var(--green);">🌟 Wins (any size)</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+        <div class="card" style="background: var(--surface); flex: 1;">
+          <div class="section-title" style="color: var(--ink-2);">🔄 One thing to keep doing</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="background: var(--amber-soft); flex: 1;">
+          <div class="section-title" style="color: var(--amber);">💡 Patterns I noticed</div>
+          <div style="font-size: 6.5pt; color: var(--ink-3); margin-bottom: 2mm; font-style: italic;">Best energy day?
+            Worst? Why?</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+        <div class="card" style="background: var(--surface); flex: 1;">
+          <div class="section-title" style="color: var(--ink-2);">🔀 One small change to try</div>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Self-compassion check -->
+    <div class="compassion-card">
+      <div class="label">💛 I'm being too hard on myself about:</div>
+      <div class="field"></div>
+    </div>
+
+    <!-- Next week intention -->
+    <div style="flex-shrink: 0;">
+      <div class="section-title" style="color: var(--blue);">→ Next week, I want to:</div>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Every week you try is a week that counts.</div>
+      <div class="footer-right">weekly</div>
+    </div>
+  </div>
+
+</body>
+
+</html>

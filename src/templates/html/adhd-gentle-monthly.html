@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Gentle Monthly Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 14mm;
+  --bg: #FAF8F5; --surface: #F3F0EB; --surface-alt: #EDE9E3;
+  --ink: #1A1A1A; --ink-2: #4A4A4A; --ink-3: #8A8580;
+  --rule: #D9D4CD; --rule-light: #E8E4DE;
+  --accent: #C45D3E; --accent-soft: #F2D8CC;
+  --green: #5E8B6A; --green-soft: #D4E4D8;
+  --blue: #4A6FA5; --blue-soft: #D3DEF0;
+  --amber: #C4933F; --amber-soft: #F0E4C8;
+  --dark: #2C2825; --cream: #FFF8F0;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --s1: 2mm; --s2: 3mm; --s3: 5mm; --s4: 7mm; --s5: 10mm; --s6: 14mm;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #E0DDD8; font-family: var(--font-body); font-size: 8.5pt; color: var(--ink); line-height: 1.35; -webkit-font-smoothing: antialiased; }
+.page { width: var(--page-w); height: var(--page-h); background: var(--bg); margin: 10mm auto; padding: var(--margin); position: relative; overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.08); page-break-after: always; display: flex; flex-direction: column; gap: var(--s4); }
+@media print { body { background: white; } .page { margin: 0; box-shadow: none; } @page { size: A4 portrait; margin: 0; } }
+
+.header { display: flex; justify-content: space-between; align-items: flex-start; border-top: 3px solid var(--accent); padding-top: var(--s3); flex-shrink: 0; }
+.title { font-family: var(--font-display); font-size: 16pt; color: var(--ink); letter-spacing: -0.02em; }
+.subtitle { font-style: italic; font-size: 7pt; color: var(--ink-3); margin-top: 1mm; }
+.date-block { text-align: right; font-family: var(--font-mono); font-size: 7pt; color: var(--ink-3); }
+.date-field { border-bottom: 0.5px solid var(--rule); min-width: 28mm; height: 4.5mm; display: inline-block; }
+
+.permission { background: var(--accent-soft); border-radius: 2.5mm; padding: var(--s2) var(--s3); text-align: center; font-size: 7pt; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+.section-title { font-weight: 700; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: var(--s2); }
+.card { border-radius: 2.5mm; padding: var(--s3); }
+.write-line { border-bottom: 0.5px dotted var(--rule-light); height: 5.5mm; margin-bottom: 1mm; }
+
+/* Mood trend — 4 weeks */
+.mood-trend { display: flex; gap: var(--s3); flex-shrink: 0; }
+.week-block { flex: 1; background: var(--surface); border-radius: 2mm; padding: var(--s2); text-align: center; }
+.week-block .week-label { font-size: 6pt; font-weight: 700; color: var(--ink-3); text-transform: uppercase; margin-bottom: 2mm; }
+.mood-bars { display: flex; flex-direction: column; gap: 1mm; align-items: center; }
+.mood-bar { width: 100%; height: 4mm; border: 0.4px solid var(--rule); border-radius: 1mm; background: var(--bg); }
+
+/* Two cols */
+.two-cols { display: flex; gap: var(--s4); flex: 1; min-height: 0; }
+.col { flex: 1; display: flex; flex-direction: column; gap: var(--s3); }
+
+/* Celebration */
+.celebrate { background: var(--green-soft); border-radius: 2.5mm; padding: var(--s3); flex-shrink: 0; }
+.celebrate .big-label { font-family: var(--font-display); font-size: 11pt; color: var(--green); text-align: center; margin-bottom: var(--s2); }
+.celebrate .field { border-bottom: 0.5px dotted var(--rule-light); height: 6mm; margin-bottom: 1mm; }
+
+/* Next month */
+.next-month { background: var(--blue-soft); border-radius: 2.5mm; padding: var(--s3); flex-shrink: 0; }
+.next-month .section-title { color: var(--blue); }
+
+.footer { display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; padding-top: var(--s2); border-top: 0.3px solid var(--rule-light); }
+.footer-left { font-size: 5.5pt; color: var(--ink-3); font-style: italic; }
+.footer-right { font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-3); }
+
+.quick-stats { display: flex; gap: var(--s3); flex-shrink: 0; }
+.stat-card { flex: 1; background: var(--surface); border-radius: 2mm; padding: var(--s2) var(--s3); text-align: center; }
+.stat-card .stat-label { font-size: 6pt; color: var(--ink-3); text-transform: uppercase; font-weight: 600; }
+.stat-card .stat-value { font-family: var(--font-mono); font-size: 14pt; color: var(--ink); margin: 1mm 0; border-bottom: 0.5px solid var(--rule); display: inline-block; min-width: 12mm; }
+.stat-card .stat-unit { font-size: 6pt; color: var(--ink-3); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     MONTHLY REVIEW — Celebrate, notice, look forward
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="title">This Month</div>
+      <div class="subtitle">Zoom out. See how far you've come.</div>
+    </div>
+    <div class="date-block">
+      <div>Month <span class="date-field"></span></div>
+    </div>
+  </div>
+
+  <div class="permission">✦ You survived 100% of your worst days. That's a perfect record. ✦</div>
+
+  <!-- Quick stats — fill in numbers -->
+  <div class="quick-stats">
+    <div class="stat-card">
+      <div class="stat-label">Days I showed up</div>
+      <div class="stat-value"></div>
+      <div class="stat-unit">/ 30</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Meds taken</div>
+      <div class="stat-value"></div>
+      <div class="stat-unit">/ 30</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Tasks completed</div>
+      <div class="stat-value"></div>
+      <div class="stat-unit">any count</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Self-care days</div>
+      <div class="stat-value"></div>
+      <div class="stat-unit">/ 30</div>
+    </div>
+  </div>
+
+  <!-- Mood trend — 4 weeks, shade the bars -->
+  <div>
+    <div class="section-title" style="color: var(--blue);">Mood Trend — shade each week's bar to show overall energy</div>
+    <div class="mood-trend">
+      <div class="week-block">
+        <div class="week-label">Week 1</div>
+        <div class="mood-bars">
+          <div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div>
+        </div>
+      </div>
+      <div class="week-block">
+        <div class="week-label">Week 2</div>
+        <div class="mood-bars">
+          <div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div>
+        </div>
+      </div>
+      <div class="week-block">
+        <div class="week-label">Week 3</div>
+        <div class="mood-bars">
+          <div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div>
+        </div>
+      </div>
+      <div class="week-block">
+        <div class="week-label">Week 4</div>
+        <div class="mood-bars">
+          <div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div><div class="mood-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Celebrate -->
+  <div class="celebrate">
+    <div class="big-label">🎉 Biggest Win This Month</div>
+    <div class="field"></div>
+    <div class="field"></div>
+  </div>
+
+  <!-- Two columns -->
+  <div class="two-cols">
+    <div class="col">
+      <div class="card" style="background: var(--amber-soft); flex: 1;">
+        <div class="section-title" style="color: var(--amber);">🔍 One pattern I noticed</div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="background: var(--surface); flex: 1;">
+        <div class="section-title" style="color: var(--ink-2);">💊 Meds / Sleep / Therapy notes</div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next month -->
+  <div class="next-month">
+    <div class="section-title">→ Next month, I want to focus on:</div>
+    <div class="write-line"></div>
+    <div style="font-size: 6.5pt; color: var(--ink-3); font-style: italic; margin-top: var(--s1);">Just one thing. Not five. One.</div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">You made it through another month. That's not nothing — that's everything.</div>
+    <div class="footer-right">monthly</div>
+  </div>
+</div>
+
+</body>
+</html>
