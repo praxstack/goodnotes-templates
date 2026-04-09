@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Gentle Daily — One Page That's Enough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   ADHD GENTLE DAILY — Designed for the ADHD + Depression + Anxiety triad
+   
+   Design principles (from CBT + ADHD research):
+   ✦ ONE page per day maximum
+   ✦ Circle/check options > blank lines (reduces executive function load)
+   ✦ Maximum 3 tasks (Rule of 3, Dr. Russell Barkley)
+   ✦ Gentle, non-judgmental language
+   ✦ "It's okay to leave this blank" visible
+   ✦ Quick binary tracking (meds, sleep, water)
+   ✦ Brief CBT check-in (mood + one thought reframe)
+   ✦ Behavioral activation (did I do ONE thing?)
+   ✦ Self-compassion built in
+   ✦ Takes 5 minutes, not 30
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 14mm;
+  --bg: #FAF8F5;
+  --surface: #F3F0EB;
+  --surface-alt: #EDE9E3;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A4A;
+  --ink-3: #8A8580;
+  --rule: #D9D4CD;
+  --rule-light: #E8E4DE;
+  --accent: #C45D3E;
+  --accent-soft: #F2D8CC;
+  --green: #5E8B6A;
+  --green-soft: #D4E4D8;
+  --blue: #4A6FA5;
+  --blue-soft: #D3DEF0;
+  --amber: #C4933F;
+  --amber-soft: #F0E4C8;
+  --dark: #2C2825;
+  --cream: #FFF8F0;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --s1: 2mm; --s2: 3mm; --s3: 5mm; --s4: 7mm; --s5: 10mm; --s6: 14mm;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E0DDD8;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  color: var(--ink);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--bg);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-top: 3px solid var(--green);
+  padding-top: var(--s3);
+  flex-shrink: 0;
+}
+.header-left .title {
+  font-family: var(--font-display);
+  font-size: 16pt;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.header-left .subtitle {
+  font-style: italic;
+  font-size: 7pt;
+  color: var(--ink-3);
+  margin-top: 1mm;
+}
+.date-block {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--ink-3);
+}
+.date-block .date-field {
+  border-bottom: 0.5px solid var(--rule);
+  min-width: 28mm;
+  height: 4.5mm;
+  display: inline-block;
+}
+
+/* ─── Permission Reminder ─── */
+.permission {
+  background: var(--green-soft);
+  border-radius: 2.5mm;
+  padding: var(--s2) var(--s3);
+  text-align: center;
+  font-size: 7pt;
+  color: var(--green);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* ─── Quick Check Row ─── */
+.quick-checks {
+  display: flex;
+  gap: var(--s3);
+  flex-shrink: 0;
+}
+.check-item {
+  flex: 1;
+  background: var(--surface);
+  border-radius: 2mm;
+  padding: var(--s2);
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  font-size: 7.5pt;
+}
+.check-item .circle {
+  width: 5mm;
+  height: 5mm;
+  border-radius: 50%;
+  border: 0.5px solid var(--rule);
+  flex-shrink: 0;
+  background: var(--bg);
+}
+.check-item .label {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.check-item .sub {
+  font-size: 6pt;
+  color: var(--ink-3);
+}
+
+/* ─── Mood Check ─── */
+.mood-section {
+  background: var(--blue-soft);
+  border-radius: 2.5mm;
+  padding: var(--s3);
+  flex-shrink: 0;
+}
+.mood-section .section-title {
+  font-weight: 700;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.mood-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1mm;
+  flex: 1;
+}
+.mood-option .emoji {
+  font-size: 14pt;
+  line-height: 1;
+}
+.mood-option .mood-circle {
+  width: 7mm;
+  height: 7mm;
+  border-radius: 50%;
+  border: 0.6px solid var(--blue);
+  background: var(--bg);
+}
+.mood-option .mood-label {
+  font-size: 5.5pt;
+  color: var(--ink-3);
+}
+
+/* ─── Rule of 3 Tasks ─── */
+.tasks-section {
+  flex-shrink: 0;
+}
+.tasks-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: var(--s2);
+}
+.section-dot {
+  width: 3mm; height: 3mm; border-radius: 50%;
+  flex-shrink: 0;
+}
+.section-dot.accent { background: var(--accent); }
+.section-dot.green { background: var(--green); }
+.section-dot.blue { background: var(--blue); }
+.section-dot.amber { background: var(--amber); }
+.section-title {
+  font-weight: 700; font-size: 7.5pt;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.section-hint {
+  font-style: italic; font-size: 6pt;
+  color: var(--ink-3); margin-left: auto;
+}
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  padding: 2mm 0;
+  border-bottom: 0.3px dotted var(--rule-light);
+}
+.task-item .task-check {
+  width: 4mm; height: 4mm;
+  border: 0.5px solid var(--rule);
+  border-radius: 0.7mm;
+  flex-shrink: 0;
+  background: var(--bg);
+}
+.task-item .task-num {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  color: var(--ink-3);
+  width: 4mm;
+  text-align: center;
+}
+.task-item .task-line {
+  flex: 1;
+  border-bottom: 0.5px dotted var(--rule-light);
+  height: 4.5mm;
+}
+.task-item .task-time {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  color: var(--ink-3);
+  width: 15mm;
+  text-align: center;
+  border-bottom: 0.5px dotted var(--rule-light);
+  height: 4mm;
+}
+
+/* ─── Two Column Section ─── */
+.two-cols {
+  display: flex;
+  gap: var(--s4);
+  flex: 1;
+  min-height: 0;
+}
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── CBT Mini Check ─── */
+.cbt-section {
+  background: var(--amber-soft);
+  border-radius: 2.5mm;
+  padding: var(--s3);
+  flex: 1;
+}
+.cbt-section .section-title {
+  color: var(--amber);
+  margin-bottom: var(--s2);
+}
+.cbt-prompt {
+  font-size: 7pt;
+  color: var(--ink-2);
+  margin-bottom: 1.5mm;
+  font-weight: 500;
+}
+.cbt-field {
+  border-bottom: 0.5px dotted var(--rule-light);
+  height: 5mm;
+  margin-bottom: 2mm;
+}
+
+/* ─── Energy & Self-Care ─── */
+.selfcare-section {
+  background: var(--green-soft);
+  border-radius: 2.5mm;
+  padding: var(--s3);
+  flex: 1;
+}
+.selfcare-section .section-title {
+  color: var(--green);
+  margin-bottom: var(--s2);
+}
+.selfcare-item {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 1.2mm 0;
+  font-size: 7.5pt;
+  color: var(--ink-2);
+}
+.selfcare-item .mini-circle {
+  width: 3.5mm; height: 3.5mm;
+  border-radius: 50%;
+  border: 0.5px solid var(--rule);
+  flex-shrink: 0;
+  background: var(--bg);
+}
+
+/* ─── Energy Scale ─── */
+.energy-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  margin-top: var(--s2);
+  margin-bottom: var(--s1);
+}
+.energy-row .energy-label {
+  font-size: 6.5pt;
+  color: var(--ink-3);
+  width: 14mm;
+}
+.energy-block {
+  flex: 1;
+  height: 4mm;
+  border: 0.4px solid var(--rule);
+  border-radius: 0.5mm;
+  background: var(--bg);
+}
+
+/* ─── One Good Thing ─── */
+.good-thing {
+  background: var(--accent-soft);
+  border-radius: 2.5mm;
+  padding: var(--s2) var(--s3);
+  flex-shrink: 0;
+}
+.good-thing .label {
+  font-size: 7pt;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1mm;
+}
+.good-thing .field {
+  border-bottom: 0.5px dotted var(--rule-light);
+  height: 5mm;
+}
+
+/* ─── Free Write ─── */
+.free-write {
+  flex: 1;
+  min-height: 20mm;
+  display: flex;
+  flex-direction: column;
+}
+.free-write .write-label {
+  font-size: 6.5pt;
+  color: var(--ink-3);
+  font-style: italic;
+  margin-bottom: var(--s1);
+}
+.free-write .lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.write-line {
+  border-bottom: 0.3px dotted var(--rule-light);
+  height: 5.5mm;
+}
+
+/* ─── Footer ─── */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: var(--s2);
+  border-top: 0.3px solid var(--rule-light);
+}
+.footer-left {
+  font-size: 5.5pt;
+  color: var(--ink-3);
+  font-style: italic;
+}
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  color: var(--ink-3);
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     DAILY PAGE — One page. That's enough.
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Today</div>
+      <div class="subtitle">One page. That's enough.</div>
+    </div>
+    <div class="date-block">
+      <div>Date <span class="date-field"></span></div>
+    </div>
+  </div>
+
+  <!-- Permission reminder — always visible -->
+  <div class="permission">
+    ✦ It's okay to leave parts blank. Showing up is the win. ✦
+  </div>
+
+  <!-- Quick binary checks (meds, sleep, water, movement) -->
+  <div class="quick-checks">
+    <div class="check-item">
+      <div class="circle"></div>
+      <div>
+        <div class="label">💊 Meds</div>
+        <div class="sub">taken?</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="circle"></div>
+      <div>
+        <div class="label">😴 Sleep</div>
+        <div class="sub">enough?</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="circle"></div>
+      <div>
+        <div class="label">💧 Water</div>
+        <div class="sub">started?</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="circle"></div>
+      <div>
+        <div class="label">🚶 Moved</div>
+        <div class="sub">5 min?</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="circle"></div>
+      <div>
+        <div class="label">👋 Connect</div>
+        <div class="sub">talked?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mood check — circle, don't write -->
+  <div class="mood-section">
+    <div class="section-title">How am I right now?</div>
+    <div class="mood-row">
+      <div class="mood-option">
+        <div class="emoji">😞</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Rough</div>
+      </div>
+      <div class="mood-option">
+        <div class="emoji">😕</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Low</div>
+      </div>
+      <div class="mood-option">
+        <div class="emoji">😐</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Meh</div>
+      </div>
+      <div class="mood-option">
+        <div class="emoji">🙂</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Okay</div>
+      </div>
+      <div class="mood-option">
+        <div class="emoji">😊</div>
+        <div class="mood-circle"></div>
+        <div class="mood-label">Good</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rule of 3 — maximum 3 tasks, with time anchor -->
+  <div class="tasks-section">
+    <div class="section-header">
+      <div class="section-dot accent"></div>
+      <div class="section-title">Just Three Things</div>
+      <div class="section-hint">If you only do #1, that's a win</div>
+    </div>
+    <div class="task-item">
+      <div class="task-check"></div>
+      <div class="task-num">1</div>
+      <div class="task-line"></div>
+      <div class="task-time">when?</div>
+    </div>
+    <div class="task-item">
+      <div class="task-check"></div>
+      <div class="task-num">2</div>
+      <div class="task-line"></div>
+      <div class="task-time">when?</div>
+    </div>
+    <div class="task-item">
+      <div class="task-check"></div>
+      <div class="task-num">3</div>
+      <div class="task-line"></div>
+      <div class="task-time">when?</div>
+    </div>
+  </div>
+
+  <!-- Two columns: CBT mini-check + Self-care -->
+  <div class="two-cols">
+
+    <!-- Left: CBT Thought Check (simplified) -->
+    <div class="col">
+      <div class="cbt-section">
+        <div class="section-title">🧠 Thought Check</div>
+        <div class="cbt-prompt">My brain is telling me:</div>
+        <div class="cbt-field"></div>
+        <div class="cbt-prompt">Is that actually true?</div>
+        <div class="cbt-field"></div>
+        <div class="cbt-prompt">A kinder way to see it:</div>
+        <div class="cbt-field"></div>
+      </div>
+    </div>
+
+    <!-- Right: Self-care + Energy -->
+    <div class="col">
+      <div class="selfcare-section">
+        <div class="section-title">🌱 Self-Care Check</div>
+        <div class="selfcare-item">
+          <div class="mini-circle"></div>
+          <span>Ate something</span>
+        </div>
+        <div class="selfcare-item">
+          <div class="mini-circle"></div>
+          <span>Went outside</span>
+        </div>
+        <div class="selfcare-item">
+          <div class="mini-circle"></div>
+          <span>Did something enjoyable</span>
+        </div>
+        <div class="selfcare-item">
+          <div class="mini-circle"></div>
+          <span>Was kind to myself</span>
+        </div>
+
+        <!-- Energy scale — color in, don't write -->
+        <div class="energy-row">
+          <div class="energy-label">Energy:</div>
+          <div class="energy-block"></div>
+          <div class="energy-block"></div>
+          <div class="energy-block"></div>
+          <div class="energy-block"></div>
+          <div class="energy-block"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- One Good Thing — behavioral activation anchor -->
+  <div class="good-thing">
+    <div class="label">✨ One good thing today (even tiny):</div>
+    <div class="field"></div>
+  </div>
+
+  <!-- Free Write — unstructured space, no prompts, no pressure -->
+  <div class="free-write">
+    <div class="write-label">Brain dump — say anything, or leave it blank</div>
+    <div class="lines">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">You showed up. That counts.</div>
+    <div class="footer-right">1 / 1</div>
+  </div>
+
+</div>
+
+</body>
+</html>
