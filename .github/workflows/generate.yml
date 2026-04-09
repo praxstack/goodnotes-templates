@@ -1,0 +1,97 @@
+name: Generate Assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Generate all assets (pages + stickers)
+        run: npx tsx src/cli/index.ts generate --pages --stickers --verbose
+
+      - name: Show manifest summary
+        run: |
+          echo "=== Generation Manifest ==="
+          cat output/manifest.json | node -e "
+            const m = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
+            console.log('Files:', m.totalFiles);
+            console.log('Size:', m.totalSizeMB, 'MB');
+            console.log('Duration:', m.duration);
+          "
+
+      - name: Upload assets as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: goodnotes-templates-assets
+          path: |
+            output/pages/
+            output/stickers/
+            output/manifest.json
+          retention-days: 90
+
+  release:
+    needs: generate
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: goodnotes-templates-assets
+          path: output/
+
+      - name: Create release bundle
+        run: |
+          cd output
+          zip -r ../goodnotes-templates-assets.zip pages/ stickers/ manifest.json
+
+      - name: Get version
+        id: version
+        run: echo "version=$(node -p 'require("./package.json").version')" >> $GITHUB_OUTPUT
+
+      - name: Create or update release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: "goodnotes-templates v${{ steps.version.outputs.version }}"
+          body: |
+            ## Pre-built Assets
+
+            Download `goodnotes-templates-assets.zip` for ready-to-use templates and stickers.
+
+            **Contents:**
+            - 7 page types × 8 themes × 3 variants = 100+ PDF pages
+            - 15 sticker types × 8 themes = 700+ PNG stickers (300 DPI, transparent)
+            - manifest.json with file metadata
+
+            **How to use:**
+            1. Download and unzip
+            2. AirDrop PDFs to your iPad
+            3. Open in GoodNotes, Notability, Noteshelf, or CollaNote
+          files: goodnotes-templates-assets.zip
+          draft: false
+          prerelease: false
