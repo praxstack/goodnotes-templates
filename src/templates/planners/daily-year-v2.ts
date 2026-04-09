@@ -523,19 +523,56 @@ function buildMonthHTML(
   }
 
   // Build complete HTML document
-  // Use the Today template's head as the base (it has all the CSS vars + fonts)
-  // Then inject tab bar CSS + multipage print rules
-  const tabCSS = `<style id="month-tabs">${getTabBarCSS()}</style>`;
-  const printCSS = `<style id="multipage-print">
+  // CRITICAL: merge CSS from ALL 4 templates — each has unique CSS classes.
+  // Only using Today's head strips styling from Reflect/Weekly/Monthly pages,
+  // causing them to render as plain text without cards, circles, etc.
+  function extractStyleBlocks(headHTML: string): string {
+    const styles: string[] = [];
+    const re = /<style[^>]*>([\s\S]*?)<\/style>/g;
+    let m;
+    while ((m = re.exec(headHTML)) !== null) {
+      styles.push(m[1]);
+    }
+    return styles.join('\n\n');
+  }
+
+  const todayCSS = extractStyleBlocks(templates.today.headHTML);
+  const reflectCSS = extractStyleBlocks(templates.reflect.headHTML);
+  const weeklyCSS = extractStyleBlocks(templates.weekly.headHTML);
+  const monthlyCSS = extractStyleBlocks(templates.monthly.headHTML);
+
+  const tabCSS = getTabBarCSS();
+  const printCSS = `
     @page { size: A4 portrait; margin: 0; }
-    body { background: white; }
+    body { background: white; margin: 0; padding: 0; }
     .page { margin: 0; box-shadow: none; page-break-after: always; page-break-inside: avoid; }
     .page:last-child { page-break-after: auto; }
-  </style>`;
-  const headWithExtras = templates.today.headHTML
-    .replace('</head>', `${tabCSS}\n${printCSS}\n</head>`);
+  `;
 
-  const html = `${headWithExtras}\n${allPages.join('\n\n')}\n</body>\n</html>`;
+  // Extract the Google Fonts link from today's head
+  const fontLinkMatch = templates.today.headHTML.match(/<link[^>]*fonts\.googleapis\.com[^>]*>/);
+  const fontLink = fontLinkMatch ? fontLinkMatch[0] : '';
+  const preconnect = '<link rel="preconnect" href="https://fonts.googleapis.com">';
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADHD v2 — ${getMonthNames(locale, 'long')[activeMonth - 1]} ${year}</title>
+  ${preconnect}
+  ${fontLink}
+  <style id="today-css">${todayCSS}</style>
+  <style id="reflect-css">${reflectCSS}</style>
+  <style id="weekly-css">${weeklyCSS}</style>
+  <style id="monthly-css">${monthlyCSS}</style>
+  <style id="month-tabs">${tabCSS}</style>
+  <style id="multipage-print">${printCSS}</style>
+</head>
+<body>
+${allPages.join('\n\n')}
+</body>
+</html>`;
 
   return { html, pageCount };
 }
