@@ -79,12 +79,19 @@ async function main() {
   // Optionally load color-mode CSS snippet
   let modeCSS = '';
   if (colorMode) {
-    const cssPath = `${prefix}-today.${colorMode}.css`;
+    // Search: 1) preset themes dir, 2) sibling CSS file
+    const presetPath = `src/templates/themes/${colorMode}.css`;
+    const siblingPath = `${prefix}-today.${colorMode}.css`;
     try {
-      modeCSS = await fs.readFile(cssPath, 'utf-8');
-      console.log(`  🎨 Color mode: ${colorMode}`);
+      modeCSS = await fs.readFile(presetPath, 'utf-8');
+      console.log(`  🎨 Theme: ${colorMode} (preset)`);
     } catch {
-      console.warn(`  ⚠ Color mode "${colorMode}" not found: ${cssPath}`);
+      try {
+        modeCSS = await fs.readFile(siblingPath, 'utf-8');
+        console.log(`  🎨 Color mode: ${colorMode} (sibling)`);
+      } catch {
+        console.warn(`  ⚠ Color mode "${colorMode}" not found in themes/ or as sibling`);
+      }
     }
   }
 
