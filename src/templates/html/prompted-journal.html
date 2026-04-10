@@ -1,198 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prompted Journal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_base.css" />
-  <style>
-    /* ═══════════════════════════════════════════════
-       Prompted Journal — template-specific styles
-       ═══════════════════════════════════════════════ */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompted Journal — Bubblegum v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   PROMPTED JOURNAL v3 — Bubblegum Edition
+   Design: Pop Retro meets Soft UI — playful pink + teal
+   Typography: Poppins (body) + Lora (headings) + Fira Code (mono)
 
-    /* ─── Prompt Card ─── */
-    .prompt-card {
-      background: var(--accent-soft);
-      border-radius: 2.5mm;
-      padding: var(--s4) var(--s5);
-      text-align: center;
-    }
-    .prompt-text {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 13pt;
-      color: var(--foreground);
-      line-height: 1.35;
-      margin-bottom: var(--s3);
-    }
-    .prompt-label {
-      font-size: 7pt;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--muted-foreground);
-      text-align: left;
-    }
+   Creative direction:
+   ✦ Gold-tinted prompt card with italic Lora text
+   ✦ Teal feelings card, gold insight card
+   ✦ Circle-check action item
+   ✦ Socrates quote footer
+   ═══════════════════════════════════════════════════════ */
 
-    /* ─── Response area ─── */
-    .response-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .response-area .write-line {
-      height: 7mm;
-      margin-bottom: 0;
-    }
+/* ─── Design Tokens ─── */
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 12mm;
 
-    /* ─── Action checkbox row ─── */
-    .action-row {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-    }
-    .action-row .cb-box {
-      width: 3.5mm;
-      height: 3.5mm;
-      border: 0.5px solid var(--border);
-      border-radius: 0.7mm;
-      flex-shrink: 0;
-      background: var(--background);
-    }
-    .action-row .write-line {
-      flex: 1;
-    }
+  /* Bubblegum palette */
+  --background: #f6e6ee;
+  --foreground: #3d2040;
+  --card: #ffffff;
+  --card-alt: #fef3d6;
+  --foreground-secondary: #5b3050;
+  --muted-foreground: #8b5070;
+  --primary: #c0408a;
+  --primary-light: #e670abCC;
+  --secondary: #8acfd1;
+  --accent: #d09030;
+  --accent-soft: rgba(208, 144, 48, 0.12);
+  --border: #d88ab0;
+  --input: #e8c0d4;
+  --dots: #d4a0c0;
+  --muted: #d4a0c0;
 
-    /* ─── Footer prompts ─── */
-    .more-prompts {
-      font-size: 6.5pt;
-      color: var(--muted-foreground);
-      text-align: center;
-      padding: var(--s2) 0;
-      line-height: 1.5;
-    }
-    .more-prompts strong {
-      font-weight: 600;
-      color: var(--foreground-secondary);
-    }
-  </style>
+  /* Bubblegum fonts */
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-mono: 'Fira Code', monospace;
+
+  /* Spacing scale */
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 8mm;
+
+  /* Pop shadow — the bubblegum signature */
+  --shadow-card: 3px 3px 0px 0px hsl(326 58% 57% / 0.3);
+  --shadow-inset: inset 0 1px 2px rgba(192, 64, 138, 0.08);
+  --radius: 6px;
+  --radius-sm: 4px;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #e8c0d4;
+  font-family: var(--font-sans);
+  font-size: 7.5pt;
+  color: var(--foreground);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Page Container ─── */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto;
+  padding: var(--margin);
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(192, 64, 138, 0.15);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Print Styles ─── */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0; box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Card Base ─── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--border);
+}
+
+/* ─── Inline SVG icon base ─── */
+.icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon svg { display: block; }
+
+/* ─── Dotted Write Line ─── */
+.write-line {
+  border-bottom: 1.5px dotted var(--dots);
+  height: 6.5mm;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   HEADER — Bubblegum signature gradient
+   ═══════════════════════════════════════ */
+.header-gradient {
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary) 0%, #e670ab 30%, var(--secondary) 60%, #d09030 100%);
+  border-radius: 3px;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header-left .title {
+  font-family: var(--font-serif);
+  font-size: 18pt;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.header-left .subtitle {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 6.5pt;
+  color: var(--muted);
+  margin-top: 0.5mm;
+}
+
+/* ─── Date Card ─── */
+.date-card {
+  padding: var(--s2) var(--s3);
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+
+.date-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+
+.date-label {
+  font-size: 6.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+}
+
+.date-field {
+  border-bottom: 1.5px solid var(--border);
+  min-width: 24mm;
+  height: 4.5mm;
+}
+
+/* ═══════════════════════════════════════
+   SECTION HEADERS — Colored bar + title
+   ═══════════════════════════════════════ */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: var(--s2);
+  flex-shrink: 0;
+  padding-left: 1mm;
+}
+
+.section-bar {
+  width: 3mm;
+  height: 3mm;
+  border-radius: 1mm;
+  flex-shrink: 0;
+}
+
+.section-bar.pink   { background: var(--primary); }
+.section-bar.teal   { background: var(--secondary); }
+.section-bar.gold   { background: var(--accent); }
+.section-bar.green  { background: #48a870; }
+
+.section-title {
+  font-family: var(--font-sans);
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--foreground);
+}
+
+/* ═══════════════════════════════════════
+   PROMPT CARD — Gold-tinted
+   ═══════════════════════════════════════ */
+.prompt-card {
+  background: var(--card-alt);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid rgba(208, 144, 48, 0.35);
+  padding: var(--s4) var(--s5);
+  text-align: center;
+  margin-bottom: var(--s4);
+  flex-shrink: 0;
+}
+
+.prompt-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 12pt;
+  font-weight: 500;
+  color: var(--foreground);
+  line-height: 1.4;
+}
+
+.prompt-hint {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2mm;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSE AREA — 10 write lines
+   ═══════════════════════════════════════ */
+.response-area {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--s4);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   FEELINGS CARD — Teal accent
+   ═══════════════════════════════════════ */
+.feelings-card {
+  background: rgba(138, 207, 209, 0.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid rgba(138, 207, 209, 0.4);
+  padding: var(--s3) var(--s4);
+  margin-bottom: var(--s4);
+  flex-shrink: 0;
+}
+
+.feelings-card .write-line {
+  border-bottom-color: rgba(138, 207, 209, 0.5);
+}
+
+/* ═══════════════════════════════════════
+   INSIGHT CARD — Gold accent
+   ═══════════════════════════════════════ */
+.insight-card {
+  background: var(--card-alt);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid rgba(208, 144, 48, 0.35);
+  padding: var(--s3) var(--s4);
+  margin-bottom: var(--s4);
+  flex-shrink: 0;
+}
+
+.insight-card .write-line {
+  border-bottom-color: rgba(208, 144, 48, 0.4);
+}
+
+/* ═══════════════════════════════════════
+   ACTION ROW — Circle check + write line
+   ═══════════════════════════════════════ */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  margin-bottom: var(--s4);
+  flex-shrink: 0;
+}
+
+.circle-check {
+  width: 5mm;
+  height: 5mm;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+  flex-shrink: 0;
+}
+
+.action-row .write-line {
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER QUOTE
+   ═══════════════════════════════════════ */
+.quote-footer {
+  margin-top: auto;
+  padding-top: var(--s3);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.quote-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 7pt;
+  color: var(--muted-foreground);
+  line-height: 1.45;
+}
+
+.quote-author {
+  font-family: var(--font-sans);
+  font-size: 6pt;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 1mm;
+  letter-spacing: 0.04em;
+}
+</style>
 </head>
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- ══════════════════════════════════════════════════════════
-         1. HEADER
-         ══════════════════════════════════════════════════════════ -->
-    <header class="page-header">
-      <div>
-        <div class="page-title">Prompted Journal</div>
-        <div class="page-subtitle">One question. Honest answers. Deeper self-knowledge.</div>
-      </div>
-    </header>
+  <!-- ─── 1. Header Gradient Bar ─── -->
+  <div class="header-gradient" aria-hidden="true"></div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         2. DATE ROW
-         ══════════════════════════════════════════════════════════ -->
-    <div class="date-row">
-      <label>Date</label><span class="field"></span>
+  <!-- ─── 2. Header ─── -->
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Prompted Journal</div>
+      <div class="subtitle">One question. Honest answers. Deeper self-knowledge.</div>
     </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         3. TODAY'S PROMPT
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label no-top">
-      <div class="section-dot"></div>
-      <div class="section-title">Today's Prompt</div>
-    </div>
-
-    <div class="prompt-card">
-      <div class="prompt-text">"What would you do if you knew you couldn't fail?"</div>
-      <div class="prompt-label">Your response:</div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         4. RESPONSE — 12 write lines
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot"></div>
-      <div class="section-title">Response</div>
-    </div>
-
-    <div class="response-area">
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         5. FEELINGS THIS BRINGS UP
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot blue"></div>
-      <div class="section-title">Feelings This Brings Up</div>
-    </div>
-
-    <div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         6. ONE INSIGHT — amber-soft card
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot amber"></div>
-      <div class="section-title">One Insight</div>
-    </div>
-
-    <div class="card amber-soft">
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         7. ACTION I'LL TAKE — 1 write line with checkbox
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot green"></div>
-      <div class="section-title">Action I'll Take</div>
-    </div>
-
-    <div class="action-row">
-      <div class="cb-box"></div>
-      <div class="write-line"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         8. MORE PROMPTS FOOTER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="more-prompts">
-      <strong>More prompts:</strong> What am I avoiding? &bull; What makes me feel alive? &bull; What would I tell my younger self?
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         9. QUOTE BANNER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="quote-banner">
-      <div class="quote-text">"The unexamined life is not worth living."</div>
-      <div class="quote-author">— Socrates</div>
-    </div>
-
+    <span class="icon" style="color: var(--primary); margin-top: 2mm;">
+      <!-- Open book icon 20×20 -->
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+    </span>
   </div>
+
+  <!-- ─── 3. Date Card ─── -->
+  <div class="date-card card">
+    <div class="date-group">
+      <span class="icon" style="color: var(--primary);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </span>
+      <span class="date-label">Date</span>
+      <span class="date-field"></span>
+    </div>
+  </div>
+
+  <!-- ─── 4. Today's Prompt ─── -->
+  <div class="section-header">
+    <div class="section-bar gold"></div>
+    <span class="icon" style="color: var(--accent);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="9" y1="18" x2="15" y2="18"/>
+        <line x1="10" y1="22" x2="14" y2="22"/>
+        <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
+      </svg>
+    </span>
+    <div class="section-title">Today's Prompt</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-text">"What would you do if you knew you couldn't fail?"</div>
+    <div class="prompt-hint">Take your time — there's no wrong answer</div>
+  </div>
+
+  <!-- ─── 5. Response Area (10 lines) ─── -->
+  <div class="section-header">
+    <div class="section-bar pink"></div>
+    <span class="icon" style="color: var(--primary);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="17" y1="10" x2="3" y2="10"/>
+        <line x1="21" y1="6" x2="3" y2="6"/>
+        <line x1="21" y1="14" x2="3" y2="14"/>
+        <line x1="17" y1="18" x2="3" y2="18"/>
+      </svg>
+    </span>
+    <div class="section-title">Response</div>
+  </div>
+
+  <div class="response-area">
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── 6. Feelings (teal card, 2 lines) ─── -->
+  <div class="section-header">
+    <div class="section-bar teal"></div>
+    <span class="icon" style="color: var(--secondary);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </span>
+    <div class="section-title">Feelings This Brings Up</div>
+  </div>
+
+  <div class="feelings-card">
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── 7. One Insight (gold card, 2 lines) ─── -->
+  <div class="section-header">
+    <div class="section-bar gold"></div>
+    <span class="icon" style="color: var(--accent);">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+    </span>
+    <div class="section-title">One Insight</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── 8. Action I'll Take (1 line with circle check) ─── -->
+  <div class="section-header">
+    <div class="section-bar green"></div>
+    <span class="icon" style="color: #48a870;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 11 12 14 22 4"/>
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+      </svg>
+    </span>
+    <div class="section-title">Action I'll Take</div>
+  </div>
+
+  <div class="action-row">
+    <div class="circle-check"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── 9. Footer Quote ─── -->
+  <div class="quote-footer">
+    <div class="quote-text">"The unexamined life is not worth living."</div>
+    <div class="quote-author">— Socrates</div>
+  </div>
+
+</div>
 
 </body>
 </html>
