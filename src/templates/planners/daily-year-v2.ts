@@ -23,7 +23,7 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type { Theme, PageDimensions, PDFBookmark, PDFHyperlink } from '../../types/index.js';
+import type { PageDimensions, PDFBookmark, PDFHyperlink } from '../../types/index.js';
 import { renderHTMLToPDF, closeBrowser } from '../../core/puppeteer-renderer.js';
 import { mergePDFs, postProcessPDF } from '../../core/pdf-postprocess.js';
 import {
@@ -89,14 +89,14 @@ export interface DailyYearV2Options {
   weeklyTemplatePath: string;
   /** Path to the Monthly Review HTML template */
   monthlyTemplatePath: string;
-  /** Theme to apply */
-  theme: Theme;
   /** Page dimensions */
   dimensions: PageDimensions;
   /** Year to generate */
   year: number;
   /** Locale for date formatting */
   locale: SupportedLocale;
+  /** Color mode (e.g., 'dark'). Omit for default. */
+  colorMode?: string;
   /** Output file path */
   outputPath: string;
   /** Progress callback */
@@ -743,11 +743,11 @@ export async function generateDailyYearPlannerV2(
     reflectTemplatePath,
     weeklyTemplatePath,
     monthlyTemplatePath,
-    theme,
     dimensions,
     year,
     locale,
     outputPath,
+    colorMode,
     onProgress,
   } = options;
 
@@ -800,10 +800,10 @@ export async function generateDailyYearPlannerV2(
       // Render to PDF via Puppeteer with theme injection
       // multiPage: true → CSS @page rules handle page breaks, each .page div → separate PDF page
       const buffer = await renderHTMLToPDF({
-        htmlPath: todayTemplatePath, // fallback path; not used since we pass htmlContent
-        theme,
+        htmlPath: todayTemplatePath, // fallback path; used for color-mode CSS discovery
         dimensions,
         htmlContent: html,
+        colorMode,
         multiPage: true,
       });
 
@@ -848,8 +848,8 @@ export async function generateDailyYearPlannerV2(
     metadata: {
       title: `ADHD v2 Planner ${year}`,
       author: 'goodnotes-templates',
-      subject: `Full year ADHD v2 planner for ${year} — ${theme.name} theme`,
-      keywords: ['planner', 'adhd', 'adhd-v2', 'daily', 'goodnotes', theme.id, String(year)],
+      subject: `Full year ADHD v2 planner for ${year}${colorMode ? ` — ${colorMode} mode` : ''}`,
+      keywords: ['planner', 'adhd', 'adhd-v2', 'daily', 'goodnotes', String(year), ...(colorMode ? [colorMode] : [])],
       creator: 'goodnotes-templates v2.0.0',
       producer: 'pdf-lib + Puppeteer',
     },

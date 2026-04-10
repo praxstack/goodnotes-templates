@@ -3,28 +3,24 @@
  * 28 days × 2 pages + 3 weekly reviews + 1 monthly review = 60 pages
  * NO month tab navbar — clean, focused pages.
  *
- * Usage: npx tsx scripts/generate-4week.ts [version] [theme]
- * Example: npx tsx scripts/generate-4week.ts v3 warm-neutral
+ * Usage: npx tsx scripts/generate-4week.ts [version] [colorMode]
+ * Example: npx tsx scripts/generate-4week.ts v3
+ * Example: npx tsx scripts/generate-4week.ts v3 dark
  */
 import fs from 'fs/promises';
 import path from 'path';
 import { renderHTMLToPDF, closeBrowser } from '../src/core/puppeteer-renderer.js';
 import { postProcessPDF } from '../src/core/pdf-postprocess.js';
-import { getTheme } from '../src/core/themes.js';
 import { getPageDimensions } from '../src/core/dimensions.js';
-import { getMonthNames } from '../src/utils/locale.js';
 import type { PDFBookmark } from '../src/types/index.js';
 
 const version = process.argv[2] || 'v3';
-const themeName = process.argv[3] || 'warm-neutral';
+const colorMode = process.argv[3]; // optional: 'dark'
 
 async function main() {
-  console.log(`\n📓 Generating 4-Week ADHD Planner (${version}, ${themeName})\n`);
+  console.log(`\n📓 Generating 4-Week ADHD Planner (${version}${colorMode ? `, ${colorMode}` : ''})\n`);
   const startTime = Date.now();
-  const theme = getTheme(themeName);
   const dims = getPageDimensions('a4', 'portrait');
-  const monthNames = getMonthNames('en', 'short');
-  const monthNamesLong = getMonthNames('en', 'long');
 
   // Read templates based on version
   const prefix = `src/templates/html/adhd-${version}`;
@@ -49,22 +45,21 @@ async function main() {
     return html.substring(bodyEnd, closeIdx).trim();
   }
 
-  // Build 28 days starting from today (or a fixed start)
-  const startDate = new Date(2026, 0, 5); // Monday Jan 5, 2026
-  const days: Array<{date: Date; day: number; dateLabel: string; weekNum: number; isWeekEnd: boolean; isMonthEnd: boolean}> = [];
+  // Build 28 UNDATED days — no hardcoded dates. User fills in dates in GoodNotes.
+  const days: Array<{dayNum: number; dayLabel: string; weekNum: number; dayInWeek: number; isWeekEnd: boolean; isMonthEnd: boolean}> = [];
+  const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   
   for (let d = 0; d < 28; d++) {
-    const date = new Date(startDate);
-    date.setDate(startDate.getDate() + d);
     const weekNum = Math.floor(d / 7) + 1; // 1-4
-    const isWeekEnd = (d + 1) % 7 === 0; // Every 7th day
+    const dayInWeek = d % 7; // 0-6 (Mon-Sun)
+    const isWeekEnd = (d + 1) % 7 === 0; // Every 7th day (Sunday)
     const isMonthEnd = d === 27; // Last day of 4 weeks
     
     days.push({
-      date,
-      day: date.getDate(),
-      dateLabel: `${date.getDate()} ${monthNames[date.getMonth()]}`,
+      dayNum: d + 1,
+      dayLabel: `W${weekNum} · ${dayNames[dayInWeek]}`,
       weekNum,
+      dayInWeek,
       isWeekEnd,
       isMonthEnd,
     });
@@ -81,35 +76,41 @@ async function main() {
   const weeklyBody = extractBody(weeklyHTML);
   const monthlyBody = extractBody(monthlyHTML);
 
+  // Optionally load color-mode CSS snippet
+  let modeCSS = '';
+  if (colorMode) {
+    const cssPath = `${prefix}-today.${colorMode}.css`;
+    try {
+      modeCSS = await fs.readFile(cssPath, 'utf-8');
+      console.log(`  🎨 Color mode: ${colorMode}`);
+    } catch {
+      console.warn(`  ⚠ Color mode "${colorMode}" not found: ${cssPath}`);
+    }
+  }
+
   // Build all pages
   const pages: string[] = [];
   let pageCount = 0;
 
   for (const day of days) {
-    const pagesInDay = 2 + (day.isWeekEnd && !day.isMonthEnd ? 1 : 0) + (day.isMonthEnd ? 1 : 0);
-
-    // Today page
+    // Today page — UNDATED: shows "W1 · Mon" style label, date field left blank for user
     let today = todayBody;
-    today = today.replace(/data-inject="date">[^<]*/g, `data-inject="date">${day.dateLabel} 2026`);
-    today = today.replace(/data-inject="page-num">[^<]*/g, `data-inject="page-num">${day.dateLabel} · 1/${pagesInDay}`);
+    today = today.replace(/data-inject="date">[^<]*/g, `data-inject="date">`); // blank date field
+    today = today.replace(/data-inject="page-num">[^<]*/g, `data-inject="page-num">Day ${day.dayNum} · ${day.dayLabel}`);
     pages.push(today);
     pageCount++;
 
-    // Reflect page
+    // Reflect page — same undated approach
     let reflect = reflectBody;
-    reflect = reflect.replace(/data-inject="date">[^<]*/g, `data-inject="date">${day.dateLabel} 2026`);
-    reflect = reflect.replace(/data-inject="page-num">[^<]*/g, `data-inject="page-num">${day.dateLabel} · 2/${pagesInDay}`);
+    reflect = reflect.replace(/data-inject="date">[^<]*/g, `data-inject="date">`); // blank
+    reflect = reflect.replace(/data-inject="page-num">[^<]*/g, `data-inject="page-num">Day ${day.dayNum} · ${day.dayLabel}`);
     pages.push(reflect);
     pageCount++;
 
     // Weekly review at end of weeks 1-3 (NOT week 4 — that gets monthly)
     if (day.isWeekEnd && !day.isMonthEnd) {
       let weekly = weeklyBody;
-      const weekEndLabel = day.dateLabel;
-      const weekStartDate = new Date(day.date);
-      weekStartDate.setDate(weekStartDate.getDate() - 6);
-      const weekStartLabel = `${weekStartDate.getDate()} ${monthNames[weekStartDate.getMonth()]}`;
-      weekly = weekly.replace(/data-inject="week-date">[^<]*/g, `data-inject="week-date">${weekStartLabel} – ${weekEndLabel}`);
+      weekly = weekly.replace(/data-inject="week-date">[^<]*/g, `data-inject="week-date">Week ${day.weekNum}`);
       pages.push(weekly);
       pageCount++;
     }
@@ -125,7 +126,7 @@ async function main() {
 
   console.log(`  📋 ${pageCount} pages (28 days × 2 + 3 weekly + 1 monthly)`);
 
-  // Build full HTML
+  // Build full HTML — template CSS is the source of truth
   const fullHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,6 +139,7 @@ async function main() {
   <style id="reflect-css">${extractStyles(reflectHTML)}</style>
   <style id="weekly-css">${extractStyles(weeklyHTML)}</style>
   <style id="monthly-css">${extractStyles(monthlyHTML)}</style>
+  ${modeCSS ? `<style id="color-mode">${modeCSS}</style>` : ''}
   <style id="print">
     @page { size: A4 portrait; margin: 0; }
     body { background: white; margin: 0; padding: 0; }
@@ -150,13 +152,12 @@ ${pages.join('\n')}
 </body>
 </html>`;
 
-  // Render PDF
+  // Render PDF — no theme injection, template CSS preserved
   console.log('  🖨  Rendering...');
   let pdfBuffer: Buffer;
   try {
     pdfBuffer = await renderHTMLToPDF({
       htmlPath: `${prefix}-today.html`,
-      theme,
       dimensions: dims,
       htmlContent: fullHTML,
       multiPage: true,
@@ -171,7 +172,7 @@ ${pages.join('\n')}
   const weekBookmarks: PDFBookmark[] = [];
   let bkIdx = 0;
   for (const day of days) {
-    const dayBk: PDFBookmark = { title: `${day.dateLabel} — Today`, pageIndex: bkIdx };
+    const dayBk: PDFBookmark = { title: `Day ${day.dayNum} · ${day.dayLabel}`, pageIndex: bkIdx };
     weekBookmarks.push(dayBk);
     bkIdx += 2; // Today + Reflect
     if (day.isWeekEnd && !day.isMonthEnd) bkIdx++; // Weekly
@@ -193,15 +194,16 @@ ${pages.join('\n')}
     metadata: {
       title: 'ADHD 4-Week Planner',
       author: 'goodnotes-templates',
-      subject: `4-week ADHD planner — ${theme.name} theme`,
-      keywords: ['planner', 'adhd', '4-week', 'goodnotes', theme.id],
+      subject: `4-week ADHD planner${colorMode ? ` — ${colorMode} mode` : ''}`,
+      keywords: ['planner', 'adhd', '4-week', 'goodnotes', ...(colorMode ? [colorMode] : [])],
       creator: 'goodnotes-templates',
       producer: 'pdf-lib + Puppeteer',
     },
     bookmarks,
   });
 
-  const outputPath = `output/templates/adhd-${version}-4week-${themeName}.pdf`;
+  const modeSuffix = colorMode ? `-${colorMode}` : '';
+  const outputPath = `output/templates/adhd-${version}-4week${modeSuffix}.pdf`;
   await fs.mkdir('output/templates', { recursive: true });
   await fs.writeFile(outputPath, pdfBuffer);
 

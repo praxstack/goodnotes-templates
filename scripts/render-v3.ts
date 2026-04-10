@@ -1,29 +1,38 @@
 /**
- * Render all 4 ADHD v3 templates as single-page PDFs.
- * Usage: npx tsx scripts/render-v3.ts
+ * Render individual v3 template pages to PDF for visual testing.
+ * Usage: npx tsx scripts/render-v3.ts [colorMode]
  */
-import fs from 'fs/promises';
-import path from 'path';
-import { renderHTMLToPDF, closeBrowser } from '../src/core/puppeteer-renderer.js';
-import { getTheme } from '../src/core/themes.js';
+import { renderHTMLToPDFFile, closeBrowser } from '../src/core/puppeteer-renderer.js';
 import { getPageDimensions } from '../src/core/dimensions.js';
 
-const templates = ['adhd-v3-today', 'adhd-v3-reflect', 'adhd-v3-weekly', 'adhd-v3-monthly'];
+const colorMode = process.argv[2]; // optional: 'dark'
 
 async function main() {
-  console.log('\n🎨 Rendering ADHD v3 templates\n');
-  const theme = getTheme('warm-neutral');
+  console.log(`\n🎨 Rendering v3 templates${colorMode ? ` (${colorMode})` : ''}...\n`);
   const dims = getPageDimensions('a4', 'portrait');
-  await fs.mkdir('output/templates', { recursive: true });
+  const modeSuffix = colorMode ? `-${colorMode}` : '';
+
+  const templates = [
+    { name: 'today', path: 'src/templates/html/adhd-v3-today.html' },
+    { name: 'reflect', path: 'src/templates/html/adhd-v3-reflect.html' },
+    { name: 'weekly', path: 'src/templates/html/adhd-v3-weekly.html' },
+    { name: 'monthly', path: 'src/templates/html/adhd-v3-monthly.html' },
+  ];
+
   try {
     for (const t of templates) {
-      const buf = await renderHTMLToPDF({ htmlPath: `src/templates/html/${t}.html`, theme, dimensions: dims });
-      const out = `output/templates/${t}.pdf`;
-      await fs.writeFile(out, buf);
-      console.log(`  ✓ ${t} — ${(buf.length / 1024).toFixed(0)} KB`);
+      const output = `output/templates/adhd-v3-${t.name}${modeSuffix}.pdf`;
+      const result = await renderHTMLToPDFFile(
+        { htmlPath: t.path, dimensions: dims, colorMode },
+        output
+      );
+      console.log(`  ✅ ${t.name}: ${(result.size / 1024).toFixed(0)} KB → ${output}`);
     }
-  } finally { await closeBrowser(); }
-  console.log('\n  ✅ Done\n');
+  } finally {
+    await closeBrowser();
+  }
+
+  console.log('\nDone!\n');
 }
 
-main().catch(e => { console.error('❌', e); process.exit(1); });
+main().catch(err => { console.error('❌', err); process.exit(1); });

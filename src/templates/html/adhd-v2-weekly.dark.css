@@ -1,0 +1,21 @@
+/* Midnight dark mode — overrides default warm-neutral palette */
+:root {
+  --bg: #1E2228;
+  --surface: #2D3340;
+  --surface-alt: #3A4A5C;
+  --ink: #E8ECF0;
+  --ink-2: #E8ECF0CC;
+  --ink-3: #4A5568;
+  --rule: #3A4A5C;
+  --rule-light: #3A4A5C80;
+  --accent: #8AB4E8;
+  --accent-soft: rgba(138, 180, 232, 0.15);
+  --green: #6AAF7E;
+  --green-soft: rgba(106, 175, 126, 0.15);
+  --blue: #6CA0D4;
+  --blue-soft: rgba(108, 160, 212, 0.15);
+  --amber: #D4A94F;
+  --amber-soft: rgba(212, 169, 79, 0.15);
+  --dark: #E8ECF0;
+  --cream: #1E2228;
+}

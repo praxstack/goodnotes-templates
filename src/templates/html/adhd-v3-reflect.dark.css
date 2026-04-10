@@ -1,0 +1,19 @@
+/* Dark lavender mode — overrides default light lavender palette */
+:root {
+  --primary: #A78BFA;
+  --primary-light: #7C3AED;
+  --accent: #34D399;
+  --accent-soft: rgba(52, 211, 153, 0.12);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.12);
+  --bg: #1A1028;
+  --surface: #2D2440;
+  --ink: #EDE5F5;
+  --ink-2: #C4B5FD;
+  --ink-3: #7C3AED;
+  --muted: #6D28D9;
+  --muted-bg: #2D2440;
+  --border: #3D2E5C;
+  --rule: #4C3672;
+  --dots: #6D28D9;
+}

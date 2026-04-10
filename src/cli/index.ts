@@ -3,123 +3,84 @@
  * CLI for goodnotes-templates generation engine.
  *
  * Commands:
- *   generate  — Generate templates, stickers, and/or pages
- *   list      — List available templates, themes, and paper sizes
+ *   render    — Render HTML templates to PDF
+ *   list      — List available templates and paper sizes
  *   preview   — Start local preview server
  */
 
 import { Command } from 'commander';
-import { getThemeIds, getTheme, getAllThemes } from '../core/themes.js';
 import { PAGE_SIZES } from '../core/dimensions.js';
 import { SUPPORTED_LOCALES } from '../utils/locale.js';
-import type { SupportedLocale } from '../utils/locale.js';
 
 const program = new Command();
 
 program
   .name('goodnotes-templates')
-  .description('Generate high-quality digital planning templates, stickers, and page assets for GoodNotes')
+  .description('Generate high-quality digital planning templates for GoodNotes')
   .version('1.0.0');
 
-// ─── generate command ───────────────────────────────────────────
+// ─── render command ─────────────────────────────────────────────
 
 program
-  .command('generate')
-  .description('Generate templates, stickers, and/or pages')
-  .option('-a, --all', 'Generate everything (templates + stickers + pages)')
-  .option('-t, --templates', 'Generate only templates')
-  .option('-s, --stickers', 'Generate only stickers')
-  .option('-p, --pages', 'Generate only simple pages (lined, grid, dot-grid, etc.)')
-  .option('--theme <id>', 'Generate only for a specific theme (e.g., rose-quartz)')
-  .option('--theme-file <path>', 'Load a custom theme from a JSON file')
-  .option('--paper-size <size>', 'Paper size: a4, letter, ipad-landscape, ipad-pro-landscape, ipad-wide', 'a4')
+  .command('render')
+  .description('Render HTML templates to PDF')
+  .argument('[template]', 'Template HTML path (e.g., src/templates/html/adhd-v3-today.html)')
+  .option('--color-mode <mode>', 'Color mode (e.g., dark). Omit for default.')
+  .option('--paper-size <size>', 'Paper size: a4, letter, ipad-landscape, etc.', 'a4')
   .option('--orientation <dir>', 'portrait or landscape', 'portrait')
-  .option('--year <year>', 'Year for dated planners (default: current year)', String(new Date().getFullYear()))
-  .option('--locale <code>', 'Locale for date formatting: en, es, fr, de, ja, ko', 'en')
-  .option('-o, --output <dir>', 'Output directory', 'output')
-  .option('--dpi <dpi>', 'DPI for sticker rasterization', '300')
-  .option('--dry-run', 'List what would be generated without producing files')
+  .option('-o, --output <path>', 'Output PDF path')
   .option('-v, --verbose', 'Verbose logging')
-  .action(async (opts) => {
-    // Validate inputs
-    const year = parseInt(opts.year, 10);
-    if (isNaN(year) || year < 1970 || year > 2100) {
-      console.error(`Error: Year must be between 1970 and 2100. Got: ${opts.year}`);
+  .action(async (template, opts) => {
+    if (!template) {
+      console.error('Error: Template path required. Example: src/templates/html/adhd-v3-today.html');
       process.exit(1);
     }
 
-    if (opts.theme && !getThemeIds().includes(opts.theme)) {
-      console.error(`Error: Theme "${opts.theme}" not found. Available: ${getThemeIds().join(', ')}`);
+    const fs = await import('node:fs/promises');
+    try {
+      await fs.access(template);
+    } catch {
+      console.error(`Error: Template not found: ${template}`);
       process.exit(1);
     }
 
-    if (!SUPPORTED_LOCALES.includes(opts.locale as SupportedLocale)) {
-      console.error(`Error: Locale "${opts.locale}" not supported. Available: ${SUPPORTED_LOCALES.join(', ')}`);
-      process.exit(1);
-    }
+    const outputPath = opts.output || template
+      .replace('src/templates/html/', 'output/templates/')
+      .replace('.html', `${opts.colorMode ? `-${opts.colorMode}` : ''}.pdf`);
 
-    const generateAll = opts.all || (!opts.templates && !opts.stickers && !opts.pages);
-
-    if (opts.dryRun) {
-      console.log('\n🔍 Dry run — listing what would be generated:\n');
-      const themes = opts.theme ? [opts.theme] : getThemeIds();
-      console.log(`  Themes: ${themes.join(', ')}`);
-      console.log(`  Paper size: ${opts.paperSize}`);
-      console.log(`  Orientation: ${opts.orientation}`);
-      console.log(`  Year: ${year}`);
-      console.log(`  Locale: ${opts.locale}`);
-      console.log(`  Output: ${opts.output}/`);
-      if (generateAll || opts.templates) console.log('  📄 Templates: 24 types × ' + themes.length + ' themes');
-      if (generateAll || opts.pages) console.log('  📝 Pages: 7 types × ' + themes.length + ' themes × 3 variants');
-      if (generateAll || opts.stickers) console.log('  🎨 Stickers: ~94 per theme × ' + themes.length + ' themes');
-      console.log('');
-      return;
-    }
-
-    console.log('\n🚀 goodnotes-templates generator\n');
-    console.log(`  Theme(s): ${opts.theme || 'all (' + getThemeIds().length + ')'}`);
+    console.log(`\n🖨  Rendering template to PDF\n`);
+    console.log(`  Template: ${template}`);
+    if (opts.colorMode) console.log(`  Color mode: ${opts.colorMode}`);
     console.log(`  Paper: ${opts.paperSize} ${opts.orientation}`);
-    console.log(`  Year: ${year} | Locale: ${opts.locale}`);
-    console.log(`  Output: ${opts.output}/\n`);
+    console.log(`  Output: ${outputPath}\n`);
 
-    // Dynamic import to avoid loading heavy deps (Puppeteer) for --help/--dry-run
-    const { runGeneration } = await import('../core/renderer.js');
+    // Dynamic import to avoid loading Puppeteer for --help
+    const { renderHTMLToPDFFile, closeBrowser } = await import('../core/puppeteer-renderer.js');
+    const { getPageDimensions } = await import('../core/dimensions.js');
 
-    await runGeneration({
-      themes: opts.theme ? [opts.theme] : getThemeIds(),
-      paperSize: opts.paperSize,
-      orientation: opts.orientation,
-      year,
-      locale: opts.locale as SupportedLocale,
-      outputDir: opts.output,
-      dpi: parseInt(opts.dpi, 10),
-      generateTemplates: generateAll || !!opts.templates,
-      generatePages: generateAll || !!opts.pages,
-      generateStickers: generateAll || !!opts.stickers,
-      verbose: !!opts.verbose,
-      customThemeFile: opts.themeFile,
-    });
+    const dims = getPageDimensions(opts.paperSize, opts.orientation);
+
+    try {
+      const result = await renderHTMLToPDFFile(
+        { htmlPath: template, dimensions: dims, colorMode: opts.colorMode },
+        outputPath
+      );
+      console.log(`  ✅ ${(result.size / 1024).toFixed(0)} KB → ${outputPath}\n`);
+    } finally {
+      await closeBrowser();
+    }
   });
 
 // ─── list command ───────────────────────────────────────────────
 
 program
   .command('list')
-  .description('List available templates, themes, and paper sizes')
-  .option('--themes', 'List themes')
+  .description('List available templates, paper sizes, and color modes')
   .option('--sizes', 'List paper sizes')
   .option('--templates', 'List template types')
   .option('--locales', 'List supported locales')
-  .action((opts) => {
-    const showAll = !opts.themes && !opts.sizes && !opts.templates && !opts.locales;
-
-    if (showAll || opts.themes) {
-      console.log('\n🎨 Available Themes:\n');
-      for (const theme of getAllThemes()) {
-        const dark = theme.isDark ? ' (dark)' : '';
-        console.log(`  ${theme.id.padEnd(20)} ${theme.name}${dark} — ${theme.description}`);
-      }
-    }
+  .action(async (opts) => {
+    const showAll = !opts.sizes && !opts.templates && !opts.locales;
 
     if (showAll || opts.sizes) {
       console.log('\n📐 Paper Sizes:\n');
@@ -136,12 +97,32 @@ program
         ['Journals', 'gratitude, morning-pages, reflection, prompted, diary'],
         ['Trackers', 'habit, mood, fitness, meal, budget, reading, goals'],
         ['Notes', 'cornell, meeting'],
-        ['Pages', 'lined, grid, dot-grid, blank, isometric, music, calligraphy'],
         ['Worksheets', 'eisenhower, goal-setting, project, recipe, travel'],
       ];
       for (const [cat, items] of types) {
         console.log(`  ${cat.padEnd(14)} ${items}`);
       }
+
+      console.log('\n🎨 Color Modes:\n');
+      console.log('  Templates are self-contained (WYSIWYG).');
+      console.log('  Optional color modes: --color-mode dark');
+      console.log('  Dark mode CSS snippets live next to each template:');
+      console.log('    adhd-v3-today.html → adhd-v3-today.dark.css\n');
+
+      // List available dark.css files
+      const fs = await import('node:fs/promises');
+      const path = await import('node:path');
+      const htmlDir = 'src/templates/html';
+      try {
+        const files = await fs.readdir(htmlDir);
+        const darkFiles = files.filter(f => f.endsWith('.dark.css'));
+        if (darkFiles.length > 0) {
+          console.log('  Available dark mode templates:');
+          for (const f of darkFiles) {
+            console.log(`    ${f.replace('.dark.css', '.html')} → ${f}`);
+          }
+        }
+      } catch { /* ignore if dir doesn't exist */ }
     }
 
     if (showAll || opts.locales) {
@@ -170,7 +151,6 @@ program
     console.log(`  Serving: ${opts.dir}/`);
     console.log(`  URL: http://localhost:${opts.port}\n`);
 
-    // Dynamic import for Express (only needed for preview)
     const { startPreviewServer } = await import('./preview-server.js');
     await startPreviewServer(opts.dir, parseInt(opts.port, 10));
   });

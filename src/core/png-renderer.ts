@@ -1,9 +1,10 @@
 /**
  * PNG renderer — converts SVG stickers to transparent PNGs at 300 DPI using Sharp.
+ * Self-contained: no external theme dependency.
  */
 
 import sharp from 'sharp';
-import type { Theme } from '../types/index.js';
+import type { StickerPalette } from '../types/index.js';
 import { generateStickerSVG, STICKER_SIZES, type StickerType } from './svg-renderer.js';
 
 const TARGET_DPI = 300;
@@ -13,11 +14,10 @@ const TARGET_DPI = 300;
  */
 export async function renderStickerPNG(
   type: StickerType,
-  theme: Theme,
-  options: { text?: string; variant?: number; dpi?: number } = {}
+  options: { text?: string; variant?: number; dpi?: number; palette?: Partial<StickerPalette> } = {}
 ): Promise<Buffer> {
-  const { text, variant, dpi = TARGET_DPI } = options;
-  const svg = generateStickerSVG(type, theme, { text, variant });
+  const { text, variant, dpi = TARGET_DPI, palette } = options;
+  const svg = generateStickerSVG(type, { text, variant, palette });
   const size = STICKER_SIZES[type];
 
   // Scale based on DPI (SVG dimensions are at 72 DPI baseline)
@@ -36,11 +36,10 @@ export async function renderStickerPNG(
  */
 export async function renderStickerToFile(
   type: StickerType,
-  theme: Theme,
   outputPath: string,
-  options: { text?: string; variant?: number; dpi?: number } = {}
+  options: { text?: string; variant?: number; dpi?: number; palette?: Partial<StickerPalette> } = {}
 ): Promise<{ path: string; size: number }> {
-  const buffer = await renderStickerPNG(type, theme, options);
+  const buffer = await renderStickerPNG(type, options);
   const fs = await import('node:fs/promises');
   const path = await import('node:path');
 
@@ -51,23 +50,24 @@ export async function renderStickerToFile(
 }
 
 /**
- * Batch render all variants of a sticker type for a theme.
+ * Batch render all variants of a sticker type.
  */
 export async function batchRenderStickers(
   type: StickerType,
-  theme: Theme,
   outputDir: string,
-  variants: Array<{ text?: string; variant?: number; suffix: string }>
+  variants: Array<{ text?: string; variant?: number; suffix: string }>,
+  palette?: Partial<StickerPalette>
 ): Promise<Array<{ path: string; size: number }>> {
   const path = await import('node:path');
   const results: Array<{ path: string; size: number }> = [];
 
   for (const v of variants) {
-    const filename = `${type}-${theme.id}-${v.suffix}.png`;
+    const filename = `${type}-${v.suffix}.png`;
     const outputPath = path.join(outputDir, filename);
-    const result = await renderStickerToFile(type, theme, outputPath, {
+    const result = await renderStickerToFile(type, outputPath, {
       text: v.text,
       variant: v.variant,
+      palette,
     });
     results.push(result);
   }
