@@ -33,7 +33,7 @@
       flex-wrap: wrap;
       gap: var(--s1) var(--s4);
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       align-items: baseline;
     }
     .cr-field {
@@ -44,11 +44,11 @@
     .cr-field label {
       font-weight: 500;
       font-size: 7pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       white-space: nowrap;
     }
     .cr-field .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 18mm;
       height: 4.5mm;
       display: inline-block;
@@ -68,12 +68,12 @@
       height: 3mm;
       border-radius: 1mm;
       overflow: hidden;
-      border: 0.4px solid var(--rule);
+      border: 0.4px solid var(--border);
     }
     .progress-segment {
       flex: 1;
-      border-right: 0.4px solid var(--rule);
-      background: var(--bg);
+      border-right: 0.4px solid var(--border);
+      background: var(--background);
     }
     .progress-segment:last-child {
       border-right: none;
@@ -91,7 +91,7 @@
 
     .stars {
       font-size: 7pt;
-      color: var(--rule);
+      color: var(--border);
       letter-spacing: 0.3mm;
     }
 
@@ -112,16 +112,16 @@
       align-items: baseline;
       gap: 1.5mm;
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .stat-item label {
       font-weight: 500;
       font-size: 7pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       white-space: nowrap;
     }
     .stat-item .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 18mm;
       height: 4.5mm;
       display: inline-block;
@@ -132,7 +132,7 @@
     .genre-label {
       font-weight: 500;
       font-size: 7pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       margin-bottom: var(--s1);
     }
     .genre-table {
@@ -142,15 +142,15 @@
     }
     .genre-table td {
       padding: 1mm 2mm;
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
     }
     .genre-table td:first-child {
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .genre-table td:last-child {
       width: 12mm;
       text-align: center;
-      border-left: 0.3px dotted var(--rule-light);
+      border-left: 0.3px dotted var(--input);
     }
 
     /* ─── Notes section ─── */

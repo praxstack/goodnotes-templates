@@ -1,0 +1,25 @@
+/* Claude — Anthropic warm parchment + terracotta (planner-optimized) */
+:root {
+  --background: #f8f5ef;
+  --foreground: #28261b;
+  --card: #ffffff;
+  --card-alt: #ede9de;
+  --foreground-secondary: #3d3929;
+  --muted-foreground: #706850;
+  --primary: #b85535;
+  --primary-light: #d97757CC;
+  --secondary: #e0dccf;
+  --muted: #a09880;
+  --muted-bg: #f0ece2;
+  --accent: #9080d0;
+  --accent-soft: rgba(144, 128, 208, 0.1);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.08);
+  --border: #d0c8b8;
+  --input: #c4bca8;
+  --dots: #c0b8a0;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow-card: 0 1px 3px 0px hsl(40 20% 30% / 0.1);
+  --shadow-inset: inset 0 1px 2px rgba(40, 30, 10, 0.06);
+}

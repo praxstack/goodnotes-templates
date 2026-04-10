@@ -57,10 +57,10 @@
 
     /* ─── Q4 — Eliminate ─── */
     .quadrant.q4 {
-      border-top: 2.5px solid var(--ink-3);
-      background: var(--surface);
+      border-top: 2.5px solid var(--muted-foreground);
+      background: var(--card);
     }
-    .quadrant.q4 .q-header { background: var(--ink-3); }
+    .quadrant.q4 .q-header { background: var(--muted-foreground); }
 
     /* ─── Quadrant header bar ─── */
     .q-header {
@@ -73,7 +73,7 @@
       flex-shrink: 0;
     }
     .q-header-title {
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-weight: 700;
       font-size: 7.5pt;
       text-transform: uppercase;
@@ -81,7 +81,7 @@
       color: #fff;
     }
     .q-header-sub {
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-size: 6pt;
       color: rgba(255,255,255,0.75);
       font-style: italic;
@@ -101,26 +101,26 @@
       gap: 2mm;
       padding: 0.8mm 0;
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .q-item-num {
       font-family: var(--font-mono);
       font-size: 6pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       min-width: 3mm;
       text-align: right;
     }
     .q-item-box {
       width: 3.5mm;
       height: 3.5mm;
-      border: 0.5px solid var(--rule);
+      border: 0.5px solid var(--border);
       border-radius: 0.7mm;
       flex-shrink: 0;
       background: rgba(255,255,255,0.55);
     }
     .q-item-line {
       flex: 1;
-      border-bottom: 0.5px dotted var(--rule);
+      border-bottom: 0.5px dotted var(--border);
       height: 4mm;
     }
 
@@ -131,7 +131,7 @@
       gap: 3mm;
       padding: var(--s2) 0;
       margin-top: var(--s2);
-      border-top: 0.3px solid var(--rule);
+      border-top: 0.3px solid var(--border);
       flex-shrink: 0;
     }
     .priority-strip label {

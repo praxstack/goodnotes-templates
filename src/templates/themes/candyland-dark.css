@@ -1,0 +1,23 @@
+/* CandyLand Dark */
+:root {
+  --background: #1a1520;
+  --foreground: #e8ddf0;
+  --card: #282030;
+  --card-alt: #201828;
+  --foreground-secondary: #d0c0e0;
+  --muted-foreground: #a090b0;
+  --primary: #e080b0;
+  --primary-light: #ff99ccCC;
+  --secondary: #40a060;
+  --muted: #3a3040;
+  --muted-bg: #201828;
+  --accent: #60c0e0;
+  --accent-soft: rgba(96, 192, 224, 0.15);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.12);
+  --border: #3a3040;
+  --input: #4a3850;
+  --dots: #3a3040;
+  --radius-sm: 4px;
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.2);
+}

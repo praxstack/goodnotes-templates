@@ -1,0 +1,23 @@
+/* Bubblegum Dark (planner-optimized) */
+:root {
+  --background: #10202a;
+  --foreground: #f0dce8;
+  --card: #1a2c38;
+  --card-alt: #142430;
+  --foreground-secondary: #d8c0d0;
+  --muted-foreground: #c090a8;
+  --primary: #e080b8;
+  --primary-light: #fbe2a7CC;
+  --secondary: #e4a2b1;
+  --muted: #2a3848;
+  --muted-bg: #142430;
+  --accent: #80c0c8;
+  --accent-soft: rgba(128, 192, 200, 0.15);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.12);
+  --border: #304050;
+  --input: #203040;
+  --dots: #2a3848;
+  --radius-sm: 4px;
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.2);
+}

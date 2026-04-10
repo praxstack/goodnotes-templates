@@ -14,14 +14,14 @@
       --page-w: 210mm;
       --page-h: 297mm;
       --margin: 14mm;
-      --bg: #FAF8F5;
-      --surface: #F3F0EB;
-      --surface-alt: #EDE9E3;
-      --ink: #1A1A1A;
-      --ink-2: #4A4A4A;
-      --ink-3: #8A8580;
-      --rule: #D9D4CD;
-      --rule-light: #E8E4DE;
+      --background: #FAF8F5;
+      --card: #F3F0EB;
+      --card-alt: #EDE9E3;
+      --foreground: #1A1A1A;
+      --foreground-secondary: #4A4A4A;
+      --muted-foreground: #8A8580;
+      --border: #D9D4CD;
+      --input: #E8E4DE;
       --accent: #C45D3E;
       --accent-soft: #F2D8CC;
       --green: #5E8B6A;
@@ -32,8 +32,8 @@
       --amber-soft: #F0E4C8;
       --dark: #2C2825;
       --cream: #FFF8F0;
-      --font-display: 'DM Serif Display', Georgia, serif;
-      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --s1: 2mm;
       --s2: 3mm;
@@ -53,9 +53,9 @@
 
     body {
       background: #E0DDD8;
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-size: 8.5pt;
-      color: var(--ink);
+      color: var(--foreground);
       line-height: 1.35;
       -webkit-font-smoothing: antialiased;
     }
@@ -63,7 +63,7 @@
     .page {
       width: var(--page-w);
       height: var(--page-h);
-      background: var(--bg);
+      background: var(--background);
       margin: 10mm auto;
       padding: var(--margin);
       position: relative;
@@ -101,16 +101,16 @@
     }
 
     .title {
-      font-family: var(--font-display);
+      font-family: var(--font-serif);
       font-size: 16pt;
-      color: var(--ink);
+      color: var(--foreground);
       letter-spacing: -0.02em;
     }
 
     .subtitle {
       font-style: italic;
       font-size: 7pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       margin-top: 1mm;
     }
 
@@ -118,11 +118,11 @@
       text-align: right;
       font-family: var(--font-mono);
       font-size: 7pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
 
     .date-field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 28mm;
       height: 4.5mm;
       display: inline-block;
@@ -153,7 +153,7 @@
     }
 
     .write-line {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       height: 5.5mm;
       margin-bottom: 1mm;
     }
@@ -167,7 +167,7 @@
 
     .day-mood {
       flex: 1;
-      background: var(--surface);
+      background: var(--card);
       border-radius: 2mm;
       padding: var(--s2);
       text-align: center;
@@ -176,7 +176,7 @@
     .day-mood .day-name {
       font-size: 6pt;
       font-weight: 700;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       text-transform: uppercase;
       margin-bottom: 1mm;
     }
@@ -185,9 +185,9 @@
       width: 8mm;
       height: 8mm;
       border-radius: 50%;
-      border: 0.5px solid var(--rule);
+      border: 0.5px solid var(--border);
       margin: 0 auto;
-      background: var(--bg);
+      background: var(--background);
     }
 
     /* Two cols */
@@ -232,7 +232,7 @@
       height: 6mm;
       border-radius: 50%;
       border: 0.5px solid var(--green);
-      background: var(--bg);
+      background: var(--background);
     }
 
     .compassion-card {
@@ -250,7 +250,7 @@
     }
 
     .compassion-card .field {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       height: 5mm;
     }
 
@@ -260,19 +260,19 @@
       align-items: center;
       flex-shrink: 0;
       padding-top: var(--s2);
-      border-top: 0.3px solid var(--rule-light);
+      border-top: 0.3px solid var(--input);
     }
 
     .footer-left {
       font-size: 5.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       font-style: italic;
     }
 
     .footer-right {
       font-family: var(--font-mono);
       font-size: 5.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
   </style>
 </head>
@@ -343,7 +343,7 @@
         <div class="win-dot"></div>
         <div class="win-dot"></div>
       </div>
-      <div style="font-size: 6pt; color: var(--ink-3); margin-left: auto;">/ 7</div>
+      <div style="font-size: 6pt; color: var(--muted-foreground); margin-left: auto;">/ 7</div>
     </div>
 
     <!-- Two columns -->
@@ -355,8 +355,8 @@
           <div class="write-line"></div>
           <div class="write-line"></div>
         </div>
-        <div class="card" style="background: var(--surface); flex: 1;">
-          <div class="section-title" style="color: var(--ink-2);">🔄 One thing to keep doing</div>
+        <div class="card" style="background: var(--card); flex: 1;">
+          <div class="section-title" style="color: var(--foreground-secondary);">🔄 One thing to keep doing</div>
           <div class="write-line"></div>
           <div class="write-line"></div>
         </div>
@@ -364,14 +364,14 @@
       <div class="col">
         <div class="card" style="background: var(--amber-soft); flex: 1;">
           <div class="section-title" style="color: var(--amber);">💡 Patterns I noticed</div>
-          <div style="font-size: 6.5pt; color: var(--ink-3); margin-bottom: 2mm; font-style: italic;">Best energy day?
+          <div style="font-size: 6.5pt; color: var(--muted-foreground); margin-bottom: 2mm; font-style: italic;">Best energy day?
             Worst? Why?</div>
           <div class="write-line"></div>
           <div class="write-line"></div>
           <div class="write-line"></div>
         </div>
-        <div class="card" style="background: var(--surface); flex: 1;">
-          <div class="section-title" style="color: var(--ink-2);">🔀 One small change to try</div>
+        <div class="card" style="background: var(--card); flex: 1;">
+          <div class="section-title" style="color: var(--foreground-secondary);">🔀 One small change to try</div>
           <div class="write-line"></div>
           <div class="write-line"></div>
         </div>

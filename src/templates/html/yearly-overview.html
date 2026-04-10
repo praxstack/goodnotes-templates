@@ -19,17 +19,17 @@
       align-items: center;
       gap: 4mm;
       padding: var(--s1) 0;
-      border-bottom: 0.3px solid var(--rule);
+      border-bottom: 0.3px solid var(--border);
       margin-bottom: var(--s2);
       flex-shrink: 0;
       font-size: 7.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .year-row label {
       font-weight: 500;
     }
     .year-row .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 20mm;
       height: 4.5mm;
       display: inline-block;
@@ -48,15 +48,15 @@
     .mini-cal {
       width: 55mm;
       height: 42mm;
-      border: 0.3px solid var(--rule-light);
+      border: 0.3px solid var(--input);
       border-radius: 1.5mm;
       padding: 1.5mm 2mm;
-      background: var(--bg);
+      background: var(--background);
       overflow: hidden;
     }
 
     .mini-cal-header {
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-weight: 700;
       font-size: 5.5pt;
       color: var(--accent);
@@ -78,14 +78,14 @@
     .mini-cal-grid .day-header {
       font-size: 3.5pt;
       font-weight: 500;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       padding: 0.5mm 0;
       line-height: 1;
     }
 
     .mini-cal-grid .day-num {
       font-size: 4pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       padding: 0.6mm 0;
       line-height: 1.2;
     }
@@ -95,7 +95,7 @@
     }
 
     .mini-cal-grid .day-num.weekend {
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
 
     /* ─── Annual Goals ─── */
@@ -118,7 +118,7 @@
       font-size: 6.5pt;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: var(--s1);
     }
 
@@ -129,7 +129,7 @@
     }
 
     .cb .goal-line {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       flex: 1;
       height: 4mm;
       display: inline-block;
@@ -143,7 +143,7 @@
       flex-shrink: 0;
       margin-bottom: var(--s3);
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .theme-row label {
       font-weight: 600;
@@ -153,7 +153,7 @@
     .theme-row .field-line {
       flex: 1;
       height: 4.5mm;
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       display: block;
     }
   </style>

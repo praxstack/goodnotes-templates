@@ -19,14 +19,14 @@
       align-items: center;
       gap: 5mm;
       font-size: 7.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .header-fields label {
       font-weight: 500;
       white-space: nowrap;
     }
     .header-fields .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 28mm;
       height: 4.5mm;
       display: inline-block;
@@ -37,7 +37,7 @@
       flex: 7;
       display: flex;
       min-height: 0;
-      border: 0.3px solid var(--rule);
+      border: 0.3px solid var(--border);
       border-radius: 2mm;
       overflow: hidden;
     }
@@ -45,7 +45,7 @@
     /* Cue column (left, 30%) */
     .cue-column {
       flex: 0 0 30%;
-      background: var(--surface);
+      background: var(--card);
       padding: var(--s2) var(--s3);
       display: flex;
       flex-direction: column;
@@ -60,7 +60,7 @@
       right: 0;
       width: 0;
       height: 100%;
-      border-right: 0.3px solid var(--rule);
+      border-right: 0.3px solid var(--border);
     }
 
     .column-label {
@@ -68,7 +68,7 @@
       font-size: 6.5pt;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       margin-bottom: var(--s2);
       flex-shrink: 0;
     }
@@ -81,7 +81,7 @@
     }
 
     .cue-line {
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
       height: 7mm;
       flex-shrink: 0;
     }
@@ -89,7 +89,7 @@
     /* Notes column (right, 70%) */
     .notes-column {
       flex: 1;
-      background: var(--bg);
+      background: var(--background);
       padding: var(--s2) var(--s3);
       display: flex;
       flex-direction: column;
@@ -103,7 +103,7 @@
     }
 
     .note-line {
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
       height: 5mm;
       flex-shrink: 0;
     }
@@ -127,7 +127,7 @@
     }
 
     .summary-line {
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
       height: 5mm;
       flex-shrink: 0;
     }
@@ -136,7 +136,7 @@
     .cornell-footer {
       text-align: center;
       font-size: 6pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       padding-top: var(--s2);
       flex-shrink: 0;
       letter-spacing: 0.02em;

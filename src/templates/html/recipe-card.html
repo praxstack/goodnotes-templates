@@ -28,13 +28,13 @@
     .info-field label {
       font-weight: 600;
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       white-space: nowrap;
     }
     .info-field label.large-label {
       font-size: 9pt;
-      font-family: var(--font-display);
-      color: var(--ink);
+      font-family: var(--font-serif);
+      color: var(--foreground);
     }
     .info-field .field-line {
       flex: 1;
@@ -48,7 +48,7 @@
     }
     .stat-card {
       flex: 1;
-      background: var(--surface);
+      background: var(--card);
       border-radius: 2.5mm;
       padding: var(--s1) var(--s2);
       text-align: center;
@@ -58,7 +58,7 @@
       font-size: 6pt;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       display: block;
       margin-bottom: 1mm;
     }
@@ -78,14 +78,14 @@
     .ingredient-item .cb-box {
       width: 3mm;
       height: 3mm;
-      border: 0.5px solid var(--rule);
+      border: 0.5px solid var(--border);
       border-radius: 0.6mm;
       flex-shrink: 0;
-      background: var(--bg);
+      background: var(--background);
     }
     .ingredient-item .line {
       flex: 1;
-      border-bottom: 0.4px dotted var(--rule-light);
+      border-bottom: 0.4px dotted var(--input);
       height: 3.5mm;
     }
 
@@ -126,7 +126,7 @@
       align-items: center;
       gap: var(--s4);
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .stars {
       font-size: 11pt;
@@ -138,7 +138,7 @@
       align-items: center;
       gap: 3mm;
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .make-again .radio {
       display: inline-flex;
@@ -149,8 +149,8 @@
       width: 3.5mm;
       height: 3.5mm;
       border-radius: 50%;
-      border: 0.5px solid var(--rule);
-      background: var(--bg);
+      border: 0.5px solid var(--border);
+      background: var(--background);
     }
 
     /* ─── Tags row ─── */
@@ -159,7 +159,7 @@
       align-items: baseline;
       gap: 2mm;
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .tags-row label {
       font-weight: 600;
@@ -173,7 +173,7 @@
     .photo-placeholder {
       width: 40mm;
       height: 40mm;
-      border: 1px dashed var(--rule);
+      border: 1px dashed var(--border);
       border-radius: 2.5mm;
       display: flex;
       align-items: center;
@@ -183,7 +183,7 @@
     }
     .photo-placeholder span {
       font-size: 6.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       font-style: italic;
     }
 

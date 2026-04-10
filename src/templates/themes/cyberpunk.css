@@ -1,0 +1,27 @@
+/* Cyberpunk — neon pink + cyan (planner-optimized) */
+:root {
+  --background: #f0f0fa;
+  --foreground: #0c0c28;
+  --card: #ffffff;
+  --card-alt: #e8e8f5;
+  --foreground-secondary: #1a1a40;
+  --muted-foreground: #4040a0;
+  --primary: #c800a0;
+  --primary-light: #e060c0CC;
+  --secondary: #e0f0ff;
+  --muted: #8080c0;
+  --muted-bg: #e8e8f5;
+  --accent: #00c0a0;
+  --accent-soft: rgba(0, 192, 160, 0.1);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.08);
+  --border: #b0b0e0;
+  --input: #c8c8e8;
+  --dots: #b0b0d0;
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow-card: 0px 4px 8px -2px hsl(280 80% 50% / 0.1);
+  --shadow-inset: inset 0 1px 2px rgba(20, 0, 40, 0.06);
+}

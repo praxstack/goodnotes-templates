@@ -85,17 +85,29 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
     html = await fs.readFile(htmlPath, 'utf-8');
   }
 
-  // Optional: inject color-mode CSS snippet (e.g., .dark.css)
-  // This is a ~20-line :root override written by the template author.
+  // Optional: inject color-mode CSS snippet.
+  // Search order:
+  // 1. Preset theme: src/templates/themes/{colorMode}.css
+  // 2. Template-sibling: {htmlPath}.replace('.html', `.${colorMode}.css`)
   if (colorMode && htmlPath) {
-    const cssPath = htmlPath.replace('.html', `.${colorMode}.css`);
+    let modeCSS: string | null = null;
+    
+    // 1. Check preset themes directory
+    const presetPath = path.join(path.dirname(htmlPath), '..', 'themes', `${colorMode}.css`);
     try {
-      const modeCSS = await fs.readFile(cssPath, 'utf-8');
-      if (html.includes('</head>')) {
-        html = html.replace('</head>', `<style id="color-mode">\n${modeCSS}\n</style>\n</head>`);
-      }
+      modeCSS = await fs.readFile(presetPath, 'utf-8');
     } catch {
-      console.warn(`  ⚠ Color mode "${colorMode}" not found: ${cssPath}`);
+      // 2. Fall back to sibling .css file (e.g., adhd-v3-today.dark.css)
+      const siblingPath = htmlPath.replace('.html', `.${colorMode}.css`);
+      try {
+        modeCSS = await fs.readFile(siblingPath, 'utf-8');
+      } catch {
+        console.warn(`  ⚠ Color mode "${colorMode}" not found in themes/ or as sibling`);
+      }
+    }
+    
+    if (modeCSS && html.includes('</head>')) {
+      html = html.replace('</head>', `<style id="color-mode">\n${modeCSS}\n</style>\n</head>`);
     }
   }
 

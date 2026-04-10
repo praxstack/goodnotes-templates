@@ -28,7 +28,7 @@
       align-items: center;
       gap: 1.5mm;
       font-size: 6.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .legend-circle {
       width: 4mm;
@@ -50,8 +50,8 @@
       min-height: 0;
     }
     .cal-header {
-      background: var(--ink);
-      color: var(--bg);
+      background: var(--foreground);
+      color: var(--background);
       font-weight: 600;
       font-size: 6pt;
       text-transform: uppercase;
@@ -61,7 +61,7 @@
       border-radius: 1.5mm;
     }
     .day-cell {
-      background: var(--surface);
+      background: var(--card);
       border-radius: 2mm;
       padding: 1.2mm 1.5mm;
       display: flex;
@@ -72,7 +72,7 @@
     .day-num {
       font-size: 5.5pt;
       font-weight: 500;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       align-self: flex-start;
       line-height: 1;
     }
@@ -80,14 +80,14 @@
       width: 10mm;
       height: 10mm;
       border-radius: 50%;
-      border: 0.5px solid var(--rule);
-      background: var(--bg);
+      border: 0.5px solid var(--border);
+      background: var(--background);
       margin: auto 0;
       flex-shrink: 0;
     }
     .day-notes {
       width: 100%;
-      border-bottom: 0.4px dotted var(--rule-light);
+      border-bottom: 0.4px dotted var(--input);
       height: 3mm;
       margin-top: auto;
     }
@@ -108,7 +108,7 @@
       align-items: baseline;
       gap: 2mm;
       font-size: 7pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: 2mm;
     }
     .summary-field label {
@@ -117,7 +117,7 @@
     }
     .summary-field .field-val {
       flex: 1;
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       height: 4.5mm;
     }
     .patterns-label {
@@ -125,7 +125,7 @@
       font-size: 7pt;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: var(--s1);
     }
 
@@ -182,7 +182,7 @@
       </div>
       <div class="legend-item">
         <span class="legend-emoji">😐</span>
-        <span class="legend-circle" style="background: var(--rule);"></span>
+        <span class="legend-circle" style="background: var(--border);"></span>
         <span>Meh</span>
       </div>
       <div class="legend-item">

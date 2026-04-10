@@ -306,17 +306,17 @@ function getTabBarCSS(): string {
       flex-shrink: 0;
       border-radius: 2mm;
       overflow: hidden;
-      border: 0.4px solid var(--rule);
+      border: 0.4px solid var(--border);
     }
     .month-tab {
       flex: 1;
       text-align: center;
       padding: 1.5mm 0;
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-size: 5.5pt;
       font-weight: 600;
-      color: var(--ink-3);
-      background: var(--surface);
+      color: var(--muted-foreground);
+      background: var(--card);
       border-right: 0.3px solid var(--rule-light);
       cursor: pointer;
       text-transform: uppercase;

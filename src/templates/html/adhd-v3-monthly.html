@@ -22,7 +22,7 @@
   --primary: #8B5CF6;
   --secondary: #C4B5FD;
   --accent: #059669;
-  --bg: #FAF5FF;
+  --background: #FAF5FF;
   --card: #FFFFFF;
   --text: #4C1D95;
   --muted: #EDEFF9;
@@ -35,9 +35,9 @@
   --amber-soft: #FFFBEB;
   --coral-soft: #FFF1F2;
   --blue-soft: #EEF2FF;
-  --surface: #F5F3FF;
-  --rule: #DDD6FE;
-  --rule-light: #EDE9FE;
+  --card: #F5F3FF;
+  --border: #DDD6FE;
+  --input: #EDE9FE;
   --ink-muted: #7C3AED;
 
   /* Shadows */
@@ -47,8 +47,8 @@
   --radius-sm: 6px;
 
   /* Typography */
-  --font-display: 'Lora', Georgia, serif;
-  --font-body: 'Raleway', system-ui, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Raleway', system-ui, sans-serif;
 
   /* Spacing */
   --s1: 2mm;
@@ -69,7 +69,7 @@
 
 body {
   background: #E8E0F0;
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 8.5pt;
   color: var(--text);
   line-height: 1.4;
@@ -82,7 +82,7 @@ body {
 .page {
   width: var(--page-w);
   height: var(--page-h);
-  background: var(--bg);
+  background: var(--background);
   margin: 10mm auto;
   padding: var(--margin);
   position: relative;
@@ -114,7 +114,7 @@ body {
 }
 
 .title {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 18pt;
   font-weight: 700;
   color: var(--text);
@@ -123,7 +123,7 @@ body {
 }
 
 .subtitle {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-weight: 400;
   font-style: italic;
   font-size: 7pt;
@@ -134,14 +134,14 @@ body {
 
 .date-block {
   text-align: right;
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 7pt;
   font-weight: 500;
   color: var(--ink-muted);
 }
 
 .date-field {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
   min-width: 30mm;
   height: 5mm;
   display: inline-block;
@@ -173,7 +173,7 @@ body {
    SECTION TITLE
    ═══════════════════════════════════════════════════ */
 .section-title {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-weight: 700;
   font-size: 7pt;
   text-transform: uppercase;
@@ -197,7 +197,7 @@ body {
    WRITE LINES
    ═══════════════════════════════════════════════════ */
 .write-line {
-  border-bottom: 1px dotted var(--rule);
+  border-bottom: 1px dotted var(--border);
   height: 6mm;
   margin-bottom: 1mm;
 }
@@ -230,11 +230,11 @@ body {
 }
 
 .stat-value {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 16pt;
   font-weight: 700;
   color: var(--text);
-  border-bottom: 1.5px solid var(--rule);
+  border-bottom: 1.5px solid var(--border);
   display: inline-block;
   min-width: 14mm;
   height: 8mm;
@@ -242,7 +242,7 @@ body {
 }
 
 .stat-label {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 5.5pt;
   font-weight: 600;
   color: var(--ink-muted);
@@ -298,7 +298,7 @@ body {
   height: 3.5mm;
   border: 1px solid var(--border);
   border-radius: 2mm;
-  background: var(--bg);
+  background: var(--background);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -314,7 +314,7 @@ body {
 }
 
 .celebrate-label {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 11pt;
   font-weight: 700;
   color: var(--accent);
@@ -389,7 +389,7 @@ body {
 }
 
 .footer-right {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 5.5pt;
   font-weight: 600;
   color: var(--secondary);
@@ -518,7 +518,7 @@ body {
       </div>
     </div>
     <div class="col">
-      <div class="card" style="background: var(--surface); border: 1px solid var(--border); flex: 1;" data-inject="meds-sleep-card">
+      <div class="card" style="background: var(--card); border: 1px solid var(--border); flex: 1;" data-inject="meds-sleep-card">
         <div class="section-title" style="color: var(--text);">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
           Meds / Sleep / Therapy notes

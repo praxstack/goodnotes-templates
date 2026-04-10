@@ -34,7 +34,7 @@
   --primary:    #8B5CF6;   /* calming lavender       */
   --secondary:  #C4B5FD;   /* light lavender          */
   --accent:     #059669;   /* wellness green           */
-  --bg:         #FAF5FF;   /* page background          */
+  --background:         #FAF5FF;   /* page background          */
   --card:       #FFFFFF;   /* white card surface       */
   --text:       #4C1D95;   /* deep purple text         */
   --text-body:  #5B21B6;   /* body text                */
@@ -45,15 +45,15 @@
   --coral:      #E11D48;   /* gentle warmth / tomorrow  */
 
   /* Semantic aliases */
-  --rule:        var(--border);
-  --rule-light:  #F3EDFF;
-  --ink:         var(--text);
-  --ink-2:       var(--text-body);
-  --ink-3:       var(--text-muted);
+  --border:        var(--border);
+  --input:  #F3EDFF;
+  --foreground:         var(--text);
+  --foreground-secondary:       var(--text-body);
+  --muted-foreground:       var(--text-muted);
 
   /* Typography */
-  --font-display: 'Lora', Georgia, serif;
-  --font-body:    'Raleway', system-ui, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans:    'Raleway', system-ui, sans-serif;
 
   /* Spacing scale */
   --s1: 2mm; --s2: 3mm; --s3: 5mm; --s4: 7mm; --s5: 10mm; --s6: 14mm;
@@ -68,9 +68,9 @@
 
 body {
   background: #EDE9FE;
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 8.5pt;
-  color: var(--ink);
+  color: var(--foreground);
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
 }
@@ -79,7 +79,7 @@ body {
 .page {
   width: var(--page-w);
   height: var(--page-h);
-  background: var(--bg);
+  background: var(--background);
   margin: 10mm auto;
   padding: var(--margin);
   position: relative;
@@ -135,7 +135,7 @@ body {
   border-radius: 2px 2px 0 0;
 }
 .header-left .title {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 18pt;
   font-weight: 600;
   color: var(--text);
@@ -143,7 +143,7 @@ body {
   line-height: 1.1;
 }
 .header-left .subtitle {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-weight: 300;
   font-style: italic;
   font-size: 7.5pt;
@@ -153,7 +153,7 @@ body {
 }
 .date-block {
   text-align: right;
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 7pt;
   font-weight: 500;
   color: var(--text-muted);
@@ -177,7 +177,7 @@ body {
 .energy-row .label {
   font-size: 8pt;
   font-weight: 600;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -211,7 +211,7 @@ body {
 .movement-row .label {
   font-size: 8pt;
   font-weight: 600;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -223,7 +223,7 @@ body {
   gap: 1.5mm;
   font-size: 7.5pt;
   font-weight: 400;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
 }
 .movement-sep {
   color: var(--border);
@@ -241,7 +241,7 @@ body {
   vertical-align: middle;
 }
 .other-line {
-  border-bottom: 0.4px dotted var(--rule-light);
+  border-bottom: 0.4px dotted var(--input);
   width: 16mm;
   display: inline-block;
 }
@@ -254,7 +254,7 @@ body {
 .feel-row .feel-label {
   font-size: 7.5pt;
   font-weight: 500;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
 }
 
@@ -263,7 +263,7 @@ body {
    ═══════════════════════════════════════════════ */
 .write-line {
   flex: 1;
-  border-bottom: 0.4px dotted var(--rule-light);
+  border-bottom: 0.4px dotted var(--input);
   min-height: 6mm;
 }
 
@@ -275,7 +275,7 @@ body {
 }
 
 .section-title {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 7.5pt;
   font-weight: 700;
   text-transform: uppercase;
@@ -356,7 +356,7 @@ body {
 .gwp-row .gwp-label {
   font-size: 8pt;
   font-weight: 500;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -401,10 +401,10 @@ body {
   margin-bottom: 1mm;
 }
 .free-write-title {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 9pt;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--foreground);
 }
 .free-write .hint {
   font-size: 6.5pt;
@@ -420,7 +420,7 @@ body {
   justify-content: space-between;
 }
 .free-write-line {
-  border-bottom: 0.3px dotted var(--rule-light);
+  border-bottom: 0.3px dotted var(--input);
   min-height: 6mm;
 }
 
@@ -435,16 +435,16 @@ body {
   color: var(--text-muted);
   flex-shrink: 0;
   padding-top: var(--s2);
-  border-top: 0.5px solid var(--rule-light);
+  border-top: 0.5px solid var(--input);
 }
 .footer .sign-off {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-style: italic;
   font-weight: 300;
   letter-spacing: 0.01em;
 }
 .footer .page-num {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-weight: 500;
   font-size: 6pt;
 }

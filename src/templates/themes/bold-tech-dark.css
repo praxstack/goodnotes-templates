@@ -1,0 +1,23 @@
+/* Bold Tech Dark */
+:root {
+  --background: #0f0a2a;
+  --foreground: #e0e7ff;
+  --card: #1e1848;
+  --card-alt: #171242;
+  --foreground-secondary: #c4b5fd;
+  --muted-foreground: #a78bfa;
+  --primary: #a78bfa;
+  --primary-light: #7c3aedCC;
+  --secondary: #1e1b4b;
+  --muted: #312e81;
+  --muted-bg: #171242;
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.12);
+  --border: #2e1065;
+  --input: #3b2080;
+  --dots: #312e81;
+  --radius-sm: 6px;
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.2);
+}

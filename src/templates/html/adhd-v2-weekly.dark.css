@@ -1,13 +1,13 @@
 /* Midnight dark mode — overrides default warm-neutral palette */
 :root {
-  --bg: #1E2228;
-  --surface: #2D3340;
-  --surface-alt: #3A4A5C;
-  --ink: #E8ECF0;
-  --ink-2: #E8ECF0CC;
-  --ink-3: #4A5568;
-  --rule: #3A4A5C;
-  --rule-light: #3A4A5C80;
+  --background: #1E2228;
+  --card: #2D3340;
+  --card-alt: #3A4A5C;
+  --foreground: #E8ECF0;
+  --foreground-secondary: #E8ECF0CC;
+  --muted-foreground: #4A5568;
+  --border: #3A4A5C;
+  --input: #3A4A5C80;
   --accent: #8AB4E8;
   --accent-soft: rgba(138, 180, 232, 0.15);
   --green: #6AAF7E;
