@@ -1,252 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=210mm, initial-scale=1" />
-  <title>Eisenhower Matrix</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eisenhower Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   EISENHOWER MATRIX v3
+   Design: Soft UI Evolution
+   Typography: Lora + Raleway
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+   Structure:
+   ✦ 2×2 quadrant grid with distinct colors
+   ✦ Axis labels (Urgent/Not Urgent, Important/Not Important)
+   ✦ SVG icons per quadrant
+   ✦ Rounded checkbox task lines
+   ✦ Priority strip + Eisenhower quote footer
+   ═══════════════════════════════════════════════════════ */
 
-  <!-- Shared base styles -->
-  <link rel="stylesheet" href="_base.css" />
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 12mm;
 
-  <style>
-    /* ─── Eisenhower Matrix – page-specific styles ─── */
+  --primary: #8B5CF6;
+  --primary-light: #C4B5FD;
+  --accent: #059669;
+  --accent-soft: rgba(5, 150, 105, 0.08);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.08);
+  --background: #FAF5FF;
+  --card: #FFFFFF;
+  --card-alt: #F5F0FF;
+  --foreground: #4C1D95;
+  --foreground-secondary: #6D28D9;
+  --muted-foreground: #7C3AED;
+  --muted: #A78BFA;
+  --muted-bg: #EDE9FE;
+  --border: #DDD6FE;
+  --input: #C4B5FD;
+  --dots: #C4B5FD;
 
-    .matrix-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 3mm;
-      flex: 1;
-      min-height: 0;
-    }
+  /* Quadrant colors */
+  --q1: #DC2626;
+  --q1-soft: rgba(220, 38, 38, 0.06);
+  --q2: #2563EB;
+  --q2-soft: rgba(37, 99, 235, 0.06);
+  --q3: #D97706;
+  --q3-soft: rgba(217, 119, 6, 0.06);
+  --q4: #6B7280;
+  --q4-soft: rgba(107, 114, 128, 0.06);
 
-    /* ─── Quadrant base ─── */
-    .quadrant {
-      border-radius: 2.5mm;
-      padding: var(--s2) var(--s3);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Raleway', 'Segoe UI', system-ui, sans-serif;
 
-    /* ─── Q1 — Do First ─── */
-    .quadrant.q1 {
-      border-top: 2.5px solid var(--accent);
-      background: var(--accent-soft);
-    }
-    .quadrant.q1 .q-header { background: var(--accent); }
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 8mm;
 
-    /* ─── Q2 — Schedule ─── */
-    .quadrant.q2 {
-      border-top: 2.5px solid var(--blue);
-      background: var(--blue-soft);
-    }
-    .quadrant.q2 .q-header { background: var(--blue); }
+  --shadow-card: 0 1px 3px rgba(139, 92, 246, 0.08), 0 4px 12px rgba(139, 92, 246, 0.04);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
 
-    /* ─── Q3 — Delegate ─── */
-    .quadrant.q3 {
-      border-top: 2.5px solid var(--amber);
-      background: var(--amber-soft);
-    }
-    .quadrant.q3 .q-header { background: var(--amber); }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ─── Q4 — Eliminate ─── */
-    .quadrant.q4 {
-      border-top: 2.5px solid var(--muted-foreground);
-      background: var(--card);
-    }
-    .quadrant.q4 .q-header { background: var(--muted-foreground); }
+body {
+  background: #E8E0F0;
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  color: var(--foreground);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* ─── Quadrant header bar ─── */
-    .q-header {
-      border-radius: 1.5mm;
-      padding: 1.5mm var(--s2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--s2);
-      flex-shrink: 0;
-    }
-    .q-header-title {
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 7.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #fff;
-    }
-    .q-header-sub {
-      font-family: var(--font-sans);
-      font-size: 6pt;
-      color: rgba(255,255,255,0.75);
-      font-style: italic;
-    }
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto;
+  padding: var(--margin);
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(139, 92, 246, 0.12);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
 
-    /* ─── Checkbox task lines inside quadrants ─── */
-    .q-items {
-      list-style: none;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5mm;
-    }
-    .q-item {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-      padding: 0.8mm 0;
-      font-size: 7.5pt;
-      color: var(--foreground-secondary);
-    }
-    .q-item-num {
-      font-family: var(--font-mono);
-      font-size: 6pt;
-      color: var(--muted-foreground);
-      min-width: 3mm;
-      text-align: right;
-    }
-    .q-item-box {
-      width: 3.5mm;
-      height: 3.5mm;
-      border: 0.5px solid var(--border);
-      border-radius: 0.7mm;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.55);
-    }
-    .q-item-line {
-      flex: 1;
-      border-bottom: 0.5px dotted var(--border);
-      height: 4mm;
-    }
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
 
-    /* ─── Priority strip ─── */
-    .priority-strip {
-      display: flex;
-      align-items: center;
-      gap: 3mm;
-      padding: var(--s2) 0;
-      margin-top: var(--s2);
-      border-top: 0.3px solid var(--border);
-      flex-shrink: 0;
-    }
-    .priority-strip label {
-      font-weight: 700;
-      font-size: 7.5pt;
-      color: var(--accent);
-      white-space: nowrap;
-    }
-    .priority-strip .field-line {
-      flex: 1;
-      min-width: 0;
-      display: block;
-      height: 5mm;
-    }
-  </style>
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon svg { display: block; }
+
+/* ═══════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════ */
+.header-gradient {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--q1) 0%, var(--q2) 33%, var(--q3) 66%, var(--q4) 100%);
+  border-radius: 2px;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header-left .title {
+  font-family: var(--font-serif);
+  font-size: 16pt;
+  font-weight: 600;
+  color: var(--foreground);
+  line-height: 1.1;
+}
+.header-left .subtitle {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 6.5pt;
+  color: var(--muted);
+  margin-top: 0.5mm;
+}
+
+.date-card {
+  padding: var(--s2) var(--s3);
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.date-label {
+  font-size: 6.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.date-field {
+  border-bottom: 1px solid var(--border);
+  min-width: 28mm;
+  height: 4.5mm;
+}
+
+/* ═══════════════════════════════════════
+   AXIS LABELS
+   ═══════════════════════════════════════ */
+.axis-labels {
+  display: flex;
+  justify-content: center;
+  gap: 2mm;
+  margin-bottom: var(--s1);
+  flex-shrink: 0;
+}
+.axis-label {
+  font-size: 6pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  flex: 1;
+  text-align: center;
+}
+.axis-label:first-child { color: var(--q1); }
+.axis-label:last-child { color: var(--q2); }
+
+/* ═══════════════════════════════════════
+   MATRIX GRID
+   ═══════════════════════════════════════ */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2.5mm;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: var(--s3);
+}
+
+/* ─── Quadrant ─── */
+.quadrant {
+  border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.quadrant.q1 { background: var(--q1-soft); border-top: 3px solid var(--q1); }
+.quadrant.q2 { background: var(--q2-soft); border-top: 3px solid var(--q2); }
+.quadrant.q3 { background: var(--q3-soft); border-top: 3px solid var(--q3); }
+.quadrant.q4 { background: var(--q4-soft); border-top: 3px solid var(--q4); }
+
+/* Quadrant header */
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: var(--s2);
+  flex-shrink: 0;
+}
+.q-badge {
+  width: 5mm;
+  height: 5mm;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 6pt;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.q1 .q-badge { background: var(--q1); }
+.q2 .q-badge { background: var(--q2); }
+.q3 .q-badge { background: var(--q3); }
+.q4 .q-badge { background: var(--q4); }
+
+.q-title {
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.q1 .q-title { color: var(--q1); }
+.q2 .q-title { color: var(--q2); }
+.q3 .q-title { color: var(--q3); }
+.q4 .q-title { color: var(--q4); }
+
+.q-desc {
+  font-size: 5.5pt;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+/* Task items */
+.q-items {
+  list-style: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+}
+.q-item {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  height: 6mm;
+}
+.q-check {
+  width: 3.5mm;
+  height: 3.5mm;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.q1 .q-check { border: 1.2px solid var(--q1); }
+.q2 .q-check { border: 1.2px solid var(--q2); }
+.q3 .q-check { border: 1.2px solid var(--q3); }
+.q4 .q-check { border: 1.2px solid var(--q4); }
+
+.q-line {
+  flex: 1;
+  border-bottom: 1.5px dotted var(--dots);
+  height: 4mm;
+}
+
+/* ═══════════════════════════════════════
+   PRIORITY STRIP
+   ═══════════════════════════════════════ */
+.priority-card {
+  padding: var(--s2) var(--s3);
+  margin-bottom: var(--s2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  background: var(--accent-soft);
+  border-color: rgba(5, 150, 105, 0.15);
+}
+.priority-label {
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.priority-line {
+  flex: 1;
+  border-bottom: 1.5px dotted rgba(5, 150, 105, 0.3);
+  height: 5mm;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.footer {
+  border-top: 1px solid var(--border);
+  padding-top: var(--s1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 6.5pt;
+  color: var(--muted);
+  max-width: 80%;
+}
+.footer .page-num {
+  font-size: 6pt;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+</style>
 </head>
-
 <body>
-  <div class="page">
 
-    <!-- ═══ Header ═══ -->
-    <header class="page-header">
-      <div>
-        <h1 class="page-title">Eisenhower Matrix</h1>
-        <p class="page-subtitle">Urgent vs. Important — decide, don't react</p>
+<div class="page">
+
+  <!-- ─── Gradient ─── -->
+  <div class="header-gradient" aria-hidden="true"></div>
+
+  <!-- ─── Header ─── -->
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Eisenhower Matrix</div>
+      <div class="subtitle">Urgent vs. Important — decide, don't react</div>
+    </div>
+    <div class="date-card card">
+      <span class="date-label">Date</span>
+      <span class="date-field"></span>
+    </div>
+  </div>
+
+  <!-- ─── Axis Labels ─── -->
+  <div class="axis-labels">
+    <span class="axis-label">Urgent</span>
+    <span class="axis-label">Not Urgent</span>
+  </div>
+
+  <!-- ─── 2×2 Matrix ─── -->
+  <div class="matrix-grid">
+
+    <!-- Q1 · Do First · Urgent + Important -->
+    <div class="quadrant q1">
+      <div class="q-header">
+        <div class="q-badge">1</div>
+        <span class="q-title">Do First</span>
+        <span class="q-desc">Urgent + Important</span>
       </div>
-    </header>
-
-    <!-- ═══ Date Row ═══ -->
-    <div class="date-row">
-      <label>Date</label>
-      <span class="field" style="min-width: 30mm;"></span>
+      <ul class="q-items">
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+      </ul>
     </div>
 
-    <!-- ═══ 2×2 Matrix Grid ═══ -->
-    <div class="matrix-grid">
-
-      <!-- Q1 · Do First · Urgent + Important -->
-      <div class="quadrant q1">
-        <div class="q-header">
-          <span class="q-header-title">Do First</span>
-          <span class="q-header-sub">Urgent + Important</span>
-        </div>
-        <ul class="q-items">
-          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-        </ul>
+    <!-- Q2 · Schedule · Not Urgent + Important -->
+    <div class="quadrant q2">
+      <div class="q-header">
+        <div class="q-badge">2</div>
+        <span class="q-title">Schedule</span>
+        <span class="q-desc">Not Urgent + Important</span>
       </div>
-
-      <!-- Q2 · Schedule · Not Urgent + Important -->
-      <div class="quadrant q2">
-        <div class="q-header">
-          <span class="q-header-title">Schedule</span>
-          <span class="q-header-sub">Not Urgent + Important</span>
-        </div>
-        <ul class="q-items">
-          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-        </ul>
-      </div>
-
-      <!-- Q3 · Delegate · Urgent + Not Important -->
-      <div class="quadrant q3">
-        <div class="q-header">
-          <span class="q-header-title">Delegate</span>
-          <span class="q-header-sub">Urgent + Not Important</span>
-        </div>
-        <ul class="q-items">
-          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-        </ul>
-      </div>
-
-      <!-- Q4 · Eliminate · Not Urgent + Not Important -->
-      <div class="quadrant q4">
-        <div class="q-header">
-          <span class="q-header-title">Eliminate</span>
-          <span class="q-header-sub">Not Urgent + Not Important</span>
-        </div>
-        <ul class="q-items">
-          <li class="q-item"><span class="q-item-num">1</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">2</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">3</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">4</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">5</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-          <li class="q-item"><span class="q-item-num">6</span><span class="q-item-box"></span><span class="q-item-line"></span></li>
-        </ul>
-      </div>
-
-    </div><!-- /.matrix-grid -->
-
-    <!-- ═══ Priority Strip ═══ -->
-    <div class="priority-strip">
-      <label>Today's #1 Priority:</label>
-      <span class="field-line"></span>
+      <ul class="q-items">
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+      </ul>
     </div>
 
-    <!-- ═══ Quote Banner ═══ -->
-    <div class="quote-banner">
-      <div class="quote-text">"What is important is seldom urgent and what is urgent is seldom important."</div>
-      <div class="quote-author">— Dwight D. Eisenhower</div>
+    <!-- Q3 · Delegate · Urgent + Not Important -->
+    <div class="quadrant q3">
+      <div class="q-header">
+        <div class="q-badge">3</div>
+        <span class="q-title">Delegate</span>
+        <span class="q-desc">Urgent + Not Important</span>
+      </div>
+      <ul class="q-items">
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+      </ul>
     </div>
 
-  </div><!-- /.page -->
+    <!-- Q4 · Eliminate · Not Urgent + Not Important -->
+    <div class="quadrant q4">
+      <div class="q-header">
+        <div class="q-badge">4</div>
+        <span class="q-title">Eliminate</span>
+        <span class="q-desc">Not Urgent + Not Important</span>
+      </div>
+      <ul class="q-items">
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+        <li class="q-item"><span class="q-check"></span><span class="q-line"></span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ─── Priority Strip ─── -->
+  <div class="priority-card card">
+    <span class="icon" style="color: var(--accent);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="7" cy="7" r="5.5"/>
+        <circle cx="7" cy="7" r="3"/>
+        <circle cx="7" cy="7" r="0.8" fill="currentColor" stroke="none"/>
+      </svg>
+    </span>
+    <span class="priority-label">Today's #1 Priority</span>
+    <span class="priority-line"></span>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <div class="footer">
+    <span class="footer-quote">"What is important is seldom urgent and what is urgent is seldom important." — Dwight D. Eisenhower</span>
+    <span class="page-num" data-inject="page-num"></span>
+  </div>
+
+</div>
+
 </body>
 </html>

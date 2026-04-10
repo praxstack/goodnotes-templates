@@ -1,370 +1,915 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monthly Habit Tracker</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_base.css" />
-  <style>
-    /* ═══════════════════════════════════════════════
-       Habit Tracker — template-specific styles
-       ═══════════════════════════════════════════════ */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Habit Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   HABIT TRACKER v3 — "Monthly Habits"
+   Design: Soft UI Evolution (evolved neumorphism)
+   Typography: Lora + Raleway
+   Palette: Mental Health App (calming lavender)
 
-    /* ─── Month/Year row ─── */
-    .month-row {
-      display: flex;
-      align-items: center;
-      gap: 6mm;
-      padding: var(--s2) 0;
-      border-bottom: 0.3px solid var(--border);
-      margin-bottom: var(--s3);
-      flex-shrink: 0;
-      font-size: 7.5pt;
-      color: var(--muted-foreground);
-    }
-    .month-row label {
-      font-weight: 500;
-    }
-    .month-row .field {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 28mm;
-      height: 4.5mm;
-      display: inline-block;
-    }
-    .month-row .field.narrow {
-      min-width: 16mm;
-    }
+   Structure:
+   ✦ 31-day grid × 15 habits
+   ✦ Category color dots for grouping
+   ✦ Rounded soft checkboxes
+   ✦ Alternating row tinting for readability
+   ✦ Streak + completion stats cards
+   ✦ Motivational quote footer
+   ═══════════════════════════════════════════════════════ */
 
-    /* ─── Habit Grid ─── */
-    .habit-grid-wrapper {
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
+/* ─── Design Tokens ─── */
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 12mm;
 
-    .habit-grid {
-      width: 182mm;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
+  /* Color palette — Mental Health App */
+  --primary: #8B5CF6;
+  --primary-light: #C4B5FD;
+  --accent: #059669;
+  --accent-soft: rgba(5, 150, 105, 0.08);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.08);
+  --background: #FAF5FF;
+  --card: #FFFFFF;
+  --card-alt: #F5F0FF;
+  --foreground: #4C1D95;
+  --foreground-secondary: #6D28D9;
+  --muted-foreground: #7C3AED;
+  --muted: #A78BFA;
+  --muted-bg: #EDE9FE;
+  --border: #DDD6FE;
+  --input: #C4B5FD;
+  --dots: #C4B5FD;
 
-    .habit-grid thead th {
-      font-family: var(--font-mono);
-      font-size: 5pt;
-      font-weight: 500;
-      color: var(--muted-foreground);
-      text-align: center;
-      padding: 1mm 0;
-      border-bottom: 0.5px solid var(--border);
-    }
-    .habit-grid thead th.col-habit {
-      width: 40mm;
-      text-align: left;
-      font-family: var(--font-sans);
-      font-size: 6pt;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--foreground-secondary);
-    }
-    .habit-grid thead th.col-day {
-      width: 4mm;
-    }
-    .habit-grid thead th.col-total {
-      width: 10mm;
-      font-family: var(--font-sans);
-      font-size: 6pt;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--foreground-secondary);
-    }
+  /* Category accents */
+  --cat-health: #059669;
+  --cat-mind: #8B5CF6;
+  --cat-work: #2563EB;
+  --cat-social: #DB2777;
+  --cat-self: #D97706;
 
-    .habit-grid tbody tr {
-      height: 5.5mm;
-    }
-    .habit-grid tbody tr:nth-child(even) {
-      background: var(--card);
-    }
+  /* Typography */
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Raleway', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Georgia', serif;
 
-    .habit-grid tbody td {
-      padding: 0;
-      text-align: center;
-      vertical-align: middle;
-      border-bottom: 0.3px dotted var(--input);
-    }
-    .habit-grid tbody td.cell-habit {
-      text-align: left;
-      padding-left: 1mm;
-    }
-    .habit-grid tbody td.cell-total {
-      border-left: 0.5px solid var(--border);
-    }
+  /* Spacing scale */
+  --s1: 2mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
 
-    /* Habit name write-in line */
-    .habit-name-line {
-      border-bottom: 0.5px dotted var(--input);
-      display: block;
-      width: 36mm;
-      height: 3.5mm;
-    }
+  /* Soft UI */
+  --shadow-card: 0 1px 3px rgba(139, 92, 246, 0.08), 0 4px 12px rgba(139, 92, 246, 0.04);
+  --shadow-inset: inset 0 1px 2px rgba(139, 92, 246, 0.06);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
 
-    /* Checkbox square */
-    .day-box {
-      width: 3.5mm;
-      height: 3.5mm;
-      border: 0.4px solid var(--border);
-      border-radius: 0.5mm;
-      display: inline-block;
-      background: var(--background);
-    }
-    .habit-grid tbody tr:nth-child(even) .day-box {
-      background: var(--card);
-    }
+/* ─── Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    /* Total field */
-    .total-field {
-      border-bottom: 0.5px dotted var(--input);
-      display: inline-block;
-      width: 7mm;
-      height: 3.5mm;
-    }
+body {
+  background: #E8E0F0;
+  font-family: var(--font-sans);
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: var(--foreground);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    /* ─── Streak Counter ─── */
-    .streak-section {
-      display: flex;
-      align-items: center;
-      gap: 6mm;
-      padding: var(--s3) 0;
-      border-top: 0.5px solid var(--border);
-      margin-top: var(--s3);
-      flex-shrink: 0;
-      font-size: 7pt;
-      color: var(--foreground-secondary);
-    }
-    .streak-section .streak-label {
-      font-weight: 600;
-      font-size: 6.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: var(--muted-foreground);
-    }
-    .streak-section .streak-field {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 14mm;
-      height: 4mm;
-      display: inline-block;
-    }
-    .streak-section .streak-item {
-      display: flex;
-      align-items: center;
-      gap: 1.5mm;
-    }
-    .streak-section .streak-dot {
-      width: 2.5mm;
-      height: 2.5mm;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .streak-section .streak-dot.green {
-      background: var(--green);
-    }
-    .streak-section .streak-dot.accent {
-      background: var(--accent);
-    }
-    .streak-section .streak-dot.blue {
-      background: var(--blue);
-    }
+/* ─── Page Container ─── */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(139, 92, 246, 0.12);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
 
-    /* ─── Print ─── */
-    @page {
-      size: A4 portrait;
-      margin: 0;
-    }
-    @media print {
-      body { background: white; }
-      .page { margin: 0; box-shadow: none; }
-    }
-  </style>
+/* ─── Print ─── */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  /* Ensure all sections stay visible in print */
+  .grid-card { flex: none !important; }
+  .stats-row, .bottom-row, .footer, .legend-row, .motivation-banner {
+    flex-shrink: 0 !important;
+  }
+}
+
+/* ─── Typography ─── */
+.section-title {
+  font-family: var(--font-sans);
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--foreground);
+}
+
+.section-hint {
+  font-family: var(--font-sans);
+  font-size: 6.5pt;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+/* ─── Card Base ─── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+
+/* ─── Inline SVG icon base ─── */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+}
+.icon svg {
+  display: block;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 1: HEADER
+   ═══════════════════════════════════════ */
+.header-gradient {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 60%, #EDE9FE 100%);
+  border-radius: 2px;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header-left .title {
+  font-family: var(--font-serif);
+  font-size: 18pt;
+  font-weight: 600;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.header-left .subtitle {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 7pt;
+  color: var(--muted);
+  margin-top: 1mm;
+}
+
+/* ─── Month/Year Card ─── */
+.date-block {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s2) var(--s3);
+}
+
+.date-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+
+.date-label {
+  font-family: var(--font-sans);
+  font-size: 6.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.date-field {
+  border-bottom: 1px solid var(--border);
+  min-width: 26mm;
+  height: 4.5mm;
+  display: inline-block;
+}
+
+.date-field.narrow {
+  min-width: 14mm;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 2: MOTIVATIONAL BANNER
+   ═══════════════════════════════════════ */
+.motivation-banner {
+  background: var(--accent-soft);
+  border: 1px solid rgba(5, 150, 105, 0.12);
+  border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 3: HABIT GRID
+   ═══════════════════════════════════════ */
+.grid-card {
+  padding: var(--s3) var(--s2);
+  overflow: hidden;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.habit-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+/* ─── Grid Header ─── */
+.habit-grid thead th {
+  font-family: var(--font-sans);
+  font-size: 5.5pt;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  padding: 2mm 0;
+  border-bottom: 1.5px solid var(--border);
+  vertical-align: bottom;
+  line-height: 1;
+}
+
+.habit-grid thead th.col-cat {
+  width: 3.5mm;
+}
+
+.habit-grid thead th.col-habit {
+  width: 34mm;
+  text-align: left;
+  padding-left: 1mm;
+  font-size: 6pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--foreground-secondary);
+}
+
+.habit-grid thead th.col-day {
+  width: 4.13mm;
+  font-family: var(--font-sans);
+}
+
+.habit-grid thead th.col-total {
+  width: 9mm;
+  font-size: 5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--foreground-secondary);
+}
+
+/* ─── Weekend highlight in header ─── */
+.habit-grid thead th.col-day.weekend {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* ─── Grid Body ─── */
+.habit-grid tbody tr {
+  height: 7.5mm;
+}
+
+/* Alternating row background */
+.habit-grid tbody tr:nth-child(odd) td {
+  background: var(--card);
+}
+.habit-grid tbody tr:nth-child(even) td {
+  background: var(--card-alt);
+}
+
+/* Top-row rounded corners */
+.habit-grid tbody tr:first-child td:first-child {
+  border-radius: var(--radius-sm) 0 0 0;
+}
+.habit-grid tbody tr:first-child td:last-child {
+  border-radius: 0 var(--radius-sm) 0 0;
+}
+/* Bottom-row rounded corners */
+.habit-grid tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 var(--radius-sm);
+}
+.habit-grid tbody tr:last-child td:last-child {
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.habit-grid tbody td {
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 0.5px solid rgba(221, 214, 254, 0.5);
+  position: relative;
+}
+
+/* Category dot cell */
+.habit-grid tbody td.cell-cat {
+  padding: 0;
+}
+
+.cat-dot {
+  width: 3mm;
+  height: 3mm;
+  border-radius: 50%;
+  display: inline-block;
+}
+.cat-dot.health  { background: var(--cat-health); }
+.cat-dot.mind    { background: var(--cat-mind); }
+.cat-dot.work    { background: var(--cat-work); }
+.cat-dot.social  { background: var(--cat-social); }
+.cat-dot.self    { background: var(--cat-self); }
+
+/* Habit name cell */
+.habit-grid tbody td.cell-habit {
+  text-align: left;
+  padding-left: 1mm;
+}
+
+.habit-name-line {
+  display: block;
+  width: 31mm;
+  height: 4.5mm;
+  border-bottom: 1px dotted var(--dots);
+}
+
+/* Day checkbox cell */
+.habit-grid tbody td.cell-day {
+  /* hover area */
+}
+
+.day-check {
+  width: 3.8mm;
+  height: 3.8mm;
+  border-radius: 50%;
+  border: 0.8px solid var(--input);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Make odd-row checkboxes slightly different bg */
+.habit-grid tbody tr:nth-child(even) .day-check {
+  border-color: rgba(196, 181, 253, 0.6);
+}
+
+/* Total cell */
+.habit-grid tbody td.cell-total {
+  border-left: 1px solid var(--border);
+}
+
+.total-field {
+  display: inline-block;
+  width: 6mm;
+  height: 4.5mm;
+  border-bottom: 1px dotted var(--dots);
+}
+
+/* ─── Grid section separator (after every 5 rows) ─── */
+.habit-grid tbody tr.section-break td {
+  border-bottom: 1.5px solid var(--border);
+}
+
+/* ═══════════════════════════════════════
+   SECTION 4: STATS ROW
+   ═══════════════════════════════════════ */
+.stats-row {
+  display: flex;
+  gap: var(--s2);
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.stat-card {
+  flex: 1;
+  padding: var(--s2) var(--s3);
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+
+.stat-card .stat-icon {
+  width: 7mm;
+  height: 7mm;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-card .stat-icon.green {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.stat-card .stat-icon.purple {
+  background: rgba(139, 92, 246, 0.08);
+  color: var(--primary);
+}
+.stat-card .stat-icon.amber {
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+.stat-card .stat-icon.blue {
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563EB;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5mm;
+  flex: 1;
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 5.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.stat-field {
+  border-bottom: 1px solid var(--border);
+  height: 4mm;
+  display: block;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 5: CATEGORY LEGEND
+   ═══════════════════════════════════════ */
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  flex-shrink: 0;
+  margin-bottom: var(--s2);
+  padding: 0 1mm;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+
+.legend-dot {
+  width: 2.5mm;
+  height: 2.5mm;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  font-size: 5.5pt;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 6: REFLECTION + NOTES
+   ═══════════════════════════════════════ */
+.bottom-row {
+  display: flex;
+  gap: var(--s2);
+  flex-shrink: 0;
+}
+
+.reflection-card {
+  flex: 1;
+  padding: var(--s2) var(--s3);
+}
+
+.reflection-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  margin-bottom: var(--s2);
+}
+
+.reflection-header .icon {
+  color: var(--primary);
+}
+
+.reflection-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+.reflection-line {
+  border-bottom: 1.5px dotted var(--dots);
+  height: 4.5mm;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 7: FOOTER
+   ═══════════════════════════════════════ */
+.footer {
+  border-top: 1px solid var(--border);
+  padding-top: var(--s1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.footer-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 6.5pt;
+  color: var(--muted);
+  max-width: 75%;
+}
+
+.footer .page-num {
+  font-family: var(--font-sans);
+  font-size: 6pt;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+</style>
 </head>
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- ══════════════════════════════════════════════════════════
-         1. HEADER
-         ══════════════════════════════════════════════════════════ -->
-    <header class="page-header">
-      <div>
-        <div class="page-title">Habit Tracker</div>
-        <div class="page-subtitle">Small daily actions compound into extraordinary results</div>
-      </div>
-    </header>
+  <!-- ─── 1. Header Gradient Bar ─── -->
+  <div class="header-gradient" aria-hidden="true"></div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         2. MONTH / YEAR ROW
-         ══════════════════════════════════════════════════════════ -->
-    <div class="month-row">
-      <label>Month:</label><span class="field"></span>
-      <label>Year:</label><span class="field narrow"></span>
+  <!-- ─── 1. Header ─── -->
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Habit Tracker</div>
+      <div class="subtitle">Small daily actions compound into extraordinary results</div>
     </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         3. MAIN HABIT GRID
-         ══════════════════════════════════════════════════════════ -->
-    <div class="habit-grid-wrapper">
-      <table class="habit-grid">
-        <thead>
-          <tr>
-            <th class="col-habit">Habit</th>
-            <th class="col-day">1</th>
-            <th class="col-day">2</th>
-            <th class="col-day">3</th>
-            <th class="col-day">4</th>
-            <th class="col-day">5</th>
-            <th class="col-day">6</th>
-            <th class="col-day">7</th>
-            <th class="col-day">8</th>
-            <th class="col-day">9</th>
-            <th class="col-day">10</th>
-            <th class="col-day">11</th>
-            <th class="col-day">12</th>
-            <th class="col-day">13</th>
-            <th class="col-day">14</th>
-            <th class="col-day">15</th>
-            <th class="col-day">16</th>
-            <th class="col-day">17</th>
-            <th class="col-day">18</th>
-            <th class="col-day">19</th>
-            <th class="col-day">20</th>
-            <th class="col-day">21</th>
-            <th class="col-day">22</th>
-            <th class="col-day">23</th>
-            <th class="col-day">24</th>
-            <th class="col-day">25</th>
-            <th class="col-day">26</th>
-            <th class="col-day">27</th>
-            <th class="col-day">28</th>
-            <th class="col-day">29</th>
-            <th class="col-day">30</th>
-            <th class="col-day">31</th>
-            <th class="col-total">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-          <tr>
-            <td class="cell-habit"><span class="habit-name-line"></span></td>
-            <td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td><td><span class="day-box"></span></td>
-            <td class="cell-total"><span class="total-field"></span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         4. STREAK COUNTER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="streak-section">
-      <div class="streak-item">
-        <span class="streak-dot green"></span>
-        <span class="streak-label">Longest Streak:</span>
-        <span class="streak-field"></span>
+    <div class="date-block card">
+      <div class="date-group">
+        <span class="date-label">Month</span>
+        <span class="date-field"></span>
       </div>
-      <div class="streak-item">
-        <span class="streak-dot accent"></span>
-        <span class="streak-label">Current Streak:</span>
-        <span class="streak-field"></span>
-      </div>
-      <div class="streak-item">
-        <span class="streak-dot blue"></span>
-        <span class="streak-label">Completion Rate:</span>
-        <span class="streak-field"></span>
-        <span class="streak-label">%</span>
+      <div class="date-group">
+        <span class="date-label">Year</span>
+        <span class="date-field narrow"></span>
       </div>
     </div>
+  </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         5. QUOTE BANNER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="quote-banner">
-      <div class="quote-text">"We are what we repeatedly do. Excellence is not an act, but a habit."</div>
-      <div class="quote-author">— Aristotle</div>
+  <!-- ─── 2. Motivational Banner ─── -->
+  <div class="motivation-banner">
+    ✦ Consistency over perfection — even one check mark is a win ✦
+  </div>
+
+  <!-- ─── 3. Category Legend ─── -->
+  <div class="legend-row">
+    <span style="font-size: 5.5pt; font-weight: 600; color: var(--foreground-secondary); text-transform: uppercase; letter-spacing: 0.06em;">Categories:</span>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--cat-health);"></div>
+      <span class="legend-label">Health</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--cat-mind);"></div>
+      <span class="legend-label">Mind</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--cat-work);"></div>
+      <span class="legend-label">Work</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--cat-social);"></div>
+      <span class="legend-label">Social</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--cat-self);"></div>
+      <span class="legend-label">Self</span>
+    </div>
+  </div>
+
+  <!-- ─── 4. Main Habit Grid ─── -->
+  <div class="grid-card card">
+    <table class="habit-grid">
+      <thead>
+        <tr>
+          <th class="col-cat"></th>
+          <th class="col-habit">Habit</th>
+          <th class="col-day">1</th>
+          <th class="col-day">2</th>
+          <th class="col-day">3</th>
+          <th class="col-day">4</th>
+          <th class="col-day">5</th>
+          <th class="col-day weekend">6</th>
+          <th class="col-day weekend">7</th>
+          <th class="col-day">8</th>
+          <th class="col-day">9</th>
+          <th class="col-day">10</th>
+          <th class="col-day">11</th>
+          <th class="col-day">12</th>
+          <th class="col-day weekend">13</th>
+          <th class="col-day weekend">14</th>
+          <th class="col-day">15</th>
+          <th class="col-day">16</th>
+          <th class="col-day">17</th>
+          <th class="col-day">18</th>
+          <th class="col-day">19</th>
+          <th class="col-day weekend">20</th>
+          <th class="col-day weekend">21</th>
+          <th class="col-day">22</th>
+          <th class="col-day">23</th>
+          <th class="col-day">24</th>
+          <th class="col-day">25</th>
+          <th class="col-day">26</th>
+          <th class="col-day weekend">27</th>
+          <th class="col-day weekend">28</th>
+          <th class="col-day">29</th>
+          <th class="col-day">30</th>
+          <th class="col-day">31</th>
+          <th class="col-total">
+            <!-- Sigma icon -->
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="8,2 2,2 5,5 2,8 8,8"/>
+            </svg>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Row 1 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot health"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 2 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot health"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 3 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot health"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 4 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot mind"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 5 — section break -->
+        <tr class="section-break">
+          <td class="cell-cat"><span class="cat-dot mind"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 6 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot mind"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 7 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot work"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 8 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot work"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 9 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot work"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 10 — section break -->
+        <tr class="section-break">
+          <td class="cell-cat"><span class="cat-dot social"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 11 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot social"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 12 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot self"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 13 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot self"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 14 -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot self"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+        <!-- Row 15 — last -->
+        <tr>
+          <td class="cell-cat"><span class="cat-dot self"></span></td>
+          <td class="cell-habit"><span class="habit-name-line"></span></td>
+          <td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td><td class="cell-day"><span class="day-check"></span></td>
+          <td class="cell-total"><span class="total-field"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 5. Stats Row ─── -->
+  <div class="stats-row">
+
+    <!-- Longest Streak -->
+    <div class="stat-card card">
+      <div class="stat-icon green">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 9l3-3 2 2 5-5"/>
+          <polyline points="8,3 11,3 11,6"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Longest Streak</span>
+        <span class="stat-field"></span>
+      </div>
+    </div>
+
+    <!-- Current Streak -->
+    <div class="stat-card card">
+      <div class="stat-icon purple">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 1v4l2.5 1.5"/>
+          <circle cx="6" cy="6.5" r="4.5"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Current Streak</span>
+        <span class="stat-field"></span>
+      </div>
+    </div>
+
+    <!-- Completion Rate -->
+    <div class="stat-card card">
+      <div class="stat-icon amber">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="5"/>
+          <path d="M6 1a5 5 0 0 1 4.33 2.5" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Completion %</span>
+        <span class="stat-field"></span>
+      </div>
+    </div>
+
+    <!-- Best Habit -->
+    <div class="stat-card card">
+      <div class="stat-icon blue">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 1l1.5 3h3.2l-2.6 2 1 3L6 7.5 3 9l1-3-2.6-2H4.5z"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Best Habit</span>
+        <span class="stat-field"></span>
+      </div>
     </div>
 
   </div>
+
+  <!-- ─── 6. Reflection + Notes ─── -->
+  <div class="bottom-row">
+
+    <!-- Monthly Reflection -->
+    <div class="reflection-card card">
+      <div class="reflection-header">
+        <span class="icon">
+          <!-- Pencil/journal icon -->
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 1.5l2 2L4 10H2v-2z"/>
+            <path d="M7 3l2 2"/>
+          </svg>
+        </span>
+        <span class="section-title">Monthly Reflection</span>
+      </div>
+      <div class="reflection-lines">
+        <div class="reflection-line"></div>
+        <div class="reflection-line"></div>
+        <div class="reflection-line"></div>
+      </div>
+    </div>
+
+    <!-- Next Month Focus -->
+    <div class="reflection-card card">
+      <div class="reflection-header">
+        <span class="icon">
+          <!-- Target icon -->
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="5"/>
+            <circle cx="6" cy="6" r="2.5"/>
+            <circle cx="6" cy="6" r="0.6" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span class="section-title">Next Month Focus</span>
+      </div>
+      <div class="reflection-lines">
+        <div class="reflection-line"></div>
+        <div class="reflection-line"></div>
+        <div class="reflection-line"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── 7. Footer ─── -->
+  <div class="footer">
+    <span class="footer-quote">"We are what we repeatedly do. Excellence is not an act, but a habit." — Aristotle</span>
+    <span class="page-num" data-inject="page-num"></span>
+  </div>
+
+</div>
 
 </body>
 </html>

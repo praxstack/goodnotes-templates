@@ -1,260 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fitness Log</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_base.css" />
-  <style>
-    /* ═══════════════════════════════════════════════
-       Fitness Log — template-specific styles
-       ═══════════════════════════════════════════════ */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   FITNESS LOG v3 — Bubblegum Edition
+   Design: Pop Retro meets Soft UI — playful pink + teal
+   Typography: Poppins (body) + Lora (headings)
+   
+   Creative direction (frontend-design):
+   ✦ Pink-on-white cards with pop shadow (3px offset)
+   ✦ Teal accent for active/cardio sections
+   ✦ Gold warm-up circles and calorie fields
+   ✦ Thick colored section dividers instead of dots
+   ✦ Retro-style numbered exercise rows
+   ═══════════════════════════════════════════════════════ */
 
-    /* ─── Workout Card ─── */
-    .workout-card {
-      display: flex;
-      align-items: center;
-      gap: var(--s4);
-      flex-wrap: wrap;
-    }
-    .workout-field {
-      display: flex;
-      align-items: baseline;
-      gap: 2mm;
-      font-size: 7.5pt;
-      color: var(--foreground-secondary);
-    }
-    .workout-field label {
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .workout-field .field-val {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 28mm;
-      height: 4.5mm;
-      display: inline-block;
-    }
-    .workout-field .field-val.narrow {
-      min-width: 18mm;
-    }
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 12mm;
 
-    /* ─── Exercise Table — mono numbers ─── */
-    .grid-table td:not(:first-child) {
-      font-family: var(--font-mono);
-      font-size: 6.5pt;
-    }
+  /* Bubblegum palette */
+  --background: #f6e6ee;
+  --foreground: #3d2040;
+  --card: #ffffff;
+  --card-alt: #fef3d6;
+  --foreground-secondary: #5b3050;
+  --muted-foreground: #8b5070;
+  --primary: #c0408a;
+  --primary-light: #e670abCC;
+  --secondary: #8acfd1;
+  --muted: #d4a0c0;
+  --muted-bg: #f8d8ea;
+  --accent: #d09030;
+  --accent-soft: rgba(208, 144, 48, 0.12);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.1);
+  --border: #d88ab0;
+  --input: #e8c0d4;
+  --dots: #d4a0c0;
 
-    /* ─── Cardio Card ─── */
-    .cardio-fields {
-      display: flex;
-      gap: var(--s4);
-      flex-wrap: wrap;
-    }
-    .cardio-field {
-      display: flex;
-      align-items: baseline;
-      gap: 2mm;
-      font-size: 7pt;
-      color: var(--foreground-secondary);
-    }
-    .cardio-field label {
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .cardio-field .field-val {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 18mm;
-      height: 4mm;
-      display: inline-block;
-    }
+  /* Bubblegum fonts */
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-mono: 'Fira Code', monospace;
 
-    /* ─── Body Stats ─── */
-    .stats-cols {
-      display: flex;
-      gap: var(--s4);
-    }
-    .stats-col {
-      flex: 1;
-    }
-    .stat-field {
-      display: flex;
-      align-items: baseline;
-      gap: 2mm;
-      font-size: 7pt;
-      color: var(--foreground-secondary);
-      margin-bottom: 1.5mm;
-    }
-    .stat-field label {
-      font-weight: 500;
-      white-space: nowrap;
-      min-width: 16mm;
-    }
-    .stat-field .field-val {
-      flex: 1;
-      border-bottom: 0.5px solid var(--border);
-      height: 4mm;
-    }
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 8mm;
 
-    /* ─── Water Circles ─── */
-    .water-row {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-      margin-bottom: 2mm;
-    }
-    .water-row label {
-      font-weight: 500;
-      font-size: 7pt;
-      color: var(--foreground-secondary);
-      white-space: nowrap;
-      min-width: 16mm;
-    }
-    .water-circles {
-      display: flex;
-      gap: 1.5mm;
-    }
-    .water-circle {
-      width: 4.5mm;
-      height: 4.5mm;
-      border-radius: 50%;
-      border: 0.5px solid var(--blue);
-      background: var(--background);
-      flex-shrink: 0;
-    }
+  /* Pop shadow — the bubblegum signature */
+  --shadow-card: 3px 3px 0px 0px hsl(326 58% 57% / 0.3);
+  --shadow-inset: inset 0 1px 2px rgba(192, 64, 138, 0.08);
+  --radius: 6px;
+  --radius-sm: 4px;
+}
 
-    /* ─── Energy Scale ─── */
-    .energy-row {
-      display: flex;
-      align-items: center;
-      gap: var(--s3);
-    }
-    .energy-label {
-      font-weight: 700;
-      font-size: 7pt;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--foreground-secondary);
-      white-space: nowrap;
-    }
-    .energy-scale {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-    }
-    .energy-num {
-      font-family: var(--font-mono);
-      font-size: 6pt;
-      color: var(--muted-foreground);
-    }
-    .energy-circle {
-      width: 5mm;
-      height: 5mm;
-      border-radius: 50%;
-      border: 0.5px solid var(--border);
-      background: var(--background);
-      flex-shrink: 0;
-    }
-    .energy-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5mm;
-    }
-    .energy-endpoint {
-      font-size: 5.5pt;
-      color: var(--muted-foreground);
-      white-space: nowrap;
-    }
-    .notes-inline {
-      display: flex;
-      align-items: baseline;
-      gap: 2mm;
-      flex: 1;
-    }
-    .notes-inline label {
-      font-weight: 500;
-      font-size: 7pt;
-      color: var(--foreground-secondary);
-      white-space: nowrap;
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ─── Feel Section ─── */
-    .feel-section {
-      margin-top: var(--s2);
-    }
-    .feel-notes {
-      margin-top: var(--s1);
-    }
-  </style>
+body {
+  background: #e8c0d4;
+  font-family: var(--font-sans);
+  font-size: 7.5pt;
+  color: var(--foreground);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto; padding: var(--margin);
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(192, 64, 138, 0.15);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--border);
+}
+
+.icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon svg { display: block; }
+
+.write-line { border-bottom: 1.5px dotted var(--dots); height: 5mm; }
+
+/* ═══════════════════════════════════════
+   HEADER — Bubblegum signature gradient
+   ═══════════════════════════════════════ */
+.header-gradient {
+  width: 100%; height: 5px;
+  background: linear-gradient(90deg, var(--primary) 0%, #e670ab 30%, var(--secondary) 60%, #d09030 100%);
+  border-radius: 3px;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: var(--s3); flex-shrink: 0;
+}
+
+.header-left .title {
+  font-family: var(--font-serif);
+  font-size: 18pt; font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em; line-height: 1.1;
+}
+.header-left .subtitle {
+  font-family: var(--font-sans);
+  font-weight: 400; font-size: 6.5pt;
+  color: var(--muted); margin-top: 0.5mm;
+}
+
+.date-card {
+  padding: var(--s2) var(--s3);
+  display: flex; align-items: center; gap: var(--s3);
+}
+.date-group { display: flex; align-items: center; gap: 1.5mm; }
+.date-label {
+  font-size: 6.5pt; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+}
+.date-field { border-bottom: 1.5px solid var(--border); min-width: 20mm; height: 4.5mm; }
+
+/* ── Section headers with thick color bar ── */
+.section-header {
+  display: flex; align-items: center; gap: 2mm;
+  margin-bottom: var(--s2); flex-shrink: 0;
+  padding-left: 1mm;
+}
+.section-bar {
+  width: 3mm; height: 3mm;
+  border-radius: 1mm;
+  flex-shrink: 0;
+}
+.section-title {
+  font-family: var(--font-sans);
+  font-size: 7pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--foreground);
+}
+
+/* ═══════════════════════════════════════
+   WORKOUT CARD — Teal accent
+   ═══════════════════════════════════════ */
+.workout-card {
+  padding: var(--s2) var(--s3); margin-bottom: var(--s3); flex-shrink: 0;
+  background: rgba(138, 207, 209, 0.12);
+  border-color: rgba(138, 207, 209, 0.4);
+}
+.workout-fields { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; }
+.wf { display: flex; align-items: center; gap: 1.5mm; font-size: 6.5pt; color: var(--foreground-secondary); }
+.wf label { font-weight: 600; }
+.wf-val { border-bottom: 1.5px solid var(--border); min-width: 24mm; height: 4mm; display: inline-block; }
+.wf-val.narrow { min-width: 14mm; }
+.wf-check { width: 4mm; height: 4mm; border-radius: 50%; border: 1.5px solid var(--secondary); flex-shrink: 0; }
+
+/* ═══════════════════════════════════════
+   EXERCISE TABLE — Pop style
+   ═══════════════════════════════════════ */
+.exercise-card { padding: var(--s2) var(--s3); margin-bottom: var(--s3); flex-shrink: 0; }
+
+.exercise-table { width: 100%; border-collapse: collapse; font-size: 6.5pt; }
+.exercise-table th {
+  background: var(--primary); color: #fff;
+  font-weight: 600; font-size: 5.5pt; text-transform: uppercase;
+  letter-spacing: 0.04em; padding: 1.5mm 2mm; text-align: center;
+}
+.exercise-table th:first-child { text-align: left; border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.exercise-table th:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.exercise-table td {
+  padding: 1.2mm 2mm; text-align: center;
+  border-bottom: 1px dotted var(--dots); height: 6mm;
+}
+.exercise-table td:first-child { text-align: left; color: var(--foreground-secondary); }
+.exercise-table td:not(:first-child) { font-family: var(--font-mono); font-size: 6pt; }
+.exercise-table tr:nth-child(even) td { background: var(--card-alt); }
+
+/* ═══════════════════════════════════════
+   CARDIO — Teal card
+   ═══════════════════════════════════════ */
+.cardio-card {
+  padding: var(--s2) var(--s3); margin-bottom: var(--s3); flex-shrink: 0;
+  background: rgba(138, 207, 209, 0.1);
+  border-color: rgba(138, 207, 209, 0.35);
+}
+.cardio-fields { display: flex; gap: var(--s3); flex-wrap: wrap; }
+.cf { display: flex; align-items: center; gap: 1.5mm; font-size: 6.5pt; color: var(--foreground-secondary); }
+.cf label { font-weight: 600; }
+.cf-val { border-bottom: 1.5px solid var(--border); min-width: 18mm; height: 4mm; display: inline-block; }
+
+/* ═══════════════════════════════════════
+   BODY STATS — 2 columns
+   ═══════════════════════════════════════ */
+.stats-cols { display: flex; gap: var(--s2); margin-bottom: var(--s3); flex-shrink: 0; }
+.stats-col { flex: 1; padding: var(--s2) var(--s3); }
+.stat-row { display: flex; align-items: center; gap: 2mm; font-size: 6.5pt; color: var(--foreground-secondary); margin-bottom: 1.5mm; }
+.stat-row label { font-weight: 600; min-width: 14mm; }
+.stat-val { flex: 1; border-bottom: 1.5px solid var(--border); height: 4mm; }
+
+/* Water circles — teal */
+.water-row { display: flex; align-items: center; gap: 2mm; margin-bottom: 1.5mm; }
+.water-row label { font-weight: 600; font-size: 6.5pt; color: var(--foreground-secondary); min-width: 14mm; }
+.water-circles { display: flex; gap: 1.5mm; }
+.water-circle { width: 4.5mm; height: 4.5mm; border-radius: 50%; border: 1.5px solid var(--secondary); flex-shrink: 0; }
+
+/* ═══════════════════════════════════════
+   ENERGY — Gold gradient card
+   ═══════════════════════════════════════ */
+.energy-card {
+  padding: var(--s2) var(--s3); margin-bottom: var(--s2); flex-shrink: 0;
+  background: linear-gradient(135deg, var(--card) 0%, var(--card-alt) 100%);
+  border-color: rgba(208, 144, 48, 0.3);
+}
+.energy-row { display: flex; align-items: center; gap: var(--s3); margin-bottom: var(--s2); }
+.energy-label { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--foreground-secondary); }
+.energy-scale { display: flex; align-items: center; gap: 1.5mm; }
+.energy-item { display: flex; flex-direction: column; align-items: center; gap: 0.5mm; }
+.energy-circle { width: 5mm; height: 5mm; border-radius: 50%; border: 1.5px solid var(--primary-light); }
+.energy-num { font-size: 5pt; font-family: var(--font-mono); color: var(--muted); }
+.energy-endpoint { font-size: 5.5pt; color: var(--muted); }
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.footer {
+  border-top: 1.5px solid var(--border); padding-top: var(--s1);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0; margin-top: auto;
+}
+.footer-quote { font-family: var(--font-serif); font-style: italic; font-size: 6.5pt; color: var(--muted-foreground); }
+.footer .page-num { font-size: 6pt; color: var(--muted); letter-spacing: 0.05em; }
+</style>
 </head>
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- ══════════════════════════════════════════════════════════
-         1. HEADER
-         ══════════════════════════════════════════════════════════ -->
-    <header class="page-header">
-      <div>
-        <div class="page-title">Fitness Log</div>
-        <div class="page-subtitle">Show up. Put in the work. Results follow.</div>
+  <!-- ─── Gradient ─── -->
+  <div class="header-gradient" aria-hidden="true"></div>
+
+  <!-- ─── Header ─── -->
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Fitness Log</div>
+      <div class="subtitle">Show up. Put in the work. Results follow.</div>
+    </div>
+    <div class="date-card card">
+      <div class="date-group">
+        <span class="date-label">Day</span>
+        <span class="date-field"></span>
       </div>
-    </header>
-
-    <!-- ══════════════════════════════════════════════════════════
-         2. DATE ROW
-         ══════════════════════════════════════════════════════════ -->
-    <div class="date-row">
-      <label>Day:</label><span class="field"></span>
-      <label>Week:</label><span class="field"></span>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         3. WORKOUT SECTION
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label no-top">
-      <div class="section-dot green"></div>
-      <div class="section-title">Workout</div>
-    </div>
-
-    <div class="card green-soft">
-      <div class="workout-card">
-        <div class="workout-field">
-          <label>Type:</label>
-          <span class="field-val">
-            <span style="font-size:6pt; color:var(--muted-foreground); font-family:var(--font-mono);">Strength / Cardio / Flexibility / Sport</span>
-          </span>
-        </div>
-        <div class="workout-field">
-          <label>Duration:</label>
-          <span class="field-val narrow"></span>
-        </div>
-        <div class="workout-field">
-          <span class="cb">Warm-up</span>
-        </div>
+      <div class="date-group">
+        <span class="date-label">Week</span>
+        <span class="date-field" style="min-width:14mm;"></span>
       </div>
     </div>
+  </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         4. EXERCISES TABLE
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot"></div>
-      <div class="section-title">Exercises</div>
+  <!-- ─── Workout ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--secondary);"></div>
+    <span class="icon" style="color: var(--secondary);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M2 7h10"/><path d="M1 5v4"/><path d="M3.5 4.5v5"/><path d="M10.5 4.5v5"/><path d="M13 5v4"/></svg>
+    </span>
+    <span class="section-title">Workout</span>
+  </div>
+
+  <div class="workout-card card">
+    <div class="workout-fields">
+      <div class="wf"><label>Type:</label><span class="wf-val" style="min-width:40mm; font-size:5.5pt; color:var(--muted);">Strength / Cardio / Flexibility / Sport</span></div>
+      <div class="wf"><label>Duration:</label><span class="wf-val narrow"></span></div>
+      <div class="wf"><label>Warm-up</label><span class="wf-check"></span></div>
     </div>
+  </div>
 
-    <table class="grid-table">
+  <!-- ─── Exercises ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--primary);"></div>
+    <span class="section-title">Exercises</span>
+  </div>
+
+  <div class="exercise-card card">
+    <table class="exercise-table">
       <thead>
         <tr>
-          <th style="width:32%;">Exercise Name</th>
+          <th style="width:30%;">Exercise</th>
           <th>Sets</th>
           <th>Reps</th>
           <th>Weight</th>
           <th>Rest</th>
-          <th style="width:20%;">Notes</th>
+          <th style="width:18%;">Notes</th>
         </tr>
       </thead>
       <tbody>
@@ -268,102 +320,92 @@
         <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
       </tbody>
     </table>
-
-    <!-- ══════════════════════════════════════════════════════════
-         5. CARDIO
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot blue"></div>
-      <div class="section-title">Cardio</div>
-    </div>
-
-    <div class="card">
-      <div class="cardio-fields">
-        <div class="cardio-field"><label>Activity:</label><span class="field-val"></span></div>
-        <div class="cardio-field"><label>Duration:</label><span class="field-val"></span></div>
-        <div class="cardio-field"><label>Distance:</label><span class="field-val"></span></div>
-        <div class="cardio-field"><label>Heart Rate:</label><span class="field-val"></span></div>
-        <div class="cardio-field"><label>Calories:</label><span class="field-val"></span></div>
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         6. BODY STATS (2-column)
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot amber"></div>
-      <div class="section-title">Body Stats</div>
-    </div>
-
-    <div class="stats-cols">
-      <!-- Left column: measurements -->
-      <div class="stats-col">
-        <div class="stat-field"><label>Weight:</label><span class="field-val"></span></div>
-        <div class="stat-field"><label>Body Fat %:</label><span class="field-val"></span></div>
-        <div class="stat-field"><label>Chest:</label><span class="field-val"></span></div>
-        <div class="stat-field"><label>Waist:</label><span class="field-val"></span></div>
-        <div class="stat-field"><label>Hips:</label><span class="field-val"></span></div>
-      </div>
-
-      <!-- Right column: wellness -->
-      <div class="stats-col">
-        <div class="water-row">
-          <label>Water:</label>
-          <div class="water-circles">
-            <span class="water-circle"></span>
-            <span class="water-circle"></span>
-            <span class="water-circle"></span>
-            <span class="water-circle"></span>
-            <span class="water-circle"></span>
-            <span class="water-circle"></span>
-            <span class="water-circle"></span>
-            <span class="water-circle"></span>
-          </div>
-        </div>
-        <div class="stat-field"><label>Sleep:</label><span class="field-val"></span></div>
-        <div class="stat-field"><label>Steps:</label><span class="field-val"></span></div>
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         7. HOW I FEEL
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot green"></div>
-      <div class="section-title">How I Feel</div>
-    </div>
-
-    <div class="feel-section">
-      <div class="energy-row">
-        <span class="energy-label">Energy:</span>
-        <div class="energy-scale">
-          <span class="energy-endpoint">Low</span>
-          <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">1</span></div>
-          <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">2</span></div>
-          <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">3</span></div>
-          <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">4</span></div>
-          <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">5</span></div>
-          <span class="energy-endpoint">High</span>
-        </div>
-        <div class="notes-inline">
-          <label>Notes:</label>
-        </div>
-      </div>
-      <div class="feel-notes">
-        <div class="write-line"></div>
-        <div class="write-line"></div>
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         8. QUOTE BANNER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="quote-banner">
-      <div class="quote-text">"The only bad workout is the one that didn't happen."</div>
-      <div class="quote-author">— Unknown</div>
-    </div>
-
   </div>
+
+  <!-- ─── Cardio ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--secondary);"></div>
+    <span class="icon" style="color: var(--secondary);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M7 3c1.8-2 5 0 3.5 3S7 11 7 12c0-1-3.5-4.5-3.5-6S5.2 1 7 3z"/></svg>
+    </span>
+    <span class="section-title">Cardio</span>
+  </div>
+
+  <div class="cardio-card card">
+    <div class="cardio-fields">
+      <div class="cf"><label>Activity:</label><span class="cf-val" style="min-width:24mm;"></span></div>
+      <div class="cf"><label>Duration:</label><span class="cf-val"></span></div>
+      <div class="cf"><label>Distance:</label><span class="cf-val"></span></div>
+      <div class="cf"><label>HR:</label><span class="cf-val"></span></div>
+      <div class="cf"><label>Cal:</label><span class="cf-val"></span></div>
+    </div>
+  </div>
+
+  <!-- ─── Body Stats ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--accent);"></div>
+    <span class="icon" style="color: var(--accent);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="7" cy="3.5" r="2.5"/><path d="M2.5 12c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5"/></svg>
+    </span>
+    <span class="section-title">Body Stats</span>
+  </div>
+
+  <div class="stats-cols">
+    <div class="stats-col card">
+      <div class="stat-row"><label>Weight:</label><span class="stat-val"></span></div>
+      <div class="stat-row"><label>Body Fat %:</label><span class="stat-val"></span></div>
+      <div class="stat-row"><label>Chest:</label><span class="stat-val"></span></div>
+      <div class="stat-row"><label>Waist:</label><span class="stat-val"></span></div>
+      <div class="stat-row"><label>Hips:</label><span class="stat-val"></span></div>
+    </div>
+    <div class="stats-col card">
+      <div class="water-row">
+        <label>Water:</label>
+        <div class="water-circles">
+          <span class="water-circle"></span><span class="water-circle"></span>
+          <span class="water-circle"></span><span class="water-circle"></span>
+          <span class="water-circle"></span><span class="water-circle"></span>
+          <span class="water-circle"></span><span class="water-circle"></span>
+        </div>
+      </div>
+      <div class="stat-row"><label>Sleep:</label><span class="stat-val"></span></div>
+      <div class="stat-row"><label>Steps:</label><span class="stat-val"></span></div>
+      <div class="stat-row"><label>Calories In:</label><span class="stat-val"></span></div>
+      <div class="stat-row"><label>Protein:</label><span class="stat-val"></span></div>
+    </div>
+  </div>
+
+  <!-- ─── How I Feel ─── -->
+  <div class="energy-card card">
+    <div class="section-header" style="margin-bottom: var(--s1);">
+      <span class="icon" style="color: var(--primary);">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M8 1L5 8h4l-3 5"/></svg>
+      </span>
+      <span class="section-title">How I Feel</span>
+    </div>
+    <div class="energy-row">
+      <span class="energy-label">Energy:</span>
+      <div class="energy-scale">
+        <span class="energy-endpoint">Low</span>
+        <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">1</span></div>
+        <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">2</span></div>
+        <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">3</span></div>
+        <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">4</span></div>
+        <div class="energy-item"><span class="energy-circle"></span><span class="energy-num">5</span></div>
+        <span class="energy-endpoint">High</span>
+      </div>
+    </div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <div class="footer">
+    <span class="footer-quote">"The only bad workout is the one that didn't happen."</span>
+    <span class="page-num" data-inject="page-num"></span>
+  </div>
+
+</div>
 
 </body>
 </html>

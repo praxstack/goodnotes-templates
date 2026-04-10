@@ -1,304 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meal Planner</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_base.css" />
-  <style>
-    /* ═══════════════════════════════════════════════
-       Meal Planner — template-specific styles
-       ═══════════════════════════════════════════════ */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   MEAL PLANNER v3 — Bubblegum Edition
+   Design: Pop Retro + Soft UI
+   Typography: Poppins + Lora
 
-    /* ─── Meal Grid (CSS Grid) ─── */
-    .meal-grid {
-      display: grid;
-      grid-template-columns: 18mm repeat(4, 1fr);
-      grid-template-rows: auto repeat(7, 18mm);
-      gap: 1mm;
-      width: 100%;
-    }
+   ✦ 7-day × 4-meal grid with pink headers
+   ✦ Grocery list (2 columns with circle checks)
+   ✦ Meal prep notes
+   ✦ Water goal circles in teal
+   ═══════════════════════════════════════════════════════ */
 
-    .meal-grid-header {
-      background: var(--foreground);
-      color: var(--background);
-      font-weight: 600;
-      font-size: 6pt;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      text-align: center;
-      padding: 1.5mm 1mm;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .meal-grid-header:first-child {
-      border-radius: 1.5mm 0 0 1.5mm;
-    }
-    .meal-grid-header:last-child {
-      border-radius: 0 1.5mm 1.5mm 0;
-    }
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 12mm;
 
-    .meal-day-label {
-      font-weight: 600;
-      font-size: 7pt;
-      color: var(--foreground-secondary);
-      display: flex;
-      align-items: center;
-      padding-left: 1mm;
-    }
-    .meal-day-label:nth-child(even) {
-      /* alternating row tint applied via nth-child on cells */
-    }
+  --background: #f6e6ee;
+  --foreground: #3d2040;
+  --card: #ffffff;
+  --card-alt: #fef3d6;
+  --foreground-secondary: #5b3050;
+  --muted-foreground: #8b5070;
+  --primary: #c0408a;
+  --primary-light: #e670abCC;
+  --secondary: #8acfd1;
+  --muted: #d4a0c0;
+  --accent: #d09030;
+  --accent-soft: rgba(208, 144, 48, 0.12);
+  --border: #d88ab0;
+  --input: #e8c0d4;
+  --dots: #d4a0c0;
 
-    .meal-cell {
-      background: var(--card);
-      border-radius: 1.5mm;
-      padding: 1.5mm 2mm;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.5mm;
-    }
-    /* Alternate row tint */
-    .meal-row-even .meal-cell {
-      background: var(--card-alt);
-    }
-    .meal-row-even .meal-day-label {
-      background: transparent;
-    }
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-mono: 'Fira Code', monospace;
 
-    .meal-cell .mini-line {
-      border-bottom: 0.4px dotted var(--input);
-      height: 3.5mm;
-    }
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 8mm;
 
-    /* ─── Grocery List ─── */
-    .grocery-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s3);
-    }
-    .grocery-item {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-      font-size: 7.5pt;
-      color: var(--foreground-secondary);
-      height: 5mm;
-    }
-    .grocery-item::before {
-      content: '';
-      width: 3mm;
-      height: 3mm;
-      border: 0.5px solid var(--border);
-      border-radius: 0.6mm;
-      flex-shrink: 0;
-      background: var(--background);
-    }
-    .grocery-item .line {
-      flex: 1;
-      border-bottom: 0.4px dotted var(--input);
-      height: 3.5mm;
-    }
+  --shadow-card: 3px 3px 0px 0px hsl(326 58% 57% / 0.3);
+  --radius: 6px; --radius-sm: 4px;
+}
 
-    /* ─── Water Goal ─── */
-    .water-row {
-      display: flex;
-      align-items: center;
-      gap: 3mm;
-      font-size: 7.5pt;
-      color: var(--foreground-secondary);
-    }
-    .water-row label {
-      font-weight: 600;
-      font-size: 7pt;
-      color: var(--muted-foreground);
-      white-space: nowrap;
-    }
-    .water-circles {
-      display: flex;
-      gap: 2mm;
-    }
-    .water-circle {
-      width: 4.5mm;
-      height: 4.5mm;
-      border-radius: 50%;
-      border: 0.5px solid var(--blue);
-      background: var(--background);
-    }
-  </style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { background: #e8c0d4; font-family: var(--font-sans); font-size: 7.5pt; color: var(--foreground); line-height: 1.4; -webkit-font-smoothing: antialiased; }
+
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--background); margin: 10mm auto; padding: var(--margin);
+  overflow: hidden; box-shadow: 0 4px 30px rgba(192, 64, 138, 0.15);
+  page-break-after: always; display: flex; flex-direction: column;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow-card); border: 1.5px solid var(--border); }
+.icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon svg { display: block; }
+.write-line { border-bottom: 1.5px dotted var(--dots); height: 5mm; }
+
+/* ═══ HEADER ═══ */
+.header-gradient {
+  width: 100%; height: 5px;
+  background: linear-gradient(90deg, var(--primary) 0%, #e670ab 30%, var(--secondary) 60%, var(--accent) 100%);
+  border-radius: 3px; margin-bottom: var(--s3); flex-shrink: 0;
+}
+.header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s3); flex-shrink: 0; }
+.header-left .title { font-family: var(--font-serif); font-size: 18pt; font-weight: 700; color: var(--primary); line-height: 1.1; }
+.header-left .subtitle { font-family: var(--font-sans); font-weight: 400; font-size: 6.5pt; color: var(--muted); margin-top: 0.5mm; }
+.date-card { padding: var(--s2) var(--s3); display: flex; align-items: center; gap: 2mm; }
+.date-label { font-size: 6.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted-foreground); }
+.date-field { border-bottom: 1.5px solid var(--border); min-width: 30mm; height: 4.5mm; }
+
+.section-header { display: flex; align-items: center; gap: 2mm; margin-bottom: var(--s2); flex-shrink: 0; }
+.section-bar { width: 3mm; height: 3mm; border-radius: 1mm; flex-shrink: 0; }
+.section-title { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--foreground); }
+
+/* ═══ MEAL GRID ═══ */
+.grid-card { padding: var(--s2); margin-bottom: var(--s3); flex-shrink: 0; }
+
+.meal-grid {
+  display: grid;
+  grid-template-columns: 16mm repeat(4, 1fr);
+  grid-template-rows: auto repeat(7, 1fr);
+  gap: 2mm;
+  width: 100%;
+}
+
+.meal-grid-header {
+  background: var(--primary); color: #fff;
+  font-weight: 600; font-size: 5.5pt; text-transform: uppercase;
+  letter-spacing: 0.04em; text-align: center;
+  padding: 1.5mm 1mm; display: flex; align-items: center; justify-content: center;
+}
+.meal-grid-header:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.meal-grid-header:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+.meal-day-label {
+  font-weight: 600; font-size: 6.5pt; color: var(--primary);
+  display: flex; align-items: center; padding-left: 1mm;
+}
+
+.meal-cell {
+  background: var(--card); border-radius: var(--radius-sm);
+  padding: 2.5mm 3mm; display: flex; flex-direction: column;
+  justify-content: center; gap: 1.5mm;
+  border: 0.5px solid rgba(216, 138, 176, 0.3);
+}
+.meal-row-even .meal-cell { background: var(--card-alt); }
+
+.meal-cell .mini-line {
+  border-bottom: 1px dotted var(--dots); height: 6.5mm;
+}
+
+/* ═══ GROCERY LIST ═══ */
+.grocery-card { padding: var(--s2) var(--s3); margin-bottom: var(--s3); flex-shrink: 0; }
+.grocery-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+.grocery-item {
+  display: flex; align-items: center; gap: 2mm;
+  font-size: 7pt; color: var(--foreground-secondary); height: 5mm;
+}
+.grocery-check {
+  width: 3mm; height: 3mm; border-radius: 50%;
+  border: 1.5px solid var(--secondary); flex-shrink: 0;
+}
+.grocery-line { flex: 1; border-bottom: 1px dotted var(--dots); height: 3.5mm; }
+
+/* ═══ MEAL PREP NOTES ═══ */
+.notes-card { padding: var(--s2) var(--s3); margin-bottom: var(--s3); flex-shrink: 0; background: var(--accent-soft); border-color: rgba(208, 144, 48, 0.25); }
+
+/* ═══ WATER ═══ */
+.water-row { display: flex; align-items: center; gap: 3mm; flex-shrink: 0; margin-bottom: var(--s2); }
+.water-row label { font-weight: 600; font-size: 7pt; color: var(--muted-foreground); }
+.water-circles { display: flex; gap: 2mm; }
+.water-circle { width: 5mm; height: 5mm; border-radius: 50%; border: 1.5px solid var(--secondary); flex-shrink: 0; }
+
+/* ═══ FOOTER ═══ */
+.footer {
+  border-top: 1.5px solid var(--border); padding-top: var(--s1);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0; margin-top: auto;
+}
+.footer-quote { font-family: var(--font-serif); font-style: italic; font-size: 6.5pt; color: var(--muted-foreground); }
+.footer .page-num { font-size: 6pt; color: var(--muted); letter-spacing: 0.05em; }
+</style>
 </head>
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- ══════════════════════════════════════════════════════════
-         1. HEADER
-         ══════════════════════════════════════════════════════════ -->
-    <header class="page-header">
-      <div>
-        <div class="page-title">Meal Planner</div>
-        <div class="page-subtitle">Nourish your body. Plan your week.</div>
-      </div>
-    </header>
+  <div class="header-gradient" aria-hidden="true"></div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         2. WEEK-OF ROW
-         ══════════════════════════════════════════════════════════ -->
-    <div class="date-row">
-      <label>Week of:</label><span class="field wide"></span>
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Meal Planner</div>
+      <div class="subtitle">Nourish your body. Plan your week.</div>
     </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         3. MAIN MEAL GRID
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label no-top">
-      <div class="section-dot"></div>
-      <div class="section-title">Weekly Meals</div>
+    <div class="date-card card">
+      <span class="date-label">Week of</span>
+      <span class="date-field"></span>
     </div>
+  </div>
 
+  <!-- ─── Meal Grid ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--primary);"></div>
+    <span class="icon" style="color: var(--primary);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="7" cy="7" r="5.5"/><path d="M7 4v3"/><path d="M4 8.5h6"/></svg>
+    </span>
+    <span class="section-title">Weekly Meals</span>
+  </div>
+
+  <div class="grid-card card">
     <div class="meal-grid">
-      <!-- Header row -->
       <div class="meal-grid-header">Day</div>
       <div class="meal-grid-header">Breakfast</div>
       <div class="meal-grid-header">Lunch</div>
       <div class="meal-grid-header">Dinner</div>
       <div class="meal-grid-header">Snacks</div>
 
-      <!-- Monday -->
       <div class="meal-day-label">Mon</div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
 
-      <!-- Tuesday -->
       <div class="meal-day-label meal-row-even">Tue</div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
 
-      <!-- Wednesday -->
       <div class="meal-day-label">Wed</div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
 
-      <!-- Thursday -->
       <div class="meal-day-label meal-row-even">Thu</div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
 
-      <!-- Friday -->
       <div class="meal-day-label">Fri</div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
 
-      <!-- Saturday -->
       <div class="meal-day-label meal-row-even">Sat</div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell meal-row-even"><div class="mini-line"></div><div class="mini-line"></div></div>
 
-      <!-- Sunday -->
       <div class="meal-day-label">Sun</div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
       <div class="meal-cell"><div class="mini-line"></div><div class="mini-line"></div></div>
     </div>
+  </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         4. GROCERY LIST
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot green"></div>
-      <div class="section-title">Grocery List</div>
-    </div>
+  <!-- ─── Grocery List ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--secondary);"></div>
+    <span class="icon" style="color: var(--secondary);">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M4 6l2 2 4-4"/><rect x="1" y="1" width="10" height="10" rx="2"/></svg>
+    </span>
+    <span class="section-title">Grocery List</span>
+  </div>
 
+  <div class="grocery-card card">
     <div class="grocery-cols">
       <div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
       </div>
       <div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
-        <div class="grocery-item"><span class="line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
+        <div class="grocery-item"><span class="grocery-check"></span><span class="grocery-line"></span></div>
       </div>
     </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         5. MEAL PREP NOTES
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot amber"></div>
-      <div class="section-title">Meal Prep Notes</div>
-    </div>
-
-    <div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         6. WATER GOAL
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot blue"></div>
-      <div class="section-title">Hydration</div>
-    </div>
-
-    <div class="water-row">
-      <label>Water Goal:</label>
-      <div class="water-circles">
-        <div class="water-circle"></div>
-        <div class="water-circle"></div>
-        <div class="water-circle"></div>
-        <div class="water-circle"></div>
-        <div class="water-circle"></div>
-        <div class="water-circle"></div>
-        <div class="water-circle"></div>
-        <div class="water-circle"></div>
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         7. QUOTE BANNER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="quote-banner">
-      <div class="quote-text">"Let food be thy medicine and medicine be thy food."</div>
-      <div class="quote-author">— Hippocrates</div>
-    </div>
-
   </div>
+
+  <!-- ─── Meal Prep Notes ─── -->
+  <div class="notes-card card">
+    <div class="section-header" style="margin-bottom: var(--s1);">
+      <span class="icon" style="color: var(--accent);">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M8.5 1.5l2 2L4 10H2v-2z"/><path d="M7 3l2 2"/></svg>
+      </span>
+      <span class="section-title" style="color: var(--accent);">Meal Prep Notes</span>
+    </div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── Water ─── -->
+  <div class="water-row">
+    <span class="icon" style="color: var(--secondary);">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M6 1.5S3 5 3 7.5a3 3 0 0 0 6 0c0-2.5-3-6-3-6z"/></svg>
+    </span>
+    <label>Water Goal:</label>
+    <div class="water-circles">
+      <div class="water-circle"></div><div class="water-circle"></div>
+      <div class="water-circle"></div><div class="water-circle"></div>
+      <div class="water-circle"></div><div class="water-circle"></div>
+      <div class="water-circle"></div><div class="water-circle"></div>
+    </div>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <div class="footer">
+    <span class="footer-quote">"Let food be thy medicine and medicine be thy food." — Hippocrates</span>
+    <span class="page-num" data-inject="page-num"></span>
+  </div>
+
+</div>
 
 </body>
 </html>

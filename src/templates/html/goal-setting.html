@@ -1,268 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Goal Setting Worksheet</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_base.css" />
-  <style>
-    /* ═══════════════════════════════════════════════
-       Goal Setting — template-specific styles
-       ═══════════════════════════════════════════════ */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goal Setting Worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   GOAL SETTING v3 — Bubblegum Edition
+   Design: Pop Retro + Soft UI — pink/teal/gold
+   Typography: Poppins + Lora
+   
+   ✦ Goal card with pink gradient accent bar
+   ✦ SMART breakdown with colored letter badges
+   ✦ Milestones table with pop header
+   ✦ Obstacles + Support in teal/gold cards
+   ✦ "First Step" action card
+   ═══════════════════════════════════════════════════════ */
 
-    /* ─── The Goal Card ─── */
-    .goal-card {
-      padding: var(--s3) var(--s4);
-    }
-    .goal-field {
-      display: flex;
-      align-items: baseline;
-      gap: 2mm;
-      font-size: 7.5pt;
-      color: var(--foreground-secondary);
-      margin-bottom: 1mm;
-    }
-    .goal-field label {
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .goal-field .field-val {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 28mm;
-      height: 4.5mm;
-      display: inline-block;
-    }
-    .goal-lines {
-      margin-top: 0.5mm;
-    }
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 12mm;
 
-    /* ─── SMART Breakdown ─── */
-    .smart-list {
-      list-style: none;
-    }
-    .smart-item {
-      display: flex;
-      align-items: center;
-      gap: 2.5mm;
-      padding: 1.8mm 0;
-      border-bottom: 0.3px dotted var(--input);
-    }
-    .smart-item:last-child {
-      border-bottom: none;
-    }
-    .smart-dot {
-      width: 3.5mm;
-      height: 3.5mm;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .smart-label {
-      font-weight: 600;
-      font-size: 7pt;
-      min-width: 18mm;
-      color: var(--foreground);
-    }
-    .smart-line {
-      flex: 1;
-      border-bottom: 0.5px dotted var(--input);
-      height: 4.5mm;
-    }
+  /* Bubblegum palette */
+  --background: #f6e6ee;
+  --foreground: #3d2040;
+  --card: #ffffff;
+  --card-alt: #fef3d6;
+  --foreground-secondary: #5b3050;
+  --muted-foreground: #8b5070;
+  --primary: #c0408a;
+  --primary-light: #e670abCC;
+  --secondary: #8acfd1;
+  --muted: #d4a0c0;
+  --muted-bg: #f8d8ea;
+  --accent: #d09030;
+  --accent-soft: rgba(208, 144, 48, 0.12);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.1);
+  --border: #d88ab0;
+  --input: #e8c0d4;
+  --dots: #d4a0c0;
 
-    /* ─── Milestones Table ─── */
-    .grid-table .col-status {
-      width: 14mm;
-    }
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-mono: 'Fira Code', monospace;
 
-    /* ─── Obstacles & Support ─── */
-    .obstacle-list {
-      list-style: none;
-    }
-    .obstacle-item {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-      padding: 1.5mm 0;
-    }
-    .obstacle-line {
-      flex: 1;
-      border-bottom: 0.5px dotted var(--input);
-      height: 4.5mm;
-    }
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 8mm;
 
-    /* ─── First Step ─── */
-    .first-step {
-      background: var(--card);
-      border-radius: 2.5mm;
-      padding: var(--s2) var(--s3);
-      border-left: 3px solid var(--accent);
-    }
-    .first-step-label {
-      font-weight: 700;
-      font-size: 7.5pt;
-      color: var(--accent);
-      margin-bottom: var(--s1);
-    }
-    .first-step-line {
-      border-bottom: 0.5px solid var(--border);
-      height: 6mm;
-    }
-  </style>
+  --shadow-card: 3px 3px 0px 0px hsl(326 58% 57% / 0.3);
+  --radius: 6px; --radius-sm: 4px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #e8c0d4;
+  font-family: var(--font-sans);
+  font-size: 7.5pt; color: var(--foreground); line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto; padding: var(--margin);
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(192, 64, 138, 0.15);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow-card); border: 1.5px solid var(--border); }
+.icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon svg { display: block; }
+.write-line { border-bottom: 1.5px dotted var(--dots); height: 5.5mm; }
+
+/* ═══ HEADER ═══ */
+.header-gradient {
+  width: 100%; height: 5px;
+  background: linear-gradient(90deg, var(--primary) 0%, #e670ab 30%, var(--secondary) 60%, var(--accent) 100%);
+  border-radius: 3px; margin-bottom: var(--s3); flex-shrink: 0;
+}
+.header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s3); flex-shrink: 0; }
+.header-left .title { font-family: var(--font-serif); font-size: 18pt; font-weight: 700; color: var(--primary); line-height: 1.1; }
+.header-left .subtitle { font-family: var(--font-sans); font-weight: 400; font-size: 6.5pt; color: var(--muted); margin-top: 0.5mm; }
+.date-card { padding: var(--s2) var(--s3); display: flex; align-items: center; gap: 2mm; }
+.date-label { font-size: 6.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted-foreground); }
+.date-field { border-bottom: 1.5px solid var(--border); min-width: 26mm; height: 4.5mm; }
+
+/* Section headers */
+.section-header { display: flex; align-items: center; gap: 2mm; margin-bottom: var(--s2); flex-shrink: 0; }
+.section-bar { width: 3mm; height: 3mm; border-radius: 1mm; flex-shrink: 0; }
+.section-title { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--foreground); }
+
+/* ═══ THE GOAL ═══ */
+.goal-card {
+  padding: var(--s3); margin-bottom: var(--s3); flex-shrink: 0;
+  border-left: 4px solid var(--primary);
+  background: linear-gradient(135deg, var(--card) 0%, rgba(192, 64, 138, 0.04) 100%);
+}
+.goal-label { font-size: 7pt; font-weight: 700; color: var(--primary); margin-bottom: var(--s1); text-transform: uppercase; letter-spacing: 0.04em; }
+.goal-sub { font-size: 6.5pt; font-weight: 600; color: var(--foreground-secondary); margin-top: var(--s2); margin-bottom: var(--s1); }
+.goal-inline { display: flex; align-items: center; gap: 2mm; font-size: 6.5pt; color: var(--foreground-secondary); margin-top: var(--s2); }
+.goal-inline label { font-weight: 600; }
+.goal-val { border-bottom: 1.5px solid var(--border); min-width: 28mm; height: 4mm; display: inline-block; }
+
+/* ═══ SMART BREAKDOWN ═══ */
+.smart-list { list-style: none; margin-bottom: var(--s3); flex-shrink: 0; }
+.smart-item { display: flex; align-items: center; gap: 2.5mm; padding: 2mm 0; border-bottom: 1px dotted var(--dots); }
+.smart-item:last-child { border-bottom: none; }
+.smart-badge {
+  width: 5.5mm; height: 5.5mm; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 5.5pt; font-weight: 700; flex-shrink: 0;
+}
+.smart-label { font-weight: 600; font-size: 7pt; min-width: 18mm; color: var(--foreground); }
+.smart-line { flex: 1; border-bottom: 1.5px dotted var(--dots); height: 4.5mm; }
+
+/* ═══ MILESTONES TABLE ═══ */
+.milestone-card { padding: var(--s2) var(--s3); margin-bottom: var(--s3); flex-shrink: 0; }
+.milestone-table { width: 100%; border-collapse: collapse; font-size: 6.5pt; }
+.milestone-table th {
+  background: var(--primary); color: #fff;
+  font-weight: 600; font-size: 5.5pt; text-transform: uppercase;
+  letter-spacing: 0.04em; padding: 1.5mm 2mm; text-align: center;
+}
+.milestone-table th:first-child { text-align: left; border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.milestone-table th:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.milestone-table td { padding: 1.2mm 2mm; text-align: center; border-bottom: 1px dotted var(--dots); height: 6mm; }
+.milestone-table td:first-child { text-align: left; color: var(--foreground-secondary); }
+.milestone-table tr:nth-child(even) td { background: var(--card-alt); }
+.status-check { width: 3.5mm; height: 3.5mm; border-radius: 50%; border: 1.5px solid var(--primary); display: inline-block; }
+
+/* ═══ OBSTACLES + SUPPORT (side by side) ═══ */
+.obs-sup-cols { display: flex; gap: var(--s2); margin-bottom: var(--s3); flex-shrink: 0; }
+.obs-card { flex: 1; padding: var(--s2) var(--s3); }
+.obs-card.teal { background: rgba(138, 207, 209, 0.1); border-color: rgba(138, 207, 209, 0.35); }
+.obs-card.gold { background: var(--accent-soft); border-color: rgba(208, 144, 48, 0.25); }
+.obs-header { display: flex; align-items: center; gap: 2mm; margin-bottom: var(--s2); }
+.obs-title { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.obs-row { display: flex; align-items: center; gap: 2mm; height: 5.5mm; }
+.obs-check { width: 3.5mm; height: 3.5mm; border-radius: 50%; flex-shrink: 0; }
+.teal .obs-check { border: 1.5px solid var(--secondary); }
+.teal .obs-title { color: #5b9fa0; }
+.gold .obs-check { border: 1.5px solid var(--accent); }
+.gold .obs-title { color: var(--accent); }
+.obs-line { flex: 1; border-bottom: 1.5px dotted var(--dots); height: 4mm; }
+
+/* ═══ FIRST STEP ═══ */
+.first-step-card {
+  padding: var(--s3); flex-shrink: 0;
+  border-left: 4px solid var(--secondary);
+  background: rgba(138, 207, 209, 0.08);
+  border-color: rgba(138, 207, 209, 0.3);
+  margin-bottom: var(--s2);
+}
+.first-step-label { font-size: 7pt; font-weight: 700; color: #5b9fa0; margin-bottom: var(--s2); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ═══ FOOTER ═══ */
+.footer {
+  border-top: 1.5px solid var(--border); padding-top: var(--s1);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0; margin-top: auto;
+}
+.footer-quote { font-family: var(--font-serif); font-style: italic; font-size: 6.5pt; color: var(--muted-foreground); }
+.footer .page-num { font-size: 6pt; color: var(--muted); letter-spacing: 0.05em; }
+</style>
 </head>
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- ══════════════════════════════════════════════════════════
-         1. HEADER
-         ══════════════════════════════════════════════════════════ -->
-    <header class="page-header">
-      <div>
-        <div class="page-title">Goal Setting</div>
-        <div class="page-subtitle">Dream it. Plan it. Do it.</div>
-      </div>
-    </header>
+  <div class="header-gradient" aria-hidden="true"></div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         2. DATE ROW
-         ══════════════════════════════════════════════════════════ -->
-    <div class="date-row">
-      <label>Date:</label><span class="field"></span>
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Goal Setting</div>
+      <div class="subtitle">Dream it. Plan it. Do it.</div>
     </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         3. THE GOAL
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label no-top">
-      <div class="section-dot"></div>
-      <div class="section-title">The Goal</div>
+    <div class="date-card card">
+      <span class="date-label">Date</span>
+      <span class="date-field"></span>
     </div>
+  </div>
 
-    <div class="card accent-soft goal-card">
-      <div class="goal-field"><label>My Goal:</label></div>
-      <div class="goal-lines">
-        <div class="write-line"></div>
-        <div class="write-line"></div>
-      </div>
-      <div class="goal-field" style="margin-top:var(--s2);"><label>Why This Matters:</label></div>
-      <div class="goal-lines">
-        <div class="write-line"></div>
-        <div class="write-line"></div>
-      </div>
-      <div class="goal-field" style="margin-top:var(--s2);">
-        <label>Target Date:</label>
-        <span class="field-val"></span>
-      </div>
-    </div>
+  <!-- ─── The Goal ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--primary);"></div>
+    <span class="icon" style="color: var(--primary);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.3 3.3 12.3l.7-4.1-3-2.9 4.2-.7z"/></svg>
+    </span>
+    <span class="section-title">The Goal</span>
+  </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         4. SMART BREAKDOWN
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot blue"></div>
-      <div class="section-title">SMART Breakdown</div>
-    </div>
+  <div class="goal-card card">
+    <div class="goal-label">My Goal:</div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="goal-sub">Why This Matters:</div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="goal-inline"><label>Target Date:</label><span class="goal-val"></span></div>
+  </div>
 
-    <ul class="smart-list">
-      <li class="smart-item">
-        <span class="smart-dot" style="background:var(--green);"></span>
-        <span class="smart-label">Specific</span>
-        <span class="smart-line"></span>
-      </li>
-      <li class="smart-item">
-        <span class="smart-dot" style="background:var(--blue);"></span>
-        <span class="smart-label">Measurable</span>
-        <span class="smart-line"></span>
-      </li>
-      <li class="smart-item">
-        <span class="smart-dot" style="background:var(--amber);"></span>
-        <span class="smart-label">Achievable</span>
-        <span class="smart-line"></span>
-      </li>
-      <li class="smart-item">
-        <span class="smart-dot" style="background:var(--accent);"></span>
-        <span class="smart-label">Relevant</span>
-        <span class="smart-line"></span>
-      </li>
-      <li class="smart-item">
-        <span class="smart-dot" style="background:var(--green);"></span>
-        <span class="smart-label">Time-bound</span>
-        <span class="smart-line"></span>
-      </li>
-    </ul>
+  <!-- ─── SMART Breakdown ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--secondary);"></div>
+    <span class="section-title">SMART Breakdown</span>
+  </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         5. MILESTONES
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot green"></div>
-      <div class="section-title">Milestones</div>
-    </div>
+  <ul class="smart-list">
+    <li class="smart-item"><span class="smart-badge" style="background:#059669;">S</span><span class="smart-label">Specific</span><span class="smart-line"></span></li>
+    <li class="smart-item"><span class="smart-badge" style="background:#2563EB;">M</span><span class="smart-label">Measurable</span><span class="smart-line"></span></li>
+    <li class="smart-item"><span class="smart-badge" style="background:var(--accent);">A</span><span class="smart-label">Achievable</span><span class="smart-line"></span></li>
+    <li class="smart-item"><span class="smart-badge" style="background:var(--primary);">R</span><span class="smart-label">Relevant</span><span class="smart-line"></span></li>
+    <li class="smart-item"><span class="smart-badge" style="background:#059669;">T</span><span class="smart-label">Time-bound</span><span class="smart-line"></span></li>
+  </ul>
 
-    <table class="grid-table">
-      <thead>
-        <tr>
-          <th style="width:50%;">Milestone</th>
-          <th>Target Date</th>
-          <th class="col-status">Status</th>
-        </tr>
-      </thead>
+  <!-- ─── Milestones ─── -->
+  <div class="section-header">
+    <div class="section-bar" style="background: var(--accent);"></div>
+    <span class="icon" style="color: var(--accent);">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2 10V2"/><path d="M2 2h6l-2 2.5L8 7H2"/></svg>
+    </span>
+    <span class="section-title">Milestones</span>
+  </div>
+
+  <div class="milestone-card card">
+    <table class="milestone-table">
+      <thead><tr><th style="width:50%;">Milestone</th><th>Target Date</th><th style="width:12%;">Done</th></tr></thead>
       <tbody>
-        <tr><td></td><td></td><td><span class="grid-box"></span></td></tr>
-        <tr><td></td><td></td><td><span class="grid-box"></span></td></tr>
-        <tr><td></td><td></td><td><span class="grid-box"></span></td></tr>
-        <tr><td></td><td></td><td><span class="grid-box"></span></td></tr>
-        <tr><td></td><td></td><td><span class="grid-box"></span></td></tr>
+        <tr><td></td><td></td><td><span class="status-check"></span></td></tr>
+        <tr><td></td><td></td><td><span class="status-check"></span></td></tr>
+        <tr><td></td><td></td><td><span class="status-check"></span></td></tr>
+        <tr><td></td><td></td><td><span class="status-check"></span></td></tr>
+        <tr><td></td><td></td><td><span class="status-check"></span></td></tr>
       </tbody>
     </table>
-
-    <!-- ══════════════════════════════════════════════════════════
-         6. POTENTIAL OBSTACLES
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot amber"></div>
-      <div class="section-title">Potential Obstacles</div>
-    </div>
-
-    <ul class="obstacle-list">
-      <li class="obstacle-item"><span class="cb"></span><span class="obstacle-line"></span></li>
-      <li class="obstacle-item"><span class="cb"></span><span class="obstacle-line"></span></li>
-      <li class="obstacle-item"><span class="cb"></span><span class="obstacle-line"></span></li>
-    </ul>
-
-    <!-- ══════════════════════════════════════════════════════════
-         7. SUPPORT NEEDED
-         ══════════════════════════════════════════════════════════ -->
-    <div class="section-label">
-      <div class="section-dot blue"></div>
-      <div class="section-title">Support Needed</div>
-    </div>
-
-    <ul class="obstacle-list">
-      <li class="obstacle-item"><span class="cb"></span><span class="obstacle-line"></span></li>
-      <li class="obstacle-item"><span class="cb"></span><span class="obstacle-line"></span></li>
-      <li class="obstacle-item"><span class="cb"></span><span class="obstacle-line"></span></li>
-    </ul>
-
-    <!-- ══════════════════════════════════════════════════════════
-         8. FIRST STEP
-         ══════════════════════════════════════════════════════════ -->
-    <div class="first-step" style="margin-top:var(--s4);">
-      <div class="first-step-label">First Step I'll Take Today:</div>
-      <div class="first-step-line"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         9. QUOTE BANNER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="quote-banner">
-      <div class="quote-text">"A journey of a thousand miles begins with a single step."</div>
-      <div class="quote-author">— Lao Tzu</div>
-    </div>
-
   </div>
+
+  <!-- ─── Obstacles + Support (side by side) ─── -->
+  <div class="obs-sup-cols">
+    <div class="obs-card card teal">
+      <div class="obs-header">
+        <span class="icon" style="color: #5b9fa0;">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M6 1v6"/><circle cx="6" cy="10" r="0.8" fill="currentColor" stroke="none"/></svg>
+        </span>
+        <span class="obs-title">Potential Obstacles</span>
+      </div>
+      <div class="obs-row"><span class="obs-check"></span><span class="obs-line"></span></div>
+      <div class="obs-row"><span class="obs-check"></span><span class="obs-line"></span></div>
+      <div class="obs-row"><span class="obs-check"></span><span class="obs-line"></span></div>
+    </div>
+    <div class="obs-card card gold">
+      <div class="obs-header">
+        <span class="icon" style="color: var(--accent);">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><circle cx="6" cy="3" r="2"/><path d="M2 10c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>
+        </span>
+        <span class="obs-title">Support Needed</span>
+      </div>
+      <div class="obs-row"><span class="obs-check"></span><span class="obs-line"></span></div>
+      <div class="obs-row"><span class="obs-check"></span><span class="obs-line"></span></div>
+      <div class="obs-row"><span class="obs-check"></span><span class="obs-line"></span></div>
+    </div>
+  </div>
+
+  <!-- ─── First Step ─── -->
+  <div class="first-step-card card">
+    <div class="first-step-label">First Step I'll Take Today:</div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <div class="footer">
+    <span class="footer-quote">"A journey of a thousand miles begins with a single step." — Lao Tzu</span>
+    <span class="page-num" data-inject="page-num"></span>
+  </div>
+
+</div>
 
 </body>
 </html>
