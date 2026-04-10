@@ -1,260 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cornell Notes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_base.css" />
-  <style>
-    /* ═══════════════════════════════════════════════
-       Cornell Notes — template-specific styles
-       ═══════════════════════════════════════════════ */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cornell Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   CORNELL NOTES v3
+   Design: Soft UI Evolution
+   Typography: Lora + Raleway
+   Palette: Mental Health App (calming lavender)
 
-    /* ─── Header fields row ─── */
-    .header-fields {
-      display: flex;
-      align-items: center;
-      gap: 5mm;
-      font-size: 7.5pt;
-      color: var(--muted-foreground);
-    }
-    .header-fields label {
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .header-fields .field {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 28mm;
-      height: 4.5mm;
-      display: inline-block;
-    }
+   Structure:
+   ✦ Header with gradient bar + subject/date/topic
+   ✦ Two-column body: Cue (30%) | Notes (70%)
+   ✦ Summary section at bottom
+   ✦ Study tips footer
+   ═══════════════════════════════════════════════════════ */
 
-    /* ─── Main body: cue + notes columns ─── */
-    .cornell-body {
-      flex: 7;
-      display: flex;
-      min-height: 0;
-      border: 0.3px solid var(--border);
-      border-radius: 2mm;
-      overflow: hidden;
-    }
+/* ─── Design Tokens ─── */
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 14mm;
 
-    /* Cue column (left, 30%) */
-    .cue-column {
-      flex: 0 0 30%;
-      background: var(--card);
-      padding: var(--s2) var(--s3);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
+  /* Color palette */
+  --primary: #8B5CF6;
+  --primary-light: #C4B5FD;
+  --accent: #059669;
+  --accent-soft: rgba(5, 150, 105, 0.08);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.08);
+  --background: #FAF5FF;
+  --card: #FFFFFF;
+  --card-alt: #F5F0FF;
+  --foreground: #4C1D95;
+  --foreground-secondary: #6D28D9;
+  --muted-foreground: #7C3AED;
+  --muted: #A78BFA;
+  --muted-bg: #EDE9FE;
+  --border: #DDD6FE;
+  --input: #C4B5FD;
+  --dots: #C4B5FD;
 
-    /* Vertical divider between cue and notes */
-    .cue-column::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 100%;
-      border-right: 0.3px solid var(--border);
-    }
+  /* Typography */
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Raleway', 'Segoe UI', system-ui, sans-serif;
 
-    .column-label {
-      font-weight: 700;
-      font-size: 6.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted-foreground);
-      margin-bottom: var(--s2);
-      flex-shrink: 0;
-    }
+  /* Spacing */
+  --s1: 2mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
 
-    .cue-lines {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
+  /* Soft UI */
+  --shadow-card: 0 1px 3px rgba(139, 92, 246, 0.08), 0 4px 12px rgba(139, 92, 246, 0.04);
+  --shadow-inset: inset 0 1px 2px rgba(139, 92, 246, 0.06);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
 
-    .cue-line {
-      border-bottom: 0.3px dotted var(--input);
-      height: 7mm;
-      flex-shrink: 0;
-    }
+/* ─── Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    /* Notes column (right, 70%) */
-    .notes-column {
-      flex: 1;
-      background: var(--background);
-      padding: var(--s2) var(--s3);
-      display: flex;
-      flex-direction: column;
-    }
+body {
+  background: #E8E0F0;
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  font-weight: 400;
+  color: var(--foreground);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
 
-    .note-lines {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
+/* ─── Page ─── */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(139, 92, 246, 0.12);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
 
-    .note-line {
-      border-bottom: 0.3px dotted var(--input);
-      height: 5mm;
-      flex-shrink: 0;
-    }
+/* ─── Print ─── */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+}
 
-    /* ─── Summary section (bottom ~20%) ─── */
-    .cornell-summary {
-      flex: 2;
-      background: var(--blue-soft);
-      border-radius: 2mm;
-      padding: var(--s2) var(--s3);
-      margin-top: var(--s3);
-      display: flex;
-      flex-direction: column;
-    }
+/* ─── Card Base ─── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
 
-    .summary-lines {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
+/* ─── Icon Base ─── */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+}
+.icon svg { display: block; }
 
-    .summary-line {
-      border-bottom: 0.3px dotted var(--input);
-      height: 5mm;
-      flex-shrink: 0;
-    }
+/* ═══════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════ */
+.header-gradient {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 60%, #EDE9FE 100%);
+  border-radius: 2px;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
 
-    /* ─── Footer ─── */
-    .cornell-footer {
-      text-align: center;
-      font-size: 6pt;
-      color: var(--muted-foreground);
-      padding-top: var(--s2);
-      flex-shrink: 0;
-      letter-spacing: 0.02em;
-    }
-  </style>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header-left .title {
+  font-family: var(--font-serif);
+  font-size: 18pt;
+  font-weight: 600;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.header-left .subtitle {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 7pt;
+  color: var(--muted);
+  margin-top: 1mm;
+}
+
+/* ─── Field Card ─── */
+.fields-card {
+  padding: var(--s2) var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+
+.field-label {
+  font-family: var(--font-sans);
+  font-size: 6.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 10mm;
+}
+
+.field-line {
+  border-bottom: 1px solid var(--border);
+  min-width: 28mm;
+  height: 4.5mm;
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════
+   CORNELL BODY — Cue | Notes
+   ═══════════════════════════════════════ */
+.cornell-body {
+  flex: 1;
+  display: flex;
+  gap: 0;
+  min-height: 0;
+  margin-bottom: var(--s3);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+
+/* ─── Cue Column (Left 30%) ─── */
+.cue-column {
+  flex: 0 0 30%;
+  background: var(--card-alt);
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+  border-right: 1.5px solid var(--border);
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.column-label {
+  font-family: var(--font-sans);
+  font-size: 6.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--foreground-secondary);
+}
+
+.column-hint {
+  font-family: var(--font-sans);
+  font-size: 6pt;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: var(--s2);
+  flex-shrink: 0;
+}
+
+.cue-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cue-line {
+  border-bottom: 1.5px dotted var(--dots);
+  height: 8mm;
+  flex-shrink: 0;
+}
+
+/* ─── Notes Column (Right 70%) ─── */
+.notes-column {
+  flex: 1;
+  background: var(--card);
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+}
+
+.note-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-line {
+  border-bottom: 1.5px dotted var(--dots);
+  height: 7mm;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   SUMMARY SECTION
+   ═══════════════════════════════════════ */
+.cornell-summary {
+  flex-shrink: 0;
+  padding: var(--s3);
+  margin-bottom: var(--s2);
+  background: linear-gradient(135deg, var(--card) 0%, var(--card-alt) 100%);
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: var(--s2);
+}
+
+.summary-lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-line {
+  border-bottom: 1.5px dotted var(--dots);
+  height: 7mm;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.footer {
+  border-top: 1px solid var(--border);
+  padding-top: var(--s1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.footer-tips {
+  display: flex;
+  gap: var(--s3);
+  align-items: center;
+}
+
+.tip-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  font-size: 6pt;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.tip-dot {
+  width: 2mm;
+  height: 2mm;
+  border-radius: 50%;
+  background: var(--primary-light);
+  flex-shrink: 0;
+}
+
+.footer .page-num {
+  font-family: var(--font-sans);
+  font-size: 6pt;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+</style>
 </head>
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- ── Header Strip ── -->
-    <header class="page-header">
-      <h1 class="page-title">Cornell Notes</h1>
-      <div class="header-fields">
-        <label>Subject:</label><span class="field"></span>
-        <label>Date:</label><span class="field"></span>
-        <label>Topic:</label><span class="field"></span>
-      </div>
-    </header>
+  <!-- ─── Header Gradient ─── -->
+  <div class="header-gradient" aria-hidden="true"></div>
 
-    <!-- ── Main Body: Cue Column + Notes Column ── -->
-    <div class="cornell-body">
-
-      <!-- Left: Cue / Key-Points Column (30%) -->
-      <div class="cue-column">
-        <div class="column-label">Key Points / Questions</div>
-        <div class="cue-lines">
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-          <div class="cue-line"></div>
-        </div>
-      </div>
-
-      <!-- Right: Notes Column (70%) -->
-      <div class="notes-column">
-        <div class="column-label">Notes</div>
-        <div class="note-lines">
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-          <div class="note-line"></div>
-        </div>
-      </div>
-
+  <!-- ─── Header ─── -->
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Cornell Notes</div>
+      <div class="subtitle">Capture, question, and synthesize</div>
     </div>
+    <div class="fields-card card">
+      <div class="field-row">
+        <span class="field-label">Subject</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Date</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Topic</span>
+        <span class="field-line"></span>
+      </div>
+    </div>
+  </div>
 
-    <!-- ── Summary Section ── -->
-    <div class="cornell-summary">
-      <div class="column-label">Summary</div>
-      <div class="summary-lines">
-        <div class="summary-line"></div>
-        <div class="summary-line"></div>
-        <div class="summary-line"></div>
-        <div class="summary-line"></div>
-        <div class="summary-line"></div>
-        <div class="summary-line"></div>
+  <!-- ─── Cornell Body: Cue | Notes ─── -->
+  <div class="cornell-body">
+
+    <!-- Left: Cue Column (30%) -->
+    <div class="cue-column">
+      <div class="column-header">
+        <span class="icon">
+          <!-- Key/question icon -->
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="4.5" r="3"/>
+            <path d="M6 7.5v3"/>
+            <path d="M5 9h2"/>
+          </svg>
+        </span>
+        <span class="column-label">Key Points / Questions</span>
+      </div>
+      <div class="column-hint">Write questions after class to test recall</div>
+      <div class="cue-lines">
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
+        <div class="cue-line"></div>
       </div>
     </div>
 
-    <!-- ── Footer ── -->
-    <footer class="cornell-footer">
-      Review within 24 hours &bull; Recite from cue column &bull; Reflect on learning
-    </footer>
+    <!-- Right: Notes Column (70%) -->
+    <div class="notes-column">
+      <div class="column-header">
+        <span class="icon">
+          <!-- Pen/notes icon -->
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 1.5l2 2L4 10H2v-2z"/>
+            <path d="M7 3l2 2"/>
+          </svg>
+        </span>
+        <span class="column-label">Notes</span>
+      </div>
+      <div class="column-hint">Record main ideas, details, and examples during class</div>
+      <div class="note-lines">
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+        <div class="note-line"></div>
+      </div>
+    </div>
 
   </div>
+
+  <!-- ─── Summary ─── -->
+  <div class="cornell-summary card">
+    <div class="summary-header">
+      <span class="icon">
+        <!-- Lightbulb icon -->
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 1a3.5 3.5 0 0 1 2 6.3V9H4V7.3A3.5 3.5 0 0 1 6 1z"/>
+          <path d="M4.5 10.5h3"/>
+          <path d="M5 9v1"/>
+          <path d="M7 9v1"/>
+        </svg>
+      </span>
+      <span class="column-label">Summary</span>
+      <span style="font-size: 6pt; font-style: italic; font-weight: 300; color: var(--muted); margin-left: 2mm;">Summarize the key ideas in your own words</span>
+    </div>
+    <div class="summary-lines">
+      <div class="summary-line"></div>
+      <div class="summary-line"></div>
+      <div class="summary-line"></div>
+      <div class="summary-line"></div>
+      <div class="summary-line"></div>
+    </div>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <div class="footer">
+    <div class="footer-tips">
+      <div class="tip-item">
+        <span class="tip-dot"></span>
+        <span>Review within 24 hours</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-dot"></span>
+        <span>Recite from cue column</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-dot"></span>
+        <span>Reflect on learning</span>
+      </div>
+    </div>
+    <span class="page-num" data-inject="page-num"></span>
+  </div>
+
+</div>
 
 </body>
 </html>
