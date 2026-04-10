@@ -19,14 +19,14 @@
   --page-w: 210mm;
   --page-h: 297mm;
   --margin: 14mm;
-  --bg: #FAF8F5;
-  --surface: #F3F0EB;
-  --surface-alt: #EDE9E3;
-  --ink: #1A1A1A;
-  --ink-2: #4A4A4A;
-  --ink-3: #8A8580;
-  --rule: #D9D4CD;
-  --rule-light: #E8E4DE;
+  --background: #FAF8F5;
+  --card: #F3F0EB;
+  --card-alt: #EDE9E3;
+  --foreground: #1A1A1A;
+  --foreground-secondary: #4A4A4A;
+  --muted-foreground: #8A8580;
+  --border: #D9D4CD;
+  --input: #E8E4DE;
   --accent: #C45D3E;
   --accent-soft: #F2D8CC;
   --green: #5E8B6A;
@@ -37,8 +37,8 @@
   --amber-soft: #F0E4C8;
   --dark: #2C2825;
   --cream: #FFF8F0;
-  --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --s1: 2mm; --s2: 3mm; --s3: 5mm; --s4: 7mm; --s5: 10mm; --s6: 14mm;
 }
@@ -47,9 +47,9 @@
 
 body {
   background: #E0DDD8;
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: 8.5pt;
-  color: var(--ink);
+  color: var(--foreground);
   line-height: 1.35;
   -webkit-font-smoothing: antialiased;
 }
@@ -57,7 +57,7 @@ body {
 .page {
   width: var(--page-w);
   height: var(--page-h);
-  background: var(--bg);
+  background: var(--background);
   margin: 10mm auto;
   padding: var(--margin);
   position: relative;
@@ -85,25 +85,25 @@ body {
   flex-shrink: 0;
 }
 .header-left .title {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 16pt;
-  color: var(--ink);
+  color: var(--foreground);
   letter-spacing: -0.02em;
 }
 .header-left .subtitle {
   font-style: italic;
   font-size: 7pt;
-  color: var(--ink-3);
+  color: var(--muted-foreground);
   margin-top: 1mm;
 }
 .date-block {
   text-align: right;
   font-family: var(--font-mono);
   font-size: 7pt;
-  color: var(--ink-3);
+  color: var(--muted-foreground);
 }
 .date-block .date-field {
-  border-bottom: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--border);
   min-width: 28mm;
   height: 4.5mm;
   display: inline-block;
@@ -125,9 +125,9 @@ body {
   width: 4.5mm;
   height: 4.5mm;
   border-radius: 50%;
-  border: 0.5px solid var(--rule);
+  border: 0.5px solid var(--border);
   flex-shrink: 0;
-  background: var(--bg);
+  background: var(--background);
   display: inline-block;
   vertical-align: middle;
 }
@@ -135,7 +135,7 @@ body {
 /* ─── Dotted write-line ─── */
 .write-line {
   flex: 1;
-  border-bottom: 0.3px dotted var(--rule-light);
+  border-bottom: 0.3px dotted var(--input);
   min-height: 5.5mm;
 }
 
@@ -158,7 +158,7 @@ body {
 .energy-row .label {
   font-size: 8pt;
   font-weight: 600;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
 }
 .energy-bars {
@@ -168,9 +168,9 @@ body {
 .energy-bar {
   width: 12mm;
   height: 5mm;
-  border: 0.5px solid var(--rule);
+  border: 0.5px solid var(--border);
   border-radius: 3px;
-  background: var(--bg);
+  background: var(--background);
 }
 
 /* ─── 🏃 Movement ─── */
@@ -184,7 +184,7 @@ body {
 .movement-row .label {
   font-size: 8pt;
   font-weight: 600;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
 }
 .movement-option {
@@ -192,14 +192,14 @@ body {
   align-items: center;
   gap: 1mm;
   font-size: 7.5pt;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
 }
 .movement-option .sep {
-  color: var(--rule);
+  color: var(--border);
   margin: 0 0.5mm;
 }
 .movement-other-line {
-  border-bottom: 0.3px dotted var(--rule-light);
+  border-bottom: 0.3px dotted var(--input);
   width: 14mm;
   display: inline-block;
 }
@@ -208,7 +208,7 @@ body {
   align-items: center;
   gap: 1.5mm;
   font-size: 7.5pt;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   margin-left: auto;
 }
 .movement-feel .write-line { min-width: 30mm; }
@@ -225,7 +225,7 @@ body {
 }
 .thought-prompt .prompt-label {
   font-size: 7.5pt;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
   font-weight: 500;
 }
@@ -245,7 +245,7 @@ body {
   align-items: center;
   gap: 1.5mm;
   font-size: 7.5pt;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
 }
 
 /* ─── Gratitude / Win / Proud ─── */
@@ -263,7 +263,7 @@ body {
 .gwp-row .gwp-label {
   font-size: 8pt;
   font-weight: 500;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
 }
 
@@ -276,7 +276,7 @@ body {
 .tomorrow .tomorrow-label {
   font-size: 8pt;
   font-weight: 700;
-  color: var(--ink-2);
+  color: var(--foreground-secondary);
   white-space: nowrap;
 }
 
@@ -289,7 +289,7 @@ body {
 .free-write .hint {
   font-size: 7pt;
   font-style: italic;
-  color: var(--ink-3);
+  color: var(--muted-foreground);
   margin-bottom: var(--s2);
 }
 .free-write-lines {
@@ -299,7 +299,7 @@ body {
   justify-content: space-between;
 }
 .free-write-line {
-  border-bottom: 0.3px dotted var(--rule-light);
+  border-bottom: 0.3px dotted var(--input);
   height: 5.5mm;
 }
 
@@ -309,10 +309,10 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   font-size: 6.5pt;
-  color: var(--ink-3);
+  color: var(--muted-foreground);
   flex-shrink: 0;
   padding-top: var(--s2);
-  border-top: 0.5px solid var(--rule-light);
+  border-top: 0.5px solid var(--input);
 }
 .footer .sign-off {
   font-style: italic;

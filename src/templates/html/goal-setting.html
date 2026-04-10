@@ -22,7 +22,7 @@
       align-items: baseline;
       gap: 2mm;
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: 1mm;
     }
     .goal-field label {
@@ -30,7 +30,7 @@
       white-space: nowrap;
     }
     .goal-field .field-val {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 28mm;
       height: 4.5mm;
       display: inline-block;
@@ -48,7 +48,7 @@
       align-items: center;
       gap: 2.5mm;
       padding: 1.8mm 0;
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
     }
     .smart-item:last-child {
       border-bottom: none;
@@ -63,11 +63,11 @@
       font-weight: 600;
       font-size: 7pt;
       min-width: 18mm;
-      color: var(--ink);
+      color: var(--foreground);
     }
     .smart-line {
       flex: 1;
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       height: 4.5mm;
     }
 
@@ -88,13 +88,13 @@
     }
     .obstacle-line {
       flex: 1;
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       height: 4.5mm;
     }
 
     /* ─── First Step ─── */
     .first-step {
-      background: var(--surface);
+      background: var(--card);
       border-radius: 2.5mm;
       padding: var(--s2) var(--s3);
       border-left: 3px solid var(--accent);
@@ -106,7 +106,7 @@
       margin-bottom: var(--s1);
     }
     .first-step-line {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       height: 6mm;
     }
   </style>

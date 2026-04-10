@@ -20,18 +20,18 @@
       gap: 1.5mm 4mm;
       align-items: center;
       padding: var(--s2) 0;
-      border-bottom: 0.3px solid var(--rule);
+      border-bottom: 0.3px solid var(--border);
       margin-bottom: var(--s3);
       flex-shrink: 0;
       font-size: 7.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .info-strip label {
       font-weight: 500;
       white-space: nowrap;
     }
     .info-strip .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 18mm;
       height: 4.5mm;
       display: block;
@@ -44,7 +44,7 @@
       gap: 1.5mm var(--s4);
     }
     .attendee-line {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       height: 5mm;
     }
 
@@ -70,7 +70,7 @@
       text-align: right;
     }
     .agenda-line {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       flex: 1;
       height: 4.5mm;
     }
@@ -86,7 +86,7 @@
       flex-direction: column;
     }
     .note-line {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       height: 5.5mm;
     }
 
@@ -101,8 +101,8 @@
       font-size: 7pt;
     }
     .action-table thead th {
-      background: var(--ink);
-      color: var(--bg);
+      background: var(--foreground);
+      color: var(--background);
       font-weight: 600;
       padding: 1.5mm 2mm;
       text-align: left;
@@ -127,28 +127,28 @@
     }
     .action-table tbody td {
       padding: 1.5mm 2mm;
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
       vertical-align: middle;
     }
     .action-table tbody td:first-child {
       text-align: center;
     }
     .action-table tbody tr:nth-child(even) {
-      background: var(--surface);
+      background: var(--card);
     }
     .action-cb {
       width: 3.5mm;
       height: 3.5mm;
-      border: 0.5px solid var(--rule);
+      border: 0.5px solid var(--border);
       border-radius: 0.7mm;
       display: inline-block;
-      background: var(--bg);
+      background: var(--background);
     }
     .action-table tbody tr:nth-child(even) .action-cb {
-      background: var(--surface);
+      background: var(--card);
     }
     .action-field {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       display: inline-block;
       width: 90%;
       height: 3.5mm;
@@ -160,7 +160,7 @@
       margin-bottom: var(--s2);
     }
     .decision-line {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       height: 5mm;
       margin-bottom: 1mm;
     }
@@ -171,7 +171,7 @@
       align-items: center;
       gap: 3mm;
       font-size: 7.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       flex-shrink: 0;
       margin-bottom: var(--s2);
     }
@@ -183,7 +183,7 @@
     .next-meeting-row .field-line {
       flex: 1;
       height: 4.5mm;
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       display: block;
     }
 
@@ -193,8 +193,8 @@
       justify-content: space-between;
       gap: var(--s4);
       font-size: 6.5pt;
-      color: var(--ink-3);
-      border-top: 0.3px solid var(--rule);
+      color: var(--muted-foreground);
+      border-top: 0.3px solid var(--border);
       padding-top: var(--s2);
       flex-shrink: 0;
     }
@@ -208,7 +208,7 @@
       white-space: nowrap;
     }
     .meeting-footer .footer-field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 30mm;
       height: 4mm;
       display: inline-block;

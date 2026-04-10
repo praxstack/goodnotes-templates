@@ -1,0 +1,23 @@
+/* Doom64 Dark */
+:root {
+  --background: #161614;
+  --foreground: #d0ccc4;
+  --card: #242420;
+  --card-alt: #1c1c18;
+  --foreground-secondary: #b0aca4;
+  --muted-foreground: #808078;
+  --primary: #d03030;
+  --primary-light: #e04040CC;
+  --secondary: #588030;
+  --muted: #383830;
+  --muted-bg: #1c1c18;
+  --accent: #5090d0;
+  --accent-soft: rgba(80, 144, 208, 0.15);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.12);
+  --border: #383830;
+  --input: #484840;
+  --dots: #383830;
+  --radius-sm: 0px;
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.3);
+}

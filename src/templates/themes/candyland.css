@@ -1,0 +1,27 @@
+/* CandyLand — pastel rainbow (planner-optimized contrast) */
+:root {
+  --background: #f5f0f5;
+  --foreground: #2a2040;
+  --card: #ffffff;
+  --card-alt: #f8f0f0;
+  --foreground-secondary: #4a3060;
+  --muted-foreground: #7a6080;
+  --primary: #d060a0;
+  --primary-light: #ff99ccCC;
+  --secondary: #60b0d0;
+  --muted: #c0a0c0;
+  --muted-bg: #f8f0f5;
+  --accent: #d0a020;
+  --accent-soft: rgba(208, 160, 32, 0.1);
+  --amber: #D97706;
+  --amber-soft: rgba(217, 119, 6, 0.08);
+  --border: #d0b0d0;
+  --input: #e0d0e0;
+  --dots: #c0a0c0;
+  --font-sans: 'Poppins', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow-card: 0 1px 3px 0px hsl(300 20% 40% / 0.1);
+  --shadow-inset: inset 0 1px 2px rgba(80, 40, 80, 0.06);
+}

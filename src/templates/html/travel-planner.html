@@ -24,18 +24,18 @@
       align-items: center;
       gap: 5mm;
       padding: var(--s2) 0;
-      border-bottom: 0.3px solid var(--rule);
+      border-bottom: 0.3px solid var(--border);
       margin-bottom: var(--s3);
       flex-shrink: 0;
       font-size: 7.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .trip-info-row label {
       font-weight: 500;
       white-space: nowrap;
     }
     .trip-info-row .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 22mm;
       height: 4.5mm;
       display: inline-block;
@@ -51,8 +51,8 @@
       font-size: 6.5pt;
     }
     .itinerary-table th {
-      background: var(--ink);
-      color: var(--bg);
+      background: var(--foreground);
+      color: var(--background);
       font-weight: 600;
       font-size: 5.5pt;
       text-transform: uppercase;
@@ -70,25 +70,25 @@
     .itinerary-table td {
       padding: 1.2mm 2mm;
       text-align: center;
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
       height: 5.5mm;
     }
     .itinerary-table td:first-child {
       font-weight: 600;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       font-size: 6.5pt;
     }
     .itinerary-table td.date-col {
       font-family: var(--font-mono);
       font-size: 6pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .itinerary-table td.activity-col {
-      background: var(--surface);
+      background: var(--card);
       text-align: left;
     }
     .itinerary-table tr:nth-child(even) td.activity-col {
-      background: var(--surface-alt);
+      background: var(--card-alt);
     }
 
     /* ─── Packing List ─── */
@@ -102,7 +102,7 @@
       font-size: 6.5pt;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: 1.5mm;
     }
     .packing-item {
@@ -110,21 +110,21 @@
       align-items: center;
       gap: 2mm;
       font-size: 7pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       height: 4.5mm;
     }
     .packing-item::before {
       content: '';
       width: 3mm;
       height: 3mm;
-      border: 0.5px solid var(--rule);
+      border: 0.5px solid var(--border);
       border-radius: 0.6mm;
       flex-shrink: 0;
-      background: var(--bg);
+      background: var(--background);
     }
     .packing-item .line {
       flex: 1;
-      border-bottom: 0.4px dotted var(--rule-light);
+      border-bottom: 0.4px dotted var(--input);
       height: 3.5mm;
     }
 
@@ -136,7 +136,7 @@
     }
     .reservations-table th {
       background: var(--blue-soft);
-      color: var(--ink);
+      color: var(--foreground);
       font-weight: 600;
       font-size: 5.5pt;
       text-transform: uppercase;
@@ -154,17 +154,17 @@
     .reservations-table td {
       padding: 1mm 2mm;
       text-align: center;
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
       height: 5mm;
     }
     .reservations-table td:first-child {
       text-align: left;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .reservations-table td.mono {
       font-family: var(--font-mono);
       font-size: 6pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
 
     /* ─── Budget breakdown card ─── */
@@ -178,7 +178,7 @@
       font-size: 6.5pt;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--ink);
+      color: var(--foreground);
       margin-bottom: 1.5mm;
     }
     .budget-row {
@@ -186,14 +186,14 @@
       align-items: center;
       justify-content: space-between;
       font-size: 6.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: 0.8mm;
     }
     .budget-row label {
       font-weight: 500;
     }
     .budget-row .budget-field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 18mm;
       height: 3.5mm;
       display: inline-block;
@@ -201,16 +201,16 @@
     }
     .budget-row.total label {
       font-weight: 700;
-      color: var(--ink);
+      color: var(--foreground);
     }
     .budget-row.total .budget-field {
       border-bottom-width: 1px;
-      border-bottom-color: var(--ink);
+      border-bottom-color: var(--foreground);
     }
 
     /* ─── Emergency info card ─── */
     .emergency-card {
-      background: var(--surface);
+      background: var(--card);
       border-radius: 2.5mm;
       padding: var(--s2) var(--s3);
     }
@@ -219,7 +219,7 @@
       font-size: 6.5pt;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--ink);
+      color: var(--foreground);
       margin-bottom: 1.5mm;
     }
     .emergency-row {
@@ -227,7 +227,7 @@
       align-items: center;
       gap: 2mm;
       font-size: 6.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: 0.8mm;
     }
     .emergency-row label {
@@ -236,7 +236,7 @@
     }
     .emergency-row .emergency-field {
       flex: 1;
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       height: 3.5mm;
       display: inline-block;
     }

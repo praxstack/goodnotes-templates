@@ -23,14 +23,14 @@
       margin-bottom: var(--s2);
     }
     .budget-section.green-soft { background: var(--green-soft); }
-    .budget-section.surface { background: var(--surface); }
+    .budget-section.surface { background: var(--card); }
 
     .budget-section-label {
       font-weight: 700;
       font-size: 6.5pt;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--ink);
+      color: var(--foreground);
       margin-bottom: 1.5mm;
       display: flex;
       align-items: center;
@@ -41,7 +41,7 @@
       flex-shrink: 0;
     }
     .budget-section-label .dot.green { background: var(--green); }
-    .budget-section-label .dot.ink { background: var(--ink-2); }
+    .budget-section-label .dot.ink { background: var(--foreground-secondary); }
 
     /* ─── Budget tables ─── */
     .budget-table {
@@ -50,8 +50,8 @@
       font-size: 6.5pt;
     }
     .budget-table th {
-      background: var(--ink);
-      color: var(--bg);
+      background: var(--foreground);
+      color: var(--background);
       font-weight: 600;
       font-size: 5.5pt;
       text-transform: uppercase;
@@ -69,31 +69,31 @@
     .budget-table td {
       padding: 1mm 2mm;
       text-align: center;
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
       height: 5mm;
     }
     .budget-table td:first-child {
       text-align: left;
-      color: var(--ink-2);
-      font-family: var(--font-body);
+      color: var(--foreground-secondary);
+      font-family: var(--font-sans);
       font-size: 6.5pt;
     }
     /* Number columns use mono font */
     .budget-table td.num {
       font-family: var(--font-mono);
       font-size: 6.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .budget-table tr.total-row td {
-      border-top: 0.8px solid var(--ink-3);
+      border-top: 0.8px solid var(--muted-foreground);
       border-bottom: none;
       font-weight: 700;
-      color: var(--ink);
+      color: var(--foreground);
       padding-top: 1.5mm;
     }
     .budget-table tr.total-row td.num {
       font-weight: 700;
-      color: var(--ink);
+      color: var(--foreground);
     }
 
     /* ─── Summary strip ─── */
@@ -116,7 +116,7 @@
       font-size: 6pt;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--ink);
+      color: var(--foreground);
       margin-bottom: 1.5mm;
     }
     .summary-row {
@@ -124,14 +124,14 @@
       align-items: center;
       justify-content: space-between;
       font-size: 6.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-bottom: 1mm;
     }
     .summary-row label {
       font-weight: 500;
     }
     .summary-row .summary-field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 22mm;
       height: 4mm;
       display: inline-block;
@@ -139,11 +139,11 @@
     }
     .summary-row.emphasis label {
       font-weight: 700;
-      color: var(--ink);
+      color: var(--foreground);
     }
     .summary-row.emphasis .summary-field {
       border-bottom-width: 1px;
-      border-bottom-color: var(--ink);
+      border-bottom-color: var(--foreground);
     }
 
     /* ─── Progress circles ─── */
@@ -152,7 +152,7 @@
       align-items: center;
       justify-content: space-between;
       font-size: 6.5pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
       margin-top: 1mm;
     }
     .progress-row label {
@@ -173,7 +173,7 @@
       justify-content: center;
       font-family: var(--font-mono);
       font-size: 4pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
 
     /* ─── Month/Year row ─── */
@@ -182,17 +182,17 @@
       align-items: center;
       gap: 6mm;
       padding: var(--s2) 0;
-      border-bottom: 0.3px solid var(--rule);
+      border-bottom: 0.3px solid var(--border);
       margin-bottom: var(--s3);
       flex-shrink: 0;
       font-size: 7.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .month-year-row label {
       font-weight: 500;
     }
     .month-year-row .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 28mm;
       height: 4.5mm;
       display: inline-block;

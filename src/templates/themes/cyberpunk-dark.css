@@ -1,0 +1,23 @@
+/* Cyberpunk Dark */
+:root {
+  --background: #0a0a1e;
+  --foreground: #e0e4f0;
+  --card: #181838;
+  --card-alt: #121230;
+  --foreground-secondary: #c0c4e0;
+  --muted-foreground: #7080b0;
+  --primary: #e030b0;
+  --primary-light: #ff00c8CC;
+  --secondary: #181838;
+  --muted: #282850;
+  --muted-bg: #121230;
+  --accent: #00e0b0;
+  --accent-soft: rgba(0, 224, 176, 0.15);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.12);
+  --border: #2a2a5a;
+  --input: #3a3a6a;
+  --dots: #282850;
+  --radius-sm: 4px;
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.3);
+}

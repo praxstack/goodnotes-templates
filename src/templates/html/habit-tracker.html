@@ -19,17 +19,17 @@
       align-items: center;
       gap: 6mm;
       padding: var(--s2) 0;
-      border-bottom: 0.3px solid var(--rule);
+      border-bottom: 0.3px solid var(--border);
       margin-bottom: var(--s3);
       flex-shrink: 0;
       font-size: 7.5pt;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .month-row label {
       font-weight: 500;
     }
     .month-row .field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 28mm;
       height: 4.5mm;
       display: inline-block;
@@ -55,58 +55,58 @@
       font-family: var(--font-mono);
       font-size: 5pt;
       font-weight: 500;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
       text-align: center;
       padding: 1mm 0;
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
     }
     .habit-grid thead th.col-habit {
       width: 40mm;
       text-align: left;
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-size: 6pt;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .habit-grid thead th.col-day {
       width: 4mm;
     }
     .habit-grid thead th.col-total {
       width: 10mm;
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-size: 6pt;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
 
     .habit-grid tbody tr {
       height: 5.5mm;
     }
     .habit-grid tbody tr:nth-child(even) {
-      background: var(--surface);
+      background: var(--card);
     }
 
     .habit-grid tbody td {
       padding: 0;
       text-align: center;
       vertical-align: middle;
-      border-bottom: 0.3px dotted var(--rule-light);
+      border-bottom: 0.3px dotted var(--input);
     }
     .habit-grid tbody td.cell-habit {
       text-align: left;
       padding-left: 1mm;
     }
     .habit-grid tbody td.cell-total {
-      border-left: 0.5px solid var(--rule);
+      border-left: 0.5px solid var(--border);
     }
 
     /* Habit name write-in line */
     .habit-name-line {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       display: block;
       width: 36mm;
       height: 3.5mm;
@@ -116,18 +116,18 @@
     .day-box {
       width: 3.5mm;
       height: 3.5mm;
-      border: 0.4px solid var(--rule);
+      border: 0.4px solid var(--border);
       border-radius: 0.5mm;
       display: inline-block;
-      background: var(--bg);
+      background: var(--background);
     }
     .habit-grid tbody tr:nth-child(even) .day-box {
-      background: var(--surface);
+      background: var(--card);
     }
 
     /* Total field */
     .total-field {
-      border-bottom: 0.5px dotted var(--rule-light);
+      border-bottom: 0.5px dotted var(--input);
       display: inline-block;
       width: 7mm;
       height: 3.5mm;
@@ -139,21 +139,21 @@
       align-items: center;
       gap: 6mm;
       padding: var(--s3) 0;
-      border-top: 0.5px solid var(--rule);
+      border-top: 0.5px solid var(--border);
       margin-top: var(--s3);
       flex-shrink: 0;
       font-size: 7pt;
-      color: var(--ink-2);
+      color: var(--foreground-secondary);
     }
     .streak-section .streak-label {
       font-weight: 600;
       font-size: 6.5pt;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-      color: var(--ink-3);
+      color: var(--muted-foreground);
     }
     .streak-section .streak-field {
-      border-bottom: 0.5px solid var(--rule);
+      border-bottom: 0.5px solid var(--border);
       min-width: 14mm;
       height: 4mm;
       display: inline-block;

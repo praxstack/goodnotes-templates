@@ -1,0 +1,23 @@
+/* Claude Dark */
+:root {
+  --background: #201e1a;
+  --foreground: #d8d0c0;
+  --card: #2c2a24;
+  --card-alt: #1a1815;
+  --foreground-secondary: #b8b0a0;
+  --muted-foreground: #908878;
+  --primary: #d97757;
+  --primary-light: #c96442CC;
+  --secondary: #2c2820;
+  --muted: #3a3630;
+  --muted-bg: #1a1815;
+  --accent: #8070c0;
+  --accent-soft: rgba(128, 112, 192, 0.15);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.12);
+  --border: #3e3a30;
+  --input: #504838;
+  --dots: #3a3630;
+  --radius-sm: 4px;
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.2);
+}

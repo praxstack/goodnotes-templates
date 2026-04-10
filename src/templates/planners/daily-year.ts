@@ -192,7 +192,7 @@ function injectDailyPageData(
   // 2. Fill in the date field
   html = html.replace(
     /<label>Date<\/label><span class="field"><\/span>/,
-    `<label>Date</label><span class="field" style="border-bottom-color: transparent; font-size: 7pt; font-weight: 500; color: var(--ink-2)">${entry.dateLabel} ${entry.year}</span>`
+    `<label>Date</label><span class="field" style="border-bottom-color: transparent; font-size: 7pt; font-weight: 500; color: var(--foreground-secondary)">${entry.dateLabel} ${entry.year}</span>`
   );
 
   // 3. Highlight the current day circle by position (not letter)
@@ -239,7 +239,7 @@ function injectWeeklyPageData(
   // Fill in "Week of" field
   html = html.replace(
     /<label>Week of<\/label><span class="field"><\/span>/,
-    `<label>Week of</label><span class="field" style="border-bottom-color: transparent; font-size: 7pt; font-weight: 500; color: var(--ink-2)">${weekStartLabel} – ${weekEndLabel}</span>`
+    `<label>Week of</label><span class="field" style="border-bottom-color: transparent; font-size: 7pt; font-weight: 500; color: var(--foreground-secondary)">${weekStartLabel} – ${weekEndLabel}</span>`
   );
 
   return html;
@@ -259,17 +259,17 @@ function getTabBarCSS(): string {
       flex-shrink: 0;
       border-radius: 2mm;
       overflow: hidden;
-      border: 0.4px solid var(--rule);
+      border: 0.4px solid var(--border);
     }
     .month-tab {
       flex: 1;
       text-align: center;
       padding: 1.5mm 0;
-      font-family: var(--font-body);
+      font-family: var(--font-sans);
       font-size: 5.5pt;
       font-weight: 600;
-      color: var(--ink-3);
-      background: var(--surface);
+      color: var(--muted-foreground);
+      background: var(--card);
       border-right: 0.3px solid var(--rule-light);
       cursor: pointer;
       text-transform: uppercase;
