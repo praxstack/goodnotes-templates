@@ -22,7 +22,7 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type { Theme, PageDimensions, PDFBookmark, PDFHyperlink } from '../../types/index.js';
+import type { PageDimensions, PDFBookmark, PDFHyperlink } from '../../types/index.js';
 import { renderHTMLToPDF, closeBrowser } from '../../core/puppeteer-renderer.js';
 import { mergePDFs, postProcessPDF } from '../../core/pdf-postprocess.js';
 import {
@@ -523,8 +523,6 @@ function buildBookmarks(
 export interface DailyYearOptions {
   /** Path to the HTML template file */
   templatePath: string;
-  /** Theme to apply */
-  theme: Theme;
   /** Page dimensions */
   dimensions: PageDimensions;
   /** Year to generate */
@@ -533,6 +531,8 @@ export interface DailyYearOptions {
   locale: SupportedLocale;
   /** Output file path */
   outputPath: string;
+  /** Color mode (e.g., 'dark'). Omit for default. */
+  colorMode?: string;
   /** Progress callback */
   onProgress?: (phase: string, detail: string) => void;
 }
@@ -554,7 +554,7 @@ export async function generateDailyYearPlanner(
   options: DailyYearOptions,
 ): Promise<YearGenerationResult> {
   const startTime = Date.now();
-  const { templatePath, theme, dimensions, year, locale, outputPath, onProgress } = options;
+  const { templatePath, dimensions, year, locale, outputPath, onProgress, colorMode } = options;
 
   const log = (phase: string, detail: string) => {
     if (onProgress) onProgress(phase, detail);
@@ -599,7 +599,7 @@ export async function generateDailyYearPlanner(
       // explicit width/height, so each .page div becomes a separate PDF page
       const buffer = await renderHTMLToPDF({
         htmlPath: templatePath, // not used since we pass htmlContent
-        theme,
+        colorMode,
         dimensions,
         htmlContent: html,
         multiPage: true,
@@ -642,8 +642,8 @@ export async function generateDailyYearPlanner(
     metadata: {
       title: `ADHD Daily Planner ${year}`,
       author: 'goodnotes-templates',
-      subject: `Full year daily planner for ${year} — ${theme.name} theme`,
-      keywords: ['planner', 'adhd', 'daily', 'goodnotes', theme.id, String(year)],
+      subject: `Full year daily planner for ${year}${colorMode ? ` — ${colorMode} mode` : ''}`,
+      keywords: ['planner', 'adhd', 'daily', 'goodnotes', String(year), ...(colorMode ? [colorMode] : [])],
       creator: 'goodnotes-templates v1.0.0',
       producer: 'pdf-lib + Puppeteer',
     },

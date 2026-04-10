@@ -28,60 +28,19 @@ export interface Margins {
   left: number;
 }
 
-// ─── Color & Theming ────────────────────────────────────────────
+// ─── Sticker Palette ────────────────────────────────────────────
 
-export interface ColorPalette {
+/**
+ * Self-contained color palette for stickers.
+ * Each sticker type has a baked-in default; this allows optional overrides.
+ */
+export interface StickerPalette {
   primary: string;
   secondary: string;
   accent: string;
-  background: string;
   text: string;
+  background: string;
   muted: string;
-  surface?: string;
-  /** Additional theme-specific colors */
-  extra?: Record<string, string>;
-}
-
-export interface FontConfig {
-  /** Font family name (must be available in Google Fonts or system) */
-  family: string;
-  /** Font weight (100-900) */
-  weight: number;
-  /** Font style */
-  style?: 'normal' | 'italic';
-  /** Font size in points */
-  size?: number;
-}
-
-export interface ThemeFonts {
-  header: FontConfig;
-  body: FontConfig;
-  accent: FontConfig;
-  /** Small labels, captions */
-  caption?: FontConfig;
-  /** Monospace for grids/numbers */
-  mono?: FontConfig;
-}
-
-export interface Theme {
-  /** Unique theme identifier */
-  id: string;
-  /** Display name */
-  name: string;
-  /** Description of the theme's aesthetic */
-  description: string;
-  /** Color palette */
-  colors: ColorPalette;
-  /** Font configurations */
-  fonts: ThemeFonts;
-  /** Whether this is a dark theme */
-  isDark: boolean;
-  /** Border radius for UI elements (in points) */
-  borderRadius: number;
-  /** Line/rule color for grids, tables, etc. */
-  lineColor: string;
-  /** Line weight for rules/grids */
-  lineWeight: number;
 }
 
 // ─── Template Types ─────────────────────────────────────────────
@@ -165,8 +124,8 @@ export interface TemplateConfig {
   category: TemplateCategory;
   /** Specific type within category */
   type: string;
-  /** Theme to apply (theme ID or Theme object) */
-  theme: string | Theme;
+  /** Color mode (e.g., 'dark'). Omit for default. */
+  colorMode?: string;
   /** Page dimensions */
   pageSize: PaperSize;
   /** Page orientation */
@@ -233,8 +192,8 @@ export interface StickerConfig {
   category: StickerCategory;
   /** Specific type */
   type: string;
-  /** Theme to use for colors */
-  theme: string | Theme;
+  /** Optional palette override */
+  palette?: Partial<StickerPalette>;
   /** Width in pixels (at target DPI) */
   width: number;
   /** Height in pixels (at target DPI) */
@@ -258,15 +217,15 @@ export interface StickerSetConfig {
   description: string;
   /** Category */
   category: StickerCategory;
-  /** Theme */
-  theme: string | Theme;
+  /** Optional palette override for the set */
+  palette?: Partial<StickerPalette>;
   /** Individual sticker configurations */
   stickers: StickerConfig[];
 }
 
 // ─── Generation Pipeline ────────────────────────────────────────
 
-export type RenderMethod = 'puppeteer' | 'pdfkit' | 'pdf-lib' | 'svg';
+export type RenderMethod = 'puppeteer' | 'pdf-lib' | 'svg';
 
 export type OutputFormat = 'pdf' | 'png' | 'svg';
 
@@ -321,8 +280,8 @@ export interface CLIOptions {
   stickers?: boolean;
   /** Generate only basic pages */
   pages?: boolean;
-  /** Theme filter */
-  theme?: string;
+  /** Color mode (e.g., 'dark'). Omit for default. */
+  colorMode?: string;
   /** Category filter */
   category?: string;
   /** Paper size */

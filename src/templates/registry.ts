@@ -3,7 +3,7 @@
  * and their metadata for the generation pipeline.
  *
  * Each entry maps to an HTML file in src/templates/html/
- * that gets rendered via Puppeteer with theme injection.
+ * that gets rendered via Puppeteer (self-contained CSS, no theme injection).
  */
 
 import path from 'node:path';
