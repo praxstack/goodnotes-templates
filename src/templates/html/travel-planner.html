@@ -1,485 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=210mm, initial-scale=1" />
-  <title>Travel Planner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Planner — Bubblegum Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   TRAVEL PLANNER v3 — Bubblegum Edition
+   Design: Pop Retro meets Soft UI — playful pink + teal + gold
+   Typography: Poppins (body) + Lora (headings) + Fira Code (mono)
+   Self-contained: all palette + base styles baked in
+   A4 portrait · 12 mm margins · SVG icons only
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+   Creative direction:
+   ✦ Pink-on-white cards with pop shadow (3px offset)
+   ✦ Teal accent for Essentials packing card
+   ✦ Gold accent for Clothing packing card
+   ✦ Retro gradient header bar
+   ✦ Circle-check packing items
+   ✦ St. Augustine quote footer
+   ═══════════════════════════════════════════════════════ */
 
-  <!-- Shared base styles -->
-  <link rel="stylesheet" href="_base.css" />
+/* ─── Design Tokens ─── */
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 12mm;
 
-  <style>
-    /* ═══════════════════════════════════════════════
-       Travel Planner — template-specific styles
-       ═══════════════════════════════════════════════ */
+  /* Bubblegum palette */
+  --background: #f6e6ee;
+  --foreground: #3d2040;
+  --card: #ffffff;
+  --card-alt: #fef3d6;
+  --foreground-secondary: #5b3050;
+  --muted-foreground: #8b5070;
+  --primary: #c0408a;
+  --primary-light: #e670abCC;
+  --secondary: #8acfd1;
+  --muted: #d4a0c0;
+  --muted-bg: #f8d8ea;
+  --accent: #d09030;
+  --accent-soft: rgba(208, 144, 48, 0.12);
+  --border: #d88ab0;
+  --input: #e8c0d4;
+  --dots: #d4a0c0;
 
-    /* ─── Trip info strip ─── */
-    .trip-info-row {
-      display: flex;
-      align-items: center;
-      gap: 5mm;
-      padding: var(--s2) 0;
-      border-bottom: 0.3px solid var(--border);
-      margin-bottom: var(--s3);
-      flex-shrink: 0;
-      font-size: 7.5pt;
-      color: var(--muted-foreground);
-    }
-    .trip-info-row label {
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .trip-info-row .field {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 22mm;
-      height: 4.5mm;
-      display: inline-block;
-    }
-    .trip-info-row .field.wide {
-      min-width: 32mm;
-    }
+  /* Bubblegum fonts */
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-mono: 'Fira Code', monospace;
 
-    /* ─── Itinerary table ─── */
-    .itinerary-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 6.5pt;
-    }
-    .itinerary-table th {
-      background: var(--foreground);
-      color: var(--background);
-      font-weight: 600;
-      font-size: 5.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 1.2mm 2mm;
-      text-align: center;
-    }
-    .itinerary-table th:first-child {
-      text-align: center;
-      border-radius: 1.5mm 0 0 1.5mm;
-    }
-    .itinerary-table th:last-child {
-      border-radius: 0 1.5mm 1.5mm 0;
-    }
-    .itinerary-table td {
-      padding: 1.2mm 2mm;
-      text-align: center;
-      border-bottom: 0.3px dotted var(--input);
-      height: 5.5mm;
-    }
-    .itinerary-table td:first-child {
-      font-weight: 600;
-      color: var(--foreground-secondary);
-      font-size: 6.5pt;
-    }
-    .itinerary-table td.date-col {
-      font-family: var(--font-mono);
-      font-size: 6pt;
-      color: var(--muted-foreground);
-    }
-    .itinerary-table td.activity-col {
-      background: var(--card);
-      text-align: left;
-    }
-    .itinerary-table tr:nth-child(even) td.activity-col {
-      background: var(--card-alt);
-    }
+  /* Spacing scale */
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 8mm;
 
-    /* ─── Packing List ─── */
-    .packing-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s4);
-    }
-    .packing-col-title {
-      font-weight: 700;
-      font-size: 6.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--foreground-secondary);
-      margin-bottom: 1.5mm;
-    }
-    .packing-item {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-      font-size: 7pt;
-      color: var(--foreground-secondary);
-      height: 4.5mm;
-    }
-    .packing-item::before {
-      content: '';
-      width: 3mm;
-      height: 3mm;
-      border: 0.5px solid var(--border);
-      border-radius: 0.6mm;
-      flex-shrink: 0;
-      background: var(--background);
-    }
-    .packing-item .line {
-      flex: 1;
-      border-bottom: 0.4px dotted var(--input);
-      height: 3.5mm;
-    }
+  /* Pop shadow — the bubblegum signature */
+  --shadow-card: 3px 3px 0px 0px hsl(326 58% 57% / 0.3);
+  --shadow-inset: inset 0 1px 2px rgba(192, 64, 138, 0.08);
+  --radius: 6px;
+  --radius-sm: 4px;
+}
 
-    /* ─── Reservations table ─── */
-    .reservations-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 6.5pt;
-    }
-    .reservations-table th {
-      background: var(--blue-soft);
-      color: var(--foreground);
-      font-weight: 600;
-      font-size: 5.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 1.2mm 2mm;
-      text-align: center;
-    }
-    .reservations-table th:first-child {
-      text-align: left;
-      border-radius: 1.5mm 0 0 1.5mm;
-    }
-    .reservations-table th:last-child {
-      border-radius: 0 1.5mm 1.5mm 0;
-    }
-    .reservations-table td {
-      padding: 1mm 2mm;
-      text-align: center;
-      border-bottom: 0.3px dotted var(--input);
-      height: 5mm;
-    }
-    .reservations-table td:first-child {
-      text-align: left;
-      color: var(--foreground-secondary);
-    }
-    .reservations-table td.mono {
-      font-family: var(--font-mono);
-      font-size: 6pt;
-      color: var(--muted-foreground);
-    }
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ─── Budget breakdown card ─── */
-    .budget-card {
-      background: var(--amber-soft);
-      border-radius: 2.5mm;
-      padding: var(--s2) var(--s3);
-    }
-    .budget-card-title {
-      font-weight: 700;
-      font-size: 6.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--foreground);
-      margin-bottom: 1.5mm;
-    }
-    .budget-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 6.5pt;
-      color: var(--foreground-secondary);
-      margin-bottom: 0.8mm;
-    }
-    .budget-row label {
-      font-weight: 500;
-    }
-    .budget-row .budget-field {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 18mm;
-      height: 3.5mm;
-      display: inline-block;
-      font-family: var(--font-mono);
-    }
-    .budget-row.total label {
-      font-weight: 700;
-      color: var(--foreground);
-    }
-    .budget-row.total .budget-field {
-      border-bottom-width: 1px;
-      border-bottom-color: var(--foreground);
-    }
+body {
+  background: #e8c0d4;
+  font-family: var(--font-sans);
+  font-size: 7.5pt;
+  color: var(--foreground);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    /* ─── Emergency info card ─── */
-    .emergency-card {
-      background: var(--card);
-      border-radius: 2.5mm;
-      padding: var(--s2) var(--s3);
-    }
-    .emergency-card-title {
-      font-weight: 700;
-      font-size: 6.5pt;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--foreground);
-      margin-bottom: 1.5mm;
-    }
-    .emergency-row {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-      font-size: 6.5pt;
-      color: var(--foreground-secondary);
-      margin-bottom: 0.8mm;
-    }
-    .emergency-row label {
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .emergency-row .emergency-field {
-      flex: 1;
-      border-bottom: 0.5px solid var(--border);
-      height: 3.5mm;
-      display: inline-block;
-    }
+/* ─── Page Container ─── */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto;
+  padding: var(--margin);
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(192, 64, 138, 0.15);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
 
-    /* ─── Bottom strip (budget + emergency side-by-side) ─── */
-    .bottom-strip {
-      display: flex;
-      gap: 3mm;
-      flex-shrink: 0;
-    }
-    .bottom-strip > * {
-      flex: 1;
-    }
-  </style>
+/* ─── Print Styles ─── */
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0; box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Card Base ─── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--border);
+}
+
+/* ─── Inline SVG icon base ─── */
+.icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon svg { display: block; }
+
+/* ─── Dotted Write Line ─── */
+.write-line { border-bottom: 1.5px dotted var(--dots); height: 5.5mm; }
+
+/* ─── Circle Check ─── */
+.circle-check {
+  width: 4mm; height: 4mm;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary-light);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 1: HEADER + TRIP INFO CARD
+   ═══════════════════════════════════════ */
+.header-gradient {
+  width: 100%; height: 5px;
+  background: linear-gradient(90deg, var(--primary) 0%, #e670ab 30%, var(--secondary) 60%, var(--accent) 100%);
+  border-radius: 3px;
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: var(--s3); flex-shrink: 0;
+}
+
+.header-left .title {
+  font-family: var(--font-serif);
+  font-size: 18pt; font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em; line-height: 1.1;
+}
+
+.header-left .subtitle {
+  font-family: var(--font-sans);
+  font-weight: 300; font-style: italic;
+  font-size: 7pt; color: var(--muted);
+  margin-top: 1mm;
+}
+
+.trip-info-card {
+  padding: var(--s3);
+  display: flex; gap: 4mm;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-bottom: var(--s4);
+}
+
+.trip-info-card .trip-field {
+  display: flex; align-items: center; gap: 2mm;
+}
+
+.trip-info-card .trip-field label {
+  font-size: 7pt; font-weight: 600;
+  color: var(--foreground-secondary);
+  white-space: nowrap;
+}
+
+.trip-info-card .trip-field .field-line {
+  border-bottom: 1.5px solid var(--border);
+  min-width: 28mm; height: 5mm;
+  display: inline-block;
+}
+
+.trip-info-card .trip-field .field-line.wide { min-width: 38mm; }
+
+/* ═══════════════════════════════════════
+   SECTION 2: ITINERARY TABLE
+   ═══════════════════════════════════════ */
+.section-bar {
+  display: flex; align-items: center; gap: 2mm;
+  margin-bottom: var(--s2); flex-shrink: 0;
+}
+
+.section-bar .bar-dot {
+  width: 3mm; height: 3mm; border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.section-bar .bar-dot.pink { background: var(--primary); }
+.section-bar .bar-dot.teal { background: var(--secondary); }
+.section-bar .bar-dot.gold { background: var(--accent); }
+
+.section-bar .bar-title {
+  font-family: var(--font-sans);
+  font-size: 7.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--foreground);
+}
+
+.itinerary-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 6.5pt; margin-bottom: var(--s4);
+}
+
+.itinerary-table th {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 600; font-size: 5.5pt;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 1.5mm 2mm; text-align: center;
+}
+
+.itinerary-table th:first-child { text-align: center; border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.itinerary-table th:last-child  { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+.itinerary-table td {
+  padding: 1.2mm 2mm; text-align: center;
+  border-bottom: 0.5px dotted var(--dots);
+  height: 5.8mm;
+}
+
+.itinerary-table td:first-child {
+  font-family: var(--font-serif);
+  font-weight: 600; font-size: 7pt;
+  color: var(--primary);
+}
+
+.itinerary-table td.date-col {
+  font-family: var(--font-mono);
+  font-size: 6pt; color: var(--muted-foreground);
+}
+
+.itinerary-table td.activity-col {
+  background: var(--card); text-align: left;
+}
+
+.itinerary-table tr:nth-child(even) td.activity-col {
+  background: var(--card-alt);
+}
+
+/* ═══════════════════════════════════════
+   SECTION 3: PACKING LIST (TWO CARDS)
+   ═══════════════════════════════════════ */
+.packing-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s3); margin-bottom: var(--s4);
+}
+
+.packing-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: var(--s3);
+}
+
+.packing-card.teal-card {
+  background: #e8f6f6;
+  border: 1.5px solid var(--secondary);
+}
+
+.packing-card.gold-card {
+  background: var(--card-alt);
+  border: 1.5px solid var(--accent);
+}
+
+.packing-card-title {
+  font-family: var(--font-sans);
+  font-size: 6.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 2mm;
+}
+
+.packing-card.teal-card .packing-card-title { color: #2a8a8a; }
+.packing-card.gold-card .packing-card-title { color: #9a6a18; }
+
+.packing-item {
+  display: flex; align-items: center;
+  gap: 2mm; height: 4.2mm;
+  margin-bottom: 0.6mm;
+}
+
+.packing-item .circle-check-teal {
+  width: 3.5mm; height: 3.5mm; border-radius: 50%;
+  border: 1.3px solid var(--secondary); flex-shrink: 0;
+}
+
+.packing-item .circle-check-gold {
+  width: 3.5mm; height: 3.5mm; border-radius: 50%;
+  border: 1.3px solid var(--accent); flex-shrink: 0;
+}
+
+.packing-item .item-line {
+  flex: 1; border-bottom: 0.5px dotted var(--dots);
+  height: 3.5mm;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 4: RESERVATIONS TABLE
+   ═══════════════════════════════════════ */
+.reservations-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 6.5pt; margin-bottom: var(--s4);
+}
+
+.reservations-table th {
+  background: var(--secondary);
+  color: var(--foreground);
+  font-weight: 600; font-size: 5.5pt;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 1.5mm 2mm; text-align: center;
+}
+
+.reservations-table th:first-child { text-align: left; border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.reservations-table th:last-child  { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+.reservations-table td {
+  padding: 1mm 2mm; text-align: center;
+  border-bottom: 0.5px dotted var(--dots);
+  height: 5.5mm;
+}
+
+.reservations-table td:first-child { text-align: left; color: var(--foreground-secondary); }
+
+.reservations-table td.mono-col {
+  font-family: var(--font-mono);
+  font-size: 5.5pt; color: var(--muted-foreground);
+}
+
+/* ═══════════════════════════════════════
+   SECTION 5 & 6: BOTTOM STRIP — BUDGET + EMERGENCY
+   ═══════════════════════════════════════ */
+.bottom-strip {
+  display: flex; gap: var(--s3);
+  margin-bottom: var(--s4);
+  flex-shrink: 0;
+}
+
+.bottom-strip > * { flex: 1; }
+
+/* Budget Breakdown Card */
+.budget-card {
+  background: var(--card-alt);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--accent);
+  padding: var(--s3);
+}
+
+.budget-card-header {
+  display: flex; align-items: center; gap: 2mm;
+  margin-bottom: 2mm;
+}
+
+.budget-card-title {
+  font-family: var(--font-sans);
+  font-size: 6.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: #9a6a18;
+}
+
+.budget-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  font-size: 6.5pt; color: var(--foreground-secondary);
+  margin-bottom: 0.8mm;
+}
+
+.budget-row label { font-weight: 500; }
+
+.budget-field {
+  border-bottom: 1px solid var(--border);
+  min-width: 18mm; height: 4mm;
+  display: inline-block;
+  font-family: var(--font-mono);
+}
+
+.budget-row.total label { font-weight: 700; color: var(--foreground); }
+.budget-row.total .budget-field {
+  border-bottom: 2px solid var(--primary);
+}
+
+/* Emergency Info Card */
+.emergency-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--border);
+  padding: var(--s3);
+}
+
+.emergency-card-header {
+  display: flex; align-items: center; gap: 2mm;
+  margin-bottom: 2mm;
+}
+
+.emergency-card-title {
+  font-family: var(--font-sans);
+  font-size: 6.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: #c0408a;
+}
+
+.emergency-row {
+  display: flex; align-items: center;
+  gap: 2mm; font-size: 6.5pt;
+  color: var(--foreground-secondary);
+  margin-bottom: 1mm;
+}
+
+.emergency-row label { font-weight: 500; white-space: nowrap; }
+
+.emergency-field {
+  flex: 1; border-bottom: 1px solid var(--border);
+  height: 4mm; display: inline-block;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 7: TRAVEL NOTES
+   ═══════════════════════════════════════ */
+.notes-section {
+  margin-bottom: var(--s3);
+  flex-shrink: 0;
+}
+
+.notes-lines {
+  display: flex; flex-direction: column;
+  gap: var(--s1);
+}
+
+/* ═══════════════════════════════════════
+   SECTION 8: FOOTER QUOTE
+   ═══════════════════════════════════════ */
+.quote-footer {
+  margin-top: auto;
+  border-top: 1.5px solid var(--border);
+  padding-top: var(--s2);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.quote-text {
+  font-family: var(--font-serif);
+  font-size: 7pt; font-style: italic;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.quote-author {
+  font-family: var(--font-sans);
+  font-size: 6pt; font-weight: 500;
+  color: var(--muted);
+  margin-top: 1mm;
+  letter-spacing: 0.04em;
+}
+</style>
 </head>
 
 <body>
-  <div class="page">
 
-    <!-- ══════════════════════════════════════════════════════════
-         1. HEADER
-         ══════════════════════════════════════════════════════════ -->
-    <header class="page-header">
-      <div>
-        <h1 class="page-title">Travel Planner</h1>
-        <p class="page-subtitle">Adventure awaits. Plan smart.</p>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════
+       1. HEADER GRADIENT + TITLE + TRIP INFO CARD
+       ═══════════════════════════════════════════ -->
+  <div class="header-gradient" aria-hidden="true"></div>
+
+  <div class="header">
+    <div class="header-left">
+      <div class="title">Travel Planner</div>
+      <div class="subtitle">Adventure awaits — plan smart, travel free.</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:2mm; padding-top:1mm;">
+      <span class="icon" style="color:var(--primary);">
+        <!-- Globe icon 16×16 -->
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="8" r="6"/>
+          <ellipse cx="8" cy="8" rx="2.5" ry="6"/>
+          <line x1="2" y1="8" x2="14" y2="8"/>
+          <path d="M3 4.5h10"/>
+          <path d="M3 11.5h10"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Trip Info Card -->
+  <div class="trip-info-card card">
+    <div class="trip-field">
+      <span class="icon" style="color:var(--primary);">
+        <!-- Map pin icon 12×12 -->
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 1C4.07 1 2.5 2.57 2.5 4.5 2.5 7.5 6 11 6 11s3.5-3.5 3.5-6.5C9.5 2.57 7.93 1 6 1z"/>
+          <circle cx="6" cy="4.5" r="1.2"/>
+        </svg>
+      </span>
+      <label>Destination</label>
+      <span class="field-line wide"></span>
+    </div>
+    <div class="trip-field">
+      <span class="icon" style="color:var(--secondary);">
+        <!-- Calendar icon 12×12 -->
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="2" width="10" height="9" rx="1.5"/>
+          <line x1="1" y1="5" x2="11" y2="5"/>
+          <line x1="4" y1="1" x2="4" y2="3"/>
+          <line x1="8" y1="1" x2="8" y2="3"/>
+        </svg>
+      </span>
+      <label>Dates</label>
+      <span class="field-line wide"></span>
+    </div>
+    <div class="trip-field">
+      <span class="icon" style="color:var(--accent);">
+        <!-- Dollar sign icon 12×12 -->
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="6" y1="1" x2="6" y2="11"/>
+          <path d="M8.5 3.5C8.5 2.67 7.38 2 6 2S3.5 2.67 3.5 3.5 4.62 5 6 5s2.5.67 2.5 1.5S7.38 8 6 8s-2.5-.67-2.5-1.5"/>
+        </svg>
+      </span>
+      <label>Budget</label>
+      <span class="field-line"></span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       2. ITINERARY TABLE (Day 1-7)
+       ═══════════════════════════════════════════ -->
+  <div class="section-bar">
+    <div class="bar-dot pink"></div>
+    <span class="bar-title">Itinerary</span>
+  </div>
+
+  <table class="itinerary-table">
+    <thead>
+      <tr>
+        <th style="width:7%;">Day</th>
+        <th style="width:13%;">Date</th>
+        <th style="width:26.5%;">Morning</th>
+        <th style="width:26.5%;">Afternoon</th>
+        <th style="width:27%;">Evening</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="date-col"></td><td class="activity-col"></td><td class="activity-col"></td><td class="activity-col"></td></tr>
+      <tr><td>2</td><td class="date-col"></td><td class="activity-col"></td><td class="activity-col"></td><td class="activity-col"></td></tr>
+      <tr><td>3</td><td class="date-col"></td><td class="activity-col"></td><td class="activity-col"></td><td class="activity-col"></td></tr>
+      <tr><td>4</td><td class="date-col"></td><td class="activity-col"></td><td class="activity-col"></td><td class="activity-col"></td></tr>
+      <tr><td>5</td><td class="date-col"></td><td class="activity-col"></td><td class="activity-col"></td><td class="activity-col"></td></tr>
+      <tr><td>6</td><td class="date-col"></td><td class="activity-col"></td><td class="activity-col"></td><td class="activity-col"></td></tr>
+      <tr><td>7</td><td class="date-col"></td><td class="activity-col"></td><td class="activity-col"></td><td class="activity-col"></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════
+       3. PACKING LIST — 2 SIDE-BY-SIDE CARDS
+       ═══════════════════════════════════════════ -->
+  <div class="section-bar">
+    <div class="bar-dot teal"></div>
+    <span class="bar-title">Packing List</span>
+  </div>
+
+  <div class="packing-grid">
+    <!-- Essentials (teal) -->
+    <div class="packing-card teal-card">
+      <div class="packing-card-title">
+        <span class="icon" style="color:#2a8a8a; margin-right:1mm;">
+          <!-- Briefcase icon 10×10 -->
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="0.8" y="3" width="8.4" height="6" rx="1"/>
+            <path d="M3.5 3V2a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1"/>
+          </svg>
+        </span>
+        Essentials
       </div>
-    </header>
-
-    <!-- ══════════════════════════════════════════════════════════
-         2. TRIP INFO STRIP
-         ══════════════════════════════════════════════════════════ -->
-    <div class="trip-info-row">
-      <label>Destination:</label><span class="field wide"></span>
-      <label>Dates:</label><span class="field wide"></span>
-      <label>Budget:</label><span class="field"></span>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-teal"></span><span class="item-line"></span></div>
     </div>
 
-    <div class="page-content">
-
-      <!-- ══════════════════════════════════════════════════════════
-           3. ITINERARY
-           ══════════════════════════════════════════════════════════ -->
-      <div class="section-label no-top">
-        <div class="section-dot"></div>
-        <div class="section-title">Itinerary</div>
+    <!-- Clothing (gold) -->
+    <div class="packing-card gold-card">
+      <div class="packing-card-title">
+        <span class="icon" style="color:#9a6a18; margin-right:1mm;">
+          <!-- Shirt icon 10×10 -->
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 1L1 3v1.5h2V9h4V4.5h2V3L7 1"/>
+            <path d="M3 1c0 1.1.9 2 2 2s2-.9 2-2"/>
+          </svg>
+        </span>
+        Clothing
       </div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+      <div class="packing-item"><span class="circle-check-gold"></span><span class="item-line"></span></div>
+    </div>
+  </div>
 
-      <table class="itinerary-table">
-        <thead>
-          <tr>
-            <th style="width: 8%;">Day</th>
-            <th style="width: 14%;">Date</th>
-            <th style="width: 26%;">Morning</th>
-            <th style="width: 26%;">Afternoon</th>
-            <th style="width: 26%;">Evening</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td class="date-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td class="date-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td class="date-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td class="date-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td class="date-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td class="date-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td class="date-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-            <td class="activity-col"></td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- ═══════════════════════════════════════════
+       4. RESERVATIONS TABLE
+       ═══════════════════════════════════════════ -->
+  <div class="section-bar">
+    <div class="bar-dot gold"></div>
+    <span class="bar-title">Reservations</span>
+  </div>
 
-      <!-- ══════════════════════════════════════════════════════════
-           4. PACKING LIST
-           ══════════════════════════════════════════════════════════ -->
-      <div class="section-label">
-        <div class="section-dot green"></div>
-        <div class="section-title">Packing List</div>
+  <table class="reservations-table">
+    <thead>
+      <tr>
+        <th style="width:18%;">Type</th>
+        <th style="width:24%;">Confirmation #</th>
+        <th style="width:16%;">Date</th>
+        <th style="width:42%;">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td></td><td class="mono-col"></td><td class="mono-col"></td><td></td></tr>
+      <tr><td></td><td class="mono-col"></td><td class="mono-col"></td><td></td></tr>
+      <tr><td></td><td class="mono-col"></td><td class="mono-col"></td><td></td></tr>
+      <tr><td></td><td class="mono-col"></td><td class="mono-col"></td><td></td></tr>
+      <tr><td></td><td class="mono-col"></td><td class="mono-col"></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════
+       5 & 6. BUDGET BREAKDOWN + EMERGENCY INFO
+       ═══════════════════════════════════════════ -->
+  <div class="bottom-strip">
+
+    <!-- Budget Breakdown -->
+    <div class="budget-card">
+      <div class="budget-card-header">
+        <span class="icon" style="color:var(--accent);">
+          <!-- Wallet icon 12×12 -->
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="10" height="7" rx="1.5"/>
+            <path d="M1 5h10"/>
+            <circle cx="8.5" cy="7.5" r="0.8" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span class="budget-card-title">Budget Breakdown</span>
       </div>
-
-      <div class="packing-cols">
-        <div>
-          <div class="packing-col-title">Essentials</div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-        </div>
-        <div>
-          <div class="packing-col-title">Clothing &amp; Extras</div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-          <div class="packing-item"><span class="line"></span></div>
-        </div>
+      <div class="budget-row">
+        <label>Transport</label>
+        <span class="budget-field"></span>
       </div>
-
-      <!-- ══════════════════════════════════════════════════════════
-           5. RESERVATIONS
-           ══════════════════════════════════════════════════════════ -->
-      <div class="section-label">
-        <div class="section-dot blue"></div>
-        <div class="section-title">Reservations</div>
+      <div class="budget-row">
+        <label>Accommodation</label>
+        <span class="budget-field"></span>
       </div>
-
-      <table class="reservations-table">
-        <thead>
-          <tr>
-            <th style="width: 20%;">Type</th>
-            <th style="width: 25%;">Confirmation #</th>
-            <th style="width: 18%;">Date</th>
-            <th style="width: 37%;">Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td></td><td class="mono"></td><td class="mono"></td><td></td></tr>
-          <tr><td></td><td class="mono"></td><td class="mono"></td><td></td></tr>
-          <tr><td></td><td class="mono"></td><td class="mono"></td><td></td></tr>
-          <tr><td></td><td class="mono"></td><td class="mono"></td><td></td></tr>
-          <tr><td></td><td class="mono"></td><td class="mono"></td><td></td></tr>
-        </tbody>
-      </table>
-
-      <!-- ══════════════════════════════════════════════════════════
-           6 & 7. BUDGET BREAKDOWN + EMERGENCY INFO
-           ══════════════════════════════════════════════════════════ -->
-      <div class="bottom-strip" style="margin-top: var(--s4);">
-
-        <!-- Budget Breakdown -->
-        <div class="budget-card">
-          <div class="budget-card-title">Budget Breakdown</div>
-          <div class="budget-row">
-            <label>Transportation:</label>
-            <span class="budget-field"></span>
-          </div>
-          <div class="budget-row">
-            <label>Accommodation:</label>
-            <span class="budget-field"></span>
-          </div>
-          <div class="budget-row">
-            <label>Food:</label>
-            <span class="budget-field"></span>
-          </div>
-          <div class="budget-row">
-            <label>Activities:</label>
-            <span class="budget-field"></span>
-          </div>
-          <div class="budget-row total">
-            <label>Total:</label>
-            <span class="budget-field"></span>
-          </div>
-        </div>
-
-        <!-- Emergency Info -->
-        <div class="emergency-card">
-          <div class="emergency-card-title">Emergency Info</div>
-          <div class="emergency-row">
-            <label>Embassy:</label>
-            <span class="emergency-field"></span>
-          </div>
-          <div class="emergency-row">
-            <label>Insurance:</label>
-            <span class="emergency-field"></span>
-          </div>
-          <div class="emergency-row">
-            <label>Emergency Contact:</label>
-            <span class="emergency-field"></span>
-          </div>
-        </div>
-
+      <div class="budget-row">
+        <label>Food</label>
+        <span class="budget-field"></span>
       </div>
-
-      <!-- ══════════════════════════════════════════════════════════
-           8. TRAVEL NOTES
-           ══════════════════════════════════════════════════════════ -->
-      <div class="section-label">
-        <div class="section-dot amber"></div>
-        <div class="section-title">Travel Notes</div>
+      <div class="budget-row">
+        <label>Activities</label>
+        <span class="budget-field"></span>
       </div>
-
-      <div>
-        <div class="write-line"></div>
-        <div class="write-line"></div>
-        <div class="write-line"></div>
+      <div class="budget-row total">
+        <label>Total</label>
+        <span class="budget-field"></span>
       </div>
-
-    </div><!-- /.page-content -->
-
-    <!-- ══════════════════════════════════════════════════════════
-         9. QUOTE BANNER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="quote-banner">
-      <div class="quote-text">"The world is a book and those who do not travel read only one page."</div>
-      <div class="quote-author">— St. Augustine</div>
     </div>
 
-  </div><!-- /.page -->
+    <!-- Emergency Info -->
+    <div class="emergency-card">
+      <div class="emergency-card-header">
+        <span class="icon" style="color:var(--primary);">
+          <!-- Shield icon 12×12 -->
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 1L1.5 3v3c0 3 2 5 4.5 5.5C8.5 11 10.5 9 10.5 6V3L6 1z"/>
+            <path d="M4.5 6l1.2 1.2L7.5 5"/>
+          </svg>
+        </span>
+        <span class="emergency-card-title">Emergency Info</span>
+      </div>
+      <div class="emergency-row">
+        <label>Embassy</label>
+        <span class="emergency-field"></span>
+      </div>
+      <div class="emergency-row">
+        <label>Insurance</label>
+        <span class="emergency-field"></span>
+      </div>
+      <div class="emergency-row">
+        <label>Emergency Contact</label>
+        <span class="emergency-field"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       7. TRAVEL NOTES
+       ═══════════════════════════════════════════ -->
+  <div class="notes-section">
+    <div class="section-bar">
+      <div class="bar-dot pink"></div>
+      <span class="bar-title">Travel Notes</span>
+    </div>
+    <div class="notes-lines">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       8. FOOTER — St. Augustine Quote
+       ═══════════════════════════════════════════ -->
+  <div class="quote-footer">
+    <div class="quote-text">"The world is a book and those who do not travel read only one page."</div>
+    <div class="quote-author">— St. Augustine</div>
+  </div>
+
+</div><!-- /.page -->
+
 </body>
 </html>

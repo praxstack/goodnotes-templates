@@ -1,307 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monthly Planner</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_base.css" />
-  <style>
-    /* ═══════════════════════════════════════════════
-       Monthly Planner — template-specific styles
-       ═══════════════════════════════════════════════ */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Planner — Bubblegum Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   Monthly Planner — v3 Bubblegum Edition
+   Self-contained · A4 Portrait · 12mm margins
+   ═══════════════════════════════════════════════════ */
+:root {
+  /* Page geometry */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 12mm;
 
-    /* ─── Month/Year row ─── */
-    .month-row {
-      display: flex;
-      align-items: center;
-      gap: 6mm;
-      padding: var(--s2) 0;
-      border-bottom: 0.3px solid var(--border);
-      margin-bottom: var(--s3);
-      flex-shrink: 0;
-      font-size: 7.5pt;
-      color: var(--muted-foreground);
-    }
-    .month-row label {
-      font-weight: 500;
-    }
-    .month-row .field {
-      border-bottom: 0.5px solid var(--border);
-      min-width: 28mm;
-      height: 4.5mm;
-      display: inline-block;
-    }
-    .month-row .field.narrow {
-      min-width: 16mm;
-    }
+  /* Bubblegum palette */
+  --background: #f6e6ee;
+  --foreground: #3d2040;
+  --card: #ffffff;
+  --card-alt: #fef3d6;
+  --primary: #c0408a;
+  --primary-light: #e670abCC;
+  --secondary: #8acfd1;
+  --muted: #d4a0c0;
+  --accent: #d09030;
+  --border: #d88ab0;
+  --dots: #d4a0c0;
 
-    /* ─── Calendar Grid ─── */
-    .calendar-wrapper {
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
-    .calendar-grid {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0.5mm;
-      table-layout: fixed;
-    }
-    .calendar-grid thead th {
-      font-family: var(--font-mono);
-      font-size: 6pt;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted-foreground);
-      text-align: center;
-      padding: 1.5mm 0;
-    }
-    .calendar-grid tbody td {
-      background: var(--card);
-      border-radius: 1.5mm;
-      width: 24mm;
-      height: 22mm;
-      vertical-align: top;
-      padding: 1mm 1.5mm;
-      position: relative;
-    }
-    .calendar-grid tbody td.empty {
-      background: transparent;
-    }
-    .cal-day-num {
-      font-family: var(--font-mono);
-      font-size: 6pt;
-      font-weight: 500;
-      color: var(--muted-foreground);
-      line-height: 1;
-    }
+  /* Typography */
+  --font-sans: 'Poppins', system-ui, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'Fira Code', monospace;
 
-    /* ─── Monthly Goals — 2-column layout ─── */
-    .goals-section {
-      margin-top: var(--s3);
-      flex-shrink: 0;
-    }
-    .goals-grid {
-      display: flex;
-      gap: var(--s4);
-    }
-    .goals-col {
-      flex: 1;
-    }
-    .goals-col .card {
-      height: 100%;
-    }
-    .goals-col .cb {
-      display: flex;
-      margin-bottom: 1.5mm;
-    }
-    .goals-col .cb:last-child {
-      margin-bottom: 0;
-    }
-    .focus-item {
-      display: flex;
-      align-items: center;
-      gap: 2mm;
-      font-size: 7.5pt;
-      color: var(--foreground-secondary);
-      margin-bottom: 1.5mm;
-    }
-    .focus-item:last-child {
-      margin-bottom: 0;
-    }
-    .focus-num {
-      font-family: var(--font-serif);
-      font-size: 10pt;
-      color: var(--accent);
-      line-height: 1;
-      flex-shrink: 0;
-      width: 5mm;
-      text-align: center;
-    }
-    .focus-line {
-      flex: 1;
-      border-bottom: 0.5px dotted var(--input);
-      height: 5mm;
-    }
+  /* Shadows & Radius */
+  --shadow-card: 3px 3px 0px 0px hsl(326 58% 57% / 0.3);
+  --radius: 6px;
 
-    /* ─── Notes ─── */
-    .notes-section {
-      margin-top: var(--s3);
-      flex-shrink: 0;
-    }
+  /* Spacing */
+  --s1: 2mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
+}
 
-    /* ─── Print ─── */
-    @page {
-      size: A4 portrait;
-      margin: 0;
-    }
-    @media print {
-      body { background: white; }
-      .page { margin: 0; box-shadow: none; }
-    }
-  </style>
+/* ═══════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #e8c0d4;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--foreground);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════════════
+   PAGE SHELL
+   ═══════════════════════════════════════════════════ */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--background);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(192, 64, 138, 0.12);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ═══════════════════════════════════════════════════
+   1. HEADER — gradient bar + title + month/year card
+   ═══════════════════════════════════════════════════ */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-top: 4px solid transparent;
+  border-image: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary)) 1;
+  padding-top: var(--s3);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 20pt;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 7pt;
+  color: var(--muted);
+  margin-top: 1.5mm;
+  opacity: 0.9;
+}
+
+.month-year-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  gap: var(--s4);
+  align-items: center;
+}
+
+.my-field {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+}
+
+.my-label {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.my-input {
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  min-width: 28mm;
+  height: 5mm;
+  display: block;
+}
+
+.my-input.narrow {
+  min-width: 16mm;
+}
+
+/* ═══════════════════════════════════════════════════
+   2. CALENDAR GRID — 7 cols × 6 rows
+   ═══════════════════════════════════════════════════ */
+.calendar-wrapper {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  flex-shrink: 1;
+}
+
+.calendar-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0.6mm;
+  table-layout: fixed;
+}
+
+.calendar-grid thead th {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  text-align: center;
+  padding: 1.5mm 0;
+}
+
+.calendar-grid tbody td {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  height: 21mm;
+  vertical-align: top;
+  padding: 1mm 1.5mm;
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+
+.calendar-grid tbody td.empty {
+  background: transparent;
+  border: 1px dashed var(--dots);
+  box-shadow: none;
+}
+
+.cal-day-num {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1;
+}
+
+/* Write space inside each day cell */
+.cal-write {
+  margin-top: 1.5mm;
+  border-bottom: 1px dotted var(--dots);
+  height: 5mm;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION TITLE
+   ═══════════════════════════════════════════════════ */
+.section-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  margin-bottom: var(--s2);
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+
+/* ═══════════════════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════════════════ */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--s3);
+  box-shadow: var(--shadow-card);
+}
+
+.card-alt {
+  background: var(--card-alt);
+  border: 1px solid var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════
+   WRITE LINES — 6.5mm height
+   ═══════════════════════════════════════════════════ */
+.write-line {
+  border-bottom: 1px dotted var(--dots);
+  height: 6.5mm;
+  margin-bottom: 0.5mm;
+}
+
+/* ═══════════════════════════════════════════════════
+   3. MONTHLY GOALS + 4. FOCUS AREAS — side by side
+   ═══════════════════════════════════════════════════ */
+.bottom-row {
+  display: flex;
+  gap: var(--s4);
+  flex-shrink: 0;
+}
+
+.bottom-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-col .card {
+  flex: 1;
+}
+
+/* Focus area numbered items */
+.focus-item {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 1.5mm;
+}
+
+.focus-item:last-child {
+  margin-bottom: 0;
+}
+
+.focus-num {
+  font-family: var(--font-serif);
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 5mm;
+  text-align: center;
+}
+
+.focus-line {
+  flex: 1;
+  border-bottom: 1px dotted var(--dots);
+  height: 6.5mm;
+}
+
+/* ═══════════════════════════════════════════════════
+   5. NOTES
+   ═══════════════════════════════════════════════════ */
+.notes-section {
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   6. FOOTER
+   ═══════════════════════════════════════════════════ */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: var(--s2);
+  border-top: 1.5px solid var(--border);
+}
+
+.footer-quote {
+  font-family: var(--font-serif);
+  font-size: 6.5pt;
+  font-style: italic;
+  color: var(--muted);
+  opacity: 0.9;
+}
+
+.footer-quote .author {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--primary);
+  opacity: 0.7;
+}
+
+.footer-brand {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+</style>
 </head>
 <body>
 
-  <div class="page">
+<!-- ════════════════════════════════════════════════════════════
+     MONTHLY PLANNER — v3 Bubblegum Edition
+     Plan your month with clarity and a pop of pink.
+     ════════════════════════════════════════════════════════════ -->
+<div class="page">
 
-    <!-- ══════════════════════════════════════════════════════════
-         1. HEADER
-         ══════════════════════════════════════════════════════════ -->
-    <header class="page-header">
-      <div>
-        <div class="page-title">Monthly Planner</div>
-        <div class="page-subtitle">See the big picture. Plan with intention.</div>
-      </div>
-    </header>
-
-    <!-- ══════════════════════════════════════════════════════════
-         2. MONTH / YEAR ROW
-         ══════════════════════════════════════════════════════════ -->
-    <div class="month-row">
-      <label>Month:</label><span class="field"></span>
-      <label>Year:</label><span class="field narrow"></span>
+  <!-- ─── 1. HEADER ─── -->
+  <div class="header">
+    <div>
+      <div class="title">Monthly Planner</div>
+      <div class="subtitle">Plan with intention. See the big picture.</div>
     </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         3. CALENDAR GRID — 7 cols (Mon–Sun) × 6 rows
-         ══════════════════════════════════════════════════════════ -->
-    <div class="calendar-wrapper">
-      <table class="calendar-grid">
-        <thead>
-          <tr>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Row 1 -->
-          <tr>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td><span class="cal-day-num">1</span></td>
-            <td><span class="cal-day-num">2</span></td>
-          </tr>
-          <!-- Row 2 -->
-          <tr>
-            <td><span class="cal-day-num">3</span></td>
-            <td><span class="cal-day-num">4</span></td>
-            <td><span class="cal-day-num">5</span></td>
-            <td><span class="cal-day-num">6</span></td>
-            <td><span class="cal-day-num">7</span></td>
-            <td><span class="cal-day-num">8</span></td>
-            <td><span class="cal-day-num">9</span></td>
-          </tr>
-          <!-- Row 3 -->
-          <tr>
-            <td><span class="cal-day-num">10</span></td>
-            <td><span class="cal-day-num">11</span></td>
-            <td><span class="cal-day-num">12</span></td>
-            <td><span class="cal-day-num">13</span></td>
-            <td><span class="cal-day-num">14</span></td>
-            <td><span class="cal-day-num">15</span></td>
-            <td><span class="cal-day-num">16</span></td>
-          </tr>
-          <!-- Row 4 -->
-          <tr>
-            <td><span class="cal-day-num">17</span></td>
-            <td><span class="cal-day-num">18</span></td>
-            <td><span class="cal-day-num">19</span></td>
-            <td><span class="cal-day-num">20</span></td>
-            <td><span class="cal-day-num">21</span></td>
-            <td><span class="cal-day-num">22</span></td>
-            <td><span class="cal-day-num">23</span></td>
-          </tr>
-          <!-- Row 5 -->
-          <tr>
-            <td><span class="cal-day-num">24</span></td>
-            <td><span class="cal-day-num">25</span></td>
-            <td><span class="cal-day-num">26</span></td>
-            <td><span class="cal-day-num">27</span></td>
-            <td><span class="cal-day-num">28</span></td>
-            <td><span class="cal-day-num">29</span></td>
-            <td><span class="cal-day-num">30</span></td>
-          </tr>
-          <!-- Row 6 -->
-          <tr>
-            <td><span class="cal-day-num">31</span></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         4. MONTHLY GOALS — 2 columns
-         ══════════════════════════════════════════════════════════ -->
-    <div class="goals-section">
-      <div class="section-label">
-        <span class="section-dot"></span>
-        <span class="section-title">Monthly Goals</span>
+    <div class="month-year-card">
+      <div class="my-field">
+        <span class="my-label">Month</span>
+        <span class="my-input"></span>
       </div>
-      <div class="goals-grid">
-        <!-- Left column: Goals -->
-        <div class="goals-col">
-          <div class="card">
-            <div class="card-title">Goals</div>
-            <div class="cb"><span class="field-line wide"></span></div>
-            <div class="cb"><span class="field-line wide"></span></div>
-            <div class="cb"><span class="field-line wide"></span></div>
-            <div class="cb"><span class="field-line wide"></span></div>
-            <div class="cb"><span class="field-line wide"></span></div>
-          </div>
-        </div>
-        <!-- Right column: Focus Areas -->
-        <div class="goals-col">
-          <div class="card accent-soft">
-            <div class="card-title">Focus Areas</div>
-            <div class="focus-item"><span class="focus-num">1</span><span class="focus-line"></span></div>
-            <div class="focus-item"><span class="focus-num">2</span><span class="focus-line"></span></div>
-            <div class="focus-item"><span class="focus-num">3</span><span class="focus-line"></span></div>
-          </div>
-        </div>
+      <div class="my-field">
+        <span class="my-label">Year</span>
+        <span class="my-input narrow"></span>
       </div>
     </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         5. NOTES
-         ══════════════════════════════════════════════════════════ -->
-    <div class="notes-section">
-      <div class="section-label">
-        <span class="section-dot blue"></span>
-        <span class="section-title">Notes</span>
-      </div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════
-         6. QUOTE BANNER
-         ══════════════════════════════════════════════════════════ -->
-    <div class="quote-banner">
-      <div class="quote-text">"A goal without a plan is just a wish."</div>
-      <div class="quote-author">— Antoine de Saint-Exupéry</div>
-    </div>
-
   </div>
+
+  <!-- ─── 2. CALENDAR GRID — Mon–Sun × 6 rows, days 1–31 ─── -->
+  <div class="calendar-wrapper">
+    <table class="calendar-grid">
+      <thead>
+        <tr>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Row 1 -->
+        <tr>
+          <td><span class="cal-day-num">1</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">2</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">3</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">4</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">5</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">6</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">7</span><div class="cal-write"></div></td>
+        </tr>
+        <!-- Row 2 -->
+        <tr>
+          <td><span class="cal-day-num">8</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">9</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">10</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">11</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">12</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">13</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">14</span><div class="cal-write"></div></td>
+        </tr>
+        <!-- Row 3 -->
+        <tr>
+          <td><span class="cal-day-num">15</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">16</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">17</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">18</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">19</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">20</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">21</span><div class="cal-write"></div></td>
+        </tr>
+        <!-- Row 4 -->
+        <tr>
+          <td><span class="cal-day-num">22</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">23</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">24</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">25</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">26</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">27</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">28</span><div class="cal-write"></div></td>
+        </tr>
+        <!-- Row 5 -->
+        <tr>
+          <td><span class="cal-day-num">29</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">30</span><div class="cal-write"></div></td>
+          <td><span class="cal-day-num">31</span><div class="cal-write"></div></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <!-- Row 6 -->
+        <tr>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 3. MONTHLY GOALS + 4. FOCUS AREAS ─── -->
+  <div class="bottom-row">
+    <!-- Monthly Goals -->
+    <div class="bottom-col">
+      <div class="card">
+        <div class="section-title">
+          <!-- Star SVG icon -->
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Monthly Goals
+        </div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+    <!-- Focus Areas -->
+    <div class="bottom-col">
+      <div class="card card-alt">
+        <div class="section-title" style="color: var(--accent);">
+          <!-- Target SVG icon -->
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          Focus Areas
+        </div>
+        <div class="focus-item"><span class="focus-num">1</span><span class="focus-line"></span></div>
+        <div class="focus-item"><span class="focus-num">2</span><span class="focus-line"></span></div>
+        <div class="focus-item"><span class="focus-num">3</span><span class="focus-line"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 5. NOTES ─── -->
+  <div class="notes-section">
+    <div class="section-title" style="color: var(--secondary);">
+      <!-- Pencil SVG icon -->
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Notes
+    </div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- ─── 6. FOOTER ─── -->
+  <div class="footer">
+    <div class="footer-quote">
+      "A goal without a plan is just a wish." <span class="author">— Antoine de Saint-Exupéry</span>
+    </div>
+    <div class="footer-brand">Monthly Planner · Bubblegum v3</div>
+  </div>
+
+</div>
 
 </body>
 </html>
