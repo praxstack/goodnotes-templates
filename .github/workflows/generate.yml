@@ -17,9 +17,10 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v4
+      # FIND-0009: pin actions by full commit SHA.
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '20'
           cache: 'npm'
@@ -40,7 +41,7 @@ jobs:
           "
 
       - name: Upload assets as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: goodnotes-templates-assets
           path: |
@@ -55,11 +56,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      # FIND-0010: required for cosign keyless OIDC signing.
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: goodnotes-templates-assets
           path: output/
@@ -69,12 +72,28 @@ jobs:
           cd output
           zip -r ../goodnotes-templates-assets.zip pages/ stickers/ manifest.json
 
+      # FIND-0010: sign the release ZIP with sigstore/cosign (keyless via OIDC).
+      # Verify downstream with: cosign verify-blob --certificate-identity-regexp \
+      #   '^https://github.com/<owner>/<repo>/.github/workflows/generate.yml@.*$' \
+      #   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+      #   --signature goodnotes-templates-assets.zip.sig \
+      #   --certificate goodnotes-templates-assets.zip.crt \
+      #   goodnotes-templates-assets.zip
+      - name: Install cosign
+        uses: sigstore/cosign-installer@d7d6e4c5b33f7866a6e41c4643ef5e5c74aa7ed5 # v3.9.2
+      - name: Sign release bundle
+        run: |
+          cosign sign-blob --yes \
+            --output-signature goodnotes-templates-assets.zip.sig \
+            --output-certificate goodnotes-templates-assets.zip.crt \
+            goodnotes-templates-assets.zip
+
       - name: Get version
         id: version
         run: echo "version=$(node -p 'require("./package.json").version')" >> $GITHUB_OUTPUT
 
       - name: Create or update release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2.3.2
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: "goodnotes-templates v${{ steps.version.outputs.version }}"
@@ -92,6 +111,9 @@ jobs:
             1. Download and unzip
             2. AirDrop PDFs to your iPad
             3. Open in GoodNotes, Notability, Noteshelf, or CollaNote
-          files: goodnotes-templates-assets.zip
+          files: |
+            goodnotes-templates-assets.zip
+            goodnotes-templates-assets.zip.sig
+            goodnotes-templates-assets.zip.crt
           draft: false
           prerelease: false

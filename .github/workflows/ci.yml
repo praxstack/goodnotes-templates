@@ -1,0 +1,49 @@
+name: CI
+
+# FIND-0008: gate PR merges on build + test + audit. The existing generate.yml
+# only runs on push to main; nothing caught broken builds, failing tests, or
+# new HIGH CVEs before they reached main. This workflow runs on every PR.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build · Test · Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # FIND-0009: pin actions by full commit SHA + dependabot group (see
+      # .github/dependabot.yml). Comments record the human-readable tag.
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps (exact lockfile)
+        run: npm ci
+
+      - name: TypeScript build
+        run: npm run build
+
+      - name: Unit tests
+        run: npm test -- --run
+
+      - name: Dependency audit (high+)
+        # Non-blocking on moderate — vitest 2.x transitive chain (FIND-0006)
+        # closes with a semver-major bump scheduled for Sprint 3.
+        run: npm audit --audit-level=high
