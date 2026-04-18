@@ -1,6 +1,7 @@
 {
   "name": "goodnotes-templates",
   "version": "1.0.0",
+  "type": "module",
   "description": "Programmatically generate high-quality digital planning templates, stickers, and page assets optimized for GoodNotes and similar digital note-taking apps",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
