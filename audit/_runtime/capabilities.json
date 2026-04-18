@@ -1,0 +1,70 @@
+{
+  "probed_at": "2026-04-18T06:07:00Z",
+  "platform": "darwin",
+  "shell": "zsh",
+  "network_access": "full",
+  "agent_config": {
+    "model": "unknown (CLI does not expose pinned model name)",
+    "temperature": null,
+    "max_tokens_per_turn": null,
+    "determinism_note": "GAP: Cline CLI does not expose model pin or temperature to the agent. Audit re-runs will not be strictly deterministic. Logged in GAPS.md."
+  },
+  "tools": {
+    "available": [
+      { "name": "git",      "version": "2.53.0",                "path": "/opt/homebrew/bin/git" },
+      { "name": "ripgrep",  "version": "15.1.0",                "path": "/opt/homebrew/bin/rg" },
+      { "name": "fd",       "version": "10.4.2",                "path": "/opt/homebrew/bin/fd" },
+      { "name": "jq",       "version": "1.8.1",                 "path": "/opt/homebrew/bin/jq" },
+      { "name": "tokei",    "version": "14.0.0",                "path": "/opt/homebrew/bin/tokei" },
+      { "name": "node",     "version": "v22.21.1",              "path": "~/.nvm/versions/node/v22.21.1/bin/node" },
+      { "name": "npm",      "version": "11.12.1",               "path": "~/.nvm/versions/node/v22.21.1/bin/npm" },
+      { "name": "pnpm",     "version": "10.32.1",               "path": "~/.nvm/versions/node/v22.21.1/bin/pnpm" },
+      { "name": "yarn",     "version": "1.22.22",               "path": "~/.nvm/versions/node/v22.21.1/bin/yarn" },
+      { "name": "python3",  "version": "3.14.4",                "path": "/opt/homebrew/bin/python3" },
+      { "name": "pytest",   "version": "9.0.3",                 "path": "/opt/homebrew/bin/pytest" },
+      { "name": "pipx",     "version": "1.11.1",                "path": "/opt/homebrew/bin/pipx" },
+      { "name": "go",       "version": "unknown",               "path": "/opt/homebrew/bin/go" },
+      { "name": "cargo",    "version": "1.94.1",                "path": "/opt/homebrew/bin/cargo" },
+      { "name": "rustc",    "version": "1.94.1",                "path": "/opt/homebrew/bin/rustc" },
+      { "name": "java",     "version": "openjdk 25.0.2",        "path": "~/.sdkman/candidates/java/current/bin/java" },
+      { "name": "mvn",      "version": "3.9.15",                "path": "/opt/homebrew/bin/mvn" },
+      { "name": "docker",   "version": "29.4.0",                "path": "/usr/local/bin/docker" },
+      { "name": "kubectl",  "version": "unknown",               "path": "/usr/local/bin/kubectl" },
+      { "name": "tsc",      "version": "6.0.2",                 "path": "~/.nvm/versions/node/v22.21.1/bin/tsc" },
+      { "name": "prettier", "version": "3.8.3",                 "path": "/opt/homebrew/bin/prettier" }
+    ],
+    "missing": [
+      "cloc", "ruff", "bandit", "mypy", "pyright", "hypothesis",
+      "gradle", "podman", "helm", "terraform",
+      "semgrep", "trivy", "grype", "gitleaks", "trufflehog", "osv-scanner",
+      "snyk", "syft", "checkov", "tfsec", "kube-linter",
+      "license-checker", "scancode",
+      "mutmut", "stryker", "pitest", "pact-broker", "fast-check",
+      "eslint", "lighthouse", "pa11y", "axe",
+      "madge", "depcheck"
+    ],
+    "installable_via_npx": [
+      "eslint", "madge", "depcheck", "license-checker", "lighthouse",
+      "pa11y", "axe-core", "@cyclonedx/cdxgen"
+    ],
+    "installable_via_pipx_or_brew": [
+      "semgrep (pipx)", "gitleaks (brew)", "trufflehog (brew)",
+      "osv-scanner (brew)", "syft (brew)", "trivy (brew)",
+      "grype (brew)", "checkov (pipx)"
+    ]
+  },
+  "detected_stacks": ["node", "typescript", "html", "css"],
+  "monorepo": {
+    "detected": false,
+    "manifests": [],
+    "packages": [],
+    "note": "Single-package Node/TypeScript repo. No pnpm-workspace.yaml, lerna.json, turbo.json, nx.json, go.work, Cargo workspace, Maven multi-module, or package.json.workspaces. Roadmap will use package=\"<root>\"."
+  },
+  "repo": {
+    "root": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+    "head": "6603b06 fix: bake bubblegum palette into templates 1-6 :root",
+    "first_commit": "2026-04-09T19:39:15+05:30",
+    "total_commits": 32,
+    "age_days": 9
+  }
+}

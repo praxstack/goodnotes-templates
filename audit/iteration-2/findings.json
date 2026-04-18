@@ -1,0 +1,321 @@
+{
+  "schema_version": "codex-audit-v1.1",
+  "iteration": 2,
+  "generated_at": "2026-04-18",
+  "package": "<root>",
+  "note": "Iteration 2 drills into the three T1 modules identified by Phase 0: preview-server.ts, puppeteer-renderer.ts, pdf-postprocess.ts. Only *new or refined* findings are listed. Iteration-1 findings are not re-emitted.",
+  "findings": [
+    {
+      "id": "FIND-0022",
+      "iteration": 2,
+      "phase": "code_review",
+      "dimension": "security",
+      "category": "path-traversal-symlink",
+      "title": "Preview server path-traversal guard is symlink-unsafe — `path.resolve` does not dereference symlinks",
+      "severity": "High",
+      "cvss": {
+        "base_score": 7.1,
+        "vector": "CVSS:3.1/AV:A/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+        "source_tool": "manual-review + POC exec"
+      },
+      "rice": null,
+      "priority": "P0",
+      "confidence": "high",
+      "confidence_reason": "POC written + executed in /tmp. `path.resolve(absDir, 'pwn')` returns a path under absDir by string, but fs.readFile follows the OS symlink and returns content from outside. Guard is bypassable.",
+      "owasp_2021": "A01",
+      "cwe": "CWE-59",
+      "package": "<root>",
+      "location": {
+        "file": "src/cli/preview-server.ts",
+        "line_start": 36,
+        "line_end": 62,
+        "function": "startPreviewServer"
+      },
+      "evidence_snippet": "    // Serve static files from output dir\n    // Use path.resolve to normalize any '..' segments, then check prefix\n    const decoded = decodeURIComponent(url.pathname).replace(/^\\/+/, '');\n    const filePath = path.resolve(absDir, decoded);\n    if (!filePath.startsWith(absDir + path.sep) && filePath !== absDir) {\n      res.writeHead(403);\n      res.end('Forbidden');\n      return;\n    }\n\n    try {\n      const stat = await fs.stat(filePath);  // <-- follows symlink\n      ...\n      const content = await fs.readFile(filePath);  // <-- reads through symlink\n",
+      "evidence_tool_outputs": [
+        {
+          "file": "audit/_runtime/tool-outputs/symlink-poc.log",
+          "jsonpath": null
+        }
+      ],
+      "secret_fingerprint": null,
+      "blast_radius": "If any file or directory under `output/` is (or becomes) a symlink pointing outside the allowed root, the server will serve its contents to any requester. Combined with FIND-0001 (0.0.0.0 bind), this becomes remotely exploitable on a shared LAN. An attacker with local write to `output/` can plant a symlink to `/etc`, `~/.ssh`, `/home/*`, etc., then read it back over HTTP.",
+      "attacker_profile": "P4 (local user who writes files to output/) + P1 (LAN attacker reads). Also any code path that writes to output/ — e.g., a future template-author script that creates relative-path includes pointing outside the repo.",
+      "reproduction": [
+        "# Set up the symlink (attacker primitive — file write to output/):",
+        "mkdir -p output && ln -s /etc output/pwn",
+        "# Start the server:",
+        "npm run preview",
+        "# Read the file:",
+        "curl http://127.0.0.1:3000/pwn/passwd   # returns /etc/passwd",
+        "# POC proving path.resolve doesn't short-circuit symlinks:",
+        "# (see audit/_runtime/tool-outputs/symlink-poc.log)"
+      ],
+      "recommendation": {
+        "summary": "Use `fs.realpath` to resolve symlinks THEN run the prefix check; or open the file with `O_NOFOLLOW` semantics (not available directly in Node, but `fs.lstat` + reject if symlink is a safe substitute for this dev tool).",
+        "code_sketch": "const filePath = path.resolve(absDir, decoded);\ntry {\n  const realPath = await fs.realpath(filePath);       // follows symlinks\n  if (!realPath.startsWith(absDir + path.sep) && realPath !== absDir) {\n    res.writeHead(403); res.end('Forbidden'); return;\n  }\n  // also reject if the path itself is a symlink to a valid-looking target:\n  const lstat = await fs.lstat(filePath);\n  if (lstat.isSymbolicLink()) { res.writeHead(403); res.end('Forbidden'); return; }\n  // ... existing serve logic using realPath\n} catch (err) {\n  res.writeHead(err.code === 'ENOENT' ? 404 : 403);\n  res.end(err.code === 'ENOENT' ? 'Not found' : 'Forbidden');\n  return;\n}",
+        "rollout_notes": "Backward compatible for normal files. Legitimate symlinks in output/ (rare) will start returning 403 — add a --follow-symlinks opt-out if needed."
+      },
+      "test_to_add": {
+        "type": "integration",
+        "name": "preview_server_rejects_symlink_escape",
+        "what_it_protects": "Regression against FIND-0022"
+      },
+      "effort_tshirt": "S",
+      "dependencies": [],
+      "related_findings": ["FIND-0001"],
+      "rollback_plan": "Revert; the bug returns.",
+      "verification_method": "Create a symlink under output/ pointing to /etc; curl the server; expect 403."
+    },
+    {
+      "id": "FIND-0023",
+      "iteration": 2,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "path-handling",
+      "title": "Preview server accepts URL-encoded null bytes and backslashes unfiltered",
+      "severity": "Low",
+      "cvss": {
+        "base_score": 3.7,
+        "vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+        "source_tool": "manual-review"
+      },
+      "rice": null,
+      "priority": "P2",
+      "confidence": "medium",
+      "confidence_reason": "`decodeURIComponent(url.pathname)` will happily decode `%00` to a literal NUL. Newer Node versions throw on NUL in fs paths (`ERR_INVALID_ARG_VALUE`), so impact is typically an unhandled rejection → 500-equivalent, not a read primitive. Confidence medium because behavior depends on Node version.",
+      "owasp_2021": "A03",
+      "cwe": "CWE-158",
+      "package": "<root>",
+      "location": {
+        "file": "src/cli/preview-server.ts",
+        "line_start": 37,
+        "line_end": 38,
+        "function": "startPreviewServer"
+      },
+      "evidence_snippet": "    const decoded = decodeURIComponent(url.pathname).replace(/^\\/+/, '');\n    const filePath = path.resolve(absDir, decoded);",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Uncaught exception crashes the request handler; under certain older Node versions (< 10) NULs truncated paths and were a CVE class. Modern Node throws. Low.",
+      "attacker_profile": "P1 sending crafted URL `GET /%00`",
+      "reproduction": [
+        "curl 'http://127.0.0.1:3000/%00etc/passwd'",
+        "Expected (post-fix): 400 Bad Request. Current: promise rejection in the handler."
+      ],
+      "recommendation": {
+        "summary": "Reject decoded paths containing NUL or backslash; wrap the handler in try/catch so Node version quirks don't crash the request.",
+        "code_sketch": "if (decoded.indexOf('\\0') !== -1 || decoded.indexOf('\\\\') !== -1) {\n  res.writeHead(400); res.end('Bad Request'); return;\n}",
+        "rollout_notes": "No user-facing impact."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": ["FIND-0022"],
+      "rollback_plan": "Revert.",
+      "verification_method": "curl with %00 returns 400."
+    },
+    {
+      "id": "FIND-0024",
+      "iteration": 2,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "pdf-integrity",
+      "title": "`addHyperlinks` does not validate link rect values — negative or zero-area rects are accepted",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 2,
+        "impact": 2,
+        "confidence": 0.8,
+        "effort": 1,
+        "score": 3.2
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Read `pdf-postprocess.ts:82-107`. The 44×44 minimum enforcement only grows too-small rects; there is no check for NaN, Infinity, negative width, or negative height. A PDFHyperlink `{ rect: [0, 0, -5, 10] }` would produce an invalid /Rect that some readers reject entirely (displaying no hyperlinks at all — silent regression on link UX).",
+      "owasp_2021": null,
+      "cwe": "CWE-20",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/pdf-postprocess.ts",
+        "line_start": 82,
+        "line_end": 107,
+        "function": "addHyperlinks"
+      },
+      "evidence_snippet": "    const [x1, y1, x2, y2] = cssToPageRect(\n      link.rect[0], link.rect[1], link.rect[2], link.rect[3],\n      pageHeight\n    );\n    // Enforce minimum tap target (44x44 points per Apple HIG)\n    const minSize = 44;\n    const actualW = x2 - x1;\n    const actualH = y2 - y1;\n    // <-- no check that actualW > 0, actualH > 0, all finite",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "A buggy generator (e.g., mis-computed tab coords in `daily-year-v2.ts`) passes nonsense rects silently. The PDF still \"succeeds\" but some readers drop all annotations on the affected page. Users report \"tabs don't work\" with no error from the generator.",
+      "attacker_profile": "N/A — correctness.",
+      "reproduction": [
+        "Call `addHyperlinks` with `{ rect: [0,0,-1,-1], sourcePageIndex: 0, destinationPageIndex: 0 }`",
+        "Open resulting PDF in a strict reader → annotations list invalid."
+      ],
+      "recommendation": {
+        "summary": "Validate rects at the public API boundary; reject rects whose width or height is <= 0 or non-finite; warn-and-skip instead of silently producing invalid PDFs.",
+        "code_sketch": "const [rx, ry, rw, rh] = link.rect;\nif (!Number.isFinite(rx) || !Number.isFinite(ry) || !(rw > 0) || !(rh > 0)) {\n  console.warn(`Hyperlink skipped: invalid rect [${link.rect.join(',')}]`);\n  continue;\n}",
+        "rollout_notes": "No ABI change."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "addHyperlinks_rejects_invalid_rects",
+        "what_it_protects": "Regression + silent-invalid-PDF"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "Unit test asserts skipped + warn."
+    },
+    {
+      "id": "FIND-0025",
+      "iteration": 2,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "race-browser-reuse",
+      "title": "Puppeteer browser singleton race — `getBrowser()` not reentrant, concurrent calls can launch two browsers",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 2,
+        "impact": 2,
+        "confidence": 1.0,
+        "effort": 2,
+        "score": 2.0
+      },
+      "priority": "P3",
+      "confidence": "high",
+      "confidence_reason": "Check code. Between the `if (!browserInstance)` test and the `puppeteer.launch` await, an interleaved second call sees `browserInstance === null` and launches again. Classic async check-then-act race.",
+      "owasp_2021": null,
+      "cwe": "CWE-362",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/puppeteer-renderer.ts",
+        "line_start": 22,
+        "line_end": 41,
+        "function": "getBrowser"
+      },
+      "evidence_snippet": "let browserInstance: Browser | null = null;\n\nasync function getBrowser(): Promise<Browser> {\n  if (!browserInstance || !browserInstance.connected) {\n    browserInstance = await puppeteer.launch({\n      headless: true,\n      args: [ ... ],\n    });\n  }\n  return browserInstance;\n}",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Today, `batchRenderHTML` awaits sequentially, so the race is not exercised. Any future `Promise.all([renderA, renderB])` will leak a second Chromium process. Memory waste. `closeBrowser` will only close one of them.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "Call `await Promise.all([renderHTMLToPDF(opts), renderHTMLToPDF(opts)])` — two browsers launched."
+      ],
+      "recommendation": {
+        "summary": "Cache the launch *promise*, not the resolved browser.",
+        "code_sketch": "let browserPromise: Promise<Browser> | null = null;\nasync function getBrowser(): Promise<Browser> {\n  if (!browserPromise) browserPromise = puppeteer.launch({ ... }).then(b => { browserInstance = b; return b; });\n  const b = await browserPromise;\n  if (!b.connected) { browserPromise = null; return getBrowser(); }\n  return b;\n}",
+        "rollout_notes": "Trivial; no API change."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "Promise.all race test; exactly one Chromium process in `ps`."
+    },
+    {
+      "id": "FIND-0026",
+      "iteration": 2,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "pdf-integrity-clamp",
+      "title": "`addBookmarks` silently clamps out-of-range `pageIndex`; masks generator bugs",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 3,
+        "impact": 2,
+        "confidence": 1.0,
+        "effort": 1,
+        "score": 6.0
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Observed directly.",
+      "owasp_2021": null,
+      "cwe": "CWE-704",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/pdf-postprocess.ts",
+        "line_start": 153,
+        "line_end": 158,
+        "function": "addBookmarks.createOutlineItem"
+      },
+      "evidence_snippet": "    const clampedIdx = Math.max(0, Math.min(bookmark.pageIndex, pages.length - 1));\n    if (bookmark.pageIndex !== clampedIdx) {\n      console.warn(`Bookmark \"${bookmark.title}\": pageIndex ${bookmark.pageIndex} clamped to ${clampedIdx} (${pages.length} pages)`);\n    }\n    const page = pages[clampedIdx];",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Silent clamping + warn is permissive at the boundary of a paid pipeline. A generator bug that produces bookmark.pageIndex = 999 on a 400-page PDF still ships; users see 'February' bookmark landing on the last page. `console.warn` is easily missed in batch output.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "Pass `{ pageIndex: pages.length }` — warn logged, bookmark clamps to last page."
+      ],
+      "recommendation": {
+        "summary": "Opinionated behavior: in strict mode, throw. In lenient mode, clamp + warn. Choose the default the CI / generator pipeline wants, and make it configurable.",
+        "code_sketch": "export async function addBookmarks(\n  pdfBuffer: Buffer,\n  bookmarks: PDFBookmark[],\n  opts: { onRangeError?: 'throw' | 'warn' } = { onRangeError: 'warn' }\n): Promise<Buffer> {\n  ...\n  if (bookmark.pageIndex !== clampedIdx) {\n    if (opts.onRangeError === 'throw') throw new Error(...);\n    console.warn(...);\n  }\n}",
+        "rollout_notes": "Default to 'warn' for back-compat; CI should call with 'throw'."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "addBookmarks_respects_onRangeError",
+        "what_it_protects": "Regression"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "Unit test: throw + warn paths both exercised."
+    },
+    {
+      "id": "FIND-0027",
+      "iteration": 2,
+      "phase": "code_review",
+      "dimension": "security",
+      "category": "svg-injection-unused-today",
+      "title": "SVG sticker generators interpolate user-supplied `text` without escaping — dormant XSS primitive",
+      "severity": "Low",
+      "cvss": {
+        "base_score": 2.4,
+        "vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:U/C:N/I:L/A:N",
+        "source_tool": "manual-review"
+      },
+      "rice": null,
+      "priority": "P3",
+      "confidence": "high",
+      "confidence_reason": "Observed: `generateDateTab`, `generateMonthTab`, `generateDayTab`, `generateNumberCircle`, `generatePriorityMarker`, `generateBanner` all interpolate `text` directly into `<text>${text}</text>`. Today all callers pass trusted literals from enums — latent vulnerability, not currently reachable.",
+      "owasp_2021": "A03",
+      "cwe": "CWE-79",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/svg-renderer.ts",
+        "line_start": 125,
+        "line_end": 163,
+        "function": "generateDateTab / generateMonthTab / generateDayTab / generateNumberCircle / generatePriorityMarker / generateBanner"
+      },
+      "evidence_snippet": "function generateDateTab(w: number, h: number, p: StickerPalette, text: string): string {\n  ...\n  <text x=\"${w / 2}\" y=\"${h / 2 + 6}\" text-anchor=\"middle\" ... fill=\"#FFFFFF\">${text}</text>\n}\n// same pattern in 5 other sticker generators",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "If a future caller passes user-controlled text (CLI flag `--sticker-text \"…\"`), the SVG output can contain `</text><script>…</script><text>` — breaking out of the text element. Resulting PNGs are raster-only (sharp rasterization ignores script), so immediate XSS impact = zero. But any downstream consumer that embeds the SVG in a web page would execute. Latent; worth a 2-line fix.",
+      "attacker_profile": "P2 future-contributor who pipes `--text` to generators.",
+      "reproduction": [
+        "generateStickerSVG('date-tab', { text: '</text><x/></svg>' }) → broken SVG"
+      ],
+      "recommendation": {
+        "summary": "Escape `&<>` in all interpolated `text` args before concatenation.",
+        "code_sketch": "function escXml(s: string): string {\n  return s.replace(/[&<>\"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&apos;' }[c]!));\n}\n// then: ...fill=\"#FFFFFF\">${escXml(text)}</text>",
+        "rollout_notes": "No behavior change for today's enum inputs."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "sticker_text_is_xml_escaped",
+        "what_it_protects": "Regression when user-controlled text is ever piped in"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "Unit test with payload."
+    }
+  ]
+}
