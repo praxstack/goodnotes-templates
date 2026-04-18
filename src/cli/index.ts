@@ -111,7 +111,6 @@ program
 
       // List available dark.css files
       const fs = await import('node:fs/promises');
-      const path = await import('node:path');
       const htmlDir = 'src/templates/html';
       try {
         const files = await fs.readdir(htmlDir);
