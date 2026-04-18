@@ -73,7 +73,7 @@ All stickers are **300 DPI, transparent PNG, pre-cropped** — ready to import d
 
 ```bash
 # Clone and install
-git clone https://github.com/yourusername/goodnotes-templates.git
+git clone https://github.com/praxstack/goodnotes-templates.git
 cd goodnotes-templates
 npm install
 
@@ -146,19 +146,27 @@ npx tsx src/cli/index.ts generate --dry-run
 
 ## 🏗️ Architecture
 
+Templates are **self-contained** — each HTML file owns its colors, fonts, and
+layout. The renderer is a transparent pass-through (see
+`docs/HLD-self-contained-templates.md`). No theme injection; what you see in
+the browser is what you get in the PDF.
+
 ```
 src/
 ├── core/
-│   ├── dimensions.ts        # Page sizes, margins, DPI conversion
-│   ├── themes.ts            # 8 built-in themes + custom theme loader
-│   ├── renderer.ts          # Generation orchestrator
-│   ├── pdfkit-renderer.ts   # PDFKit: lined, grid, dot-grid, blank, isometric, music, calligraphy
-│   ├── svg-renderer.ts      # SVG generation for 15 sticker types
-│   ├── png-renderer.ts      # Sharp: SVG → PNG rasterization at 300 DPI
-│   └── pdf-postprocess.ts   # pdf-lib: hyperlinks, bookmarks, metadata, PDF merging
+│   ├── dimensions.ts        # Paper sizes, margins, DPI conversion
+│   ├── puppeteer-renderer.ts # HTML → PDF via headless Chromium
+│   ├── pdf-postprocess.ts   # pdf-lib: hyperlinks, bookmarks, metadata, merge
+│   ├── svg-renderer.ts      # SVG generation for 19 sticker types (baked-in palettes)
+│   └── png-renderer.ts      # Sharp: SVG → PNG rasterization at 300 DPI
 ├── cli/
-│   ├── index.ts             # Commander.js CLI (generate, list, preview)
-│   └── preview-server.ts    # Local gallery server
+│   ├── index.ts             # Commander.js CLI (render, list, preview)
+│   └── preview-server.ts    # Local gallery server (binds 127.0.0.1 by default)
+├── templates/
+│   ├── registry.ts          # Template metadata (id, name, category, htmlPath)
+│   ├── html/                # 32 self-contained HTML templates + 11 .dark.css siblings
+│   ├── themes/              # 8 optional color themes (light + dark pairs)
+│   └── planners/            # Programmatic generators (full-year planner)
 ├── types/
 │   └── index.ts             # TypeScript type definitions
 └── utils/
@@ -169,11 +177,12 @@ src/
 
 | Asset Type | Renderer | Output | File Size |
 |-----------|----------|--------|-----------|
-| Simple pages (grid, lined, dots) | PDFKit (direct PDF) | PDF | <100 KB |
-| Stickers | SVG markup → Sharp | PNG (300 DPI) | <200 KB |
-| Complex templates* | Puppeteer → pdf-lib | PDF | <5 MB |
+| HTML templates (all 32)   | Puppeteer → pdf-lib | PDF | <500 KB |
+| Full-year planners | Puppeteer (monthly batches) → pdf-lib merge | PDF | ~150 MB |
+| Stickers (19 types) | SVG markup → Sharp | PNG (300 DPI) | <200 KB |
 
-*Complex templates (planners with hyperlinks) use Puppeteer for HTML/CSS layout + pdf-lib for link injection.
+Puppeteer is used for every HTML → PDF path. pdf-lib post-processes to add
+hyperlinks, bookmarks, and metadata.
 
 ---
 
@@ -283,21 +292,21 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ## 🗺️ Roadmap
 
-- [x] Core generation engine (PDFKit + SVG + Sharp)
-- [x] 8 color themes with font pairings
-- [x] 7 simple page types with variants
-- [x] 15 sticker types (700+ individual PNGs)
-- [x] CLI with generate/list/preview commands
-- [x] 6-language locale support
-- [x] Custom theme JSON loader
-- [x] CI/CD with GitHub Actions + Releases
-- [ ] Puppeteer-rendered planners with hyperlinked tabs
-- [ ] Journal templates (gratitude, morning pages, reflection)
-- [ ] Tracker templates (habit, mood, fitness, budget)
-- [ ] Worksheet templates (Eisenhower matrix, goal setting)
+Shipped:
+- [x] Core generation engine (Puppeteer + pdf-lib + SVG + Sharp)
+- [x] 32 self-contained HTML templates (planners, journals, trackers, worksheets, notes)
+- [x] 8 color themes + 11 dark-mode variants
+- [x] 19 sticker types (700+ PNGs when batched × themes)
+- [x] CLI (`render`, `list`, `preview`)
+- [x] 6-language locale support (en, es, fr, de, ja, ko)
+- [x] Full-year ADHD planner (daily-year-v2) with hyperlinked monthly tabs + bookmarks
+- [x] CI/CD with GitHub Actions + Releases (release artifacts signed with cosign/sigstore)
+
+Next:
+- [ ] Self-host Google Fonts under `assets/fonts/` (drop the online `<link>`)
+- [ ] Dark-mode parity for all 32 HTML templates (currently 11/32)
 - [ ] Web-based template customizer
 - [ ] Plugin system for community templates
-- [ ] AI-generated cover art
 
 ---
 

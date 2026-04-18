@@ -5,40 +5,45 @@ Thank you for your interest in contributing! This project welcomes templates, th
 ## Quick Start
 
 ```bash
-git clone https://github.com/yourusername/goodnotes-templates.git
+git clone https://github.com/praxstack/goodnotes-templates.git
 cd goodnotes-templates
 npm install
-npm run start -- list                    # See available themes and template types
-npm run start -- generate --pages --stickers --theme warm-neutral  # Generate a subset
-npm run start -- preview                 # Browse generated assets at localhost:3000
-npm test                                 # Run tests
+npm run build                            # TypeScript check (must pass)
+npm run start -- list                    # See available templates and paper sizes
+npm run start -- render src/templates/html/adhd-gentle-daily.html  # Render one
+npm run start -- preview                 # Browse output/ at http://127.0.0.1:3000
+npm test                                 # Run unit tests
 ```
 
 ## What Can You Contribute?
 
-### 1. New Themes
-Add a new color palette to `src/core/themes.ts`:
-- Pick 6 colors: primary, secondary, accent, background, text, muted
-- Choose 3 Google Fonts: header, body, accent
-- All colors must meet WCAG AA contrast ratio (4.5:1 for text)
-- Include both the theme and add a test in `tests/unit/themes.test.ts`
+Templates are **self-contained** — each HTML file owns its colors, fonts, and
+layout (see `docs/HLD-self-contained-templates.md`). Adding a template is a
+one-file change, not a multi-module change.
 
-Or create a JSON custom theme (see `examples/custom-theme.json`).
+### 1. New HTML template
+Create `src/templates/html/<my-template>.html`:
+- Inline all styles. No external fetches; we self-host fonts (see `assets/fonts/`).
+- Use CSS variables for colors so users can re-theme via `.dark.css` siblings.
+- Satisfy WCAG AA contrast (4.5:1 text, 3:1 large text) on every background.
+- Register the template in `src/templates/registry.ts`.
+- Add a sample render to verify: `npm run start -- render src/templates/html/<my-template>.html`.
 
-### 2. New Simple Page Types
-Add a new drawing function in `src/core/pdfkit-renderer.ts`:
-1. Add the type to `SimplePageType` union
-2. Write a `draw*Page()` function
-3. Add a case to the switch in `renderSimplePage()`
-4. Add variants to the page generation loop in `src/core/renderer.ts`
+Optional: drop a `<my-template>.dark.css` sibling for the dark variant. It
+gets injected with `--color-mode dark`.
 
-### 3. New Sticker Types
-Add a new SVG generator in `src/core/svg-renderer.ts`:
-1. Add dimensions to `STICKER_SIZES`
-2. Add the type to `StickerType`
-3. Write a `generate*()` function returning SVG markup
-4. Add a case to `generateStickerSVG()`
-5. Add generation config to `src/core/renderer.ts`
+### 2. New color theme
+Add `src/templates/themes/<my-theme>.css` (and `<my-theme>-dark.css` for the
+dark variant). Themes are pure CSS variable overrides; no code changes needed.
+Use with `--color-mode <my-theme>`.
+
+### 3. New sticker type
+Add an SVG generator in `src/core/svg-renderer.ts`:
+1. Add dimensions to `STICKER_SIZES`.
+2. Add the type key to the `StickerType` union.
+3. Write a `generate*()` function returning SVG markup (XML-escape any
+   interpolated text — use the `escXml` helper).
+4. Add a case to the `switch` in `generateStickerSVG()`.
 
 ### 4. Bug Fixes
 - Run `npm test` before and after your fix
@@ -84,11 +89,12 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ## Design Principles
 
-1. **Visual quality is non-negotiable** — Every template must look professional
-2. **Programmatic first** — Everything is generated from code, not drawn manually
-3. **Theme-aware** — All templates must work with any theme
-4. **GoodNotes-compatible** — PDF 1.7, sRGB, embedded fonts, internal hyperlinks only
-5. **Small files** — Simple pages <500KB, stickers <200KB each
+1. **Visual quality is non-negotiable** — Every template must look professional.
+2. **Self-contained HTML** — One file per template; it owns its CSS (see HLD).
+3. **Theme via override, not injection** — Templates define CSS variables; themes override them.
+4. **GoodNotes-compatible** — PDF 1.7, sRGB, embedded fonts, internal hyperlinks only.
+5. **Small files** — single-page PDFs <500 KB; stickers <200 KB each.
+6. **Offline-capable** — No runtime network calls from the renderer.
 
 ## License
 
