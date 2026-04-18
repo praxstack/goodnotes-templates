@@ -1,0 +1,18 @@
+graph TD
+  CLI[src/cli/index.ts] --> PUP[src/core/puppeteer-renderer.ts]
+  CLI --> DIM[src/core/dimensions.ts]
+  CLI --> LOC[src/utils/locale.ts]
+  CLI --> PREV[src/cli/preview-server.ts]
+  PREV -->|fs + http| OUTPUT[(output/ dir)]
+  PUP -->|puppeteer| CHROME[Chromium]
+  PUP -->|fs.readFile| HTML[src/templates/html/*.html]
+  PUP -->|fs.readFile| DCSS[*.dark.css / themes/*.css]
+  REG[src/templates/registry.ts] --> HTML
+  PLANV1[templates/planners/daily-year.ts] --> HTML
+  PLANV2[templates/planners/daily-year-v2.ts] --> HTML
+  PLANV2 --> PUP
+  PDF[src/core/pdf-postprocess.ts] -->|pdf-lib| BUFFER[(PDF buffer)]
+  SVG[src/core/svg-renderer.ts] --> PNG[src/core/png-renderer.ts]
+  PNG -->|sharp| PNGOUT[(*.png)]
+  SCRIPTS[scripts/*.ts] --> PUP
+  SCRIPTS --> PDF

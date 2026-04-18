@@ -1,0 +1,139 @@
+{
+  "schema_version": "codex-audit-v1.1",
+  "generated_at": "2026-04-18",
+  "repo": {
+    "path": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+    "head_sha": "6603b06c6d70c800deeab58b40185f5e51fe9750",
+    "first_commit": "2026-04-09T19:39:15+05:30",
+    "total_commits": 32,
+    "age_days": 9
+  },
+  "audit_config": {
+    "mode": "FULL_REPO",
+    "budget": "full-3-iterations",
+    "network": "yes",
+    "depth_overrides": null,
+    "iterations_run": 3,
+    "monorepo": false,
+    "packages": ["<root>"]
+  },
+  "health": {
+    "grade": "C+",
+    "grade_after_sprint_1": "B+",
+    "effort_to_green_tshirt_sum": "~2 days P0s, ~9 days to close all"
+  },
+  "counts": {
+    "total_findings": 27,
+    "by_severity": {
+      "critical": 0,
+      "high": 4,
+      "medium": 11,
+      "low": 11,
+      "informational": 1
+    },
+    "by_dimension": {
+      "security": 11,
+      "correctness": 9,
+      "maintainability": 3,
+      "operability": 1,
+      "testability": 1,
+      "uxa11y": 1,
+      "privacy": 0
+    },
+    "by_priority": {
+      "P0": 3,
+      "P1": 7,
+      "P2": 12,
+      "P3": 4,
+      "informational_only": 1
+    },
+    "by_iteration": {
+      "iteration_1": 21,
+      "iteration_2": 6,
+      "iteration_3_refuted_fully": 0,
+      "iteration_3_refuted_partially": 1,
+      "iteration_3_inconclusive": 0,
+      "iteration_3_confirmed": 26
+    }
+  },
+  "tool_outputs": {
+    "npm_audit": "audit/_runtime/tool-outputs/npm-audit.json",
+    "depcheck": "audit/_runtime/tool-outputs/depcheck.json",
+    "licenses_prod": "audit/_runtime/tool-outputs/licenses-prod.json",
+    "licenses_all": "audit/_runtime/tool-outputs/licenses-all.json",
+    "gitleaks": "audit/_runtime/tool-outputs/gitleaks.sarif",
+    "semgrep": "audit/_runtime/tool-outputs/semgrep.sarif",
+    "tokei": "audit/_runtime/tool-outputs/tokei.json",
+    "tsc_noemit": "audit/_runtime/tool-outputs/tsc-noemit.log",
+    "symlink_poc": "audit/_runtime/tool-outputs/symlink-poc.log"
+  },
+  "tech_stack_analysis": {
+    "sbom_path": null,
+    "sbom_gap_reason": "G-003 — syft not installed; cdxgen skipped. package-lock.json used as proxy.",
+    "detected_stacks": ["node", "typescript", "html", "css"],
+    "prod_dep_count": 12,
+    "prod_transitive_count": 244,
+    "unused_prod_deps": ["pdfkit", "@svgdotjs/svg.js", "svgdom", "chalk", "ora", "glob", "handlebars", "fontkit"],
+    "license_breakdown": {
+      "MIT": 188,
+      "Apache-2.0": 18,
+      "ISC": 14,
+      "BlueOak-1.0.0": 9,
+      "BSD-2-Clause": 6,
+      "BSD-3-Clause": 3,
+      "0BSD": 2,
+      "LGPL-3.0-or-later": 1,
+      "MIT AND Zlib": 1,
+      "Python-2.0": 1,
+      "MIT*": 1
+    }
+  },
+  "findings_sources": {
+    "iteration_1": "audit/iteration-1/findings.json",
+    "iteration_2": "audit/iteration-2/findings.json",
+    "iteration_3_verdicts": "audit/iteration-3/verification-results.md",
+    "refuted_or_downgraded": [
+      {
+        "id": "FIND-0023",
+        "from_severity": "Low",
+        "to_severity": "Informational",
+        "reason": "Adversarial pass: behavioral claim ('promise rejection / crash on %00') is wrong on Node >= 18. Modern Node throws ERR_INVALID_ARG_VALUE, caught by the existing try/catch → 404. Defensive-programming fix still valid but severity should be Informational/Hardening."
+      }
+    ]
+  },
+  "top_risks": [
+    { "rank": 1, "id": "FIND-0011", "title": "tsc --noEmit fails — broken build",                "priority": "P0", "severity": "High",    "effort_tshirt": "XS" },
+    { "rank": 2, "id": "FIND-0022", "title": "Preview server symlink path-traversal (POC)",       "priority": "P0", "severity": "High",    "effort_tshirt": "S"  },
+    { "rank": 3, "id": "FIND-0008", "title": "CI workflow does not gate merges",                  "priority": "P0", "severity": "High",    "effort_tshirt": "S"  },
+    { "rank": 4, "id": "FIND-0005", "title": "basic-ftp HIGH-CVSS transitive",                    "priority": "P1", "severity": "High",    "effort_tshirt": "XS" },
+    { "rank": 5, "id": "FIND-0014", "title": "Runtime Google Fonts dep contradicts docs",         "priority": "P1", "severity": "Medium",  "effort_tshirt": "M"  }
+  ],
+  "gaps_file": "audit/GAPS.md",
+  "privacy": { "scope": "not_applicable" },
+  "deliverables": [
+    "audit/CODEBASE_AUDIT_REPORT.md",
+    "audit/CODEBASE_AUDIT_REPORT.json",
+    "audit/IMPLEMENTATION_ROADMAP.md",
+    "audit/IMPLEMENTATION_ROADMAP.csv",
+    "audit/TEST_STRATEGY.md",
+    "audit/SLIDE_OUTLINE.md",
+    "audit/GAPS.md",
+    "audit/iteration-1/findings.json",
+    "audit/iteration-1/findings.md (superseded by CODEBASE_AUDIT_REPORT.md)",
+    "audit/iteration-1/docs-review.md",
+    "audit/iteration-1/claims-ledger.md",
+    "audit/iteration-1/supply-chain.md",
+    "audit/iteration-1/architecture.md",
+    "audit/iteration-1/threat-model.md",
+    "audit/iteration-1/tests-and-quality-gates.md",
+    "audit/iteration-1/performance-and-observability.md",
+    "audit/iteration-1/privacy-review.md",
+    "audit/iteration-1/ui-ux-a11y.md",
+    "audit/iteration-2/findings.json",
+    "audit/iteration-3/verification-results.md",
+    "audit/_runtime/capabilities.json",
+    "audit/_runtime/topology.md",
+    "audit/_runtime/dependency-graph.mmd",
+    "audit/_runtime/tool-outputs/"
+  ]
+}

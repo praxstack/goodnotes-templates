@@ -1,0 +1,1100 @@
+{
+  "schema_version": "codex-audit-v1.1",
+  "iteration": 1,
+  "generated_at": "2026-04-18",
+  "package": "<root>",
+  "findings": [
+    {
+      "id": "FIND-0001",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "security",
+      "category": "hardening",
+      "title": "Preview HTTP server binds to all interfaces by default",
+      "severity": "Medium",
+      "cvss": {
+        "base_score": 5.3,
+        "vector": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+        "source_tool": "manual-review + threat-model T-04"
+      },
+      "rice": null,
+      "priority": "P1",
+      "confidence": "high",
+      "confidence_reason": "Node's http.Server.listen(port, callback) without a host argument binds to all interfaces on macOS/Linux. Verified by Node docs; code matches pattern exactly.",
+      "owasp_2021": "A05",
+      "cwe": "CWE-200",
+      "package": "<root>",
+      "location": {
+        "file": "src/cli/preview-server.ts",
+        "line_start": 65,
+        "line_end": 68,
+        "function": "startPreviewServer"
+      },
+      "evidence_snippet": "  server.listen(port, () => {\n    console.log(`  Preview server running at http://localhost:${port}`);\n    console.log(`  Press Ctrl+C to stop.\\n`);\n  });",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "On a shared network (coffee shop, conference, shared office Wi-Fi) anyone on-LAN can browse /output files. The gallery UI lists every file in output/ — includes potentially unreleased template drafts, personal journal PDFs, and anything the developer has placed there.",
+      "attacker_profile": "Unauthenticated LAN-adjacent attacker (same Wi-Fi).",
+      "reproduction": [
+        "In one terminal: `npm run preview`",
+        "Console prints 'http://localhost:3000' — misleading; it actually binds 0.0.0.0:3000",
+        "From another host on the same LAN: `curl http://<dev-laptop-ip>:3000/`",
+        "Observe the gallery HTML response with every output/ file listed"
+      ],
+      "recommendation": {
+        "summary": "Default-bind to 127.0.0.1; add --host flag for opt-in exposure.",
+        "code_sketch": "// src/cli/preview-server.ts:65\n  const host = process.env.PREVIEW_HOST || '127.0.0.1';\n  server.listen(port, host, () => {\n    console.log(`  Preview server running at http://${host}:${port}`);\n  });\n// CLI (src/cli/index.ts): add .option('--host <host>', 'Bind host', '127.0.0.1')",
+        "rollout_notes": "Back-compat: passing --host 0.0.0.0 restores the current behavior; users who relied on cross-device access are a small minority."
+      },
+      "test_to_add": {
+        "type": "integration",
+        "name": "preview_server_binds_localhost_by_default",
+        "what_it_protects": "Regression against binding to 0.0.0.0"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert commit; no data migration.",
+      "verification_method": "`ss -tlnp | grep 3000` or `lsof -iTCP:3000 -sTCP:LISTEN` after starting; expect `127.0.0.1:3000` not `*:3000`."
+    },
+    {
+      "id": "FIND-0002",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "security",
+      "category": "xss",
+      "title": "Bespoke HTML escape in preview gallery misses single-quote context",
+      "severity": "Medium",
+      "cvss": {
+        "base_score": 5.4,
+        "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:L/I:L/A:N",
+        "source_tool": "manual-review + threat-model T-02"
+      },
+      "rice": null,
+      "priority": "P2",
+      "confidence": "medium",
+      "confidence_reason": "Escape function handles the common HTML-text context characters but the output is also placed inside attribute contexts (alt=\"\", src=\"\", href=\"\"). Current attributes use double quotes so ' is not weaponizable in current template — but defensive programming + PR-change fragility justify fix. Marked medium, not high, because an attacker first needs filesystem write to output/ which is the same trust boundary as the dev machine.",
+      "owasp_2021": "A03",
+      "cwe": "CWE-79",
+      "package": "<root>",
+      "location": {
+        "file": "src/cli/preview-server.ts",
+        "line_start": 94,
+        "line_end": 109,
+        "function": "generateGalleryHTML"
+      },
+      "evidence_snippet": "  // HTML-escape to prevent XSS from filenames\n  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\n  const sections = Object.entries(categories).sort().map(([cat, files]) => {\n    const items = files.sort().map(f => {\n      const ext = path.extname(f).toLowerCase();\n      const name = esc(path.basename(f));\n      const href = encodeURI(`/${f}`);\n      if (ext === '.png' || ext === '.svg') {\n        return `<div class=\"card\"><img src=\"${href}\" alt=\"${name}\" loading=\"lazy\" /><span>${name}</span></div>`;\n      }\n      return `<div class=\"card pdf\"><a href=\"${href}\" target=\"_blank\">📄 ${name}</a></div>`;\n    }).join('\\n');",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Local-origin JS execution in the developer's browser within the preview origin. Can exfil localStorage/cookies scoped to localhost:3000 (which is nothing), but can also navigate + read other pages served by the same origin. Local, not remote.",
+      "attacker_profile": "P4 — local low-priv user who can write a file named `'><script>…` under output/. On single-user dev machines this is implausible; in shared environments (CI runners with preview), realistic.",
+      "reproduction": [
+        "touch \"output/templates/evil'><script>alert(1)</script>.pdf\"",
+        "npm run preview && open http://127.0.0.1:3000/",
+        "The filename breaks the src=\"\" attribute via the ' character and the script fires (depending on browser parsing)."
+      ],
+      "recommendation": {
+        "summary": "Replace the bespoke esc() with a stdlib-grade encoder (e.g., `he`), or whitelist filenames to [A-Za-z0-9._-] at directory-scan time.",
+        "code_sketch": "const esc = (s: string) => s.replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'})[c]!);\n// OR stricter: skip files whose names contain characters outside /^[\\w.\\-\\/]+$/",
+        "rollout_notes": "Zero user impact; internal tool."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "gallery_escapes_single_quote_in_filenames",
+        "what_it_protects": "Regression against FIND-0002"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "Unit test asserts `esc(\"'\")` returns `&#39;`."
+    },
+    {
+      "id": "FIND-0003",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "security",
+      "category": "configuration",
+      "title": "Chromium launched with --no-sandbox unconditionally",
+      "severity": "Medium",
+      "cvss": {
+        "base_score": 4.4,
+        "vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:L",
+        "source_tool": "manual-review + threat-model T-05"
+      },
+      "rice": null,
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Literal code inspection — the args list is unconditional, not gated on platform or env.",
+      "owasp_2021": "A05",
+      "cwe": "CWE-16",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/puppeteer-renderer.ts",
+        "line_start": 29,
+        "line_end": 39,
+        "function": "getBrowser"
+      },
+      "evidence_snippet": "async function getBrowser(): Promise<Browser> {\n  if (!browserInstance || !browserInstance.connected) {\n    browserInstance = await puppeteer.launch({\n      headless: true,\n      args: [\n        '--no-sandbox',\n        '--disable-setuid-sandbox',\n        '--disable-dev-shm-usage',\n        '--font-render-hinting=none',\n      ],\n    });\n  }\n  return browserInstance;\n}",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "If a malicious HTML template (or a template that loads malicious external resources — see FIND-0004) exercises a Chromium sandbox-escape bug, the Chromium process runs as the invoking user with no sandbox layer. Could read arbitrary files accessible to that user, exec processes, etc.",
+      "attacker_profile": "P2 (PR contributor who lands a malicious template) or P3 (supply-chain compromise that adds an import of a malicious HTML file).",
+      "reproduction": [
+        "Cannot reproduce non-destructively; the threat is contingent on an unpatched Chromium RCE + a malicious template."
+      ],
+      "recommendation": {
+        "summary": "Only disable sandboxing when required (CI/Docker). Default to Chromium's native sandbox on developer machines.",
+        "code_sketch": "const inSandboxedRuntime = !!(process.env.CI || process.env.DOCKER_CONTAINER);\nconst launchArgs: string[] = ['--disable-dev-shm-usage', '--font-render-hinting=none'];\nif (inSandboxedRuntime) {\n  launchArgs.unshift('--no-sandbox', '--disable-setuid-sandbox');\n}\nbrowserInstance = await puppeteer.launch({ headless: true, args: launchArgs });",
+        "rollout_notes": "GH Actions `ubuntu-latest` has working sandboxing in most cases; test before shipping. Document the env var toggle."
+      },
+      "test_to_add": {
+        "type": "integration",
+        "name": "puppeteer_launch_args_depend_on_env",
+        "what_it_protects": "Regression against accidental --no-sandbox outside CI"
+      },
+      "effort_tshirt": "S",
+      "dependencies": ["FIND-0008 (CI gate)"],
+      "related_findings": ["FIND-0004"],
+      "rollback_plan": "Revert; re-enable unconditional --no-sandbox if local sandbox issues surface.",
+      "verification_method": "Manual: run render on laptop without env; observe Puppeteer launch args in process list. Expect no --no-sandbox."
+    },
+    {
+      "id": "FIND-0004",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "security",
+      "category": "ssrf",
+      "title": "Puppeteer waits on arbitrary outbound network requests (networkidle0) with no URL allow-list",
+      "severity": "Low",
+      "cvss": {
+        "base_score": 3.1,
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:L/I:N/A:N",
+        "source_tool": "manual-review + threat-model T-06"
+      },
+      "rice": null,
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Directly observed: every HTML template under src/templates/html/ references fonts.googleapis.com + fonts.gstatic.com, and puppeteer-renderer.ts uses waitUntil: 'networkidle0'.",
+      "owasp_2021": "A10",
+      "cwe": "CWE-918",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/puppeteer-renderer.ts",
+        "line_start": 123,
+        "line_end": 127,
+        "function": "renderHTMLToPDF"
+      },
+      "evidence_snippet": "    await page.setContent(html, {\n      waitUntil: 'networkidle0',\n      timeout,\n    });",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "(a) Contradicts PROBLEM_STATEMENT §8 'No external APIs at runtime'. (b) If a malicious template adds `<link href=\"http://attacker/\">`, the Chromium process will fetch it, exposing the developer's IP to attacker + allowing arbitrary HTTP redirects/interactions inside Chromium. Not classical SSRF because there's no inbound request; it is template-driven egress.",
+      "attacker_profile": "P2/P3 — only materialises if malicious template lands in the repo.",
+      "reproduction": [
+        "Disconnect from network",
+        "`npm run generate` — Puppeteer hangs until networkidle0 timeout (30s default, 120s multi-page)",
+        "Confirms that network is required, contradicting the documented offline guarantee"
+      ],
+      "recommendation": {
+        "summary": "Self-host the Google Fonts CSS + woff2 under assets/fonts/ and replace the <link> in every template with a local @font-face block. Add an `page.on('request')` allow-list that rejects any request outside a tight list.",
+        "code_sketch": "await page.setRequestInterception(true);\nconst allow = /^(data:|file:|https:\\/\\/fonts\\.(googleapis|gstatic)\\.com\\/)/;\npage.on('request', req => {\n  if (allow.test(req.url())) req.continue(); else req.abort();\n});",
+        "rollout_notes": "Preferred path: drop online fonts entirely (assets/fonts/ already exists as a skeleton). Offline rendering then 'just works'."
+      },
+      "test_to_add": {
+        "type": "integration",
+        "name": "render_succeeds_without_network",
+        "what_it_protects": "Regression against dependency on fonts.googleapis.com"
+      },
+      "effort_tshirt": "M",
+      "dependencies": [],
+      "related_findings": ["FIND-0003", "FIND-0014"],
+      "rollback_plan": "Revert; re-link remote fonts if local subset proves insufficient.",
+      "verification_method": "Run tests with network blocked (`docker run --network=none`). All templates render successfully."
+    },
+    {
+      "id": "FIND-0005",
+      "iteration": 1,
+      "phase": "supply_chain",
+      "dimension": "security",
+      "category": "dependency-vulnerability",
+      "title": "basic-ftp (transitive via puppeteer→extract-zip) has HIGH CVSS 8.2 CRLF-injection vulnerability",
+      "severity": "High",
+      "cvss": {
+        "base_score": 8.2,
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:L",
+        "source_tool": "npm-audit"
+      },
+      "rice": null,
+      "priority": "P1",
+      "confidence": "medium",
+      "confidence_reason": "CVSS is from the upstream advisory (GHSA-6v7q-wjvx-w8wg). Actual exploitability from this codebase is near-zero: basic-ftp is only invoked when Puppeteer downloads Chromium via FTP, and this codebase never drives FTP URLs. Listed per Rule 3 + Rule 4 — confidence is 'medium' because impact-in-context differs from the advisory's generic impact.",
+      "owasp_2021": "A06",
+      "cwe": "CWE-93",
+      "package": "<root>",
+      "location": {
+        "file": "package-lock.json",
+        "line_start": null,
+        "line_end": null,
+        "function": null
+      },
+      "evidence_snippet": "{ \"basic-ftp\": transitive via puppeteer@23 → extract-zip → basic-ftp }",
+      "evidence_tool_outputs": [
+        {
+          "file": "audit/_runtime/tool-outputs/npm-audit.json",
+          "jsonpath": "$.vulnerabilities.\"basic-ftp\""
+        }
+      ],
+      "secret_fingerprint": null,
+      "blast_radius": "Advisory-level: CRLF injection into FTP control channel → arbitrary FTP commands. In-context: zero — project never uses the FTP code path.",
+      "attacker_profile": "P3 (compromised npm path) — but the exploit primitive is not reachable.",
+      "reproduction": [
+        "npm audit → observe GHSA-6v7q-wjvx-w8wg in basic-ftp"
+      ],
+      "recommendation": {
+        "summary": "Run `npm audit fix` — available non-major fix per tool.",
+        "code_sketch": "npm audit fix   # per npm-audit.json $.vulnerabilities.\"basic-ftp\".fixAvailable = true",
+        "rollout_notes": "No code change; regenerate lockfile."
+      },
+      "test_to_add": {
+        "type": "ci-check",
+        "name": "npm_audit_gate_high_severity",
+        "what_it_protects": "Regression against high-severity deps re-entering tree"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": ["FIND-0006"],
+      "rollback_plan": "`git checkout package-lock.json` if the fix changes puppeteer resolution.",
+      "verification_method": "`npm audit --audit-level=high` returns exit 0 afterwards."
+    },
+    {
+      "id": "FIND-0006",
+      "iteration": 1,
+      "phase": "supply_chain",
+      "dimension": "security",
+      "category": "dependency-vulnerability",
+      "title": "vitest 2.1.x pulls in vite/esbuild moderate advisories; fix requires semver-major bump to vitest 4.x",
+      "severity": "Medium",
+      "cvss": {
+        "base_score": 5.3,
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N",
+        "source_tool": "npm-audit"
+      },
+      "rice": null,
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Direct tool output; all 5 moderate entries roll up to a single vitest bump.",
+      "owasp_2021": "A06",
+      "cwe": "CWE-1395",
+      "package": "<root>",
+      "location": {
+        "file": "package.json",
+        "line_start": 37,
+        "line_end": 37,
+        "function": null
+      },
+      "evidence_snippet": "    \"vitest\": \"^2.1.8\",",
+      "evidence_tool_outputs": [
+        {
+          "file": "audit/_runtime/tool-outputs/npm-audit.json",
+          "jsonpath": "$.vulnerabilities.vitest"
+        }
+      ],
+      "secret_fingerprint": null,
+      "blast_radius": "Dev-time only. Moderate: dev server + bundler. Not reachable from production artifact.",
+      "attacker_profile": "P1/P3 during local dev with shared network + browser mode.",
+      "reproduction": [
+        "npm audit → 5 moderate entries, all with fixAvailable.version = vitest@4.1.4"
+      ],
+      "recommendation": {
+        "summary": "Bump vitest to ^4.1.4. Expect test-runner API churn between 2.x and 4.x — allocate time to fix broken describe/vi.mock APIs.",
+        "code_sketch": "npm install -D vitest@^4.1.4 && npm test -- --run   # verify suite passes",
+        "rollout_notes": "Semver-major. Read vitest 3.x & 4.x migration notes. Vitest config syntax may change; coverage plugin likely needs re-wire."
+      },
+      "test_to_add": {
+        "type": "ci-check",
+        "name": "npm_audit_gate_moderate_in_devdeps",
+        "what_it_protects": "Regression"
+      },
+      "effort_tshirt": "S",
+      "dependencies": [],
+      "related_findings": ["FIND-0005"],
+      "rollback_plan": "Revert package.json + lockfile.",
+      "verification_method": "`npm audit --audit-level=moderate` returns 0 after bump."
+    },
+    {
+      "id": "FIND-0007",
+      "iteration": 1,
+      "phase": "supply_chain",
+      "dimension": "maintainability",
+      "category": "dead-dependency",
+      "title": "8 of 12 production dependencies are unused (attack-surface + install-size waste)",
+      "severity": "Medium",
+      "cvss": null,
+      "rice": {
+        "reach": 3,
+        "impact": 3,
+        "confidence": 1.0,
+        "effort": 2,
+        "score": 4.5
+      },
+      "priority": "P1",
+      "confidence": "high",
+      "confidence_reason": "Tool-confirmed by depcheck; cross-checked via ripgrep — zero imports of handlebars, pdfkit, @svgdotjs/svg.js, svgdom, chalk, ora, glob, fontkit in src/ or scripts/.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "package.json",
+        "line_start": 33,
+        "line_end": 45,
+        "function": null
+      },
+      "evidence_snippet": "  \"dependencies\": {\n    \"pdf-lib\": \"^1.17.1\",\n    \"pdfkit\": \"^0.15.1\",\n    \"puppeteer\": \"^23.11.1\",\n    \"sharp\": \"^0.33.5\",\n    \"@svgdotjs/svg.js\": \"^3.2.4\",\n    \"svgdom\": \"^0.1.23\",\n    \"commander\": \"^12.1.0\",\n    \"chalk\": \"^5.3.0\",\n    \"ora\": \"^8.1.1\",\n    \"glob\": \"^11.0.0\",\n    \"handlebars\": \"^4.7.8\",\n    \"fontkit\": \"^2.0.4\"\n  }",
+      "evidence_tool_outputs": [
+        {
+          "file": "audit/_runtime/tool-outputs/depcheck.json",
+          "jsonpath": "$.dependencies"
+        }
+      ],
+      "secret_fingerprint": null,
+      "blast_radius": "Each unused prod dep: (a) bloats `npm install` time + disk, (b) broadens CVE surface, (c) misleads future maintainers reading the manifest as a statement of intent.",
+      "attacker_profile": "P3 (supply chain) — removing unused deps reduces the number of CVEs any `npm audit` will flag.",
+      "reproduction": [
+        "npx depcheck (see audit/_runtime/tool-outputs/depcheck.json)",
+        "rg '(handlebars|pdfkit|@svgdotjs/svg.js|svgdom|chalk|ora|glob|fontkit)' src/ scripts/ — zero TS hits"
+      ],
+      "recommendation": {
+        "summary": "Remove all 8 unused prod deps and 4 unused dev deps in one commit; run full test suite.",
+        "code_sketch": "npm uninstall pdfkit @svgdotjs/svg.js svgdom chalk ora glob handlebars fontkit @types/pdfkit looks-same @typescript-eslint/eslint-plugin @typescript-eslint/parser\n# verify: `npm run build && npm test`\n# also re-check: CONTRIBUTING.md doesn't instruct users to add pdfkit renderers (it does today)",
+        "rollout_notes": "Paired with Phase 1 doc fixes (CONTRIBUTING.md)."
+      },
+      "test_to_add": {
+        "type": "ci-check",
+        "name": "depcheck_gate",
+        "what_it_protects": "Future dead-dep accumulation"
+      },
+      "effort_tshirt": "S",
+      "dependencies": [],
+      "related_findings": ["FIND-0013"],
+      "rollback_plan": "`git revert` and `npm ci`.",
+      "verification_method": "`npx depcheck` reports 0 unused prod deps."
+    },
+    {
+      "id": "FIND-0008",
+      "iteration": 1,
+      "phase": "tests_and_gates",
+      "dimension": "operability",
+      "category": "ci-gate",
+      "title": "CI workflow does not gate merges — no test, no lint, no audit on PRs",
+      "severity": "High",
+      "cvss": null,
+      "rice": {
+        "reach": 5,
+        "impact": 4,
+        "confidence": 1.0,
+        "effort": 2,
+        "score": 10.0
+      },
+      "priority": "P0",
+      "confidence": "high",
+      "confidence_reason": "Read the workflow. It triggers on push to main and only does `npm ci` + `npx tsx src/cli/index.ts generate`. No test step, no lint step, no audit step, no build step. No pull_request trigger.",
+      "owasp_2021": "A04",
+      "cwe": "CWE-1357",
+      "package": "<root>",
+      "location": {
+        "file": ".github/workflows/generate.yml",
+        "line_start": 1,
+        "line_end": 50,
+        "function": null
+      },
+      "evidence_snippet": "on:\n  push:\n    branches: [main]\n    paths:\n      - 'src/**'\n      - 'package.json'\n  workflow_dispatch:\n...\n      - run: npm ci\n      - name: Generate all assets (pages + stickers)\n        run: npx tsx src/cli/index.ts generate --pages --stickers --verbose",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Broken TypeScript (confirmed — FIND-0011), failing tests, high-severity CVEs, style regressions all land on main silently. The one workflow that runs also fails fast if the generator is broken, which is fine, but nothing gates PRs.",
+      "attacker_profile": "N/A (hygiene).",
+      "reproduction": [
+        "grep -E 'pull_request|test|lint|audit' .github/workflows/*.yml — zero matches"
+      ],
+      "recommendation": {
+        "summary": "Add a separate `ci.yml` workflow that runs on pull_request events with: `npm ci && npm run build && npm test && npm audit --audit-level=high`. Require it in branch protection.",
+        "code_sketch": "# .github/workflows/ci.yml\nname: CI\non: { pull_request: {}, push: { branches: [main] } }\njobs:\n  verify:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: '20', cache: npm }\n      - run: npm ci\n      - run: npm run build       # currently fails — see FIND-0011\n      - run: npm test -- --run\n      - run: npm audit --audit-level=high",
+        "rollout_notes": "First run will fail (FIND-0011). Land FIND-0011's fix first, then enable this gate."
+      },
+      "test_to_add": {
+        "type": "ci-workflow",
+        "name": "ci_gates_pr",
+        "what_it_protects": "Breaking changes landing on main"
+      },
+      "effort_tshirt": "S",
+      "dependencies": ["FIND-0011"],
+      "related_findings": ["FIND-0005", "FIND-0006", "FIND-0011"],
+      "rollback_plan": "Disable workflow.",
+      "verification_method": "Open a failing PR; observe CI blocking."
+    },
+    {
+      "id": "FIND-0009",
+      "iteration": 1,
+      "phase": "supply_chain",
+      "dimension": "security",
+      "category": "supply-chain-integrity",
+      "title": "GitHub Actions pinned by tag rather than full commit SHA",
+      "severity": "Medium",
+      "cvss": null,
+      "rice": {
+        "reach": 2,
+        "impact": 3,
+        "confidence": 0.8,
+        "effort": 1,
+        "score": 4.8
+      },
+      "priority": "P1",
+      "confidence": "high",
+      "confidence_reason": "Literal strings in generate.yml all use @v4 / @v2 form.",
+      "owasp_2021": "A08",
+      "cwe": "CWE-494",
+      "package": "<root>",
+      "location": {
+        "file": ".github/workflows/generate.yml",
+        "line_start": 22,
+        "line_end": 80,
+        "function": null
+      },
+      "evidence_snippet": "      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n      - uses: actions/upload-artifact@v4\n      - uses: actions/download-artifact@v4\n      - uses: softprops/action-gh-release@v2",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "If an action maintainer (or a token thief) force-pushes a new v4 tag pointing at malicious code, the next CI run executes it. The Tj-actions/changed-files supply-chain incident (March 2025) is the canonical example.",
+      "attacker_profile": "P3 — Action maintainer / GitHub tag force-push.",
+      "reproduction": [
+        "rg '@v[0-9]+' .github/workflows/ — 5 matches"
+      ],
+      "recommendation": {
+        "summary": "Pin each action by its full commit SHA; add dependabot group for GH Actions to keep them fresh.",
+        "code_sketch": "- uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1\n- uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8  # v4.0.2\n...\n# .github/dependabot.yml\nversion: 2\nupdates:\n  - package-ecosystem: github-actions\n    directory: /\n    schedule: { interval: weekly }",
+        "rollout_notes": "Maintainability trade-off: SHAs are opaque; dependabot keeps them current."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": ["FIND-0010"],
+      "rollback_plan": "Revert.",
+      "verification_method": "`rg '@v[0-9]' .github/workflows/` returns 0 matches (comments allowed)."
+    },
+    {
+      "id": "FIND-0010",
+      "iteration": 1,
+      "phase": "supply_chain",
+      "dimension": "security",
+      "category": "supply-chain-integrity",
+      "title": "Release artifacts are unsigned (no cosign / sigstore / PGP / SLSA provenance)",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 2,
+        "impact": 3,
+        "confidence": 0.8,
+        "effort": 2,
+        "score": 2.4
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Workflow grepped; no cosign/sigstore/gpg/intoto steps present.",
+      "owasp_2021": "A08",
+      "cwe": "CWE-353",
+      "package": "<root>",
+      "location": {
+        "file": ".github/workflows/generate.yml",
+        "line_start": 60,
+        "line_end": 100,
+        "function": null
+      },
+      "evidence_snippet": "      - name: Create release bundle\n        run: |\n          cd output\n          zip -r ../goodnotes-templates-assets.zip pages/ stickers/ manifest.json\n...\n      - name: Create or update release\n        uses: softprops/action-gh-release@v2\n        with:\n          files: goodnotes-templates-assets.zip",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "A downstream user who downloads goodnotes-templates-assets.zip cannot verify integrity. Attacker with GH write to releases could substitute a tampered zip.",
+      "attacker_profile": "P3.",
+      "reproduction": [
+        "Download latest release zip; no .sig / .intoto.jsonl / .sbom file accompanies it."
+      ],
+      "recommendation": {
+        "summary": "Sign the release zip with cosign (keyless via sigstore's OIDC). Emit a SLSA provenance file.",
+        "code_sketch": "- uses: sigstore/cosign-installer@main\n- run: cosign sign-blob --yes --output-signature goodnotes-templates-assets.zip.sig goodnotes-templates-assets.zip\n- uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0  # as reusable workflow",
+        "rollout_notes": "Free for public repos. Document the verification command in README."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "S",
+      "dependencies": [],
+      "related_findings": ["FIND-0009"],
+      "rollback_plan": "Remove sig step.",
+      "verification_method": "`cosign verify-blob --signature …` succeeds against release artifact."
+    },
+    {
+      "id": "FIND-0011",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "broken-build",
+      "title": "tsc --noEmit fails: DOM lib missing + ESM import.meta in CommonJS target",
+      "severity": "High",
+      "cvss": null,
+      "rice": {
+        "reach": 5,
+        "impact": 4,
+        "confidence": 1.0,
+        "effort": 1,
+        "score": 20.0
+      },
+      "priority": "P0",
+      "confidence": "high",
+      "confidence_reason": "Ran tsc --noEmit and captured the output below. Build is literally broken on HEAD.",
+      "owasp_2021": null,
+      "cwe": "CWE-1120",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/puppeteer-renderer.ts",
+        "line_start": 129,
+        "line_end": 129,
+        "function": "renderHTMLToPDF"
+      },
+      "evidence_snippet": "    // Wait for fonts to load\n    await page.evaluate(() => document.fonts.ready);  // <- document is not in scope under tsconfig 'lib: [ES2022]'",
+      "evidence_tool_outputs": [
+        {
+          "file": "audit/_runtime/tool-outputs/tsc-noemit.log",
+          "jsonpath": null
+        }
+      ],
+      "secret_fingerprint": null,
+      "blast_radius": "`npm run build` (declared in package.json) fails. `prepublishOnly` therefore fails. Anyone who runs the declared build command sees a broken project on first clone. Tests pass because vitest uses tsx JIT.",
+      "attacker_profile": "N/A — self-inflicted.",
+      "reproduction": [
+        "npx tsc --noEmit",
+        "Observe 2 errors: TS2584 (document missing in lib) at puppeteer-renderer.ts:129, TS1470 (import.meta in CommonJS) at registry.ts:12"
+      ],
+      "recommendation": {
+        "summary": "Two fixes: (1) the document.fonts.ready lambda runs inside the Chromium page context, so type-annotate it explicitly and accept the lib gap; (2) the `module: NodeNext` + `import.meta.url` combination requires `\"type\": \"module\"` in package.json — add it, and update `main`/`bin` accordingly.",
+        "code_sketch": "// src/core/puppeteer-renderer.ts:129\n// Cast through void return — the eval runs in Chromium's DOM context\nawait page.evaluate(() => (globalThis as unknown as { document: { fonts: { ready: Promise<void> } } }).document.fonts.ready);\n// OR simpler: add `\"lib\": [\"ES2022\", \"DOM\"]` to tsconfig.json — page.evaluate callback is typed against the browser realm.\n\n// package.json — add\n{\n  \"type\": \"module\"\n}",
+        "rollout_notes": "Simplest path: tsconfig.json `\"lib\": [\"ES2022\", \"DOM\"]` + package.json `\"type\": \"module\"`. Impact on `main`/`bin`: the compiled output is already `dist/cli/index.js` (line 14 package.json), emitted as ES modules under NodeNext — consistent."
+      },
+      "test_to_add": {
+        "type": "ci-check",
+        "name": "tsc_noemit_on_ci",
+        "what_it_protects": "Regression — covered by FIND-0008 'CI gate' if `npm run build` is added to the PR workflow"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": ["FIND-0008"],
+      "rollback_plan": "Revert tsconfig + package.json changes.",
+      "verification_method": "`npm run build` exits 0."
+    },
+    {
+      "id": "FIND-0012",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "fragile-parser",
+      "title": "HTML parsing in daily-year-v2.ts uses bespoke regex with depth-counting; breaks on benign template edits",
+      "severity": "Medium",
+      "cvss": null,
+      "rice": {
+        "reach": 3,
+        "impact": 4,
+        "confidence": 0.8,
+        "effort": 5,
+        "score": 1.92
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Read the parser; it regex-matches `<body[^>]*>` then `<div\\s+class=\"page\"[^>]*>`, then walks string indices counting `<div` and `</div>`. Does not handle self-closing tags, HTML comments, attributes containing `<`, CDATA, or inner tags with varying whitespace patterns (e.g. `<DIV`, `< div`). Each of these is a live foot-gun for a template contributor.",
+      "owasp_2021": null,
+      "cwe": "CWE-1336",
+      "package": "<root>",
+      "location": {
+        "file": "src/templates/planners/daily-year-v2.ts",
+        "line_start": 119,
+        "line_end": 152,
+        "function": "parseSinglePageTemplate"
+      },
+      "evidence_snippet": "function parseSinglePageTemplate(html: string): ParsedPage {\n  const bodyMatch = html.match(/<body[^>]*>/);\n  if (!bodyMatch || bodyMatch.index === undefined) {\n    throw new Error('Template has no <body> tag');\n  }\n  const headHTML = html.substring(0, bodyMatch.index + bodyMatch[0].length);\n\n  const pageOpenMatch = html.match(/<div\\s+class=\"page\"[^>]*>/);\n  ...\n  let depth = 1;\n  let i = contentStart;\n  while (i < html.length && depth > 0) {\n    if (html.startsWith('<div', i)) { depth++; i += 4; }\n    else if (html.startsWith('</div>', i)) { depth--; if (depth === 0) break; i += 6; }\n    else { i++; }\n  }",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "A contributor editing a template to add `<!-- <div class='page'> disabled -->` or `<style>div { … }</style>` produces incorrect pageBody slices. Either the year-planner output is wrong (365 days of off-pages) or the parser throws mid-run.",
+      "attacker_profile": "N/A — availability/correctness.",
+      "reproduction": [
+        "Add a comment like `<!-- <div class=\"page\"> draft -->` before the real `<div class=\"page\">` in any template.",
+        "Run year generator → parser picks the commented `<div class=\"page\">` first and walks depth from a non-matching start."
+      ],
+      "recommendation": {
+        "summary": "Replace bespoke parser with cheerio (prod dep ~1.5 MB) or parse5 (smaller). Each templates file has 1 <body> and exactly 1 <div class=\"page\"> — a DOM query is one line.",
+        "code_sketch": "import { load } from 'cheerio';\nfunction parseSinglePageTemplate(html: string): ParsedPage {\n  const $ = load(html);\n  const pageEl = $('body > .page').first();\n  if (!pageEl.length) throw new Error('Template missing <body>/.page');\n  return {\n    headHTML: `<!DOCTYPE html><html>${$('head').prop('outerHTML')}<body>`,\n    pageBody: pageEl.html() ?? ''\n  };\n}",
+        "rollout_notes": "Adds cheerio (Apache-2.0). Net size growth negligible vs. 244-package baseline."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "parseSinglePageTemplate_handles_comments_and_inner_styles",
+        "what_it_protects": "Regression against this class of fragility"
+      },
+      "effort_tshirt": "M",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert to existing parser.",
+      "verification_method": "New unit test with pathological templates passes."
+    },
+    {
+      "id": "FIND-0013",
+      "iteration": 1,
+      "phase": "docs",
+      "dimension": "maintainability",
+      "category": "doc-drift",
+      "title": "README, CONTRIBUTING, CLAUDE.md reference deleted files (themes.ts, pdfkit-renderer.ts)",
+      "severity": "Medium",
+      "cvss": null,
+      "rice": {
+        "reach": 5,
+        "impact": 3,
+        "confidence": 1.0,
+        "effort": 2,
+        "score": 7.5
+      },
+      "priority": "P1",
+      "confidence": "high",
+      "confidence_reason": "Directly observed: README §Architecture + CONTRIBUTING §New Themes + CLAUDE.md §Project describe the pre-HLD-refactor world. HLD & LLD docs (2026-04-10) describe those files' removal.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "README.md",
+        "line_start": 148,
+        "line_end": 166,
+        "function": null
+      },
+      "evidence_snippet": "## 🏗️ Architecture\n\n```\nsrc/\n├── core/\n│   ├── dimensions.ts\n│   ├── themes.ts            # 8 built-in themes + custom theme loader  ← DELETED\n│   ├── renderer.ts          # Generation orchestrator                  ← DELETED\n│   ├── pdfkit-renderer.ts   # PDFKit: lined, grid, …                    ← DELETED\n│   ...\n```",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "External contributors follow CONTRIBUTING.md, fail, abandon the PR. Success metric #6 (community contributions) is undermined.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "Open README §Architecture and try to open each listed file — 3 404s."
+      ],
+      "recommendation": {
+        "summary": "One pass to rewrite README §Architecture, CONTRIBUTING §New Themes, CLAUDE.md §Project, and the README roadmap checkboxes. Also fix `package.json` `repository.url` and README clone URL from `yourusername` to `praxstack`.",
+        "code_sketch": "# README §Architecture — rewrite as current tree:\n#   core/puppeteer-renderer.ts, pdf-postprocess.ts, svg-renderer.ts, png-renderer.ts, dimensions.ts\n#   cli/index.ts, preview-server.ts\n#   templates/registry.ts, themes/*.css, html/*.html, planners/daily-year*.ts\n#   utils/locale.ts\n# CONTRIBUTING §New Themes — pivot to 'add src/templates/themes/<name>.css'\n# package.json — fix repository.url",
+        "rollout_notes": "Pair with FIND-0007 (unused-dep removal) so doc + manifest align."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "S",
+      "dependencies": ["FIND-0007"],
+      "related_findings": ["FIND-0007"],
+      "rollback_plan": "N/A.",
+      "verification_method": "For every file path mentioned in README/CONTRIBUTING/CLAUDE.md, run `fd` — expect 0 misses."
+    },
+    {
+      "id": "FIND-0014",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "doc-behavior-mismatch",
+      "title": "Claim 'No external APIs at runtime' is false — all templates fetch Google Fonts online",
+      "severity": "Medium",
+      "cvss": null,
+      "rice": {
+        "reach": 5,
+        "impact": 3,
+        "confidence": 1.0,
+        "effort": 5,
+        "score": 3.0
+      },
+      "priority": "P1",
+      "confidence": "high",
+      "confidence_reason": "`rg \"https://fonts\\.googleapis\\.com\" src/templates/html/` returns ~30 matches; `puppeteer-renderer.ts:124` waits on networkidle0. The claim is in PROBLEM_STATEMENT.md §8.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "src/templates/html/adhd-gentle-daily.html",
+        "line_start": 7,
+        "line_end": 9,
+        "function": null
+      },
+      "evidence_snippet": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link href=\"https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;…display=swap\" rel=\"stylesheet\">",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Offline rendering fails. Privacy: every render-time font fetch reveals the developer's IP + user-agent to Google. Reproducibility: font version drift silently changes output between runs.",
+      "attacker_profile": "N/A — behavior/claim mismatch.",
+      "reproduction": [
+        "`docker run --network=none …` invoking the renderer hangs on networkidle0.",
+        "`rg \"fonts.googleapis.com\" src/templates/html/ -c | head` — ~27 files."
+      ],
+      "recommendation": {
+        "summary": "Self-host fonts (skeleton `assets/fonts/` already exists per FS listing). Replace <link> with an @font-face block pointing at `file:///…/assets/fonts/…woff2`. Add the download script `npm run fonts:download` (already declared in scripts but no source file).",
+        "code_sketch": "// New scripts/download-fonts.ts — referenced in package.json but missing on disk (verify).\n// For each HTML template, replace:\n//   <link href=\"https://fonts.googleapis.com/…\">\n// with:\n//   <style>\n//     @font-face { font-family: 'DM Sans'; src: url('../../../assets/fonts/dm-sans.woff2') format('woff2'); }\n//     …\n//   </style>",
+        "rollout_notes": "This is also the fix for FIND-0004's SSRF concern."
+      },
+      "test_to_add": {
+        "type": "integration",
+        "name": "render_succeeds_without_network",
+        "what_it_protects": "Regression against re-introduced online font <link>"
+      },
+      "effort_tshirt": "M",
+      "dependencies": [],
+      "related_findings": ["FIND-0004"],
+      "rollback_plan": "Revert + re-enable online <link>.",
+      "verification_method": "Network-disabled render succeeds."
+    },
+    {
+      "id": "FIND-0015",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "duplication",
+      "title": "Color-mode CSS discovery logic duplicated between renderer and ad-hoc scripts",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 2,
+        "impact": 2,
+        "confidence": 0.8,
+        "effort": 2,
+        "score": 1.6
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Observed twice: `scripts/generate-4week.ts:~85-95` reimplements the same `presetPath` → `siblingPath` fallback that lives in `puppeteer-renderer.ts:92-107`.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "scripts/generate-4week.ts",
+        "line_start": 80,
+        "line_end": 95,
+        "function": null
+      },
+      "evidence_snippet": "if (colorMode) {\n  const presetPath = path.join(path.dirname(htmlPath), '..', 'themes', `${colorMode}.css`);\n  ...\n  const siblingPath = htmlPath.replace('.html', `.${colorMode}.css`);\n  ...\n}",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "If the renderer's resolution rule changes (which it already has once, per HLD), the script diverges silently and produces different-looking PDFs.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "Compare lines in the two files."
+      ],
+      "recommendation": {
+        "summary": "Extract `resolveColorModeCSS(htmlPath, colorMode): Promise<string|null>` to `src/core/puppeteer-renderer.ts` as a named export; consume from both paths.",
+        "code_sketch": "export async function resolveColorModeCSS(htmlPath: string, colorMode: string): Promise<string | null> {\n  const candidates = [\n    path.join(path.dirname(htmlPath), '..', 'themes', `${colorMode}.css`),\n    htmlPath.replace('.html', `.${colorMode}.css`)\n  ];\n  for (const p of candidates) {\n    try { return await fs.readFile(p, 'utf-8'); } catch { /* next */ }\n  }\n  return null;\n}",
+        "rollout_notes": "No behavior change."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "resolveColorModeCSS_prefers_preset_theme",
+        "what_it_protects": "Regression against divergence"
+      },
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "Unit test runs both candidate orders."
+    },
+    {
+      "id": "FIND-0016",
+      "iteration": 1,
+      "phase": "tests_and_gates",
+      "dimension": "testability",
+      "category": "coverage",
+      "title": "Zero tests on T1 modules (preview-server, puppeteer-renderer, pdf-postprocess)",
+      "severity": "Medium",
+      "cvss": null,
+      "rice": {
+        "reach": 4,
+        "impact": 4,
+        "confidence": 1.0,
+        "effort": 5,
+        "score": 3.2
+      },
+      "priority": "P1",
+      "confidence": "high",
+      "confidence_reason": "`tests/unit/` contains 3 files: daily-year-v2.test.ts, dimensions.test.ts, locale.test.ts. None exercise the T1 modules identified in Phase 0.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "tests/unit/",
+        "line_start": null,
+        "line_end": null,
+        "function": null
+      },
+      "evidence_snippet": "tests/unit/\n  daily-year-v2.test.ts     # covers T2 planner logic\n  dimensions.test.ts        # covers T2 dims helpers\n  locale.test.ts            # covers T2 locale helpers\n# T1 files (preview-server, puppeteer-renderer, pdf-postprocess) have no tests.",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Any change to the 3 highest-risk modules lands with no regression safety. FIND-0001 / FIND-0002 / FIND-0011 would all be caught by even a lightweight smoke test against the T1 surface.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "ls tests/unit/ — 3 files."
+      ],
+      "recommendation": {
+        "summary": "Add minimal unit tests targeting the three findings above. Don't chase global coverage — target the risk.",
+        "code_sketch": "// tests/unit/preview-server.test.ts — 3 tests: bind-localhost, path-traversal-blocked, filename-xss-escaped\n// tests/unit/puppeteer-renderer.test.ts — 1 test: tsc builds + launchArgs reads env\n// tests/unit/pdf-postprocess.test.ts — 2 tests: cssToPageRect roundtrip, bookmark pageIndex clamp",
+        "rollout_notes": "Use vitest, stub fs where needed. Don't try to launch real Chromium in unit tests."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "T1 module coverage batch",
+        "what_it_protects": "FIND-0001, FIND-0002, FIND-0011, FIND-0021"
+      },
+      "effort_tshirt": "M",
+      "dependencies": [],
+      "related_findings": ["FIND-0001", "FIND-0002", "FIND-0011"],
+      "rollback_plan": "N/A.",
+      "verification_method": "vitest reports the new test files."
+    },
+    {
+      "id": "FIND-0017",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "maintainability",
+      "category": "error-handling",
+      "title": "batchRenderHTML swallows errors, returns partial result without signalling failures",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 3,
+        "impact": 2,
+        "confidence": 1.0,
+        "effort": 2,
+        "score": 3.0
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Directly observed. A catch block console.errors and continues; no array index or failed-count is returned to the caller.",
+      "owasp_2021": null,
+      "cwe": "CWE-703",
+      "package": "<root>",
+      "location": {
+        "file": "src/core/puppeteer-renderer.ts",
+        "line_start": 190,
+        "line_end": 206,
+        "function": "batchRenderHTML"
+      },
+      "evidence_snippet": "    try {\n      const result = await renderHTMLToPDFFile({ htmlPath: t.htmlPath, dimensions, colorMode }, t.outputPath);\n      results.push({ ...result, name: t.name });\n    } catch (err) {\n      console.error(`  ✗ ${t.name}: ${err instanceof Error ? err.message : err}`);\n    }",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "CI workflow reports success even when some templates fail to render. Developer/user has no programmatic way to know N≠M.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "Add an invalid `@page` rule to one template; batch-render; observe exit 0 with fewer files produced."
+      ],
+      "recommendation": {
+        "summary": "Return `{ results, failures }` from `batchRenderHTML`; callers exit non-zero when failures.length > 0 unless `--best-effort` is passed.",
+        "code_sketch": "return { results, failures: failedNames };\n// caller:\nif (failures.length) { console.error(`${failures.length} failed`); if (!opts.bestEffort) process.exit(1); }",
+        "rollout_notes": "Callers updated in scripts/ simultaneously."
+      },
+      "test_to_add": {
+        "type": "unit",
+        "name": "batchRenderHTML_reports_failures",
+        "what_it_protects": "Silent partial-success regression"
+      },
+      "effort_tshirt": "S",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "Force a render failure in test fixture; assert caller exits non-zero."
+    },
+    {
+      "id": "FIND-0018",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "uxa11y",
+      "category": "wcag-contrast",
+      "title": "Dark-mode CSS contrast not audited; 11 of 32 templates have dark variants (62% gap)",
+      "severity": "Medium",
+      "cvss": null,
+      "rice": {
+        "reach": 4,
+        "impact": 3,
+        "confidence": 0.8,
+        "effort": 5,
+        "score": 1.92
+      },
+      "priority": "P2",
+      "confidence": "medium",
+      "confidence_reason": "File count by `ls` — 32 HTML, 11 `.dark.css` siblings. PROBLEM_STATEMENT FR-04.2 requires 'Every light theme MUST have a corresponding dark mode variant'. Actual ratio 11/32 = 34%. Contrast itself not measured in this iteration.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "src/templates/html/",
+        "line_start": null,
+        "line_end": null,
+        "function": null
+      },
+      "evidence_snippet": "$ ls src/templates/html/*.html | wc -l → 32\n$ ls src/templates/html/*.dark.css | wc -l → 11",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Users select `--color-mode dark` and get silent fallback to light for 21/32 templates. NFR-06.1 (WCAG AA contrast) not measurably confirmed in this iteration.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "ls src/templates/html/"
+      ],
+      "recommendation": {
+        "summary": "Either (a) scope dark mode to 11 named templates in PROBLEM_STATEMENT; or (b) add the missing 21 dark variants. Run a contrast script (axe-core/pa11y) against rendered PDFs converted to PNG.",
+        "code_sketch": "# Quick contrast check: npx pa11y file://…/adhd-gentle-daily.html\n# Or parse CSS variables and verify WCAG 2.1 4.5:1 ratio.",
+        "rollout_notes": "(a) is cheaper; (b) is the advertised behavior."
+      },
+      "test_to_add": {
+        "type": "integration",
+        "name": "contrast_audit_passes_wcag_aa",
+        "what_it_protects": "Dark mode text legibility"
+      },
+      "effort_tshirt": "M",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "N/A.",
+      "verification_method": "Contrast script runs in CI; fails on <4.5:1 for normal text."
+    },
+    {
+      "id": "FIND-0019",
+      "iteration": 1,
+      "phase": "docs",
+      "dimension": "maintainability",
+      "category": "metadata",
+      "title": "package.json repository.url stub + README clone URL both point to non-existent yourusername/…",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 5,
+        "impact": 1,
+        "confidence": 1.0,
+        "effort": 1,
+        "score": 5.0
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "Direct file read: package.json §repository.url + README.md Quick-Start.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "package.json",
+        "line_start": 30,
+        "line_end": 33,
+        "function": null
+      },
+      "evidence_snippet": "  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/yourusername/goodnotes-templates\"\n  }",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "`npm view goodnotes-templates` links to a 404. README instructions 404. Small, but affects every external reader.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "jq .repository.url package.json"
+      ],
+      "recommendation": {
+        "summary": "Set to actual origin: https://github.com/praxstack/goodnotes-templates; mirror in README.",
+        "code_sketch": "jq '.repository.url = \"https://github.com/praxstack/goodnotes-templates\"' package.json > package.tmp && mv package.tmp package.json",
+        "rollout_notes": "Trivial."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": ["FIND-0013"],
+      "rollback_plan": "Revert.",
+      "verification_method": "README + package.json reference praxstack/goodnotes-templates."
+    },
+    {
+      "id": "FIND-0020",
+      "iteration": 1,
+      "phase": "supply_chain",
+      "dimension": "security",
+      "category": "license-notice",
+      "title": "Missing NOTICE / THIRD_PARTY_LICENSES for LGPL-3.0-or-later libvips binary",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 3,
+        "impact": 2,
+        "confidence": 1.0,
+        "effort": 1,
+        "score": 6.0
+      },
+      "priority": "P2",
+      "confidence": "high",
+      "confidence_reason": "license-checker output lists `@img/sharp-libvips-darwin-arm64@1.0.4` as LGPL-3.0-or-later. No NOTICE/THIRD_PARTY_LICENSES/licenses.md present in repo (only LICENSE).",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "LICENSE",
+        "line_start": 1,
+        "line_end": 5,
+        "function": null
+      },
+      "evidence_snippet": "MIT License\nCopyright (c) 2026 goodnotes-templates contributors\n...",
+      "evidence_tool_outputs": [
+        {
+          "file": "audit/_runtime/tool-outputs/licenses-prod.json",
+          "jsonpath": "$.\"@img/sharp-libvips-darwin-arm64@1.0.4\""
+        }
+      ],
+      "secret_fingerprint": null,
+      "blast_radius": "LGPL-3 dynamic-link obligations are satisfied by `sharp` as a build-time dep (no static link). Still, industry-standard compliance practice is to enumerate bundled 3rd-party licenses in a NOTICE file. Absence is noisy, not a violation.",
+      "attacker_profile": "N/A (legal hygiene).",
+      "reproduction": [
+        "`fd -HI NOTICE THIRD_PARTY_LICENSES licenses.md` returns nothing."
+      ],
+      "recommendation": {
+        "summary": "Generate THIRD_PARTY_LICENSES.md from license-checker output; include a short note about libvips LGPL dynamic link.",
+        "code_sketch": "./node_modules/.bin/license-checker --production --markdown > THIRD_PARTY_LICENSES.md",
+        "rollout_notes": "Regenerate on each release via CI."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Delete file.",
+      "verification_method": "THIRD_PARTY_LICENSES.md exists and lists sharp-libvips-*@LGPL."
+    },
+    {
+      "id": "FIND-0021",
+      "iteration": 1,
+      "phase": "code_review",
+      "dimension": "correctness",
+      "category": "error-handling",
+      "title": "preview-server responds 404 with no Cache-Control; valid responses use 'no-cache' preventing CDN / client caching",
+      "severity": "Low",
+      "cvss": null,
+      "rice": {
+        "reach": 1,
+        "impact": 1,
+        "confidence": 1.0,
+        "effort": 1,
+        "score": 1.0
+      },
+      "priority": "P3",
+      "confidence": "high",
+      "confidence_reason": "Read the code.",
+      "owasp_2021": null,
+      "cwe": null,
+      "package": "<root>",
+      "location": {
+        "file": "src/cli/preview-server.ts",
+        "line_start": 53,
+        "line_end": 62,
+        "function": "startPreviewServer"
+      },
+      "evidence_snippet": "      res.writeHead(200, {\n        'Content-Type': mime,\n        'Content-Length': content.length,\n        'Cache-Control': 'no-cache',\n      });\n      res.end(content);\n    } catch {\n      res.writeHead(404);\n      res.end('Not found');\n    }",
+      "evidence_tool_outputs": [],
+      "secret_fingerprint": null,
+      "blast_radius": "Minor perf annoyance when browsing large galleries; Chrome re-downloads unchanged PDFs on every click. Functionally fine.",
+      "attacker_profile": "N/A.",
+      "reproduction": [
+        "Open the gallery twice; observe full re-download each time."
+      ],
+      "recommendation": {
+        "summary": "Switch to `Cache-Control: public, max-age=60, must-revalidate` or compute ETag from mtime.",
+        "code_sketch": "const etag = `\"${stat.mtimeMs.toString(36)}-${stat.size.toString(36)}\"`;\nif (req.headers['if-none-match'] === etag) { res.writeHead(304); res.end(); return; }\nres.writeHead(200, { 'Content-Type': mime, 'Content-Length': content.length, 'Cache-Control': 'public, max-age=60', ETag: etag });",
+        "rollout_notes": "Nice-to-have."
+      },
+      "test_to_add": null,
+      "effort_tshirt": "XS",
+      "dependencies": [],
+      "related_findings": [],
+      "rollback_plan": "Revert.",
+      "verification_method": "`curl -I` returns ETag + 304 on re-request."
+    }
+  ]
+}
