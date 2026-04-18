@@ -20,24 +20,54 @@ import fs from 'node:fs/promises';
 import type { PageDimensions } from '../types/index.js';
 
 let browserInstance: Browser | null = null;
+// Cache the launch *promise*, not the resolved browser, so concurrent callers
+// share one launch instead of racing to spawn two Chromiums (FIND-0025).
+let browserPromise: Promise<Browser> | null = null;
+
+/**
+ * Build the Chromium launch args for the current environment.
+ *
+ * We only disable the Chromium sandbox when we're running inside another
+ * sandbox (CI / Docker), because Chromium cannot create its own namespace
+ * sandbox in those contexts. On a developer workstation, Chromium's native
+ * sandbox should stay on — malicious templates are a real (though small)
+ * threat in a future where this tool renders 3rd-party templates.
+ * See audit finding FIND-0003 (CVSS 4.4).
+ */
+function getChromiumLaunchArgs(): string[] {
+  const args: string[] = ['--disable-dev-shm-usage', '--font-render-hinting=none'];
+  const inSandboxedRuntime = !!(
+    process.env.CI ||
+    process.env.DOCKER_CONTAINER ||
+    process.env.GITHUB_ACTIONS
+  );
+  if (inSandboxedRuntime) {
+    args.unshift('--no-sandbox', '--disable-setuid-sandbox');
+  }
+  return args;
+}
 
 /**
  * Get or create a shared Puppeteer browser instance.
  * Reusing the browser saves ~2s per render vs launching fresh.
+ * Concurrent-safe: caches the launch promise, not the resolved browser.
  */
 async function getBrowser(): Promise<Browser> {
-  if (!browserInstance || !browserInstance.connected) {
-    browserInstance = await puppeteer.launch({
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--font-render-hinting=none',
-      ],
-    });
+  if (browserPromise) {
+    const b = await browserPromise;
+    if (b.connected) return b;
+    // Stale handle; reset and re-launch below.
+    browserPromise = null;
+    browserInstance = null;
   }
-  return browserInstance;
+
+  browserPromise = puppeteer
+    .launch({ headless: true, args: getChromiumLaunchArgs() })
+    .then((b) => {
+      browserInstance = b;
+      return b;
+    });
+  return browserPromise;
 }
 
 /**
@@ -46,9 +76,42 @@ async function getBrowser(): Promise<Browser> {
 export async function closeBrowser(): Promise<void> {
   if (browserInstance && browserInstance.connected) {
     await browserInstance.close();
-    browserInstance = null;
   }
+  browserInstance = null;
+  browserPromise = null;
 }
+
+/**
+ * Resolve the color-mode CSS for a template.
+ * Search order: preset theme dir → template-sibling .{mode}.css file.
+ * Returns the CSS string, or null if no variant is defined.
+ * Extracted from renderHTMLToPDF + generate-4week.ts to dedupe (FIND-0015).
+ */
+export async function resolveColorModeCSS(
+  htmlPath: string,
+  colorMode: string,
+): Promise<string | null> {
+  const candidates = [
+    path.join(path.dirname(htmlPath), '..', 'themes', `${colorMode}.css`),
+    htmlPath.replace('.html', `.${colorMode}.css`),
+  ];
+  for (const p of candidates) {
+    try {
+      return await fs.readFile(p, 'utf-8');
+    } catch {
+      /* try next */
+    }
+  }
+  return null;
+}
+
+/**
+ * Default network allow-list for Puppeteer request interception.
+ * Only fonts.googleapis.com + fonts.gstatic.com + data:/file: are permitted.
+ * See FIND-0004. Once FIND-0014 lands (self-hosted fonts) the fonts
+ * domains can move to a deny-by-default posture.
+ */
+const DEFAULT_REQUEST_ALLOWLIST = /^(data:|file:|https:\/\/fonts\.(googleapis|gstatic)\.com\/)/;
 
 export interface PuppeteerRenderOptions {
   /** Path to HTML template file (also used for color-mode CSS discovery) */
@@ -85,29 +148,13 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
     html = await fs.readFile(htmlPath, 'utf-8');
   }
 
-  // Optional: inject color-mode CSS snippet.
-  // Search order:
-  // 1. Preset theme: src/templates/themes/{colorMode}.css
-  // 2. Template-sibling: {htmlPath}.replace('.html', `.${colorMode}.css`)
+  // Optional: inject color-mode CSS snippet via the shared resolver.
   if (colorMode && htmlPath) {
-    let modeCSS: string | null = null;
-    
-    // 1. Check preset themes directory
-    const presetPath = path.join(path.dirname(htmlPath), '..', 'themes', `${colorMode}.css`);
-    try {
-      modeCSS = await fs.readFile(presetPath, 'utf-8');
-    } catch {
-      // 2. Fall back to sibling .css file (e.g., adhd-v3-today.dark.css)
-      const siblingPath = htmlPath.replace('.html', `.${colorMode}.css`);
-      try {
-        modeCSS = await fs.readFile(siblingPath, 'utf-8');
-      } catch {
-        console.warn(`  ⚠ Color mode "${colorMode}" not found in themes/ or as sibling`);
-      }
-    }
-    
+    const modeCSS = await resolveColorModeCSS(htmlPath, colorMode);
     if (modeCSS && html.includes('</head>')) {
       html = html.replace('</head>', `<style id="color-mode">\n${modeCSS}\n</style>\n</head>`);
+    } else if (!modeCSS) {
+      console.warn(`  ⚠ Color mode "${colorMode}" not found in themes/ or as sibling`);
     }
   }
 
@@ -117,6 +164,21 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
   const page = await browser.newPage();
 
   try {
+    // SECURITY: deny any outbound request that is not in the allow-list.
+    // Templates may fetch Google Fonts; nothing else. A malicious template
+    // that tries to beacon to an attacker host gets aborted silently.
+    // See FIND-0004 (CWE-918). The deny-by-default posture tightens once
+    // FIND-0014 self-hosts fonts and the allow-list becomes "data: | file:".
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      const url = req.url();
+      if (DEFAULT_REQUEST_ALLOWLIST.test(url)) {
+        void req.continue();
+      } else {
+        void req.abort('blockedbyclient');
+      }
+    });
+
     // Load the HTML content
     // Increase timeout for large multi-page documents (100+ pages)
     const timeout = options.multiPage ? 120000 : 30000;
@@ -125,8 +187,9 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
       timeout,
     });
 
-    // Wait for fonts to load
-    await page.evaluate(() => document.fonts.ready);
+    // Wait for fonts to load. Cast explicitly because this runs in the
+    // Chromium page realm, where `document.fonts` is a FontFaceSet.
+    await page.evaluate(() => (document as Document).fonts.ready);
 
     // Generate PDF
     let pdfBuffer: Uint8Array;
@@ -177,16 +240,31 @@ export async function renderHTMLToPDFFile(
 }
 
 /**
+ * Result of a batch render. Callers should fail loud when `failures.length > 0`
+ * (see FIND-0017). Keeps the old `results` shape for backwards compat with
+ * scripts that only care about the happy path.
+ */
+export interface BatchRenderResult {
+  results: Array<{ path: string; size: number; name: string }>;
+  failures: Array<{ name: string; error: string }>;
+}
+
+/**
  * Batch render multiple HTML templates.
  * Reuses the browser instance for efficiency.
+ *
+ * Returns both successes and failures (FIND-0017). Callers should check
+ * `failures.length` and exit non-zero when non-empty, unless they explicitly
+ * opt in to best-effort via `{ bestEffort: true }`.
  */
 export async function batchRenderHTML(
   templates: Array<{ htmlPath: string; outputPath: string; name: string }>,
   dimensions: PageDimensions,
   colorMode?: string,
-  onProgress?: (name: string, index: number, total: number) => void
-): Promise<Array<{ path: string; size: number; name: string }>> {
-  const results: Array<{ path: string; size: number; name: string }> = [];
+  onProgress?: (name: string, index: number, total: number) => void,
+): Promise<BatchRenderResult> {
+  const results: BatchRenderResult['results'] = [];
+  const failures: BatchRenderResult['failures'] = [];
 
   for (let i = 0; i < templates.length; i++) {
     const t = templates[i];
@@ -195,13 +273,15 @@ export async function batchRenderHTML(
     try {
       const result = await renderHTMLToPDFFile(
         { htmlPath: t.htmlPath, dimensions, colorMode },
-        t.outputPath
+        t.outputPath,
       );
       results.push({ ...result, name: t.name });
     } catch (err) {
-      console.error(`  ✗ ${t.name}: ${err instanceof Error ? err.message : err}`);
+      const message = err instanceof Error ? err.message : String(err);
+      console.error(`  ✗ ${t.name}: ${message}`);
+      failures.push({ name: t.name, error: message });
     }
   }
 
-  return results;
+  return { results, failures };
 }

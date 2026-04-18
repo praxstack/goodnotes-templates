@@ -56,6 +56,9 @@ export async function addMetadata(
  * Add internal hyperlinks to a PDF.
  * Each hyperlink creates a /Link annotation with a /GoTo action
  * pointing to a specific page. Minimum tap target: 44x44 points (Apple HIG).
+ *
+ * Invalid rects (non-finite, zero/negative width or height) are skipped with
+ * a warning rather than silently producing an unreadable PDF. See FIND-0024.
  */
 export async function addHyperlinks(
   pdfBuffer: Buffer,
@@ -71,6 +74,25 @@ export async function addHyperlinks(
     }
     if (link.destinationPageIndex < 0 || link.destinationPageIndex >= pages.length) {
       console.warn(`Hyperlink skipped: dest page ${link.destinationPageIndex} out of range (0-${pages.length - 1})`);
+      continue;
+    }
+
+    // FIND-0024: validate the rect before passing it into PDF annotation
+    // storage. A generator bug that produces NaN / Infinity / negative size
+    // rects used to land in the PDF silently, producing a /Rect that some
+    // readers reject entirely (all hyperlinks on the page then disappear).
+    const [rx, ry, rw, rh] = link.rect;
+    if (
+      !Number.isFinite(rx) ||
+      !Number.isFinite(ry) ||
+      !Number.isFinite(rw) ||
+      !Number.isFinite(rh) ||
+      rw <= 0 ||
+      rh <= 0
+    ) {
+      console.warn(
+        `Hyperlink skipped: invalid rect [${link.rect.join(', ')}] on page ${link.sourcePageIndex} (width and height must be > 0 and finite)`,
+      );
       continue;
     }
 
@@ -130,13 +152,26 @@ export async function addHyperlinks(
 }
 
 /**
+ * Options for `addBookmarks`.
+ * `onRangeError` controls how out-of-range `pageIndex` values are handled.
+ * CI pipelines should prefer `'throw'` so generator bugs are caught before
+ * shipping (see FIND-0026). `'warn'` is the lenient default for backwards
+ * compatibility.
+ */
+export interface AddBookmarksOptions {
+  onRangeError?: 'throw' | 'warn';
+}
+
+/**
  * Add bookmark outlines to a PDF.
  * Creates a hierarchical bookmark tree for GoodNotes sidebar navigation.
  */
 export async function addBookmarks(
   pdfBuffer: Buffer,
-  bookmarks: PDFBookmark[]
+  bookmarks: PDFBookmark[],
+  options: AddBookmarksOptions = {}
 ): Promise<Buffer> {
+  const onRangeError = options.onRangeError ?? 'warn';
   const doc = await PDFDocument.load(pdfBuffer);
   const pages = doc.getPages();
 
@@ -153,7 +188,11 @@ export async function addBookmarks(
     const ref = doc.context.nextRef();
     const clampedIdx = Math.max(0, Math.min(bookmark.pageIndex, pages.length - 1));
     if (bookmark.pageIndex !== clampedIdx) {
-      console.warn(`Bookmark "${bookmark.title}": pageIndex ${bookmark.pageIndex} clamped to ${clampedIdx} (${pages.length} pages)`);
+      const msg = `Bookmark "${bookmark.title}": pageIndex ${bookmark.pageIndex} out of range (0-${pages.length - 1})`;
+      if (onRangeError === 'throw') {
+        throw new RangeError(msg);
+      }
+      console.warn(`${msg} — clamped to ${clampedIdx}`);
     }
     const page = pages[clampedIdx];
 
