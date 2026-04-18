@@ -122,11 +122,26 @@ function svgWrap(w: number, h: number, content: string): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${content}</svg>`;
 }
 
+/**
+ * XML-escape a user-supplied string before interpolating into SVG markup.
+ * Every sticker generator that takes a `text` argument MUST pass it through
+ * this helper before dropping it inside `<text>…</text>`. See FIND-0027 — a
+ * future caller that pipes `--text` through the CLI would otherwise ship a
+ * live XSS primitive to any downstream consumer that renders the SVG in a
+ * web context. (Today all callers pass enum literals; this is defense for
+ * the next change.)
+ */
+function escXml(s: string): string {
+  return s.replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c] ?? c),
+  );
+}
+
 function generateDateTab(w: number, h: number, p: StickerPalette, text: string): string {
   const r = STICKER_BORDER_RADIUS;
   return svgWrap(w, h, `
     <rect x="2" y="2" width="${w - 4}" height="${h - 4}" rx="${r}" ry="${r}" fill="${p.primary}" />
-    <text x="${w / 2}" y="${h / 2 + 6}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="${STICKER_FONTS.header.weight}" font-size="36" fill="#FFFFFF">${text}</text>
+    <text x="${w / 2}" y="${h / 2 + 6}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="${STICKER_FONTS.header.weight}" font-size="36" fill="#FFFFFF">${escXml(text)}</text>
   `);
 }
 
@@ -134,7 +149,7 @@ function generateMonthTab(w: number, h: number, p: StickerPalette, text: string)
   const r = STICKER_BORDER_RADIUS;
   return svgWrap(w, h, `
     <rect x="2" y="2" width="${w - 4}" height="${h - 4}" rx="${r}" ry="${r}" fill="${p.accent}" />
-    <text x="${w / 2}" y="${h / 2 + 8}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="${STICKER_FONTS.header.weight}" font-size="32" fill="#FFFFFF">${text}</text>
+    <text x="${w / 2}" y="${h / 2 + 8}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="${STICKER_FONTS.header.weight}" font-size="32" fill="#FFFFFF">${escXml(text)}</text>
   `);
 }
 
@@ -142,7 +157,7 @@ function generateDayTab(w: number, h: number, p: StickerPalette, text: string): 
   const r = STICKER_BORDER_RADIUS;
   return svgWrap(w, h, `
     <rect x="2" y="2" width="${w - 4}" height="${h - 4}" rx="${r}" ry="${r}" fill="${p.secondary}" />
-    <text x="${w / 2}" y="${h / 2 + 6}" text-anchor="middle" font-family="${STICKER_FONTS.body.family}, sans-serif" font-weight="${STICKER_FONTS.body.weight}" font-size="28" fill="${p.text}">${text}</text>
+    <text x="${w / 2}" y="${h / 2 + 6}" text-anchor="middle" font-family="${STICKER_FONTS.body.family}, sans-serif" font-weight="${STICKER_FONTS.body.weight}" font-size="28" fill="${p.text}">${escXml(text)}</text>
   `);
 }
 
@@ -150,7 +165,7 @@ function generateNumberCircle(w: number, h: number, p: StickerPalette, text: str
   const cx = w / 2, cy = h / 2, r = w / 2 - 4;
   return svgWrap(w, h, `
     <circle cx="${cx}" cy="${cy}" r="${r}" fill="${p.primary}" />
-    <text x="${cx}" y="${cy + 8}" text-anchor="middle" font-family="${STICKER_FONTS.body.family}, sans-serif" font-weight="600" font-size="40" fill="#FFFFFF">${text}</text>
+    <text x="${cx}" y="${cy + 8}" text-anchor="middle" font-family="${STICKER_FONTS.body.family}, sans-serif" font-weight="600" font-size="40" fill="#FFFFFF">${escXml(text)}</text>
   `);
 }
 
@@ -159,7 +174,7 @@ function generatePriorityMarker(w: number, h: number, p: StickerPalette, text: s
   const color = colors[text] || p.accent;
   return svgWrap(w, h, `
     <rect x="2" y="2" width="${w - 4}" height="${h - 4}" rx="20" ry="20" fill="${color}" />
-    <text x="${w / 2}" y="${h / 2 + 7}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">${text}</text>
+    <text x="${w / 2}" y="${h / 2 + 7}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">${escXml(text)}</text>
   `);
 }
 
@@ -254,7 +269,7 @@ function generateBanner(w: number, h: number, p: StickerPalette, text: string): 
   const fold = 15;
   return svgWrap(w, h, `
     <path d="M${fold},10 L${w - fold},10 L${w},${10 + ribbonH / 2} L${w - fold},${10 + ribbonH} L${fold},${10 + ribbonH} L0,${10 + ribbonH / 2} Z" fill="${p.primary}" />
-    <text x="${w / 2}" y="${h / 2 + 6}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="${STICKER_FONTS.header.weight}" font-size="30" fill="#FFFFFF">${text}</text>
+    <text x="${w / 2}" y="${h / 2 + 6}" text-anchor="middle" font-family="${STICKER_FONTS.header.family}, sans-serif" font-weight="${STICKER_FONTS.header.weight}" font-size="30" fill="#FFFFFF">${escXml(text)}</text>
   `);
 }
 
