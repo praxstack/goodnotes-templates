@@ -2,7 +2,7 @@
 
 ## Project
 
-Open-source programmatic template generation system for GoodNotes and similar digital note-taking apps. TypeScript monorepo with CLI, theming, PDF/PNG/SVG generation pipeline.
+Open-source programmatic template generation system for GoodNotes and similar digital note-taking apps. Single-package TypeScript build tool (not a monorepo) with CLI, self-contained HTML templates, and a PDF/PNG/SVG generation pipeline. See `docs/HLD-self-contained-templates.md` for the architecture.
 
 ## Key files
 
