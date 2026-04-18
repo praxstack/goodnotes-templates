@@ -21,9 +21,13 @@ const MIME_TYPES: Record<string, string> = {
 
 export async function startPreviewServer(outputDir: string, port: number): Promise<void> {
   const absDir = path.resolve(outputDir);
+  // SECURITY: bind to 127.0.0.1 by default — do not expose gallery to LAN.
+  // Override with PREVIEW_HOST=0.0.0.0 if you really want it.
+  // See audit finding FIND-0001 (CVSS 5.3, CWE-200).
+  const host = process.env.PREVIEW_HOST || '127.0.0.1';
 
   const server = http.createServer(async (req, res) => {
-    const url = new URL(req.url || '/', `http://localhost:${port}`);
+    const url = new URL(req.url || '/', `http://${host}:${port}`);
 
     if (url.pathname === '/' || url.pathname === '/index.html') {
       const html = await generateGalleryHTML(absDir);
@@ -32,28 +36,74 @@ export async function startPreviewServer(outputDir: string, port: number): Promi
       return;
     }
 
-    // Serve static files from output dir
-    // Use path.resolve to normalize any '..' segments, then check prefix
-    const decoded = decodeURIComponent(url.pathname).replace(/^\/+/, '');
+    // Decode the request path. Strip leading slashes.
+    let decoded: string;
+    try {
+      decoded = decodeURIComponent(url.pathname).replace(/^\/+/, '');
+    } catch {
+      res.writeHead(400);
+      res.end('Bad Request');
+      return;
+    }
+
+    // SECURITY: reject NUL bytes (CWE-158) + backslashes (Windows path split).
+    // See FIND-0023 (downgraded Informational in iter-3, kept as defense-in-depth).
+    if (decoded.indexOf('\0') !== -1 || decoded.indexOf('\\') !== -1) {
+      res.writeHead(400);
+      res.end('Bad Request');
+      return;
+    }
+
     const filePath = path.resolve(absDir, decoded);
-    if (!filePath.startsWith(absDir + path.sep) && filePath !== absDir) {
+
+    // SECURITY: path.resolve does NOT dereference symlinks — fs.readFile does.
+    // Use fs.realpath to detect symlink escapes, then re-check the prefix.
+    // We also reject if the literal path itself is a symlink (belt + suspenders).
+    // See FIND-0022 (CVSS 7.1, CWE-59, POC executed in audit/_runtime/tool-outputs/symlink-poc.log).
+    let realPath: string;
+    let lstat: import('node:fs').Stats;
+    try {
+      lstat = await fs.lstat(filePath);
+      if (lstat.isSymbolicLink()) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+      }
+      realPath = await fs.realpath(filePath);
+    } catch (err: unknown) {
+      const code = (err as NodeJS.ErrnoException)?.code;
+      res.writeHead(code === 'ENOENT' ? 404 : 403);
+      res.end(code === 'ENOENT' ? 'Not found' : 'Forbidden');
+      return;
+    }
+
+    if (!realPath.startsWith(absDir + path.sep) && realPath !== absDir) {
       res.writeHead(403);
       res.end('Forbidden');
       return;
     }
 
     try {
-      const stat = await fs.stat(filePath);
+      const stat = await fs.stat(realPath);
       if (!stat.isFile()) throw new Error('Not a file');
 
-      const ext = path.extname(filePath).toLowerCase();
+      const ext = path.extname(realPath).toLowerCase();
       const mime = MIME_TYPES[ext] || 'application/octet-stream';
-      const content = await fs.readFile(filePath);
 
+      // Cheap freshness: ETag from mtime+size. Send 304 on match. (FIND-0021)
+      const etag = `"${stat.mtimeMs.toString(36)}-${stat.size.toString(36)}"`;
+      if (req.headers['if-none-match'] === etag) {
+        res.writeHead(304, { ETag: etag });
+        res.end();
+        return;
+      }
+
+      const content = await fs.readFile(realPath);
       res.writeHead(200, {
         'Content-Type': mime,
         'Content-Length': content.length,
-        'Cache-Control': 'no-cache',
+        'Cache-Control': 'public, max-age=60, must-revalidate',
+        ETag: etag,
       });
       res.end(content);
     } catch {
@@ -62,9 +112,12 @@ export async function startPreviewServer(outputDir: string, port: number): Promi
     }
   });
 
-  server.listen(port, () => {
-    console.log(`  Preview server running at http://localhost:${port}`);
+  server.listen(port, host, () => {
+    console.log(`  Preview server running at http://${host}:${port}`);
     console.log(`  Press Ctrl+C to stop.\n`);
+    if (host === '127.0.0.1') {
+      console.log(`  (localhost only. Set PREVIEW_HOST=0.0.0.0 to expose to LAN.)\n`);
+    }
   });
 }
 
@@ -91,8 +144,13 @@ async function generateGalleryHTML(outputDir: string): Promise<string> {
 
   await scan(outputDir);
 
-  // HTML-escape to prevent XSS from filenames
-  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  // HTML-escape to prevent XSS from filenames (FIND-0002). Includes ' escape
+  // so switching to single-quoted attributes in the future does not silently
+  // reintroduce the injection primitive.
+  const esc = (s: string): string =>
+    s.replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] ?? c),
+    );
 
   const sections = Object.entries(categories).sort().map(([cat, files]) => {
     const items = files.sort().map(f => {
