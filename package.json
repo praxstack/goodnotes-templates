@@ -45,35 +45,26 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/goodnotes-templates"
+    "url": "https://github.com/praxstack/goodnotes-templates"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "pdf-lib": "^1.17.1",
-    "pdfkit": "^0.15.1",
-    "puppeteer": "^23.11.1",
-    "sharp": "^0.33.5",
-    "@svgdotjs/svg.js": "^3.2.4",
-    "svgdom": "^0.1.23",
     "commander": "^12.1.0",
-    "chalk": "^5.3.0",
-    "ora": "^8.1.1",
-    "glob": "^11.0.0",
-    "handlebars": "^4.7.8",
-    "fontkit": "^2.0.4"
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^23.11.1",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
-    "tsx": "^4.19.2",
-    "vitest": "^2.1.8",
     "@types/node": "^22.10.2",
-    "@types/pdfkit": "^0.13.5",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "@vitest/coverage-v8": "4.1.4",
     "eslint": "^9.16.0",
     "prettier": "^3.4.2",
-    "looks-same": "^9.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.18.0",
-    "@typescript-eslint/parser": "^8.18.0"
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "4.1.4"
   }
 }
