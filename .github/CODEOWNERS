@@ -1,0 +1,20 @@
+# Code owners — every PR that touches these paths gets routed automatically.
+# Update when team composition changes.
+#
+# Default catch-all
+* @praxstack
+
+# T1 security-sensitive modules (from audit/_runtime/topology.md):
+# any change here should have a second set of eyes on the live POC test run.
+/src/cli/preview-server.ts        @praxstack
+/src/core/puppeteer-renderer.ts   @praxstack
+/src/core/pdf-postprocess.ts      @praxstack
+
+# CI + supply chain — changes here can invalidate the PR gate.
+/.github/                         @praxstack
+/scripts/audit.sh                 @praxstack
+/package.json                     @praxstack
+/package-lock.json                @praxstack
+
+# Audit artifacts — should only change via explicit re-audit, not casually.
+/audit/                           @praxstack

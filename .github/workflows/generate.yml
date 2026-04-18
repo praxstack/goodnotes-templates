@@ -67,6 +67,16 @@ jobs:
           name: goodnotes-templates-assets
           path: output/
 
+      - name: Generate SBOM (CycloneDX)
+        # FIND-0014 companion / A+ polish — ships an SBOM + SLSA provenance
+        # with every release so downstream consumers can verify what shipped.
+        uses: anchore/sbom-action@f325610c9f50a54015d37c8d16cb3b0e2c8f4de0 # v0.18.0
+        with:
+          path: .
+          format: cyclonedx-json
+          artifact-name: goodnotes-templates-sbom.cdx.json
+          output-file: goodnotes-templates-sbom.cdx.json
+
       - name: Create release bundle
         run: |
           cd output
@@ -115,5 +125,6 @@ jobs:
             goodnotes-templates-assets.zip
             goodnotes-templates-assets.zip.sig
             goodnotes-templates-assets.zip.crt
+            goodnotes-templates-sbom.cdx.json
           draft: false
           prerelease: false

@@ -40,10 +40,19 @@ jobs:
       - name: TypeScript build
         run: npm run build
 
-      - name: Unit tests
-        run: npm test -- --run
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests with coverage gate
+        run: npm test -- --run --coverage
 
       - name: Dependency audit (high+)
-        # Non-blocking on moderate — vitest 2.x transitive chain (FIND-0006)
-        # closes with a semver-major bump scheduled for Sprint 3.
         run: npm audit --audit-level=high
+
+      - name: Upload coverage report
+        if: success() || failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: coverage-${{ github.run_id }}
+          path: coverage/
+          retention-days: 30
