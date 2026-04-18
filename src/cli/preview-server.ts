@@ -19,7 +19,7 @@ const MIME_TYPES: Record<string, string> = {
   '.ico': 'image/x-icon',
 };
 
-export async function startPreviewServer(outputDir: string, port: number): Promise<void> {
+export async function startPreviewServer(outputDir: string, port: number): Promise<http.Server> {
   const absDir = path.resolve(outputDir);
   // SECURITY: bind to 127.0.0.1 by default — do not expose gallery to LAN.
   // Override with PREVIEW_HOST=0.0.0.0 if you really want it.
@@ -112,13 +112,17 @@ export async function startPreviewServer(outputDir: string, port: number): Promi
     }
   });
 
-  server.listen(port, host, () => {
-    console.log(`  Preview server running at http://${host}:${port}`);
-    console.log(`  Press Ctrl+C to stop.\n`);
-    if (host === '127.0.0.1') {
-      console.log(`  (localhost only. Set PREVIEW_HOST=0.0.0.0 to expose to LAN.)\n`);
-    }
+  await new Promise<void>((resolve) => {
+    server.listen(port, host, () => {
+      console.log(`  Preview server running at http://${host}:${port}`);
+      console.log(`  Press Ctrl+C to stop.\n`);
+      if (host === '127.0.0.1') {
+        console.log(`  (localhost only. Set PREVIEW_HOST=0.0.0.0 to expose to LAN.)\n`);
+      }
+      resolve();
+    });
   });
+  return server;
 }
 
 async function generateGalleryHTML(outputDir: string): Promise<string> {
