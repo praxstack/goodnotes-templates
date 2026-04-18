@@ -252,7 +252,7 @@ function injectWeeklyData(
   pageBody: string,
   weekEndDate: Date,
   locale: SupportedLocale,
-  year: number,
+  _year: number, // reserved for future year-aware week labels
 ): string {
   let html = pageBody;
 

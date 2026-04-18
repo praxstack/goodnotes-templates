@@ -221,7 +221,7 @@ function injectWeeklyPageData(
   pageInDay: number,
   totalPagesInDay: number,
   locale: SupportedLocale,
-  year: number,
+  _year: number, // reserved for future year-aware week labels
 ): string {
   let html = pageBlock;
 
@@ -486,7 +486,6 @@ function buildBookmarks(
   const grouped = groupByMonth(allDays);
 
   const monthBookmarks: PDFBookmark[] = [];
-  let globalPageIdx = 0;
 
   for (let m = 1; m <= 12; m++) {
     const days = grouped.get(m) || [];

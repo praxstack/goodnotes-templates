@@ -1,0 +1,46 @@
+name: Monthly audit probe
+
+# Re-runs the tool surface from CODEX-AUDIT v1.1 once a month to catch drift:
+# new CVEs in the transitive tree, licence changes, secret-leak regressions,
+# new SAST hits. Opens a tracking issue if counts diverge from main.
+
+on:
+  schedule:
+    - cron: '0 6 1 * *' # 1st of each month, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Install probe tools
+        run: |
+          # gitleaks + semgrep are optional on CI — script handles missing.
+          sudo apt-get update && sudo apt-get install -y jq
+          pip install --user semgrep >/dev/null 2>&1 || true
+
+      - name: Run probe
+        run: bash scripts/audit.sh --no-gitleaks
+
+      - name: Upload outputs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: audit-probe-${{ github.run_id }}
+          path: audit/_runtime/tool-outputs/
+          retention-days: 90
+
+      - name: Fail if HIGH+ vulns
+        run: npm audit --audit-level=high
