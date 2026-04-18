@@ -1,0 +1,24 @@
+version: 2
+# FIND-0009: keep GitHub Actions pinned to SHAs but fresh.
+# Dependabot opens PRs that bump SHA + update the trailing # v4.x comment.
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
+
+  # npm — weekly, grouped to minimize PR churn
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      prod:
+        dependency-type: production
+      dev:
+        dependency-type: development
