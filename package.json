@@ -57,16 +57,16 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.4",
-    "@types/node": "^22.10.2",
-    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@eslint/js": "10.0.1",
+    "@types/node": "^25.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
     "@typescript-eslint/parser": "^8.18.0",
     "@vitest/coverage-v8": "4.1.4",
-    "eslint": "^9.16.0",
+    "eslint": "^10.2.1",
     "fast-check": "4.7.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.8.3",
     "tsx": "^4.19.2",
-    "typescript": "^5.6.3",
+    "typescript": "^6.0.3",
     "vitest": "4.1.4"
   }
 }
