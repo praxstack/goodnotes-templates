@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v5 — Midday Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v5 · PAGE 2 / 4 · MIDDAY CHECK — Shreya's core
+   Design contract: prax-journal-design.md · Warm Analog Editorial
+
+   Blocks:
+   • B-01 Masthead · B-02 Permission
+   • SAGE: Jar + Body 3-row matrix (Shreya's pairing practice)
+   • NEUTRAL: "What am I doing right now?" strip
+   • AMBER: Pseudo-doing check (real task vs prerequisite)
+   • AMBER: Mini Thought Flip (3-prompt CBT, if harsh thought running)
+   • B-18 Footer
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
+  --paper: #F9F5EC;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #7D7668; --ink-whisper: #B5AD9F;
+  --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
+  --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
+  --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
+  --lavender: #B6A9CB; --lavender-ink: #6B5D86; --lavender-tint: rgba(182, 169, 203, 0.10); --lavender-edge: rgba(182, 169, 203, 0.28);
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm;
+  --dot: var(--ink-whisper);
+  --shadow-page: 0 1px 2px rgba(42,40,36,0.04), 0 16px 48px rgba(42,40,36,0.10), 0 2px 8px rgba(42,40,36,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; color: var(--ink-soft); line-height: 1.45; font-variation-settings: "opsz" 14; -webkit-font-smoothing: antialiased; }
+.page { width: var(--page-w); height: var(--page-h); background: var(--paper); margin: 10mm auto; padding: var(--margin); position: relative; overflow: clip; box-shadow: var(--shadow-page); page-break-after: always; display: flex; flex-direction: column; gap: var(--s3); }
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+@media print { body { background: #fff; } .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; } @page { size: A4 portrait; margin: 0; } }
+
+/* ─── Masthead ─── */
+.masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--s2); border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
+.masthead .kicker { font-family: var(--font-mono); font-size: 6pt; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); margin-bottom: 1.5mm; }
+.masthead h1 { font-family: var(--font-serif); font-size: 28pt; font-weight: 400; line-height: 0.92; letter-spacing: -0.02em; color: var(--ink); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.masthead .subtitle { font-family: var(--font-serif); font-size: 9pt; font-style: italic; color: var(--ink-quiet); margin-top: 1.5mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.mh-r { text-align: right; display: flex; flex-direction: column; gap: 1.5mm; align-items: flex-end; }
+.date-row { display: flex; align-items: baseline; gap: 2.5mm; }
+.date-row .label { font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet); }
+.date-row .field { border-bottom: 0.6px solid var(--ink); min-width: 34mm; height: 4.5mm; font-family: var(--font-mono); font-size: 9pt; }
+.time-row { display: flex; align-items: baseline; gap: 2mm; font-family: var(--font-mono); font-size: 7pt; color: var(--ink-quiet); letter-spacing: 0.08em; }
+.time-row .lbl { text-transform: uppercase; letter-spacing: 0.15em; }
+.time-row .hf { border-bottom: 0.5px solid var(--ink-whisper); width: 14mm; height: 3.5mm; display: inline-block; }
+.day-counter { font-family: var(--font-mono); font-size: 7pt; font-weight: 500; color: var(--ink-quiet); letter-spacing: 0.08em; }
+.day-counter .big { font-size: 10pt; color: var(--ink); font-weight: 600; }
+.day-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+
+/* ─── Permission banner ─── */
+.permission { background: var(--sage-tint); border-left: 2px solid var(--sage); padding: 2.5mm var(--s3); font-family: var(--font-serif); font-style: italic; font-size: 8pt; color: var(--sage-ink); font-variation-settings: "opsz" 14, "SOFT" 100; flex-shrink: 0; }
+.permission .glyph { color: var(--sage); font-style: normal; margin: 0 1.5mm; opacity: 0.6; }
+
+/* ─── Card archetype base ─── */
+.card { border-radius: 3.5mm; padding: 3mm var(--s3) 3mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.card-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.2mm; }
+.card-head .meta { flex: 1; }
+.card-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; }
+.card-head .title { font-family: var(--font-serif); font-size: 11pt; font-weight: 500; line-height: 1; margin-top: 0.5mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.card-head .attr { font-family: var(--font-mono); font-size: 5pt; opacity: 0.7; letter-spacing: 0.1em; text-align: right; line-height: 1.3; }
+.card-explainer { font-family: var(--font-serif); font-size: 7pt; font-style: italic; opacity: 0.8; margin-bottom: 2mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+
+.card-sage { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); }
+.card-sage::before { background: var(--sage); }
+.card-sage .kicker { color: var(--sage); }
+.card-sage .title, .card-sage .attr, .card-sage .card-explainer, .card-sage .card-head .icon { color: var(--sage-ink); }
+
+.card-amber { background: var(--amber-tint); border: 0.8px solid var(--amber-edge); }
+.card-amber::before { background: var(--amber); }
+.card-amber .kicker { color: var(--amber); }
+.card-amber .title, .card-amber .attr, .card-amber .card-explainer, .card-amber .card-head .icon { color: var(--amber-ink); }
+
+/* ─── Jar + Body matrix (sage · Shreya's core) ─── */
+.jb-grid { display: grid; grid-template-columns: 5mm 18mm 1fr 30mm 1fr; gap: 1.5mm 3mm; align-items: center; margin-top: 1.5mm; }
+.jb-grid .h { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage-ink); opacity: 0.75; padding-bottom: 0.6mm; border-bottom: 0.4px solid var(--sage-edge); }
+.jb-grid .n { font-family: var(--font-serif); font-size: 12pt; font-weight: 500; color: var(--sage); text-align: center; font-variation-settings: "opsz" 72, "SOFT" 60; line-height: 1; }
+.jb-grid .tm { border-bottom: 0.8px solid var(--sage-edge); height: 5.5mm; font-family: var(--font-mono); font-size: 7.5pt; color: var(--ink); }
+.jb-grid .jar-chips { display: flex; gap: 0.8mm; flex-wrap: wrap; }
+.jb-grid .jar-chips span { padding: 0.8mm 1.6mm; border: 0.6px solid var(--sage-edge); border-radius: 1mm; font-family: var(--font-mono); font-size: 4.8pt; font-weight: 500; color: var(--sage-ink); opacity: 0.85; background: rgba(249,245,236,0.4); letter-spacing: 0.04em; text-transform: lowercase; }
+.jb-grid .kg-box { display: flex; gap: 0.7mm; }
+.jb-grid .kg-box span { width: 5mm; height: 4.5mm; border: 0.6px solid var(--sage-edge); border-radius: 1mm; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.5pt; font-weight: 600; color: var(--sage-ink); opacity: 0.85; background: rgba(249,245,236,0.4); }
+.jb-grid .filler { border-bottom: 0.8px dotted var(--sage-edge); height: 5.5mm; font-family: var(--font-mono); font-size: 7pt; }
+.jb-legend { font-family: var(--font-mono); font-size: 4.8pt; color: var(--sage-ink); opacity: 0.6; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 1.5mm; padding-top: 1mm; border-top: 0.3px dotted var(--sage-edge); display: flex; justify-content: space-between; gap: var(--s2); }
+
+/* ─── "What am I doing right now" strip ─── */
+.doing-strip { display: grid; grid-template-columns: auto 1fr auto auto auto; gap: var(--s3); align-items: center; padding: 2.5mm 0; border-top: 0.5px solid var(--ink-whisper); border-bottom: 0.5px solid var(--ink-whisper); flex-shrink: 0; }
+.doing-strip .lg { display: flex; flex-direction: column; gap: 0.5mm; min-width: 32mm; }
+.doing-strip .lg .k { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-quiet); }
+.doing-strip .lg .t { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--ink); font-variation-settings: "opsz" 72, "SOFT" 60; line-height: 1; }
+.doing-strip .in { border: none; border-bottom: 1.2px solid var(--ink-whisper); height: 6mm; min-width: 40mm; }
+.doing-strip .planned { display: flex; align-items: center; gap: 1.5mm; font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-quiet); text-transform: uppercase; letter-spacing: 0.1em; }
+.doing-strip .planned label { display: flex; align-items: center; gap: 1mm; color: var(--ink-soft); font-family: var(--font-sans); font-size: 7.5pt; font-weight: 500; text-transform: none; letter-spacing: -0.005em; }
+.doing-strip .planned label .c { width: 3mm; height: 3mm; border-radius: 50%; border: 0.9px solid var(--ink-quiet); }
+.doing-strip .pulled { font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-quiet); text-transform: uppercase; letter-spacing: 0.1em; }
+.doing-strip .pulled .pl { border-bottom: 0.6px dotted var(--ink-whisper); width: 30mm; height: 4mm; display: inline-block; margin-left: 1mm; }
+
+/* ─── Pseudo-doing (amber) ─── */
+.pseudo-body { display: grid; grid-template-columns: 1fr 1fr auto; gap: var(--s3); align-items: center; margin-top: 1.5mm; }
+.pseudo-body .cell { display: flex; flex-direction: column; gap: 0.8mm; }
+.pseudo-body .cell .k { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--amber); }
+.pseudo-body .cell .in { border: none; border-bottom: 1px solid var(--amber-edge); height: 6mm; font-family: var(--font-serif); font-size: 8pt; color: var(--ink); }
+.pseudo-body .chk { display: flex; align-items: center; gap: 1.5mm; font-family: var(--font-mono); font-size: 5.5pt; color: var(--amber-ink); letter-spacing: 0.08em; font-weight: 600; text-transform: uppercase; }
+.pseudo-body .chk .b { width: 4mm; height: 4mm; border: 1.1px solid var(--amber); border-radius: 1mm; background: rgba(249,245,236,0.4); }
+
+/* ─── Thought Flip (amber · 3 prompts) ─── */
+.tf-prompt { display: flex; align-items: flex-end; gap: 2mm; margin-bottom: 1mm; }
+.tf-prompt:last-child { margin-bottom: 0; }
+.tf-prompt .pn { font-family: var(--font-serif); font-size: 10pt; font-weight: 400; color: var(--amber); width: 4mm; font-variation-settings: "opsz" 72; }
+.tf-prompt .pl { font-family: var(--font-sans); font-size: 8pt; font-weight: 500; color: var(--amber-ink); white-space: nowrap; }
+.tf-prompt .pline { flex: 1; border: none; border-bottom: 1.2px dotted var(--amber-edge); height: 5.5mm; }
+
+/* ─── Body-sensation note strip ─── */
+.body-strip { display: flex; align-items: center; gap: var(--s3); padding: 1mm 0; flex-shrink: 0; }
+.body-strip .k { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-quiet); min-width: 34mm; }
+.body-strip .in { flex: 1; border: none; border-bottom: 1.2px dotted var(--ink-whisper); height: 6mm; }
+
+/* ─── Free Write bottom canvas ─── */
+.free-canvas {
+  flex: 1;
+  min-height: 14mm;
+  position: relative;
+  background-image: radial-gradient(circle, rgba(42,40,36,0.11) 0.33mm, transparent 0.33mm);
+  background-size: 5mm 5mm;
+  background-position: 0 3mm;
+  border-top: 0.4px dotted var(--ink-whisper);
+  padding: 2mm 0 1mm;
+}
+.free-canvas .fc-label {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-quiet);
+  background: var(--paper);
+  padding: 0 2mm 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Footer ─── */
+.footer { margin-top: auto; padding-top: var(--s2); border-top: 0.4px solid var(--ink-whisper); display: flex; justify-content: space-between; align-items: baseline; flex-shrink: 0; }
+.footer .signoff { font-family: var(--font-serif); font-size: 8.5pt; font-style: italic; color: var(--ink-quiet); font-variation-settings: "opsz" 14, "SOFT" 100; }
+.footer .pg { font-family: var(--font-mono); font-size: 6.5pt; font-weight: 500; color: var(--ink-quiet); letter-spacing: 0.14em; text-transform: uppercase; }
+.footer .pg .cur { color: var(--ink); font-weight: 600; }
+.footer .pg .sep { color: var(--ink-whisper); margin: 0 1mm; }
+/* ─── Squircle clipping + hint of 3D + nowrap pomos (patch) ─── */
+.pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav, .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri {
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.frog-tail .pomos { flex-wrap: nowrap; }
+.frog-tail .pomos .lbl { flex-shrink: 0; padding-right: 2.5mm; }
+.frog-tail .pomos .d { flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<main class="page" data-template="adhd-v5-midday" role="document">
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div>
+      <div class="kicker">The Daily · 2 PM Alarm</div>
+      <h1>Midday</h1>
+      <div class="subtitle">Pause. Check the jar. Weigh the chest.</div>
+    </div>
+    <div class="mh-r">
+      <div class="date-row"><span class="label">Date</span><span class="field"></span></div>
+      <div class="time-row"><span class="lbl">Filled at</span><span class="hf"></span></div>
+      <div class="day-counter"><span>day&nbsp;</span><span class="big">___</span><span class="slash">/</span><span>365</span></div>
+    </div>
+  </header>
+
+  <!-- Permission -->
+  <aside class="permission">
+    <span class="glyph">✳</span>Notice, don't judge. Leaving parts blank is still showing up.<span class="glyph">✳</span>
+  </aside>
+
+  <!-- Jar + Body matrix (Shreya) -->
+  <section class="card card-sage" aria-labelledby="jb-title">
+    <div class="card-head">
+      <span class="icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 4h10l-1 4H8z"/>
+          <path d="M6 8h12l-.8 10a2 2 0 0 1-2 1.8h-6.4a2 2 0 0 1-2-1.8z"/>
+          <path d="M8.5 13h7"/>
+        </svg>
+      </span>
+      <div class="meta">
+        <div class="kicker">Shreya · core pairing practice</div>
+        <h2 class="title" id="jb-title">Processing Jar + Body (kg)</h2>
+      </div>
+      <div class="attr">log 3×<br>or more today</div>
+    </div>
+    <div class="card-explainer">How full is your jar right now? How heavy does your chest feel? Track them together — the activity AND the body sensation.</div>
+
+    <div class="jb-grid">
+      <div class="h">#</div>
+      <div class="h">Time</div>
+      <div class="h">Jar level</div>
+      <div class="h">Chest · kg</div>
+      <div class="h">What's filling it</div>
+
+      <div class="n">1</div>
+      <div class="tm"></div>
+      <div class="jar-chips"><span>overflow</span><span>full</span><span>half</span><span>space</span><span>empty</span></div>
+      <div class="kg-box"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+      <div class="filler"></div>
+
+      <div class="n">2</div>
+      <div class="tm"></div>
+      <div class="jar-chips"><span>overflow</span><span>full</span><span>half</span><span>space</span><span>empty</span></div>
+      <div class="kg-box"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+      <div class="filler"></div>
+
+      <div class="n">3</div>
+      <div class="tm"></div>
+      <div class="jar-chips"><span>overflow</span><span>full</span><span>half</span><span>space</span><span>empty</span></div>
+      <div class="kg-box"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+      <div class="filler"></div>
+    </div>
+    <div class="jb-legend">
+      <span>Filler examples: YouTube · Reddit · tooling · news · phone · worry · actual study ✓</span>
+      <span>Jar and body together or it doesn't work — Shreya</span>
+    </div>
+  </section>
+
+  <!-- Doing strip -->
+  <section class="doing-strip" aria-label="Right now">
+    <div class="lg">
+      <span class="k">Right now I'm</span>
+      <span class="t">Doing</span>
+    </div>
+    <span class="in"></span>
+    <div class="planned">
+      <span>planned?</span>
+      <label><span class="c"></span>Yes</label>
+      <label><span class="c"></span>No</label>
+    </div>
+    <div class="pulled">
+      <span>pulled away by</span>
+      <span class="pl"></span>
+    </div>
+  </section>
+
+  <!-- Pseudo-doing (amber) -->
+  <section class="card card-amber" aria-labelledby="pseudo-title">
+    <div class="card-head">
+      <span class="icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5"/>
+          <circle cx="12" cy="16" r=".8" fill="currentColor"/>
+        </svg>
+      </span>
+      <div class="meta">
+        <div class="kicker">Shreya · prerequisite trap</div>
+        <h2 class="title" id="pseudo-title">Pseudo-doing check</h2>
+      </div>
+      <div class="attr">prep ≠ doing</div>
+    </div>
+    <div class="card-explainer">Am I doing the real task, or a prerequisite that feels productive? Catch it now while I can still switch.</div>
+    <div class="pseudo-body">
+      <div class="cell">
+        <span class="k">Real task</span>
+        <span class="in"></span>
+      </div>
+      <div class="cell">
+        <span class="k">What I'm actually doing</span>
+        <span class="in"></span>
+      </div>
+      <div class="chk">
+        <span class="b"></span>
+        diversion<br>noticed
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini Thought Flip (amber, optional) -->
+  <section class="card card-amber" aria-labelledby="tf-title">
+    <div class="card-head">
+      <span class="icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a5 5 0 0 1 4.42 2.65A4.5 4.5 0 0 1 20 9a4 4 0 0 1-.68 7.74A5 5 0 0 1 12 22"/>
+          <path d="M12 2a5 5 0 0 0-4.42 2.65A4.5 4.5 0 0 0 4 9a4 4 0 0 0 .68 7.74A5 5 0 0 0 12 22"/>
+        </svg>
+      </span>
+      <div class="meta">
+        <div class="kicker">CBT · only if a harsh thought is running</div>
+        <h2 class="title" id="tf-title">Thought flip · midday</h2>
+      </div>
+      <div class="attr">Ramsay &amp;<br>Rostain</div>
+    </div>
+    <div class="card-explainer">If a loop is spinning right now, write it · check it · rewrite it kinder. Skip if nothing's running.</div>
+    <div class="tf-prompt"><span class="pn">1</span><span class="pl">Brain's telling me:</span><span class="pline"></span></div>
+    <div class="tf-prompt"><span class="pn">2</span><span class="pl">Is that actually true?</span><span class="pline"></span></div>
+    <div class="tf-prompt"><span class="pn">3</span><span class="pl">A kinder way to see it:</span><span class="pline"></span></div>
+  </section>
+
+  <!-- Body-sensation note -->
+  <section class="body-strip">
+    <span class="k">Body sensation right now</span>
+    <span class="in"></span>
+  </section>
+  <section class="body-strip" style="margin-top:-1.5mm">
+    <span class="k">Breathing · shallow · held · easy · deep</span>
+    <span class="in"></span>
+  </section>
+
+  <!-- Free Write dot-grid canvas -->
+  <section class="free-canvas" aria-label="Free write">
+    <span class="fc-label">Free Write · say anything, or leave it blank</span>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="signoff">Notice. Don't judge. The jar can be emptied.</span>
+    <span class="pg"><span class="cur">Midday</span><span class="sep">·</span><span>2 / 4</span></span>
+  </footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v5 — Today</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v5 · PAGE 1 / 4 · TODAY — morning commit
+   Design contract: prax-journal-design.md · Warm Analog Editorial
+
+   Changes vs v4:
+   ✦ Day-type selector (Weekday / Therapy / Weekend) — from digital journal
+   ✦ 2-Second Pause 3-row matrix (Shreya's anchor) — NEW sage block
+   ✦ Rx card with Dr Pallavi Joshi's 8 meds from 13-04-2026 consult
+   ✦ Mindful hourly counter + First thought + One small thing
+   ✦ Cigs horror metric MOVED to Page 3 Reflect
+   ✦ Notes strip REMOVED (Brain Dump on Page 4 owns that)
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
+  --paper: #F9F5EC;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #7D7668; --ink-whisper: #B5AD9F;
+  --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
+  --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
+  --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
+  --lavender: #B6A9CB; --lavender-ink: #6B5D86; --lavender-tint: rgba(182, 169, 203, 0.10); --lavender-edge: rgba(182, 169, 203, 0.28);
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm;
+  --dot: var(--ink-whisper);
+  --shadow-page: 0 1px 2px rgba(42,40,36,0.04), 0 16px 48px rgba(42,40,36,0.10), 0 2px 8px rgba(42,40,36,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans); font-size: 8.5pt;
+  color: var(--ink-soft); line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative;
+  /* `overflow: clip` — same visual as `hidden` for print, but no scroll
+     container. Flip to `visible` via `data-debug="overflow"` on <html>
+     to surface any A4 bleed when inspecting in the browser. */
+  overflow: clip;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+  gap: 2.8mm;
+}
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+@media print { body { background: #fff; } .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; } @page { size: A4 portrait; margin: 0; } }
+
+/* ─── Masthead (B-01) ─── */
+.masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--s2); border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
+.masthead .kicker { font-family: var(--font-mono); font-size: 6pt; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-quiet); margin-bottom: 1.5mm; }
+.masthead h1 { font-family: var(--font-serif); font-size: 30pt; font-weight: 400; line-height: 0.92; letter-spacing: -0.02em; color: var(--ink); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.masthead .subtitle { font-family: var(--font-serif); font-size: 9pt; font-style: italic; color: var(--ink-quiet); margin-top: 1.5mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.mh-r { text-align: right; display: flex; flex-direction: column; gap: 1.5mm; align-items: flex-end; }
+.date-row { display: flex; align-items: baseline; gap: 2.5mm; }
+.date-row .label { font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet); }
+.date-row .field { border-bottom: 0.6px solid var(--ink); min-width: 34mm; height: 4.5mm; font-family: var(--font-mono); font-size: 9pt; }
+.day-counter { font-family: var(--font-mono); font-size: 7pt; font-weight: 500; color: var(--ink-quiet); letter-spacing: 0.08em; }
+.day-counter .big { font-size: 10pt; color: var(--ink); font-weight: 600; }
+.day-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+.dow-row { display: flex; gap: 1.2mm; margin-top: 0.5mm; }
+.dow-row span { width: 4.4mm; height: 4.4mm; border-radius: 50%; border: 0.6px solid var(--ink-whisper); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 5pt; font-weight: 500; color: var(--ink-quiet); }
+
+/* ─── Day Type + Permission — single row to save space ─── */
+.dt-perm { display: grid; grid-template-columns: auto 1fr; gap: var(--s3); align-items: stretch; flex-shrink: 0; }
+.day-type { display: flex; align-items: center; gap: var(--s3); padding: 1.5mm 3mm; border: 0.5px solid var(--ink-whisper); border-radius: 1mm; background: rgba(42,40,36,0.015); }
+.day-type .k { font-family: var(--font-mono); font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-quiet); }
+.day-type label { display: flex; align-items: center; gap: 1.2mm; font-family: var(--font-sans); font-size: 7.5pt; font-weight: 500; color: var(--ink-soft); cursor: default; }
+.day-type label .r { width: 3.2mm; height: 3.2mm; border-radius: 50%; border: 0.9px solid var(--ink-quiet); }
+.permission { background: var(--sage-tint); border-left: 2px solid var(--sage); padding: 2mm var(--s3); font-family: var(--font-serif); font-style: italic; font-size: 8pt; color: var(--sage-ink); font-variation-settings: "opsz" 14, "SOFT" 100; display: flex; align-items: center; }
+.permission .glyph { color: var(--sage); font-style: normal; margin: 0 1.5mm; opacity: 0.6; }
+
+/* ─── 2-Second Pause (Shreya) — sage card · 3-row matrix ─── */
+.pause { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 3mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.pause::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.pause-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1mm; }
+.pause-head .icon { color: var(--sage-ink); display: inline-flex; }
+.pause-head .meta { flex: 1; }
+.pause-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage); }
+.pause-head .title { font-family: var(--font-serif); font-size: 11pt; font-weight: 500; color: var(--sage-ink); line-height: 1; margin-top: 0.5mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.pause-head .attr { font-family: var(--font-mono); font-size: 5pt; color: var(--sage-ink); opacity: 0.7; letter-spacing: 0.1em; text-align: right; line-height: 1.3; }
+.pause-sub { font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--sage-ink); opacity: 0.8; margin-bottom: 2mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.pause-grid { display: grid; grid-template-columns: 5mm 20mm 1fr; gap: 1mm 3mm; align-items: center; }
+.pause-grid .h { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage-ink); opacity: 0.75; padding-bottom: 0.5mm; border-bottom: 0.4px solid var(--sage-edge); }
+.pause-grid .n { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--sage); text-align: center; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.pause-grid .tm { border-bottom: 0.8px solid var(--sage-edge); height: 5mm; font-family: var(--font-mono); font-size: 7pt; color: var(--ink); }
+.pause-grid .bw { display: flex; gap: 2mm; align-items: center; }
+.pause-grid .bw .chips { display: flex; gap: 0.8mm; }
+.pause-grid .bw .chips span { width: 4mm; height: 4mm; border: 0.6px solid var(--sage-edge); border-radius: 1mm; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.5pt; font-weight: 600; color: var(--sage-ink); opacity: 0.85; background: rgba(249,245,236,0.4); }
+.pause-grid .bw .why { flex: 1; border-bottom: 0.8px dotted var(--sage-edge); height: 5mm; min-width: 40mm; }
+.pause-legend { font-family: var(--font-mono); font-size: 4.8pt; color: var(--sage-ink); opacity: 0.6; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 1.5mm; padding-top: 1mm; border-top: 0.3px dotted var(--sage-edge); }
+
+/* ─── Frog (B-03) — sage hero ─── */
+.frog { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 3mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.frog::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.frog-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.5mm; }
+.frog-head .icon { color: var(--sage-ink); display: inline-flex; }
+.frog-head .meta { flex: 1; }
+.frog-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage); }
+.frog-head .title { font-family: var(--font-serif); font-size: 13pt; font-weight: 500; color: var(--sage-ink); line-height: 1; margin-top: 0.5mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.frog-head .constraint { font-family: var(--font-mono); font-size: 5.5pt; color: var(--sage-ink); opacity: 0.7; text-align: right; line-height: 1.3; letter-spacing: 0.02em; }
+.frog-line { border: none; border-bottom: 1.5px solid var(--sage); height: 7mm; margin-bottom: 1.5mm; }
+.frog-tail { display: flex; justify-content: space-between; align-items: center; }
+.frog-tail .hint { font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--sage-ink); opacity: 0.85; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.frog-tail .pomos { display: flex; align-items: center; gap: 1.8mm; }
+.frog-tail .pomos .lbl { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage-ink); opacity: 0.7; margin-right: 1mm; }
+.frog-tail .pomos .d { width: 3.6mm; height: 3.6mm; border-radius: 50%; border: 1.2px solid var(--sage); flex-shrink: 0; }
+
+/* ─── Top 3 (B-04) — compressed rows ─── */
+.top3 { flex-shrink: 0; }
+.top3-head { display: flex; align-items: baseline; gap: var(--s2); margin-bottom: 0.5mm; padding-bottom: 1mm; border-bottom: 0.4px solid var(--ink-whisper); }
+.top3-head .num { font-family: var(--font-serif); font-size: 20pt; font-weight: 400; line-height: 1; color: var(--ink); letter-spacing: -0.03em; font-variation-settings: "opsz" 144, "SOFT" 100; }
+.top3-head .label { font-family: var(--font-sans); font-size: 10.5pt; font-weight: 600; color: var(--ink); margin-bottom: 0.5mm; }
+.top3-head .rule { margin-left: auto; font-family: var(--font-mono); font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-quiet); margin-bottom: 1mm; }
+.task-row { display: grid; grid-template-columns: 5mm 5mm 1fr auto auto auto; align-items: center; gap: 2mm; padding: 1.5mm 0; border-bottom: 0.3px dotted var(--ink-whisper); min-height: 8.5mm; }
+.task-row:last-child { border-bottom: none; }
+.task-check { width: 4mm; height: 4mm; border: 1.2px solid var(--ink); border-radius: 1mm; flex-shrink: 0; }
+.task-num { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--ink-quiet); text-align: center; font-variation-settings: "opsz" 72; }
+.task-line { border: none; border-bottom: 1.5px solid var(--ink-whisper); height: 6mm; min-width: 0; }
+.task-band { display: flex; gap: 0.6mm; }
+.task-band span { width: 5mm; height: 4mm; border: 0.6px solid var(--ink-whisper); border-radius: 1mm; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.8pt; font-weight: 600; color: var(--ink-quiet); letter-spacing: 0.04em; }
+.task-est { display: flex; align-items: center; gap: 0.8mm; font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-quiet); }
+.task-est .el { text-transform: uppercase; letter-spacing: 0.1em; }
+.task-est .ef { width: 7mm; height: 3.2mm; border-bottom: 0.6px solid var(--ink-whisper); }
+.task-est .eu { font-size: 5pt; color: var(--ink-whisper); }
+.task-pomo { display: flex; gap: 0.8mm; }
+.task-pomo span { width: 2.6mm; height: 2.6mm; border-radius: 50%; border: 0.9px solid var(--ink-whisper); }
+
+/* ─── Rx Prescription card (B-05 expanded) — Dr Pallavi Joshi's 8 meds ─── */
+.rx { border: 0.8px solid var(--ink); border-radius: 3.5mm; padding: 2.5mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; background: rgba(249,245,236,0.5); }
+.rx-head { display: flex; align-items: flex-start; gap: 2.5mm; padding-bottom: 1.5mm; border-bottom: 0.4px dashed var(--ink-whisper); margin-bottom: 1.8mm; }
+.rx-head .rx-mark { font-family: var(--font-serif); font-size: 20pt; color: var(--clay); font-weight: 400; font-style: italic; line-height: 0.85; font-variation-settings: "opsz" 144, "SOFT" 60; }
+.rx-head .dr { flex: 1; }
+.rx-head .dr .n { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--ink); font-variation-settings: "opsz" 40, "SOFT" 60; letter-spacing: -0.005em; }
+.rx-head .dr .n em { font-style: italic; color: var(--clay); }
+.rx-head .dr .cred { font-family: var(--font-mono); font-size: 4.5pt; color: var(--ink-quiet); text-transform: uppercase; letter-spacing: 0.18em; margin-top: 0.4mm; }
+.rx-head .dr .reg { font-family: var(--font-mono); font-size: 5pt; color: var(--ink-quiet); letter-spacing: 0.1em; margin-top: 0.8mm; }
+.rx-head .meta { text-align: right; font-family: var(--font-mono); font-size: 5pt; color: var(--ink-quiet); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.5; }
+.rx-head .meta b { display: block; color: var(--ink); font-size: 6pt; font-weight: 600; letter-spacing: 0.06em; }
+.rx-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2mm 3mm; }
+.rx-item { display: flex; align-items: center; gap: 1.2mm; font-family: var(--font-sans); font-size: 7pt; color: var(--ink-soft); white-space: nowrap; }
+.rx-item .b { width: 3mm; height: 3mm; border: 1px solid var(--ink); border-radius: 0.8mm; flex-shrink: 0; background: var(--paper); }
+.rx-item .nm { font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+.rx-item .ds { font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-quiet); letter-spacing: 0.05em; margin-left: 0.3mm; }
+
+/* ─── Baselines row (Sleep · Water · Mindful · First thought + One small thing) ─── */
+.baselines { display: grid; grid-template-columns: 1fr 1fr 1fr 1.2fr; gap: var(--s3); padding: 2.5mm 0; border-top: 0.5px solid var(--ink-whisper); border-bottom: 0.5px solid var(--ink-whisper); flex-shrink: 0; }
+.bl-cell { display: flex; flex-direction: column; gap: 1.2mm; }
+.bl-cell .head { display: flex; align-items: center; gap: 1.5mm; color: var(--ink); }
+.bl-cell .head .icon { color: var(--ink); display: inline-flex; }
+.bl-cell .head .label { font-family: var(--font-sans); font-size: 7.5pt; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+.bl-cell .head .sub { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-quiet); margin-left: auto; }
+.bl-cell .content { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5mm; }
+.bl-cell .hrs-field { border-bottom: 0.8px solid var(--ink); width: 7mm; height: 3.8mm; font-family: var(--font-mono); font-size: 7.5pt; display: inline-block; }
+.bl-cell .quality { display: flex; gap: 0.8mm; }
+.bl-cell .quality span { width: 3mm; height: 3mm; border-radius: 50%; border: 0.8px solid var(--ink-quiet); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4pt; color: var(--ink-quiet); }
+.bl-cell .drops { display: flex; gap: 0.8mm; flex-wrap: wrap; }
+.bl-cell .drops span { width: 3mm; height: 3mm; border-radius: 50%; border: 0.8px solid var(--ink-quiet); }
+.bl-cell .ct-box { display: flex; align-items: baseline; gap: 1mm; }
+.bl-cell .ct-box .cf { width: 9mm; height: 4mm; border-bottom: 0.8px solid var(--ink); font-family: var(--font-mono); font-size: 8pt; display: inline-block; text-align: center; }
+.bl-cell .ct-box .cs { font-family: var(--font-mono); font-size: 5pt; color: var(--ink-whisper); letter-spacing: 0.08em; }
+.bl-cell .line-input { border: none; border-bottom: 1px solid var(--ink-whisper); height: 7mm; flex: 1; min-width: 30mm; display: block; }
+/* Inline-style refactor (Phase M / audit item #7) — these three utilities
+   replace the per-element `style="…"` attributes that used to live on the
+   baseline cells. One class = one typographic role, reusable across cells. */
+.bl-cell .unit { font-family: var(--font-mono); font-size: 5pt; color: var(--ink-quiet); text-transform: uppercase; letter-spacing: 0.1em; }
+.bl-cell .caption { font-family: var(--font-mono); font-size: 4.8pt; color: var(--ink-quiet); text-transform: uppercase; letter-spacing: 0.12em; }
+.bl-cell .caption + .line-input + .caption { margin-top: 0.5mm; }
+.bl-cell .whisper { font-family: var(--font-serif); font-size: 6.5pt; font-style: italic; color: var(--ink-quiet); margin-left: auto; }
+.bl-cell .content--stack { flex-direction: column; align-items: stretch; gap: 1.5mm; }
+
+/* ─── Movement (B-06) — compact ─── */
+.movement { display: flex; align-items: center; gap: var(--s4); flex-shrink: 0; padding: 0.5mm 0; }
+.movement .head { display: flex; align-items: center; gap: 1.5mm; color: var(--ink); }
+.movement .head .icon { color: var(--ink); display: inline-flex; }
+.movement .head .label { font-family: var(--font-sans); font-size: 8pt; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+.move-opts { display: flex; gap: var(--s4); align-items: center; }
+.move-opts label { display: flex; align-items: center; gap: 1.5mm; }
+.move-opts label .c { width: 4mm; height: 4mm; border-radius: 50%; border: 1px solid var(--sage); }
+.move-opts label .lbl { font-family: var(--font-sans); font-size: 8pt; font-weight: 500; color: var(--ink-soft); }
+.move-dur { margin-left: auto; display: flex; align-items: baseline; gap: 1.5mm; }
+.move-dur .dl { font-family: var(--font-mono); font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-quiet); }
+.move-dur .df { width: 14mm; height: 4mm; border-bottom: 0.6px solid var(--ink-whisper); display: inline-block; }
+.move-dur .dl--whisper { color: var(--ink-whisper); }
+
+/* ─── Free Write bottom canvas ─── */
+.free-canvas {
+  flex: 1;
+  min-height: 14mm;
+  position: relative;
+  background-image: radial-gradient(circle, rgba(42,40,36,0.11) 0.33mm, transparent 0.33mm);
+  background-size: 5mm 5mm;
+  background-position: 0 3mm;
+  border-top: 0.4px dotted var(--ink-whisper);
+  padding: 2mm 0 1mm;
+}
+.free-canvas .fc-label {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-quiet);
+  background: var(--paper);
+  padding: 0 2mm 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Footer (B-18) ─── */
+.footer { margin-top: auto; padding-top: var(--s2); border-top: 0.4px solid var(--ink-whisper); display: flex; justify-content: space-between; align-items: baseline; flex-shrink: 0; }
+.footer .signoff { font-family: var(--font-serif); font-size: 8.5pt; font-style: italic; color: var(--ink-quiet); font-variation-settings: "opsz" 14, "SOFT" 100; }
+.footer .pg { font-family: var(--font-mono); font-size: 6.5pt; font-weight: 500; color: var(--ink-quiet); letter-spacing: 0.14em; text-transform: uppercase; }
+.footer .pg .cur { color: var(--ink); font-weight: 600; }
+.footer .pg .sep { color: var(--ink-whisper); margin: 0 1mm; }
+/* ─── Squircle clipping + hint of 3D + nowrap pomos (patch) ─── */
+.pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav, .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri {
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.frog-tail { flex-wrap: nowrap; gap: var(--s3); }
+.frog-tail .hint { flex: 1 1 0; min-width: 0; }
+.frog-tail .pomos { flex-wrap: nowrap; flex-shrink: 0; }
+.frog-tail .pomos .lbl { flex-shrink: 0; padding-right: 2.5mm; }
+.frog-tail .pomos .d { flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<main class="page" data-template="adhd-v5-today" role="document">
+
+  <!-- 1 · Masthead -->
+  <header class="masthead">
+    <div>
+      <div class="kicker">The Daily · Morning Edition</div>
+      <h1>Today</h1>
+      <div class="subtitle">Commit small. Start with the frog.</div>
+    </div>
+    <div class="mh-r">
+      <div class="date-row"><span class="label">Date</span><span class="field"></span></div>
+      <div class="day-counter"><span>day&nbsp;</span><span class="big">___</span><span class="slash">/</span><span>365</span></div>
+      <div class="dow-row" aria-label="Day of week"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+    </div>
+  </header>
+
+  <!-- 2 · Day type + permission (shared row to save vertical space) -->
+  <div class="dt-perm">
+    <section class="day-type" aria-label="Day type">
+      <span class="k">Day type</span>
+      <label><span class="r"></span>Weekday</label>
+      <label><span class="r"></span>Therapy</label>
+      <label><span class="r"></span>Weekend</label>
+    </section>
+    <aside class="permission">
+      <span class="glyph">✳</span>It's okay to leave parts blank. Showing up is the win.<span class="glyph">✳</span>
+    </aside>
+  </div>
+
+  <!-- 3 · 2-Second Pause · Shreya's anchor — 3-row matrix -->
+  <section class="pause" aria-labelledby="pause-title">
+    <div class="pause-head">
+      <span class="icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <polyline points="12,7 12,12 15,14"/>
+        </svg>
+      </span>
+      <div class="meta">
+        <div class="kicker">Shreya · anchor practice</div>
+        <h2 class="title" id="pause-title">2-Second Pause</h2>
+      </div>
+      <div class="attr">before phone<br>before cigarette</div>
+    </div>
+    <div class="pause-sub">Pause two seconds. Notice body. Ask "why am I doing what I'm doing?" Don't fix it. Just notice.</div>
+    <div class="pause-grid">
+      <div class="h">#</div><div class="h">Time</div><div class="h">Body · Why</div>
+      <div class="n">1</div>
+      <div class="tm"></div>
+      <div class="bw"><div class="chips"><span>H</span><span>L</span><span>T</span><span>N</span><span>R</span><span>C</span></div><div class="why"></div></div>
+      <div class="n">2</div>
+      <div class="tm"></div>
+      <div class="bw"><div class="chips"><span>H</span><span>L</span><span>T</span><span>N</span><span>R</span><span>C</span></div><div class="why"></div></div>
+      <div class="n">3</div>
+      <div class="tm"></div>
+      <div class="bw"><div class="chips"><span>H</span><span>L</span><span>T</span><span>N</span><span>R</span><span>C</span></div><div class="why"></div></div>
+    </div>
+    <div class="pause-legend">H heavy · L light · T tense · N numb · R restless · C calm</div>
+  </section>
+
+  <!-- 4 · The Frog -->
+  <section class="frog" aria-labelledby="frog-title">
+    <div class="frog-head">
+      <span class="icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="14" rx="9" ry="7"/>
+          <circle cx="7" cy="8.5" r="3"/><circle cx="17" cy="8.5" r="3"/>
+          <circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="8" r="1" fill="currentColor"/>
+          <path d="M9 16.5c.8.8 2 1.2 3 1.2s2.2-.4 3-1.2"/>
+        </svg>
+      </span>
+      <div class="meta">
+        <div class="kicker">The Frog</div>
+        <h2 class="title" id="frog-title">My #1 most important task</h2>
+      </div>
+      <div class="constraint">concrete<br>≤ 25 min<br>one only</div>
+    </div>
+    <div class="frog-line"></div>
+    <div class="frog-tail">
+      <span class="hint">Do this FIRST. Everything else is bonus.</span>
+      <div class="pomos"><span class="lbl">pomos</span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+    </div>
+  </section>
+
+  <!-- 5 · Top 3 -->
+  <section class="top3" aria-labelledby="top3-title">
+    <header class="top3-head">
+      <span class="num">3</span>
+      <span class="label" id="top3-title">Today's Priorities</span>
+      <span class="rule">Rule of 3 · no more</span>
+    </header>
+    <div class="task-row">
+      <span class="task-check"></span><span class="task-num">1</span><span class="task-line"></span>
+      <div class="task-band"><span>AM</span><span>MID</span><span>EVE</span></div>
+      <div class="task-est"><span class="el">est</span><span class="ef"></span><span class="eu">min</span></div>
+      <div class="task-pomo"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="task-row">
+      <span class="task-check"></span><span class="task-num">2</span><span class="task-line"></span>
+      <div class="task-band"><span>AM</span><span>MID</span><span>EVE</span></div>
+      <div class="task-est"><span class="el">est</span><span class="ef"></span><span class="eu">min</span></div>
+      <div class="task-pomo"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="task-row">
+      <span class="task-check"></span><span class="task-num">3</span><span class="task-line"></span>
+      <div class="task-band"><span>AM</span><span>MID</span><span>EVE</span></div>
+      <div class="task-est"><span class="el">est</span><span class="ef"></span><span class="eu">min</span></div>
+      <div class="task-pomo"><span></span><span></span><span></span><span></span></div>
+    </div>
+  </section>
+
+  <!-- 6 · Rx card — Dr Pallavi Joshi's 8 meds (13-04-2026) -->
+  <section class="rx" aria-label="Prescription">
+    <div class="rx-head">
+      <span class="rx-mark">℞</span>
+      <div class="dr">
+        <div class="n">Dr. Pallavi A. <em>Joshi</em></div>
+        <div class="cred">Consultant Psychiatrist · MBBS DPM MD FIPS</div>
+        <div class="reg">Reg № 96823 · F/U 40 days · Clonotril 0.25 SOS</div>
+      </div>
+      <div class="meta">
+        <b>Rx · 13·04·2026</b>
+        F/U 40 days
+      </div>
+    </div>
+    <div class="rx-grid">
+      <div class="rx-item"><span class="b"></span><span class="nm">Veniz-ER</span><span class="ds">75mg · 1-0-1</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">Dexbutrin</span><span class="ds">45/105 · 1-0-1</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">Inspiral SR</span><span class="ds">10mg · 2-0-0</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">Inspiral</span><span class="ds">5mg · 0-1-0</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">Etizolam</span><span class="ds">0.5mg · 1-0-0</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">Amlokind</span><span class="ds">BP</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">Mounjaro</span><span class="ds">GLP-1</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">Clonotril</span><span class="ds">0.25 · SOS</span></div>
+    </div>
+  </section>
+
+  <!-- 7 · Baselines — Sleep · Water · Mindful · First thought / One small thing -->
+  <section class="baselines" aria-label="Daily baselines">
+
+    <div class="bl-cell">
+      <div class="head">
+        <span class="icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 7.5a5 5 0 1 1-6-6 4 4 0 0 0 6 6z"/></svg></span>
+        <span class="label">Sleep</span>
+      </div>
+      <div class="content">
+        <span class="hrs-field"></span>
+        <span class="unit">hrs</span>
+        <span class="unit">·Q</span>
+        <div class="quality"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      </div>
+    </div>
+
+    <div class="bl-cell">
+      <div class="head">
+        <span class="icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 1.5S3 5.5 3 8.5a4 4 0 0 0 8 0c0-3-4-7-4-7z"/></svg></span>
+        <span class="label">Paani</span>
+        <span class="sub">goal 10</span>
+      </div>
+      <div class="content">
+        <div class="drops"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <div class="bl-cell">
+      <div class="head">
+        <span class="icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span>
+        <span class="label">Meditation</span>
+        <span class="sub">mins</span>
+      </div>
+      <div class="content">
+        <div class="ct-box">
+          <span class="cf"></span>
+          <span class="cs">min</span>
+        </div>
+        <span class="whisper">just sit · breathe · notice</span>
+      </div>
+    </div>
+
+    <div class="bl-cell">
+      <div class="head">
+        <span class="label">First thought today</span>
+      </div>
+      <div class="content content--stack">
+        <span class="caption">the thing that arrived before you opened your eyes</span>
+        <span class="line-input"></span>
+        <span class="caption">one stupidly small thing I'll do today</span>
+        <span class="line-input"></span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 8 · Movement -->
+  <section class="movement" aria-label="Movement">
+    <div class="head">
+      <span class="icon" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="17" cy="4" r="2"/>
+          <path d="M15.59 13.51l2.41 4.49h3m-9-8l-2-4-7 3.5 2 2.5"/>
+          <path d="M3.5 21.5l4-7 4.5 1.5 3.5-5"/>
+        </svg>
+      </span>
+      <span class="label">Movement</span>
+    </div>
+    <div class="move-opts">
+      <label><span class="c"></span><span class="lbl">Gym</span></label>
+      <label><span class="c"></span><span class="lbl">Walk</span></label>
+      <label><span class="c"></span><span class="lbl">Swim</span></label>
+      <label><span class="c"></span><span class="lbl">20-min bahar</span></label>
+    </div>
+    <div class="move-dur">
+      <span class="dl">duration</span>
+      <span class="df"></span>
+      <span class="dl dl--whisper">min</span>
+    </div>
+  </section>
+
+  <!-- 9 · Free Write dot-grid canvas — fills remaining bottom space -->
+  <section class="free-canvas" aria-label="Free write">
+    <span class="fc-label">Free Write · say anything, or leave it blank</span>
+  </section>
+
+  <!-- 10 · Footer -->
+  <footer class="footer">
+    <span class="signoff">Start with the frog. Pause before the phone.</span>
+    <span class="pg"><span class="cur">Today</span><span class="sep">·</span><span>1 / 4</span></span>
+  </footer>
+
+</main>
+
+</body>
+</html>
