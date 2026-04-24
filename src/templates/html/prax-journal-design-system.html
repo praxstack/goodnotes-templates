@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL · DESIGN SYSTEM REFERENCE PAGE
+   Renders every token / primitive / block from the v4 Warm Analog Editorial
+   direction at 1:1 A4 scale. Source of truth: prax-journal-design.md
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* geometry */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 13mm;
+
+  /* paper + ink */
+  --paper:        #F9F5EC;
+  --paper-dark:   #F0EAD9;
+  --ink:          #2A2824;
+  --ink-soft:     #4A453D;
+  --ink-quiet:    #7D7668;
+  --ink-whisper:  #B5AD9F;
+
+  /* sage */
+  --sage:        #7B9476;
+  --sage-ink:    #4E6249;
+  --sage-tint:   rgba(123, 148, 118, 0.08);
+  --sage-edge:   rgba(123, 148, 118, 0.22);
+
+  /* clay */
+  --clay:        #B85A44;
+  --clay-ink:    #8A3E2E;
+  --clay-tint:   rgba(184, 90, 68, 0.07);
+  --clay-edge:   rgba(184, 90, 68, 0.25);
+
+  /* amber */
+  --amber:       #C9884A;
+  --amber-ink:   #8F5D28;
+  --amber-tint:  rgba(201, 136, 74, 0.08);
+  --amber-edge:  rgba(201, 136, 74, 0.22);
+
+  /* lavender */
+  --lavender:      #B6A9CB;
+  --lavender-ink:  #6B5D86;
+  --lavender-tint: rgba(182, 169, 203, 0.10);
+  --lavender-edge: rgba(182, 169, 203, 0.28);
+
+  /* typography */
+  --font-serif: 'Fraunces', 'Baskerville', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  /* spacing */
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 9mm; --s6: 13mm;
+
+  --dot: var(--ink-whisper);
+
+  --shadow-page:  0 1px 2px rgba(42, 40, 36, 0.04),
+                  0 8px 32px rgba(42, 40, 36, 0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+  width: var(--page-w);
+  min-height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  box-shadow: var(--shadow-page);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-after: always; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── tiny primitives used inside the showcase itself ─── */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+}
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  padding-bottom: 1.5mm;
+  border-bottom: 0.4px solid var(--ink-whisper);
+  margin-bottom: var(--s2);
+}
+.section-head .num {
+  font-family: var(--font-serif);
+  font-size: 22pt;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.section-head .title {
+  font-family: var(--font-serif);
+  font-size: 14pt;
+  font-weight: 500;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+.section-head .caption {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+}
+.lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  max-width: 160mm;
+  margin-bottom: var(--s3);
+}
+.rule-hair { border: none; border-top: 0.4px solid var(--ink-whisper); }
+
+/* ═══════════════════════════════════════════════════════
+   COVER MASTHEAD (same pattern as every journal page)
+   ═══════════════════════════════════════════════════════ */
+.cover-masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--s2);
+  border-bottom: 0.6px solid var(--ink);
+}
+.cover-masthead .left .kicker-xl {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-quiet);
+  margin-bottom: 2mm;
+}
+.cover-masthead .left .title-xl {
+  font-family: var(--font-serif);
+  font-size: 38pt;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.cover-masthead .left .subtitle-xl {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 10pt;
+  color: var(--ink-quiet);
+  margin-top: 2mm;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.cover-masthead .right {
+  text-align: right;
+  display: flex; flex-direction: column; gap: 1.5mm;
+  align-items: flex-end;
+}
+.cover-masthead .right .ver {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+}
+.cover-masthead .right .ver .sep { color: var(--ink-whisper); margin: 0 1mm; }
+.cover-masthead .right .built {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 7.5pt;
+  color: var(--ink-quiet);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+
+/* ═══════════════════════════════════════════════════════
+   1 · COLOR PALETTE — swatches
+   ═══════════════════════════════════════════════════════ */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--s3);
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+.swatch .chip {
+  height: 24mm;
+  border-radius: 2px;
+  border: 0.6px solid var(--ink-whisper);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+.swatch .name {
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.swatch .hex {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  color: var(--ink-quiet);
+  letter-spacing: 0.06em;
+}
+.swatch .role {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 6.5pt;
+  color: var(--ink-quiet);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  line-height: 1.3;
+}
+
+/* Swatch families subheads */
+.fam-head {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+  margin-top: var(--s3);
+  padding-bottom: 1mm;
+  border-bottom: 0.3px dotted var(--ink-whisper);
+}
+.fam-head:first-child { margin-top: 0; }
+
+/* ═══════════════════════════════════════════════════════
+   2 · TYPOGRAPHY specimen
+   ═══════════════════════════════════════════════════════ */
+.type-specimen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s4);
+  padding: var(--s3) 0;
+  border-top: 0.4px solid var(--ink-whisper);
+  border-bottom: 0.4px solid var(--ink-whisper);
+}
+.type-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+.type-block .tk-label {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+}
+.type-block .sample-serif-144 {
+  font-family: var(--font-serif);
+  font-size: 32pt;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.type-block .sample-serif-72 {
+  font-family: var(--font-serif);
+  font-size: 14pt;
+  font-weight: 500;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+.type-block .sample-serif-it {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.type-block .sample-sans {
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.type-block .sample-kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+}
+.type-block .sample-mono-num {
+  font-family: var(--font-mono);
+  font-size: 10pt;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+
+/* type-scale table */
+.scale-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  color: var(--ink-soft);
+}
+.scale-table th,
+.scale-table td {
+  padding: 1.2mm 2mm;
+  border-bottom: 0.3px dotted var(--ink-whisper);
+  text-align: left;
+  vertical-align: baseline;
+}
+.scale-table th {
+  font-weight: 600;
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  border-bottom: 0.6px solid var(--ink);
+}
+.scale-table td.preview {
+  font-family: var(--font-serif);
+  color: var(--ink);
+}
+.scale-table td .s-xl { font-size: 22pt; font-variation-settings: "opsz" 144, "SOFT" 100; font-weight: 400; letter-spacing: -0.02em; }
+.scale-table td .s-md { font-size: 12pt; font-variation-settings: "opsz" 72, "SOFT" 60; font-weight: 500; }
+.scale-table td .s-it { font-size: 9pt;  font-style: italic; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.scale-table td .s-sans { font-family: var(--font-sans); font-size: 8.5pt; color: var(--ink-soft); }
+.scale-table td .s-mono-kick { font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-quiet); }
+.scale-table td .s-mono { font-family: var(--font-mono); font-size: 8pt; color: var(--ink); letter-spacing: 0.05em; }
+
+/* ═══════════════════════════════════════════════════════
+   3 · SPACING + GEOMETRY
+   ═══════════════════════════════════════════════════════ */
+.space-row {
+  display: grid;
+  grid-template-columns: 18mm 1fr 24mm;
+  gap: var(--s3);
+  align-items: center;
+  padding: 1.5mm 0;
+  border-bottom: 0.3px dotted var(--ink-whisper);
+}
+.space-row .token {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.space-row .bar {
+  height: 3mm;
+  background: var(--sage);
+  border-radius: 1px;
+  opacity: 0.55;
+}
+.space-row .use {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 7.5pt;
+  color: var(--ink-quiet);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4 · PRIMITIVES row (lines, checkboxes, radios, dots)
+   ═══════════════════════════════════════════════════════ */
+.prim-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s4);
+}
+.prim-card {
+  display: flex; flex-direction: column; gap: 2.5mm;
+  padding: var(--s3);
+  background: rgba(42, 40, 36, 0.02);
+  border: 0.4px solid var(--ink-whisper);
+  border-radius: 2px;
+}
+.prim-card .p-title {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+.prim-card .p-kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+}
+.prim-card .p-row {
+  display: flex; align-items: center; gap: 2mm;
+  padding: 1mm 0;
+}
+.prim-card .p-row .lbl {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  color: var(--ink-quiet);
+  letter-spacing: 0.1em;
+  min-width: 28mm;
+  text-transform: uppercase;
+}
+
+/* exact primitives from v4 */
+.task-check-demo { width: 4.2mm; height: 4.2mm; border: 1.2px solid var(--ink); border-radius: 1px; flex-shrink: 0; }
+.sage-check      { width: 4.2mm; height: 4.2mm; border: 1.2px solid var(--sage); border-radius: 1px; flex-shrink: 0; }
+.radio-ink       { width: 3mm; height: 3mm; border-radius: 50%; border: 0.9px solid var(--ink-quiet); flex-shrink: 0; }
+.radio-sage      { width: 4.2mm; height: 4.2mm; border-radius: 50%; border: 1px solid var(--sage); flex-shrink: 0; }
+.dow-demo        { width: 4.4mm; height: 4.4mm; border-radius: 50%; border: 0.6px solid var(--ink-whisper); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 5pt; color: var(--ink-quiet); }
+.qdot-demo       { width: 3.2mm; height: 3.2mm; border-radius: 50%; border: 0.9px solid var(--ink-quiet); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.5pt; color: var(--ink-quiet); }
+.water-demo      { width: 3.4mm; height: 3.4mm; border-radius: 50%; border: 0.9px solid var(--ink-quiet); }
+
+.line-demo { flex: 1; border-bottom: 1.5px solid var(--ink-whisper); height: 6mm; min-width: 30mm; }
+.line-dot  { flex: 1; border-bottom: 1.2px dotted var(--dot); height: 6mm; min-width: 30mm; }
+.line-sage { flex: 1; border-bottom: 1.5px solid var(--sage); height: 6mm; min-width: 30mm; }
+.line-amber{ flex: 1; border-bottom: 1.2px dotted var(--amber-edge); height: 6mm; min-width: 30mm; }
+
+/* ═══════════════════════════════════════════════════════
+   5 · CARD ARCHETYPES — mini previews of v4 blocks
+   ═══════════════════════════════════════════════════════ */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s4);
+}
+
+/* shared card pattern */
+.demo-card {
+  border-radius: 2px;
+  padding: var(--s3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+.demo-card::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 2px;
+}
+.demo-card .c-head {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+}
+.demo-card .c-head .c-kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+.demo-card .c-head .c-title {
+  font-family: var(--font-serif);
+  font-size: 11pt;
+  font-weight: 500;
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+.demo-card .c-head .c-method {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  letter-spacing: 0.12em;
+  text-align: right;
+  line-height: 1.2;
+  opacity: 0.7;
+}
+.demo-card .c-explainer {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 7pt;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  opacity: 0.8;
+}
+.demo-card .c-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+  margin-top: 1mm;
+}
+
+/* sage card */
+.card-sage { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); }
+.card-sage::before { background: var(--sage); }
+.card-sage .c-kicker, .card-sage .c-head svg { color: var(--sage); }
+.card-sage .c-title, .card-sage .c-method, .card-sage .c-explainer { color: var(--sage-ink); }
+
+/* amber card */
+.card-amber { background: var(--amber-tint); border: 0.8px solid var(--amber-edge); }
+.card-amber::before { background: var(--amber); }
+.card-amber .c-kicker, .card-amber .c-head svg { color: var(--amber); }
+.card-amber .c-title, .card-amber .c-method, .card-amber .c-explainer { color: var(--amber-ink); }
+
+/* clay card */
+.card-clay { background: var(--clay-tint); border: 0.8px solid var(--clay-edge); }
+.card-clay::before { background: var(--clay); }
+.card-clay .c-kicker, .card-clay .c-head svg { color: var(--clay); }
+.card-clay .c-title, .card-clay .c-method, .card-clay .c-explainer { color: var(--clay-ink); }
+
+/* lavender card */
+.card-lavender { background: var(--lavender-tint); border: 0.8px solid var(--lavender-edge); }
+.card-lavender::before { background: var(--lavender); }
+.card-lavender .c-kicker, .card-lavender .c-head svg { color: var(--lavender-ink); }
+.card-lavender .c-title, .card-lavender .c-method, .card-lavender .c-explainer { color: var(--lavender-ink); }
+
+/* in-card small field line */
+.c-body .c-line {
+  border: none;
+  border-bottom: 1px dotted var(--ink-whisper);
+  height: 5mm;
+}
+.card-sage .c-body .c-line { border-bottom-color: var(--sage-edge); }
+.card-amber .c-body .c-line { border-bottom-color: var(--amber-edge); }
+.card-clay .c-body .c-line { border-bottom-color: var(--clay-edge); }
+.card-lavender .c-body .c-line { border-bottom-color: var(--lavender-edge); }
+
+/* ═══════════════════════════════════════════════════════
+   6 · PERMISSION banner
+   ═══════════════════════════════════════════════════════ */
+.permission-demo {
+  background: var(--sage-tint);
+  border-left: 2px solid var(--sage);
+  padding: 2.5mm var(--s3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 8pt;
+  color: var(--sage-ink);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.permission-demo .glyph {
+  color: var(--sage); font-style: normal; margin: 0 1.5mm; opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7 · ICON LIBRARY
+   ═══════════════════════════════════════════════════════ */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--s3);
+}
+.icon-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5mm;
+  padding: var(--s2);
+  background: rgba(42, 40, 36, 0.02);
+  border: 0.3px solid var(--ink-whisper);
+  border-radius: 2px;
+}
+.icon-tile svg { display: block; color: var(--ink); }
+.icon-tile .lbl {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-quiet);
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   8 · VOICE + COPY table
+   ═══════════════════════════════════════════════════════ */
+.voice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.voice-table th, .voice-table td {
+  padding: 2mm 2.5mm;
+  text-align: left;
+  vertical-align: top;
+  font-size: 7.5pt;
+}
+.voice-table th {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  border-bottom: 0.6px solid var(--ink);
+  font-weight: 600;
+}
+.voice-table td {
+  border-bottom: 0.3px dotted var(--ink-whisper);
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.voice-table td.ctx {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink);
+}
+.voice-table td.yes { color: var(--sage-ink); }
+.voice-table td.no  { color: var(--clay-ink); text-decoration: line-through; text-decoration-color: var(--clay-edge); }
+
+/* ═══════════════════════════════════════════════════════
+   9 · COMPONENT LIBRARY TABLE (B-01 … B-18)
+   ═══════════════════════════════════════════════════════ */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  color: var(--ink-soft);
+}
+.comp-table th, .comp-table td {
+  padding: 1.5mm 2mm;
+  border-bottom: 0.3px dotted var(--ink-whisper);
+  text-align: left;
+  vertical-align: top;
+}
+.comp-table th {
+  font-weight: 600;
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  border-bottom: 0.6px solid var(--ink);
+}
+.comp-table td.block-name {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--ink);
+  font-size: 8pt;
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+.chip-color {
+  display: inline-block;
+  padding: 0.4mm 1.8mm;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 1px;
+}
+.chip-sage     { background: var(--sage-tint);     color: var(--sage-ink);     border: 0.4px solid var(--sage-edge); }
+.chip-clay     { background: var(--clay-tint);     color: var(--clay-ink);     border: 0.4px solid var(--clay-edge); }
+.chip-amber    { background: var(--amber-tint);    color: var(--amber-ink);    border: 0.4px solid var(--amber-edge); }
+.chip-lavender { background: var(--lavender-tint); color: var(--lavender-ink); border: 0.4px solid var(--lavender-edge); }
+.chip-neutral  { background: rgba(42,40,36,0.05);  color: var(--ink-quiet);    border: 0.4px solid var(--ink-whisper); }
+
+/* ═══════════════════════════════════════════════════════
+   10 · FOOTER
+   ═══════════════════════════════════════════════════════ */
+.footer {
+  margin-top: auto;
+  padding-top: var(--s2);
+  border-top: 0.4px solid var(--ink-whisper);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.footer .signoff {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.footer .page-marker {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  color: var(--ink-quiet);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.footer .page-marker .cur { color: var(--ink); font-weight: 600; }
+.footer .page-marker .sep { color: var(--ink-whisper); margin: 0 1mm; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COVER · PAGE 1 — Title + TOC
+     ═══════════════════════════════════════════════════════════════════ -->
+<main class="page" data-template="prax-journal-design-system" role="document">
+
+  <!-- Cover masthead -->
+  <header class="cover-masthead">
+    <div class="left">
+      <div class="kicker-xl">Prax Journal · The Design System</div>
+      <h1 class="title-xl">Warm Analog Editorial</h1>
+      <div class="subtitle-xl">The shared design language for every page. Cream paper. Soft sage. One clay truth.</div>
+    </div>
+    <div class="right">
+      <div class="ver"><span>v4</span><span class="sep">·</span><span>A4 portrait</span></div>
+      <div class="built">built from adhd-v4-today · reflect · brain-dump</div>
+    </div>
+  </header>
+
+  <p class="lead">
+    This page renders every token, primitive, and block of the shipped v4 journal direction at 1:1 A4 scale.
+    If a new page looks nothing like what you see here, it does not belong in Prax Journal. Open this before you
+    touch CSS for a new template — it is the design system in picture form.
+  </p>
+
+  <!-- Permission banner — same one used on every journal page -->
+  <aside class="permission-demo">
+    <span class="glyph">✳</span>It's okay to leave parts blank. Showing up is the win.<span class="glyph">✳</span>
+  </aside>
+
+  <!-- ─── 1 · COLOR PALETTE ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">1</span>
+      <span class="title">Color Palette</span>
+      <span class="caption">Warm Analog · 7 families · AA 4.5:1 on cream</span>
+    </div>
+
+    <div class="swatch-grid">
+
+      <!-- Paper + Ink -->
+      <div class="fam-head">paper &amp; ink — neutral foundation</div>
+
+      <div class="swatch">
+        <div class="chip" style="background: var(--paper);"></div>
+        <div class="name">paper</div>
+        <div class="hex">#F9F5EC</div>
+        <div class="role">Page background. Warm cream, not sterile white.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--paper-dark);"></div>
+        <div class="name">paper-dark</div>
+        <div class="hex">#F0EAD9</div>
+        <div class="role">Deeper cream for edges + cut marks.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--ink);"></div>
+        <div class="name">ink</div>
+        <div class="hex">#2A2824</div>
+        <div class="role">Titles · hard rules · primary text. 13.2:1.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--ink-soft);"></div>
+        <div class="name">ink-soft</div>
+        <div class="hex">#4A453D</div>
+        <div class="role">Body copy. 8.7:1.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--ink-quiet);"></div>
+        <div class="name">ink-quiet</div>
+        <div class="hex">#7D7668</div>
+        <div class="role">Metadata, hints, kickers.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--ink-whisper);"></div>
+        <div class="name">ink-whisper</div>
+        <div class="hex">#B5AD9F</div>
+        <div class="role">Dotted lines. Field underlines.</div>
+      </div>
+
+      <!-- Sage -->
+      <div class="fam-head">sage — the "good" accent · frog, done, tomorrow</div>
+
+      <div class="swatch">
+        <div class="chip" style="background: var(--sage);"></div>
+        <div class="name">sage</div>
+        <div class="hex">#7B9476</div>
+        <div class="role">Hero accent, section rails.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--sage-ink);"></div>
+        <div class="name">sage-ink</div>
+        <div class="hex">#4E6249</div>
+        <div class="role">Sage text on cream. 5.1:1.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--sage-tint); border:0.6px solid var(--sage-edge);"></div>
+        <div class="name">sage-tint</div>
+        <div class="hex">rgba · 0.08</div>
+        <div class="role">Card fill — the Frog, Tomorrow.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: transparent; border: 1px solid var(--sage-edge);"></div>
+        <div class="name">sage-edge</div>
+        <div class="hex">rgba · 0.22</div>
+        <div class="role">Card border, dotted amber-ish.</div>
+      </div>
+
+      <div class="swatch">
+        <div class="chip" style="background: var(--clay);"></div>
+        <div class="name">clay</div>
+        <div class="hex">#B85A44</div>
+        <div class="role">Horror metric accent. Max 1 block per page.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--clay-ink);"></div>
+        <div class="name">clay-ink</div>
+        <div class="hex">#8A3E2E</div>
+        <div class="role">Clay text. 5.3:1.</div>
+      </div>
+
+      <!-- Clay -->
+      <div class="fam-head">clay — the horror metric · cigs, cravings</div>
+
+      <div class="swatch">
+        <div class="chip" style="background: var(--clay-tint); border:0.6px solid var(--clay-edge);"></div>
+        <div class="name">clay-tint</div>
+        <div class="hex">rgba · 0.07</div>
+        <div class="role">Card fill — confrontational not loud.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: transparent; border:1px solid var(--clay-edge);"></div>
+        <div class="name">clay-edge</div>
+        <div class="hex">rgba · 0.25</div>
+        <div class="role">Card border, intensity boxes.</div>
+      </div>
+
+      <!-- Amber -->
+      <div class="fam-head">amber — CBT thought-check</div>
+
+      <div class="swatch">
+        <div class="chip" style="background: var(--amber);"></div>
+        <div class="name">amber</div>
+        <div class="hex">#C9884A</div>
+        <div class="role">CBT accent. Rare.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--amber-ink);"></div>
+        <div class="name">amber-ink</div>
+        <div class="hex">#8F5D28</div>
+        <div class="role">Amber text on cream. 4.8:1.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--amber-tint); border:0.6px solid var(--amber-edge);"></div>
+        <div class="name">amber-tint</div>
+        <div class="hex">rgba · 0.08</div>
+        <div class="role">Thought-flip card.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: transparent; border:1px solid var(--amber-edge);"></div>
+        <div class="name">amber-edge</div>
+        <div class="hex">rgba · 0.22</div>
+        <div class="role">Card border. Dotted prompt lines.</div>
+      </div>
+
+      <!-- Lavender -->
+      <div class="fam-head">lavender — self-care · anti-shame · moved-to-tomorrow</div>
+
+      <div class="swatch">
+        <div class="chip" style="background: var(--lavender);"></div>
+        <div class="name">lavender</div>
+        <div class="hex">#B6A9CB</div>
+        <div class="role">Self-care accent.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--lavender-ink);"></div>
+        <div class="name">lavender-ink</div>
+        <div class="hex">#6B5D86</div>
+        <div class="role">Lavender text. 4.7:1.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--lavender-tint); border:0.6px solid var(--lavender-edge);"></div>
+        <div class="name">lavender-tint</div>
+        <div class="hex">rgba · 0.10</div>
+        <div class="role">Self-care card fill.</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: transparent; border:1px solid var(--lavender-edge);"></div>
+        <div class="name">lavender-edge</div>
+        <div class="hex">rgba · 0.28</div>
+        <div class="role">Moved-to-tomorrow rule.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── 2 · TYPOGRAPHY ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">2</span>
+      <span class="title">Typography</span>
+      <span class="caption">Fraunces · Instrument Sans · JetBrains Mono</span>
+    </div>
+
+    <div class="type-specimen">
+
+      <div class="type-block">
+        <div class="tk-label">Fraunces — display · opsz 144 · SOFT 100</div>
+        <div class="sample-serif-144">Today.</div>
+        <div class="tk-label">Fraunces — section title · opsz 72 · SOFT 60</div>
+        <div class="sample-serif-72">The Frog · Done today · Thought flip</div>
+        <div class="tk-label">Fraunces italic — hint · opsz 14 · SOFT 100</div>
+        <div class="sample-serif-it">It's okay to leave parts blank. Showing up is the win.</div>
+      </div>
+
+      <div class="type-block">
+        <div class="tk-label">Instrument Sans — body / labels</div>
+        <div class="sample-sans">
+          Humanist sans — body, section labels, checkbox copy.
+          Weight 400–600. Never italic (Fraunces italic owns that voice).
+          Negative tracking only at display sizes.
+        </div>
+        <div class="tk-label">Mono kicker — uppercase 0.18em</div>
+        <div class="sample-kicker">The Daily · Morning Edition</div>
+        <div class="tk-label">JetBrains Mono — numbers &amp; dates</div>
+        <div class="sample-mono-num">23 · 04 · 2026 &nbsp; day 114 / 365 &nbsp; ₹ 1,240</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: var(--s3)">
+      <table class="scale-table">
+        <thead>
+          <tr>
+            <th style="width: 32%">Element</th>
+            <th style="width: 18%">Font / Size</th>
+            <th style="width: 50%">Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Page title (masthead)</td>
+            <td>Fraunces · 26–30pt · opsz 144 / SOFT 100</td>
+            <td class="preview"><span class="s-xl">Reflect.</span></td>
+          </tr>
+          <tr>
+            <td>Section title</td>
+            <td>Fraunces · 10–14pt · opsz 72 / SOFT 60</td>
+            <td class="preview"><span class="s-md">Thought flip</span></td>
+          </tr>
+          <tr>
+            <td>Italic hint / signoff</td>
+            <td>Fraunces italic · 7–9pt · opsz 14 / SOFT 100</td>
+            <td class="preview"><span class="s-it">You showed up. That counts.</span></td>
+          </tr>
+          <tr>
+            <td>Body / labels</td>
+            <td>Instrument Sans · 8–8.5pt · 400–600</td>
+            <td class="preview"><span class="s-sans">Did I do <em>one</em> thing today?</span></td>
+          </tr>
+          <tr>
+            <td>Kicker</td>
+            <td>JetBrains Mono · 5.5–6pt · UPPERCASE 0.18em</td>
+            <td class="preview"><span class="s-mono-kick">evidence log · no shame</span></td>
+          </tr>
+          <tr>
+            <td>Metadata · dates · numbers</td>
+            <td>JetBrains Mono · 7–10pt · 500–600</td>
+            <td class="preview"><span class="s-mono">23 / 04 / 2026</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── 3 · SPACING SCALE ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">3</span>
+      <span class="title">Spacing Scale</span>
+      <span class="caption">5mm dot-grid aligned · tokens only</span>
+    </div>
+    <div class="space-row"><span class="token">--s1</span><span class="bar" style="width: 1.5mm"></span><span class="use">hair-line gaps inside a row · 1.5mm</span></div>
+    <div class="space-row"><span class="token">--s2</span><span class="bar" style="width: 2.5mm"></span><span class="use">tight cell padding · masthead · 2.5mm</span></div>
+    <div class="space-row"><span class="token">--s3</span><span class="bar" style="width: 4mm"></span><span class="use">default block padding · page gap · 4mm</span></div>
+    <div class="space-row"><span class="token">--s4</span><span class="bar" style="width: 6mm"></span><span class="use">two-column gutters · frog internal · 6mm</span></div>
+    <div class="space-row"><span class="token">--s5</span><span class="bar" style="width: 9mm"></span><span class="use">big breathing between stacks · rare · 9mm</span></div>
+    <div class="space-row"><span class="token">--s6</span><span class="bar" style="width: 13mm"></span><span class="use">outer margin · page frame · 13mm</span></div>
+  </section>
+
+  <!-- ─── 4 · PRIMITIVES ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">4</span>
+      <span class="title">Primitives</span>
+      <span class="caption">Lines · boxes · radios · dots · DOW</span>
+    </div>
+
+    <div class="prim-grid">
+
+      <div class="prim-card">
+        <div class="p-kicker">lines — hero vs. fill</div>
+        <div class="p-title">Writable lines</div>
+        <div class="p-row"><span class="lbl">task-line · 1.5px</span><span class="line-demo"></span></div>
+        <div class="p-row"><span class="lbl">dotline · 1.2px dot</span><span class="line-dot"></span></div>
+        <div class="p-row"><span class="lbl">frog-line · sage 1.5</span><span class="line-sage"></span></div>
+        <div class="p-row"><span class="lbl">tf-prompt · amber dot</span><span class="line-amber"></span></div>
+      </div>
+
+      <div class="prim-card">
+        <div class="p-kicker">checkboxes &amp; radios</div>
+        <div class="p-title">Boxes &amp; dots</div>
+        <div class="p-row"><span class="lbl">task-check · ink</span><span class="task-check-demo"></span></div>
+        <div class="p-row"><span class="lbl">BA check · sage</span><span class="sage-check"></span></div>
+        <div class="p-row"><span class="lbl">radio-ink · mood</span><span class="radio-ink"></span></div>
+        <div class="p-row"><span class="lbl">radio-sage · movement</span><span class="radio-sage"></span></div>
+      </div>
+
+      <div class="prim-card">
+        <div class="p-kicker">micro marks</div>
+        <div class="p-title">DOW · water · quality</div>
+        <div class="p-row">
+          <span class="lbl">day of week</span>
+          <span style="display:flex; gap:1.2mm;">
+            <span class="dow-demo">M</span><span class="dow-demo">T</span><span class="dow-demo">W</span>
+            <span class="dow-demo">T</span><span class="dow-demo">F</span><span class="dow-demo">S</span>
+            <span class="dow-demo">S</span>
+          </span>
+        </div>
+        <div class="p-row">
+          <span class="lbl">water · 8 drops</span>
+          <span style="display:flex; gap:1.2mm;">
+            <span class="water-demo"></span><span class="water-demo"></span><span class="water-demo"></span>
+            <span class="water-demo"></span><span class="water-demo"></span><span class="water-demo"></span>
+            <span class="water-demo"></span><span class="water-demo"></span>
+          </span>
+        </div>
+        <div class="p-row">
+          <span class="lbl">quality · 1–5</span>
+          <span style="display:flex; gap:1mm;">
+            <span class="qdot-demo">1</span><span class="qdot-demo">2</span><span class="qdot-demo">3</span>
+            <span class="qdot-demo">4</span><span class="qdot-demo">5</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Footer (page 1) ─── -->
+  <footer class="footer">
+    <span class="signoff">This is how every page breathes.</span>
+    <span class="page-marker">
+      <span class="cur">Design System</span>
+      <span class="sep">·</span>
+      <span>1 / 2</span>
+    </span>
+  </footer>
+
+</main>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 2 — Card archetypes, icons, voice, component library, rules
+     ═══════════════════════════════════════════════════════════════════ -->
+<main class="page" data-template="prax-journal-design-system-p2" role="document">
+
+  <!-- masthead -->
+  <header class="cover-masthead">
+    <div class="left">
+      <div class="kicker-xl">Prax Journal · Design System — Part Two</div>
+      <h1 class="title-xl">Cards · Icons · Voice</h1>
+      <div class="subtitle-xl">Four card archetypes, one library, one tone. Compose don't invent.</div>
+    </div>
+    <div class="right">
+      <div class="ver"><span>v4</span><span class="sep">·</span><span>18 blocks</span></div>
+      <div class="built">B-01 through B-18 · shipped</div>
+    </div>
+  </header>
+
+  <!-- ─── 5 · CARD ARCHETYPES ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">5</span>
+      <span class="title">Card Archetypes</span>
+      <span class="caption">One accent per card · top 2px rail · kicker + serif + explainer</span>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- SAGE -->
+      <div class="demo-card card-sage">
+        <div class="c-head">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="9" ry="7"/><circle cx="7" cy="8.5" r="3"/><circle cx="17" cy="8.5" r="3"/></svg>
+          <div>
+            <div class="c-kicker">sage · the good</div>
+            <div class="c-title">The Frog</div>
+          </div>
+          <div class="c-method">Tracy ·<br>Sonuga-Barke</div>
+        </div>
+        <div class="c-explainer">Concrete · ≤ 25 min · one only. Do this first, everything else is bonus.</div>
+        <div class="c-body"><div class="c-line"></div></div>
+      </div>
+
+      <!-- AMBER -->
+      <div class="demo-card card-amber">
+        <div class="c-head">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 4.42 2.65A4.5 4.5 0 0 1 20 9a4 4 0 0 1-.68 7.74A5 5 0 0 1 12 22"/><path d="M12 2a5 5 0 0 0-4.42 2.65A4.5 4.5 0 0 0 4 9a4 4 0 0 0 .68 7.74A5 5 0 0 0 12 22"/></svg>
+          <div>
+            <div class="c-kicker">amber · CBT</div>
+            <div class="c-title">Thought Flip</div>
+          </div>
+          <div class="c-method">Ramsay &amp;<br>Rostain</div>
+        </div>
+        <div class="c-explainer">Brain telling me · Is that true · A kinder way to see it.</div>
+        <div class="c-body">
+          <div class="c-line"></div>
+          <div class="c-line"></div>
+        </div>
+      </div>
+
+      <!-- CLAY -->
+      <div class="demo-card card-clay">
+        <div class="c-head">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="15" height="3" rx="0.5"/><line x1="18" y1="14.5" x2="21" y2="14.5" stroke-width="2.5"/><path d="M6 10c-1-1.5 0-2.5 1-3M9 10c-1-1.5 0-2.5 1-3"/></svg>
+          <div>
+            <div class="c-kicker">clay · horror metric</div>
+            <div class="c-title">Cigarettes · face it</div>
+          </div>
+          <div class="c-method">NHS cost ·<br>Allen Carr</div>
+        </div>
+        <div class="c-explainer">One clay block per page, max. Confrontational without shouting.</div>
+        <div class="c-body"><div class="c-line"></div></div>
+      </div>
+
+      <!-- LAVENDER -->
+      <div class="demo-card card-lavender">
+        <div class="c-head">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10"/><path d="M6 14c0-3.31 2.69-6 6-6"/><path d="M18 10c0 3.31-2.69 6-6 6"/></svg>
+          <div>
+            <div class="c-kicker">lavender · self-care</div>
+            <div class="c-title">Self-care check</div>
+          </div>
+          <div class="c-method">Martell BA ·<br>Anti-shame</div>
+        </div>
+        <div class="c-explainer">Ate something · Went outside · Something fun · Kind to myself.</div>
+        <div class="c-body"><div class="c-line"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── 6 · ICON LIBRARY ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">6</span>
+      <span class="title">Icon Library</span>
+      <span class="caption">SVG only · stroke 1.1–1.8 · currentColor · hand-drawn warmth</span>
+    </div>
+
+    <div class="icon-grid">
+
+      <div class="icon-tile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="9" ry="7"/><circle cx="7" cy="8.5" r="3"/><circle cx="17" cy="8.5" r="3"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="8" r="1" fill="currentColor"/><path d="M9 16.5c.8.8 2 1.2 3 1.2s2.2-.4 3-1.2"/></svg>
+        <span class="lbl">Frog</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5.5" width="12" height="3" rx="1.5" transform="rotate(-45 7 7)"/><line x1="4.88" y1="4.88" x2="9.12" y2="9.12"/></svg>
+        <span class="lbl">Meds</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 7.5a5 5 0 1 1-6-6 4 4 0 0 0 6 6z"/></svg>
+        <span class="lbl">Sleep</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 1.5S3 5.5 3 8.5a4 4 0 0 0 8 0c0-3-4-7-4-7z"/></svg>
+        <span class="lbl">Water</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="4" r="2"/><path d="M15.59 13.51l2.41 4.49h3m-9-8l-2-4-7 3.5 2 2.5"/><path d="M3.5 21.5l4-7 4.5 1.5 3.5-5"/></svg>
+        <span class="lbl">Movement</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="15" height="3" rx="0.5"/><line x1="18" y1="14.5" x2="21" y2="14.5" stroke-width="2.5"/><path d="M6 10c-1-1.5 0-2.5 1-3M9 10c-1-1.5 0-2.5 1-3"/></svg>
+        <span class="lbl">Cigs</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 4.42 2.65A4.5 4.5 0 0 1 20 9a4 4 0 0 1-.68 7.74A5 5 0 0 1 12 22"/><path d="M12 2a5 5 0 0 0-4.42 2.65A4.5 4.5 0 0 0 4 9a4 4 0 0 0 .68 7.74A5 5 0 0 0 12 22"/></svg>
+        <span class="lbl">Thought</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 15c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><path d="M2 11c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/></svg>
+        <span class="lbl">Urge surf</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7.5"/><circle cx="6.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/><circle cx="11.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/><path d="M5.5 10.5c1 1.8 2.2 2.5 3.5 2.5s2.5-.7 3.5-2.5"/></svg>
+        <span class="lbl">Mood · good</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7.5"/><circle cx="6.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/><circle cx="11.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/><line x1="6.5" y1="12" x2="11.5" y2="12"/></svg>
+        <span class="lbl">Mood · meh</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <span class="lbl">Win</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="lbl">Grateful</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10"/><path d="M6 14c0-3.31 2.69-6 6-6"/><path d="M18 10c0 3.31-2.69 6-6 6"/></svg>
+        <span class="lbl">Self-care</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,7.5 5.5,10.5 11.5,3.5"/></svg>
+        <span class="lbl">Done · sage</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="7" x2="11" y2="7"/><polyline points="8,4 11,7 8,10"/></svg>
+        <span class="lbl">Moved →</span>
+      </div>
+      <div class="icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15,14"/></svg>
+        <span class="lbl">Filled at</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── 7 · VOICE + COPY ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">7</span>
+      <span class="title">Voice &amp; Copy</span>
+      <span class="caption">Gentle imperative · no CTAs · no red X</span>
+    </div>
+
+    <table class="voice-table">
+      <thead>
+        <tr>
+          <th style="width: 28%">Context</th>
+          <th style="width: 36%">Say</th>
+          <th style="width: 36%">Don't</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ctx">Permission banner</td>
+          <td class="yes">It's okay to leave parts blank.</td>
+          <td class="no">Fill in every field!</td>
+        </tr>
+        <tr>
+          <td class="ctx">Frog hint</td>
+          <td class="yes">Do this FIRST. Everything else is bonus.</td>
+          <td class="no">Top priority task:</td>
+        </tr>
+        <tr>
+          <td class="ctx">Moved column</td>
+          <td class="yes">no shame · no red X</td>
+          <td class="no">Failed · Undone</td>
+        </tr>
+        <tr>
+          <td class="ctx">Footer signoff</td>
+          <td class="yes">You showed up. That counts.</td>
+          <td class="no">Goal achieved!</td>
+        </tr>
+        <tr>
+          <td class="ctx">Cigs micro-label</td>
+          <td class="yes">Today's total · Projected / month</td>
+          <td class="no">Damage report</td>
+        </tr>
+        <tr>
+          <td class="ctx">Craving prompt</td>
+          <td class="yes">Next time I'll try…</td>
+          <td class="no">Why did you relapse?</td>
+        </tr>
+        <tr>
+          <td class="ctx">Brain-dump hint</td>
+          <td class="yes">No rules here. Say anything, or leave it all blank.</td>
+          <td class="no">Write your thoughts here</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── 8 · COMPONENT LIBRARY ─── -->
+  <section>
+    <div class="section-head">
+      <span class="num">8</span>
+      <span class="title">Component Library</span>
+      <span class="caption">B-01 … B-18 · already shipped · compose don't invent</span>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width: 6%">#</th>
+          <th style="width: 24%">Block</th>
+          <th style="width: 14%">Color</th>
+          <th style="width: 28%">Research basis</th>
+          <th style="width: 28%">Lives on</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>B-01</td><td class="block-name">Masthead</td><td><span class="chip-color chip-neutral">neutral</span></td><td>Hobonichi day-counter</td><td>All pages</td></tr>
+        <tr><td>B-02</td><td class="block-name">Permission banner</td><td><span class="chip-color chip-sage">sage</span></td><td>Neff self-compassion</td><td>All pages</td></tr>
+        <tr><td>B-03</td><td class="block-name">The Frog</td><td><span class="chip-color chip-sage">sage</span></td><td>Tracy + Sonuga-Barke</td><td>Today</td></tr>
+        <tr><td>B-04</td><td class="block-name">Top 3 Today</td><td><span class="chip-color chip-neutral">neutral</span></td><td>Barkley Rule of 3</td><td>Today</td></tr>
+        <tr><td>B-05</td><td class="block-name">Body row (Meds · Sleep · Water)</td><td><span class="chip-color chip-neutral">neutral</span></td><td>Clever Fox time-of-day</td><td>Today</td></tr>
+        <tr><td>B-06</td><td class="block-name">Movement row</td><td><span class="chip-color chip-sage">sage</span></td><td>—</td><td>Today</td></tr>
+        <tr><td>B-07</td><td class="block-name">Cigs horror metric</td><td><span class="chip-color chip-clay">clay</span></td><td>NHS cost + Allen Carr</td><td>Today</td></tr>
+        <tr><td>B-08</td><td class="block-name">Notes strip (dot grid)</td><td><span class="chip-color chip-neutral">neutral</span></td><td>—</td><td>Today bottom</td></tr>
+        <tr><td>B-09</td><td class="block-name">Done / Moved two-col</td><td><span class="chip-color chip-sage">sage</span> <span class="chip-color chip-lavender">lav</span></td><td>Newport + Neff</td><td>Reflect</td></tr>
+        <tr><td>B-10</td><td class="block-name">Mood + Energy row</td><td><span class="chip-color chip-neutral">neutral</span></td><td>PHQ-2 Lite</td><td>Reflect</td></tr>
+        <tr><td>B-11</td><td class="block-name">Thought Flip (3-prompt CBT)</td><td><span class="chip-color chip-amber">amber</span></td><td>Ramsay &amp; Rostain 2015</td><td>Reflect</td></tr>
+        <tr><td>B-12</td><td class="block-name">Self-care + BA anchor</td><td><span class="chip-color chip-lavender">lav</span> <span class="chip-color chip-sage">sage</span></td><td>Martell BA</td><td>Reflect</td></tr>
+        <tr><td>B-13</td><td class="block-name">Wins · Grateful · Proud triad</td><td><span class="chip-color chip-neutral">neutral</span></td><td>Clever Fox wins</td><td>Reflect</td></tr>
+        <tr><td>B-14</td><td class="block-name">Craving log (urge surfing)</td><td><span class="chip-color chip-clay">clay</span></td><td>Marlatt</td><td>Reflect</td></tr>
+        <tr><td>B-15</td><td class="block-name">Tomorrow's Frog</td><td><span class="chip-color chip-sage">sage</span></td><td>Newport shutdown</td><td>Reflect</td></tr>
+        <tr><td>B-16</td><td class="block-name">Dot-grid canvas</td><td><span class="chip-color chip-neutral">neutral</span></td><td>—</td><td>Brain Dump</td></tr>
+        <tr><td>B-17</td><td class="block-name">Corner cut marks</td><td><span class="chip-color chip-neutral">neutral</span></td><td>Editorial signature</td><td>Brain Dump</td></tr>
+        <tr><td>B-18</td><td class="block-name">Footer (signoff · marker)</td><td><span class="chip-color chip-neutral">neutral</span></td><td>—</td><td>All pages</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="signoff">Compose from this. Don't reinvent the cream.</span>
+    <span class="page-marker">
+      <span class="cur">Design System</span>
+      <span class="sep">·</span>
+      <span>2 / 2</span>
+    </span>
+  </footer>
+
+</main>
+
+</body>
+</html>
