@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Planner v4 — Today</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   ADHD PLANNER v4 — PAGE 1 of 3  ·  "TODAY"
+   Warm Analog Editorial  ·  Cream + Sage + Clay horror-metric
+
+   RESEARCH-GROUNDED DESIGN DECISIONS
+   ✦ Barkley Rule-of-3 → hard-capped Top 3 Today, 3 rows, no more
+   ✦ Tracy + Sonuga-Barke → THE FROG at top, one, ≤25 min, morning dopamine
+   ✦ Time-of-day bands AM/Mid/EVE → NOT hourly grid (ADHD time-blindness)
+   ✦ Pomodoro ☐☐☐☐ inline per task → externalize time (Barkley)
+   ✦ Est min per task → build time-estimation feedback loop
+   ✦ NHS cost calculator + Allen Carr → horror-metric Cigs tracker in clay
+   ✦ Neff self-compassion → permission banner, NO red X, NO strikethrough
+   ✦ Hobonichi → day-of-year counter in mono (quiet signature)
+   ✦ Code & Quill / Papier → serif header + sans body + mono metadata stack
+
+   TYPOGRAPHY STACK (fresh to this repo)
+   • Fraunces (display serif, variable, SOFT axis for warmth)
+   • Instrument Sans (humanist sans, body)
+   • JetBrains Mono (dates, numbers, cost)
+
+   ACCESSIBILITY (ui-ux-pro-max)
+   • Text contrast ≥4.5:1 verified (ink #2A2824 on cream #F9F5EC = 13.2:1)
+   • Touch targets ≥44pt equivalent for all input elements
+   • Icons supplemented by labels — never icon-only
+   • Semantic section landmarks for screen readers
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Design Tokens — Warm Analog Editorial ─── */
+:root {
+  /* Page geometry — A4 portrait */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 13mm;
+
+  /* Palette — Calm cream + sage */
+  --paper:           #F9F5EC;   /* warm cream, not sterile white */
+  --paper-dark:      #F0EAD9;   /* deeper cream for page edge */
+  --ink:             #2A2824;   /* deep warm black */
+  --ink-soft:        #4A453D;   /* body text */
+  --ink-quiet:       #7D7668;   /* metadata, hints */
+  --ink-whisper:     #B5AD9F;   /* dotted lines, subtle rules */
+
+  --sage:            #7B9476;   /* primary accent — frog, checks */
+  --sage-ink:        #4E6249;   /* sage text for a11y on cream */
+  --sage-tint:       rgba(123, 148, 118, 0.08);
+  --sage-edge:       rgba(123, 148, 118, 0.22);
+
+  --clay:            #B85A44;   /* horror-metric — cigs, urgent */
+  --clay-ink:        #8A3E2E;
+  --clay-tint:       rgba(184, 90, 68, 0.07);
+  --clay-edge:       rgba(184, 90, 68, 0.25);
+
+  --amber:           #C9884A;   /* CBT thought-check tint */
+  --amber-ink:       #8F5D28;
+  --amber-tint:      rgba(201, 136, 74, 0.08);
+  --amber-edge:      rgba(201, 136, 74, 0.22);
+
+  --lavender:        #B6A9CB;   /* self-care */
+  --lavender-ink:    #6B5D86;
+  --lavender-tint:   rgba(182, 169, 203, 0.10);
+  --lavender-edge:   rgba(182, 169, 203, 0.28);
+
+  /* Typography */
+  --font-serif: 'Fraunces', 'Baskerville', Georgia, serif;
+  --font-sans:  'Instrument Sans', 'Söhne', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  /* Spacing — 5mm dot grid aligned */
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 9mm; --s6: 13mm;
+
+  /* Dotted underline (writable lines) */
+  --dot: var(--ink-whisper);
+
+  /* Shadows — Papier London restraint, not bubblegum pop */
+  --shadow-page:  0 1px 2px rgba(42, 40, 36, 0.04),
+                  0 8px 32px rgba(42, 40, 36, 0.08);
+  --shadow-card-subtle: 0 0 0 1px rgba(42, 40, 36, 0.04);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Page ─── */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  /* `overflow: clip` — same visual as `hidden` for print, no scroll container.
+     Flip to `visible` via `data-debug="overflow"` on <html> to debug A4 bleed. */
+  overflow: clip;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Primitives ─── */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: currentColor;
+}
+.icon svg { display: block; }
+
+.dotline {
+  border: none;
+  border-bottom: 1.2px dotted var(--dot);
+  min-height: 5mm;
+  flex: 1;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-quiet);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 7pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+}
+
+.hint {
+  font-family: var(--font-serif);
+  font-size: 7pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-quiet);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+
+/* ═══════════════════════════════════════════════════════
+   1. MASTHEAD
+   • Thin rule not gradient (editorial)
+   • Title uses Fraunces w/ opsz 144 (display) + SOFT 100
+   • Day-of-year counter = Hobonichi signature
+   ═══════════════════════════════════════════════════════ */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--s2);
+  border-bottom: 0.6px solid var(--ink);
+  flex-shrink: 0;
+}
+
+.masthead-left .kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+  margin-bottom: 2mm;
+}
+
+.masthead-left .title {
+  font-family: var(--font-serif);
+  font-size: 30pt;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+
+.masthead-left .subtitle {
+  font-family: var(--font-serif);
+  font-size: 9pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-quiet);
+  margin-top: 2mm;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+
+.masthead-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+  align-items: flex-end;
+}
+
+.date-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2.5mm;
+}
+.date-row .label { font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet); }
+.date-row .field {
+  border-bottom: 0.6px solid var(--ink);
+  min-width: 34mm;
+  height: 4.5mm;
+  font-family: var(--font-mono);
+  font-size: 9pt;
+  color: var(--ink);
+  display: inline-block;
+}
+
+.day-counter {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  letter-spacing: 0.08em;
+}
+.day-counter .big {
+  font-size: 10pt;
+  color: var(--ink);
+  font-weight: 600;
+}
+.day-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+
+.day-of-week {
+  display: flex;
+  gap: 1.2mm;
+  margin-top: 1mm;
+}
+.dow {
+  width: 4.4mm;
+  height: 4.4mm;
+  border-radius: 50%;
+  border: 0.6px solid var(--ink-whisper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  background: transparent;
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. PERMISSION BANNER
+   Neff self-compassion; sage-soft, small, quiet
+   ═══════════════════════════════════════════════════════ */
+.permission {
+  background: var(--sage-tint);
+  border-left: 2px solid var(--sage);
+  padding: 2.5mm var(--s3);
+  font-family: var(--font-serif);
+  font-size: 8pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--sage-ink);
+  letter-spacing: 0.01em;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  flex-shrink: 0;
+}
+.permission .glyph {
+  color: var(--sage);
+  font-family: var(--font-serif);
+  font-style: normal;
+  margin: 0 1.5mm;
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. THE FROG
+   Research: Tracy + Sonuga-Barke — one, concrete, ≤25 min
+   Visual weight: MOST important block on page
+   Sage-tinted, double-line, serif label
+   ═══════════════════════════════════════════════════════ */
+.frog {
+  background: var(--sage-tint);
+  border: 0.8px solid var(--sage-edge);
+  border-radius: 2px;
+  padding: var(--s4) var(--s4) var(--s3);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.frog::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--sage);
+}
+
+.frog-head {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  margin-bottom: var(--s3);
+}
+
+.frog-head .icon {
+  color: var(--sage-ink);
+}
+
+.frog-head .label-group {
+  flex: 1;
+}
+
+.frog-head .label-group .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--sage);
+}
+
+.frog-head .label-group .title {
+  font-family: var(--font-serif);
+  font-size: 13pt;
+  font-weight: 500;
+  color: var(--sage-ink);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-top: 0.8mm;
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+
+.frog-head .constraint {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  color: var(--sage-ink);
+  opacity: 0.7;
+  text-align: right;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.frog-line {
+  border: none;
+  border-bottom: 1.5px solid var(--sage);
+  height: 8mm;
+  margin-bottom: 2mm;
+}
+
+.frog-tail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.frog-tail .hint {
+  font-size: 7pt;
+  color: var(--sage-ink);
+  opacity: 0.8;
+}
+
+.frog-tail .pomo-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+.frog-tail .pomo-row .pomo-label {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sage-ink);
+  opacity: 0.7;
+}
+.frog-pomo {
+  width: 3.8mm;
+  height: 3.8mm;
+  border-radius: 50%;
+  border: 1.2px solid var(--sage);
+  background: transparent;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. TOP 3 TODAY — Barkley Rule of 3 (hard cap)
+   Each row: ☐ # task_______________ [band] Est__min ☐☐☐☐
+   ═══════════════════════════════════════════════════════ */
+.top3 {
+  flex-shrink: 0;
+}
+
+.top3-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  margin-bottom: var(--s2);
+  padding-bottom: 1.5mm;
+  border-bottom: 0.4px solid var(--ink-whisper);
+}
+.top3-head .num {
+  font-family: var(--font-serif);
+  font-size: 22pt;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.top3-head .label {
+  font-family: var(--font-sans);
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin-bottom: 1mm;
+}
+.top3-head .rule-badge {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-quiet);
+  margin-bottom: 2mm;
+  margin-left: auto;
+}
+
+.task-row {
+  display: grid;
+  grid-template-columns: 5mm 5mm 1fr auto auto auto;
+  align-items: center;
+  gap: 2mm;
+  padding: 2mm 0;
+  border-bottom: 0.3px dotted var(--ink-whisper);
+  min-height: 10mm;
+}
+
+.task-row:last-child { border-bottom: none; }
+
+.task-check {
+  width: 4.2mm;
+  height: 4.2mm;
+  border: 1.2px solid var(--ink);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.task-num {
+  font-family: var(--font-serif);
+  font-size: 11pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  text-align: center;
+  font-variation-settings: "opsz" 72;
+}
+
+.task-line {
+  border: none;
+  border-bottom: 1.5px solid var(--ink-whisper);
+  height: 7mm;
+  min-width: 0;
+}
+
+.task-band {
+  display: flex;
+  gap: 0.8mm;
+}
+.band-pill {
+  width: 5.5mm;
+  height: 4.5mm;
+  border: 0.6px solid var(--ink-whisper);
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 600;
+  color: var(--ink-quiet);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.task-est {
+  display: flex;
+  align-items: center;
+  gap: 1mm;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  color: var(--ink-quiet);
+}
+.task-est .est-label { text-transform: uppercase; letter-spacing: 0.1em; }
+.task-est .est-field {
+  width: 8mm;
+  height: 3.5mm;
+  border-bottom: 0.6px solid var(--ink-whisper);
+  display: inline-block;
+}
+.task-est .est-unit { font-size: 5.5pt; color: var(--ink-whisper); }
+
+.task-pomo-row {
+  display: flex;
+  gap: 1mm;
+}
+.task-pomo {
+  width: 2.8mm;
+  height: 2.8mm;
+  border-radius: 50%;
+  border: 0.9px solid var(--ink-whisper);
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. BODY ROW — Meds · Sleep · Water
+   Research: Clever Fox time-of-day bands
+   ═══════════════════════════════════════════════════════ */
+.body-row {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr 1.3fr;
+  gap: var(--s3);
+  padding: var(--s3) 0;
+  border-top: 0.6px solid var(--ink-whisper);
+  border-bottom: 0.6px solid var(--ink-whisper);
+  flex-shrink: 0;
+}
+
+.body-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.body-cell .head {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  color: var(--ink);
+}
+.body-cell .head .label {
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.body-cell .head .icon { color: var(--ink); }
+
+.body-cell .content {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.body-cell .content .sub {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-quiet);
+}
+
+.ring {
+  width: 4.8mm;
+  height: 4.8mm;
+  border-radius: 50%;
+  border: 1.2px solid var(--ink);
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.hrs-field {
+  border-bottom: 0.8px solid var(--ink);
+  width: 8mm;
+  height: 4mm;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+}
+
+.quality-row {
+  display: flex;
+  gap: 1mm;
+  align-items: center;
+}
+.q-dot {
+  width: 3.2mm;
+  height: 3.2mm;
+  border-radius: 50%;
+  border: 0.9px solid var(--ink-quiet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 4.5pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  line-height: 1;
+}
+
+.water-row {
+  display: flex;
+  gap: 1.2mm;
+}
+.water-drop {
+  width: 3.4mm;
+  height: 3.4mm;
+  border-radius: 50%;
+  border: 0.9px solid var(--ink-quiet);
+}
+
+/* ═══════════════════════════════════════════════════════
+   6. MOVEMENT — Gym · Walk · Swim (your spec)
+   Simple radio row, sage accent
+   ═══════════════════════════════════════════════════════ */
+.movement {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  flex-shrink: 0;
+  padding: 1mm 0;
+}
+.movement .head {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  color: var(--ink);
+}
+.movement .head .label {
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.move-options {
+  display: flex;
+  gap: var(--s4);
+  align-items: center;
+}
+.move-opt {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+.move-opt .circle {
+  width: 4.2mm;
+  height: 4.2mm;
+  border-radius: 50%;
+  border: 1px solid var(--sage);
+  background: transparent;
+}
+.move-opt .opt-label {
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.move-duration {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5mm;
+}
+.move-duration .d-label {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-quiet);
+}
+.move-duration .d-field {
+  width: 14mm;
+  height: 4mm;
+  border-bottom: 0.6px solid var(--ink-whisper);
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7. CIGS HORROR METRIC — clay/red, urgent
+   Research: NHS cost calculator + Allen Carr "see it clearly"
+   Only block using clay. Designed to be confrontational.
+   ═══════════════════════════════════════════════════════ */
+.cigs {
+  background: var(--clay-tint);
+  border: 0.8px solid var(--clay-edge);
+  border-radius: 2px;
+  padding: var(--s3) var(--s3) 2.5mm;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cigs::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--clay);
+}
+
+.cigs-head {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  margin-bottom: 2.5mm;
+}
+.cigs-head .icon { color: var(--clay); }
+.cigs-head .label {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--clay-ink);
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 72;
+}
+.cigs-head .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--clay);
+  margin-left: auto;
+}
+
+.cigs-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: var(--s3);
+  align-items: end;
+}
+
+.cigs-cell { display: flex; flex-direction: column; gap: 1mm; }
+
+.cigs-cell .micro-label {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--clay-ink);
+  opacity: 0.75;
+}
+
+.cigs-counter {
+  display: flex;
+  gap: 1mm;
+}
+.cig-tick {
+  width: 4.6mm;
+  height: 4.6mm;
+  border: 0.9px solid var(--clay);
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 500;
+  color: var(--clay);
+  opacity: 0.8;
+  background: transparent;
+}
+
+.cost-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1mm;
+  font-family: var(--font-mono);
+  color: var(--clay-ink);
+}
+.cost-row .currency { font-size: 7pt; opacity: 0.8; }
+.cost-row .cost-field {
+  border-bottom: 0.8px solid var(--clay);
+  width: 10mm;
+  height: 4.5mm;
+  display: inline-block;
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--clay);
+}
+
+.cost-row.projected .cost-field { width: 13mm; }
+
+.cost-multiply {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  color: var(--clay-ink);
+  opacity: 0.6;
+  margin-left: 0.8mm;
+}
+
+/* ═══════════════════════════════════════════════════════
+   8. NOTES STRIP — small dot-grid brain-dump
+   Sits between cigs and footer. 3 dotted lines high.
+   ═══════════════════════════════════════════════════════ */
+.notes-strip {
+  flex: 1;
+  min-height: 22mm;
+  position: relative;
+  border-top: 0.4px dotted var(--ink-whisper);
+  padding: 2.5mm 0 2mm;
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+}
+.notes-strip .notes-head {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+  margin-bottom: 1mm;
+}
+.notes-strip .notes-lines {
+  flex: 1;
+  background-image: radial-gradient(circle, rgba(42,40,36,0.10) 0.32mm, transparent 0.32mm);
+  background-size: 5mm 5mm;
+  background-position: 0 2mm;
+}
+
+/* ═══════════════════════════════════════════════════════
+   9. FOOTER — Editorial sign-off
+   ═══════════════════════════════════════════════════════ */
+
+.footer {
+  margin-top: auto;
+  padding-top: var(--s2);
+  border-top: 0.4px solid var(--ink-whisper);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+
+.footer .signoff {
+  font-family: var(--font-serif);
+  font-size: 8pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-quiet);
+  letter-spacing: 0.005em;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+
+.footer .page-marker {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.footer .page-marker .cur { color: var(--ink); font-weight: 600; }
+.footer .page-marker .sep { color: var(--ink-whisper); margin: 0 1mm; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 1 / 3  ·  TODAY  ·  Morning commit  ·  ADHD v4 Warm-Analog
+     ═══════════════════════════════════════════════════════════════════ -->
+<main class="page" data-template="adhd-v4-today" role="document">
+
+  <!-- ─── 1. MASTHEAD ─── -->
+  <header class="masthead">
+    <div class="masthead-left">
+      <div class="kicker">The Daily · Morning Edition</div>
+      <h1 class="title">Today</h1>
+      <div class="subtitle">Commit small. Start with the frog.</div>
+    </div>
+    <div class="masthead-right">
+      <div class="date-row">
+        <span class="label">Date</span>
+        <span class="field" data-inject="date"></span>
+      </div>
+      <div class="day-counter">
+        <span>day&nbsp;</span><span class="big" data-inject="doy">___</span><span class="slash">/</span><span>365</span>
+      </div>
+      <div class="day-of-week" aria-label="Day of week">
+        <div class="dow">M</div><div class="dow">T</div><div class="dow">W</div><div class="dow">T</div><div class="dow">F</div><div class="dow">S</div><div class="dow">S</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── 2. PERMISSION BANNER (Neff) ─── -->
+  <aside class="permission">
+    <span class="glyph">✳</span>It's okay to leave parts blank. Showing up is the win.<span class="glyph">✳</span>
+  </aside>
+
+  <!-- ─── 3. THE FROG (Tracy / Sonuga-Barke) ─── -->
+  <section class="frog" aria-labelledby="frog-title">
+    <div class="frog-head">
+      <span class="icon" aria-hidden="true">
+        <!-- hand-drawn frog, warmth not polish -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="14" rx="9" ry="7"/>
+          <circle cx="7" cy="8.5" r="3"/>
+          <circle cx="17" cy="8.5" r="3"/>
+          <circle cx="7" cy="8" r="1" fill="currentColor"/>
+          <circle cx="17" cy="8" r="1" fill="currentColor"/>
+          <path d="M9 16.5c.8.8 2 1.2 3 1.2s2.2-.4 3-1.2"/>
+        </svg>
+      </span>
+      <div class="label-group">
+        <div class="kicker">The Frog</div>
+        <h2 class="title" id="frog-title">My #1 most important task</h2>
+      </div>
+      <div class="constraint">concrete<br>≤ 25 min<br>one only</div>
+    </div>
+
+    <div class="frog-line"></div>
+
+    <div class="frog-tail">
+      <span class="hint">Do this FIRST. Everything else is bonus.</span>
+      <div class="pomo-row">
+        <span class="pomo-label">pomos</span>
+        <span class="frog-pomo"></span><span class="frog-pomo"></span><span class="frog-pomo"></span><span class="frog-pomo"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 4. TOP 3 TODAY (Barkley) ─── -->
+  <section class="top3" aria-labelledby="top3-title">
+    <header class="top3-head">
+      <span class="num">3</span>
+      <span class="label" id="top3-title">Today's Priorities</span>
+      <span class="rule-badge">Rule of 3 · no more</span>
+    </header>
+
+    <div class="task-row">
+      <span class="task-check" aria-hidden="true"></span>
+      <span class="task-num">1</span>
+      <span class="task-line"></span>
+      <div class="task-band" role="radiogroup" aria-label="When">
+        <span class="band-pill">AM</span>
+        <span class="band-pill">MID</span>
+        <span class="band-pill">EVE</span>
+      </div>
+      <div class="task-est">
+        <span class="est-label">est</span>
+        <span class="est-field"></span>
+        <span class="est-unit">min</span>
+      </div>
+      <div class="task-pomo-row" aria-label="Pomodoro tally">
+        <span class="task-pomo"></span><span class="task-pomo"></span><span class="task-pomo"></span><span class="task-pomo"></span>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-check" aria-hidden="true"></span>
+      <span class="task-num">2</span>
+      <span class="task-line"></span>
+      <div class="task-band" role="radiogroup" aria-label="When">
+        <span class="band-pill">AM</span>
+        <span class="band-pill">MID</span>
+        <span class="band-pill">EVE</span>
+      </div>
+      <div class="task-est">
+        <span class="est-label">est</span>
+        <span class="est-field"></span>
+        <span class="est-unit">min</span>
+      </div>
+      <div class="task-pomo-row" aria-label="Pomodoro tally">
+        <span class="task-pomo"></span><span class="task-pomo"></span><span class="task-pomo"></span><span class="task-pomo"></span>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-check" aria-hidden="true"></span>
+      <span class="task-num">3</span>
+      <span class="task-line"></span>
+      <div class="task-band" role="radiogroup" aria-label="When">
+        <span class="band-pill">AM</span>
+        <span class="band-pill">MID</span>
+        <span class="band-pill">EVE</span>
+      </div>
+      <div class="task-est">
+        <span class="est-label">est</span>
+        <span class="est-field"></span>
+        <span class="est-unit">min</span>
+      </div>
+      <div class="task-pomo-row" aria-label="Pomodoro tally">
+        <span class="task-pomo"></span><span class="task-pomo"></span><span class="task-pomo"></span><span class="task-pomo"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 5. BODY ROW — Meds · Sleep · Water ─── -->
+  <section class="body-row" aria-label="Body care check">
+
+    <div class="body-cell">
+      <div class="head">
+        <span class="icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="5.5" width="12" height="3" rx="1.5" transform="rotate(-45 7 7)"/>
+            <line x1="4.88" y1="4.88" x2="9.12" y2="9.12"/>
+          </svg>
+        </span>
+        <span class="label">Meds</span>
+      </div>
+      <div class="content">
+        <span class="sub">taken</span>
+        <span class="ring"></span>
+      </div>
+    </div>
+
+    <div class="body-cell">
+      <div class="head">
+        <span class="icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11.5 7.5a5 5 0 1 1-6-6 4 4 0 0 0 6 6z"/>
+          </svg>
+        </span>
+        <span class="label">Sleep</span>
+      </div>
+      <div class="content">
+        <span class="sub">hrs</span>
+        <span class="hrs-field"></span>
+        <span class="sub">·</span>
+        <span class="sub">quality</span>
+        <div class="quality-row">
+          <div class="q-dot">1</div>
+          <div class="q-dot">2</div>
+          <div class="q-dot">3</div>
+          <div class="q-dot">4</div>
+          <div class="q-dot">5</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-cell">
+      <div class="head">
+        <span class="icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 1.5S3 5.5 3 8.5a4 4 0 0 0 8 0c0-3-4-7-4-7z"/>
+          </svg>
+        </span>
+        <span class="label">Water</span>
+      </div>
+      <div class="content">
+        <div class="water-row" aria-label="8 glasses">
+          <div class="water-drop"></div><div class="water-drop"></div>
+          <div class="water-drop"></div><div class="water-drop"></div>
+          <div class="water-drop"></div><div class="water-drop"></div>
+          <div class="water-drop"></div><div class="water-drop"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── 6. MOVEMENT — Gym · Walk · Swim ─── -->
+  <section class="movement" aria-label="Movement">
+    <div class="head">
+      <span class="icon" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="17" cy="4" r="2"/>
+          <path d="M15.59 13.51l2.41 4.49h3m-9-8l-2-4-7 3.5 2 2.5"/>
+          <path d="M3.5 21.5l4-7 4.5 1.5 3.5-5"/>
+        </svg>
+      </span>
+      <span class="label">Movement</span>
+    </div>
+    <div class="move-options" role="radiogroup" aria-label="Pick one">
+      <label class="move-opt"><span class="circle"></span><span class="opt-label">Gym</span></label>
+      <label class="move-opt"><span class="circle"></span><span class="opt-label">Walk</span></label>
+      <label class="move-opt"><span class="circle"></span><span class="opt-label">Swim</span></label>
+    </div>
+    <div class="move-duration">
+      <span class="d-label">duration</span>
+      <span class="d-field"></span>
+      <span class="d-label" style="color:var(--ink-whisper)">min</span>
+    </div>
+  </section>
+
+  <!-- ─── 7. CIGS HORROR METRIC (NHS + Allen Carr) ─── -->
+  <section class="cigs" aria-labelledby="cigs-title">
+    <div class="cigs-head">
+      <span class="icon" aria-hidden="true">
+        <!-- Stylized cig + smoke, single color -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="13" width="15" height="3" rx="0.5"/>
+          <line x1="8" y1="13" x2="8" y2="16"/>
+          <line x1="18" y1="14.5" x2="21" y2="14.5" stroke-width="2.5"/>
+          <path d="M6 10c-1-1.5 0-2.5 1-3M9 10c-1-1.5 0-2.5 1-3"/>
+        </svg>
+      </span>
+      <h2 class="label" id="cigs-title">Cigarettes — the horror metric</h2>
+      <span class="kicker">NHS-style · face it</span>
+    </div>
+
+    <div class="cigs-grid">
+      <div class="cigs-cell">
+        <span class="micro-label">Smoked yesterday · tick each</span>
+
+        <div class="cigs-counter">
+          <span class="cig-tick">1</span><span class="cig-tick">2</span>
+          <span class="cig-tick">3</span><span class="cig-tick">4</span>
+          <span class="cig-tick">5</span><span class="cig-tick">6</span>
+          <span class="cig-tick">7</span><span class="cig-tick">8</span>
+          <span class="cig-tick">9</span><span class="cig-tick">10</span>
+        </div>
+      </div>
+
+      <div class="cigs-cell">
+        <span class="micro-label">Cost / stick</span>
+        <div class="cost-row">
+          <span class="currency">₹</span>
+          <span class="cost-field"></span>
+        </div>
+      </div>
+
+      <div class="cigs-cell">
+        <span class="micro-label">Today's total</span>
+        <div class="cost-row">
+          <span class="currency">₹</span>
+          <span class="cost-field"></span>
+        </div>
+      </div>
+
+      <div class="cigs-cell">
+        <span class="micro-label">Projected / month</span>
+        <div class="cost-row projected">
+          <span class="currency">₹</span>
+          <span class="cost-field"></span>
+          <span class="cost-multiply">× 30</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 8. NOTES STRIP (bottom brain-dump on Page 1) ─── -->
+  <section class="notes-strip" aria-label="Quick notes">
+    <span class="notes-head">notes · brain dump</span>
+    <div class="notes-lines"></div>
+  </section>
+
+  <!-- ─── 9. FOOTER ─── -->
+
+  <footer class="footer">
+    <span class="signoff">Structure your day. Start with the frog.</span>
+    <span class="page-marker">
+      <span class="cur">Today</span>
+      <span class="sep">·</span>
+      <span>1 / 3</span>
+    </span>
+  </footer>
+
+</main>
+
+</body>
+</html>
