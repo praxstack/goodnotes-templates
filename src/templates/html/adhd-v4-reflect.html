@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Planner v4 — Reflect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   ADHD PLANNER v4 — PAGE 2 of 3  ·  "REFLECT"
+   Warm Analog Editorial — evening companion to Today
+
+   RESEARCH-GROUNDED
+   ✦ Newport "done today" + "moved to tomorrow" → evidence against
+     "I did nothing" (CBT) and anti-shame for missed tasks (Neff)
+   ✦ Ramsay & Rostain 2015 → 3-column shortened CBT thought-flip
+   ✦ Martell Behavioral Activation → Self-Care Check as BA anchor
+   ✦ Clever Fox "wins" framing → Wins / Grateful / Proud triad
+   ✦ Marlatt urge-surfing → Craving Log (clay, cigs-specific)
+   ✦ Newport shutdown → Tomorrow's Frog (pre-commit)
+   ✦ Neff sign-off → "You showed up. That counts."
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 13mm;
+
+  --paper:           #F9F5EC;
+  --paper-dark:      #F0EAD9;
+  --ink:             #2A2824;
+  --ink-soft:        #4A453D;
+  --ink-quiet:       #7D7668;
+  --ink-whisper:     #B5AD9F;
+
+  --sage:            #7B9476;
+  --sage-ink:        #4E6249;
+  --sage-tint:       rgba(123, 148, 118, 0.08);
+  --sage-edge:       rgba(123, 148, 118, 0.22);
+
+  --clay:            #B85A44;
+  --clay-ink:        #8A3E2E;
+  --clay-tint:       rgba(184, 90, 68, 0.07);
+  --clay-edge:       rgba(184, 90, 68, 0.25);
+
+  --amber:           #C9884A;
+  --amber-ink:       #8F5D28;
+  --amber-tint:      rgba(201, 136, 74, 0.09);
+  --amber-edge:      rgba(201, 136, 74, 0.25);
+
+  --lavender:        #B6A9CB;
+  --lavender-ink:    #6B5D86;
+  --lavender-tint:   rgba(182, 169, 203, 0.12);
+  --lavender-edge:   rgba(182, 169, 203, 0.30);
+
+  --font-serif: 'Fraunces', 'Baskerville', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 9mm; --s6: 13mm;
+  --dot: var(--ink-whisper);
+
+  --shadow-page:  0 1px 2px rgba(42, 40, 36, 0.04),
+                  0 8px 32px rgba(42, 40, 36, 0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  /* `overflow: clip` — same visual as `hidden` for print, no scroll container.
+     Flip to `visible` via `data-debug="overflow"` on <html> to debug A4 bleed. */
+  overflow: clip;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  gap: 2.8mm; /* tighter than --s3 so Page 2 fits A4 */
+}
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+.icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon svg { display: block; }
+
+.dotline {
+  border: none;
+  border-bottom: 1.2px dotted var(--dot);
+  min-height: 5mm;
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════════════════════
+   1. MASTHEAD  (lavender-edition variant of Page 1)
+   ═══════════════════════════════════════════════════════ */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--s2);
+  border-bottom: 0.6px solid var(--ink);
+  flex-shrink: 0;
+}
+
+.masthead-left .kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--lavender-ink);
+  margin-bottom: 2mm;
+}
+
+.masthead-left .title {
+  font-family: var(--font-serif);
+  font-size: 26pt;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+
+.masthead-left .subtitle {
+  font-family: var(--font-serif);
+  font-size: 8.5pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-quiet);
+  margin-top: 1.5mm;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+
+
+.masthead-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+  align-items: flex-end;
+}
+.date-row { display: flex; align-items: baseline; gap: 2.5mm; }
+.date-row .label {
+  font-family: var(--font-mono); font-size: 6pt;
+  text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet);
+}
+.date-row .field {
+  border-bottom: 0.6px solid var(--ink);
+  min-width: 34mm; height: 4.5mm;
+  font-family: var(--font-mono); font-size: 9pt; color: var(--ink);
+}
+
+.day-counter {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  letter-spacing: 0.08em;
+}
+.day-counter .big {
+  font-size: 10pt;
+  color: var(--ink);
+  font-weight: 600;
+}
+.day-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+
+.day-of-week {
+  display: flex;
+  gap: 1.2mm;
+  margin-top: 1mm;
+}
+.dow {
+  width: 4.4mm;
+  height: 4.4mm;
+  border-radius: 50%;
+  border: 0.6px solid var(--ink-whisper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  background: transparent;
+}
+
+.time-stamp {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--ink-quiet);
+  letter-spacing: 0.08em;
+}
+.time-stamp .label-inline { text-transform: uppercase; letter-spacing: 0.15em; }
+.time-stamp .hour-field {
+  border-bottom: 0.5px solid var(--ink-whisper);
+  width: 14mm;
+  height: 3.5mm;
+  display: inline-block;
+  margin-left: 1.5mm;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Permission banner — Neff self-compassion (consistency w/ Page 1)
+   ═══════════════════════════════════════════════════════ */
+.permission {
+  background: var(--sage-tint);
+  border-left: 2px solid var(--sage);
+  padding: 2.5mm var(--s3);
+  font-family: var(--font-serif);
+  font-size: 8pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--sage-ink);
+  letter-spacing: 0.01em;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  flex-shrink: 0;
+}
+.permission .glyph {
+  color: var(--sage);
+  font-style: normal;
+  margin: 0 1.5mm;
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Subtle explainer under card headings — "simpler words"
+   ═══════════════════════════════════════════════════════ */
+.explainer {
+  font-family: var(--font-serif);
+  font-size: 7pt;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin-top: -1mm;
+  margin-bottom: 2.5mm;
+  opacity: 0.75;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.thought-flip .explainer { color: var(--amber-ink); }
+.craving      .explainer { color: var(--clay-ink); }
+
+/* ═══════════════════════════════════════════════════════
+   "Did I do ONE thing?" — Martell/Jacobson BA anchor
+   ═══════════════════════════════════════════════════════ */
+.ba-anchor {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 1.5mm 0 0;
+  margin-top: 1mm;
+  border-top: 0.4px solid var(--ink-whisper);
+  flex-shrink: 0;
+}
+.ba-anchor .ba-check {
+  width: 4.2mm;
+  height: 4.2mm;
+  border: 1.2px solid var(--sage);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.ba-anchor .ba-label {
+  font-family: var(--font-serif);
+  font-size: 9pt;
+  font-weight: 500;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+  letter-spacing: -0.005em;
+}
+.ba-anchor .ba-label em {
+  font-style: italic;
+  color: var(--sage-ink);
+  font-weight: 400;
+}
+.ba-anchor .ba-line {
+  flex: 1;
+  border: none;
+  border-bottom: 1px dotted var(--ink-whisper);
+  height: 5mm;
+}
+.ba-anchor .ba-hint {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-quiet);
+  flex-shrink: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   2. TWO-COL DONE + MOVED
+   Newport + Neff — evidence log / anti-shame handoff
+   ═══════════════════════════════════════════════════════ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s4);
+  flex-shrink: 0;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+.col-head {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  padding-bottom: 1.5mm;
+  border-bottom: 0.4px solid var(--ink-whisper);
+}
+
+.col-head .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+}
+
+.col-head .title {
+  font-family: var(--font-serif);
+  font-size: 14pt;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+
+.col-head .counter {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  color: var(--ink-quiet);
+  letter-spacing: 0.1em;
+}
+
+.line-row {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 0.8mm 0;
+}
+
+.line-row .bullet {
+  width: 3mm;
+  height: 3mm;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.line-row.done .bullet {
+  color: var(--sage);
+}
+.line-row.done .bullet svg { display: block; }
+.line-row.moved .bullet {
+  width: 3mm; height: 3mm;
+  font-family: var(--font-serif);
+  font-size: 9pt;
+  font-weight: 500;
+  color: var(--lavender-ink);
+  line-height: 0.6;
+}
+
+.line-row .line {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid var(--ink-whisper);
+  height: 6mm;
+}
+.col.moved .line { border-bottom-color: var(--lavender-edge); }
+.col.done .line  { border-bottom-color: var(--sage-edge); }
+
+/* ═══════════════════════════════════════════════════════
+   3. MOOD + ENERGY row
+   End-of-day re-rate — PHQ-2 Lite sibling
+   ═══════════════════════════════════════════════════════ */
+.mood-energy-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--s3);
+  padding: 2.5mm 0;
+  border-top: 0.6px solid var(--ink-whisper);
+  border-bottom: 0.6px solid var(--ink-whisper);
+  flex-shrink: 0;
+}
+
+
+.mood-card, .energy-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.mini-head {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+}
+.mini-head .micro {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-quiet);
+}
+.mini-head .serif {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 72;
+}
+
+.mood-faces {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1mm;
+}
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1mm;
+  flex: 1;
+}
+.mood-option .face-icon { color: var(--ink-quiet); }
+.mood-option .radio {
+  width: 3mm;
+  height: 3mm;
+  border-radius: 50%;
+  border: 0.9px solid var(--ink-quiet);
+  background: transparent;
+}
+.mood-option .lbl {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.energy-blocks {
+  display: flex;
+  gap: 1mm;
+}
+.e-block {
+  flex: 1;
+  height: 6mm;
+  border: 0.8px solid var(--ink-whisper);
+  border-radius: 1px;
+  background: transparent;
+}
+.e-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  color: var(--ink-whisper);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 0.5mm;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. THOUGHT FLIP — amber CBT (Ramsay & Rostain 2015)
+   Brain telling me / Is that true? / Kinder way
+   ═══════════════════════════════════════════════════════ */
+.thought-flip {
+  background: var(--amber-tint);
+  border: 0.8px solid var(--amber-edge);
+  border-radius: 2px;
+  padding: 3mm var(--s3);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.thought-flip::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: var(--amber);
+}
+
+.tf-head {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  margin-bottom: 2.5mm;
+}
+.tf-head .icon { color: var(--amber-ink); }
+.tf-head .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+}
+.tf-head .title {
+  font-family: var(--font-serif);
+  font-size: 11pt;
+  font-weight: 500;
+  color: var(--amber-ink);
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 72, "SOFT" 40;
+}
+.tf-head .method-badge {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  color: var(--amber-ink);
+  opacity: 0.7;
+  letter-spacing: 0.1em;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.tf-prompt {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+  margin-bottom: 1.5mm;
+}
+.tf-prompt .p-num {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-weight: 400;
+  color: var(--amber);
+  width: 4mm;
+  font-variation-settings: "opsz" 72;
+}
+.tf-prompt .p-label {
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  font-weight: 500;
+  color: var(--amber-ink);
+  white-space: nowrap;
+}
+.tf-prompt .p-line {
+  flex: 1;
+  border: none;
+  border-bottom: 1.2px dotted var(--amber-edge);
+  height: 5.5mm;
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. SELF-CARE CHECK — lavender (Martell BA)
+   ═══════════════════════════════════════════════════════ */
+.self-care {
+  background: var(--lavender-tint);
+  border: 0.8px solid var(--lavender-edge);
+  border-radius: 2px;
+  padding: 2.5mm var(--s3);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+
+.sc-head {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.sc-head .icon { color: var(--lavender-ink); }
+.sc-head .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--lavender-ink);
+}
+.sc-head .title {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--lavender-ink);
+  font-variation-settings: "opsz" 72;
+}
+
+.sc-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s3);
+}
+.sc-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+.sc-item .circle {
+  width: 4mm;
+  height: 4mm;
+  border-radius: 50%;
+  border: 1px solid var(--lavender-ink);
+  background: transparent;
+  flex-shrink: 0;
+}
+.sc-item .lbl {
+  font-family: var(--font-sans);
+  font-size: 8pt;
+  font-weight: 500;
+  color: var(--lavender-ink);
+}
+
+/* ═══════════════════════════════════════════════════════
+   6. WINS · GRATEFUL · PROUD — triad
+   Clever Fox wins framing
+   ═══════════════════════════════════════════════════════ */
+.triad {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.triad-row {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 1mm 0;
+}
+.triad-row .t-label {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  min-width: 24mm;
+}
+.triad-row .t-label .icon { color: var(--ink); }
+.triad-row .t-label .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-quiet);
+  display: block;
+}
+.triad-row .t-label .word {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 72;
+}
+
+.triad-line {
+  flex: 1;
+  border: none;
+  border-bottom: 1.2px dotted var(--dot);
+  height: 6mm;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7. CRAVING LOG — clay (Marlatt urge-surfing)
+   ═══════════════════════════════════════════════════════ */
+.craving {
+  background: var(--clay-tint);
+  border: 0.8px solid var(--clay-edge);
+  border-radius: 2px;
+  padding: 2.5mm var(--s3) 2.5mm;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.craving::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: var(--clay);
+}
+
+.cv-head {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  margin-bottom: 2.5mm;
+}
+.cv-head .icon { color: var(--clay); }
+.cv-head .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--clay);
+}
+.cv-head .title {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--clay-ink);
+  font-variation-settings: "opsz" 72;
+}
+.cv-head .method {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  color: var(--clay-ink);
+  opacity: 0.7;
+  letter-spacing: 0.12em;
+}
+
+.cv-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 0.8fr 1fr 1fr;
+  gap: var(--s3);
+}
+
+.cv-cell { display: flex; flex-direction: column; gap: 1.5mm; }
+.cv-cell .micro {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clay-ink);
+  opacity: 0.8;
+}
+
+.cv-field {
+  border-bottom: 1px solid var(--clay-edge);
+  height: 6mm;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  color: var(--clay-ink);
+}
+
+.cv-intensity {
+  display: flex;
+  gap: 0.8mm;
+}
+.cv-box {
+  width: 4.5mm;
+  height: 4.5mm;
+  border: 0.9px solid var(--clay);
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 4.5pt;
+  font-weight: 500;
+  color: var(--clay);
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════
+   8. TOMORROW'S FROG (pre-commit)
+   Newport shutdown ritual
+   ═══════════════════════════════════════════════════════ */
+.tomorrow {
+  background: var(--sage-tint);
+  border: 0.8px solid var(--sage-edge);
+  border-radius: 2px;
+  padding: 2.5mm var(--s3);
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.tomorrow::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: var(--sage);
+}
+.tomorrow .icon { color: var(--sage-ink); }
+.tomorrow .label-group { min-width: 40mm; }
+.tomorrow .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--sage);
+}
+.tomorrow .title {
+  font-family: var(--font-serif);
+  font-size: 11pt;
+  font-weight: 500;
+  color: var(--sage-ink);
+  letter-spacing: -0.005em;
+  margin-top: 0.5mm;
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+.tomorrow .field {
+  flex: 1;
+  border: none;
+  border-bottom: 1.5px solid var(--sage);
+  height: 7mm;
+}
+
+/* ═══════════════════════════════════════════════════════
+   9. FOOTER
+   ═══════════════════════════════════════════════════════ */
+.footer {
+  margin-top: auto;
+  padding-top: var(--s2);
+  border-top: 0.4px solid var(--ink-whisper);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.footer .signoff {
+  font-family: var(--font-serif);
+  font-size: 9pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.footer .page-marker {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.footer .page-marker .cur { color: var(--ink); font-weight: 600; }
+.footer .page-marker .sep { color: var(--ink-whisper); margin: 0 1mm; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 2 / 3  ·  REFLECT  ·  Evening process  ·  ADHD v4 Warm-Analog
+     ═══════════════════════════════════════════════════════════════════ -->
+<main class="page" data-template="adhd-v4-reflect" role="document">
+
+  <!-- 1. MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-left">
+      <div class="kicker">The Daily · Evening Edition</div>
+      <h1 class="title">Reflect</h1>
+      <div class="subtitle">Notice. Learn. Be kind to yourself.</div>
+    </div>
+    <div class="masthead-right">
+      <div class="date-row">
+        <span class="label">Date</span>
+        <span class="field" data-inject="date"></span>
+      </div>
+      <div class="day-counter">
+        <span>day&nbsp;</span><span class="big" data-inject="doy">___</span><span class="slash">/</span><span>365</span>
+      </div>
+      <div class="day-of-week" aria-label="Day of week">
+        <div class="dow">M</div><div class="dow">T</div><div class="dow">W</div><div class="dow">T</div><div class="dow">F</div><div class="dow">S</div><div class="dow">S</div>
+      </div>
+      <div class="time-stamp">
+        <span class="label-inline">Filled at</span>
+        <span class="hour-field"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Permission banner (Neff) — matches Page 1 for consistency -->
+  <aside class="permission">
+    <span class="glyph">✳</span>Notice, don't judge. Leaving parts blank is still showing up.<span class="glyph">✳</span>
+  </aside>
+
+  <!-- 2. DONE + MOVED two-col -->
+
+  <section class="two-col" aria-label="Done and moved">
+
+    <div class="col done">
+      <div class="col-head">
+        <span class="kicker">evidence log</span>
+        <span class="title">Done today</span>
+        <span class="counter">4 slots</span>
+      </div>
+      <div class="line-row done">
+        <span class="bullet" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,7.5 5.5,10.5 11.5,3.5"/></svg>
+        </span>
+        <span class="line"></span>
+      </div>
+      <div class="line-row done">
+        <span class="bullet" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,7.5 5.5,10.5 11.5,3.5"/></svg>
+        </span>
+        <span class="line"></span>
+      </div>
+      <div class="line-row done">
+        <span class="bullet" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,7.5 5.5,10.5 11.5,3.5"/></svg>
+        </span>
+        <span class="line"></span>
+      </div>
+      <div class="line-row done">
+        <span class="bullet" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5,7.5 5.5,10.5 11.5,3.5"/></svg>
+        </span>
+        <span class="line"></span>
+      </div>
+    </div>
+
+    <div class="col moved">
+      <div class="col-head">
+        <span class="kicker">no shame · no red X</span>
+        <span class="title">Moved to tomorrow</span>
+        <span class="counter">4 slots</span>
+      </div>
+      <div class="line-row moved">
+        <span class="bullet" aria-hidden="true">→</span>
+        <span class="line"></span>
+      </div>
+      <div class="line-row moved">
+        <span class="bullet" aria-hidden="true">→</span>
+        <span class="line"></span>
+      </div>
+      <div class="line-row moved">
+        <span class="bullet" aria-hidden="true">→</span>
+        <span class="line"></span>
+      </div>
+      <div class="line-row moved">
+        <span class="bullet" aria-hidden="true">→</span>
+        <span class="line"></span>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- 3. MOOD + ENERGY -->
+  <section class="mood-energy-row">
+
+    <div class="mood-card">
+      <div class="mini-head">
+        <span class="micro">how am I now</span>
+        <span class="serif">Mood</span>
+      </div>
+      <div class="mood-faces">
+        <div class="mood-option">
+          <span class="face-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="9" r="7.5"/>
+              <circle cx="6.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <circle cx="11.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <path d="M6 13.5c.8-1.5 1.8-2.2 3-2.2s2.2.7 3 2.2"/>
+            </svg>
+          </span>
+          <span class="radio"></span>
+          <span class="lbl">Rough</span>
+        </div>
+        <div class="mood-option">
+          <span class="face-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="9" r="7.5"/>
+              <circle cx="6.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <circle cx="11.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <path d="M6.5 12.5c.7-.9 1.5-1.3 2.5-1.3s1.8.4 2.5 1.3"/>
+            </svg>
+          </span>
+          <span class="radio"></span>
+          <span class="lbl">Low</span>
+        </div>
+        <div class="mood-option">
+          <span class="face-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="9" r="7.5"/>
+              <circle cx="6.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <circle cx="11.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <line x1="6.5" y1="12" x2="11.5" y2="12"/>
+            </svg>
+          </span>
+          <span class="radio"></span>
+          <span class="lbl">Meh</span>
+        </div>
+        <div class="mood-option">
+          <span class="face-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="9" r="7.5"/>
+              <circle cx="6.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <circle cx="11.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <path d="M6.5 11c.7.9 1.5 1.3 2.5 1.3s1.8-.4 2.5-1.3"/>
+            </svg>
+          </span>
+          <span class="radio"></span>
+          <span class="lbl">Okay</span>
+        </div>
+        <div class="mood-option">
+          <span class="face-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="9" r="7.5"/>
+              <circle cx="6.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <circle cx="11.5" cy="7.5" r="0.7" fill="currentColor" stroke="none"/>
+              <path d="M5.5 10.5c1 1.8 2.2 2.5 3.5 2.5s2.5-.7 3.5-2.5"/>
+            </svg>
+          </span>
+          <span class="radio"></span>
+          <span class="lbl">Good</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="energy-card">
+      <div class="mini-head">
+        <span class="micro">level</span>
+        <span class="serif">Energy</span>
+      </div>
+      <div class="energy-blocks">
+        <div class="e-block"></div>
+        <div class="e-block"></div>
+        <div class="e-block"></div>
+        <div class="e-block"></div>
+        <div class="e-block"></div>
+      </div>
+      <div class="e-scale-labels"><span>empty</span><span>full</span></div>
+    </div>
+
+  </section>
+
+  <!-- 4. THOUGHT FLIP (CBT) -->
+  <section class="thought-flip">
+    <div class="tf-head">
+      <span class="icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a5 5 0 0 1 4.42 2.65A4.5 4.5 0 0 1 20 9a4 4 0 0 1-.68 7.74A5 5 0 0 1 12 22"/>
+          <path d="M12 2a5 5 0 0 0-4.42 2.65A4.5 4.5 0 0 0 4 9a4 4 0 0 0 .68 7.74A5 5 0 0 0 12 22"/>
+        </svg>
+      </span>
+      <div>
+        <div class="kicker">CBT · 3-column</div>
+        <div class="title">Thought flip</div>
+      </div>
+      <div class="method-badge">Ramsay &amp; Rostain<br>ADHD adaptation</div>
+    </div>
+    <div class="explainer">When a harsh thought loops, write it down, check it, rewrite it kinder.</div>
+
+    <div class="tf-prompt">
+
+      <span class="p-num">1</span>
+      <span class="p-label">Brain's telling me:</span>
+      <span class="p-line"></span>
+    </div>
+    <div class="tf-prompt">
+      <span class="p-num">2</span>
+      <span class="p-label">Is that actually true?</span>
+      <span class="p-line"></span>
+    </div>
+    <div class="tf-prompt">
+      <span class="p-num">3</span>
+      <span class="p-label">A kinder way to see it:</span>
+      <span class="p-line"></span>
+    </div>
+  </section>
+
+  <!-- 5. SELF-CARE CHECK -->
+  <section class="self-care">
+    <div class="sc-head">
+      <span class="icon" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22V10"/>
+          <path d="M6 14c0-3.31 2.69-6 6-6"/>
+          <path d="M18 10c0 3.31-2.69 6-6 6"/>
+          <path d="M12 10c2-4 6-4 8-2 0 0-2 4-8 2"/>
+          <path d="M12 10c-2-4-6-4-8-2 0 0 2 4 8 2"/>
+        </svg>
+      </span>
+      <div>
+        <div class="kicker">behavioral activation</div>
+        <div class="title">Self-care check</div>
+      </div>
+    </div>
+    <div class="sc-items">
+      <label class="sc-item"><span class="circle"></span><span class="lbl">Ate something</span></label>
+      <label class="sc-item"><span class="circle"></span><span class="lbl">Went outside</span></label>
+      <label class="sc-item"><span class="circle"></span><span class="lbl">Something fun</span></label>
+      <label class="sc-item"><span class="circle"></span><span class="lbl">Kind to myself</span></label>
+    </div>
+
+    <!-- BA anchor (Martell / Jacobson) — action precedes motivation -->
+    <div class="ba-anchor" role="group" aria-label="One-thing anchor">
+      <span class="ba-check" aria-hidden="true"></span>
+      <span class="ba-label">Did I do <em>one</em> thing today?</span>
+      <span class="ba-line"></span>
+      <span class="ba-hint">it counts · even tiny</span>
+    </div>
+  </section>
+
+  <!-- 6. WINS · GRATEFUL · PROUD triad -->
+
+  <section class="triad">
+    <div class="triad-row">
+      <div class="t-label">
+        <span class="icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+        </span>
+        <div>
+          <span class="kicker">today's</span>
+          <span class="word">Win</span>
+        </div>
+      </div>
+      <span class="triad-line"></span>
+    </div>
+    <div class="triad-row">
+      <div class="t-label">
+        <span class="icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </span>
+        <div>
+          <span class="kicker">one thing</span>
+          <span class="word">Grateful for</span>
+        </div>
+      </div>
+      <span class="triad-line"></span>
+    </div>
+    <div class="triad-row">
+      <div class="t-label">
+        <span class="icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 14s1-2 4-2 4 4 7 4 4-2 4-2"/>
+            <path d="M10.1 8.3C10.5 6.4 12 5 14 5c2.2 0 4 1.8 4 4 0 .9-.3 1.7-.8 2.4"/>
+            <path d="M7.5 12.5c-.5-1.1-.5-2.5.4-3.5 1-1.2 2.7-1.5 4-1"/>
+          </svg>
+        </span>
+        <div>
+          <span class="kicker">I am</span>
+          <span class="word">Proud of</span>
+        </div>
+      </div>
+      <span class="triad-line"></span>
+    </div>
+  </section>
+
+  <!-- 7. CRAVING LOG (clay — urge surfing) -->
+  <section class="craving">
+    <div class="cv-head">
+      <span class="icon" aria-hidden="true">
+        <!-- wave icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 15c3 0 3-3 6-3s3 3 6 3 3-3 6-3 3 3 6 3"/>
+          <path d="M2 11c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/>
+        </svg>
+      </span>
+      <div>
+        <div class="kicker">urge surfing</div>
+        <div class="title">Craving log</div>
+      </div>
+      <div class="method">Marlatt · surf the wave</div>
+    </div>
+    <div class="explainer">Fill when a craving hits — catching the pattern helps you beat it.</div>
+
+    <div class="cv-grid">
+
+      <div class="cv-cell">
+        <span class="micro">Worst craving · time</span>
+        <div class="cv-field"></div>
+      </div>
+      <div class="cv-cell">
+        <span class="micro">Intensity 1–10</span>
+        <div class="cv-intensity">
+          <span class="cv-box">1</span><span class="cv-box">2</span><span class="cv-box">3</span>
+          <span class="cv-box">4</span><span class="cv-box">5</span><span class="cv-box">6</span>
+          <span class="cv-box">7</span><span class="cv-box">8</span><span class="cv-box">9</span>
+          <span class="cv-box">10</span>
+        </div>
+      </div>
+      <div class="cv-cell">
+        <span class="micro">What I did instead</span>
+        <div class="cv-field"></div>
+      </div>
+      <div class="cv-cell">
+        <span class="micro">Next time I'll try</span>
+        <div class="cv-field"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. TOMORROW'S FROG (pre-commit) -->
+  <section class="tomorrow">
+    <span class="icon" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="14" rx="9" ry="7"/>
+        <circle cx="7" cy="8.5" r="3"/>
+        <circle cx="17" cy="8.5" r="3"/>
+        <circle cx="7" cy="8" r="1" fill="currentColor"/>
+        <circle cx="17" cy="8" r="1" fill="currentColor"/>
+      </svg>
+    </span>
+    <div class="label-group">
+      <div class="kicker">shutdown ritual · Newport</div>
+      <div class="title">Tomorrow's frog</div>
+    </div>
+    <div class="field"></div>
+  </section>
+
+  <!-- 9. FOOTER -->
+  <footer class="footer">
+    <span class="signoff">You showed up. That counts.</span>
+    <span class="page-marker">
+      <span class="cur">Reflect</span>
+      <span class="sep">·</span>
+      <span>2 / 3</span>
+    </span>
+  </footer>
+
+</main>
+
+</body>
+</html>

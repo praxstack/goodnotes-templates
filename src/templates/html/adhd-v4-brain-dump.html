@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADHD Planner v4 — Brain Dump</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   ADHD PLANNER v4 — PAGE 3 of 3  ·  "BRAIN DUMP"
+   Warm Analog Editorial — mostly blank, by design
+
+   Structure (per user spec: "mostly blank, no columns, no demo sticker"):
+   ✦ Masthead (matches Page 1 + 2 — day counter + dow circles)
+   ✦ Permission banner (Neff, consistency)
+   ✦ Tiny inline hint — short sentence + sticker names as soft italic
+   ✦ Thin horizontal rule
+   ✦ Large dot-grid canvas (~85% of page height) with ruler ticks
+   ✦ Corner printer cut marks (editorial signature)
+   ✦ Footer sign-off
+
+   Full 36-sticker catalog ships separately in Phase 4.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 13mm;
+
+  --paper:           #F9F5EC;
+  --ink:             #2A2824;
+  --ink-soft:        #4A453D;
+  --ink-quiet:       #7D7668;
+  --ink-whisper:     #B5AD9F;
+
+  --sage:            #7B9476;
+  --sage-ink:        #4E6249;
+  --sage-tint:       rgba(123, 148, 118, 0.08);
+
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm; --s5: 9mm; --s6: 13mm;
+
+  --shadow-page: 0 1px 2px rgba(42, 40, 36, 0.04),
+                 0 8px 32px rgba(42, 40, 36, 0.08);
+
+  /* Dot grid — 5mm pitch */
+  --grid-color: rgba(42, 40, 36, 0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  /* `overflow: clip` — same visual as `hidden` for print, no scroll container.
+     Flip to `visible` via `data-debug="overflow"` on <html> to debug A4 bleed. */
+  overflow: clip;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Corner cut marks ─── */
+.cutmark {
+  position: absolute;
+  width: 3mm;
+  height: 3mm;
+  border-color: var(--ink-whisper);
+  pointer-events: none;
+  z-index: 3;
+}
+.cutmark.tl { top: 5mm; left: 5mm;     border-top: 0.4px solid; border-left: 0.4px solid; }
+.cutmark.tr { top: 5mm; right: 5mm;    border-top: 0.4px solid; border-right: 0.4px solid; }
+.cutmark.bl { bottom: 5mm; left: 5mm;  border-bottom: 0.4px solid; border-left: 0.4px solid; }
+.cutmark.br { bottom: 5mm; right: 5mm; border-bottom: 0.4px solid; border-right: 0.4px solid; }
+
+/* ═══════════════════════════════════════════════════════
+   1. MASTHEAD — matches Page 1 & 2
+   ═══════════════════════════════════════════════════════ */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--s2);
+  border-bottom: 0.6px solid var(--ink);
+  flex-shrink: 0;
+}
+.masthead-left .kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+  margin-bottom: 2mm;
+}
+.masthead-left .title {
+  font-family: var(--font-serif);
+  font-size: 28pt;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.masthead-left .subtitle {
+  font-family: var(--font-serif);
+  font-size: 9pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-quiet);
+  margin-top: 1.5mm;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.masthead-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+  align-items: flex-end;
+}
+.date-row { display: flex; align-items: baseline; gap: 2.5mm; }
+.date-row .label {
+  font-family: var(--font-mono); font-size: 6pt;
+  text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet);
+}
+.date-row .field {
+  border-bottom: 0.6px solid var(--ink);
+  min-width: 34mm; height: 4.5mm;
+  font-family: var(--font-mono); font-size: 9pt; color: var(--ink);
+}
+.day-counter {
+  font-family: var(--font-mono);
+  font-size: 7pt; font-weight: 500;
+  color: var(--ink-quiet); letter-spacing: 0.08em;
+}
+.day-counter .big { font-size: 10pt; color: var(--ink); font-weight: 600; }
+.day-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+.day-of-week { display: flex; gap: 1.2mm; margin-top: 1mm; }
+.dow {
+  width: 4.4mm; height: 4.4mm;
+  border-radius: 50%;
+  border: 0.6px solid var(--ink-whisper);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 5pt; font-weight: 500;
+  color: var(--ink-quiet);
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. PERMISSION BANNER (Neff)
+   ═══════════════════════════════════════════════════════ */
+.permission {
+  background: var(--sage-tint);
+  border-left: 2px solid var(--sage);
+  padding: 2.5mm var(--s3);
+  font-family: var(--font-serif);
+  font-size: 8pt;
+  font-style: italic;
+  color: var(--sage-ink);
+  letter-spacing: 0.01em;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  flex-shrink: 0;
+}
+.permission .glyph {
+  color: var(--sage); font-style: normal; margin: 0 1.5mm; opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. TINY HINT STRIP — one line only, soft italic
+   ═══════════════════════════════════════════════════════ */
+.hint-strip {
+  display: flex;
+  align-items: baseline;
+  gap: 2.5mm;
+  padding: 0.5mm 0;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.hint-strip .label {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-quiet);
+  white-space: nowrap;
+}
+.hint-strip .text {
+  font-family: var(--font-serif);
+  font-size: 8pt;
+  font-style: italic;
+  color: var(--ink-quiet);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.hint-strip .text em {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-size: 7.5pt;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. DOT-GRID CANVAS — the whole rest of the page
+   ═══════════════════════════════════════════════════════ */
+.canvas {
+  flex: 1;
+  position: relative;
+  background-image: radial-gradient(circle, var(--grid-color) 0.35mm, transparent 0.35mm);
+  background-size: 5mm 5mm;
+  background-position: 0 0;
+  padding-left: 7mm; /* room for ruler ticks */
+  min-height: 180mm;
+}
+
+/* Vintage margin ruler — tick every 10mm */
+.canvas::before {
+  content: "";
+  position: absolute;
+  left: 1.5mm;
+  top: 0; bottom: 0;
+  width: 2.5mm;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 9.3mm,
+    var(--ink-quiet) 9.3mm,
+    var(--ink-quiet) 9.7mm,
+    transparent 9.7mm,
+    transparent 10mm
+  );
+  opacity: 0.5;
+}
+
+/* Bolder tick every 50mm */
+.canvas::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0; bottom: 0;
+  width: 5mm;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 49mm,
+    var(--ink-quiet) 49mm,
+    var(--ink-quiet) 50mm,
+    transparent 50mm
+  );
+  opacity: 0.4;
+}
+
+.margin-tick {
+  position: absolute;
+  left: 1mm;
+  font-family: var(--font-mono);
+  font-size: 4.5pt;
+  color: var(--ink-quiet);
+  opacity: 0.65;
+  letter-spacing: 0.1em;
+  background: var(--paper);
+  padding: 0.3mm 1mm;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. FOOTER
+   ═══════════════════════════════════════════════════════ */
+.footer {
+  margin-top: auto;
+  padding-top: var(--s2);
+  border-top: 0.4px solid var(--ink-whisper);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.footer .signoff {
+  font-family: var(--font-serif);
+  font-size: 9pt;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.footer .page-marker {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--ink-quiet);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.footer .page-marker .cur { color: var(--ink); font-weight: 600; }
+.footer .page-marker .sep { color: var(--ink-whisper); margin: 0 1mm; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE 3 / 3  ·  BRAIN DUMP  ·  Mostly blank, just paper
+     ═══════════════════════════════════════════════════════════════════ -->
+<main class="page" data-template="adhd-v4-brain-dump" role="document">
+
+  <!-- Corner cut marks -->
+  <span class="cutmark tl" aria-hidden="true"></span>
+  <span class="cutmark tr" aria-hidden="true"></span>
+  <span class="cutmark bl" aria-hidden="true"></span>
+  <span class="cutmark br" aria-hidden="true"></span>
+
+  <!-- 1. MASTHEAD — consistent with Pages 1 & 2 -->
+  <header class="masthead">
+    <div class="masthead-left">
+      <div class="kicker">The Daily · Free Page</div>
+      <h1 class="title">Brain Dump</h1>
+      <div class="subtitle">Plug stickers · freewrite · doodle · whatever lands.</div>
+    </div>
+    <div class="masthead-right">
+      <div class="date-row">
+        <span class="label">Date</span>
+        <span class="field" data-inject="date"></span>
+      </div>
+      <div class="day-counter">
+        <span>day&nbsp;</span><span class="big" data-inject="doy">___</span><span class="slash">/</span><span>365</span>
+      </div>
+      <div class="day-of-week" aria-label="Day of week">
+        <div class="dow">M</div><div class="dow">T</div><div class="dow">W</div><div class="dow">T</div><div class="dow">F</div><div class="dow">S</div><div class="dow">S</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. PERMISSION BANNER (Neff) -->
+  <aside class="permission">
+    <span class="glyph">✳</span>No rules here. Say anything, or leave it all blank.<span class="glyph">✳</span>
+  </aside>
+
+  <!-- 3. TINY HINT STRIP (single line) -->
+  <section class="hint-strip" aria-label="Sticker suggestions">
+    <span class="label">stickers you could use →</span>
+    <span class="text">
+      <em>Three Good Things</em>, <em>Grateful for</em>, <em>Win Today</em>, <em>Thought Flip</em>, <em>What Would I Tell a Friend</em>, <em>If–Then Plan</em>, <em>Craving Surf</em>, <em>Wins Jar</em>, <em>Mood Dot</em>, or anything else.
+    </span>
+  </section>
+
+  <!-- 4. DOT-GRID CANVAS (biggest element on page) -->
+  <section class="canvas" aria-label="Free write canvas">
+    <span class="margin-tick" style="top: 48mm;">5</span>
+    <span class="margin-tick" style="top: 98mm;">10</span>
+    <span class="margin-tick" style="top: 148mm;">15</span>
+    <span class="margin-tick" style="top: 198mm;">20</span>
+  </section>
+
+  <!-- 5. FOOTER -->
+  <footer class="footer">
+    <span class="signoff">Say anything. Or nothing. It's just paper.</span>
+    <span class="page-marker">
+      <span class="cur">Brain Dump</span>
+      <span class="sep">·</span>
+      <span>3 / 3</span>
+    </span>
+  </footer>
+
+</main>
+
+</body>
+</html>
