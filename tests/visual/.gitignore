@@ -1,0 +1,2 @@
+# Red-overlay diffs are transient CI artifacts. Baselines ARE committed.
+diffs/
