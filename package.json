@@ -51,10 +51,10 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "commander": "^12.1.0",
+    "commander": "^14.0.3",
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^23.11.1",
-    "sharp": "^0.33.5"
+    "puppeteer": "^24.42.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
