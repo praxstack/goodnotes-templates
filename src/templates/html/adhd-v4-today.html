@@ -47,7 +47,7 @@
   --paper-dark:      #F0EAD9;   /* deeper cream for page edge */
   --ink:             #2A2824;   /* deep warm black */
   --ink-soft:        #4A453D;   /* body text */
-  --ink-quiet:       #7D7668;   /* metadata, hints */
+  --ink-quiet:       #6E6658;   /* metadata, hints */
   --ink-whisper:     #B5AD9F;   /* dotted lines, subtle rules */
 
   --sage:            #7B9476;   /* primary accent — frog, checks */
@@ -128,6 +128,12 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     box-shadow: none;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+  /* Drop card shadows — Chromium prints them as flat grey haloes. */
+  .pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav,
+  .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri,
+  .thought-flip, .self-care, .craving, .cigs, .tomorrow {
+    box-shadow: none !important;
   }
   @page { size: A4 portrait; margin: 0; }
 }
@@ -297,7 +303,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   flex-shrink: 0;
 }
 .permission .glyph {
-  color: var(--sage);
+  color: var(--sage-ink);
   font-family: var(--font-serif);
   font-style: normal;
   margin: 0 1.5mm;
@@ -348,7 +354,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--sage);
+  color: var(--sage-ink);
 }
 
 .frog-head .label-group .title {
@@ -734,7 +740,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   gap: 2.5mm;
   margin-bottom: 2.5mm;
 }
-.cigs-head .icon { color: var(--clay); }
+.cigs-head .icon { color: var(--clay-ink); }
 .cigs-head .label {
   font-family: var(--font-serif);
   font-size: 10pt;
@@ -748,7 +754,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   font-size: 5.5pt;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--clay);
+  color: var(--clay-ink);
   margin-left: auto;
 }
 
@@ -785,7 +791,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   font-family: var(--font-mono);
   font-size: 5pt;
   font-weight: 500;
-  color: var(--clay);
+  color: var(--clay-ink);
   opacity: 0.8;
   background: transparent;
 }
@@ -805,7 +811,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   display: inline-block;
   font-size: 9pt;
   font-weight: 600;
-  color: var(--clay);
+  color: var(--clay-ink);
 }
 
 .cost-row.projected .cost-field { width: 13mm; }

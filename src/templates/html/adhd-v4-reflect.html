@@ -32,7 +32,7 @@
   --paper-dark:      #F0EAD9;
   --ink:             #2A2824;
   --ink-soft:        #4A453D;
-  --ink-quiet:       #7D7668;
+  --ink-quiet:       #6E6658;
   --ink-whisper:     #B5AD9F;
 
   --sage:            #7B9476;
@@ -100,6 +100,12 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 @media print {
   body { background: white; }
   .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Drop card shadows — Chromium prints them as flat grey haloes. */
+  .pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav,
+  .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri,
+  .thought-flip, .self-care, .craving, .cigs, .tomorrow {
+    box-shadow: none !important;
+  }
   @page { size: A4 portrait; margin: 0; }
 }
 
@@ -240,7 +246,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   flex-shrink: 0;
 }
 .permission .glyph {
-  color: var(--sage);
+  color: var(--sage-ink);
   font-style: normal;
   margin: 0 1.5mm;
   opacity: 0.6;
@@ -377,7 +383,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   justify-content: center;
 }
 .line-row.done .bullet {
-  color: var(--sage);
+  color: var(--sage-ink);
 }
 .line-row.done .bullet svg { display: block; }
 .line-row.moved .bullet {
@@ -526,7 +532,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--amber);
+  color: var(--amber-ink);
 }
 .tf-head .title {
   font-family: var(--font-serif);
@@ -557,7 +563,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   font-family: var(--font-serif);
   font-size: 10pt;
   font-weight: 400;
-  color: var(--amber);
+  color: var(--amber-ink);
   width: 4mm;
   font-variation-settings: "opsz" 72;
 }
@@ -711,14 +717,14 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   gap: 2.5mm;
   margin-bottom: 2.5mm;
 }
-.cv-head .icon { color: var(--clay); }
+.cv-head .icon { color: var(--clay-ink); }
 .cv-head .kicker {
   font-family: var(--font-mono);
   font-size: 5.5pt;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--clay);
+  color: var(--clay-ink);
 }
 .cv-head .title {
   font-family: var(--font-serif);
@@ -775,7 +781,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   font-family: var(--font-mono);
   font-size: 4.5pt;
   font-weight: 500;
-  color: var(--clay);
+  color: var(--clay-ink);
   opacity: 0.8;
 }
 
@@ -810,7 +816,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--sage);
+  color: var(--sage-ink);
 }
 .tomorrow .title {
   font-family: var(--font-serif);
