@@ -174,11 +174,54 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .frog-tail .pomos { flex-wrap: nowrap; }
 .frog-tail .pomos .lbl { flex-shrink: 0; padding-right: 2.5mm; }
 .frog-tail .pomos .d { flex-shrink: 0; }
+
+/* ─── Jar mascot — page signature (design review §6.2) ─── */
+/* Scaled hand-drawn jar lives in the bottom-right of the page,
+   behind content, as the one-thing-you-remember for Midday.
+   Same treatment philosophy as Fraunces 144-opsz on the h1 */
+.jar-mascot {
+  position: absolute;
+  bottom: 4mm;
+  right: 6mm;
+  width: 42mm;
+  height: 42mm;
+  color: var(--sage-ink);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.jar-mascot svg { width: 100%; height: 100%; display: block; }
+/* Make sure every card/strip sits ABOVE the mascot */
+.masthead, .permission, .card, .doing-strip, .body-strip, .free-canvas, .footer { position: relative; z-index: 1; }
 </style>
 </head>
 <body>
 
 <main class="page" data-template="adhd-v5-midday" role="document">
+
+  <!-- Jar mascot — page signature (design review §6.2).
+       Hand-drawn style, ~42mm, bottom-right, 8% opacity behind content.
+       This is Midday's one-thing-you-remember, parallel to Today's Rx card. -->
+  <span class="jar-mascot" aria-hidden="true">
+    <svg viewBox="0 0 120 140" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Jar lid -->
+      <path d="M28 22 L92 22 L88 42 L32 42 Z"/>
+      <!-- Lid groove -->
+      <path d="M30 32 L90 32" stroke-width="1.2" opacity="0.7"/>
+      <!-- Jar body -->
+      <path d="M24 42 L96 42 L92 118 a6 6 0 0 1 -6 6 L34 124 a6 6 0 0 1 -6 -6 Z"/>
+      <!-- Jar label — simple band suggesting "processing" -->
+      <path d="M32 66 L88 66" stroke-width="1.2" opacity="0.55"/>
+      <path d="M32 76 L88 76" stroke-width="1.2" opacity="0.55"/>
+      <!-- Liquid level ~half (the whole point of 'half' on the jar chips) -->
+      <path d="M30 92 C 42 88, 78 96, 90 90 L 88 118 a6 6 0 0 1 -6 6 L 38 124 a6 6 0 0 1 -6 -6 Z"
+            fill="currentColor" fill-opacity="0.12" stroke="none"/>
+      <!-- Two bubbles in the "liquid" suggesting jar-is-alive -->
+      <circle cx="46" cy="105" r="2.5" opacity="0.7"/>
+      <circle cx="70" cy="112" r="1.8" opacity="0.5"/>
+    </svg>
+  </span>
+
 
   <!-- Masthead -->
   <header class="masthead">
