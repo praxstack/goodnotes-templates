@@ -34,7 +34,7 @@
 :root {
   --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
   --paper: #F9F5EC;
-  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #7D7668; --ink-whisper: #B5AD9F;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
   --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
   --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
   --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
@@ -52,7 +52,16 @@
 body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; color: var(--ink-soft); line-height: 1.45; font-variation-settings: "opsz" 14; -webkit-font-smoothing: antialiased; }
 .page { width: var(--page-w); height: var(--page-h); background: var(--paper); margin: 10mm auto; padding: var(--margin); position: relative; overflow: clip; box-shadow: var(--shadow-page); page-break-after: always; display: flex; flex-direction: column; gap: 3.2mm; }
 html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
-@media print { body { background: #fff; } .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; } @page { size: A4 portrait; margin: 0; } }
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Drop card shadows — Chromium prints them as flat grey haloes. */
+  .pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav,
+  .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri {
+    box-shadow: none !important;
+  }
+  @page { size: A4 portrait; margin: 0; }
+}
 
 /* ─── Masthead ─── */
 .mh { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 2mm; border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
@@ -70,7 +79,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 
 /* ─── Permission ─── */
 .perm { background: var(--sage-tint); border-left: 2px solid var(--sage); padding: 2mm var(--s3); font-family: var(--font-serif); font-style: italic; font-size: 8pt; color: var(--sage-ink); font-variation-settings: "opsz" 14, "SOFT" 100; flex-shrink: 0; border-radius: var(--r-cell); }
-.perm .g { color: var(--sage); font-style: normal; margin: 0 1.3mm; opacity: 0.6; }
+.perm .g { color: var(--sage-ink); font-style: normal; margin: 0 1.3mm; opacity: 0.6; }
 
 /* ─── Done + Moved two-col ─── */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); flex-shrink: 0; }
@@ -81,7 +90,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .col-h .ct { margin-left: auto; font-family: var(--font-mono); font-size: 5pt; color: var(--ink-quiet); letter-spacing: 0.08em; }
 .line-row { display: flex; align-items: center; gap: 1.5mm; padding: 0.5mm 0; }
 .line-row .b { width: 3mm; height: 3mm; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.line-row.done .b { color: var(--sage); }
+.line-row.done .b { color: var(--sage-ink); }
 .line-row.moved .b { font-family: var(--font-serif); font-size: 9pt; font-weight: 500; color: var(--lavender-ink); line-height: 0.6; }
 .line-row .ln { flex: 1; border: none; border-bottom: 1px solid var(--ink-whisper); height: 6mm; }
 .col.done .ln { border-bottom-color: var(--sage-edge); }
@@ -99,10 +108,10 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 /* ─── Chest heaviness (its own row, clay-tint squircle card) ─── */
 .chest-block { display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: var(--s3); align-items: center; padding: 2.5mm var(--s3); background: var(--clay-tint); border: 0.6px solid var(--clay-edge); border-radius: var(--r-card); flex-shrink: 0; box-shadow: var(--shadow-card); }
 .chest-block .c-lg { display: flex; flex-direction: column; gap: 0.3mm; min-width: 38mm; }
-.chest-block .c-lg .k { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--clay); font-weight: 600; }
+.chest-block .c-lg .k { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--clay-ink); font-weight: 600; }
 .chest-block .c-lg .t { font-family: var(--font-serif); font-size: 10.5pt; font-weight: 500; color: var(--clay-ink); font-variation-settings: "opsz" 72; line-height: 1; }
 .chest-block .c-cell { display: flex; flex-direction: column; gap: 0.8mm; }
-.chest-block .c-cell .lb { font-family: var(--font-mono); font-size: 4.8pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--clay); font-weight: 600; }
+.chest-block .c-cell .lb { font-family: var(--font-mono); font-size: 4.8pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--clay-ink); font-weight: 600; }
 .chest-block .s10 { display: flex; gap: 0.4mm; }
 .chest-block .s10 span { flex: 1; min-width: 0; height: 4mm; border: 0.5px solid var(--clay-edge); border-radius: var(--r-chip); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4pt; color: var(--clay-ink); opacity: 0.85; background: rgba(249,245,236,0.35); }
 
@@ -120,12 +129,12 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 
 .c-sage { background: var(--sage-tint); border: 0.7px solid var(--sage-edge); }
 .c-sage::before { background: var(--sage); }
-.c-sage .card-h .k { color: var(--sage); }
+.c-sage .card-h .k { color: var(--sage-ink); }
 .c-sage .card-h .t { color: var(--sage-ink); }
 
 .c-clay { background: var(--clay-tint); border: 0.7px solid var(--clay-edge); }
 .c-clay::before { background: var(--clay); }
-.c-clay .card-h .k { color: var(--clay); }
+.c-clay .card-h .k { color: var(--clay-ink); }
 .c-clay .card-h .t { color: var(--clay-ink); }
 .c-clay .card-h .m { color: var(--clay-ink); font-family: var(--font-mono); font-size: 4.8pt; opacity: 0.7; letter-spacing: 0.1em; text-align: right; line-height: 1.3; margin-left: auto; }
 
@@ -134,10 +143,10 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .cigs-cell { display: flex; flex-direction: column; gap: 0.6mm; }
 .cigs-cell .ml { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.12em; color: var(--clay-ink); opacity: 0.75; font-weight: 600; }
 .cig-count { display: flex; gap: 0.7mm; flex-wrap: wrap; }
-.cig-count span { width: 4.4mm; height: 4.4mm; border: 0.8px solid var(--clay); border-radius: var(--r-chip); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.5pt; color: var(--clay); opacity: 0.85; background: rgba(249,245,236,0.35); }
+.cig-count span { width: 4.4mm; height: 4.4mm; border: 0.8px solid var(--clay); border-radius: var(--r-chip); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.5pt; color: var(--clay-ink); opacity: 0.85; background: rgba(249,245,236,0.35); }
 .cost-row { display: flex; align-items: baseline; gap: 1mm; font-family: var(--font-mono); color: var(--clay-ink); }
 .cost-row .cy { font-size: 6.8pt; opacity: 0.8; }
-.cost-row .cf { border-bottom: 0.8px solid var(--clay); width: 11mm; height: 4mm; display: inline-block; font-size: 8pt; font-weight: 600; color: var(--clay); }
+.cost-row .cf { border-bottom: 0.8px solid var(--clay); width: 11mm; height: 4mm; display: inline-block; font-size: 8pt; font-weight: 600; color: var(--clay-ink); }
 .cost-row.proj .cf { width: 13mm; }
 .cost-row .mult { font-size: 4.8pt; color: var(--clay-ink); opacity: 0.6; margin-left: 0.6mm; }
 
@@ -163,7 +172,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 
 /* ─── Nutritional meds row ─── */
 .nutri { display: grid; grid-template-columns: auto repeat(6, 1fr); gap: 2.5mm; align-items: center; padding: 2mm var(--s3); background: var(--sage-tint); border: 0.6px solid var(--sage-edge); border-radius: var(--r-card); flex-shrink: 0; box-shadow: var(--shadow-card); }
-.nutri .lbl { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage); font-weight: 600; padding-right: var(--s2); border-right: 0.4px solid var(--sage-edge); }
+.nutri .lbl { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage-ink); font-weight: 600; padding-right: var(--s2); border-right: 0.4px solid var(--sage-edge); }
 .nutri label { display: flex; align-items: center; gap: 1.2mm; font-family: var(--font-sans); font-size: 7pt; color: var(--sage-ink); }
 .nutri label .b { width: 3mm; height: 3mm; border: 0.8px solid var(--sage); border-radius: var(--r-chip); background: rgba(249,245,236,0.4); flex-shrink: 0; }
 .nutri .extra { border-bottom: 0.6px dotted var(--sage-edge); height: 3.5mm; min-width: 18mm; }
@@ -171,14 +180,14 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 /* ─── Tomorrow block (sage) — stronger writable surfaces ─── */
 .tom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s4); margin-top: 1mm; }
 .tom-cell { display: flex; flex-direction: column; gap: 1.2mm; }
-.tom-cell .k { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage); font-weight: 600; }
+.tom-cell .k { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage-ink); font-weight: 600; }
 .tom-cell .in { border: none; border-bottom: 1.2px solid var(--sage); height: 7mm; font-family: var(--font-serif); font-size: 8.5pt; margin-bottom: 0.5mm; }
 .tom-task { display: grid; grid-template-columns: 4mm 5mm 1fr; align-items: center; gap: 1.5mm; padding: 0.8mm 0; }
 .tom-task .c { width: 3.5mm; height: 3.5mm; border: 1px solid var(--sage); border-radius: var(--r-cell); }
-.tom-task .n { font-family: var(--font-serif); font-size: 9pt; color: var(--sage); font-variation-settings: "opsz" 72, "SOFT" 60; text-align: center; }
+.tom-task .n { font-family: var(--font-serif); font-size: 9pt; color: var(--sage-ink); font-variation-settings: "opsz" 72, "SOFT" 60; text-align: center; }
 .tom-task .ln { border: none; border-bottom: 1px solid var(--sage-edge); height: 6.5mm; }
 .tom-conf { display: flex; gap: 0.5mm; margin: 0.5mm 0 0.5mm; }
-.tom-conf span { flex: 1; height: 4.5mm; border-radius: 50%; border: 0.8px solid var(--sage); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.5pt; color: var(--sage); background: rgba(249,245,236,0.3); }
+.tom-conf span { flex: 1; height: 4.5mm; border-radius: 50%; border: 0.8px solid var(--sage); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 4.5pt; color: var(--sage-ink); background: rgba(249,245,236,0.3); }
 /* "If barrier fires, then I'll" needs two generous writing lines, not one */
 .tom-ifthen { display: flex; flex-direction: column; gap: 1mm; margin-top: 0.5mm; }
 .tom-ifthen .line { border: none; border-bottom: 1px solid var(--sage-edge); height: 7mm; }

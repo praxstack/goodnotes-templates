@@ -32,7 +32,7 @@
   --paper:           #F9F5EC;
   --ink:             #2A2824;
   --ink-soft:        #4A453D;
-  --ink-quiet:       #7D7668;
+  --ink-quiet:       #6E6658;
   --ink-whisper:     #B5AD9F;
 
   --sage:            #7B9476;
@@ -85,6 +85,12 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 @media print {
   body { background: white; }
   .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Drop card shadows — Chromium prints them as flat grey haloes. */
+  .pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav,
+  .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri,
+  .thought-flip, .self-care, .craving, .cigs, .tomorrow {
+    box-shadow: none !important;
+  }
   @page { size: A4 portrait; margin: 0; }
 }
 
@@ -191,7 +197,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   flex-shrink: 0;
 }
 .permission .glyph {
-  color: var(--sage); font-style: normal; margin: 0 1.5mm; opacity: 0.6;
+  color: var(--sage-ink); font-style: normal; margin: 0 1.5mm; opacity: 0.6;
 }
 
 /* ═══════════════════════════════════════════════════════
