@@ -76,6 +76,8 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .mh-r .doy .big { font-size: 9.5pt; color: var(--ink); font-weight: 600; }
 .mh-r .ts { font-family: var(--font-mono); font-size: 6.8pt; color: var(--ink-quiet); letter-spacing: 0.06em; }
 .mh-r .ts .hf { border-bottom: 0.5px solid var(--ink-whisper); width: 13mm; height: 3.2mm; display: inline-block; margin-left: 1mm; }
+/* Inline-style refactor (design review §7) — "Filled at" caps label */
+.mh-r .ts .caps { text-transform: uppercase; letter-spacing: 0.14em; }
 
 /* ─── Permission ─── */
 .perm { background: var(--sage-tint); border-left: 2px solid var(--sage); padding: 2mm var(--s3); font-family: var(--font-serif); font-style: italic; font-size: 8pt; color: var(--sage-ink); font-variation-settings: "opsz" 14, "SOFT" 100; flex-shrink: 0; border-radius: var(--r-cell); }
@@ -165,6 +167,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 /* ─── Wins · Grateful · Proud triad ─── */
 .triad { display: flex; flex-direction: column; gap: 1mm; flex-shrink: 0; }
 .t-row { display: flex; align-items: center; gap: 2.5mm; padding: 0.5mm 0; }
+.t-row .l .icon { color: var(--ink); }
 .t-row .l { display: flex; align-items: baseline; gap: 1.5mm; min-width: 32mm; }
 .t-row .l .k { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-quiet); display: block; }
 .t-row .l .w { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--ink); font-variation-settings: "opsz" 72; }
@@ -176,10 +179,13 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .nutri label { display: flex; align-items: center; gap: 1.2mm; font-family: var(--font-sans); font-size: 7pt; color: var(--sage-ink); }
 .nutri label .b { width: 3mm; height: 3mm; border: 0.8px solid var(--sage); border-radius: var(--r-chip); background: rgba(249,245,236,0.4); flex-shrink: 0; }
 .nutri .extra { border-bottom: 0.6px dotted var(--sage-edge); height: 3.5mm; min-width: 18mm; }
+.nutri .spare { gap: 1.5mm; }
 
 /* ─── Tomorrow block (sage) — stronger writable surfaces ─── */
 .tom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s4); margin-top: 1mm; }
 .tom-cell { display: flex; flex-direction: column; gap: 1.2mm; }
+.tom-cell.full { grid-column: 1 / -1; }
+.tom-cell .k--spaced { margin-top: 2mm; }
 .tom-cell .k { font-family: var(--font-mono); font-size: 5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage-ink); font-weight: 600; }
 .tom-cell .in { border: none; border-bottom: 1.2px solid var(--sage); height: 7mm; font-family: var(--font-serif); font-size: 8.5pt; margin-bottom: 0.5mm; }
 .tom-task { display: grid; grid-template-columns: 4mm 5mm 1fr; align-items: center; gap: 1.5mm; padding: 0.8mm 0; }
@@ -223,7 +229,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     <div class="mh-r">
       <div class="dr"><span class="lbl">Date</span><span class="fl"></span></div>
       <div class="doy"><span>day&nbsp;</span><span class="big">___</span> / 365</div>
-      <div class="ts"><span style="text-transform:uppercase;letter-spacing:.14em">Filled at</span><span class="hf"></span></div>
+      <div class="ts"><span class="caps">Filled at</span><span class="hf"></span></div>
     </div>
   </header>
 
@@ -275,7 +281,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   <!-- Self-care + BA anchor (daily) -->
   <section class="card c-lav" aria-labelledby="sc-title">
     <div class="card-h">
-      <span class="icon" aria-hidden="true" style="color:var(--lavender-ink)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10"/><path d="M6 14c0-3.31 2.69-6 6-6"/><path d="M18 10c0 3.31-2.69 6-6 6"/></svg></span>
+      <span class="icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10"/><path d="M6 14c0-3.31 2.69-6 6-6"/><path d="M18 10c0 3.31-2.69 6-6 6"/></svg></span>
       <div class="meta"><div class="k">behavioral activation</div><div class="t" id="sc-title">Self-care check</div></div>
     </div>
     <div class="sc-items">
@@ -289,9 +295,9 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 
   <!-- Wins · Grateful · Proud (daily) -->
   <section class="triad">
-    <div class="t-row"><div class="l"><span class="icon" aria-hidden="true" style="color:var(--ink)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span><div><span class="k">today's</span><span class="w">Win</span></div></div><span class="ln"></span></div>
-    <div class="t-row"><div class="l"><span class="icon" aria-hidden="true" style="color:var(--ink)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span><div><span class="k">one thing</span><span class="w">Grateful for</span></div></div><span class="ln"></span></div>
-    <div class="t-row"><div class="l"><span class="icon" aria-hidden="true" style="color:var(--ink)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5 5.6.6-4 4 1 5.4L12 15l-5 3 1-5.4-4-4 5.6-.6z"/></svg></span><div><span class="k">I am</span><span class="w">Proud of</span></div></div><span class="ln"></span></div>
+    <div class="t-row"><div class="l"><span class="icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span><div><span class="k">today's</span><span class="w">Win</span></div></div><span class="ln"></span></div>
+    <div class="t-row"><div class="l"><span class="icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span><div><span class="k">one thing</span><span class="w">Grateful for</span></div></div><span class="ln"></span></div>
+    <div class="t-row"><div class="l"><span class="icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5 5.6.6-4 4 1 5.4L12 15l-5 3 1-5.4-4-4 5.6-.6z"/></svg></span><div><span class="k">I am</span><span class="w">Proud of</span></div></div><span class="ln"></span></div>
   </section>
 
   <!-- Nutritional meds (daily) -->
@@ -302,17 +308,17 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     <label><span class="b"></span>Multivitamin</label>
     <label><span class="b"></span>Milk thistle</label>
     <label><span class="b"></span>Omega-3</label>
-    <label style="gap:1.5mm"><span class="b"></span><span class="extra" aria-label="spare"></span></label>
+    <label class="spare"><span class="b"></span><span class="extra" aria-label="spare"></span></label>
   </section>
 
   <!-- Tomorrow pre-commit (daily) -->
   <section class="card c-sage" aria-labelledby="tom-title">
     <div class="card-h">
-      <span class="icon" aria-hidden="true" style="color:var(--sage-ink)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="9" ry="7"/><circle cx="7" cy="8.5" r="3"/><circle cx="17" cy="8.5" r="3"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="8" r="1" fill="currentColor"/></svg></span>
+      <span class="icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="9" ry="7"/><circle cx="7" cy="8.5" r="3"/><circle cx="17" cy="8.5" r="3"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="8" r="1" fill="currentColor"/></svg></span>
       <div class="meta"><div class="k">shutdown ritual · Newport</div><div class="t" id="tom-title">Tomorrow · pre-commit</div></div>
     </div>
     <div class="tom-grid">
-      <div class="tom-cell" style="grid-column: 1 / -1"><span class="k">Tomorrow's frog · ≤ 25 min · one only</span><span class="in"></span></div>
+      <div class="tom-cell full"><span class="k">Tomorrow's frog · ≤ 25 min · one only</span><span class="in"></span></div>
       <div class="tom-cell">
         <span class="k">Top 3 for tomorrow</span>
         <div class="tom-task"><span class="c"></span><span class="n">1</span><span class="ln"></span></div>
@@ -322,7 +328,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
       <div class="tom-cell">
         <span class="k">Confidence to execute · 1–10</span>
         <div class="tom-conf"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
-        <span class="k" style="margin-top:2mm">If barrier fires, then I'll</span>
+        <span class="k k--spaced">If barrier fires, then I'll</span>
         <div class="tom-ifthen">
           <span class="line"></span>
           <span class="line"></span>
@@ -334,7 +340,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   <!-- Cigs horror metric (clay) — daily tally, kept as permanent block -->
   <section class="card c-clay" aria-labelledby="cig-title">
     <div class="card-h">
-      <span class="icon" aria-hidden="true" style="color:var(--clay)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="15" height="3" rx="0.5"/><line x1="18" y1="14.5" x2="21" y2="14.5" stroke-width="2.5"/><path d="M6 10c-1-1.5 0-2.5 1-3M9 10c-1-1.5 0-2.5 1-3"/></svg></span>
+      <span class="icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="15" height="3" rx="0.5"/><line x1="18" y1="14.5" x2="21" y2="14.5" stroke-width="2.5"/><path d="M6 10c-1-1.5 0-2.5 1-3M9 10c-1-1.5 0-2.5 1-3"/></svg></span>
       <div class="meta"><div class="k">NHS style · face it</div><div class="t" id="cig-title">Cigarettes today · the horror metric</div></div>
       <div class="m">Allen Carr ·<br>see it clearly</div>
     </div>

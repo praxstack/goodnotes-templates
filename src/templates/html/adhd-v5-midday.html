@@ -133,6 +133,8 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .body-strip { display: flex; align-items: center; gap: var(--s3); padding: 1mm 0; flex-shrink: 0; }
 .body-strip .k { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-quiet); min-width: 34mm; }
 .body-strip .in { flex: 1; border: none; border-bottom: 1.2px dotted var(--ink-whisper); height: 7mm; }
+/* Inline-style refactor — adjacent body-strips tuck into each other */
+.body-strip + .body-strip { margin-top: -1.5mm; }
 
 /* ─── Free Write bottom canvas ─── */
 .free-canvas {
@@ -323,7 +325,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     <span class="k">Body sensation right now</span>
     <span class="in"></span>
   </section>
-  <section class="body-strip" style="margin-top:-1.5mm">
+  <section class="body-strip">
     <span class="k">Breathing · shallow · held · easy · deep</span>
     <span class="in"></span>
   </section>
