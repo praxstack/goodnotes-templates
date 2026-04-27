@@ -23,7 +23,7 @@
 :root {
   --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
   --paper: #F9F5EC;
-  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #7D7668; --ink-whisper: #B5AD9F;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
   --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
   --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
   --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
@@ -39,7 +39,16 @@
 body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; color: var(--ink-soft); line-height: 1.45; font-variation-settings: "opsz" 14; -webkit-font-smoothing: antialiased; }
 .page { width: var(--page-w); height: var(--page-h); background: var(--paper); margin: 10mm auto; padding: var(--margin); position: relative; overflow: clip; box-shadow: var(--shadow-page); page-break-after: always; display: flex; flex-direction: column; gap: var(--s3); }
 html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
-@media print { body { background: #fff; } .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; } @page { size: A4 portrait; margin: 0; } }
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Drop card shadows — Chromium prints them as flat grey haloes. */
+  .pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav,
+  .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri {
+    box-shadow: none !important;
+  }
+  @page { size: A4 portrait; margin: 0; }
+}
 
 /* ─── Masthead ─── */
 .masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--s2); border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
@@ -59,7 +68,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 
 /* ─── Permission banner ─── */
 .permission { background: var(--sage-tint); border-left: 2px solid var(--sage); padding: 2.5mm var(--s3); font-family: var(--font-serif); font-style: italic; font-size: 8pt; color: var(--sage-ink); font-variation-settings: "opsz" 14, "SOFT" 100; flex-shrink: 0; }
-.permission .glyph { color: var(--sage); font-style: normal; margin: 0 1.5mm; opacity: 0.6; }
+.permission .glyph { color: var(--sage-ink); font-style: normal; margin: 0 1.5mm; opacity: 0.6; }
 
 /* ─── Card archetype base ─── */
 .card { border-radius: 3.5mm; padding: 3mm var(--s3) 3mm; flex-shrink: 0; position: relative; overflow: hidden; }
@@ -73,18 +82,18 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 
 .card-sage { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); }
 .card-sage::before { background: var(--sage); }
-.card-sage .kicker { color: var(--sage); }
+.card-sage .kicker { color: var(--sage-ink); }
 .card-sage .title, .card-sage .attr, .card-sage .card-explainer, .card-sage .card-head .icon { color: var(--sage-ink); }
 
 .card-amber { background: var(--amber-tint); border: 0.8px solid var(--amber-edge); }
 .card-amber::before { background: var(--amber); }
-.card-amber .kicker { color: var(--amber); }
+.card-amber .kicker { color: var(--amber-ink); }
 .card-amber .title, .card-amber .attr, .card-amber .card-explainer, .card-amber .card-head .icon { color: var(--amber-ink); }
 
 /* ─── Jar + Body matrix (sage · <REDACTED-PSYCH-FIRST>'s core) ─── */
 .jb-grid { display: grid; grid-template-columns: 5mm 18mm 1fr 30mm 1fr; gap: 1.5mm 3mm; align-items: center; margin-top: 1.5mm; }
 .jb-grid .h { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage-ink); opacity: 0.75; padding-bottom: 0.6mm; border-bottom: 0.4px solid var(--sage-edge); }
-.jb-grid .n { font-family: var(--font-serif); font-size: 12pt; font-weight: 500; color: var(--sage); text-align: center; font-variation-settings: "opsz" 72, "SOFT" 60; line-height: 1; }
+.jb-grid .n { font-family: var(--font-serif); font-size: 12pt; font-weight: 500; color: var(--sage-ink); text-align: center; font-variation-settings: "opsz" 72, "SOFT" 60; line-height: 1; }
 .jb-grid .tm { border-bottom: 0.8px solid var(--sage-edge); height: 5.5mm; font-family: var(--font-mono); font-size: 7.5pt; color: var(--ink); }
 .jb-grid .jar-chips { display: flex; gap: 0.8mm; flex-wrap: wrap; }
 .jb-grid .jar-chips span { padding: 0.8mm 1.6mm; border: 0.6px solid var(--sage-edge); border-radius: 1mm; font-family: var(--font-mono); font-size: 4.8pt; font-weight: 500; color: var(--sage-ink); opacity: 0.85; background: rgba(249,245,236,0.4); letter-spacing: 0.04em; text-transform: lowercase; }
@@ -108,7 +117,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 /* ─── Pseudo-doing (amber) ─── */
 .pseudo-body { display: grid; grid-template-columns: 1fr 1fr auto; gap: var(--s3); align-items: center; margin-top: 1.5mm; }
 .pseudo-body .cell { display: flex; flex-direction: column; gap: 0.8mm; }
-.pseudo-body .cell .k { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--amber); }
+.pseudo-body .cell .k { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--amber-ink); }
 .pseudo-body .cell .in { border: none; border-bottom: 1px solid var(--amber-edge); height: 6mm; font-family: var(--font-serif); font-size: 8pt; color: var(--ink); }
 .pseudo-body .chk { display: flex; align-items: center; gap: 1.5mm; font-family: var(--font-mono); font-size: 5.5pt; color: var(--amber-ink); letter-spacing: 0.08em; font-weight: 600; text-transform: uppercase; }
 .pseudo-body .chk .b { width: 4mm; height: 4mm; border: 1.1px solid var(--amber); border-radius: 1mm; background: rgba(249,245,236,0.4); }
@@ -116,7 +125,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 /* ─── Thought Flip (amber · 3 prompts) ─── */
 .tf-prompt { display: flex; align-items: flex-end; gap: 2mm; margin-bottom: 1mm; }
 .tf-prompt:last-child { margin-bottom: 0; }
-.tf-prompt .pn { font-family: var(--font-serif); font-size: 10pt; font-weight: 400; color: var(--amber); width: 4mm; font-variation-settings: "opsz" 72; }
+.tf-prompt .pn { font-family: var(--font-serif); font-size: 10pt; font-weight: 400; color: var(--amber-ink); width: 4mm; font-variation-settings: "opsz" 72; }
 .tf-prompt .pl { font-family: var(--font-sans); font-size: 8pt; font-weight: 500; color: var(--amber-ink); white-space: nowrap; }
 .tf-prompt .pline { flex: 1; border: none; border-bottom: 1.2px dotted var(--amber-edge); height: 5.5mm; }
 

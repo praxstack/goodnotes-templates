@@ -23,7 +23,7 @@
 :root {
   --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
   --paper: #F9F5EC;
-  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #7D7668; --ink-whisper: #B5AD9F;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
   --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
   --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
   --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
@@ -58,7 +58,17 @@ body {
   gap: 2.8mm;
 }
 html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
-@media print { body { background: #fff; } .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; } @page { size: A4 portrait; margin: 0; } }
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Drop every card shadow — Chromium's print pipeline renders them as
+     flat grey haloes instead of soft shadows, making cards look "framed". */
+  .pause, .frog, .rx, .card, .card-sage, .card-amber, .card-clay, .card-lav,
+  .c-sage, .c-amber, .c-clay, .c-lav, .chest-block, .nutri {
+    box-shadow: none !important;
+  }
+  @page { size: A4 portrait; margin: 0; }
+}
 
 /* ─── Masthead (B-01) ─── */
 .masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--s2); border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
@@ -82,7 +92,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .day-type label { display: flex; align-items: center; gap: 1.2mm; font-family: var(--font-sans); font-size: 7.5pt; font-weight: 500; color: var(--ink-soft); cursor: default; }
 .day-type label .r { width: 3.2mm; height: 3.2mm; border-radius: 50%; border: 0.9px solid var(--ink-quiet); }
 .permission { background: var(--sage-tint); border-left: 2px solid var(--sage); padding: 2mm var(--s3); font-family: var(--font-serif); font-style: italic; font-size: 8pt; color: var(--sage-ink); font-variation-settings: "opsz" 14, "SOFT" 100; display: flex; align-items: center; }
-.permission .glyph { color: var(--sage); font-style: normal; margin: 0 1.5mm; opacity: 0.6; }
+.permission .glyph { color: var(--sage-ink); font-style: normal; margin: 0 1.5mm; opacity: 0.6; }
 
 /* ─── 2-Second Pause (<REDACTED-PSYCH-FIRST>) — sage card · 3-row matrix ─── */
 .pause { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 3mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; }
@@ -90,13 +100,13 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .pause-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1mm; }
 .pause-head .icon { color: var(--sage-ink); display: inline-flex; }
 .pause-head .meta { flex: 1; }
-.pause-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage); }
+.pause-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); }
 .pause-head .title { font-family: var(--font-serif); font-size: 11pt; font-weight: 500; color: var(--sage-ink); line-height: 1; margin-top: 0.5mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
 .pause-head .attr { font-family: var(--font-mono); font-size: 5pt; color: var(--sage-ink); opacity: 0.7; letter-spacing: 0.1em; text-align: right; line-height: 1.3; }
 .pause-sub { font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--sage-ink); opacity: 0.8; margin-bottom: 2mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
 .pause-grid { display: grid; grid-template-columns: 5mm 20mm 1fr; gap: 1mm 3mm; align-items: center; }
 .pause-grid .h { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage-ink); opacity: 0.75; padding-bottom: 0.5mm; border-bottom: 0.4px solid var(--sage-edge); }
-.pause-grid .n { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--sage); text-align: center; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.pause-grid .n { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--sage-ink); text-align: center; font-variation-settings: "opsz" 72, "SOFT" 60; }
 .pause-grid .tm { border-bottom: 0.8px solid var(--sage-edge); height: 5mm; font-family: var(--font-mono); font-size: 7pt; color: var(--ink); }
 .pause-grid .bw { display: flex; gap: 2mm; align-items: center; }
 .pause-grid .bw .chips { display: flex; gap: 0.8mm; }
@@ -110,7 +120,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .frog-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.5mm; }
 .frog-head .icon { color: var(--sage-ink); display: inline-flex; }
 .frog-head .meta { flex: 1; }
-.frog-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage); }
+.frog-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); }
 .frog-head .title { font-family: var(--font-serif); font-size: 13pt; font-weight: 500; color: var(--sage-ink); line-height: 1; margin-top: 0.5mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
 .frog-head .constraint { font-family: var(--font-mono); font-size: 5.5pt; color: var(--sage-ink); opacity: 0.7; text-align: right; line-height: 1.3; letter-spacing: 0.02em; }
 .frog-line { border: none; border-bottom: 1.5px solid var(--sage); height: 7mm; margin-bottom: 1.5mm; }
@@ -143,10 +153,10 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 /* ─── Rx Prescription card (B-05 expanded) — Dr <REDACTED-PSYCH-FIRST-DR> <REDACTED-PSYCH-LAST-DR>'s 8 meds ─── */
 .rx { border: 0.8px solid var(--ink); border-radius: 3.5mm; padding: 2.5mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; background: rgba(249,245,236,0.5); }
 .rx-head { display: flex; align-items: flex-start; gap: 2.5mm; padding-bottom: 1.5mm; border-bottom: 0.4px dashed var(--ink-whisper); margin-bottom: 1.8mm; }
-.rx-head .rx-mark { font-family: var(--font-serif); font-size: 20pt; color: var(--clay); font-weight: 400; font-style: italic; line-height: 0.85; font-variation-settings: "opsz" 144, "SOFT" 60; }
+.rx-head .rx-mark { font-family: var(--font-serif); font-size: 20pt; color: var(--clay-ink); font-weight: 400; font-style: italic; line-height: 0.85; font-variation-settings: "opsz" 144, "SOFT" 60; }
 .rx-head .dr { flex: 1; }
 .rx-head .dr .n { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--ink); font-variation-settings: "opsz" 40, "SOFT" 60; letter-spacing: -0.005em; }
-.rx-head .dr .n em { font-style: italic; color: var(--clay); }
+.rx-head .dr .n em { font-style: italic; color: var(--clay-ink); }
 .rx-head .dr .cred { font-family: var(--font-mono); font-size: 4.5pt; color: var(--ink-quiet); text-transform: uppercase; letter-spacing: 0.18em; margin-top: 0.4mm; }
 .rx-head .dr .reg { font-family: var(--font-mono); font-size: 5pt; color: var(--ink-quiet); letter-spacing: 0.1em; margin-top: 0.8mm; }
 .rx-head .meta { text-align: right; font-family: var(--font-mono); font-size: 5pt; color: var(--ink-quiet); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.5; }
