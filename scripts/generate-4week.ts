@@ -80,7 +80,7 @@ async function main() {
   let modeCSS = '';
   if (colorMode) {
     // Search: 1) preset themes dir, 2) sibling CSS file
-    const presetPath = `src/templates/themes/${colorMode}.css`;
+    const presetPath = `shared/themes/${colorMode}.css`;
     const siblingPath = `${prefix}-today.${colorMode}.css`;
     try {
       modeCSS = await fs.readFile(presetPath, 'utf-8');
