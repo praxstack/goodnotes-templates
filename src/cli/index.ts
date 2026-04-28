@@ -24,7 +24,7 @@ program
 program
   .command('render')
   .description('Render HTML templates to PDF')
-  .argument('[template]', 'Template HTML path (e.g., src/templates/html/adhd-v3-today.html)')
+  .argument('[template]', 'Template HTML path (e.g., packs/journals/prax-journal/versions/v5/today.html)')
   .option('--color-mode <mode>', 'Color mode (e.g., dark). Omit for default.')
   .option('--paper-size <size>', 'Paper size: a4, letter, ipad-landscape, etc.', 'a4')
   .option('--orientation <dir>', 'portrait or landscape', 'portrait')
@@ -32,7 +32,7 @@ program
   .option('-v, --verbose', 'Verbose logging')
   .action(async (template, opts) => {
     if (!template) {
-      console.error('Error: Template path required. Example: src/templates/html/adhd-v3-today.html');
+      console.error('Error: Template path required. Example: packs/journals/prax-journal/versions/v5/today.html');
       process.exit(1);
     }
 
@@ -45,7 +45,7 @@ program
     }
 
     const outputPath = opts.output || template
-      .replace('src/templates/html/', 'output/templates/')
+      .replace(/^packs\//, 'output/')
       .replace('.html', `${opts.colorMode ? `-${opts.colorMode}` : ''}.pdf`);
 
     console.log(`\n🖨  Rendering template to PDF\n`);
@@ -107,21 +107,34 @@ program
       console.log('  Templates are self-contained (WYSIWYG).');
       console.log('  Optional color modes: --color-mode dark');
       console.log('  Dark mode CSS snippets live next to each template:');
-      console.log('    adhd-v3-today.html → adhd-v3-today.dark.css\n');
+      console.log('    packs/journals/prax-journal/versions/v3/today.html → today.dark.css\n');
 
-      // List available dark.css files
+      // List available dark.css files across packs/
       const fs = await import('node:fs/promises');
-      const htmlDir = 'src/templates/html';
-      try {
-        const files = await fs.readdir(htmlDir);
-        const darkFiles = files.filter(f => f.endsWith('.dark.css'));
-        if (darkFiles.length > 0) {
-          console.log('  Available dark mode templates:');
-          for (const f of darkFiles) {
-            console.log(`    ${f.replace('.dark.css', '.html')} → ${f}`);
-          }
+      const path = await import('node:path');
+      async function* walkDark(dir: string): AsyncGenerator<string> {
+        let entries: Array<import('node:fs').Dirent>;
+        try {
+          entries = (await fs.readdir(dir, { withFileTypes: true })) as Array<
+            import('node:fs').Dirent
+          >;
+        } catch {
+          return;
         }
-      } catch { /* ignore if dir doesn't exist */ }
+        for (const e of entries) {
+          const full = path.join(dir, String(e.name));
+          if (e.isDirectory()) yield* walkDark(full);
+          else if (e.isFile() && String(e.name).endsWith('.dark.css')) yield full;
+        }
+      }
+      const darkFiles: string[] = [];
+      for await (const f of walkDark('packs')) darkFiles.push(f);
+      if (darkFiles.length > 0) {
+        console.log('  Available dark mode templates:');
+        for (const f of darkFiles) {
+          console.log(`    ${f} → ${f.replace('.dark.css', '.html')}`);
+        }
+      }
     }
 
     if (showAll || opts.locales) {
