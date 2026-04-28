@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v5 — Weekly Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v5 · WEEKLY REVIEW — Sunday end-of-week recap
+   Design contract: packs/journals/prax-journal/DESIGN.md · Warm Analog Editorial
+
+   Cadence: fill on Sunday evening. Looks back at Mon→Sun, sets intent for
+   the week ahead.
+
+   Block map (top to bottom):
+     B-01  Masthead            week-number + dates field
+     B-02  7-day strip         Mon..Sun with mood/chest-kg/cigs/one-word
+     B-03  Wins jar            amber card, 10 cumulative slots
+     B-04  Named Patterns      lavender tally + free slot
+     B-05  Worked / Didn't     two columns, sage ↔ clay
+     B-06  Next week's Frog    sage hero (same grammar as Today)
+     B-07  Intention line      single handwritten line for Q3-cadence hope
+
+   Same token system + squircle + writing-zone rule as v5/today.html.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
+  --paper: #F9F5EC;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
+  --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
+  --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
+  --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
+  --lavender: #B6A9CB; --lavender-ink: #6B5D86; --lavender-tint: rgba(182, 169, 203, 0.10); --lavender-edge: rgba(182, 169, 203, 0.28);
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm;
+  --dot: var(--ink-whisper);
+  --shadow-page: 0 1px 2px rgba(42,40,36,0.04), 0 16px 48px rgba(42,40,36,0.10), 0 2px 8px rgba(42,40,36,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans); font-size: 8.5pt;
+  color: var(--ink-soft); line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative;
+  overflow: clip;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+  gap: 2.8mm;
+}
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .week-strip, .wins, .patterns, .triad, .frog, .intention { box-shadow: none !important; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── B-01 · Masthead ─── */
+.masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--s2); border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
+.masthead .kicker { font-family: var(--font-mono); font-size: 6pt; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-quiet); margin-bottom: 1.5mm; }
+.masthead h1 { font-family: var(--font-serif); font-size: 30pt; font-weight: 400; line-height: 0.92; letter-spacing: -0.02em; color: var(--ink); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.masthead .subtitle { font-family: var(--font-serif); font-size: 9pt; font-style: italic; color: var(--ink-quiet); margin-top: 1.5mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.mh-r { text-align: right; display: flex; flex-direction: column; gap: 1.5mm; align-items: flex-end; }
+.week-row { display: flex; align-items: baseline; gap: 2.5mm; }
+.week-row .label { font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet); }
+.week-row .field { border-bottom: 0.6px solid var(--ink); min-width: 34mm; height: 4.5mm; font-family: var(--font-mono); font-size: 9pt; }
+.wk-counter { font-family: var(--font-mono); font-size: 7pt; font-weight: 500; color: var(--ink-quiet); letter-spacing: 0.08em; }
+.wk-counter .big { font-size: 10pt; color: var(--ink); font-weight: 600; }
+.wk-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+
+/* ─── B-02 · 7-day strip ─── */
+.week-strip { display: grid; grid-template-columns: 20mm repeat(7, 1fr); gap: 0.5mm; background: #F4EFE3; border: 0.6px solid var(--ink-whisper); border-radius: 3.5mm; padding: 2mm 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.week-strip::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ink-quiet); }
+.week-strip .row { display: contents; }
+.week-strip .rowhead { font-family: var(--font-mono); font-size: 5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-quiet); padding: 1mm 1.5mm; display: flex; align-items: center; border-right: 0.4px dotted var(--ink-whisper); }
+.week-strip .cell { padding: 1mm 0.5mm; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 6.5pt; color: var(--ink); border-right: 0.3px dotted var(--ink-whisper); min-height: 7mm; }
+.week-strip .cell:last-child { border-right: none; }
+.week-strip .dow { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; color: var(--ink-quiet); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; padding: 1mm 0.5mm; border-bottom: 0.4px dotted var(--ink-whisper); border-right: 0.3px dotted var(--ink-whisper); }
+.week-strip .dow:last-of-type { border-right: none; }
+.week-strip .dow-head { grid-column: 1 / 2; border-bottom: 0.4px dotted var(--ink-whisper); border-right: 0.4px dotted var(--ink-whisper); }
+.week-strip .mood-dot { width: 4.5mm; height: 4.5mm; border-radius: 50%; border: 0.8px solid var(--ink-whisper); }
+.week-strip .chest-num { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; color: var(--ink); font-variation-settings: "opsz" 72, "SOFT" 60; }
+.week-strip .cigs-num { font-family: var(--font-mono); font-size: 8pt; font-weight: 500; color: var(--clay-ink); }
+.week-strip .word-blank { width: 100%; border-bottom: 0.4px solid var(--ink-whisper); height: 4mm; }
+
+/* ─── B-03 · Wins jar (amber) ─── */
+.wins { background: var(--amber-tint); border: 0.8px solid var(--amber-edge); border-radius: 3.5mm; padding: 2.5mm var(--s3); flex-shrink: 0; position: relative; overflow: hidden; }
+.wins::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); }
+.wins-head { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 1.5mm; }
+.wins-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--amber-ink); }
+.wins-head .title { font-family: var(--font-serif); font-size: 13pt; font-weight: 500; color: var(--amber-ink); line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.wins-head .hint { margin-left: auto; font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--amber-ink); opacity: 0.75; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.wins-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5mm var(--s4); }
+.win-row { display: grid; grid-template-columns: 5mm 1fr; align-items: center; gap: 2mm; }
+.win-row .num { font-family: var(--font-mono); font-size: 6pt; font-weight: 600; color: var(--amber-ink); opacity: 0.7; }
+.win-row .ln { border-bottom: 0.6px solid var(--amber-edge); height: 6mm; }
+
+/* ─── B-04 · Named Patterns (lavender) ─── */
+.patterns { background: var(--lavender-tint); border: 0.8px solid var(--lavender-edge); border-radius: 3.5mm; padding: 2.5mm var(--s3); flex-shrink: 0; position: relative; overflow: hidden; }
+.patterns::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--lavender); }
+.patterns-head { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 1.5mm; }
+.patterns-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--lavender-ink); }
+.patterns-head .title { font-family: var(--font-serif); font-size: 11pt; font-weight: 500; color: var(--lavender-ink); line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.patterns-head .note { margin-left: auto; font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--lavender-ink); opacity: 0.75; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.patterns-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2mm 4mm; }
+.pat-row { display: grid; grid-template-columns: 1fr 20mm; align-items: center; gap: 2mm; padding: 0.5mm 0; border-bottom: 0.3px dotted var(--lavender-edge); }
+.pat-row .name { font-family: var(--font-sans); font-size: 8pt; font-weight: 500; color: var(--lavender-ink); }
+.pat-row .ticks { display: flex; gap: 1mm; justify-content: flex-end; }
+.pat-row .ticks span { width: 3mm; height: 3mm; border: 0.6px solid var(--lavender-edge); border-radius: 0.5mm; background: rgba(249,245,236,0.3); }
+.pat-row .blank-name { border-bottom: 0.5px dotted var(--lavender-edge); height: 4mm; font-family: var(--font-mono); font-size: 7pt; font-style: italic; color: var(--lavender-ink); padding-left: 0.5mm; }
+
+/* ─── B-05 · Worked / Didn't (sage + clay triad) ─── */
+.triad { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); flex-shrink: 0; }
+.t-col { border-radius: 3.5mm; padding: 2.5mm var(--s3); position: relative; overflow: hidden; }
+.t-col.t-worked { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); }
+.t-col.t-worked::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.t-col.t-didnt { background: var(--clay-tint); border: 0.8px solid var(--clay-edge); }
+.t-col.t-didnt::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--clay); }
+.t-col .head { display: flex; align-items: baseline; gap: 2mm; margin-bottom: 1.5mm; }
+.t-col .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; }
+.t-col .title { font-family: var(--font-serif); font-size: 10pt; font-weight: 500; line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.t-col.t-worked .kicker, .t-col.t-worked .title { color: var(--sage-ink); }
+.t-col.t-didnt .kicker, .t-col.t-didnt .title { color: var(--clay-ink); }
+.t-col .t-rows { display: flex; flex-direction: column; gap: 1mm; }
+.t-row { display: grid; grid-template-columns: 5mm 1fr; align-items: center; gap: 2mm; }
+.t-row .n { font-family: var(--font-mono); font-size: 6pt; font-weight: 600; opacity: 0.7; }
+.t-row .ln { height: 6mm; }
+.t-col.t-worked .t-row .n { color: var(--sage-ink); }
+.t-col.t-worked .t-row .ln { border-bottom: 0.6px solid var(--sage-edge); }
+.t-col.t-didnt .t-row .n { color: var(--clay-ink); }
+.t-col.t-didnt .t-row .ln { border-bottom: 0.6px solid var(--clay-edge); }
+
+/* ─── B-06 · Next week's Frog (sage, matches Today's grammar) ─── */
+.frog { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 3mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.frog::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.frog-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.5mm; }
+.frog-head .icon { color: var(--sage-ink); display: inline-flex; flex-shrink: 0; }
+.frog-head .meta { flex: 1; }
+.frog-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); }
+.frog-head .title { font-family: var(--font-serif); font-size: 13pt; font-weight: 500; color: var(--sage-ink); line-height: 1; margin-top: 0.5mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.frog-head .constraint { font-family: var(--font-mono); font-size: 5.5pt; color: var(--sage-ink); opacity: 0.7; text-align: right; line-height: 1.3; letter-spacing: 0.02em; }
+.frog-line { border: none; border-bottom: 1.5px solid var(--sage); height: 7mm; margin-bottom: 1.5mm; }
+.frog-tail { display: flex; justify-content: space-between; align-items: center; }
+.frog-tail .hint { font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--sage-ink); opacity: 0.85; font-variation-settings: "opsz" 14, "SOFT" 100; }
+
+/* ─── B-07 · Intention line ─── */
+.intention { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--s3) 0 0; border-top: 0.4px dotted var(--ink-whisper); }
+.intention .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-quiet); margin-bottom: 1.5mm; }
+.intention .prompt { font-family: var(--font-serif); font-size: 11pt; font-style: italic; color: var(--ink-soft); margin-bottom: 2.5mm; font-variation-settings: "opsz" 72, "SOFT" 100; }
+.intention .line { border: none; border-bottom: 1.2px solid var(--ink); height: 9mm; }
+
+/* ─── Footer whisper ─── */
+.footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1mm; font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-quiet); letter-spacing: 0.12em; text-transform: uppercase; padding-top: 1mm; border-top: 0.3px dotted var(--ink-whisper); }
+.footer .left { opacity: 0.7; }
+.footer .right { font-family: var(--font-serif); font-size: 7pt; font-style: italic; text-transform: none; letter-spacing: normal; color: var(--ink-quiet); opacity: 0.85; font-variation-settings: "opsz" 14, "SOFT" 100; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ B-01 · MASTHEAD ═══ -->
+  <header class="masthead">
+    <div class="mh-l">
+      <div class="kicker">Sunday Review · week ending</div>
+      <h1>this week</h1>
+      <div class="subtitle">seven days, one aperture</div>
+    </div>
+    <div class="mh-r">
+      <div class="week-row">
+        <span class="label">Week of</span>
+        <span class="field" data-inject="week-date"></span>
+      </div>
+      <div class="wk-counter">
+        Week <span class="big" data-inject="week-num">__</span><span class="slash">·</span>
+        <span data-inject="quarter">Q_</span><span class="slash">·</span>
+        <span data-inject="year">____</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ B-02 · 7-DAY STRIP ═══ -->
+  <section class="week-strip" aria-label="Seven-day recap strip">
+    <div class="dow-head">·</div>
+    <div class="dow">Mon</div>
+    <div class="dow">Tue</div>
+    <div class="dow">Wed</div>
+    <div class="dow">Thu</div>
+    <div class="dow">Fri</div>
+    <div class="dow">Sat</div>
+    <div class="dow">Sun</div>
+
+    <div class="rowhead">Mood</div>
+    <div class="cell"><span class="mood-dot"></span></div>
+    <div class="cell"><span class="mood-dot"></span></div>
+    <div class="cell"><span class="mood-dot"></span></div>
+    <div class="cell"><span class="mood-dot"></span></div>
+    <div class="cell"><span class="mood-dot"></span></div>
+    <div class="cell"><span class="mood-dot"></span></div>
+    <div class="cell"><span class="mood-dot"></span></div>
+
+    <div class="rowhead">Chest·kg</div>
+    <div class="cell"><span class="chest-num">·</span></div>
+    <div class="cell"><span class="chest-num">·</span></div>
+    <div class="cell"><span class="chest-num">·</span></div>
+    <div class="cell"><span class="chest-num">·</span></div>
+    <div class="cell"><span class="chest-num">·</span></div>
+    <div class="cell"><span class="chest-num">·</span></div>
+    <div class="cell"><span class="chest-num">·</span></div>
+
+    <div class="rowhead">Cigs</div>
+    <div class="cell"><span class="cigs-num">·</span></div>
+    <div class="cell"><span class="cigs-num">·</span></div>
+    <div class="cell"><span class="cigs-num">·</span></div>
+    <div class="cell"><span class="cigs-num">·</span></div>
+    <div class="cell"><span class="cigs-num">·</span></div>
+    <div class="cell"><span class="cigs-num">·</span></div>
+    <div class="cell"><span class="cigs-num">·</span></div>
+
+    <div class="rowhead">One word</div>
+    <div class="cell"><span class="word-blank"></span></div>
+    <div class="cell"><span class="word-blank"></span></div>
+    <div class="cell"><span class="word-blank"></span></div>
+    <div class="cell"><span class="word-blank"></span></div>
+    <div class="cell"><span class="word-blank"></span></div>
+    <div class="cell"><span class="word-blank"></span></div>
+    <div class="cell"><span class="word-blank"></span></div>
+  </section>
+
+  <!-- ═══ B-03 · WINS JAR (amber) ═══ -->
+  <section class="wins" aria-label="Wins this week">
+    <div class="wins-head">
+      <span class="kicker">§ wins jar</span>
+      <span class="title">what I did that counts</span>
+      <span class="hint">even tiny · especially tiny</span>
+    </div>
+    <div class="wins-grid">
+      <div class="win-row"><span class="num">01</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">06</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">02</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">07</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">03</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">08</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">04</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">09</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">05</span><span class="ln"></span></div>
+      <div class="win-row"><span class="num">10</span><span class="ln"></span></div>
+    </div>
+  </section>
+
+  <!-- ═══ B-04 · NAMED PATTERNS (lavender) ═══ -->
+  <section class="patterns" aria-label="Named patterns tally">
+    <div class="patterns-head">
+      <span class="kicker">§ named patterns</span>
+      <span class="title">loops this week</span>
+      <span class="note">one tick each time it ran</span>
+    </div>
+    <div class="patterns-grid">
+      <div class="pat-row">
+        <span class="name">doomscroll</span>
+        <span class="ticks"><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
+      <div class="pat-row">
+        <span class="name">catastrophize</span>
+        <span class="ticks"><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
+      <div class="pat-row">
+        <span class="name">prereq trap</span>
+        <span class="ticks"><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
+      <div class="pat-row">
+        <span class="name">rejection scanner</span>
+        <span class="ticks"><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
+      <div class="pat-row">
+        <span class="blank-name"></span>
+        <span class="ticks"><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
+      <div class="pat-row">
+        <span class="blank-name"></span>
+        <span class="ticks"><span></span><span></span><span></span><span></span><span></span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ B-05 · WHAT WORKED / WHAT DIDN'T ═══ -->
+  <section class="triad" aria-label="Worked and didn't">
+    <div class="t-col t-worked">
+      <div class="head">
+        <span class="kicker">§ worked</span>
+        <span class="title">keep doing</span>
+      </div>
+      <div class="t-rows">
+        <div class="t-row"><span class="n">1</span><span class="ln"></span></div>
+        <div class="t-row"><span class="n">2</span><span class="ln"></span></div>
+        <div class="t-row"><span class="n">3</span><span class="ln"></span></div>
+      </div>
+    </div>
+    <div class="t-col t-didnt">
+      <div class="head">
+        <span class="kicker">§ didn't</span>
+        <span class="title">try different</span>
+      </div>
+      <div class="t-rows">
+        <div class="t-row"><span class="n">1</span><span class="ln"></span></div>
+        <div class="t-row"><span class="n">2</span><span class="ln"></span></div>
+        <div class="t-row"><span class="n">3</span><span class="ln"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ B-06 · NEXT WEEK'S FROG (sage) ═══ -->
+  <section class="frog" aria-label="Next week frog">
+    <div class="frog-head">
+      <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 14c0-3.3 2.2-6 5-6s5 2.7 5 6"/>
+        <circle cx="9.5" cy="11" r="0.6" fill="currentColor"/>
+        <circle cx="14.5" cy="11" r="0.6" fill="currentColor"/>
+        <path d="M9 16c1 1.3 2 2 3 2s2-.7 3-2"/>
+      </svg>
+      <div class="meta">
+        <div class="kicker">§ next week · the frog</div>
+        <div class="title">one big thing</div>
+      </div>
+      <div class="constraint">what would make next Sunday<br>feel like a win regardless</div>
+    </div>
+    <hr class="frog-line">
+    <div class="frog-tail">
+      <span class="hint">eat it early · finish by Tuesday</span>
+    </div>
+  </section>
+
+  <!-- ═══ B-07 · INTENTION LINE ═══ -->
+  <section class="intention" aria-label="Intention for next week">
+    <div class="kicker">§ what I want next week to feel like</div>
+    <div class="prompt">one sentence · big handwriting · say it plain</div>
+    <hr class="line">
+  </section>
+
+  <!-- Footer whisper -->
+  <footer class="footer">
+    <span class="left">prax journal · v5 · weekly review</span>
+    <span class="right">You showed up. That counts.</span>
+  </footer>
+
+</div>
+</body>
+</html>

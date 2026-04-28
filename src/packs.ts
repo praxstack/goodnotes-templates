@@ -235,6 +235,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
     pageCount: 1,
   },
   {
+    id: 'adhd-v5-weekly',
+    name: 'Prax Journal v5 Weekly',
+    category: 'journal',
+    description: 'v5 — Sunday end-of-week recap (7-day strip · wins · patterns · next frog)',
+    htmlPath: journal('v5', 'weekly.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
     id: 'prax-journal-design-system',
     name: 'Prax Journal Design System',
     category: 'journal',
