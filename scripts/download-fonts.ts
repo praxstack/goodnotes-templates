@@ -1,10 +1,10 @@
 #!/usr/bin/env tsx
 /**
  * Downloads the Google Fonts woff2 files the templates use into
- * `assets/fonts/` so rendering works offline (FIND-0014).
+ * `shared/fonts/` so rendering works offline (FIND-0014).
  *
  * This script is the first half of FIND-0014. The second half — rewriting
- * every `<link>` in `src/templates/html/*.html` to reference the local
+ * every `<link>` in `packs/**/*.html` to reference the local
  * `@font-face` file — is left as a follow-up because it's visual and should
  * be diffed template-by-template before shipping.
  *
@@ -15,10 +15,10 @@
  *   1. Lists the 7 unique Google Fonts CSS URLs used across templates.
  *   2. Fetches each CSS with a modern User-Agent so Google serves woff2.
  *   3. Parses `src: url(...)` entries, dedupes by URL, downloads each woff2.
- *   4. Writes `assets/fonts/<family>/<variant>.woff2` + a fonts.css aggregator.
+ *   4. Writes `shared/fonts/<family>/<variant>.woff2` + a fonts.css aggregator.
  *
  * Safety:
- *   - Only writes under assets/fonts/. No other filesystem touches.
+ *   - Only writes under shared/fonts/. No other filesystem touches.
  *   - Network allow-list: fetches only fonts.googleapis.com + fonts.gstatic.com.
  */
 
@@ -28,9 +28,9 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const OUT_DIR = path.join(ROOT, 'assets', 'fonts');
+const OUT_DIR = path.join(ROOT, 'shared', 'fonts');
 
-// The 7 distinct Google Fonts stylesheet URLs used across src/templates/html/.
+// The 7 distinct Google Fonts stylesheet URLs used across packs/**/*.html.
 // Update this list if templates reference new font combinations.
 const STYLESHEET_URLS: string[] = [
   'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap',
@@ -160,8 +160,8 @@ async function main() {
 
   console.log('');
   console.log('Next step: rewrite every `<link href="https://fonts.googleapis.com/…">`');
-  console.log('in src/templates/html/*.html to:');
-  console.log('  <link href="../../../assets/fonts/fonts.css" rel="stylesheet">');
+  console.log('in packs/**/*.html to:');
+  console.log('  <link href="/shared/fonts/fonts.css" rel="stylesheet">');
   console.log('This half is deliberately not automated — diff each template visually before merging.');
 }
 

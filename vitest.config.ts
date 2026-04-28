@@ -24,7 +24,6 @@ export default defineConfig({
         'src/core/svg-renderer.ts',
         'src/cli/preview-server.ts',
         'src/utils/locale.ts',
-        'src/templates/planners/daily-year-v2.ts',
       ],
       exclude: [
         'node_modules/**',
@@ -34,8 +33,7 @@ export default defineConfig({
         'scripts/**',
         'src/cli/index.ts', // thin Commander wrapper, tested via integration
         'src/core/png-renderer.ts', // wraps sharp; tested via svg-renderer
-        'src/templates/registry.ts', // static metadata
-        'src/templates/planners/daily-year.ts', // v1 planner; v2 is the live path
+        'src/packs.ts', // static pack registry (was src/templates/registry.ts)
         'src/types/**',
         'src/utils/**/*.d.ts',
       ],

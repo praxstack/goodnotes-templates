@@ -25,25 +25,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
-const HTML_DIR = path.join(REPO_ROOT, 'src', 'templates', 'html');
+const PRAX_JOURNAL = path.join(REPO_ROOT, 'packs', 'journals', 'prax-journal');
 const BASELINE_DIR = path.join(__dirname, 'baselines');
 const DIFF_DIR = path.join(__dirname, 'diffs');
 
 // Pages under active design — any pixel drift deserves a look.
-const TEMPLATES = [
+// Each tuple: [baseline-id, absolute HTML path]. Baseline IDs stay stable
+// even if paths move again, so existing PNGs under baselines/ keep working.
+const TEMPLATES: Array<readonly [string, string]> = [
   // v5 — current production journal (Prax journal, 4-page spread).
-  'adhd-v5-today',
-  'adhd-v5-midday',
-  'adhd-v5-reflect',
-  'adhd-v5-brain-dump',
-  // v4 — predecessor, still referenced by /v4-all.
-  'adhd-v4-today',
-  'adhd-v4-reflect',
-  'adhd-v4-brain-dump',
+  ['adhd-v5-today',         path.join(PRAX_JOURNAL, 'versions', 'v5', 'today.html')],
+  ['adhd-v5-midday',        path.join(PRAX_JOURNAL, 'versions', 'v5', 'midday.html')],
+  ['adhd-v5-reflect',       path.join(PRAX_JOURNAL, 'versions', 'v5', 'reflect.html')],
+  ['adhd-v5-brain-dump',    path.join(PRAX_JOURNAL, 'versions', 'v5', 'brain-dump.html')],
+  // v4 — predecessor.
+  ['adhd-v4-today',         path.join(PRAX_JOURNAL, 'versions', 'v4', 'today.html')],
+  ['adhd-v4-reflect',       path.join(PRAX_JOURNAL, 'versions', 'v4', 'reflect.html')],
+  ['adhd-v4-brain-dump',    path.join(PRAX_JOURNAL, 'versions', 'v4', 'brain-dump.html')],
   // Design-system reference page — regressions here usually signal a
-  // broken token in `prax-journal-design.md`.
-  'prax-journal-design-system',
-] as const;
+  // broken token in the pack's DESIGN.md.
+  ['prax-journal-design-system', path.join(PRAX_JOURNAL, 'design-system.html')],
+];
 
 // 0.5% of pixels (~4,463 on an A4 canvas). Tight enough to catch a
 // missing card; loose enough to tolerate font-hinting jitter.
@@ -55,9 +57,8 @@ describe('Prax journal — visual baselines', () => {
     await closeBrowser();
   });
 
-  for (const name of TEMPLATES) {
+  for (const [name, htmlPath] of TEMPLATES) {
     it(`${name} matches its baseline`, async () => {
-      const htmlPath = path.join(HTML_DIR, `${name}.html`);
       const actual = await renderToPng({ htmlPath });
 
       const baselinePath = path.join(BASELINE_DIR, `${name}.png`);
