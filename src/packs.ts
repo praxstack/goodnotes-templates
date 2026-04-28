@@ -244,6 +244,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
     pageCount: 1,
   },
   {
+    id: 'adhd-v5-monthly',
+    name: 'Prax Journal v5 Monthly',
+    category: 'journal',
+    description: 'v5 — month-end blank (hybrid reminder · AI-filled version arrives via AirDrop)',
+    htmlPath: journal('v5', 'monthly.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
     id: 'prax-journal-design-system',
     name: 'Prax Journal Design System',
     category: 'journal',
