@@ -10,7 +10,7 @@ cd goodnotes-templates
 npm install
 npm run build                            # TypeScript check (must pass)
 npm run start -- list                    # See available templates and paper sizes
-npm run start -- render src/templates/html/adhd-gentle-daily.html  # Render one
+npm run start -- render packs/journals/prax-journal/versions/v5/today.html  # Render one
 npm run start -- preview                 # Browse output/ at http://127.0.0.1:3000
 npm test                                 # Run unit tests
 ```
@@ -22,18 +22,23 @@ layout (see `docs/HLD-self-contained-templates.md`). Adding a template is a
 one-file change, not a multi-module change.
 
 ### 1. New HTML template
-Create `src/templates/html/<my-template>.html`:
-- Inline all styles. No external fetches; we self-host fonts (see `assets/fonts/`).
+Pick a category (`journals`, `planners`, `trackers`, `notes`, `worksheets`) and
+create `packs/<category>/<my-template>/<my-template>.html`:
+- Inline all styles. No external fetches; we self-host fonts (see `shared/fonts/`).
 - Use CSS variables for colors so users can re-theme via `.dark.css` siblings.
 - Satisfy WCAG AA contrast (4.5:1 text, 3:1 large text) on every background.
-- Register the template in `src/templates/registry.ts`.
-- Add a sample render to verify: `npm run start -- render src/templates/html/<my-template>.html`.
+- Add a `README.md` in the same directory describing the template's purpose.
+- Register the template in `src/packs.ts` (the pack registry).
+- Add a sample render to verify: `npm run start -- render packs/<category>/<my-template>/<my-template>.html`.
 
 Optional: drop a `<my-template>.dark.css` sibling for the dark variant. It
 gets injected with `--color-mode dark`.
 
+For multi-version packs (e.g. Prax Journal), each version lives under its own
+subdir: `packs/journals/<name>/versions/v<N>/<role>.html`.
+
 ### 2. New color theme
-Add `src/templates/themes/<my-theme>.css` (and `<my-theme>-dark.css` for the
+Add `shared/themes/<my-theme>.css` (and `<my-theme>-dark.css` for the
 dark variant). Themes are pure CSS variable overrides; no code changes needed.
 Use with `--color-mode <my-theme>`.
 
