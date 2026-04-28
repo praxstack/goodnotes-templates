@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v5 — Monthly Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v5 · MONTHLY REVIEW — last-day-of-month reflection
+   Design contract: packs/journals/prax-journal/DESIGN.md · Warm Analog Editorial
+
+   Cadence: fill on the last evening of the month. Looks back across ~30 days,
+   sets intent for the next one.
+
+   This is the BLANK (hybrid reminder) half of decision Q1 in
+   docs/plan-ceo-review-v4-five-decisions-locked.md:
+     • This page lives inside the baked-in PDF as a visual reminder that
+       month-end exists.
+     • After Prax AirDrops the filled notebook, AI emits a *filled* version
+       with real data aggregates (cigs · mood mean · chest-kg · best/worst
+       day computed · Named Patterns tally).
+
+   Design refinements folded in from docs/plan-design-review-v4-five-decisions.md:
+     • Dashboard rows widened 5→6mm (§1 · Monthly)
+     • Best/hardest day cards gain a day-number affordance (§1 · Monthly)
+     • Intention hero line stays 12mm solid (matches Quarterly pattern)
+
+   Block map (top to bottom):
+     B-01  Masthead               month-name hero + month-counter
+     B-02  Free-writing card      sage squircle · "what this month felt like"
+     B-03  Remembered dashboard   2×2 grid · wins · patterns · best · hardest
+     B-04  Reminder card          lavender · AirDrop-for-AI bullet list
+     B-05  Intention hero         sage · 12mm handwritten next-month line
+
+   Same token system + squircle + writing-zone rule as v5/today.html and
+   v5/weekly.html. Cream paper, Fraunces+Instrument+JetBrains Mono.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
+  --paper: #F9F5EC;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
+  --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
+  --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
+  --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
+  --lavender: #B6A9CB; --lavender-ink: #6B5D86; --lavender-tint: rgba(182, 169, 203, 0.10); --lavender-edge: rgba(182, 169, 203, 0.28);
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm;
+  --dot: var(--ink-whisper);
+  --shadow-page: 0 1px 2px rgba(42,40,36,0.04), 0 16px 48px rgba(42,40,36,0.10), 0 2px 8px rgba(42,40,36,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans); font-size: 8.5pt;
+  color: var(--ink-soft); line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative;
+  overflow: clip;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+  gap: 3mm;
+}
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .felt, .dashboard .card, .reminder, .intention { box-shadow: none !important; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── B-01 · Masthead ─── */
+.masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--s2); border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
+.masthead .kicker { font-family: var(--font-mono); font-size: 6pt; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-quiet); margin-bottom: 1.5mm; }
+.masthead h1 { font-family: var(--font-serif); font-size: 30pt; font-weight: 400; line-height: 0.92; letter-spacing: -0.02em; color: var(--ink); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.masthead .subtitle { font-family: var(--font-serif); font-size: 9pt; font-style: italic; color: var(--ink-quiet); margin-top: 1.5mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.mh-r { text-align: right; display: flex; flex-direction: column; gap: 1.5mm; align-items: flex-end; }
+.month-row { display: flex; align-items: baseline; gap: 2.5mm; }
+.month-row .label { font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet); }
+.month-row .field { border-bottom: 0.6px solid var(--ink); min-width: 34mm; height: 4.5mm; font-family: var(--font-mono); font-size: 9pt; }
+.mo-counter { font-family: var(--font-mono); font-size: 7pt; font-weight: 500; color: var(--ink-quiet); letter-spacing: 0.08em; }
+.mo-counter .big { font-size: 10pt; color: var(--ink); font-weight: 600; }
+.mo-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+
+/* ─── B-02 · Free-writing card (sage) ─── */
+.felt { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 2.5mm var(--s3) 3mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.felt::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.felt-head { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 2mm; }
+.felt-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); }
+.felt-head .title { font-family: var(--font-serif); font-size: 13pt; font-weight: 500; color: var(--sage-ink); line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.felt-head .hint { margin-left: auto; font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--sage-ink); opacity: 0.75; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.felt .prompt { font-family: var(--font-serif); font-size: 8pt; font-style: italic; color: var(--sage-ink); opacity: 0.85; margin-bottom: 2mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.felt-lines { display: flex; flex-direction: column; gap: 0; }
+.felt-lines .ln { border-bottom: 0.8px solid var(--sage-edge); height: 8mm; }
+
+/* ─── B-03 · Remembered dashboard · 2×2 grid ─── */
+.dashboard { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: var(--s2); flex: 1; min-height: 0; }
+.dashboard .card { border-radius: 3.5mm; padding: 2.5mm var(--s3); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.dashboard .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.dashboard .card.amber { background: var(--amber-tint); border: 0.8px solid var(--amber-edge); }
+.dashboard .card.amber::before { background: var(--amber); }
+.dashboard .card.clay  { background: var(--clay-tint);  border: 0.8px solid var(--clay-edge); }
+.dashboard .card.clay::before  { background: var(--clay); }
+.dashboard .card .head { display: flex; align-items: baseline; gap: 2mm; margin-bottom: 2mm; }
+.dashboard .card .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; }
+.dashboard .card .title  { font-family: var(--font-serif); font-size: 11pt; font-weight: 500; line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.dashboard .card .hint   { margin-left: auto; font-family: var(--font-serif); font-size: 7pt; font-style: italic; opacity: 0.75; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.dashboard .card.amber .kicker, .dashboard .card.amber .title, .dashboard .card.amber .hint { color: var(--amber-ink); }
+.dashboard .card.clay  .kicker, .dashboard .card.clay  .title, .dashboard .card.clay  .hint  { color: var(--clay-ink); }
+
+/* numbered 6mm rows (list variant · wins + patterns) */
+.dashboard .rows { display: flex; flex-direction: column; gap: 0; flex: 1; }
+.dashboard .row { display: grid; grid-template-columns: 5mm 1fr; align-items: center; gap: 2mm; }
+.dashboard .row .n { font-family: var(--font-mono); font-size: 6pt; font-weight: 600; opacity: 0.7; }
+.dashboard .row .ln { height: 6mm; }
+.dashboard .card.amber .row .n { color: var(--amber-ink); }
+.dashboard .card.amber .row .ln { border-bottom: 0.6px solid var(--amber-edge); }
+.dashboard .card.clay  .row .n { color: var(--clay-ink); }
+.dashboard .card.clay  .row .ln { border-bottom: 0.6px solid var(--clay-edge); }
+
+/* day-number affordance · best + hardest cards */
+.daycard { display: flex; flex-direction: column; gap: 2mm; flex: 1; }
+.daycard .day-chip { display: inline-flex; align-items: baseline; gap: 2mm; }
+.daycard .day-chip .day-label { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.7; }
+.daycard .day-chip .day-num { font-family: var(--font-mono); font-size: 8.5pt; font-weight: 500; min-width: 10mm; text-align: center; border: 0.6px solid; border-radius: 1.5mm; padding: 0.3mm 1.2mm; background: rgba(249,245,236,0.55); }
+.dashboard .card.amber .daycard .day-chip .day-num { color: var(--amber-ink); border-color: var(--amber-edge); }
+.dashboard .card.clay  .daycard .day-chip .day-num { color: var(--clay-ink);  border-color: var(--clay-edge);  }
+.daycard .why { font-family: var(--font-serif); font-size: 7.5pt; font-style: italic; opacity: 0.8; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.dashboard .card.amber .daycard .why { color: var(--amber-ink); }
+.dashboard .card.clay  .daycard .why { color: var(--clay-ink); }
+.daycard .day-lines { display: flex; flex-direction: column; gap: 0; flex: 1; justify-content: flex-end; }
+.daycard .day-lines .ln { height: 6mm; }
+.dashboard .card.amber .daycard .day-lines .ln { border-bottom: 0.6px solid var(--amber-edge); }
+.dashboard .card.clay  .daycard .day-lines .ln { border-bottom: 0.6px solid var(--clay-edge); }
+
+/* ─── B-04 · Reminder card (lavender) ─── */
+.reminder { background: var(--lavender-tint); border: 0.8px solid var(--lavender-edge); border-radius: 3.5mm; padding: 2.5mm var(--s3); flex-shrink: 0; position: relative; overflow: hidden; }
+.reminder::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--lavender); }
+.reminder-head { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 1.5mm; }
+.reminder-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--lavender-ink); }
+.reminder-head .title { font-family: var(--font-serif); font-size: 10.5pt; font-weight: 500; color: var(--lavender-ink); line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.reminder-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1mm var(--s4); align-items: center; }
+.reminder-body .check { display: grid; grid-template-columns: 4mm 1fr; align-items: center; gap: 2mm; font-family: var(--font-sans); font-size: 8pt; color: var(--lavender-ink); font-weight: 500; }
+.reminder-body .check .box { width: 3.6mm; height: 3.6mm; border: 1px solid var(--lavender-ink); border-radius: 0.8mm; background: rgba(249,245,236,0.5); }
+.reminder-body .arrives { font-family: var(--font-serif); font-size: 7.5pt; font-style: italic; color: var(--lavender-ink); opacity: 0.85; line-height: 1.45; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.reminder-body .arrives strong { font-family: var(--font-mono); font-style: normal; font-size: 6.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lavender-ink); opacity: 0.9; }
+
+/* ─── B-05 · Intention hero (sage) ─── */
+.intention { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 3mm var(--s3) 3mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.intention::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.intention .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); margin-bottom: 1mm; }
+.intention .title { font-family: var(--font-serif); font-size: 13pt; font-weight: 500; color: var(--sage-ink); line-height: 1; margin-bottom: 0.8mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.intention .prompt { font-family: var(--font-serif); font-size: 8pt; font-style: italic; color: var(--sage-ink); opacity: 0.85; margin-bottom: 2.5mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.intention .line { border: none; border-bottom: 1.5px solid var(--sage); height: 12mm; }
+
+/* ─── Footer whisper ─── */
+.footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5mm; font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-quiet); letter-spacing: 0.12em; text-transform: uppercase; padding-top: 1mm; border-top: 0.3px dotted var(--ink-whisper); }
+.footer .left { opacity: 0.7; }
+.footer .right { font-family: var(--font-serif); font-size: 7pt; font-style: italic; text-transform: none; letter-spacing: normal; color: var(--ink-quiet); opacity: 0.85; font-variation-settings: "opsz" 14, "SOFT" 100; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ B-01 · MASTHEAD ═══ -->
+  <header class="masthead">
+    <div class="mh-l">
+      <div class="kicker">Monthly Review · month ending</div>
+      <h1>this month</h1>
+      <div class="subtitle">thirty days, one reflection</div>
+    </div>
+    <div class="mh-r">
+      <div class="month-row">
+        <span class="label">Month</span>
+        <span class="field" data-inject="month-name"></span>
+      </div>
+      <div class="mo-counter">
+        Month <span class="big" data-inject="month-num">__</span><span class="slash">·</span>
+        <span data-inject="quarter">Q_</span><span class="slash">·</span>
+        <span data-inject="year">____</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ B-02 · FREE-WRITING CARD (sage) ═══ -->
+  <section class="felt" aria-label="What this month felt like">
+    <div class="felt-head">
+      <span class="kicker">§ felt like</span>
+      <span class="title">what this month felt like</span>
+      <span class="hint">1–2 sentences · before you look at the data</span>
+    </div>
+    <div class="prompt">say it plain · the mood, not the metrics</div>
+    <div class="felt-lines">
+      <div class="ln"></div>
+      <div class="ln"></div>
+      <div class="ln"></div>
+    </div>
+  </section>
+
+  <!-- ═══ B-03 · REMEMBERED DASHBOARD · 2×2 grid ═══ -->
+  <section class="dashboard" aria-label="What you remember without looking">
+
+    <!-- wins · amber -->
+    <div class="card amber">
+      <div class="head">
+        <span class="kicker">§ wins</span>
+        <span class="title">what I'm proud of</span>
+        <span class="hint">from memory · not the jar</span>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="n">01</span><span class="ln"></span></div>
+        <div class="row"><span class="n">02</span><span class="ln"></span></div>
+        <div class="row"><span class="n">03</span><span class="ln"></span></div>
+        <div class="row"><span class="n">04</span><span class="ln"></span></div>
+        <div class="row"><span class="n">05</span><span class="ln"></span></div>
+      </div>
+    </div>
+
+    <!-- patterns · clay -->
+    <div class="card clay">
+      <div class="head">
+        <span class="kicker">§ patterns</span>
+        <span class="title">what kept happening</span>
+        <span class="hint">loops that ran the most</span>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="n">01</span><span class="ln"></span></div>
+        <div class="row"><span class="n">02</span><span class="ln"></span></div>
+        <div class="row"><span class="n">03</span><span class="ln"></span></div>
+        <div class="row"><span class="n">04</span><span class="ln"></span></div>
+        <div class="row"><span class="n">05</span><span class="ln"></span></div>
+      </div>
+    </div>
+
+    <!-- best day · amber with day-chip -->
+    <div class="card amber">
+      <div class="head">
+        <span class="kicker">§ best day</span>
+        <span class="title">when it clicked</span>
+        <span class="hint">the day you'd re-live</span>
+      </div>
+      <div class="daycard">
+        <div class="day-chip">
+          <span class="day-label">day #</span>
+          <span class="day-num">__</span>
+        </div>
+        <div class="why">why · what made it work</div>
+        <div class="day-lines">
+          <div class="ln"></div>
+          <div class="ln"></div>
+          <div class="ln"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- hardest day · clay with day-chip -->
+    <div class="card clay">
+      <div class="head">
+        <span class="kicker">§ hardest day</span>
+        <span class="title">when it didn't</span>
+        <span class="hint">the day that broke you</span>
+      </div>
+      <div class="daycard">
+        <div class="day-chip">
+          <span class="day-label">day #</span>
+          <span class="day-num">__</span>
+        </div>
+        <div class="why">why · what pulled you under</div>
+        <div class="day-lines">
+          <div class="ln"></div>
+          <div class="ln"></div>
+          <div class="ln"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══ B-04 · REMINDER CARD (lavender) ═══ -->
+  <section class="reminder" aria-label="AirDrop reminder">
+    <div class="reminder-head">
+      <span class="kicker">§ reminder</span>
+      <span class="title">before starting next month</span>
+    </div>
+    <div class="reminder-body">
+      <label class="check">
+        <span class="box"></span>
+        <span>AirDrop this notebook to AI for the data version</span>
+      </label>
+      <div class="arrives">
+        <strong>what arrives:</strong> cigs total · mood mean · chest-kg delta · Named Patterns tally · best/worst day computed · see docs/monthly-generation-playbook.md
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ B-05 · INTENTION HERO (sage) ═══ -->
+  <section class="intention" aria-label="Intention for next month">
+    <div class="kicker">§ next month</div>
+    <div class="title">what I want next month to feel like</div>
+    <div class="prompt">one sentence · big handwriting · say it plain</div>
+    <hr class="line">
+  </section>
+
+  <!-- Footer whisper -->
+  <footer class="footer">
+    <span class="left">prax journal · v5 · monthly review</span>
+    <span class="right">this is the blank — the AI-filled version arrives via AirDrop</span>
+  </footer>
+
+</div>
+</body>
+</html>
