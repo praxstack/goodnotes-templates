@@ -24,131 +24,21 @@ import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  fontsDefs,
   rasterize,
   SIZE_CLASSES,
   PALETTE,
-  type StickerSize,
-  type Accent,
+  stickerShell,
+  kickerLine,
+  solidLine,
+  dottedLine,
 } from '../src/core/sticker-renderer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, '..');
 
-const inlineFontCss = fontsDefs()
-  .replace(/^\s*<defs>\s*<style><!\[CDATA\[/m, '')
-  .replace(/\]\]><\/style>\s*<\/defs>\s*$/m, '');
-
-// ─── Shared helpers ────────────────────────────────────────
-function stickerShell(opts: {
-  id: string;
-  title: string;
-  desc: string;
-  size: StickerSize;
-  accent: Accent;
-  kicker: string;
-  hero: string;
-  subtitle: string;
-  whisper: string;
-  bodySvg: string;
-  heroFontSize?: number;
-  heroY?: number;
-  subtitleY?: number;
-}): string {
-  const { width: W, height: H, rx: RX } = SIZE_CLASSES[opts.size];
-  const a = PALETTE[opts.accent];
-  const heroFontSize = opts.heroFontSize ?? (opts.size === 'compact' ? 38 : 44);
-  const heroY = opts.heroY ?? (opts.size === 'compact' ? 108 : 115);
-  const subY  = opts.subtitleY ?? (heroY + 33);
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"
-     role="img" aria-labelledby="${opts.id}-title ${opts.id}-desc">
-  <title id="${opts.id}-title">${opts.title}</title>
-  <desc id="${opts.id}-desc">${opts.desc}</desc>
-
-  <defs>
-    <style><![CDATA[${inlineFontCss}]]></style>
-    <linearGradient id="paperWarmth" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FBF7EE"/>
-      <stop offset="100%" stop-color="#F4EFE0"/>
-    </linearGradient>
-    <filter id="paperGrain" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="3" seed="7"/>
-      <feColorMatrix values="0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.08  0 0 0 0.12 0"/>
-      <feComposite in2="SourceGraphic" operator="in"/>
-    </filter>
-    <clipPath id="cardClip">
-      <rect x="0" y="0" width="${W}" height="${H}" rx="${RX}" ry="${RX}"/>
-    </clipPath>
-  </defs>
-
-  <rect x="0" y="0" width="${W}" height="${H}" rx="${RX}" ry="${RX}" fill="url(#paperWarmth)"/>
-  <rect x="0" y="0" width="${W}" height="${H}" rx="${RX}" ry="${RX}" fill="${PALETTE.paper}" filter="url(#paperGrain)"/>
-
-  <rect x="0" y="0" width="${W}" height="8"
-        fill="${a.rail}" fill-opacity="0.72"
-        clip-path="url(#cardClip)"/>
-  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="${RX}" ry="${RX}"
-        fill="none" stroke="${a.edge}" stroke-width="1"/>
-
-  <text x="${W / 2}" y="50"
-        text-anchor="middle"
-        font-family="'JetBrains Mono', Menlo, monospace"
-        font-size="11" font-weight="600"
-        letter-spacing="${11 * 0.18}"
-        fill="${a.ink}">${opts.kicker}</text>
-
-  <text x="${W / 2}" y="${heroY}"
-        text-anchor="middle"
-        font-family="'Fraunces', Georgia, serif"
-        font-size="${heroFontSize}" font-weight="400"
-        fill="${PALETTE.ink}"
-        style="font-variation-settings: 'opsz' 72, 'SOFT' 60;">${opts.hero}</text>
-
-  <text x="${W / 2}" y="${subY}"
-        text-anchor="middle"
-        font-family="'Fraunces', Georgia, serif"
-        font-size="14" font-style="italic"
-        fill="${a.ink}" fill-opacity="0.8"
-        style="font-variation-settings: 'opsz' 14, 'SOFT' 100;">${opts.subtitle}</text>
-
-${opts.bodySvg}
-
-  <text x="${W / 2}" y="${H - 50}"
-        text-anchor="middle"
-        font-family="'Fraunces', Georgia, serif"
-        font-size="12" font-style="italic"
-        fill="${a.ink}" fill-opacity="0.55"
-        style="font-variation-settings: 'opsz' 14, 'SOFT' 100;">${opts.whisper}</text>
-
-  <text x="${W / 2}" y="${H - 18}"
-        text-anchor="middle"
-        font-family="'JetBrains Mono', Menlo, monospace"
-        font-size="9" font-weight="400"
-        letter-spacing="${9 * 0.2}"
-        fill="${a.ink}" fill-opacity="0.45">PRAX JOURNAL · STICKER</text>
-
-</svg>
-`;
-}
-
-function kickerLine(text: string, x: number, y: number, accent: Accent, size = 10): string {
-  return `  <text x="${x}" y="${y}"
-        font-family="'JetBrains Mono', Menlo, monospace"
-        font-size="${size}" font-weight="600"
-        letter-spacing="${size * 0.14}"
-        fill="${PALETTE[accent].ink}">${text}</text>`;
-}
-
-function solidLine(x1: number, y: number, x2: number, w = 1.3): string {
-  return `  <line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${PALETTE.ink}" stroke-width="${w}"/>`;
-}
-
-function dottedLine(x1: number, y: number, x2: number, w = 0.9): string {
-  return `  <line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${PALETTE.ink}" stroke-width="${w}" stroke-dasharray="1,3"/>`;
-}
+// Post-refactor: stickerShell + helpers moved to src/core/sticker-renderer.ts
+// so the 4 flagship scripts and this batch script share the same
+// canonical surface.
 
 // ─── Output ────────────────────────────────────────────────
 async function ship(name: string, svg: string): Promise<void> {
