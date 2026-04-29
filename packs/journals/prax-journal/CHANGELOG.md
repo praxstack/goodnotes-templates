@@ -8,8 +8,18 @@ Version history of the journal pack. See `versions/` for frozen snapshots of eac
   rules directly into each of the 7 v5 pages. Google Fonts `<link>` removed. Pages
   now render with the warm-analog voice offline. Same base64 pipeline as stickers.
   Rewriter: `scripts/inline-v5-fonts.ts` (idempotent, marker-gated).
+- **C6b · splice edge-case TDD tests (G4)** — authored `src/core/splice.ts`
+  as a RED stub (`buildPageSequence()` throws `NotImplementedError`) plus
+  7 canonical test cases + 1 bonus in `tests/unit/splice.test.ts`, pinning
+  down the page-sequence contract before C7 lands the generator CLI. Cases
+  cover: mid-month start, year boundary (12/31 = monthly + quarterly),
+  leap-year Feb 29, partial quarter, single-day weekday, single-day
+  Sunday, Sunday-as-`--from`, and inverted range returns `[]`. Tests use
+  `it.fails(...)` so CI stays green today; flip to `it(...)` in the C7
+  commit that removes the throw.
 - **C6a polish** — three small post-review fixes: (a) `font-display: block` matches
   the sticker renderer (cosmetic alignment; for data URIs both values behave
+
   identically, but one value is easier to reason about); (b) `FONT_FILES` hoisted
   to a single exported constant in `src/core/sticker-renderer.ts` so stickers and
   v5 pages can't drift; (c) 500 KB soft cap on the generated `<style>` block to
