@@ -87,9 +87,6 @@
 
   /* Dot grid — 5mm pitch */
   --grid-color: rgba(42, 40, 36, 0.12);
-
-  /* watermark hint color — same hue as ink-whisper but softer */
-  --watermark: rgba(42, 40, 36, 0.10);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -288,73 +285,37 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
   overflow: hidden;
 }
 
-/* ─── Watermark suggestions — scattered Fraunces italic sticker names in very pale ink
-       Sits under the dot grid. Print-friendly. Non-interactive. ─── */
-.watermark {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-variation-settings: "opsz" 144, "SOFT" 100;
-  color: var(--watermark);
-  user-select: none;
-}
-.watermark .wm {
-  position: absolute;
-  white-space: nowrap;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-/* Rotations + sizes — scattered, rhythmic */
-.watermark .wm.w1  { top: 6%;  left: 14%; font-size: 44pt; transform: rotate(-4deg); }
-.watermark .wm.w2  { top: 18%; left: 55%; font-size: 30pt; transform: rotate(3deg); }
-.watermark .wm.w3  { top: 28%; left: 10%; font-size: 26pt; transform: rotate(-2deg); }
-.watermark .wm.w4  { top: 37%; left: 48%; font-size: 36pt; transform: rotate(-1deg); }
-.watermark .wm.w5  { top: 48%; left: 8%;  font-size: 32pt; transform: rotate(2deg); }
-.watermark .wm.w6  { top: 56%; left: 52%; font-size: 28pt; transform: rotate(-3deg); }
-.watermark .wm.w7  { top: 66%; left: 12%; font-size: 40pt; transform: rotate(1deg); }
-.watermark .wm.w8  { top: 76%; left: 48%; font-size: 26pt; transform: rotate(-2deg); }
-.watermark .wm.w9  { top: 86%; left: 18%; font-size: 30pt; transform: rotate(3deg); }
-.watermark .wm.w10 { top: 92%; left: 58%; font-size: 22pt; transform: rotate(-1deg); font-style: normal; font-family: var(--font-mono); letter-spacing: 0.15em; text-transform: uppercase; font-size: 10pt; }
+/* ─── Draftsman's ruler — realistic, no pink band ───────────
+   Single SVG pattern tile = 50mm tall, repeats vertically.
+   Each tile draws: a full-height spine, minor ticks at every
+   10mm (1.5mm long), and a major tick at the bottom (3mm
+   long, slightly thicker) that also reads as the 5cm mark
+   when the tile repeats. Numbered labels at 5/10/15/20 cm
+   land exactly on the major ticks.
 
-/* Vintage margin ruler — tick every 10mm */
+   SVG is inlined via data URI so the template remains fully
+   self-contained (FIND-0010). Colours are hardcoded to
+   --ink-quiet (#6E6658) because data URIs can't reference
+   CSS variables. ─── */
 .canvas::before {
   content: "";
   position: absolute;
   left: 1.5mm;
   top: 0; bottom: 0;
-  width: 2.5mm;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 9.3mm,
-    var(--ink-quiet) 9.3mm,
-    var(--ink-quiet) 9.7mm,
-    transparent 9.7mm,
-    transparent 10mm
-  );
-  opacity: 0.5;
-}
-
-/* Bolder tick every 50mm */
-.canvas::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0; bottom: 0;
-  width: 5mm;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 49mm,
-    var(--ink-quiet) 49mm,
-    var(--ink-quiet) 50mm,
-    transparent 50mm
-  );
-  opacity: 0.4;
+  width: 4mm;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='4' height='50' viewBox='0 0 4 50' preserveAspectRatio='none'>\
+<line x1='0.35' y1='0' x2='0.35' y2='50' stroke='%236E6658' stroke-width='0.12'/>\
+<line x1='0.35' y1='10' x2='1.8' y2='10' stroke='%236E6658' stroke-width='0.1'/>\
+<line x1='0.35' y1='20' x2='1.8' y2='20' stroke='%236E6658' stroke-width='0.1'/>\
+<line x1='0.35' y1='30' x2='1.8' y2='30' stroke='%236E6658' stroke-width='0.1'/>\
+<line x1='0.35' y1='40' x2='1.8' y2='40' stroke='%236E6658' stroke-width='0.1'/>\
+<line x1='0.35' y1='50' x2='3.2' y2='50' stroke='%236E6658' stroke-width='0.18'/>\
+</svg>");
+  background-size: 4mm 50mm;
+  background-repeat: repeat-y;
+  background-position: left top;
+  opacity: 0.55;
 }
 
 .margin-tick {
@@ -459,20 +420,6 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 
   <!-- 4. DOT-GRID CANVAS (biggest element on page) -->
   <section class="canvas" aria-label="Free write canvas">
-    <!-- Watermark: scattered sticker suggestions you can write over -->
-    <div class="watermark" aria-hidden="true">
-      <span class="wm w1">Three Good Things</span>
-      <span class="wm w2">Grateful for</span>
-      <span class="wm w3">Win Today</span>
-      <span class="wm w4">Thought Flip</span>
-      <span class="wm w5">What Would I Tell a Friend</span>
-      <span class="wm w6">If–Then Plan</span>
-      <span class="wm w7">Craving Surf</span>
-      <span class="wm w8">Wins Jar</span>
-      <span class="wm w9">Mood Dot</span>
-      <span class="wm w10">or anything else</span>
-    </div>
-
     <span class="margin-tick" style="top: 48mm;">5</span>
     <span class="margin-tick" style="top: 98mm;">10</span>
     <span class="margin-tick" style="top: 148mm;">15</span>
