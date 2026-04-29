@@ -84,7 +84,12 @@ export const PALETTE: Record<Accent, AccentColors> & { ink: string; paper: strin
 // Reading + base64-encoding the five WOFF2 files costs ~200µs; memoizing
 // is pragmatic since the renderer runs once per sticker per build.
 
-const FONT_FILES = [
+/**
+ * The 5 WOFF2 files every v5 surface (stickers + journal pages) ships with.
+ * Single source of truth — imported by `scripts/inline-v5-fonts.ts` so the
+ * two pipelines can't drift. Add a font here → both surfaces pick it up.
+ */
+export const FONT_FILES = [
   { family: 'Fraunces',        weight: '400 700', woff2: 'fraunces/fraunces-normal-w400-700.woff2' },
   { family: 'Instrument Sans', weight: '400 700', woff2: 'instrument-sans/instrument-sans-normal-w400-700.woff2' },
   { family: 'JetBrains Mono',  weight: '400',     woff2: 'jetbrains-mono/jetbrains-mono-normal-w400.woff2' },
