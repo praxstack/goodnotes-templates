@@ -24,7 +24,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,json,css,html}\"",
     "clean": "rm -rf dist output/*",
     "fonts:download": "tsx scripts/download-fonts.ts",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "build:stickers": "tsx scripts/build-stickers.ts"
   },
   "keywords": [
     "goodnotes",
