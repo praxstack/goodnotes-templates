@@ -33,11 +33,15 @@ const DIFF_DIR = path.join(__dirname, 'diffs');
 // Each tuple: [baseline-id, absolute HTML path]. Baseline IDs stay stable
 // even if paths move again, so existing PNGs under baselines/ keep working.
 const TEMPLATES: Array<readonly [string, string]> = [
-  // v5 — current production journal (Prax journal, 4-page spread).
+  // v5 — current production journal (Prax journal, 4-page daily spread
+  // plus the weekly/monthly review pages that the baked-in annual PDF
+  // slots between months).
   ['adhd-v5-today',         path.join(PRAX_JOURNAL, 'versions', 'v5', 'today.html')],
   ['adhd-v5-midday',        path.join(PRAX_JOURNAL, 'versions', 'v5', 'midday.html')],
   ['adhd-v5-reflect',       path.join(PRAX_JOURNAL, 'versions', 'v5', 'reflect.html')],
   ['adhd-v5-brain-dump',    path.join(PRAX_JOURNAL, 'versions', 'v5', 'brain-dump.html')],
+  ['adhd-v5-weekly',        path.join(PRAX_JOURNAL, 'versions', 'v5', 'weekly.html')],
+  ['adhd-v5-monthly',       path.join(PRAX_JOURNAL, 'versions', 'v5', 'monthly.html')],
   // v4 — predecessor.
   ['adhd-v4-today',         path.join(PRAX_JOURNAL, 'versions', 'v4', 'today.html')],
   ['adhd-v4-reflect',       path.join(PRAX_JOURNAL, 'versions', 'v4', 'reflect.html')],
