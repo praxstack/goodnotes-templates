@@ -285,7 +285,7 @@ const PNG_PATH = path.join(OUT_DIR, 'mood-dot.png');
 writeFileSync(SVG_PATH, svg);
 console.log(`  ✓ ${path.relative(REPO, SVG_PATH)}  (${Math.round(svg.length / 1024)} KB · geometry ≈ ${Math.round((svg.length - inlineFontCss.length) / 1024)} KB)`);
 
-const raster = await rasterize(svg, PNG_PATH, 1);
+const raster = await rasterize(svg, PNG_PATH, 4);
 console.log(`  ✓ ${path.relative(REPO, raster.path)}  ${raster.width}×${raster.height}  (${Math.round(raster.bytes / 1024)} KB)`);
 
 console.log('');
