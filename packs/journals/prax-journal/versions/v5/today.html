@@ -298,8 +298,8 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
       <div class="subtitle">Commit small. Start with the frog.</div>
     </div>
     <div class="mh-r">
-      <div class="date-row"><span class="label">Date</span><span class="field"></span></div>
-      <div class="day-counter"><span>day&nbsp;</span><span class="big">___</span><span class="slash">/</span><span>365</span></div>
+      <div class="date-row"><span class="label">Date</span><span class="field">{{DAY_DATE}} · {{DAY_WEEKDAY}}</span></div>
+      <div class="day-counter"><span>day&nbsp;</span><span class="big">{{DAY_OF_YEAR}}</span><span class="slash">/</span><span>{{DAYS_IN_YEAR}}</span></div>
       <div class="dow-row" aria-label="Day of week"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
     </div>
   </header>
