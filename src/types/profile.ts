@@ -58,14 +58,37 @@ const Medication = z
   })
   .strict();
 
-/** A care provider — psychologist, psychiatrist, coach, or other (see profile.local.json). */
+/**
+ * A care provider — psychologist, psychiatrist, coach, or other.
+ *
+ * The psychiatry entry drives the Rx card on `today.html`. To keep the
+ * self-contained-templates invariant honest, the Rx block accepts a few
+ * optional identity fields that the renderer substitutes into `{{...}}`
+ * placeholders before handing HTML to Puppeteer:
+ *
+ *   - `credentials` fills `{{DR_CREDENTIALS}}`  (e.g. "MD Psych, MBBS")
+ *   - `registration_number` fills `{{DR_REG}}`  (e.g. "MCI 12345")
+ *   - `follow_up_days` fills `{{DR_FOLLOWUP}}`  (default days between visits)
+ *
+ * When the fields are absent (or no psychiatry entry exists) the renderer
+ * falls back to the printed-blank style so the template still reads as
+ * a blank form. See `src/core/prax-journal-renderer.ts`.
+ */
 const Therapist = z
   .object({
     role: z.enum(['psychology', 'psychiatry', 'coach', 'medical', 'other']),
     name: z.string().min(1, 'therapist.name cannot be empty'),
     notes: z.string().optional(),
+    credentials: z.string().optional(),
+    registration_number: z.string().optional(),
+    follow_up_days: z
+      .number()
+      .int()
+      .positive('follow_up_days must be a positive integer')
+      .optional(),
   })
   .strict();
+
 
 /** Named pattern — the therapist-style loops the user tallies weekly. */
 const NamedPattern = z

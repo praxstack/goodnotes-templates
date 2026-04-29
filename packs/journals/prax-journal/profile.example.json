@@ -14,7 +14,10 @@
     },
     {
       "role": "psychiatry",
-      "name": "Your Psychiatrist Here"
+      "name": "Your Psychiatrist Here",
+      "credentials": "MBBS, MD (Psych)",
+      "registration_number": "MCI-000000",
+      "follow_up_days": 14
     }
   ],
   "medications": [
