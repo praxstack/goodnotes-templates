@@ -14,8 +14,8 @@
 
    Changes vs v4:
    ✦ Day-type selector (Weekday / Therapy / Weekend) — from digital journal
-   ✦ 2-Second Pause 3-row matrix (<REDACTED-PSYCH-FIRST>'s anchor) — NEW sage block
-   ✦ Rx card with Dr <REDACTED-PSYCH-FIRST-DR> <REDACTED-PSYCH-LAST-DR>'s 8 meds from 13-04-2026 consult
+   ✦ 2-Second Pause 3-row matrix (therapist-guided anchor) — NEW sage block
+   ✦ Rx card — hand-write current meds from your profile.local.json
    ✦ Mindful hourly counter + First thought + One small thing
    ✦ Cigs horror metric MOVED to Page 3 Reflect
    ✦ Notes strip REMOVED (Brain Dump on Page 4 owns that)
@@ -94,7 +94,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .permission { background: var(--sage-tint); border-left: 2px solid var(--sage); padding: 2mm var(--s3); font-family: var(--font-serif); font-style: italic; font-size: 8pt; color: var(--sage-ink); font-variation-settings: "opsz" 14, "SOFT" 100; display: flex; align-items: center; }
 .permission .glyph { color: var(--sage-ink); font-style: normal; margin: 0 1.5mm; opacity: 0.6; }
 
-/* ─── 2-Second Pause (<REDACTED-PSYCH-FIRST>) — sage card · 3-row matrix ─── */
+/* ─── 2-Second Pause (therapist-guided anchor) — sage card · 3-row matrix ─── */
 .pause { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 3mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; }
 .pause::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
 .pause-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1mm; }
@@ -150,7 +150,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
 .task-pomo { display: flex; gap: 0.8mm; }
 .task-pomo span { width: 2.6mm; height: 2.6mm; border-radius: 50%; border: 0.9px solid var(--ink-whisper); }
 
-/* ─── Rx Prescription card (B-05 expanded) — Dr <REDACTED-PSYCH-FIRST-DR> <REDACTED-PSYCH-LAST-DR>'s 8 meds ─── */
+/* ─── Rx Prescription card (B-05 expanded) — hand-fill from profile.local.json ─── */
 .rx { border: 0.8px solid var(--ink); border-radius: 3.5mm; padding: 2.5mm var(--s3) 2.5mm; flex-shrink: 0; position: relative; overflow: hidden; background: rgba(249,245,236,0.5); }
 .rx-head { display: flex; align-items: flex-start; gap: 2.5mm; padding-bottom: 1.5mm; border-bottom: 0.4px dashed var(--ink-whisper); margin-bottom: 1.8mm; }
 .rx-head .rx-mark { font-family: var(--font-serif); font-size: 20pt; color: var(--clay-ink); font-weight: 400; font-style: italic; line-height: 0.85; font-variation-settings: "opsz" 144, "SOFT" 60; }
@@ -280,7 +280,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     </aside>
   </div>
 
-  <!-- 3 · 2-Second Pause · <REDACTED-PSYCH-FIRST>'s anchor — 3-row matrix -->
+  <!-- 3 · 2-Second Pause · therapist-guided anchor — 3-row matrix -->
   <section class="pause" aria-labelledby="pause-title">
     <div class="pause-head">
       <span class="icon" aria-hidden="true">
@@ -290,7 +290,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
         </svg>
       </span>
       <div class="meta">
-        <div class="kicker"><REDACTED-PSYCH-FIRST> · anchor practice</div>
+        <div class="kicker">§ anchor practice</div>
         <h2 class="title" id="pause-title">2-Second Pause</h2>
       </div>
       <div class="attr">before phone<br>before cigarette</div>
@@ -362,29 +362,29 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     </div>
   </section>
 
-  <!-- 6 · Rx card — Dr <REDACTED-PSYCH-FIRST-DR> <REDACTED-PSYCH-LAST-DR>'s 8 meds (13-04-2026) -->
-  <section class="rx" aria-label="Prescription">
+  <!-- 6 · Rx card — blank template; Prax hand-fills from profile.local.json -->
+  <section class="rx" aria-label="Prescription card — blank template">
     <div class="rx-head">
-      <span class="rx-mark">℞</span>
+      <span class="rx-mark" aria-hidden="true">℞</span>
       <div class="dr">
-        <div class="n">Dr. <REDACTED-PSYCH-FIRST-DR> A. <em><REDACTED-PSYCH-LAST-DR></em></div>
-        <div class="cred">Consultant Psychiatrist · MBBS DPM MD FIPS</div>
-        <div class="reg">Reg № <REDACTED-MCI-REG> · F/U 40 days · <REDACTED-MED-5> 0.25 SOS</div>
+        <div class="n">Dr. <em>_________________</em></div>
+        <div class="cred">Consultant Psychiatrist · [credentials]</div>
+        <div class="reg">Reg № __________ · F/U __ days · PRN __________</div>
       </div>
       <div class="meta">
-        <b>Rx · 13·04·2026</b>
-        F/U 40 days
+        <b>Rx · __·__·____</b>
+        F/U __ days
       </div>
     </div>
     <div class="rx-grid">
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-9></span><span class="ds">75mg · 1-0-1</span></div>
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-7></span><span class="ds">45/105 · 1-0-1</span></div>
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-6> SR</span><span class="ds">10mg · 2-0-0</span></div>
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-6></span><span class="ds">5mg · 0-1-0</span></div>
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-8></span><span class="ds">0.5mg · 1-0-0</span></div>
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-2></span><span class="ds">BP</span></div>
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-1></span><span class="ds">GLP-1</span></div>
-      <div class="rx-item"><span class="b"></span><span class="nm"><REDACTED-MED-5></span><span class="ds">0.25 · SOS</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
+      <div class="rx-item"><span class="b"></span><span class="nm">___________</span><span class="ds">__ · _-_-_</span></div>
     </div>
   </section>
 

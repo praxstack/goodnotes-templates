@@ -373,7 +373,7 @@ Weekly reflection, monthly reflection, and brain-dump will all follow this patte
 | Daily — evening | `src/templates/html/adhd-v4-reflect.html` | `adhd-v4-reflect` |
 | Daily — brain dump | `src/templates/html/adhd-v4-brain-dump.html` | `adhd-v4-brain-dump` |
 
-### v5 — Prax-personal (4-page, <REDACTED-PSYCH-FIRST> + Dr <REDACTED-PSYCH-LAST-DR> integration)
+### v5 — Prax-personal (4-page, therapist-integrated)
 | Type | Filename | Template ID |
 |---|---|---|
 | Daily — morning | `src/templates/html/adhd-v5-today.html` | `adhd-v5-today` |
@@ -388,7 +388,7 @@ Weekly reflection, monthly reflection, and brain-dump will all follow this patte
 | Monthly — reflection | `src/templates/html/adhd-v4-monthly-reflect.html` | `adhd-v4-monthly-reflect` |
 | Stickers | `src/stickers/<family>/<name>.html` | — |
 
-**v4 vs v5:** Both share this design contract 1:1 — same tokens, same fonts, same component library, same voice. v5 adds therapist-specific blocks (2-Sec Pause, Jar+Body, Chest-kg, Dr <REDACTED-PSYCH-LAST-DR>'s Rx card, Named Patterns, Nutritional meds). v4 stays as the generic/shippable product line.
+**v4 vs v5:** Both share this design contract 1:1 — same tokens, same fonts, same component library, same voice. v5 adds therapist-guided blocks (2-Sec Pause, Jar+Body, Chest-kg, blank Rx card, Named Patterns, Nutritional meds). v4 stays as the generic/shippable product line.
 
 ---
 

@@ -126,7 +126,7 @@ a11y          <title> + <desc> + role="img"
 | 8 | Win Today | sage | compact | single focus |
 | 9 | Mood Dot | lavender | compact | neutral observation |
 | 10 | Named Patterns | clay | standard | pattern recognition |
-| 11 | Shame + Baggage | clay | standard | heavy / <REDACTED-PSYCH-FIRST> content |
+| 11 | Shame + Baggage | clay | standard | heavy / [psychologist] content |
 | 12 | PHQ-2 Lite | lavender | compact | clinical tool |
 
 ### Scoring
