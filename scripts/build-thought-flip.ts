@@ -14,6 +14,7 @@ import {
   stickerShell,
   rasterize,
   fontsCssInnerSize,
+  archetype,
 } from '../src/core/sticker-renderer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -81,6 +82,13 @@ const svg = stickerShell({
   subtitle: 'CBT · catch it, test it, rewrite it',
   whisper: 'a thought is not a fact · give it one test',
   bodySvg,
+  // CLINIC archetype — the "reviewed clinical form" feel. A top
+  // thread-stitch, a FIELD · 2026 date stamp under the kicker, a
+  // rotated "CBT · REVIEWED" rubber-stamp at the lower-left third,
+  // and a stitched inset border. No pins, no tape — this sticker is
+  // serious. Counter-balance: stamp sits left, date-stamp sits left,
+  // so the right side stays quiet for the third writing column.
+  skeuo: archetype('clinic', 'expanded', 'clay', { stampLabel: 'CBT · REVIEWED' }),
 });
 
 writeFileSync(path.join(OUT_DIR, 'thought-flip.svg'), svg);
