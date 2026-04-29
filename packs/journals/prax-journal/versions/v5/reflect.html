@@ -264,8 +264,8 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
       <div class="s">Notice. Learn. Be kind to yourself.</div>
     </div>
     <div class="mh-r">
-      <div class="dr"><span class="lbl">Date</span><span class="fl"></span></div>
-      <div class="doy"><span>day&nbsp;</span><span class="big">___</span> / 365</div>
+      <div class="dr"><span class="lbl">Date</span><span class="fl">{{DAY_DATE}} · {{DAY_WEEKDAY}}</span></div>
+      <div class="doy"><span>day&nbsp;</span><span class="big">{{DAY_OF_YEAR}}</span> / {{DAYS_IN_YEAR}}</div>
       <div class="ts"><span class="caps">Filled at</span><span class="hf"></span></div>
     </div>
   </header>
