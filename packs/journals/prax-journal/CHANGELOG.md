@@ -4,6 +4,10 @@ Version history of the journal pack. See `versions/` for frozen snapshots of eac
 
 ## v5 — Warm Analog Editorial + Midday + Rx (2026-04 · current)
 
+- **C6a · font self-contained (G1)** — inlined 5 WOFF2 files as base64 `@font-face`
+  rules directly into each of the 7 v5 pages. Google Fonts `<link>` removed. Pages
+  now render with the warm-analog voice offline. Same base64 pipeline as stickers.
+  Rewriter: `scripts/inline-v5-fonts.ts` (idempotent, marker-gated).
 - **Added Midday** as page 2 of 4 (2 pm re-anchor)
   - 2-second pause matrix (therapist-guided anchor)
   - Body scan block (heat · tight · sink)
