@@ -320,6 +320,23 @@ describe('Repo-wide PII guard (post-code-review P0)', () => {
         // profile.README.md documents what the blocked tokens ARE
         // (for the PII-rule explanation), so it is out of scope.
         if (file.endsWith('profile.README.md')) continue;
+        // Gitignored per-user profiles (`profile.local.json`,
+        // `profile.prax.json`, …) are the *intended* home for PII —
+        // the whole point of the guard is ensuring PII doesn't leak
+        // out of them into templates/docs. They're excluded from the
+        // commit via `.gitignore` (pattern: `profile.*.json` with a
+        // negation for `profile.example.json`), so the guard has no
+        // business inspecting them. Match the same shape here.
+        {
+          const base = path.basename(file);
+          if (
+            /^profile\..+\.json$/u.test(base) &&
+            base !== 'profile.example.json'
+          ) {
+            continue;
+          }
+        }
+
 
         const content = readFileSync(file, 'utf8');
         for (const re of PII_TOKENS) {
