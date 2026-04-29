@@ -1,0 +1,55 @@
+# ============================================================
+# .clineignore — keep Cline's context window lean
+# ============================================================
+# Cline includes a recursive file tree + reads in every turn.
+# Excluding generated/binary/vendored output dramatically
+# reduces per-turn token overhead and prevents /compact from
+# being undone in 1–2 iterations.
+# ============================================================
+
+# Vendored deps
+node_modules/
+dist/
+coverage/
+
+# Generated output (PDFs, PNGs — some are 50–70 MB each)
+output/
+
+# Generated sticker PNGs (SVG is source of truth)
+packs/journals/prax-journal/stickers/*/*.png
+
+# Example PDFs / HTML exports
+examples/**/*.pdf
+
+# Fonts (binary, regenerable via scripts/download-fonts.ts)
+shared/fonts/**/*.ttf
+shared/fonts/**/*.otf
+shared/fonts/**/*.woff
+shared/fonts/**/*.woff2
+assets/fonts/
+
+# Audit / runtime artifacts (regenerable)
+audit/_runtime/
+audit/**/*.sarif
+audit/**/*.json
+
+# Test baselines (binary)
+tests/visual/baselines/
+
+# Lock / log / env
+package-lock.json
+*.log
+.env
+.env.local
+.DS_Store
+
+# Editor / tooling state
+.superpowers/
+.gstack/
+.vscode/
+.idea/
+
+# Never let secrets near the model
+packs/journals/prax-journal/profile.json
+packs/journals/prax-journal/profile.*.json
+!packs/journals/prax-journal/profile.example.json

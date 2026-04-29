@@ -107,17 +107,24 @@ function buildRxSlotPlaceholders(): Record<string, string> {
 
 /**
  * Whitelist of `{{PLACEHOLDER}}` tokens that `substituteProfile` recognises,
- * mapped to a short printed-blank fallback used when the profile doesn't
- * supply the value. These match the tokens that appear in the v5 HTML —
- * currently only inside the Rx card on `today.html`.
+ * mapped to a short printed-blank fallback used when the profile (and/or
+ * page) doesn't supply the value. These match the tokens that appear in
+ * the v5 HTML.
  *
- * Two families:
- *   - `DR_*`   — psychiatrist identity (name / credentials / reg № / F-U)
- *   - `RX_N_*` — medication slots N=1..8 (name + dose)
+ * Three families:
+ *   - `DR_*`   — psychiatrist identity (name / credentials / reg № / F-U).
+ *                Sourced from the profile; static across every day of the
+ *                journal.
+ *   - `RX_N_*` — medication slots N=1..8 (name + dose). Sourced from the
+ *                profile; static across every day of the journal.
+ *   - `DAY_*`  — per-day date values (date, weekday, day-of-year, days in
+ *                year). Sourced from the `PageSpec.date` when the page is
+ *                a `daily` kind. Review pages (weekly/monthly/quarterly)
+ *                don't embed these tokens in their HTML, so the whitelist
+ *                regex never finds a match on them — zero-risk fallback.
  *
  * Fallbacks are short underscore runs, chosen so the rendered blank form
- * looks visually equivalent to the pre-substitution template (i.e. a
- * hand-writable Rx line).
+ * looks visually equivalent to the pre-substitution template.
  */
 export const PROFILE_PLACEHOLDERS = {
   DR_NAME:         '_________________',
@@ -125,6 +132,11 @@ export const PROFILE_PLACEHOLDERS = {
   DR_REG:          '__________',
   DR_FOLLOWUP:     '__',
   ...buildRxSlotPlaceholders(),
+  // ── Per-day date tokens (filled from PageSpec.date when kind='daily') ──
+  DAY_DATE:        '__________',
+  DAY_WEEKDAY:     '___',
+  DAY_OF_YEAR:     '___',
+  DAYS_IN_YEAR:    '365',
 } as const;
 
 export type ProfilePlaceholder = keyof typeof PROFILE_PLACEHOLDERS;
@@ -171,17 +183,88 @@ function extractRxFields(profile: Profile): Partial<Record<ProfilePlaceholder, s
 
 
 /**
- * Replace every `{{PLACEHOLDER}}` token in `html` with its profile value,
- * or the fallback from `PROFILE_PLACEHOLDERS` when the profile doesn't
- * supply it. Pure, no IO.
+ * Decide whether a year is a leap year (Gregorian rules).
+ * Exported for tests.
+ */
+export function isLeapYear(year: number): boolean {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
+/**
+ * Derive the `DAY_*` placeholder values from an ISO `YYYY-MM-DD` date
+ * string. Pure, UTC-only (matches `splice.ts` + `pdf-splice.ts` bookmark
+ * titles — no timezone drift).
+ *
+ * Produces, for e.g. `'2026-04-30'`:
+ *   - `DAY_DATE`     → `'April 30'`
+ *   - `DAY_WEEKDAY`  → `'Thu'`
+ *   - `DAY_OF_YEAR`  → `'120'`
+ *   - `DAYS_IN_YEAR` → `'365'`
+ *
+ * Exported so tests can pin the formatting contract and so any future
+ * non-daily page kind that wants to display "N/365" can share the math.
+ */
+export function deriveDateFields(
+  isoDate: string,
+): Partial<Record<ProfilePlaceholder, string>> {
+  const [yStr, mStr, dStr] = isoDate.split('-');
+  const year = Number(yStr);
+  const month = Number(mStr);
+  const day = Number(dStr);
+  const utc = Date.UTC(year, month - 1, day);
+
+  // Day-of-year: 1-based; Jan 1 → 1, Dec 31 (non-leap) → 365.
+  const yearStart = Date.UTC(year, 0, 1);
+  const dayOfYear = Math.floor((utc - yearStart) / 86_400_000) + 1;
+  const daysInYear = isLeapYear(year) ? 366 : 365;
+
+  // Intl.DateTimeFormat with explicit UTC timezone matches bookmarkTitle()
+  // and buildPageSequence() — the whole renderer is UTC-locked.
+  const dateFmt = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+  const weekdayFmt = new Intl.DateTimeFormat('en-US', {
+    weekday: 'short',
+    timeZone: 'UTC',
+  });
+
+  return {
+    DAY_DATE:     dateFmt.format(utc),
+    DAY_WEEKDAY:  weekdayFmt.format(utc),
+    DAY_OF_YEAR:  String(dayOfYear),
+    DAYS_IN_YEAR: String(daysInYear),
+  };
+}
+
+/**
+ * Replace every `{{PLACEHOLDER}}` token in `html` with its resolved value,
+ * or the fallback from `PROFILE_PLACEHOLDERS` when neither the profile
+ * nor the page supplies it. Pure, no IO.
+ *
+ * Value resolution (first match wins):
+ *   1. Profile — DR_* identity + RX_N_* medication slots from `profile`.
+ *   2. Page    — DAY_* date tokens derived from `page.date` when `page`
+ *                is a `daily` kind. Review pages (weekly/monthly/
+ *                quarterly) don't embed `DAY_*` tokens, so they sail
+ *                through untouched.
+ *   3. Fallback — the printed-blank glyph from `PROFILE_PLACEHOLDERS`.
  *
  * Implementation detail: we build a single RegExp from the whitelist so
  * any token the whitelist doesn't know about is left untouched — this
  * prevents accidental substitution into unrelated curly-brace text
  * (e.g. CSS `{ … }` rules, JSON samples in comments).
  */
-export function substituteProfile(html: string, profile?: Profile): string {
-  const filled = profile ? extractRxFields(profile) : {};
+export function substituteProfile(
+  html: string,
+  profile?: Profile,
+  page?: PageSpec,
+): string {
+  const filled: Partial<Record<ProfilePlaceholder, string>> = {
+    ...(profile ? extractRxFields(profile) : {}),
+    ...(page && page.kind === 'daily' ? deriveDateFields(page.date) : {}),
+  };
 
   const keys = Object.keys(PROFILE_PLACEHOLDERS) as ProfilePlaceholder[];
   const pattern = new RegExp(`\\{\\{(${keys.join('|')})\\}\\}`, 'g');
@@ -249,7 +332,7 @@ export async function renderPageSpec(
   const buffers: Buffer[] = [];
   for (const htmlPath of files) {
     const rawHtml = await fs.readFile(htmlPath, 'utf-8');
-    const htmlContent = substituteProfile(rawHtml, opts.profile);
+    const htmlContent = substituteProfile(rawHtml, opts.profile, page);
     buffers.push(
       await renderHTMLToPDF({
         htmlPath,
