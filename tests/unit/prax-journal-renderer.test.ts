@@ -21,11 +21,31 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   resolvePageSpecFiles,
+  substituteProfile,
+  PROFILE_PLACEHOLDERS,
   V5_PACK_DIR,
   DAILY_HTML_FILES,
   REVIEW_HTML_FILE,
 } from '../../src/core/prax-journal-renderer.js';
 import type { PageSpec } from '../../src/core/splice.js';
+import type { Profile } from '../../src/types/profile.js';
+
+/**
+ * Tiny helper — build a minimal-valid Profile for tests. Keeps the
+ * substitution cases focused on what they're testing (token replacement)
+ * rather than Zod shape plumbing.
+ */
+function makeProfile(therapists: Profile['therapists']): Profile {
+  return {
+    schema_version: 1,
+    user: { name: 'Test User', tz: 'Asia/Kolkata', locale: 'en-IN' },
+    therapists,
+    medications: [],
+    named_patterns: [],
+    baselines: {},
+  };
+}
+
 
 describe('resolvePageSpecFiles · PageSpec → HTML files', () => {
   // ── 1 · Daily expands to 4 files in render order ────────────
@@ -108,3 +128,94 @@ describe('resolvePageSpecFiles · PageSpec → HTML files', () => {
     }
   });
 });
+
+describe('substituteProfile · narrow PII injection', () => {
+  // A small fixture covering all four placeholders in one line — keeps
+  // every assertion focused on the substitution, not the layout.
+  const sample =
+    'Dr. {{DR_NAME}} · {{DR_CREDENTIALS}} · Reg № {{DR_REG}} · F/U {{DR_FOLLOWUP}} days';
+
+  // ── 5 · No profile → every token falls back to its printed blank ──
+
+  it('no profile → tokens replaced with printed-blank fallbacks', () => {
+    const out = substituteProfile(sample, undefined);
+    expect(out).toBe(
+      `Dr. ${PROFILE_PLACEHOLDERS.DR_NAME} · ${PROFILE_PLACEHOLDERS.DR_CREDENTIALS} ` +
+        `· Reg № ${PROFILE_PLACEHOLDERS.DR_REG} · F/U ${PROFILE_PLACEHOLDERS.DR_FOLLOWUP} days`,
+    );
+    // No leftover `{{…}}` tokens — important, a leak into the PDF
+    // would look like user-visible templating debris.
+    expect(out).not.toMatch(/\{\{/u);
+  });
+
+  // ── 6 · Fully-populated psychiatry entry → every field substituted ──
+
+  it('psychiatry entry → all four placeholders pulled from profile', () => {
+    const profile = makeProfile([
+      {
+        role: 'psychiatry',
+        name: 'Jane Roe',
+        credentials: 'MBBS, MD Psych',
+        registration_number: 'MCI-12345',
+        follow_up_days: 21,
+      },
+    ]);
+    expect(substituteProfile(sample, profile)).toBe(
+      'Dr. Jane Roe · MBBS, MD Psych · Reg № MCI-12345 · F/U 21 days',
+    );
+  });
+
+  // ── 7 · Partial psychiatry entry → present fields fill, absent fall back ──
+
+  it('partial psychiatry entry → missing fields keep printed-blank fallback', () => {
+    const profile = makeProfile([
+      { role: 'psychiatry', name: 'Jane Roe' }, // only `name` supplied
+    ]);
+    const out = substituteProfile(sample, profile);
+    expect(out).toContain('Dr. Jane Roe');
+    expect(out).toContain(`· ${PROFILE_PLACEHOLDERS.DR_CREDENTIALS} ·`);
+    expect(out).toContain(`Reg № ${PROFILE_PLACEHOLDERS.DR_REG}`);
+    expect(out).toContain(`F/U ${PROFILE_PLACEHOLDERS.DR_FOLLOWUP} days`);
+  });
+
+  // ── 8 · Psychiatry role missing → whole card falls back cleanly ──
+
+  it('profile with no psychiatry role → every token falls back', () => {
+    const profile = makeProfile([
+      { role: 'psychology', name: 'Jane Roe' },
+      { role: 'coach',      name: 'Coach Smith' },
+    ]);
+    expect(substituteProfile(sample, profile)).toBe(
+      substituteProfile(sample, undefined),
+    );
+  });
+
+  // ── 9 · Multiple psychiatrists → first one wins (stable, deterministic) ──
+
+  it('multiple psychiatrists → first entry wins', () => {
+    const profile = makeProfile([
+      { role: 'psychiatry', name: 'First Chosen' },
+      { role: 'psychiatry', name: 'Second Ignored' },
+    ]);
+    const out = substituteProfile(sample, profile);
+    expect(out).toContain('Dr. First Chosen');
+    expect(out).not.toContain('Second Ignored');
+  });
+
+  // ── 10 · Unknown {{TOKENS}} left alone — scoped-replace safety ──
+  //
+  // The renderer's replace is whitelist-scoped so templates can use
+  // `{{foo}}` freely in comments / CSS strings without accidental
+  // clobbering. This guards that promise.
+
+  it('unknown tokens are left untouched (no wildcard replace)', () => {
+    const input =
+      'keep {{UNKNOWN}} and /* css {{braces}} */ untouched · swap {{DR_NAME}}';
+    const out = substituteProfile(input, undefined);
+    expect(out).toContain('{{UNKNOWN}}');
+    expect(out).toContain('{{braces}}');
+    expect(out).toContain(PROFILE_PLACEHOLDERS.DR_NAME);
+    expect(out).not.toContain('{{DR_NAME}}');
+  });
+});
+
