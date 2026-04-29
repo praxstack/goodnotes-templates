@@ -8,6 +8,15 @@ Version history of the journal pack. See `versions/` for frozen snapshots of eac
   rules directly into each of the 7 v5 pages. Google Fonts `<link>` removed. Pages
   now render with the warm-analog voice offline. Same base64 pipeline as stickers.
   Rewriter: `scripts/inline-v5-fonts.ts` (idempotent, marker-gated).
+- **C6a polish** — three small post-review fixes: (a) `font-display: block` matches
+  the sticker renderer (cosmetic alignment; for data URIs both values behave
+  identically, but one value is easier to reason about); (b) `FONT_FILES` hoisted
+  to a single exported constant in `src/core/sticker-renderer.ts` so stickers and
+  v5 pages can't drift; (c) 500 KB soft cap on the generated `<style>` block to
+  flag accidental variable-axis bloat. Marker bumped to `v5-inlined-woff2-v2`;
+  the rewriter treats any v1-marked page as "re-emit" so roll-forward needs no
+  `--force` flag.
+
 - **Added Midday** as page 2 of 4 (2 pm re-anchor)
   - 2-second pause matrix (therapist-guided anchor)
   - Body scan block (heat · tight · sink)
