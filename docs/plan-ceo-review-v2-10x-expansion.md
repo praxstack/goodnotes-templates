@@ -30,7 +30,7 @@ ebba205 test(visual): Puppeteer baseline regression harness
 **What exists at HEAD:**
 - v5 daily spread (4 pages): Today · Midday · Reflect · Brain Dump — A4, bookmarked, shadow-fix'd
 - Warm Analog Editorial design contract (`prax-journal-design.md`, 12 sections)
-- Dr Pallavi Rx card (8 meds from 13-04-2026), Shreya Jar+Body matrix, chest-kg + 2-sec pause
+- Dr [psychiatrist] Rx card (8 meds from 13-04-2026), [psychologist] Jar+Body matrix, chest-kg + 2-sec pause
 - Self-contained templates (FIND-0010), `@media print { box-shadow: none }` on all 7
 - Visual-regression harness: sharp pixel diff, 0.5% drift budget, 8 baselines
 - Design-system reference page: fonts + color + squircle grammar preserved
@@ -97,7 +97,7 @@ Prax is building this with AI help. When the session ends, does the journal evol
                                                             2026-05-01 --to 2026-07-01
                                                           + longitudinal data layer:
                                                             every filled field extractable
-                                                            to CSV for Shreya/Dr Pallavi
+                                                            to CSV for [psychologist]/Dr [psychiatrist]
                                                           + printable assembly guide
                                                             (TODO v1 already captured)
                                                           + 60-day PDF every 2 months
@@ -149,7 +149,7 @@ Each proposal below follows the expansive framing: **felt experience first · co
 ### E1 · **The Memory Loop** — Quarterly retrospective page
 *(sixth-month, twelfth-month, season-of-life reflection)*
 
-**Felt experience.** Prax opens the journal on 2026-06-30. The last page isn't another daily — it's a quarterly spread titled "Q2 2026 · what this season taught me". Top-left: every Named Pattern frequency count across the 90 days (doomscroll: 47 · prereq trap: 19 · catastrophize: 8). Top-right: Chest-kg 90-day trend as a dot series, annotated with "↓ after Shreya session 13-04". Middle: "Three things that worked" · "Three things I'll stop". Bottom: "What I want Q3 to feel like" — one sentence, big. The page knows what Prax wrote on every prior day and reflects it back.
+**Felt experience.** Prax opens the journal on 2026-06-30. The last page isn't another daily — it's a quarterly spread titled "Q2 2026 · what this season taught me". Top-left: every Named Pattern frequency count across the 90 days (doomscroll: 47 · prereq trap: 19 · catastrophize: 8). Top-right: Chest-kg 90-day trend as a dot series, annotated with "↓ after [psychologist] session 13-04". Middle: "Three things that worked" · "Three things I'll stop". Bottom: "What I want Q3 to feel like" — one sentence, big. The page knows what Prax wrote on every prior day and reflects it back.
 
 **Concrete shape.** `adhd-v5-quarterly.html` (1 page A4). Static HTML renders the structure. A one-shot TypeScript script (`scripts/aggregate-quarter.ts`) reads the last 90 daily entries from `content/entries/*.yaml` (optional frontmatter, opt-in per day) and injects aggregations into the HTML via simple `<!-- @aggregate:named-patterns -->` comment placeholders. If no entries exist yet, the page renders blank fields for manual fill — backward-compatible. No new runtime dependency.
 
@@ -184,8 +184,8 @@ Each proposal below follows the expansive framing: **felt experience first · co
 {
   "user": { "name": "Prax", "locale": "en-IN", "timezone": "Asia/Calcutta" },
   "therapists": [
-    { "name": "Shreya", "role": "psychologist", "last_session": "2026-04-13" },
-    { "name": "Dr Pallavi Joshi", "role": "psychiatrist", "last_consult": "2026-04-13", "next_due": "2026-05-13" }
+    { "name": "[psychologist]", "role": "psychologist", "last_session": "2026-04-13" },
+    { "name": "Dr [psychiatrist]", "role": "psychiatrist", "last_consult": "2026-04-13", "next_due": "2026-05-13" }
   ],
   "meds": [
     { "name": "Prothiaden 25", "dose": "1-0-0", "since": "2026-04-13" },
@@ -201,7 +201,7 @@ Every template reads this at render time. Changing a med updates every future pa
 
 **Effort.** Human-team: ~3 days. CC+gstack: ~50 min.
 
-**Delta vs v1.** v1 hardcodes meds + therapist names on every HTML file. Editing on 2026-05-13 after the next Dr Pallavi consult means editing 6+ files by hand. v2's profile is edit-once.
+**Delta vs v1.** v1 hardcodes meds + therapist names on every HTML file. Editing on 2026-05-13 after the next Dr [psychiatrist] consult means editing 6+ files by hand. v2's profile is edit-once.
 
 **Recommendation: STRONG YES.** Non-optional for longevity — without it, the journal rots every time meds change. But landable as a separate follow-up PR if user wants v1 to ship first.
 
@@ -223,9 +223,9 @@ Every template reads this at render time. Changing a med updates every future pa
 ---
 
 ### E5 · **The Longitudinal Layer** — `scripts/extract-entries.ts` → CSV for therapists
-*(data layer that turns journal entries into Shreya/Dr Pallavi-shareable insight)*
+*(data layer that turns journal entries into [psychologist]/Dr [psychiatrist]-shareable insight)*
 
-**Felt experience.** Before a therapy session, Prax types `npm run extract -- --from 2026-04-13 --to 2026-06-13 --fields mood,anxiety,energy,chest_kg,cigs,named_patterns`. Output: `output/extract-2026-04-13_2026-06-13.csv`. He opens it in Numbers, sees "cigs: mean 7.2 (down from baseline 10), trending -0.3/week. Chest-kg: 3.4 mean, 4.8 max (peaked 2026-05-02-07, rejection scanner flagged 6 times that week)." He walks into Shreya's office with **data**, not memory.
+**Felt experience.** Before a therapy session, Prax types `npm run extract -- --from 2026-04-13 --to 2026-06-13 --fields mood,anxiety,energy,chest_kg,cigs,named_patterns`. Output: `output/extract-2026-04-13_2026-06-13.csv`. He opens it in Numbers, sees "cigs: mean 7.2 (down from baseline 10), trending -0.3/week. Chest-kg: 3.4 mean, 4.8 max (peaked 2026-05-02-07, rejection scanner flagged 6 times that week)." He walks into [psychologist]'s office with **data**, not memory.
 
 **Concrete shape.** Opt-in frontmatter on daily templates — each day becomes an editable YAML file (`content/entries/2026-04-28.yaml`) that the HTML template reads at render. Extraction reads the YAML directory, filters by date, emits CSV. PHI-safe: no free-form text exported, only numeric/enum fields by default (redaction flag available).
 
@@ -362,7 +362,7 @@ Retains every decision from `docs/plan-weekly-monthly-stickers.md`. Eng-reviewed
 | R3 | YAML frontmatter on dailies (E5) adds friction if Prax forgets to fill it | High | Low | Opt-in. HTML renders fine without YAML. Extraction skips empty days. |
 | R4 | Practice-of-week rotation algorithm feels "random" to Prax in week 2 | Med | Low | Expose rotation state in page footer: "Week 3 · cycle position 3/12 · pattern-driven: false" |
 | R5 | Quarterly aggregator miscounts Named Patterns if variant spellings exist ("doomscroll" vs "doom scroll") | Med | Med | Normalize to lowercase + strip whitespace + singularize trailing 's'. Unit test. |
-| R6 | Profile migration when Dr Pallavi updates meds: Prax edits profile, forgets some page still hardcodes old meds | Med | High | Lint: `scripts/check-hardcoded-meds.ts` greps templates for med names not in profile |
+| R6 | Profile migration when Dr [psychiatrist] updates meds: Prax edits profile, forgets some page still hardcodes old meds | Med | High | Lint: `scripts/check-hardcoded-meds.ts` greps templates for med names not in profile |
 
 ---
 

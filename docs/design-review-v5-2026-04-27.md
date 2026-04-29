@@ -201,7 +201,7 @@ Reflect is kicker-dense — 17 tiny uppercase mono labels in one page. That's th
 
 The 2-Second Pause 3-row matrix on Today puts body-chips *above* the writing line. Visually it's: time → chips → "why" on dotted. Pen ergonomics are left-to-right → top-to-bottom, so a user's hand will cover the chips they just ticked while writing why. Swap the order in each row: **time → why → chips** (write first, tick last), or put chips to the left of the why-field. Small move, big usability win.
 
-### 5.5 The Shreya matrix on Midday
+### 5.5 The [psychologist] matrix on Midday
 
 `.jb-grid` has 5 columns: `#`, Time, Jar, Chest, What's filling. That's dense. On mobile-first thinking this would be a scroll nightmare but since it's print at A4 fixed: **measure actual column widths in mm**, because "Jar level" column has 5 chips each 4mm wide = 20mm + gaps = needs ~25mm but grid template is `1fr`. If `1fr` computes below 25mm the chips wrap. Confirm by rendering and measuring — but I'd tighten the grid to `5mm 18mm 25mm 30mm 1fr` to pin the problem.
 
@@ -216,7 +216,7 @@ The 2-Second Pause 3-row matrix on Today puts body-chips *above* the writing lin
 - **Hobonichi day counter** in monospace — editorial signature, not a cliché in this context.
 - **Permission banner** delivers tone in one line per page. Rare in planners.
 - **`::before` 2px accent rail on every colored card** is the through-line that holds the layout together.
-- **The Rx card** (Dr. Pallavi Joshi, with the reg number and follow-up date) is the most unforgettable element. It's truthful, specific to Prax, and aesthetically functions as a magazine masthead for the meds section. This is the one-thing-you-remember of Page 1.
+- **The Rx card** (Dr. [psychiatrist], with the reg number and follow-up date) is the most unforgettable element. It's truthful, specific to Prax, and aesthetically functions as a magazine masthead for the meds section. This is the one-thing-you-remember of Page 1.
 
 ### 6.2 What's missing — design ambition ceiling
 

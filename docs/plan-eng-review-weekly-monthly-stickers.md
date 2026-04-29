@@ -90,7 +90,7 @@ No new runtime deps. `sharp` already imports. `pdf-lib` already imports. The new
 
 **Supply chain:** `sharp` is already pinned. `pdf-lib` already pinned. No new transitive deps introduced.
 
-**Data classification:** SVGs may contain Prax's therapist names (Shreya, Dr Joshi) and med names. This is already in the repo (see v5-today Rx card). Per design contract, this is personal-use; no PII concern.
+**Data classification:** SVGs may contain Prax's therapist names ([psychologist], Dr [psychiatrist]) and med names. This is already in the repo (see v5-today Rx card). Per design contract, this is personal-use; no PII concern.
 
 **LLM/prompt injection:** N/A. No LLM surface.
 

@@ -5,10 +5,10 @@ Version history of the journal pack. See `versions/` for frozen snapshots of eac
 ## v5 — Warm Analog Editorial + Midday + Rx (2026-04 · current)
 
 - **Added Midday** as page 2 of 4 (2 pm re-anchor)
-  - 2-second pause matrix (Shreya anchor)
+  - 2-second pause matrix (therapist-guided anchor)
   - Body scan block (heat · tight · sink)
   - Jar visualization — "the jar holds everything"
-- **Added Rx card** on Reflect with Dr Pallavi Joshi's 8 meds from 13-04-2026 consult
+- **Added Rx card** on Reflect — blank template; Prax hand-fills from `profile.local.json`
 - **Chest-kg metric** on Today + Reflect (0–5 scale, subjective)
 - **Cigs horror metric** moved to Reflect (reality before redemption) with `/year` projection
 - **Jar mascot SVG** on Midday (42mm hand-drawn, 8% opacity bottom-right)
