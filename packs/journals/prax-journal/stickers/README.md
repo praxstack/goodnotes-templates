@@ -36,24 +36,32 @@ Living inventory of stickers for the Prax Journal pack. **Fluid.** Add freely, d
 
 ---
 
-## Shipped (v5.2 · Iteration-1 target · 12 stickers)
+## Shipped (v5.3 C5 · all 12 stickers)
 
 | # | Sticker | Kind | Source | Status | Size | Accent |
 |---|---|---|---|---|---|---|
-| 1 | **thought-flip** | data-capturing | CBT 3-col pattern (Reflect) | backlog | expanded | clay |
-| 2 | **if-then-plan** | data-capturing | Gollwitzer implementation intentions | backlog | standard | sage |
-| 3 | **craving-surf** | data-capturing | Marlatt urge-surfing worksheet | backlog | standard | lavender |
-| 4 | **wins-jar** | data-capturing | 30-slot cumulative wins tracker | backlog | expanded | amber |
-| 5 | **three-good-things** | data-capturing | Seligman positive-psychology triple | backlog | standard | amber |
-| 6 | **friend-letter** | data-capturing | Neff self-compassion rewrite | backlog | expanded | sage |
-| 7 | **grateful-for** | data-capturing | Daily gratitude triple | backlog | compact | amber |
-| 8 | **win-today** | data-capturing | Single-focus badge + 1 line | backlog | compact | sage |
-| 9 | **mood-dot** | data-capturing | 1-10 mood dot with context blank | backlog | compact | lavender |
-| 10 | **named-patterns** | data-capturing | Prax-specific patterns + free slot | backlog | standard | clay |
-| 11 | **shame-baggage** | data-capturing | therapist note · notice, don't force | backlog | standard | clay |
-| 12 | **phq2-lite** | data-capturing | 2-question weekly depression screen | backlog | compact | lavender |
+| 1 | **mood-dot** | data-capturing | 1-10 mood dot + one word + why | **shipped** | compact | lavender |
+| 2 | **thought-flip** | data-capturing | CBT 3-col pattern (Reflect) | **shipped** | expanded | clay |
+| 3 | **wins-jar** | data-capturing | 10-slot cumulative wins + hand-drawn jar | **shipped** | expanded | amber |
+| 4 | **friend-letter** | data-capturing | Neff self-compassion rewrite (Dear __ + 6 lines) | **shipped** | expanded | sage |
+| 5 | **if-then-plan** | data-capturing | Gollwitzer implementation intentions | **shipped** | standard | sage |
+| 6 | **craving-surf** | data-capturing | Marlatt urge-surfing worksheet | **shipped** | standard | lavender |
+| 7 | **three-good-things** | data-capturing | Seligman positive-psychology triple | **shipped** | standard | amber |
+| 8 | **named-patterns** | data-capturing | 5 patterns × 5 tick boxes | **shipped** | standard | clay |
+| 9 | **shame-baggage** | data-capturing | therapist note · notice, don't force | **shipped** | standard | clay |
+| 10 | **grateful-for** | data-capturing | 1 primary + 2 dotted lines | **shipped** | compact | amber |
+| 11 | **win-today** | data-capturing | single checkbox + one thing | **shipped** | compact | sage |
+| 12 | **phq2-lite** | data-capturing | 2-question weekly depression screen | **shipped** | compact | lavender |
 
-**Legend:** *backlog* = planned for next implementation pass · *shipped* = SVG + PNG set exist · *cut* = decided against · *parked* = on-hold for later iteration
+All 12 shipped at @4× native PNG resolution (compact 1600×2400 ≈ 2.9 MB, standard 2400×2400 ≈ 4.2 MB, expanded 3200×2400 ≈ 5.5 MB). SVG source files are ~325 KB each (of which 319 KB is base64 fonts; ~10 KB is actual geometry).
+
+**Legend:** *backlog* = planned · **shipped** = SVG + PNG live in this folder · *cut* = decided against · *parked* = on-hold for later iteration
+
+## Pipeline provenance
+
+Base64 Fraunces pipeline was de-risked first via `scripts/probe-sharp-fraunces.ts` — confirmed librsvg (inside sharp) honors `@font-face` with `data:font/woff2` URIs. `src/core/sticker-renderer.ts` provides the shared `fontsDefs()` / `SIZE_CLASSES` / `PALETTE` / `rasterize()` primitives. Individual sticker authors (`scripts/build-*.ts`) call into this.
+
+Pipeline details live in `packs/journals/prax-journal/stickers/mood-dot/README.md` (the canary).
 
 ---
 
@@ -77,11 +85,10 @@ Living inventory of stickers for the Prax Journal pack. **Fluid.** Add freely, d
 
 ## How to add a sticker
 
-1. Create directory: `mkdir packs/journals/prax-journal/stickers/<kebab-name>/`
-2. Author the SVG: `packs/journals/prax-journal/stickers/<kebab-name>/<kebab-name>.svg`
-3. If data-capturing, add `README.md` with the data spec
-4. Add a row to the "Shipped" table in this file with status `backlog`
-5. When renderer next runs, PNG set is generated automatically
+1. Create a `scripts/build-<kebab-name>.ts` (copy `build-mood-dot.ts` as a template — simpler — or add a block in `scripts/build-stickers-remaining.ts` if your sticker fits the helper shell).
+2. Run `npx tsx scripts/build-<kebab-name>.ts` to generate `stickers/<kebab-name>/<kebab-name>.{svg,png}`.
+3. Add a `stickers/<kebab-name>/README.md` with the data spec (Kind / Captures / Aggregation / Size / Accent).
+4. Add a row to the "Shipped" table above with status **shipped**.
 
 ## How to remove a sticker
 
@@ -90,4 +97,4 @@ Living inventory of stickers for the Prax Journal pack. **Fluid.** Add freely, d
 
 ---
 
-*Last updated:* 2026-04-28 · Phase 1 restructure (v3 plan). Nothing shipped yet; this is the pre-Iteration-1 intent.
+*Last updated:* 2026-04-29 · C5 shipped all 12 stickers + the base64-Fraunces pipeline.
