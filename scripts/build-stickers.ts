@@ -25,7 +25,9 @@ const SCRIPTS = [
   'build-thought-flip.ts',
   'build-wins-jar.ts',
   'build-friend-letter.ts',
-  'build-stickers-remaining.ts', // contains the 8 compact/standard variants
+  'build-stickers-remaining.ts', // the 8 original standard/compact variants
+  'build-wave1-stickers.ts',     // Wave-1 expansion: 20 targeted stickers
+  'build-wave2-stickers.ts',     // Wave-2 expansion: 28 more → 60 total
 ];
 
 function runOne(script: string): Promise<void> {
@@ -42,7 +44,7 @@ function runOne(script: string): Promise<void> {
 }
 
 const started = Date.now();
-console.log(`\nBuilding all 12 stickers (${SCRIPTS.length} scripts, parallel)…\n`);
+console.log(`\nBuilding all 60 stickers (${SCRIPTS.length} scripts, parallel)…\n`);
 
 await Promise.all(SCRIPTS.map(runOne));
 
