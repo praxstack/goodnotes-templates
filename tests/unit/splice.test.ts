@@ -1,14 +1,10 @@
 /**
- * C6b · Splice edge-case TDD tests (G4).
+ * Splice edge-case tests (G4).
  *
- * Seven canonical cases pinning down `buildPageSequence`'s behaviour
- * before C7's generator CLI goes GREEN. Per the eng-review G4 finding:
- *
- *   "Splice edge cases (month/quarter/year boundaries, leap, partial
- *    ranges, single day) lack spec tests → write 7 canonical test cases.
- *    New commit C6b — TDD spec before C7."
- *
- * Each case is chosen to poke at a specific invariant:
+ * Seven canonical cases pinning down `buildPageSequence`'s behaviour,
+ * plus one bonus (inverted range). Authored as RED/TDD in C6b against
+ * a stub; flipped to real GREEN assertions in C7a alongside the
+ * implementation.
  *
  *   1. Mid-month start       — range doesn't begin on day 1 of a month
  *   2. Year boundary         — 12/31 triggers BOTH monthly AND quarterly
@@ -20,61 +16,22 @@
  *   + bonus · inverted range — `to < from` returns empty, not a throw
  *
  * All calendar claims (days-of-week, month-ends, leap day) were verified
- * against `Date.UTC(y, m-1, d).getUTCDay()` before the test was authored
- * — see commit message for the cross-check output.
+ * against `Date.UTC(y, m-1, d).getUTCDay()` during authoring.
  *
- * ## TDD shape
- *
- * Cases 1–7 and the bonus are authored with vitest's `it.fails(...)` —
- * meaning "this test is EXPECTED to fail today; it will become a real
- * passing test once the implementation lands." So:
- *
- *   - RIGHT NOW (C6b RED): the stub throws NotImplementedError, each
- *     `it.fails` case confirms that the assertion body can't be
- *     satisfied, the overall suite is green, CI stays green.
- *   - ONCE C7 GREEN LANDS: flip every `it.fails(...)` → `it(...)` in
- *     one mechanical pass. If the implementation is correct, the
- *     assertions pass; if it's wrong, CI goes red with a real diff.
- *
- * The single `RED sentinel` test below ASSERTS the throw directly
- * (it's a real `it(...)`), and should be deleted in the same commit
- * that removes the throw.
- *
- * This shape means C6b can land cleanly on a green main while still
- * pinning down the contract unambiguously.
- *
- * No fixtures on disk, no fonts, no Puppeteer. Pure calendar math.
+ * No fixtures on disk, no fonts, no Puppeteer. Pure calendar math —
+ * the whole suite runs in a handful of milliseconds.
  */
 
-
 import { describe, it, expect } from 'vitest';
-import {
-  buildPageSequence,
-  NotImplementedError,
-  type PageSpec,
-} from '../../src/core/splice.js';
+import { buildPageSequence, type PageSpec } from '../../src/core/splice.js';
 
 describe('buildPageSequence · splice edge cases (G4)', () => {
-  // ── RED sentinel ─────────────────────────────────────────────
-  // Currently passes because the stub throws. When C7 ships GREEN,
-  // remove this test and the throw together in the same commit.
-
-  it('RED sentinel · stub throws NotImplementedError · remove when C7 lands', () => {
-    expect(() => buildPageSequence({ from: '2026-05-01', to: '2026-05-01' })).toThrow(
-      NotImplementedError,
-    );
-    expect(() => buildPageSequence({ from: '2026-05-01', to: '2026-05-01' })).toThrow(
-      /C6b-RED/,
-    );
-  });
-
   // ── 1 · Mid-month start ─────────────────────────────────────
   // Range: 2026-05-15 (Fri) through 2026-05-22 (Fri). 8 days. One
   // Sunday (5/17) inside the range → one weekly. No monthly (5/31
   // outside range). No quarterly.
 
-  it.fails('case 1 · mid-month start · 2026-05-15 → 2026-05-22 · 8 dailies + 1 weekly', () => {
-
+  it('case 1 · mid-month start · 2026-05-15 → 2026-05-22 · 8 dailies + 1 weekly', () => {
     const out: PageSpec[] = buildPageSequence({ from: '2026-05-15', to: '2026-05-22' });
 
     expect(out.filter((p) => p.kind === 'daily')).toHaveLength(8);
@@ -101,8 +58,7 @@ describe('buildPageSequence · splice edge cases (G4)', () => {
   // Compound-day ordering on 12/31 (Thu, not Sunday):
   //   daily · monthly · quarterly
 
-  it.fails('case 2 · year boundary · 2026-12-28 → 2027-01-03 · compound day 12/31 + Sunday 1/3', () => {
-
+  it('case 2 · year boundary · 2026-12-28 → 2027-01-03 · compound day 12/31 + Sunday 1/3', () => {
     const out = buildPageSequence({ from: '2026-12-28', to: '2027-01-03' });
 
     expect(out.filter((p) => p.kind === 'daily')).toHaveLength(7);
@@ -132,8 +88,7 @@ describe('buildPageSequence · splice edge cases (G4)', () => {
   //   daily 2028-02-29 · monthly 2028-02-29 ·
   //   daily 2028-03-01
 
-  it.fails('case 3 · leap year · 2028-02-27 → 2028-03-01 · Feb 29 exists and is month-end', () => {
-
+  it('case 3 · leap year · 2028-02-27 → 2028-03-01 · Feb 29 exists and is month-end', () => {
     const out = buildPageSequence({ from: '2028-02-27', to: '2028-03-01' });
 
     const dailies = out.filter((p) => p.kind === 'daily');
@@ -171,8 +126,7 @@ describe('buildPageSequence · splice edge cases (G4)', () => {
   //
   // Compound-day ordering on 3/31: daily → monthly → quarterly.
 
-  it.fails('case 4 · partial quarter · 2026-03-15 → 2026-04-15 · Q1 end spliced inside range', () => {
-
+  it('case 4 · partial quarter · 2026-03-15 → 2026-04-15 · Q1 end spliced inside range', () => {
     const out = buildPageSequence({ from: '2026-03-15', to: '2026-04-15' });
 
     expect(out.filter((p) => p.kind === 'daily')).toHaveLength(32);
@@ -196,8 +150,7 @@ describe('buildPageSequence · splice edge cases (G4)', () => {
   // ── 5 · Single-day weekday ──────────────────────────────────
   // Range: 2026-05-15 (Friday) → 2026-05-15. Just one daily, no splices.
 
-  it.fails('case 5 · single-day weekday · 2026-05-15 → 2026-05-15 · one daily, zero splices', () => {
-
+  it('case 5 · single-day weekday · 2026-05-15 → 2026-05-15 · one daily, zero splices', () => {
     const out = buildPageSequence({ from: '2026-05-15', to: '2026-05-15' });
     expect(out).toEqual([{ kind: 'daily', date: '2026-05-15' }]);
   });
@@ -207,8 +160,7 @@ describe('buildPageSequence · splice edge cases (G4)', () => {
   // rule "weekly on every Sunday in range" doesn't care that the range
   // is a single day.
 
-  it.fails('case 6 · single-day Sunday · 2026-05-17 → 2026-05-17 · daily + weekly', () => {
-
+  it('case 6 · single-day Sunday · 2026-05-17 → 2026-05-17 · daily + weekly', () => {
     const out = buildPageSequence({ from: '2026-05-17', to: '2026-05-17' });
     expect(out).toEqual([
       { kind: 'daily',  date: '2026-05-17' },
@@ -220,8 +172,7 @@ describe('buildPageSequence · splice edge cases (G4)', () => {
   // Range: 2026-05-03 (Sun) → 2026-05-10 (Sun). 8 dailies bracketed by
   // two Sundays → two weeklies. Tests the Sunday-is-first-day edge.
 
-  it.fails('case 7 · Sunday as --from · 2026-05-03 → 2026-05-10 · two weeklies, bracketed', () => {
-
+  it('case 7 · Sunday as --from · 2026-05-03 → 2026-05-10 · two weeklies, bracketed', () => {
     const out = buildPageSequence({ from: '2026-05-03', to: '2026-05-10' });
 
     expect(out.filter((p) => p.kind === 'daily')).toHaveLength(8);
@@ -239,12 +190,11 @@ describe('buildPageSequence · splice edge cases (G4)', () => {
   });
 
   // ── Bonus · Inverted range ──────────────────────────────────
-  // Not one of the 7 G4 cases but a natural companion: when `to < from`,
-  // return an empty array rather than throwing. The generator CLI will
-  // surface that as "nothing to render" without special-casing.
+  // When `to < from`, return an empty array rather than throwing. The
+  // generator CLI surfaces that as "nothing to render" without special-
+  // casing.
 
-  it.fails('bonus · inverted range · to < from · empty array (not a throw)', () => {
-
+  it('bonus · inverted range · to < from · empty array (not a throw)', () => {
     expect(buildPageSequence({ from: '2026-05-15', to: '2026-05-01' })).toEqual([]);
   });
 });
