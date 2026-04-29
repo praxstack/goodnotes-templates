@@ -253,7 +253,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
       <div class="daycard">
         <div class="day-chip">
           <span class="day-label">day #</span>
-          <span class="day-num">__</span>
+          <span class="day-num" aria-hidden="true">__</span>
         </div>
         <div class="why">why · what made it work</div>
         <div class="day-lines">
@@ -274,7 +274,7 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
       <div class="daycard">
         <div class="day-chip">
           <span class="day-label">day #</span>
-          <span class="day-num">__</span>
+          <span class="day-num" aria-hidden="true">__</span>
         </div>
         <div class="why">why · what pulled you under</div>
         <div class="day-lines">
@@ -294,10 +294,10 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
       <span class="title">before starting next month</span>
     </div>
     <div class="reminder-body">
-      <label class="check">
-        <span class="box"></span>
+      <div class="check" role="group" aria-label="pre-month action">
+        <span class="box" aria-hidden="true"></span>
         <span>AirDrop this notebook to AI for the data version</span>
-      </label>
+      </div>
       <div class="arrives">
         <strong>what arrives:</strong> cigs total · mood mean · chest-kg delta · Named Patterns tally · best/worst day computed · see docs/monthly-generation-playbook.md
       </div>
