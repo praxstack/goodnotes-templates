@@ -42,6 +42,7 @@ const TEMPLATES: Array<readonly [string, string]> = [
   ['adhd-v5-brain-dump',    path.join(PRAX_JOURNAL, 'versions', 'v5', 'brain-dump.html')],
   ['adhd-v5-weekly',        path.join(PRAX_JOURNAL, 'versions', 'v5', 'weekly.html')],
   ['adhd-v5-monthly',       path.join(PRAX_JOURNAL, 'versions', 'v5', 'monthly.html')],
+  ['adhd-v5-quarterly',     path.join(PRAX_JOURNAL, 'versions', 'v5', 'quarterly.html')],
   // v4 — predecessor.
   ['adhd-v4-today',         path.join(PRAX_JOURNAL, 'versions', 'v4', 'today.html')],
   ['adhd-v4-reflect',       path.join(PRAX_JOURNAL, 'versions', 'v4', 'reflect.html')],

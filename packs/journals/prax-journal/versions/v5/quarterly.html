@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v5 — Season Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v5 · SEASON REVIEW — end-of-quarter reflection
+   Design contract: packs/journals/prax-journal/DESIGN.md · Warm Analog Editorial
+
+   Cadence: fill on the last evening of the quarter (Mar 31, Jun 30, Sep 30,
+   Dec 31). Looks back across ~90 days as NARRATIVE, not dashboard.
+
+   Hybrid-reminder half of decision Q2 in
+   docs/plan-ceo-review-v4-five-decisions-locked.md:
+     • This page lives inside the baked-in PDF at each quarter's end as a
+       visual reminder that season-end reflection is due.
+     • After Prax AirDrops the filled notebook, AI emits a *filled*
+       quarterly-review-YYYY-QN.pdf with 90-day aggregates rendered as
+       narrative prose, not metrics.
+
+   Design-review fold-ins (docs/plan-design-review-v4-five-decisions.md §2):
+     • Intention hero line = 12mm solid (biggest handwriting on page)
+     • Triad = 3 columns at ~52mm writing-line each (fits A4 at 100%)
+     • Fallback: merge to 2 columns if rendering shows cramping (NOT triggered —
+       verified at authoring).
+
+   Aperture grammar (per design review table):
+     Weekly   — pulse check  — "what was this week?"
+     Monthly  — landscape    — "where am I?"
+     Quarterly— narrative    — "who did I become?"  ← this page
+
+   Block map (top to bottom):
+     B-01  Masthead              SEASON REVIEW kicker + "this season" hero
+     B-02  Narrative card        sage · 3× 8mm · "in three sentences"
+     B-03  Triad (3 columns)     worked (sage) · didn't (clay) · changed (lavender)
+                                 3× 6mm dotted rows per column
+     B-04  Intention HERO        sage · 12mm solid · biggest line on the page
+     B-05  Reminder              lavender · AirDrop checkbox + 90-day arrivals
+
+   Same token system + squircle + writing-zone rule as today.html, weekly.html,
+   monthly.html. Cream paper, Fraunces+Instrument+JetBrains Mono.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 10mm;
+  --paper: #F9F5EC;
+  --ink: #2A2824; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
+  --sage: #7B9476; --sage-ink: #4E6249; --sage-tint: rgba(123, 148, 118, 0.08); --sage-edge: rgba(123, 148, 118, 0.22);
+  --clay: #B85A44; --clay-ink: #8A3E2E; --clay-tint: rgba(184, 90, 68, 0.07); --clay-edge: rgba(184, 90, 68, 0.25);
+  --amber: #C9884A; --amber-ink: #8F5D28; --amber-tint: rgba(201, 136, 74, 0.08); --amber-edge: rgba(201, 136, 74, 0.22);
+  --lavender: #B6A9CB; --lavender-ink: #6B5D86; --lavender-tint: rgba(182, 169, 203, 0.10); --lavender-edge: rgba(182, 169, 203, 0.28);
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+  --s1: 1.5mm; --s2: 2.5mm; --s3: 4mm; --s4: 6mm;
+  --dot: var(--ink-whisper);
+  --shadow-page: 0 1px 2px rgba(42,40,36,0.04), 0 16px 48px rgba(42,40,36,0.10), 0 2px 8px rgba(42,40,36,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans); font-size: 8.5pt;
+  color: var(--ink-soft); line-height: 1.45;
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative;
+  overflow: clip;
+  box-shadow: var(--shadow-page);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+  gap: 3mm;
+}
+html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(--ink-quiet); outline-offset: -2px; }
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .narrative, .triad .tcol, .intention, .reminder { box-shadow: none !important; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── B-01 · Masthead ─── */
+.masthead { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--s2); border-bottom: 0.6px solid var(--ink); flex-shrink: 0; }
+.masthead .kicker { font-family: var(--font-mono); font-size: 6pt; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-quiet); margin-bottom: 1.5mm; }
+.masthead h1 { font-family: var(--font-serif); font-size: 30pt; font-weight: 400; line-height: 0.92; letter-spacing: -0.02em; color: var(--ink); font-variation-settings: "opsz" 144, "SOFT" 100; }
+.masthead .subtitle { font-family: var(--font-serif); font-size: 9pt; font-style: italic; color: var(--ink-quiet); margin-top: 1.5mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.mh-r { text-align: right; display: flex; flex-direction: column; gap: 1.5mm; align-items: flex-end; }
+.q-row { display: flex; align-items: baseline; gap: 2.5mm; }
+.q-row .label { font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-quiet); }
+.q-row .field { border-bottom: 0.6px solid var(--ink); min-width: 44mm; height: 4.5mm; font-family: var(--font-mono); font-size: 9pt; }
+.q-counter { font-family: var(--font-mono); font-size: 7pt; font-weight: 500; color: var(--ink-quiet); letter-spacing: 0.08em; }
+.q-counter .big { font-size: 10pt; color: var(--ink); font-weight: 600; }
+.q-counter .slash { color: var(--ink-whisper); margin: 0 0.5mm; }
+
+/* ─── B-02 · Narrative card (sage) ─── */
+.narrative { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 2.5mm var(--s3) 3mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.narrative::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.narrative-head { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 2mm; }
+.narrative-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); }
+.narrative-head .title { font-family: var(--font-serif); font-size: 13pt; font-weight: 500; color: var(--sage-ink); line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.narrative-head .hint { margin-left: auto; font-family: var(--font-serif); font-size: 7pt; font-style: italic; color: var(--sage-ink); opacity: 0.75; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.narrative .prompt { font-family: var(--font-serif); font-size: 8pt; font-style: italic; color: var(--sage-ink); opacity: 0.85; margin-bottom: 2mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.narrative-lines { display: flex; flex-direction: column; gap: 0; }
+.narrative-lines .ln { border-bottom: 0.8px solid var(--sage-edge); height: 8mm; }
+
+/* ─── B-03 · Triad (3 columns at equal width) ─── */
+.triad { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--s2); flex: 1; min-height: 0; }
+.triad .tcol { border-radius: 3.5mm; padding: 2.5mm var(--s3); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.triad .tcol::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.triad .tcol.worked  { background: var(--sage-tint);     border: 0.8px solid var(--sage-edge); }
+.triad .tcol.worked::before  { background: var(--sage); }
+.triad .tcol.didnt   { background: var(--clay-tint);     border: 0.8px solid var(--clay-edge); }
+.triad .tcol.didnt::before   { background: var(--clay); }
+.triad .tcol.changed { background: var(--lavender-tint); border: 0.8px solid var(--lavender-edge); }
+.triad .tcol.changed::before { background: var(--lavender); }
+.triad .head { display: flex; flex-direction: column; gap: 1mm; margin-bottom: 2mm; }
+.triad .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; }
+.triad .title  { font-family: var(--font-serif); font-size: 10.5pt; font-weight: 500; line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.triad .hint   { font-family: var(--font-serif); font-size: 7pt; font-style: italic; opacity: 0.75; font-variation-settings: "opsz" 14, "SOFT" 100; margin-top: 0.2mm; }
+.triad .tcol.worked  .kicker, .triad .tcol.worked  .title, .triad .tcol.worked  .hint { color: var(--sage-ink); }
+.triad .tcol.didnt   .kicker, .triad .tcol.didnt   .title, .triad .tcol.didnt   .hint { color: var(--clay-ink); }
+.triad .tcol.changed .kicker, .triad .tcol.changed .title, .triad .tcol.changed .hint { color: var(--lavender-ink); }
+.triad .rows { display: flex; flex-direction: column; gap: 0; flex: 1; justify-content: flex-end; }
+.triad .row { display: grid; grid-template-columns: 5mm 1fr; align-items: center; gap: 2mm; }
+.triad .row .n { font-family: var(--font-mono); font-size: 6pt; font-weight: 600; opacity: 0.7; }
+.triad .row .ln { height: 6mm; }
+.triad .tcol.worked  .row .n { color: var(--sage-ink); }
+.triad .tcol.worked  .row .ln { border-bottom: 0.5px dotted var(--sage-edge); }
+.triad .tcol.didnt   .row .n { color: var(--clay-ink); }
+.triad .tcol.didnt   .row .ln { border-bottom: 0.5px dotted var(--clay-edge); }
+.triad .tcol.changed .row .n { color: var(--lavender-ink); }
+.triad .tcol.changed .row .ln { border-bottom: 0.5px dotted var(--lavender-edge); }
+
+/* ─── B-04 · Intention HERO (sage, 12mm) ─── */
+.intention { background: var(--sage-tint); border: 0.8px solid var(--sage-edge); border-radius: 3.5mm; padding: 3mm var(--s3) 3.5mm; flex-shrink: 0; position: relative; overflow: hidden; }
+.intention::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sage); }
+.intention .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sage-ink); margin-bottom: 1mm; }
+.intention .title { font-family: var(--font-serif); font-size: 14pt; font-weight: 500; color: var(--sage-ink); line-height: 1; margin-bottom: 0.8mm; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.intention .prompt { font-family: var(--font-serif); font-size: 8pt; font-style: italic; color: var(--sage-ink); opacity: 0.85; margin-bottom: 2.5mm; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.intention .line { border: none; border-bottom: 1.5px solid var(--sage); height: 12mm; }
+
+/* ─── B-05 · Reminder (lavender) ─── */
+.reminder { background: var(--lavender-tint); border: 0.8px solid var(--lavender-edge); border-radius: 3.5mm; padding: 2.5mm var(--s3); flex-shrink: 0; position: relative; overflow: hidden; }
+.reminder::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--lavender); }
+.reminder-head { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 1.5mm; }
+.reminder-head .kicker { font-family: var(--font-mono); font-size: 5.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--lavender-ink); }
+.reminder-head .title { font-family: var(--font-serif); font-size: 10.5pt; font-weight: 500; color: var(--lavender-ink); line-height: 1; font-variation-settings: "opsz" 72, "SOFT" 60; }
+.reminder-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1mm var(--s4); align-items: center; }
+.reminder-body .check { display: grid; grid-template-columns: 4mm 1fr; align-items: center; gap: 2mm; font-family: var(--font-sans); font-size: 8pt; color: var(--lavender-ink); font-weight: 500; }
+.reminder-body .check .box { width: 3.6mm; height: 3.6mm; border: 1px solid var(--lavender-ink); border-radius: 0.8mm; background: rgba(249,245,236,0.5); }
+.reminder-body .arrives { font-family: var(--font-serif); font-size: 7.5pt; font-style: italic; color: var(--lavender-ink); opacity: 0.85; line-height: 1.45; font-variation-settings: "opsz" 14, "SOFT" 100; }
+.reminder-body .arrives strong { font-family: var(--font-mono); font-style: normal; font-size: 6.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lavender-ink); opacity: 0.9; }
+
+/* ─── Footer whisper ─── */
+.footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5mm; font-family: var(--font-mono); font-size: 5.5pt; color: var(--ink-quiet); letter-spacing: 0.12em; text-transform: uppercase; padding-top: 1mm; border-top: 0.3px dotted var(--ink-whisper); }
+.footer .left { opacity: 0.7; }
+.footer .right { font-family: var(--font-serif); font-size: 7pt; font-style: italic; text-transform: none; letter-spacing: normal; color: var(--ink-quiet); opacity: 0.85; font-variation-settings: "opsz" 14, "SOFT" 100; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ B-01 · MASTHEAD ═══ -->
+  <header class="masthead">
+    <div class="mh-l">
+      <div class="kicker">Season Review · quarter ending</div>
+      <h1>this season</h1>
+      <div class="subtitle">ninety days · who did I become</div>
+    </div>
+    <div class="mh-r">
+      <div class="q-row">
+        <span class="label">Range</span>
+        <span class="field" data-inject="quarter-range"></span>
+      </div>
+      <div class="q-counter">
+        <span class="big" data-inject="quarter">Q_</span><span class="slash">·</span>
+        <span data-inject="year">____</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ B-02 · NARRATIVE CARD (sage) ═══ -->
+  <section class="narrative" aria-label="What this season felt like in three sentences">
+    <div class="narrative-head">
+      <span class="kicker">§ narrative</span>
+      <span class="title">in three sentences, what happened</span>
+      <span class="hint">90 days · prose, not bullets</span>
+    </div>
+    <div class="prompt">tell the story you'd tell a friend · no metrics · plain voice</div>
+    <div class="narrative-lines">
+      <div class="ln"></div>
+      <div class="ln"></div>
+      <div class="ln"></div>
+    </div>
+  </section>
+
+  <!-- ═══ B-03 · TRIAD · worked · didn't · changed ═══ -->
+  <section class="triad" aria-label="What worked, didn't work, and changed this season">
+
+    <!-- worked · sage -->
+    <div class="tcol worked">
+      <div class="head">
+        <span class="kicker">§ worked</span>
+        <span class="title">keep doing</span>
+        <span class="hint">prove-it moments</span>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="n">1</span><span class="ln"></span></div>
+        <div class="row"><span class="n">2</span><span class="ln"></span></div>
+        <div class="row"><span class="n">3</span><span class="ln"></span></div>
+      </div>
+    </div>
+
+    <!-- didn't · clay -->
+    <div class="tcol didnt">
+      <div class="head">
+        <span class="kicker">§ didn't</span>
+        <span class="title">try different</span>
+        <span class="hint">honest, not cruel</span>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="n">1</span><span class="ln"></span></div>
+        <div class="row"><span class="n">2</span><span class="ln"></span></div>
+        <div class="row"><span class="n">3</span><span class="ln"></span></div>
+      </div>
+    </div>
+
+    <!-- changed · lavender -->
+    <div class="tcol changed">
+      <div class="head">
+        <span class="kicker">§ changed</span>
+        <span class="title">who I am now</span>
+        <span class="hint">the identity shifts</span>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="n">1</span><span class="ln"></span></div>
+        <div class="row"><span class="n">2</span><span class="ln"></span></div>
+        <div class="row"><span class="n">3</span><span class="ln"></span></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══ B-04 · INTENTION HERO (sage · 12mm) ═══ -->
+  <section class="intention" aria-label="Intention for next season">
+    <div class="kicker">§ next season</div>
+    <div class="title">what I want next season to feel like</div>
+    <div class="prompt">one sentence · biggest handwriting on the page · say it like you mean it</div>
+    <hr class="line">
+  </section>
+
+  <!-- ═══ B-05 · REMINDER (lavender) ═══ -->
+  <section class="reminder" aria-label="AirDrop reminder for season review">
+    <div class="reminder-head">
+      <span class="kicker">§ reminder</span>
+      <span class="title">before starting next season</span>
+    </div>
+    <div class="reminder-body">
+      <div class="check" role="group" aria-label="pre-season action">
+        <span class="box" aria-hidden="true"></span>
+        <span>AirDrop this notebook to AI for the narrative version</span>
+      </div>
+      <div class="arrives">
+        <strong>what arrives:</strong> 90-day cig trend · mood trajectory · chest-kg delta · pattern-tally across months · named identity shifts · quarterly-review-YYYY-QN.pdf
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer whisper -->
+  <footer class="footer">
+    <span class="left">prax journal · v5 · season review</span>
+    <span class="right">this is the blank — the narrative version arrives via AirDrop</span>
+  </footer>
+
+</div>
+</body>
+</html>
