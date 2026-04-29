@@ -23,10 +23,12 @@ import {
   resolvePageSpecFiles,
   substituteProfile,
   PROFILE_PLACEHOLDERS,
+  RX_SLOT_COUNT,
   V5_PACK_DIR,
   DAILY_HTML_FILES,
   REVIEW_HTML_FILE,
 } from '../../src/core/prax-journal-renderer.js';
+
 import type { PageSpec } from '../../src/core/splice.js';
 import type { Profile } from '../../src/types/profile.js';
 
@@ -218,4 +220,86 @@ describe('substituteProfile · narrow PII injection', () => {
     expect(out).not.toContain('{{DR_NAME}}');
   });
 });
+
+describe('substituteProfile · medication rows (RX_N_*)', () => {
+  // Tiny helper — single med, used to make intent obvious row-by-row.
+  const med = (name: string, dose: string) => ({ name, dose, cadence: 'daily' });
+
+  // Build a string with slot N's two tokens side by side. Keeping the
+  // test fixture tight makes the expected output easy to eyeball.
+  const rowFixture = (n: number) => `{{RX_${n}_NAME}}|{{RX_${n}_DOSE}}`;
+
+  // ── 11 · RX_SLOT_COUNT matches today.html's row count ──
+  //
+  // If today.html ever grows/shrinks its `.rx-item` row count, this
+  // test nudges you to update RX_SLOT_COUNT in lock-step. It's a cheap
+  // coupling guard rather than an assertion about render output.
+
+  it('RX_SLOT_COUNT stays in sync with today.html .rx-item rows', () => {
+    const todayHtml = fs.readFileSync(
+      path.join(V5_PACK_DIR, 'today.html'),
+      'utf-8',
+    );
+    const rowMatches = todayHtml.match(/class="rx-item"/gu) ?? [];
+    expect(rowMatches.length).toBe(RX_SLOT_COUNT);
+  });
+
+  // ── 12 · No meds → every RX slot falls back to printed blank ──
+
+  it('profile with no meds → every RX_N_* token falls back', () => {
+    const profile = makeProfile([]);
+    const input = Array.from({ length: RX_SLOT_COUNT }, (_, i) =>
+      rowFixture(i + 1),
+    ).join(' · ');
+    const out = substituteProfile(input, profile);
+    expect(out).not.toMatch(/\{\{RX_/u);
+    // Every slot should show the blank name glyph.
+    const nameBlankCount = out.split(PROFILE_PLACEHOLDERS.RX_1_NAME).length - 1;
+    expect(nameBlankCount).toBe(RX_SLOT_COUNT);
+  });
+
+  // ── 13 · Meds fill slots in declaration order ──
+
+  it('medications populate slots in declaration order', () => {
+    const profile: Profile = {
+      ...makeProfile([]),
+      medications: [
+        med('Alpha',   '1 tab'),
+        med('Bravo',   '2 caps'),
+        med('Charlie', '5 mg'),
+      ],
+    };
+    expect(substituteProfile(rowFixture(1), profile)).toBe('Alpha|1 tab');
+    expect(substituteProfile(rowFixture(2), profile)).toBe('Bravo|2 caps');
+    expect(substituteProfile(rowFixture(3), profile)).toBe('Charlie|5 mg');
+    // Slot 4 has no med → fallback glyphs.
+    expect(substituteProfile(rowFixture(4), profile)).toBe(
+      `${PROFILE_PLACEHOLDERS.RX_4_NAME}|${PROFILE_PLACEHOLDERS.RX_4_DOSE}`,
+    );
+  });
+
+  // ── 14 · More meds than slots → extras drop, slots 1..N fill ──
+  //
+  // Documents the "reorder profile.json to pick which 8 meds print"
+  // behaviour. The drop is silent-by-design, so this test pins it.
+
+  it('meds beyond RX_SLOT_COUNT are dropped, first N fill slots', () => {
+    const profile: Profile = {
+      ...makeProfile([]),
+      medications: Array.from({ length: RX_SLOT_COUNT + 3 }, (_, i) =>
+        med(`Drug${i + 1}`, `dose${i + 1}`),
+      ),
+    };
+    // Slot 1 and slot RX_SLOT_COUNT both filled from profile.
+    expect(substituteProfile(rowFixture(1), profile)).toBe('Drug1|dose1');
+    expect(substituteProfile(rowFixture(RX_SLOT_COUNT), profile)).toBe(
+      `Drug${RX_SLOT_COUNT}|dose${RX_SLOT_COUNT}`,
+    );
+    // And there should be no RX_9_* etc. tokens in the whitelist —
+    // asking the renderer to fill beyond the slot count would leave
+    // the token untouched (safety: no silent overflow).
+    expect(substituteProfile('{{RX_9_NAME}}', profile)).toBe('{{RX_9_NAME}}');
+  });
+});
+
 

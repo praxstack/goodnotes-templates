@@ -85,10 +85,35 @@ export const REVIEW_HTML_FILE: Record<
 };
 
 /**
+ * Number of medication rows the Rx card exposes on `today.html`. The
+ * template hard-codes 8 `.rx-item` blocks; this constant keeps the
+ * whitelist + `extractRxFields` in lock-step with the markup.
+ */
+export const RX_SLOT_COUNT = 8;
+
+/**
+ * Build the full `{{RX_N_NAME}}/{{RX_N_DOSE}}` slot whitelist for N=1..8.
+ * Done programmatically so we cannot drift between the two token families
+ * or off-by-one when slot count changes.
+ */
+function buildRxSlotPlaceholders(): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (let i = 1; i <= RX_SLOT_COUNT; i++) {
+    out[`RX_${i}_NAME`] = '___________';
+    out[`RX_${i}_DOSE`] = '__ · _-_-_';
+  }
+  return out;
+}
+
+/**
  * Whitelist of `{{PLACEHOLDER}}` tokens that `substituteProfile` recognises,
  * mapped to a short printed-blank fallback used when the profile doesn't
  * supply the value. These match the tokens that appear in the v5 HTML —
  * currently only inside the Rx card on `today.html`.
+ *
+ * Two families:
+ *   - `DR_*`   — psychiatrist identity (name / credentials / reg № / F-U)
+ *   - `RX_N_*` — medication slots N=1..8 (name + dose)
  *
  * Fallbacks are short underscore runs, chosen so the rendered blank form
  * looks visually equivalent to the pre-substitution template (i.e. a
@@ -99,26 +124,51 @@ export const PROFILE_PLACEHOLDERS = {
   DR_CREDENTIALS:  '[credentials]',
   DR_REG:          '__________',
   DR_FOLLOWUP:     '__',
+  ...buildRxSlotPlaceholders(),
 } as const;
 
 export type ProfilePlaceholder = keyof typeof PROFILE_PLACEHOLDERS;
 
 /**
- * Pull identity fields from a profile into the placeholder token map.
- * Only `therapists[]` entries with `role === 'psychiatry'` are consulted;
- * the first such entry wins. Missing fields stay undefined so the caller
- * (`substituteProfile`) can apply the fallback.
+ * Pull identity + medication fields from a profile into the placeholder
+ * token map. Two independent sources, combined into one map:
+ *
+ *   1. Psychiatrist identity — the first `therapists[]` entry whose
+ *      `role === 'psychiatry'` wins. Deterministic; absent fields stay
+ *      undefined so the caller (`substituteProfile`) applies the fallback.
+ *
+ *   2. Medication rows — the first `RX_SLOT_COUNT` (= 8) entries of
+ *      `medications[]` populate the Rx card in declaration order. To
+ *      reorder which meds show, reorder the array in `profile.json`.
+ *      Meds beyond slot 8 are not rendered (the template only has 8 rows);
+ *      write them in the margin or trim the profile to the ones you want
+ *      printed.
  */
-function extractPsychiatry(profile: Profile): Partial<Record<ProfilePlaceholder, string>> {
-  const psych = profile.therapists.find((t) => t.role === 'psychiatry');
-  if (!psych) return {};
+function extractRxFields(profile: Profile): Partial<Record<ProfilePlaceholder, string>> {
   const out: Partial<Record<ProfilePlaceholder, string>> = {};
-  out.DR_NAME = psych.name;
-  if (psych.credentials !== undefined) out.DR_CREDENTIALS = psych.credentials;
-  if (psych.registration_number !== undefined) out.DR_REG = psych.registration_number;
-  if (psych.follow_up_days !== undefined) out.DR_FOLLOWUP = String(psych.follow_up_days);
+
+  // ── Psychiatrist identity ─────────────────────────────────────
+  const psych = profile.therapists.find((t) => t.role === 'psychiatry');
+  if (psych) {
+    out.DR_NAME = psych.name;
+    if (psych.credentials !== undefined) out.DR_CREDENTIALS = psych.credentials;
+    if (psych.registration_number !== undefined) out.DR_REG = psych.registration_number;
+    if (psych.follow_up_days !== undefined) out.DR_FOLLOWUP = String(psych.follow_up_days);
+  }
+
+  // ── Medication rows 1..RX_SLOT_COUNT ──────────────────────────
+  // First N meds, declaration order. Extras silently drop (documented
+  // behaviour — user controls which get printed via profile order).
+  const meds = profile.medications.slice(0, RX_SLOT_COUNT);
+  meds.forEach((m, idx) => {
+    const n = idx + 1; // 1-based for template readability
+    (out as Record<string, string>)[`RX_${n}_NAME`] = m.name;
+    (out as Record<string, string>)[`RX_${n}_DOSE`] = m.dose;
+  });
+
   return out;
 }
+
 
 /**
  * Replace every `{{PLACEHOLDER}}` token in `html` with its profile value,
@@ -131,7 +181,8 @@ function extractPsychiatry(profile: Profile): Partial<Record<ProfilePlaceholder,
  * (e.g. CSS `{ … }` rules, JSON samples in comments).
  */
 export function substituteProfile(html: string, profile?: Profile): string {
-  const filled = profile ? extractPsychiatry(profile) : {};
+  const filled = profile ? extractRxFields(profile) : {};
+
   const keys = Object.keys(PROFILE_PLACEHOLDERS) as ProfilePlaceholder[];
   const pattern = new RegExp(`\\{\\{(${keys.join('|')})\\}\\}`, 'g');
   return html.replace(pattern, (_match, token: string) => {
