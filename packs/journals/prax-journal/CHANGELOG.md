@@ -17,10 +17,15 @@ Version history of the journal pack. See `versions/` for frozen snapshots of eac
   Sunday, Sunday-as-`--from`, and inverted range returns `[]`. Tests use
   `it.fails(...)` so CI stays green today; flip to `it(...)` in the C7
   commit that removes the throw.
+- **C7a · splice GREEN** — implemented `buildPageSequence()` with pure
+  UTC-safe calendar math (`parseUTC` / `addOneDay` / `isMonthEnd` /
+  `isQuarterEnd`). 8/8 splice tests pass on first try — the RED oracle
+  from C6b was accurate. Sub-millisecond for 90-day ranges. Sets the
+  stage for C7b's generator CLI.
 - **C6a polish** — three small post-review fixes: (a) `font-display: block` matches
   the sticker renderer (cosmetic alignment; for data URIs both values behave
-
   identically, but one value is easier to reason about); (b) `FONT_FILES` hoisted
+
   to a single exported constant in `src/core/sticker-renderer.ts` so stickers and
   v5 pages can't drift; (c) 500 KB soft cap on the generated `<style>` block to
   flag accidental variable-axis bloat. Marker bumped to `v5-inlined-woff2-v2`;
