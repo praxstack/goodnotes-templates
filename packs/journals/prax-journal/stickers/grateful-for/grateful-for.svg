@@ -68,6 +68,73 @@
     <clipPath id="cardClip">
       <rect x="0" y="0" width="400" height="600" rx="24" ry="24"/>
     </clipPath>
+
+    
+    <!-- Soft directional drop shadow (for tape, pin, seal — raised objects) -->
+    <filter id="skeuoDrop" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.6"/>
+      <feOffset dx="1.2" dy="2.4"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.55"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Heavy shadow for wax seals and bigger raised pieces -->
+    <filter id="skeuoDropLarge" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3.2"/>
+      <feOffset dx="2" dy="4"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.6"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grunge / distressed edge (for rubber stamps and worn marks).
+         feTurbulence generates noise → feDisplacementMap pushes the
+         source image around those noise coordinates, creating
+         irregular broken edges. scale=3 keeps it subtle. -->
+    <filter id="skeuoGrunge" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Paper fiber (stronger than the card-level grain). Used on
+         overlays like tape to give them texture. -->
+    <filter id="skeuoFiber" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="2.3" numOctaves="3" seed="5"/>
+      <feColorMatrix values="0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.3  0 0 0 0.18 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Tape translucency / crease highlight gradient -->
+    <linearGradient id="tapeShine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="rgba(255,255,255,0.38)"/>
+      <stop offset="45%" stop-color="rgba(255,255,255,0.04)"/>
+      <stop offset="55%" stop-color="rgba(60,42,20,0.02)"/>
+      <stop offset="100%" stop-color="rgba(60,42,20,0.22)"/>
+    </linearGradient>
+
+    <!-- Pushpin head radial gradient — glint at top-left, dark rim -->
+    <radialGradient id="pinHead" cx="30%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="var(--pin-glint, #F2B8AC)"/>
+      <stop offset="45%" stop-color="var(--pin-head, #C14B3A)"/>
+      <stop offset="100%" stop-color="var(--pin-shadow, #7A2A1E)"/>
+    </radialGradient>
+
+    <!-- Wax seal radial gradient — specular highlight + dark edge -->
+    <radialGradient id="waxShine" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="rgba(255,255,255,0.5)"/>
+      <stop offset="30%" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+    </radialGradient>
+  
   </defs>
 
   <!-- Card body · layered for tactility:
@@ -85,6 +152,26 @@
   <rect x="0.5" y="0.5" width="399" height="599"
         rx="24" ry="24"
         fill="none" stroke="rgba(201, 136, 74, 0.22)" stroke-width="1"/>
+
+  <!-- Skeuomorphic accents (optional): stitched border, pressed leaf,
+       tape, pushpin, stamp, folded corner. Layered between the
+       paper/rail and the kicker/hero text stack so textual elements
+       stay legible even with ornaments present. Fully opt-in per-sticker
+       via StickerShellOptions.skeuo. -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   <!-- Kicker · JetBrains Mono 600, 11px, 0.18em -->
   <text x="200" y="50"

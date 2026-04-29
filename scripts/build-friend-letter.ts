@@ -20,6 +20,7 @@ import {
   stickerShell,
   rasterize,
   fontsCssInnerSize,
+  archetype,
 } from '../src/core/sticker-renderer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -96,6 +97,7 @@ const svg = stickerShell({
   heroY: 105,
   subtitleY: 172,
   bodySvg,
+  skeuo: archetype('clinic', 'expanded', 'sage', { stampLabel: 'PRIVATE', dateText: 'SESSION · 2026' }),
 });
 
 writeFileSync(path.join(OUT_DIR, 'friend-letter.svg'), svg);

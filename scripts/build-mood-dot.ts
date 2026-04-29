@@ -24,6 +24,7 @@ import {
   dottedLine,
   rasterize,
   fontsCssInnerSize,
+  archetype,
 } from '../src/core/sticker-renderer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -99,7 +100,7 @@ ${dottedLine(40, 502, W - 40)}
 const svg = stickerShell({
   id: 'mood-dot',
   title: 'Mood Dot',
-  desc: 'A warm-analog sticker in the Prax Journal pack. Textured cream paper with a softened lavender rail signals neutral observation. A Fraunces serif title "how I\'m feeling" anchors the hero, a 10-dot horizontal spectrum lets the user tap a mood on a 1-to-10 scale, and two writing zones capture "one word" and "why".',
+  desc: 'A warm-analog field-journal sticker in the Prax Journal pack. Textured cream paper with a softened lavender rail, washi-tape corner accent and stitched inset border signal a hand-kept field book rather than a clinical form. A Fraunces serif title "how I\'m feeling" anchors the hero, a 10-dot horizontal spectrum lets the user tap a mood on a 1-to-10 scale, and two writing zones capture "one word" and "why".',
   size: 'compact',
   accent: 'lavender',
   kicker: '§ MOOD DOT',
@@ -107,6 +108,11 @@ const svg = stickerShell({
   subtitle: 'right now, plain',
   whisper: 'an observation · not a verdict',
   bodySvg,
+  // HERBARIUM archetype: pressed-leaf top-right, botanical sprig
+  // bottom-left, stitched inset. Soft, observational, no hard
+  // statement elements — fits the "observation · not a verdict"
+  // whisper. Curated 3 elements, diagonal counter-balance.
+  skeuo: archetype('herbarium', 'compact', 'lavender'),
 });
 
 const SVG_PATH = path.join(OUT_DIR, 'mood-dot.svg');

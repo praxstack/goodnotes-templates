@@ -31,6 +31,7 @@ import {
   kickerLine,
   solidLine,
   dottedLine,
+  archetype,
 } from '../src/core/sticker-renderer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -74,6 +75,7 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'the plan that survives the moment',
     whisper: 'small commitments · survive the spiral',
     bodySvg: bodyLines.join('\n'),
+    skeuo: archetype('field-note', 'standard', 'sage', { dateText: 'PLAN · 2026' }),
   }));
 }
 
@@ -117,6 +119,7 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'ride the wave · don\'t drown it',
     whisper: 'the urge always passes · you don\'t have to',
     bodySvg: bodyLines.join('\n'),
+    skeuo: archetype('clinic', 'standard', 'lavender', { stampLabel: 'URGE-SURFED', dateText: 'RP · 2026' }),
   }));
 }
 
@@ -149,6 +152,7 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'even the small ones count',
     whisper: 'the brain magnifies what it practices · Seligman',
     bodySvg: bodyLines.join('\n'),
+    skeuo: archetype('herbarium', 'standard', 'amber'),
   }));
 }
 
@@ -186,6 +190,7 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'one tick each time it runs',
     whisper: 'naming it is half the work',
     bodySvg: bodyLines.join('\n'),
+    skeuo: archetype('ledger', 'standard', 'clay', { monogram: 'N' }),
   }));
 }
 
@@ -223,6 +228,7 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'notice · don\'t force it',
     whisper: 'the weight becomes bearable when it\'s named',
     bodySvg: bodyLines.join('\n'),
+    skeuo: archetype('herbarium', 'standard', 'clay'),
   }));
 }
 
@@ -245,6 +251,7 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'name one. then maybe two more.',
     whisper: 'gratitude isn\'t performance · it\'s a memory aid',
     bodySvg: bodyLines.join('\n'),
+    skeuo: archetype('herbarium', 'compact', 'amber'),
   }));
 }
 
@@ -272,6 +279,7 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'one is enough',
     whisper: 'small is not nothing · small is today',
     bodySvg: bodyLines.join('\n'),
+    skeuo: archetype('field-note', 'compact', 'sage', { dateText: 'WIN · 2026' }),
   }));
 }
 
@@ -322,6 +330,12 @@ async function ship(name: string, svg: string): Promise<void> {
     subtitle: 'two questions · past 14 days',
     whisper: 'a number, not a verdict',
     bodySvg: bodyLines.join('\n'),
+    // LEDGER archetype — stitched inset, a single wax-seal monogram
+    // at the top-left (single statement element), a faint thumbprint
+    // at the bottom-right. Feels like an audit log entry: serious,
+    // personal, minimal. Counter-balance: the seal is the only
+    // saturated element on the card; everything else is quiet.
+    skeuo: archetype('ledger', 'compact', 'lavender', { monogram: 'P' }),
   }));
 }
 

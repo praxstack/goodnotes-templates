@@ -49,18 +49,64 @@
       <stop offset="100%" stop-color="#F4EFE0"/>
     </linearGradient>
 
-    <!-- Paper grain filter — fractalNoise reshaped to alpha-only.
-         Source: svg-principal-engineer/filters-cookbook.md § Paper grain.
-         baseFrequency 0.95 for fine fibers, alpha 0.12 for visible
-         middle-ground grain. -->
+    <!-- Radial vignette — warms the center, shadows the edges.
+         This is what makes the card look like it has thickness
+         (a real sheet's center catches more light than its corners). -->
+    <radialGradient id="paperVignette" cx="50%" cy="45%" r="70%">
+      <stop offset="0%"   stop-color="#FFFAEE" stop-opacity="0.55"/>
+      <stop offset="55%"  stop-color="#F9F5EC" stop-opacity="0.0"/>
+      <stop offset="100%" stop-color="#8A6C3A" stop-opacity="0.22"/>
+    </radialGradient>
+
+    <!-- Visible paper fiber on the cream base. Stronger than the
+         original grain — we want to SEE the fibers on a real render,
+         not just feel them subconsciously. baseFrequency=0.55 makes
+         broader strands; alpha=0.22 keeps the legibility. -->
     <filter id="paperGrain" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="3" seed="7"/>
-      <feColorMatrix values="0 0 0 0 0.12
-                             0 0 0 0 0.10
-                             0 0 0 0 0.08
-                             0 0 0 0.12 0"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="4" seed="7"/>
+      <feColorMatrix values="0 0 0 0 0.22
+                             0 0 0 0 0.18
+                             0 0 0 0 0.12
+                             0 0 0 0.22 0"/>
       <feComposite in2="SourceGraphic" operator="in"/>
     </filter>
+
+    <!-- Card-level drop shadow — the sticker sits on a surface.
+         This is the single biggest "is this skeuomorphic" signal. -->
+    <filter id="cardDrop" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="3"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.38"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Inset edge shadow — the paper's own thickness.
+         Draws a soft dark ring just inside the edge so the border
+         feels bevelled, not painted. Uses feMorphology + blur. -->
+    <filter id="paperInset" x="-5%" y="-5%" width="110%" height="110%">
+      <feMorphology in="SourceAlpha" operator="erode" radius="4"/>
+      <feGaussianBlur stdDeviation="3"/>
+      <feComposite in="SourceAlpha" in2="" operator="out"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.32"/>
+      </feComponentTransfer>
+      <feColorMatrix values="0 0 0 0 0
+                             0 0 0 0 0
+                             0 0 0 0 0
+                             0 0 0 1 0"/>
+    </filter>
+
+    <!-- Top inner highlight (light catching the top edge of the page) -->
+    <linearGradient id="paperTopHighlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#FFFFFF" stop-opacity="0.48"/>
+      <stop offset="10%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
 
     <!-- Clip path = the squircle. Anything clipped to this will
          respect the rounded corners, which is how the rail gets
@@ -68,23 +114,207 @@
     <clipPath id="cardClip">
       <rect x="0" y="0" width="800" height="600" rx="32" ry="32"/>
     </clipPath>
+
+    
+    <!-- Soft directional drop shadow (for tape, pin, seal — raised objects) -->
+    <filter id="skeuoDrop" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.6"/>
+      <feOffset dx="1.2" dy="2.4"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.55"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Heavy shadow for wax seals and bigger raised pieces -->
+    <filter id="skeuoDropLarge" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3.2"/>
+      <feOffset dx="2" dy="4"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.6"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grunge / distressed edge (for rubber stamps and worn marks).
+         feTurbulence generates noise → feDisplacementMap pushes the
+         source image around those noise coordinates, creating
+         irregular broken edges. scale=3 keeps it subtle. -->
+    <filter id="skeuoGrunge" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Paper fiber (stronger than the card-level grain). Used on
+         overlays like tape to give them texture. -->
+    <filter id="skeuoFiber" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="2.3" numOctaves="3" seed="5"/>
+      <feColorMatrix values="0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.3  0 0 0 0.18 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Tape translucency / crease highlight gradient -->
+    <linearGradient id="tapeShine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="rgba(255,255,255,0.38)"/>
+      <stop offset="45%" stop-color="rgba(255,255,255,0.04)"/>
+      <stop offset="55%" stop-color="rgba(60,42,20,0.02)"/>
+      <stop offset="100%" stop-color="rgba(60,42,20,0.22)"/>
+    </linearGradient>
+
+    <!-- Pushpin head radial gradient — glint at top-left, dark rim -->
+    <radialGradient id="pinHead" cx="30%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="var(--pin-glint, #F2B8AC)"/>
+      <stop offset="45%" stop-color="var(--pin-head, #C14B3A)"/>
+      <stop offset="100%" stop-color="var(--pin-shadow, #7A2A1E)"/>
+    </radialGradient>
+
+    <!-- Wax seal radial gradient — specular highlight + dark edge -->
+    <radialGradient id="waxShine" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="rgba(255,255,255,0.5)"/>
+      <stop offset="30%" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+    </radialGradient>
+  
   </defs>
 
-  <!-- Card body · layered for tactility:
-       (1) warm cream gradient base
-       (2) same shape with fractalNoise grain composited on top
-       (3) softened accent rail clipped to the squircle top
-       (4) faint accent border (deckle edge) -->
+  <!-- Card body · 8-layer tactile stack:
+       (1) outer drop shadow (card sits on a surface)
+       (2) warm cream gradient base
+       (3) paper grain filter (fractalNoise fibers now visible)
+       (4) radial vignette (edges darker than center — paper thickness)
+       (5) top-edge inner highlight (light catching the top face)
+       (6) inset dark ring (paper edge shadow, feMorphology+blur)
+       (7) softened accent rail clipped to the squircle top
+       (8) faint accent stroke border -->
+  <!-- (1) outer cast shadow — the single biggest "skeuomorphic" signal -->
+  <rect x="4" y="6" width="792" height="596" rx="32" ry="32"
+        fill="rgba(42,40,36,0.28)" filter="url(#cardDrop)"/>
+
+  <g clip-path="url(#cardClip)">
+    <!-- (2) cream warmth gradient -->
+    <rect x="0" y="0" width="800" height="600"
+          fill="url(#paperWarmth)"/>
+    <!-- (3) visible paper fiber -->
+    <rect x="0" y="0" width="800" height="600"
+          fill="#F9F5EC" filter="url(#paperGrain)"/>
+    <!-- (4) radial vignette — warms center, shadows corners -->
+    <rect x="0" y="0" width="800" height="600"
+          fill="url(#paperVignette)"/>
+    <!-- (5) top-edge light highlight — only first 80px -->
+    <rect x="0" y="0" width="800" height="80"
+          fill="url(#paperTopHighlight)"/>
+    <!-- (7) accent rail (kept for brand continuity) -->
+    <rect x="0" y="0" width="800" height="8"
+          fill="#C9884A" fill-opacity="0.82"/>
+  </g>
+
+  <!-- (6) inset edge shadow — drawn OUTSIDE the clip so it can
+       actually show an inner ring. Uses feMorphology+blur. -->
   <rect x="0" y="0" width="800" height="600" rx="32" ry="32"
-        fill="url(#paperWarmth)"/>
-  <rect x="0" y="0" width="800" height="600" rx="32" ry="32"
-        fill="#F9F5EC" filter="url(#paperGrain)"/>
-  <rect x="0" y="0" width="800" height="8"
-        fill="#C9884A" fill-opacity="0.72"
-        clip-path="url(#cardClip)"/>
+        fill="none" stroke="rgba(42,40,36,0.55)" stroke-width="12"
+        filter="url(#paperInset)"/>
+  <!-- (8) faint accent stroke border on top -->
   <rect x="0.5" y="0.5" width="799" height="599"
         rx="32" ry="32"
-        fill="none" stroke="rgba(201, 136, 74, 0.22)" stroke-width="1"/>
+        fill="none" stroke="rgba(201, 136, 74, 0.22)" stroke-width="1.1"/>
+
+  <!-- Skeuomorphic accents (optional): stitched border, pressed leaf,
+       tape, pushpin, stamp, folded corner. Layered between the
+       paper/rail and the kicker/hero text stack so textual elements
+       stay legible even with ornaments present. Fully opt-in per-sticker
+       via StickerShellOptions.skeuo. -->
+  
+  <rect x="14" y="14" width="772" height="572"
+        rx="26" ry="26"
+        fill="none" stroke="#8F5D28" stroke-width="0.9"
+        stroke-opacity="0.35" stroke-dasharray="4,3"/>
+  
+  <g transform="translate(52 536) rotate(-18) scale(0.7)" opacity="0.22">
+    <path d="M -40 0 Q -20 -22 0 -16 Q 20 -10 40 0 Q 20 10 0 16 Q -20 22 -40 0 Z"
+          fill="#8F5D28" fill-opacity="0.45"/>
+    <line x1="-40" y1="0" x2="40" y2="0" stroke="#8F5D28" stroke-width="0.8" stroke-opacity="0.6"/>
+    <line x1="-20" y1="-14" x2="-10" y2="0"  stroke="#8F5D28" stroke-width="0.5" stroke-opacity="0.5"/>
+    <line x1="0"   y1="-16" x2="0"   y2="0"  stroke="#8F5D28" stroke-width="0.5" stroke-opacity="0.5"/>
+    <line x1="20"  y1="-14" x2="10"  y2="0"  stroke="#8F5D28" stroke-width="0.5" stroke-opacity="0.5"/>
+    <line x1="-20" y1="14"  x2="-10" y2="0"  stroke="#8F5D28" stroke-width="0.5" stroke-opacity="0.5"/>
+    <line x1="20"  y1="14"  x2="10"  y2="0"  stroke="#8F5D28" stroke-width="0.5" stroke-opacity="0.5"/>
+  </g>
+  
+  
+  
+  
+  
+  <g transform="rotate(8 713 35)" filter="url(#skeuoDrop)">
+    <!-- Tape body with deckled (torn) short edges -->
+    <path d="M 648,24.6
+                    L 651.2,22
+                    L 646.4,32.4
+                    L 650.4,40.2
+                    L 646.8,48 L 778,22 L 779.2,45.400000000000006
+                     L 776,37.6
+                     L 779.6,29.8
+                     L 777.2,22
+                     Z"
+          fill="#D9C8A3" fill-opacity="0.88"/>
+    <!-- translucent shine band — sells the plastic film -->
+    <rect x="648" y="22" width="130" height="26"
+          fill="url(#tapeShine)" opacity="0.85"/>
+    <!-- paper fibers inside the tape -->
+    <rect x="648" y="22" width="130" height="26"
+          fill="#D9C8A3" filter="url(#skeuoFiber)" opacity="0.7"/>
+    <!-- faint edge ink -->
+    <path d="M 648,24.6
+                    L 651.2,22
+                    L 646.4,32.4
+                    L 650.4,40.2
+                    L 646.8,48 L 778,22 L 779.2,45.400000000000006
+                     L 776,37.6
+                     L 779.6,29.8
+                     L 777.2,22
+                     Z"
+          fill="none" stroke="rgba(60,42,20,0.22)" stroke-width="0.8"/>
+  </g>
+  
+  <g style="--pin-head:#3E5878; --pin-glint:#B9C7DD; --pin-shadow:#1E2B3F;">
+    <!-- Cast soft shadow (ground) -->
+    <ellipse cx="740" cy="46" rx="11" ry="4.5"
+             fill="rgba(42,40,36,0.28)" filter="url(#skeuoDrop)"/>
+    <!-- Pin dome — radial gradient does the lighting -->
+    <circle cx="738" cy="42" r="9" fill="#3E5878"/>
+    <!-- Specular gradient overlay: paint the highlight explicitly
+         so we stay compatible with sharp / librsvg. -->
+    <circle cx="738" cy="42" r="9"
+            fill="url(#waxShine)" opacity="0.65"/>
+    <!-- Rim / dark edge accent -->
+    <circle cx="738" cy="42" r="9" fill="none"
+            stroke="#1E2B3F" stroke-width="1.2" stroke-opacity="0.75"/>
+    <!-- Bright specular point -->
+    <ellipse cx="734.85" cy="38.4"
+             rx="3.15" ry="1.98"
+             fill="#FFFFFF" fill-opacity="0.75"/>
+    <!-- Secondary highlight -->
+    <circle cx="737.1" cy="40.65" r="1.3499999999999999"
+            fill="#B9C7DD" fill-opacity="0.9"/>
+  </g>
+  
+  
+  
+  
+  <g opacity="0.78">
+    <rect x="34" y="72" width="90.4" height="14"
+          fill="none" stroke="#8F5D28" stroke-width="0.8" stroke-opacity="0.55" rx="1"/>
+    <text x="38" y="82" font-family="'JetBrains Mono', Menlo, monospace"
+          font-size="9" font-weight="500" letter-spacing="1.8"
+          fill="#8F5D28" fill-opacity="0.88">FIELD · 2026</text>
+  </g>
+  
+  
 
   <!-- Kicker · JetBrains Mono 600, 11px, 0.18em -->
   <text x="400" y="50"

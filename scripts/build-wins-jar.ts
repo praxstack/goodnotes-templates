@@ -17,6 +17,7 @@ import {
   stickerShell,
   rasterize,
   fontsCssInnerSize,
+  archetype,
 } from '../src/core/sticker-renderer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -92,6 +93,12 @@ const svg = stickerShell({
   subtitle: 'even the tiniest counts · drop it in',
   whisper: 'put a small one in the jar · especially on the hard days',
   bodySvg,
+  // FIELD-NOTE archetype — the "pinned to my book" feel. Kraft washi
+  // tape + navy pushpin at top-right, FIELD · 2026 date stamp under
+  // the kicker on the left, pressed-leaf atmosphere bottom-left.
+  // Counter-balance: the tape/pin anchor is top-right, the leaf is
+  // bottom-left — diagonal rhythm, no corner-cluster.
+  skeuo: archetype('field-note', 'expanded', 'amber', { dateText: 'FIELD · 2026' }),
 });
 
 writeFileSync(path.join(OUT_DIR, 'wins-jar.svg'), svg);
