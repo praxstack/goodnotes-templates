@@ -125,10 +125,11 @@ export function fontsBlockSize(): number {
 
 // ─── Raster pipeline ─────────────────────────────────────────
 //
-// A sticker SVG gets rasterized at three resolutions:
+// A sticker SVG gets rasterized at configurable resolutions:
 //   @1× — the canvas size (400/600/800 × 600)
 //   @2× — double, for retina preview
 //   @3× — triple, for GoodNotes's internal scaling headroom
+//   @4× — maximum we ship; keeps zoom-in crisp in GoodNotes' pinch-zoom.
 //
 // We only output PNG, not JPEG. Stickers have alpha (the rounded
 // corners) and JPEG would square them off.
@@ -143,7 +144,7 @@ export interface RasterOutput {
 export async function rasterize(
   svg: string,
   outPath: string,
-  scale: 1 | 2 | 3 = 1,
+  scale: 1 | 2 | 3 | 4 = 1,
 ): Promise<RasterOutput> {
   const buf = await sharp(Buffer.from(svg), { density: 72 * scale })
     .png({ compressionLevel: 9 })
