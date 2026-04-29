@@ -253,6 +253,15 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
     pageCount: 1,
   },
   {
+    id: 'adhd-v5-quarterly',
+    name: 'Prax Journal v5 Quarterly',
+    category: 'journal',
+    description: 'v5 — season review (narrative blank · 12mm hero · AI emits quarterly-review-YYYY-QN.pdf)',
+    htmlPath: journal('v5', 'quarterly.html'),
+    multiPage: false,
+    pageCount: 1,
+  },
+  {
     id: 'prax-journal-design-system',
     name: 'Prax Journal Design System',
     category: 'journal',
