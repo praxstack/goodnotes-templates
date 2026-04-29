@@ -202,7 +202,7 @@ export const TEMPLATE_REGISTRY: TemplateEntry[] = [
     id: 'adhd-v5-today',
     name: 'Prax Journal v5 Today',
     category: 'journal',
-    description: 'v5 — morning commit + <REDACTED-PSYCH-FIRST> 2-second pause matrix',
+    description: 'v5 — morning commit + therapist-guided 2-second pause matrix',
     htmlPath: journal('v5', 'today.html'),
     multiPage: false,
     pageCount: 1,

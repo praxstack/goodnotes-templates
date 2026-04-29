@@ -173,7 +173,7 @@ If Prax uses "Step Back" 3× in 3 weeks → split into separate weekly/monthly f
 | 8 | Win Today | `functional/` | Single-focus badge + 1 line |
 | 9 | Mood Dot | `functional/` | 1-10 mood scale with context blank |
 | 10 | Named Patterns | `functional/` | Prax-specific + free slot ("doomscroll · prereq trap · …") |
-| 11 | Shame + Baggage | `functional/` | <REDACTED-PSYCH-FIRST>: just notice, don't force |
+| 11 | Shame + Baggage | `functional/` | [psychologist]: just notice, don't force |
 | 12 | PHQ-2 Lite | `functional/` | 2-question depression screen (weekly check-in) |
 
 ### New scripts

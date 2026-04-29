@@ -50,7 +50,7 @@ Living inventory of stickers for the Prax Journal pack. **Fluid.** Add freely, d
 | 8 | **win-today** | data-capturing | Single-focus badge + 1 line | backlog | compact | sage |
 | 9 | **mood-dot** | data-capturing | 1-10 mood dot with context blank | backlog | compact | lavender |
 | 10 | **named-patterns** | data-capturing | Prax-specific patterns + free slot | backlog | standard | clay |
-| 11 | **shame-baggage** | data-capturing | <REDACTED-PSYCH-FIRST>: notice, don't force | backlog | standard | clay |
+| 11 | **shame-baggage** | data-capturing | therapist note · notice, don't force | backlog | standard | clay |
 | 12 | **phq2-lite** | data-capturing | 2-question weekly depression screen | backlog | compact | lavender |
 
 **Legend:** *backlog* = planned for next implementation pass · *shipped* = SVG + PNG set exist · *cut* = decided against · *parked* = on-hold for later iteration

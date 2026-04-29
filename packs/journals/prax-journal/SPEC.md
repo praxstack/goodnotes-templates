@@ -12,7 +12,7 @@ Prax (one specific user) has ADHD + depression and needs a daily journal that:
 
 - Forces morning/midday/evening check-ins (3 apertures per day)
 - Captures structured metrics (mood · chest-kg · cigs · Named Patterns)
-- Integrates therapist context (<REDACTED-PSYCH-FIRST> psychology · Dr <REDACTED-PSYCH-FIRST-DR> psychiatry)
+- Integrates therapist context (psychology + psychiatry — names live in profile.local.json, never committed)
 - Works entirely inside GoodNotes on iPad (no cloud, no account, no apps)
 - Can be regenerated at any time on Mac with updated meds/therapists
 - Delivers month-end insights via AI reading the filled PDF (not user double-entry)

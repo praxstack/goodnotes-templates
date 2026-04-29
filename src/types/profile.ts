@@ -58,7 +58,7 @@ const Medication = z
   })
   .strict();
 
-/** A care provider — Prax currently has <REDACTED-PSYCH-FIRST> (psych) + Dr <REDACTED-PSYCH-FIRST-DR> (psy). */
+/** A care provider — psychologist, psychiatrist, coach, or other (see profile.local.json). */
 const Therapist = z
   .object({
     role: z.enum(['psychology', 'psychiatry', 'coach', 'medical', 'other']),
@@ -67,7 +67,7 @@ const Therapist = z
   })
   .strict();
 
-/** Named pattern — the <REDACTED-PSYCH-FIRST>-style loops Prax tallies weekly. */
+/** Named pattern — the therapist-style loops the user tallies weekly. */
 const NamedPattern = z
   .object({
     name: z.string().min(1, 'pattern.name cannot be empty'),
@@ -80,12 +80,29 @@ const NamedPattern = z
  * knowing the number 10. Exact keys are intentionally open-ended so
  * future trackers slot in without a schema bump; the record value is
  * constrained to number for aggregate safety.
+ *
+ * Zod 3 gotcha: the key-schema argument (`z.string().min(1)`) does NOT
+ * actually validate the real object keys at parse time — it validates
+ * the *schema* identity only. We explicitly walk `Object.keys` in a
+ * superRefine so an empty or whitespace-only key is caught with a clear
+ * path-based issue instead of silently passing.
  */
 const Baselines = z
   .record(
     z.string().min(1),
     z.number().finite('baseline values must be finite numbers'),
-  );
+  )
+  .superRefine((obj, ctx) => {
+    for (const key of Object.keys(obj)) {
+      if (key.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [key],
+          message: 'baseline key cannot be empty or whitespace-only',
+        });
+      }
+    }
+  });
 
 /** Identity block — the only hard-required user piece. */
 const User = z
