@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "user": {
+    "name": "Your Name Here",
+    "pronouns": "they/them",
+    "tz": "Asia/Kolkata",
+    "locale": "en-IN"
+  },
+  "therapists": [
+    {
+      "role": "psychology",
+      "name": "Your Psychologist Here",
+      "notes": "describe approach (e.g. CBT, IFS, somatic) so AI reviews can reference technique"
+    },
+    {
+      "role": "psychiatry",
+      "name": "Your Psychiatrist Here"
+    }
+  ],
+  "medications": [
+    {
+      "name": "Example SSRI",
+      "dose": "10 mg",
+      "cadence": "nightly",
+      "started_on": "2026-01-01",
+      "purpose": "depression"
+    }
+  ],
+  "named_patterns": [
+    { "name": "doomscroll", "reframe": "one tap closes the tab" },
+    { "name": "catastrophize", "reframe": "name the evidence, not the fear" },
+    { "name": "prereq trap", "reframe": "the simplest version counts" },
+    { "name": "rejection scanner", "reframe": "neutral is neutral" }
+  ],
+  "baselines": {
+    "cigs_per_day": 10,
+    "chest_kg": 0
+  }
+}

@@ -26,6 +26,19 @@ Thumbs.db
 .env
 .env.local
 
+# ═══════════════════════════════════════════════════════════════════════
+# PII SAFETY — NEVER COMMIT PRAX'S REAL PROFILE
+# ═══════════════════════════════════════════════════════════════════════
+# profile.json holds medications, therapist names, and baselines.
+# profile.example.json is the committable seed with generic placeholders.
+# Addresses G3 (CRITICAL) in docs/plan-eng-review-v4-five-decisions.md.
+# ═══════════════════════════════════════════════════════════════════════
+packs/journals/prax-journal/profile.json
+# Defensive: also block the .bak/.local/.personal suffixes people reach for
+# when they copy+edit.
+packs/journals/prax-journal/profile.*.json
+!packs/journals/prax-journal/profile.example.json
+
 # Logs
 *.log
 npm-debug.log*
