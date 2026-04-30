@@ -8,7 +8,10 @@
  *   ├── README.md
  *   ├── The Praxis Ledger — <Month YYYY>.pdf
  *   ├── The Praxis Ledger — <Month YYYY>.html            (optional; skipped if absent)
- *   ├── assets/                                          (copy of fonts + css + inline assets)
+ *   ├── assets/
+ *   │   ├── fonts/                                       Fraunces · Instrument Sans · JetBrains Mono
+ *   │   ├── css/                                         base.css + themes/
+ *   │   └── source-html/                                 v5 per-section templates (today/midday/…)
  *   └── sticker-pack/
  *       ├── README.md
  *       ├── pngs/
@@ -30,6 +33,11 @@
  *
  *   # optional flags:
  *   #   --html <path>        path to a standalone HTML export to include
+ *   #                        (if omitted, the bundle's combined HTML is
+ *   #                        built in-process via scripts/build-standalone-html.ts
+ *   #                        using --from/--to)
+ *   #   --from <date>        start date for the auto-built HTML (YYYY-MM-DD)
+ *   #   --to   <date>        end date   for the auto-built HTML (YYYY-MM-DD)
  *   #   --remove-source      rm the source PDF/HTML after moving
  *   #   --dry-run            print the plan, write nothing
  */
@@ -56,22 +64,36 @@ interface Args {
   pdf: string;
   html: string | null;
   month: string;
+  from: string | null;
+  to: string | null;
   removeSource: boolean;
   dryRun: boolean;
 }
 
 function parseArgs(argv: string[]): Args {
-  const args: Partial<Args> = { html: null, removeSource: false, dryRun: false };
+  const args: Partial<Args> = {
+    html: null,
+    from: null,
+    to: null,
+    removeSource: false,
+    dryRun: false,
+  };
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
     if (a === '--pdf') args.pdf = argv[++i];
     else if (a === '--html') args.html = argv[++i];
     else if (a === '--month') args.month = argv[++i];
+    else if (a === '--from') args.from = argv[++i];
+    else if (a === '--to') args.to = argv[++i];
     else if (a === '--remove-source') args.removeSource = true;
     else if (a === '--dry-run') args.dryRun = true;
   }
   if (!args.pdf || !args.month) {
-    console.error('usage: bundle-release.ts --pdf <path> --month "<Month YYYY>" [--html <path>] [--remove-source] [--dry-run]');
+    console.error(
+      'usage: bundle-release.ts --pdf <path> --month "<Month YYYY>" ' +
+        '[--html <path> | --from YYYY-MM-DD --to YYYY-MM-DD] ' +
+        '[--remove-source] [--dry-run]',
+    );
     process.exit(2);
   }
   return args as Args;
@@ -82,6 +104,7 @@ function parseArgs(argv: string[]): Args {
 const STICKERS = path.join(REPO, 'packs/journals/prax-journal/stickers');
 const SHARED_FONTS = path.join(REPO, 'shared/fonts');
 const SHARED_CSS = path.join(REPO, 'shared');
+const V5_TEMPLATES = path.join(REPO, 'packs/journals/prax-journal/versions/v5');
 
 // ─── dimension classifier (borrowed from rebuild-all-stickers-index) ─
 
@@ -162,10 +185,17 @@ One month. Dated daily pages. Evidence, not shame.
 
 - **\`The Praxis Ledger — ${month}.pdf\`** — the primary deliverable.
   135-ish pages, bookmarked by section and by day. Dated cover + daily headers.
-- **\`The Praxis Ledger — ${month}.html\`** — standalone HTML export of the
-  same content. Self-contained; fonts and CSS live in \`assets/\`.
-- **\`assets/\`** — fonts (Fraunces / Instrument Sans / JetBrains Mono) and
-  shared CSS. Present so the HTML file is portable.
+- **\`The Praxis Ledger — ${month}.html\`** — standalone rendered HTML of the
+  full month. Fonts are base64-inlined, so this single file opens in any
+  browser without external assets. Use browser print → PDF to re-export.
+- **\`assets/fonts/\`** — raw Fraunces / Instrument Sans / JetBrains Mono
+  TTFs for anyone who wants them.
+- **\`assets/css/\`** — shared base CSS + the 14 theme files.
+- **\`assets/source-html/\`** — the v5 authoring templates
+  (\`today.html\`, \`midday.html\`, \`reflect.html\`, \`brain-dump.html\`,
+  \`weekly.html\`, \`monthly.html\`, \`quarterly.html\`, \`design-system.html\`).
+  These are pre-substitution templates you can open directly in a browser
+  to see the layout of each section.
 - **\`sticker-pack/\`** — the companion 60-sticker skeuomorphic set.
 
 ## Sticker pack at a glance
@@ -189,9 +219,11 @@ This folder was built by \`scripts/bundle-release.ts\`. Everything under
 \`output/\` is gitignored, so you can safely rm -rf and rebuild.
 
 \`\`\`bash
+# Full bundle (PDF + standalone HTML + assets + stickers):
 npx tsx scripts/bundle-release.ts \\
   --pdf output/journal-${month.toLowerCase().replace(' ', '-')}.pdf \\
-  --month "${month}"
+  --month "${month}" \\
+  --from 2026-04-30 --to 2026-05-31     # dates for standalone HTML build
 \`\`\`
 `;
 }
@@ -278,17 +310,67 @@ function main(): void {
   console.log(`  · PDF  ${path.relative(REPO, srcPdf)} → ${BUNDLE_NAME}.pdf`);
   if (!args.dryRun) copyFileSync(srcPdf, destPdf);
 
-  // ── HTML (optional) ──
+  // ── HTML — standalone rendered + source templates ──
+  //
+  // Two paths into the bundle:
+  //
+  //   (a) `The Praxis Ledger — <Month>.html` at the bundle root. Either
+  //       copied from `--html <path>` if supplied, or auto-built from
+  //       `--from/--to` by invoking scripts/build-standalone-html.ts.
+  //   (b) `assets/source-html/` holds the pre-substitution v5 section
+  //       templates (today/midday/reflect/brain-dump/weekly/monthly/quarterly
+  //       + design-system.html). Honest scope: these are templates, not
+  //       the rendered month.
+  const destHtml = path.join(BUNDLE_DIR, `${BUNDLE_NAME}.html`);
   if (args.html) {
     const srcHtml = path.isAbsolute(args.html) ? args.html : path.join(REPO, args.html);
     if (existsSync(srcHtml)) {
-      const destHtml = path.join(BUNDLE_DIR, `${BUNDLE_NAME}.html`);
       console.log(`  · HTML ${path.relative(REPO, srcHtml)} → ${BUNDLE_NAME}.html`);
       if (!args.dryRun) copyFileSync(srcHtml, destHtml);
     } else {
-      console.log(`  · HTML requested but not found at ${srcHtml} — skipping`);
+      console.log(`  · HTML ${srcHtml} not found — skipping standalone HTML`);
+    }
+  } else if (args.from && args.to) {
+    console.log(`  · HTML auto-build via scripts/build-standalone-html.ts  (${args.from} → ${args.to})`);
+    if (!args.dryRun) {
+      execFileSync(
+        'npx',
+        [
+          'tsx',
+          path.join(REPO, 'scripts/build-standalone-html.ts'),
+          '--from', args.from,
+          '--to',   args.to,
+          '--out',  destHtml,
+        ],
+        { stdio: 'inherit', cwd: REPO },
+      );
+    }
+  } else {
+    console.log(`  · HTML — no --html path and no --from/--to range; skipping standalone HTML`);
+  }
+
+  // Source templates (authoring HTML, pre-substitution).
+  const sourceHtmlDir = path.join(ASSET_DIR, 'source-html');
+  if (!args.dryRun) mkdirSync(sourceHtmlDir, { recursive: true });
+  let sourceHtmlCount = 0;
+  if (existsSync(V5_TEMPLATES)) {
+    for (const name of readdirSync(V5_TEMPLATES)) {
+      if (!name.endsWith('.html')) continue;
+      if (!args.dryRun) {
+        copyFileSync(path.join(V5_TEMPLATES, name), path.join(sourceHtmlDir, name));
+      }
+      sourceHtmlCount += 1;
     }
   }
+  // Also include the design-system reference if present.
+  const designSystem = path.join(REPO, 'packs/journals/prax-journal/design-system.html');
+  if (existsSync(designSystem)) {
+    if (!args.dryRun) {
+      copyFileSync(designSystem, path.join(sourceHtmlDir, 'design-system.html'));
+    }
+    sourceHtmlCount += 1;
+  }
+  console.log(`  · source-html ${sourceHtmlCount} files → assets/source-html/`);
 
   // ── assets (fonts + css) ──
   const fontCount = copyTree(SHARED_FONTS, path.join(ASSET_DIR, 'fonts'), args.dryRun);
