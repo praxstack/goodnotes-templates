@@ -5,15 +5,62 @@
   "description": "Core rendering pipeline — splice, puppeteer, pdf-postprocess, themes.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "//": "Explicit subpath map (code-review P2-2): every export listed here is public API. Internal modules (png-renderer, packs, puppeteer-renderer internals) stay unreachable so downstream packs don't accidentally couple to them.",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./*": {
-      "import": "./dist/*.js",
-      "types": "./dist/*.d.ts"
-    }
+    "./errors": {
+      "import": "./dist/errors.js",
+      "types": "./dist/errors.d.ts"
+    },
+    "./dimensions": {
+      "import": "./dist/dimensions.js",
+      "types": "./dist/dimensions.d.ts"
+    },
+    "./splice": {
+      "import": "./dist/splice.js",
+      "types": "./dist/splice.d.ts"
+    },
+    "./pdf-splice": {
+      "import": "./dist/pdf-splice.js",
+      "types": "./dist/pdf-splice.d.ts"
+    },
+    "./pdf-postprocess": {
+      "import": "./dist/pdf-postprocess.js",
+      "types": "./dist/pdf-postprocess.d.ts"
+    },
+    "./puppeteer-renderer": {
+      "import": "./dist/puppeteer-renderer.js",
+      "types": "./dist/puppeteer-renderer.d.ts"
+    },
+    "./prax-journal-renderer": {
+      "import": "./dist/prax-journal-renderer.js",
+      "types": "./dist/prax-journal-renderer.d.ts"
+    },
+    "./standalone-builder": {
+      "import": "./dist/standalone-builder.js",
+      "types": "./dist/standalone-builder.d.ts"
+    },
+    "./svg-renderer": {
+      "import": "./dist/svg-renderer.js",
+      "types": "./dist/svg-renderer.d.ts"
+    },
+    "./types/profile": {
+      "import": "./dist/types/profile.js",
+      "types": "./dist/types/profile.d.ts"
+    },
+    "./types/registry": {
+      "import": "./dist/types/registry.js",
+      "types": "./dist/types/registry.d.ts"
+    },
+    "./utils/locale": {
+      "import": "./dist/utils/locale.js",
+      "types": "./dist/utils/locale.d.ts"
+    },
+    "./assets/base.css": "./assets/base.css",
+    "./assets/themes/*": "./assets/themes/*"
   },
   "files": [
     "dist",

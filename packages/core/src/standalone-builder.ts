@@ -198,12 +198,24 @@ const HARNESS_CSS = `
 `.trim();
 
 /**
- * Minimal HTML-attribute escape for `data-label` values. Only guards
- * against `"` and `<` — labels are internally-generated and never
- * contain user input, so we don't need a general-purpose escape.
+ * HTML-attribute escape. Handles the four reserved characters that can
+ * break an attribute value or leak markup: `&`, `<`, `>`, `"`.
+ *
+ * `&` MUST be escaped first so the later replacements don't double-encode
+ * entities we just introduced. `'` is not escaped because every caller
+ * here wraps values in double quotes (see `data-label="${…}"`).
+ *
+ * Hardened per code-review P2-5: originally only escaped `"` and `<` on
+ * the assumption that labels were internally-generated. W4-6 pack
+ * migration introduces user-authored titles that can contain `&`, and
+ * we don't want to re-audit then.
  */
 function escapeAttr(s: string): string {
-  return s.replace(/"/gu, '&quot;').replace(/</gu, '&lt;');
+  return s
+    .replace(/&/gu, '&amp;')
+    .replace(/"/gu, '&quot;')
+    .replace(/</gu, '&lt;')
+    .replace(/>/gu, '&gt;');
 }
 
 // ─── Main ────────────────────────────────────────────────────────────
