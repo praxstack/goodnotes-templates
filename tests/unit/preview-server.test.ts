@@ -11,7 +11,7 @@ import path from 'node:path';
 import type { AddressInfo } from 'node:net';
 import type { Server } from 'node:http';
 
-import { startPreviewServer } from '../../src/cli/preview-server.js';
+import { startPreviewServer } from '../../packages/cli/src/preview-server.js';
 
 // Muzzle console.log so the test log stays readable.
 const origLog = console.log;

@@ -14,7 +14,7 @@
 import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
 import { PDFDocument } from 'pdf-lib';
-import { addHyperlinks } from '../../src/core/pdf-postprocess.js';
+import { addHyperlinks } from '../../packages/core/src/pdf-postprocess.js';
 
 // Local mirror of the private helper cssToPageRect in pdf-postprocess.ts.
 // Keeping it here ensures the test fails if the public behavior drifts.

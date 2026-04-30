@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getMonthNames, getDayNames, getDaysInMonth, isLeapYear, getMonthGrid, getISOWeekNumber, validateYear } from '../../src/utils/locale.js';
+import { getMonthNames, getDayNames, getDaysInMonth, isLeapYear, getMonthGrid, getISOWeekNumber, validateYear } from '../../packages/core/src/utils/locale.js';
 
 describe('Locale', () => {
   it('returns 12 month names in English', () => {

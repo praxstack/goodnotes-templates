@@ -23,7 +23,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { buildPageSequence, type PageSpec } from '../../src/core/splice.js';
+import { buildPageSequence, type PageSpec } from '../../packages/core/src/splice.js';
 
 describe('buildPageSequence · splice edge cases (G4)', () => {
   // ── 1 · Mid-month start ─────────────────────────────────────

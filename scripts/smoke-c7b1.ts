@@ -12,9 +12,9 @@ import path from 'node:path';
 import {
   renderPageSpec,
   DAILY_HTML_FILES,
-} from '../src/core/prax-journal-renderer.js';
-import { closeBrowser } from '../src/core/puppeteer-renderer.js';
-import { parseProfile, type Profile } from '../src/types/profile.js';
+} from '../packages/core/src/prax-journal-renderer.js';
+import { closeBrowser } from '../packages/core/src/puppeteer-renderer.js';
+import { parseProfile, type Profile } from '../packages/core/src/types/profile.js';
 
 /**
  * Load `profile.local.json` from the pack if present. Missing file ⇒

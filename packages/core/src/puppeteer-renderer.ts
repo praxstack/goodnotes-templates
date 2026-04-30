@@ -17,7 +17,7 @@
 import puppeteer, { type Browser } from 'puppeteer';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import type { PageDimensions } from '../types/index.js';
+import type { PageDimensions } from './types/index.js';
 
 let browserInstance: Browser | null = null;
 // Cache the launch *promise*, not the resolved browser, so concurrent callers

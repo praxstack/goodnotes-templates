@@ -25,11 +25,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { buildPageSequence } from '../src/core/splice.js';
-import { renderPageSpec } from '../src/core/prax-journal-renderer.js';
-import { splicePdfBuffers, bookmarkTitle, type SpecRender } from '../src/core/pdf-splice.js';
-import { closeBrowser } from '../src/core/puppeteer-renderer.js';
-import { parseProfile, type Profile } from '../src/types/profile.js';
+import { buildPageSequence } from '../packages/core/src/splice.js';
+import { renderPageSpec } from '../packages/core/src/prax-journal-renderer.js';
+import { splicePdfBuffers, bookmarkTitle, type SpecRender } from '../packages/core/src/pdf-splice.js';
+import { closeBrowser } from '../packages/core/src/puppeteer-renderer.js';
+import { parseProfile, type Profile } from '../packages/core/src/types/profile.js';
 
 // ─── Args ───────────────────────────────────────────────────────
 interface Args {

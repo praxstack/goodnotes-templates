@@ -29,10 +29,10 @@ import {
   V5_PACK_DIR,
   DAILY_HTML_FILES,
   REVIEW_HTML_FILE,
-} from '../../src/core/prax-journal-renderer.js';
+} from '../../packages/core/src/prax-journal-renderer.js';
 
-import type { PageSpec } from '../../src/core/splice.js';
-import type { Profile } from '../../src/types/profile.js';
+import type { PageSpec } from '../../packages/core/src/splice.js';
+import type { Profile } from '../../packages/core/src/types/profile.js';
 
 /**
  * Tiny helper — build a minimal-valid Profile for tests. Keeps the

@@ -6,7 +6,7 @@
 
 import { describe, it, expect, vi } from 'vitest';
 import { PDFDocument } from 'pdf-lib';
-import { addHyperlinks, addBookmarks } from '../../src/core/pdf-postprocess.js';
+import { addHyperlinks, addBookmarks } from '../../packages/core/src/pdf-postprocess.js';
 
 async function makePdf(pageCount: number): Promise<Buffer> {
   const doc = await PDFDocument.create();

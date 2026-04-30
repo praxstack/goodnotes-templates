@@ -8,7 +8,7 @@
  * @see RESEARCH.md §3 — iPad Display Specifications
  */
 
-import type { PageDimensions, PaperSize, Orientation, Margins } from '../types/index.js';
+import type { PageDimensions, PaperSize, Orientation, Margins } from './types/index.js';
 
 // ─── Standard Paper Sizes ───────────────────────────────────────
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getPageDimensions, pointsToPixels, pixelsToPoints, getContentArea, PAGE_SIZES } from '../../src/core/dimensions.js';
+import { getPageDimensions, pointsToPixels, pixelsToPoints, getContentArea, PAGE_SIZES } from '../../packages/core/src/dimensions.js';
 
 describe('Dimensions', () => {
   it('has 6 paper sizes', () => {

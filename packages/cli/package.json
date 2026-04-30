@@ -1,0 +1,27 @@
+{
+  "name": "@pretext-templates/cli",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Commander-based CLI for the pretext-templates monorepo.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "pretext-templates": "dist/index.js",
+    "goodnotes-templates": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@pretext-templates/core": "*",
+    "commander": "^12.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

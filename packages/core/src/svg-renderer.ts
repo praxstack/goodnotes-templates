@@ -8,7 +8,7 @@
  * rasterized to PNG at 300 DPI by Sharp (see png-renderer.ts).
  */
 
-import type { StickerPalette } from '../types/index.js';
+import type { StickerPalette } from './types/index.js';
 
 // ─── Baked-In Palettes ──────────────────────────────────────────
 

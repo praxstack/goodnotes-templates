@@ -23,8 +23,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { PDFDocument, PDFName, PDFDict, PDFString, PDFArray } from 'pdf-lib';
-import { bookmarkTitle, splicePdfBuffers, type SpecRender } from '../../src/core/pdf-splice.js';
-import type { PageSpec } from '../../src/core/splice.js';
+import { bookmarkTitle, splicePdfBuffers, type SpecRender } from '../../packages/core/src/pdf-splice.js';
+import type { PageSpec } from '../../packages/core/src/splice.js';
 
 /** Build a throw-away PDF with N blank A4 pages. */
 async function makePdf(pages: number): Promise<Buffer> {

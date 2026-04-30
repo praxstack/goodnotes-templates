@@ -61,3 +61,8 @@ assets/fonts/*.otf
 output/
 .superpowers/
 .gstack/
+
+# tsc build cache (per-workspace)
+packages/*/tsconfig.tsbuildinfo
+packages/*/dist/
+apps/*/dist/

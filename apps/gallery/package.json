@@ -1,0 +1,11 @@
+{
+  "name": "@pretext-templates/gallery",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Astro gallery — scaffold (see Week 4-6 of eng-review). Stub package for W1 workspace wiring only.",
+  "scripts": {
+    "build": "echo 'gallery W4 — stub' && exit 0",
+    "test": "echo 'no tests yet' && exit 0"
+  },
+  "license": "MIT"
+}

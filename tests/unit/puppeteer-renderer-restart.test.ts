@@ -28,7 +28,7 @@ import {
   maybeRestartBrowser,
   _resetRenderCountForTest,
   _renderCountForTest,
-} from '../../src/core/puppeteer-renderer.js';
+} from '../../packages/core/src/puppeteer-renderer.js';
 
 describe('C7b.3 · maybeRestartBrowser — threshold logic', () => {
   const ORIGINAL = process.env.PRAX_BROWSER_RESTART_EVERY;

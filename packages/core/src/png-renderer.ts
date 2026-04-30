@@ -4,7 +4,7 @@
  */
 
 import sharp from 'sharp';
-import type { StickerPalette } from '../types/index.js';
+import type { StickerPalette } from './types/index.js';
 import { generateStickerSVG, STICKER_SIZES, type StickerType } from './svg-renderer.js';
 
 const TARGET_DPI = 300;
