@@ -6,10 +6,11 @@
   "description": "Astro gallery for pretext-templates. Home + pack detail + browse routes. Blurhash placeholders for specimen imagery.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "tsx scripts/validate-pack-ids.ts && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "generate:specimens": "tsx scripts/generate-specimens.ts",
+    "validate": "tsx scripts/validate-pack-ids.ts",
     "test": "echo 'gallery tests land in W5' && exit 0"
   },
   "license": "MIT",

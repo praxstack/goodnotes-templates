@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE } from '../config/site';
 
 interface Props {
   title: string;
@@ -22,13 +23,13 @@ const { title, description = 'Warm analog planning templates for digital noteboo
   <body>
     <header class="site-header">
       <div class="container site-header__inner">
-        <a href="/" class="site-header__brand" aria-label="pretext-templates home">
+        <a href="/" class="site-header__brand" aria-label={`${SITE.name} home`}>
           <span class="site-header__mark">PT</span>
-          <span class="site-header__wordmark">pretext-templates</span>
+          <span class="site-header__wordmark">{SITE.name}</span>
         </a>
         <nav class="site-header__nav" aria-label="primary">
           <a href="/browse">Browse</a>
-          <a href="https://github.com/praxstack/pretext-templates">GitHub</a>
+          <a href={SITE.repoUrl}>GitHub</a>
         </nav>
       </div>
     </header>
@@ -37,8 +38,8 @@ const { title, description = 'Warm analog planning templates for digital noteboo
     </main>
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <span class="meta">MIT · v0.6.1</span>
-        <span class="meta">pretext-templates.dev</span>
+        <span class="meta">{SITE.license} · v{SITE.version}</span>
+        <span class="meta">{SITE.domain}</span>
       </div>
     </footer>
   </body>

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import BlurhashImage from '../../components/BlurhashImage.astro';
 import { getCollection, render } from 'astro:content';
 import blurhashManifest from '../../data/blurhash-manifest.json';
+import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
   const packs = await getCollection('packs');
@@ -64,8 +65,8 @@ const entry = manifest[pack.data.id];
     <footer class="pack__colophon">
       <p class="meta">Colophon</p>
       <p>
-        Typeset in Fraunces & JetBrains Mono. MIT-licensed. Built with the
-        <a href="https://github.com/praxstack/pretext-templates">
+        Typeset in Fraunces & JetBrains Mono. {SITE.license}-licensed. Built with the
+        <a href={SITE.repoUrl}>
           @pretext-templates/cli
         </a>.
       </p>
