@@ -183,6 +183,52 @@ export async function resolveColorModeCSS(
  */
 const DEFAULT_REQUEST_ALLOWLIST = /^(data:|file:|https:\/\/fonts\.(googleapis|gstatic)\.com\/)/;
 
+// ─── W3 T3 · Render scale / 150dpi fallback ─────────────────────────
+//
+// Rationale: eng-review Finding 4.2 + D7 accept the risk that mobile
+// Safari's 200 MB WebKit heap ceiling may OOM on 130-page PDFs at the
+// current default scale. A reduced-scale codepath shrinks every page's
+// raster surface proportionally, buying us a predictable heap headroom
+// knob without re-authoring the CSS.
+//
+// Puppeteer's `scale` option maps to Chromium's printing scale factor:
+//   1.0 = default (same bytes as today — byte-identical baseline)
+//   0.5 = every page rendered at half linear dimension (~¼ memory)
+//
+// Chromium enforces 0.1 ≤ scale ≤ 2.0. We clamp in that range and
+// return the resolved number so callers can log what was actually used.
+// Default behaviour is unchanged from pre-W3: no scaling applied.
+const MIN_RENDER_SCALE = 0.1;
+const MAX_RENDER_SCALE = 2.0;
+const DEFAULT_RENDER_SCALE = 1.0;
+
+/**
+ * Resolve the render scale from (in priority order):
+ *   1. explicit `PuppeteerRenderOptions.renderScale`
+ *   2. `PRAX_RENDER_SCALE` env var (e.g. '0.5' for the Safari fallback path)
+ *   3. 1.0 default (byte-identical to pre-W3 behaviour)
+ *
+ * Returned value is always within [MIN_RENDER_SCALE, MAX_RENDER_SCALE].
+ * Invalid inputs fall back silently to 1.0 so a typo'd env var can't
+ * brick a year-long run.
+ *
+ * Exported so tests and the CLI can verify the knob from outside.
+ */
+export function resolveRenderScale(explicit?: number): number {
+  const envRaw = process.env.PRAX_RENDER_SCALE;
+  const candidates: Array<number | undefined> = [
+    explicit,
+    envRaw !== undefined ? Number(envRaw) : undefined,
+  ];
+  for (const c of candidates) {
+    if (c === undefined) continue;
+    if (!Number.isFinite(c)) continue;
+    if (c < MIN_RENDER_SCALE || c > MAX_RENDER_SCALE) continue;
+    return c;
+  }
+  return DEFAULT_RENDER_SCALE;
+}
+
 export interface PuppeteerRenderOptions {
   /** Path to HTML template file (also used for color-mode CSS discovery) */
   htmlPath: string;
@@ -202,6 +248,17 @@ export interface PuppeteerRenderOptions {
    * Required for documents with multiple CSS pages (e.g., full year planner).
    */
   multiPage?: boolean;
+  /**
+   * PDF render scale, 0.1-2.0 (Chromium limits). Defaults to 1.0.
+   * Eng-review W3 T3 fallback: set to ~0.5 (the 150dpi equivalent) when
+   * the target device — specifically mobile Safari / WebKit with a
+   * 200 MB heap — OOMs on full-scale renders.
+   *
+   * The `PRAX_RENDER_SCALE` env var is a process-wide override when this
+   * option is omitted; useful for bulk scripts that don't want to thread
+   * a CLI flag through every renderPageSpec call.
+   */
+  renderScale?: number;
 }
 
 /**
@@ -269,6 +326,13 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
     // Generate PDF
     let pdfBuffer: Uint8Array;
 
+    // W3 T3: resolve the render scale once per call (explicit option
+    // wins · env fallback · 1.0 default). Chromium's `scale` option is
+    // omitted entirely when scale === 1.0 so the call is byte-identical
+    // to pre-W3 output on the happy path.
+    const scale = resolveRenderScale(options.renderScale);
+    const scaleOpt = scale === DEFAULT_RENDER_SCALE ? {} : { scale };
+
     if (options.multiPage) {
       // Multi-page mode: let CSS @page { size } and page-break-after
       // control page breaks. The HTML template must have @page rules.
@@ -276,6 +340,7 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
         preferCSSPageSize: true,
         printBackground: true,
         margin: { top: 0, right: 0, bottom: 0, left: 0 },
+        ...scaleOpt,
       });
     } else {
       // Single-page mode: explicit dimensions (Puppeteer needs inches: 1pt = 1/72 inch)
@@ -287,6 +352,7 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
         printBackground: true,
         preferCSSPageSize: true,
         margin: { top: 0, right: 0, bottom: 0, left: 0 },
+        ...scaleOpt,
       });
     }
 
