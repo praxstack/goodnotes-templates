@@ -43,7 +43,7 @@ const REPO = path.resolve(__dirname, '..');
 
 // ─── Output ────────────────────────────────────────────────
 async function ship(name: string, svg: string): Promise<void> {
-  const dir = path.join(REPO, 'packs/journals/prax-journal/stickers', name);
+  const dir = path.join(REPO, 'packages/packs-prax-journal/stickers', name);
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
   writeFileSync(path.join(dir, `${name}.svg`), svg);
   await rasterize(svg, path.join(dir, `${name}.png`), 4);

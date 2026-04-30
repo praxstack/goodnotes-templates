@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "journal",
+  "description": "Julia Cameron's three-page longhand rhythm. One ruled A4 sheet sized to carry the discipline.",
+  "entry": "morning-pages.html",
+  "id": "morning-pages",
+  "license": "MIT",
+  "name": "Morning Pages",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "journal",
+    "morning-pages",
+    "stream-of-consciousness"
+  ],
+  "version": "0.1.0"
+}

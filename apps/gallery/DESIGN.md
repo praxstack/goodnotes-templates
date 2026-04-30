@@ -1,7 +1,7 @@
 # `apps/gallery` — DESIGN.md
 
 > Design tokens + usage rules for the pretext-templates gallery.
-> Inherits palette & typography from `packs/journals/prax-journal/DESIGN.md`.
+> Inherits palette & typography from `packages/packs-prax-journal/DESIGN.md`.
 > Approved direction: [wireframes-v2.html](../../../.gstack/projects/goodnotes-templates/designs/pretext-gallery-homepage-20260430/wireframes-v2.html) (design review v1, 2026-04-30).
 
 Extracted per design-review D-3 (lands before any Astro component ships).
@@ -48,7 +48,7 @@ Production target is **3 fonts** (design-review D-1):
 
 The wireframes currently load 6 (adds Instrument Sans, Instrument Serif, Reenie Beanie). Those three are **dev-only placeholders** for v2 mockup rendering; the W4 scaffold inherits that set to match the approved look, and D-1 polish cuts the extras in a follow-up commit before ship.
 
-Self-hosted via `shared/fonts/` (see `packs/journals/prax-journal/DESIGN.md` for license details). Google Fonts CDN is the dev fallback with `display=swap`.
+Self-hosted via `shared/fonts/` (see `packages/packs-prax-journal/DESIGN.md` for license details). Google Fonts CDN is the dev fallback with `display=swap`.
 
 ---
 

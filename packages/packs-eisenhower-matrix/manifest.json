@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "worksheet",
+  "description": "Urgent / important quadrant grid with room to write tasks, not just categorise them.",
+  "entry": "eisenhower-matrix.html",
+  "id": "eisenhower-matrix",
+  "license": "MIT",
+  "name": "Eisenhower Matrix",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "worksheet",
+    "productivity",
+    "matrix"
+  ],
+  "version": "0.1.0"
+}

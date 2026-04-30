@@ -31,7 +31,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(
   REPO,
-  'packs/journals/prax-journal/stickers/mood-dot',
+  'packages/packs-prax-journal/stickers/mood-dot',
 );
 if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
 

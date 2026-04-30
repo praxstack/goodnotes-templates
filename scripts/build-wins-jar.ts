@@ -24,7 +24,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(
   REPO,
-  'packs/journals/prax-journal/stickers/wins-jar',
+  'packages/packs-prax-journal/stickers/wins-jar',
 );
 if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
 

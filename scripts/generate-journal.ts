@@ -18,7 +18,7 @@
  *   4. Write to disk, print the ledger.
  *
  * Optional `--profile <path>` lets you point at a non-default profile
- * JSON. Default is `packs/journals/prax-journal/profile.local.json`
+ * JSON. Default is `packages/packs-prax-journal/profile.local.json`
  * (gitignored; falls back to printed-blanks if absent).
  */
 
@@ -59,7 +59,7 @@ function parseArgs(argv: readonly string[]): Args {
     out:  get('--out'),
     profilePath: get(
       '--profile',
-      'packs/journals/prax-journal/profile.local.json',
+      'packages/packs-prax-journal/profile.local.json',
     ),
   };
 }

@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "journal",
+  "description": "End-of-day reflection layout with space for wins, what shifted, and a one-line summary.",
+  "entry": "reflection-journal.html",
+  "id": "reflection-journal",
+  "license": "MIT",
+  "name": "Reflection Journal",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "journal",
+    "reflection",
+    "daily"
+  ],
+  "version": "0.1.0"
+}

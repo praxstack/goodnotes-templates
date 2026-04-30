@@ -72,7 +72,7 @@ export { isLeapYear };
  */
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
-export const V5_PACK_DIR = path.join(REPO_ROOT, 'packs/journals/prax-journal/versions/v5');
+export const V5_PACK_DIR = path.join(REPO_ROOT, 'packages/packs-prax-journal/versions/v5');
 
 /**
  * Filenames that make up one daily spread, in render order. Exported so

@@ -64,7 +64,7 @@ function parseArgs(argv: readonly string[]): Args {
     from: get('--from'),
     to:   get('--to'),
     out:  get('--out'),
-    profilePath: get('--profile', 'packs/journals/prax-journal/profile.local.json'),
+    profilePath: get('--profile', 'packages/packs-prax-journal/profile.local.json'),
     versionDir:  get('--pack', V5_PACK_DIR),
   };
 }

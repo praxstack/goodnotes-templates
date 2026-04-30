@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "worksheet",
+  "description": "Brian Tracy's Eat That Frog! — one big frog box, three secondary task boxes, a reflection line.",
+  "entry": "eat-the-frog.html",
+  "id": "eat-the-frog",
+  "license": "MIT",
+  "name": "Eat the Frog",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "worksheet",
+    "productivity",
+    "priorities"
+  ],
+  "version": "0.1.0"
+}

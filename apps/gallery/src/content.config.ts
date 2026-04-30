@@ -12,7 +12,10 @@ const packs = defineCollection({
   schema: z.object({
     id: z.string().regex(/^[a-z][a-z0-9-]*$/, 'kebab-case id required'),
     title: z.string(),
-    category: z.enum(['journal', 'notes', 'trackers', 'worksheets', 'covers', 'planners']),
+    // Aligned with packages/core/src/types/registry.ts PACK_CATEGORIES
+    // (singular where English allows). Schema is immutable without a
+    // `schema_version` bump on the registry side.
+    category: z.enum(['journal', 'notes', 'tracker', 'worksheet', 'cover', 'planner']),
     oneLiner: z.string().min(8).max(140),
     version: z.string(),
     heroImage: z.string().optional(), // path relative to /public (e.g. /specimens/prax-journal.png)

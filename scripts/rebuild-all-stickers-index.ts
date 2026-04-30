@@ -7,7 +7,7 @@
  * Why this exists
  * ───────────────
  * Each sticker lives in its own subfolder under
- * `packs/journals/prax-journal/stickers/<name>/<name>.png` so the
+ * `packages/packs-prax-journal/stickers/<name>/<name>.png` so the
  * per-sticker README/SVG stays colocated with its output. That's great
  * for authoring, but painful when you want to eyeball the whole pack
  * at once or compare everything at one canvas size.
@@ -42,7 +42,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, '..');
-const STICKERS = path.join(REPO, 'packs/journals/prax-journal/stickers');
+const STICKERS = path.join(REPO, 'packages/packs-prax-journal/stickers');
 const GALLERY = path.join(REPO, 'output/all-stickers');
 
 // ─── Dimension classifier ───────────────────────────────────────
@@ -125,7 +125,7 @@ ${rows}
 \`\`\`
 
 Each file is a **real PNG copy** of the source at
-\`packs/journals/prax-journal/stickers/<name>/<name>.png\` — so every folder
+\`packages/packs-prax-journal/stickers/<name>/<name>.png\` — so every folder
 is self-contained and survives zipping, AirDropping, or dragging into
 GoodNotes. After \`npm run build:stickers\` re-renders the sources, re-run
 this script to refresh the copies.
