@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@pretext-templates/core": "*",
-    "commander": "^12.1.0"
+    "commander": "^14.0.3"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -72,9 +72,9 @@
   },
   "dependencies": {
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^23.11.1",
-    "sharp": "^0.33.5",
-    "zod": "3.23.8"
+    "puppeteer": "^24.42.0",
+    "sharp": "^0.34.5",
+    "zod": "4.4.1"
   },
   "engines": {
     "node": ">=18.0.0"
