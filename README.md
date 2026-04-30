@@ -10,6 +10,46 @@
 
 ---
 
+## 📓 The Praxis Ledger — a monthly daybook for the unquiet mind
+
+Alongside the general pack library, this repo ships **The Praxis Ledger**, a
+personal ADHD + depression journal authored in HTML and assembled each month
+into a self-contained release bundle:
+
+```bash
+# 1. Render the month's bookmarked PDF
+npx tsx scripts/generate-journal.ts \
+  --from 2026-05-01 --to 2026-05-31 \
+  --out output/journal-may-2026.pdf
+
+# 2. Bundle into "The Praxis Ledger — <Month YYYY>/"
+npx tsx scripts/bundle-release.ts \
+  --pdf output/journal-may-2026.pdf \
+  --month "May 2026" \
+  --from 2026-05-01 --to 2026-05-31
+```
+
+You get one folder under `output/` containing:
+
+- `The Praxis Ledger — <Month YYYY>.pdf` — bookmarked A4 PDF (v5 daily spread
+  · weekly / monthly / quarterly reviews)
+- `The Praxis Ledger — <Month YYYY>.html` — standalone HTML export with all
+  fonts base64-inlined and per-page `<style>` blocks deduplicated
+  (135 pages typically under 2 MB)
+- `assets/fonts/`, `assets/css/`, `assets/source-html/` — the raw material
+  (Fraunces, Instrument Sans, JetBrains Mono; `base.css` + 14 themes; the
+  seven v5 templates + design-system.html)
+- `sticker-pack/` — 60 skeuomorphic stickers as both SVG source and rendered
+  PNG (four archetypes × three dimension classes × four accents)
+
+Everything is a real file copy — the bundle zips, AirDrops, and drags into
+GoodNotes as a self-contained artifact. Lives under `output/` (gitignored).
+
+See **[`packs/journals/prax-journal/README.md`](packs/journals/prax-journal/README.md)**
+for the full daily-spread design, sticker library, and month-end loop.
+
+---
+
 ## ✨ What's Included
 
 ### 📝 Simple Page PDFs (7 types × 3 variants × 8 themes)

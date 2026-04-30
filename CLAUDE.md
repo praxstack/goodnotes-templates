@@ -99,20 +99,73 @@ All three should succeed. If one fails, reinstall gstack — don't paper over it
 7. Atomic commit with a `feat(<pack>): ...` header + block map + verification
    evidence in the body.
 
-## Current HEAD and commit log (v5.3 in flight)
+## Current HEAD and commit log (post-v5.3 · Praxis Ledger release pipeline live)
 - `815ac1c` — audit wrap (Phase 0 done)
 - `0090599` — Phase-1 restructure complete
 - `b2db914` — C1 · Weekly blank page
 - `d929307` — CEO v4 (5 decisions locked)
 - `d5fa6ce` — Eng v4 + Design v4 reviews committed
-- `9f13aa3` — **C2 · Monthly blank page (HEAD)**
+- `9f13aa3` — C2 · Monthly blank page
+- `630b3ed` — v5 brain-dump · watermark removed, ruler redesigned
+- `43917d0` / `bedf8e5` — C7b.1 / C7b.1++ · PII substitution + 8-row Rx extension
+- `fa0d355` — C7b.2 · pdf-splice (PageSpec renders → one PDF with flat bookmarks)
+- `f292477` — C7b.4 · CLI wiring (`scripts/generate-journal.ts`)
+- `75b71a1` / `a1a7236` — DAY_* date tokens across all 4 daily templates + 14 unit tests
+- `86ac274` — hybrid skeuomorphic pack · deep-paper shell + 4 archetypes
+- `a2a43a6` / `a132038` — Wave-1 (20) + Wave-2 (28) build scripts + 48 new SVGs → 60-sticker pack
+- `1547280` / `ec27c9d` / `ebd5297` — `output/all-stickers/` browse gallery (real PNG copies, no symlinks)
+- `1fad6cf` — `scripts/bundle-release.ts` · **The Praxis Ledger** monthly release builder
+- `e96c88f` — **standalone HTML export + source-html templates in bundle (HEAD)**
 
-## Next
-- **C3** — Quarterly blank page (narrative grammar, 12mm intention line, 3-column triad)
-- **C4** — `profile.example.json` + Zod schema + `.gitignore` rule for `profile.json` (G3 critical)
-- **C5** — 12-sticker SVG library (Mood Dot FIRST to verify base64 Fraunces in sharp)
-- Then C6·C6a·C6b·C7·C8 per `docs/plan-eng-review-v4-five-decisions.md`
+## The release pipeline (canonical flow · as of e96c88f)
+
+```bash
+# 1. Render the month's bookmarked PDF
+npx tsx scripts/generate-journal.ts \
+  --from 2026-05-01 --to 2026-05-31 \
+  --out output/journal-may-2026.pdf
+
+# 2. Bundle into "The Praxis Ledger — <Month YYYY>/"
+npx tsx scripts/bundle-release.ts \
+  --pdf output/journal-may-2026.pdf \
+  --month "May 2026" \
+  --from 2026-05-01 --to 2026-05-31
+```
+
+The bundle script auto-invokes `scripts/build-standalone-html.ts` when
+`--from/--to` are present (no `--html`). The standalone-HTML builder replays
+`buildPageSequence → resolvePageSpecFiles → substituteProfile` in-process
+(no Puppeteer), extracts each page's `<body>`, dedupes `<style>` blocks via
+`Set<string>`, and stitches into one self-contained HTML with
+`@page { size: A4 portrait }` + `break-after: page` per section. 135 pages
+lands at ~1.5 MB because the 5 base64-inlined fonts dedupe to one copy
+(not 135×).
+
+Output tree:
+
+```
+output/The Praxis Ledger — <Month YYYY>/
+├── README.md
+├── The Praxis Ledger — <Month YYYY>.pdf      (54 MB · 135 pp · 39 bookmarks)
+├── The Praxis Ledger — <Month YYYY>.html     (1.5 MB · 135 pp · 5 base64 fonts)
+├── assets/
+│   ├── fonts/         Fraunces · Instrument Sans · JetBrains Mono
+│   ├── css/           base.css + 14 themes
+│   └── source-html/   today · midday · reflect · brain-dump · weekly · monthly · quarterly · design-system
+└── sticker-pack/
+    ├── README.md
+    ├── pngs/{all,compact-400x600,standard-600x600,expanded-800x600}/
+    └── svgs/
+```
+
+Bundle lives under `output/` (gitignored, ~766 MB per month).
+
+## Next (all deferred — core C7b.* pipeline is shipped)
+- **C7b.3** — Memory-aware browser-restart loop in journal renderer (for >100-spec runs)
+- **Schema v2** — DOB, weight, allergies, emergency contact, structured therapist fields (flagged in CEO plan)
+- **AI curation layer** — sticker-of-the-week rotation + goal-based bundle picks
+  (Framings B + C from `docs/plan-ceo-review-sticker-expansion-v1.md`)
 
 ---
 
-_Last updated 2026-04-28 after C2 ship + gstack diagnosis._
+_Last updated 2026-04-30 after e96c88f · standalone HTML + source templates in bundle._

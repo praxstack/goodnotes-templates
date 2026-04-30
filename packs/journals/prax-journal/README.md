@@ -1,10 +1,11 @@
-# Prax Journal
+# Prax Journal · **The Praxis Ledger**
 
 A personal ADHD + depression journal in the **Warm Analog Editorial** aesthetic, designed for GoodNotes on iPad, authored as HTML + generated to bookmarked A4 PDF.
 
 **For:** Prax. Specifically. One user, one body, one set of therapists.
 **Format:** A4 portrait PDF with bookmarks. Drag-in stickers (PNG + SVG).
 **Delivery:** Generate on Mac → AirDrop to iPad → import as GoodNotes notebook.
+**Release name:** _The Praxis Ledger — &lt;Month YYYY&gt;_ (tagline: _A Monthly Daybook for the Unquiet Mind_).
 
 ## Daily spread (v5 · current)
 
@@ -34,21 +35,71 @@ packs/journals/prax-journal/
 │   ├── v4/             Warm Analog Editorial lands — Today / Reflect / BrainDump
 │   └── v5/             + Midday + Rx card + Jar matrix (current)
 └── stickers/
-    ├── README.md       sticker backlog (living)
-    └── <name>/         per-sticker directory (SVG source + data spec)
+    ├── README.md              sticker backlog (living)
+    └── <slug>/                per-sticker directory — 60 skeuomorphic stickers
+                               (SVG source + README + rendered PNG)
 ```
 
-## Running the generator
+### Sticker pack (60 items)
 
-From repo root:
+Four deep-paper archetypes — **field-note** · **ledger** · **herbarium** · **clinic** —
+rendered at three dimension classes (compact 400×600, standard 600×600, expanded 800×600)
+across four accents (sage, clay, amber, lavender). Wave-1 authored 20, Wave-2 authored 28,
+the original 12 round out the pack. Every sticker is XML-safe, escapes `&` in `<desc>`,
+and uses an 8-layer tactile filter stack (drop shadow + vignette + fiber turbulence +
+edge highlights).
+
+Browse locally after a build:
+
+```
+open output/all-stickers/all/
+# or the dimension-bucketed view:
+open output/all-stickers/standard-600x600/
+```
+
+## Monthly release bundle · The Praxis Ledger
+
+One command assembles the self-contained release folder:
+
+```
+# 1. Generate the month's bookmarked PDF
+npx tsx scripts/generate-journal.ts \
+  --from 2026-05-01 --to 2026-05-31 \
+  --out output/journal-may-2026.pdf
+
+# 2. Bundle into "The Praxis Ledger — <Month YYYY>/"
+npx tsx scripts/bundle-release.ts \
+  --pdf output/journal-may-2026.pdf \
+  --month "May 2026" \
+  --from 2026-05-01 --to 2026-05-31
+```
+
+Produces `output/The Praxis Ledger — May 2026/` containing:
+
+| Path | What |
+|---|---|
+| `The Praxis Ledger — May 2026.pdf` | Bookmarked A4 PDF (135 pp, 39 bookmarks for May 2026) |
+| `The Praxis Ledger — May 2026.html` | Standalone HTML (built in-process by `scripts/build-standalone-html.ts` — style-dedupe keeps 135 pages under 2 MB) |
+| `README.md` | Bundle-level readme |
+| `assets/fonts/` | Fraunces · Instrument Sans · JetBrains Mono (self-hosted) |
+| `assets/css/` | `base.css` + 14 theme files |
+| `assets/source-html/` | v5 per-section templates (`today.html`, `midday.html`, `reflect.html`, `brain-dump.html`, `weekly.html`, `monthly.html`, `quarterly.html`, `design-system.html`) |
+| `sticker-pack/pngs/` | `all/` (60) · `compact-400x600/` · `standard-600x600/` · `expanded-800x600/` |
+| `sticker-pack/svgs/` | 60 flat SVG sources |
+| `sticker-pack/README.md` | Pack-level readme |
+
+Everything is a **real file copy** — no symlinks — so the folder zips cleanly,
+AirDrops, and drags into GoodNotes as a self-contained artifact. Lives under
+`output/` which is gitignored (no repo bloat).
+
+### Legacy one-shot generator (PDF only)
 
 ```
 npm run journal -- --from 2026-04-28 --to 2026-05-30
 ```
 
-Produces `output/prax-journal-2026-04-28_2026-05-30.pdf` — bookmarked A4, daily spread for every day, weekly review page spliced every Sunday. Import into GoodNotes.
-
-(To be implemented in Phase 2 · `src/generators/prax-journal.ts`.)
+Produces `output/prax-journal-2026-04-28_2026-05-30.pdf`. Use the bundle flow
+above for a full monthly release.
 
 ## Month-end loop
 
