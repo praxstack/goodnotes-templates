@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-30T19:27:13.321Z",
+  "source_commit": "b3da6dc51e99f14dbf4cecd21ded19f5a3ac2a9f",
+  "packs": [
+    {
+      "schema_version": 1,
+      "id": "budget-tracker",
+      "version": "0.1.0",
+      "name": "Budget Tracker",
+      "description": "Monthly income / expense / savings ledger with category totals. Pencil-friendly, no app required.",
+      "category": "tracker",
+      "author": "prax",
+      "entry": "budget-tracker.html",
+      "tags": [
+        "tracker",
+        "budget",
+        "money"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "cornell-notes",
+      "version": "0.1.0",
+      "name": "Cornell Notes",
+      "description": "The canonical Cornell layout — cue column, notes pane, summary zone. Rule-honest, no flourish.",
+      "category": "notes",
+      "author": "prax",
+      "entry": "cornell-notes.html",
+      "tags": [
+        "notes",
+        "cornell",
+        "lecture"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "eat-the-frog",
+      "version": "0.1.0",
+      "name": "Eat the Frog",
+      "description": "Brian Tracy's Eat That Frog! — one big frog box, three secondary task boxes, a reflection line.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "eat-the-frog.html",
+      "tags": [
+        "worksheet",
+        "productivity",
+        "priorities"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "eisenhower-matrix",
+      "version": "0.1.0",
+      "name": "Eisenhower Matrix",
+      "description": "Urgent / important quadrant grid with room to write tasks, not just categorise them.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "eisenhower-matrix.html",
+      "tags": [
+        "worksheet",
+        "productivity",
+        "matrix"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "fitness-log",
+      "version": "0.1.0",
+      "name": "Fitness Log",
+      "description": "Sets, reps, weights, cardio — a no-nonsense workout log that survives contact with real training.",
+      "category": "tracker",
+      "author": "prax",
+      "entry": "fitness-log.html",
+      "tags": [
+        "tracker",
+        "fitness",
+        "training"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "goal-setting",
+      "version": "0.1.0",
+      "name": "Goal Setting",
+      "description": "One-page SMART goal layout with milestone ladder and a review prompt. Start once, finish once.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "goal-setting.html",
+      "tags": [
+        "worksheet",
+        "goals",
+        "planning"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "gratitude-journal",
+      "version": "0.1.0",
+      "name": "Gratitude Journal",
+      "description": "A five-line gratitude rhythm for daily practice — small prompts, plenty of writing space.",
+      "category": "journal",
+      "author": "prax",
+      "entry": "gratitude-journal.html",
+      "tags": [
+        "journal",
+        "gratitude",
+        "daily"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "habit-tracker",
+      "version": "0.1.0",
+      "name": "Habit Tracker",
+      "description": "Monthly habit grid — one row per habit, one column per day, filled dots for completion.",
+      "category": "tracker",
+      "author": "prax",
+      "entry": "habit-tracker.html",
+      "tags": [
+        "tracker",
+        "habits"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "meal-planning",
+      "version": "0.1.0",
+      "name": "Meal Planning",
+      "description": "Weekly meal grid + shopping list column on one A4. Plan Monday, shop once, cook calmly.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "meal-planning.html",
+      "tags": [
+        "worksheet",
+        "meals",
+        "planning"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "meeting-notes",
+      "version": "0.1.0",
+      "name": "Meeting Notes",
+      "description": "Attendees / agenda / decisions / actions in fixed zones. Prints on one A4 page per meeting.",
+      "category": "notes",
+      "author": "prax",
+      "entry": "meeting-notes.html",
+      "tags": [
+        "notes",
+        "meeting",
+        "work"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "monthly-planner",
+      "version": "0.1.0",
+      "name": "Monthly Planner",
+      "description": "Full-month grid with a notes column. Standalone or as the monthly review inside a bigger planner.",
+      "category": "planner",
+      "author": "prax",
+      "entry": "monthly-planner.html",
+      "tags": [
+        "planner",
+        "monthly"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "mood-tracker",
+      "version": "0.1.0",
+      "name": "Mood Tracker",
+      "description": "Monthly mood dot grid with a legend strip. Useful data without demanding journaling.",
+      "category": "tracker",
+      "author": "prax",
+      "entry": "mood-tracker.html",
+      "tags": [
+        "tracker",
+        "mood",
+        "wellbeing"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "morning-pages",
+      "version": "0.1.0",
+      "name": "Morning Pages",
+      "description": "Julia Cameron's three-page longhand rhythm. One ruled A4 sheet sized to carry the discipline.",
+      "category": "journal",
+      "author": "prax",
+      "entry": "morning-pages.html",
+      "tags": [
+        "journal",
+        "morning-pages",
+        "stream-of-consciousness"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "prax-journal",
+      "version": "5.3.0",
+      "name": "Praxis Ledger",
+      "description": "A 130-page bound journal that prints like an edition and plans like a system. Themeable.",
+      "category": "journal",
+      "author": "prax",
+      "entry": "versions/v5/today.html",
+      "tags": [
+        "journal",
+        "planner",
+        "flagship",
+        "themeable"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "project-planning",
+      "version": "0.1.0",
+      "name": "Project Planning",
+      "description": "Scope / risks / milestones / next-actions in fixed blocks. Project on one page.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "project-planning.html",
+      "tags": [
+        "worksheet",
+        "projects",
+        "planning"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "prompted-journal",
+      "version": "0.1.0",
+      "name": "Prompted Journal",
+      "description": "Dated pages with rotating prompts across the week — writing you can show up to without deciding first.",
+      "category": "journal",
+      "author": "prax",
+      "entry": "prompted-journal.html",
+      "tags": [
+        "journal",
+        "prompts",
+        "daily"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "reading-log",
+      "version": "0.1.0",
+      "name": "Reading Log",
+      "description": "Title / author / started / finished / rating / note. One line per book, one year per sheet.",
+      "category": "tracker",
+      "author": "prax",
+      "entry": "reading-log.html",
+      "tags": [
+        "tracker",
+        "reading",
+        "books"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "recipe-card",
+      "version": "0.1.0",
+      "name": "Recipe Card",
+      "description": "A5-sized recipe card with ingredients, method, notes. Print, write, cook, stain, keep.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "recipe-card.html",
+      "tags": [
+        "worksheet",
+        "cooking",
+        "recipes"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "reflection-journal",
+      "version": "0.1.0",
+      "name": "Reflection Journal",
+      "description": "End-of-day reflection layout with space for wins, what shifted, and a one-line summary.",
+      "category": "journal",
+      "author": "prax",
+      "entry": "reflection-journal.html",
+      "tags": [
+        "journal",
+        "reflection",
+        "daily"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "travel-planner",
+      "version": "0.1.0",
+      "name": "Travel Planner",
+      "description": "Trip-in-a-page: dates / route / stays / packing / budget. Fold it, tuck it, travel with it.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "travel-planner.html",
+      "tags": [
+        "worksheet",
+        "travel",
+        "planning"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "weekly-planner",
+      "version": "0.1.0",
+      "name": "Weekly Planner",
+      "description": "Mon-start weekly spread with intention + review. Enough structure to be useful, no more.",
+      "category": "planner",
+      "author": "prax",
+      "entry": "weekly-planner.html",
+      "tags": [
+        "planner",
+        "weekly"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "yearly-overview",
+      "version": "0.1.0",
+      "name": "Yearly Overview",
+      "description": "Twelve-month on one page. Year-at-a-glance for dating spreads, goals, and anchors.",
+      "category": "planner",
+      "author": "prax",
+      "entry": "yearly-overview.html",
+      "tags": [
+        "planner",
+        "yearly"
+      ],
+      "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    }
+  ]
+}

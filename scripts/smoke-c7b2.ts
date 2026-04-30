@@ -22,7 +22,7 @@ import type { PageSpec } from '../packages/core/src/splice.js';
 
 /** Optional: same loader the C7b.1 smoke uses, so the Rx card fills. */
 async function loadLocalProfile(): Promise<Profile | undefined> {
-  const p = path.resolve('packs/journals/prax-journal/profile.local.json');
+  const p = path.resolve('packages/packs-prax-journal/profile.local.json');
   try {
     const raw = await fs.readFile(p, 'utf-8');
     return parseProfile(JSON.parse(raw) as unknown);

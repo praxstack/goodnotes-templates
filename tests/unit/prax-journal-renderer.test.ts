@@ -115,7 +115,7 @@ describe('resolvePageSpecFiles · PageSpec → HTML files', () => {
   //
   // This is the cheap "canary" that catches a pack rename/move. It's
   // not a rendering test — it's a wiring test. If someone relocates
-  // `packs/journals/prax-journal/versions/v5/` without updating
+  // `packages/packs-prax-journal/versions/v5/` without updating
   // `V5_PACK_DIR`, this goes red before the CLI would.
 
   it('default V5_PACK_DIR files all exist on disk', () => {

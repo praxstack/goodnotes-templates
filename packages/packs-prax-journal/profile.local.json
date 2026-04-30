@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "user": {
+    "name": "Prakhar Shekhar Parthasarthi",
+    "pronouns": "he/him",
+    "tz": "Asia/Kolkata",
+    "locale": "en-IN"
+  },
+
+  "therapists": [
+    {
+      "role": "psychology",
+      "name": "Shreya Banerjee",
+      "notes": "Creative Care Psychotherapy · instagram.com/creative.care.psychotherapy"
+    },
+    {
+      "role": "psychiatry",
+      "name": "Pallavi A. Joshi",
+      "credentials": "MBBS, DPM, MD (Gold Medal), FIPS",
+      "registration_number": "96823",
+      "follow_up_days": 40,
+      "notes": "Consultant Psychiatrist, Bangalore"
+    }
+  ],
+
+  "medications": [
+    {
+      "name": "Mounjaro Kwikpen",
+      "dose": "weekly pen",
+      "cadence": "weekly · Sunday",
+      "purpose": "weight · GLP-1 analogue"
+    },
+    {
+      "name": "Amlokind-AT",
+      "dose": "1 tab",
+      "cadence": "daily",
+      "purpose": "blood pressure · amlodipine + atenolol"
+    },
+    {
+      "name": "AB-Rozu F 10",
+      "dose": "10 mg",
+      "cadence": "daily",
+      "purpose": "cholesterol"
+    },
+    {
+      "name": "Uprise-D3 60K",
+      "dose": "60,000 IU",
+      "cadence": "weekly · Sunday",
+      "purpose": "vitamin D"
+    },
+    {
+      "name": "Veniz-ER",
+      "dose": "75 mg · 1-0-1",
+      "cadence": "twice daily",
+      "started_on": "2026-04-13",
+      "purpose": "depression · SNRI (venlafaxine)"
+    },
+    {
+      "name": "Dexbutrin",
+      "dose": "45/105 · 1-0-1",
+      "cadence": "twice daily",
+      "started_on": "2026-04-13",
+      "purpose": "depression · bupropion"
+    },
+    {
+      "name": "Inspiral-SR",
+      "dose": "10 mg · 2-0-0",
+      "cadence": "morning",
+      "started_on": "2026-04-13",
+      "purpose": "anxiety · buspirone SR"
+    },
+    {
+      "name": "Inspiral",
+      "dose": "5 mg · 0-1-0",
+      "cadence": "midday",
+      "started_on": "2026-04-13",
+      "purpose": "anxiety · buspirone"
+    },
+    {
+      "name": "Etizolam",
+      "dose": "0.5 mg · 1-0-0 + SOS",
+      "cadence": "morning + SOS",
+      "started_on": "2026-04-13",
+      "purpose": "anxiety"
+    },
+    {
+      "name": "Clonotril",
+      "dose": "0.25 mg SOS",
+      "cadence": "SOS only",
+      "started_on": "2026-04-13",
+      "purpose": "anxiety rescue"
+    }
+  ],
+
+  "named_patterns": [
+    { "name": "social-media comparison", "reframe": "their highlight reel is not my baseline" },
+    { "name": "doomscroll", "reframe": "one tap closes the tab" },
+    { "name": "catastrophize", "reframe": "name the evidence, not the fear" },
+    { "name": "prereq trap", "reframe": "the simplest version counts" },
+    { "name": "rejection scanner", "reframe": "neutral is neutral" }
+  ],
+
+  "baselines": {
+    "cigs_per_day": 10,
+    "chest_kg": 0,
+    "weight_kg_baseline": 0,
+    "sleep_hrs_target": 7.5
+  }
+}

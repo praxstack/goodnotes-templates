@@ -1,0 +1,18 @@
+{
+  "author": "prax",
+  "category": "journal",
+  "description": "A 130-page bound journal that prints like an edition and plans like a system. Themeable.",
+  "entry": "versions/v5/today.html",
+  "id": "prax-journal",
+  "license": "MIT",
+  "name": "Praxis Ledger",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "journal",
+    "planner",
+    "flagship",
+    "themeable"
+  ],
+  "version": "5.3.0"
+}

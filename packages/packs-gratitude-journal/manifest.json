@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "journal",
+  "description": "A five-line gratitude rhythm for daily practice — small prompts, plenty of writing space.",
+  "entry": "gratitude-journal.html",
+  "id": "gratitude-journal",
+  "license": "MIT",
+  "name": "Gratitude Journal",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "journal",
+    "gratitude",
+    "daily"
+  ],
+  "version": "0.1.0"
+}

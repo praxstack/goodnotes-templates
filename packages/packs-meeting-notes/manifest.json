@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "notes",
+  "description": "Attendees / agenda / decisions / actions in fixed zones. Prints on one A4 page per meeting.",
+  "entry": "meeting-notes.html",
+  "id": "meeting-notes",
+  "license": "MIT",
+  "name": "Meeting Notes",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "notes",
+    "meeting",
+    "work"
+  ],
+  "version": "0.1.0"
+}

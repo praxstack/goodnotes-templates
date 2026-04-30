@@ -1,0 +1,16 @@
+{
+  "author": "prax",
+  "category": "planner",
+  "description": "Mon-start weekly spread with intention + review. Enough structure to be useful, no more.",
+  "entry": "weekly-planner.html",
+  "id": "weekly-planner",
+  "license": "MIT",
+  "name": "Weekly Planner",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "planner",
+    "weekly"
+  ],
+  "version": "0.1.0"
+}

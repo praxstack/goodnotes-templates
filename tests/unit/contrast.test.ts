@@ -2,7 +2,7 @@
  * WCAG contrast gate (FIND-0018 companion).
  *
  * Parses every CSS theme file under `shared/themes/` and every dark-variant
- * sibling under `packs/journals/prax-journal/versions/v{N}/` — resolves the
+ * sibling under `packages/packs-prax-journal/versions/v{N}/` — resolves the
  * foreground/background pairs the templates actually use, and fails if any
  * pair falls below WCAG 2.2 AA contrast ratios (4.5:1 normal text, 3:1 large
  * text or non-text UI).

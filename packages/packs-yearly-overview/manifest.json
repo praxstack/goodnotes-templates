@@ -1,0 +1,16 @@
+{
+  "author": "prax",
+  "category": "planner",
+  "description": "Twelve-month on one page. Year-at-a-glance for dating spreads, goals, and anchors.",
+  "entry": "yearly-overview.html",
+  "id": "yearly-overview",
+  "license": "MIT",
+  "name": "Yearly Overview",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "planner",
+    "yearly"
+  ],
+  "version": "0.1.0"
+}

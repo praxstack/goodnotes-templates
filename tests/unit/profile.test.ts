@@ -224,9 +224,8 @@ describe('ProfileParseError — diagnostic quality', () => {
 describe('profile.example.json — committed seed', () => {
   const EXAMPLE_PATH = path.join(
     REPO_ROOT,
-    'packs',
-    'journals',
-    'prax-journal',
+    'packages',
+    'packs-prax-journal',
     'profile.example.json',
   );
 
@@ -360,7 +359,7 @@ describe('Repo-wide PII guard (post-code-review P0)', () => {
       throw new Error(
         `PII guard tripped — ${hits.length} match${hits.length === 1 ? '' : 'es'}:\n${preview}${overflow}\n\n` +
           'Real names (therapists, psychiatrists, the user) MUST NOT live in templates or docs. ' +
-          'They belong in profile.local.json (gitignored). See packs/journals/prax-journal/profile.README.md.',
+          'They belong in profile.local.json (gitignored). See packages/packs-prax-journal/profile.README.md.',
       );
     }
     expect(hits).toHaveLength(0);
@@ -482,7 +481,7 @@ describe('schema v2 — additive compatibility', () => {
   it('v1 example profile parses as v2 with schema_version: 1 preserved', () => {
     const examplePath = path.join(
       REPO_ROOT,
-      'packs/journals/prax-journal/profile.example.json',
+      'packages/packs-prax-journal/profile.example.json',
     );
     const raw = JSON.parse(readFileSync(examplePath, 'utf-8'));
     // Mutate to v1 shape for this specific test
