@@ -2,7 +2,22 @@
 
 _Intended audience: the AI agent paired with Prax. Kept short, updated as things change._
 
+## Global guidelines first
+
+**Read [`AGENTS.md`](./AGENTS.md) before writing any code.** It contains the
+four Karpathy-derived principles that govern every edit in this repo:
+
+1. **Think Before Coding** — don't assume · don't hide confusion · surface tradeoffs
+2. **Simplicity First** — minimum code that solves the problem · nothing speculative
+3. **Surgical Changes** — touch only what you must · every changed line must trace to the request
+4. **Goal-Driven Execution** — define success criteria · loop until verified
+
+When a principle in this file conflicts with `AGENTS.md`, `AGENTS.md` wins
+(it's the global contract). Everything below is the local, project-specific
+context layered on top.
+
 ## Repo shape (post-restructure)
+
 - `packs/<category>/<name>/` — one folder per shippable template, self-contained HTML + README.
 - `packs/journals/prax-journal/versions/v{N}/*.html` — every historical + current Prax Journal version.
 - `shared/` — fonts (Fraunces, Instrument Sans, JetBrains Mono), `base.css`, theme swaps.
