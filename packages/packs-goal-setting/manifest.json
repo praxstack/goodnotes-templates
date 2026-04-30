@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "worksheet",
+  "description": "One-page SMART goal layout with milestone ladder and a review prompt. Start once, finish once.",
+  "entry": "goal-setting.html",
+  "id": "goal-setting",
+  "license": "MIT",
+  "name": "Goal Setting",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "worksheet",
+    "goals",
+    "planning"
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "journal",
+  "description": "Dated pages with rotating prompts across the week — writing you can show up to without deciding first.",
+  "entry": "prompted-journal.html",
+  "id": "prompted-journal",
+  "license": "MIT",
+  "name": "Prompted Journal",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "journal",
+    "prompts",
+    "daily"
+  ],
+  "version": "0.1.0"
+}

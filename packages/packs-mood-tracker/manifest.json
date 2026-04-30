@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "tracker",
+  "description": "Monthly mood dot grid with a legend strip. Useful data without demanding journaling.",
+  "entry": "mood-tracker.html",
+  "id": "mood-tracker",
+  "license": "MIT",
+  "name": "Mood Tracker",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "tracker",
+    "mood",
+    "wellbeing"
+  ],
+  "version": "0.1.0"
+}

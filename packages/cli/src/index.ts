@@ -24,7 +24,7 @@ program
 program
   .command('render')
   .description('Render HTML templates to PDF')
-  .argument('[template]', 'Template HTML path (e.g., packs/journals/prax-journal/versions/v5/today.html)')
+  .argument('[template]', 'Template HTML path (e.g., packages/packs-prax-journal/versions/v5/today.html)')
   .option('--color-mode <mode>', 'Color mode (e.g., dark). Omit for default.')
   .option('--paper-size <size>', 'Paper size: a4, letter, ipad-landscape, etc.', 'a4')
   .option('--orientation <dir>', 'portrait or landscape', 'portrait')
@@ -32,7 +32,7 @@ program
   .option('-v, --verbose', 'Verbose logging')
   .action(async (template, opts) => {
     if (!template) {
-      console.error('Error: Template path required. Example: packs/journals/prax-journal/versions/v5/today.html');
+      console.error('Error: Template path required. Example: packages/packs-prax-journal/versions/v5/today.html');
       process.exit(1);
     }
 
@@ -107,7 +107,7 @@ program
       console.log('  Templates are self-contained (WYSIWYG).');
       console.log('  Optional color modes: --color-mode dark');
       console.log('  Dark mode CSS snippets live next to each template:');
-      console.log('    packs/journals/prax-journal/versions/v3/today.html → today.dark.css\n');
+      console.log('    packages/packs-prax-journal/versions/v3/today.html → today.dark.css\n');
 
       // List available dark.css files across packs/
       const fs = await import('node:fs/promises');

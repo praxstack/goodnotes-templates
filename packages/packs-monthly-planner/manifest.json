@@ -1,0 +1,16 @@
+{
+  "author": "prax",
+  "category": "planner",
+  "description": "Full-month grid with a notes column. Standalone or as the monthly review inside a bigger planner.",
+  "entry": "monthly-planner.html",
+  "id": "monthly-planner",
+  "license": "MIT",
+  "name": "Monthly Planner",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "planner",
+    "monthly"
+  ],
+  "version": "0.1.0"
+}

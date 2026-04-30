@@ -14,7 +14,7 @@
  *   2. Builds a <style data-fonts="v5-inlined-woff2-v2">…</style> block
  *      with 5 @font-face rules, each carrying a base64 data:font/woff2 URI
  *      and `font-display: block` (matches the sticker renderer).
- *   3. In every packs/journals/prax-journal/versions/v5/*.html, replaces
+ *   3. In every packages/packs-prax-journal/versions/v5/*.html, replaces
  *      either (a) the 3-line Google Fonts block or (b) a prior inlined
  *      <style data-fonts="v5-inlined-woff2"> block with that <style>.
  *   4. Idempotent on the v2 marker — a re-run against already-v2 pages

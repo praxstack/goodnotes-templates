@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "notes",
+  "description": "The canonical Cornell layout — cue column, notes pane, summary zone. Rule-honest, no flourish.",
+  "entry": "cornell-notes.html",
+  "id": "cornell-notes",
+  "license": "MIT",
+  "name": "Cornell Notes",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "notes",
+    "cornell",
+    "lecture"
+  ],
+  "version": "0.1.0"
+}

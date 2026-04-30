@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "worksheet",
+  "description": "Weekly meal grid + shopping list column on one A4. Plan Monday, shop once, cook calmly.",
+  "entry": "meal-planning.html",
+  "id": "meal-planning",
+  "license": "MIT",
+  "name": "Meal Planning",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "worksheet",
+    "meals",
+    "planning"
+  ],
+  "version": "0.1.0"
+}

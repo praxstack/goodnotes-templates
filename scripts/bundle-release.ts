@@ -101,10 +101,10 @@ function parseArgs(argv: string[]): Args {
 
 // ─── paths ──────────────────────────────────────────────────────
 
-const STICKERS = path.join(REPO, 'packs/journals/prax-journal/stickers');
+const STICKERS = path.join(REPO, 'packages/packs-prax-journal/stickers');
 const SHARED_FONTS = path.join(REPO, 'shared/fonts');
 const SHARED_CSS = path.join(REPO, 'shared');
-const V5_TEMPLATES = path.join(REPO, 'packs/journals/prax-journal/versions/v5');
+const V5_TEMPLATES = path.join(REPO, 'packages/packs-prax-journal/versions/v5');
 
 // ─── dimension classifier (borrowed from rebuild-all-stickers-index) ─
 
@@ -363,7 +363,7 @@ function main(): void {
     }
   }
   // Also include the design-system reference if present.
-  const designSystem = path.join(REPO, 'packs/journals/prax-journal/design-system.html');
+  const designSystem = path.join(REPO, 'packages/packs-prax-journal/design-system.html');
   if (existsSync(designSystem)) {
     if (!args.dryRun) {
       copyFileSync(designSystem, path.join(sourceHtmlDir, 'design-system.html'));

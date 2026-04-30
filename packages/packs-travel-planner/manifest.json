@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "worksheet",
+  "description": "Trip-in-a-page: dates / route / stays / packing / budget. Fold it, tuck it, travel with it.",
+  "entry": "travel-planner.html",
+  "id": "travel-planner",
+  "license": "MIT",
+  "name": "Travel Planner",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "worksheet",
+    "travel",
+    "planning"
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "worksheet",
+  "description": "Scope / risks / milestones / next-actions in fixed blocks. Project on one page.",
+  "entry": "project-planning.html",
+  "id": "project-planning",
+  "license": "MIT",
+  "name": "Project Planning",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "worksheet",
+    "projects",
+    "planning"
+  ],
+  "version": "0.1.0"
+}

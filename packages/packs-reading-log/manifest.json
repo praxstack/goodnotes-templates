@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "tracker",
+  "description": "Title / author / started / finished / rating / note. One line per book, one year per sheet.",
+  "entry": "reading-log.html",
+  "id": "reading-log",
+  "license": "MIT",
+  "name": "Reading Log",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "tracker",
+    "reading",
+    "books"
+  ],
+  "version": "0.1.0"
+}

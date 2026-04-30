@@ -1,0 +1,17 @@
+{
+  "author": "prax",
+  "category": "tracker",
+  "description": "Monthly income / expense / savings ledger with category totals. Pencil-friendly, no app required.",
+  "entry": "budget-tracker.html",
+  "id": "budget-tracker",
+  "license": "MIT",
+  "name": "Budget Tracker",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "tracker",
+    "budget",
+    "money"
+  ],
+  "version": "0.1.0"
+}

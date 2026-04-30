@@ -23,7 +23,7 @@ import { parseProfile, type Profile } from '../packages/core/src/types/profile.j
  */
 async function loadLocalProfile(): Promise<Profile | undefined> {
   const p = path.resolve(
-    'packs/journals/prax-journal/profile.local.json',
+    'packages/packs-prax-journal/profile.local.json',
   );
   try {
     const raw = await fs.readFile(p, 'utf-8');
