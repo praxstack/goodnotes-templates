@@ -156,17 +156,23 @@ async function main(): Promise<void> {
 
   // ── Stitch into a single doc ──
   //
-  // Every `.page` is forced to its own print page via `break-after: page`.
-  // Each body's original class is preserved on the inner wrapper so that
-  // any CSS selectors rooted at `body.today` etc. keep matching.
+  // Wrapper class is `.ledger-page` (NOT `.page`) to avoid colliding with
+  // every source v5 template's own `.page { width: var(--page-w); height:
+  // var(--page-h); background: var(--paper); ... }` rule. Without this
+  // rename, the outer wrapper would inherit A4 sizing and paper color from
+  // the templates' own CSS, and each month rendered as two stacked A4
+  // cards with ~300px of phantom whitespace in between.
+  //
+  // The source templates' own inner `<div class="page">` still renders as
+  // the true A4 canvas inside our frame — so print stays pixel-identical
+  // to the PDF pipeline.
   const combinedStyles = Array.from(uniqueStyles).join('\n\n/* ─── */\n\n');
   const stitched = pages
     .map(
       (p) =>
-        `<section class="page" data-label="${p.label}">\n` +
-        `  <div class="page-inner ${p.klass}">\n` +
+        `<section class="ledger-page" data-label="${p.label}">\n` +
         `${p.body}\n` +
-        `  </div>\n</section>`,
+        `</section>`,
     )
     .join('\n\n');
 
@@ -179,23 +185,68 @@ async function main(): Promise<void> {
     `<title>${path.basename(outPath, '.html')}</title>\n` +
     `<style>\n${combinedStyles}\n</style>\n` +
     `<style>\n` +
-    `  /* Standalone combined view — scripts/build-standalone-html.ts\n` +
-    `   * Force each spec-page to its own print page.\n` +
-    `   * Set neutral background between pages so the A4 canvas reads\n` +
-    `   * clearly in the browser too.\n` +
-    `   */\n` +
-    `  html, body { margin: 0; padding: 0; background: #e8e8ea; }\n` +
-    `  section.page { break-after: page; page-break-after: always; margin: 16px auto; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; }\n` +
-    `  section.page:last-child { break-after: auto; page-break-after: auto; }\n` +
+    `  /* ╔══════════════════════════════════════════════════════════╗\n` +
+    `     ║ Standalone combined view · build-standalone-html.ts     ║\n` +
+    `     ║ Wrapper = .ledger-page (NOT .page) to avoid collision   ║\n` +
+    `     ║ with every template's own \`.page { width/height/bg }\`.  ║\n` +
+    `     ║ Screen: each month renders 135 framed A4 cards.         ║\n` +
+    `     ║ Print : cards unframe, page breaks snap to A4.          ║\n` +
+    `     ╚══════════════════════════════════════════════════════════╝ */\n` +
+    `  html, body {\n` +
+    `    margin: 0;\n` +
+    `    padding: 0;\n` +
+    `    background: #d7d6d2;\n` +
+    `    font-family: -apple-system, BlinkMacSystemFont, sans-serif;\n` +
+    `  }\n` +
+    `  section.ledger-page {\n` +
+    `    display: block;\n` +
+    `    width: 210mm;\n` +
+    `    min-height: 297mm;\n` +
+    `    margin: 32px auto;\n` +
+    `    background: #fff;\n` +
+    `    box-shadow:\n` +
+    `      0 1px 2px rgba(0, 0, 0, 0.12),\n` +
+    `      0 8px 24px rgba(0, 0, 0, 0.10),\n` +
+    `      0 18px 48px rgba(0, 0, 0, 0.06);\n` +
+    `    border-radius: 2px;\n` +
+    `    overflow: hidden;\n` +
+    `    break-after: page;\n` +
+    `    page-break-after: always;\n` +
+    `    position: relative;\n` +
+    `  }\n` +
+    `  /* Page counter chip — bottom-right of each card (screen only) */\n` +
+    `  section.ledger-page::after {\n` +
+    `    content: attr(data-label);\n` +
+    `    position: absolute;\n` +
+    `    bottom: 8px;\n` +
+    `    right: 12px;\n` +
+    `    font: 10px/1 ui-monospace, Menlo, monospace;\n` +
+    `    color: rgba(0, 0, 0, 0.28);\n` +
+    `    letter-spacing: 0.04em;\n` +
+    `    pointer-events: none;\n` +
+    `    z-index: 10;\n` +
+    `  }\n` +
+    `  section.ledger-page:last-child { break-after: auto; page-break-after: auto; }\n` +
+    `  /* The source template's inner \`.page\` div already sizes itself to\n` +
+    `   * A4 via --page-w / --page-h. Null the extra auto margin it adds so\n` +
+    `   * the card doesn't inherit 10mm of padding twice. */\n` +
+    `  section.ledger-page > .page { margin: 0 auto; }\n` +
     `  @media print {\n` +
     `    html, body { background: #fff; }\n` +
-    `    section.page { margin: 0; box-shadow: none; break-after: page; }\n` +
+    `    section.ledger-page {\n` +
+    `      margin: 0;\n` +
+    `      box-shadow: none;\n` +
+    `      border-radius: 0;\n` +
+    `      min-height: auto;\n` +
+    `    }\n` +
+    `    section.ledger-page::after { display: none; }\n` +
     `  }\n` +
     `  @page { size: A4 portrait; margin: 0; }\n` +
     `</style>\n` +
     `</head>\n` +
     `<body>\n${stitched}\n</body>\n` +
     `</html>\n`;
+
 
   await fs.writeFile(outPath, doc, 'utf-8');
   const sizeMB = (Buffer.byteLength(doc) / 1024 / 1024).toFixed(2);
