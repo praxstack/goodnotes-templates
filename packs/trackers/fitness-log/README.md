@@ -1,7 +1,25 @@
-# Fitness Log
+# 💪 Fitness Log
 
-Single-page tracker template.
+Workout capture — exercise · sets × reps × weight. One row per set, one session per sheet.
 
-- Template: `fitness-log.html`
-- A4 portrait, self-contained styles
-- Theme-agnostic: pair with any `shared/themes/*.css`
+| | |
+|---|---|
+| **Template** | [`fitness-log.html`](fitness-log.html) |
+| **Format** | A4 portrait · self-contained styles |
+| **Scope** | One session per sheet |
+
+## Render
+
+```bash
+npx tsx src/cli/index.ts render \
+  packs/trackers/fitness-log/fitness-log.html \
+  -o output/fitness-log.pdf
+```
+
+## Compatibility
+
+GoodNotes 6 · Notability · Noteshelf · CollaNote.
+
+## Future
+
+<!-- Empty on purpose — see AGENTS.md -->
