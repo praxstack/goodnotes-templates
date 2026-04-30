@@ -13,7 +13,7 @@
  */
 
 import { PDFDocument, PDFName, PDFArray, PDFDict, PDFNumber, PDFString } from 'pdf-lib';
-import type { PDFMetadata, PDFBookmark, PDFHyperlink } from '../types/index.js';
+import type { PDFMetadata, PDFBookmark, PDFHyperlink } from './types/index.js';
 
 /**
  * Convert CSS-style rect (top-left origin) to PDF rect (bottom-left origin).

@@ -9,8 +9,8 @@
  */
 
 import { Command } from 'commander';
-import { PAGE_SIZES } from '../core/dimensions.js';
-import { SUPPORTED_LOCALES } from '../utils/locale.js';
+import { PAGE_SIZES } from '../../core/src/dimensions.js';
+import { SUPPORTED_LOCALES } from '../../core/src/utils/locale.js';
 
 const program = new Command();
 
@@ -55,8 +55,8 @@ program
     console.log(`  Output: ${outputPath}\n`);
 
     // Dynamic import to avoid loading Puppeteer for --help
-    const { renderHTMLToPDFFile, closeBrowser } = await import('../core/puppeteer-renderer.js');
-    const { getPageDimensions } = await import('../core/dimensions.js');
+    const { renderHTMLToPDFFile, closeBrowser } = await import('../../core/src/puppeteer-renderer.js');
+    const { getPageDimensions } = await import('../../core/src/dimensions.js');
 
     const dims = getPageDimensions(opts.paperSize, opts.orientation);
 

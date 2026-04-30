@@ -18,24 +18,25 @@ export default defineConfig({
         branches: 75,
       },
       include: [
-        'src/core/dimensions.ts',
-        'src/core/pdf-postprocess.ts',
-        'src/core/puppeteer-renderer.ts',
-        'src/core/svg-renderer.ts',
-        'src/cli/preview-server.ts',
-        'src/utils/locale.ts',
+        'packages/core/src/dimensions.ts',
+        'packages/core/src/pdf-postprocess.ts',
+        'packages/core/src/puppeteer-renderer.ts',
+        'packages/core/src/svg-renderer.ts',
+        'packages/cli/src/preview-server.ts',
+        'packages/core/src/utils/locale.ts',
       ],
       exclude: [
         'node_modules/**',
         'dist/**',
+        'packages/*/dist/**',
         'output/**',
         'tests/**',
         'scripts/**',
-        'src/cli/index.ts', // thin Commander wrapper, tested via integration
-        'src/core/png-renderer.ts', // wraps sharp; tested via svg-renderer
-        'src/packs.ts', // static pack registry (was src/templates/registry.ts)
-        'src/types/**',
-        'src/utils/**/*.d.ts',
+        'packages/cli/src/index.ts', // thin Commander wrapper, tested via integration
+        'packages/core/src/png-renderer.ts', // wraps sharp; tested via svg-renderer
+        'packages/core/src/packs.ts', // static pack registry
+        'packages/core/src/types/**',
+        'packages/core/src/utils/**/*.d.ts',
       ],
     },
   },

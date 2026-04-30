@@ -5,7 +5,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { generateStickerSVG, STICKER_SIZES, type StickerType } from '../../src/core/svg-renderer.js';
+import { generateStickerSVG, STICKER_SIZES, type StickerType } from '../../packages/core/src/svg-renderer.js';
 
 describe('generateStickerSVG', () => {
   it('returns a non-empty SVG for every registered sticker type', () => {

@@ -14,11 +14,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { PDFDocument, PDFName, PDFDict } from 'pdf-lib';
 
-import { renderPageSpec } from '../src/core/prax-journal-renderer.js';
-import { splicePdfBuffers, type SpecRender } from '../src/core/pdf-splice.js';
-import { closeBrowser } from '../src/core/puppeteer-renderer.js';
-import { parseProfile, type Profile } from '../src/types/profile.js';
-import type { PageSpec } from '../src/core/splice.js';
+import { renderPageSpec } from '../packages/core/src/prax-journal-renderer.js';
+import { splicePdfBuffers, type SpecRender } from '../packages/core/src/pdf-splice.js';
+import { closeBrowser } from '../packages/core/src/puppeteer-renderer.js';
+import { parseProfile, type Profile } from '../packages/core/src/types/profile.js';
+import type { PageSpec } from '../packages/core/src/splice.js';
 
 /** Optional: same loader the C7b.1 smoke uses, so the Rx card fills. */
 async function loadLocalProfile(): Promise<Profile | undefined> {

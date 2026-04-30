@@ -1,30 +1,31 @@
 {
-  "name": "goodnotes-templates",
+  "name": "pretext-templates",
   "version": "1.0.0",
+  "private": true,
   "type": "module",
-  "description": "Programmatically generate high-quality digital planning templates, stickers, and page assets optimized for GoodNotes and similar digital note-taking apps",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "bin": {
-    "goodnotes-templates": "dist/cli/index.js"
-  },
+  "description": "Programmatically generate high-quality digital planning templates, stickers, and page assets optimized for GoodNotes and similar digital note-taking apps. Monorepo root — see packages/*.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "build": "tsc",
-    "dev": "tsx watch src/cli/index.ts",
-    "start": "tsx src/cli/index.ts",
-    "generate": "tsx src/cli/index.ts generate --all",
-    "generate:templates": "tsx src/cli/index.ts generate --templates",
-    "generate:stickers": "tsx src/cli/index.ts generate --stickers",
-    "generate:pages": "tsx src/cli/index.ts generate --pages",
-    "preview": "tsx src/cli/index.ts preview",
+    "build": "tsc -b packages/core packages/cli",
+    "build:core": "npm run build -w @pretext-templates/core",
+    "build:cli": "npm run build -w @pretext-templates/cli",
+    "dev": "tsx watch packages/cli/src/index.ts",
+    "start": "tsx packages/cli/src/index.ts",
+    "generate": "tsx packages/cli/src/index.ts generate --all",
+    "generate:templates": "tsx packages/cli/src/index.ts generate --templates",
+    "generate:stickers": "tsx packages/cli/src/index.ts generate --stickers",
+    "generate:pages": "tsx packages/cli/src/index.ts generate --pages",
+    "preview": "tsx packages/cli/src/index.ts preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:visual": "vitest run --config vitest.visual.config.ts",
-    "lint": "eslint src/",
-    "format": "prettier --write \"src/**/*.{ts,tsx,json,css,html}\"",
-    "clean": "rm -rf dist output/*",
+    "lint": "eslint packages/ scripts/ tests/",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,json,css,html}\" \"scripts/**/*.ts\" \"tests/**/*.ts\"",
+    "clean": "rm -rf packages/*/dist apps/*/dist output/*",
     "fonts:download": "tsx scripts/download-fonts.ts",
-    "prepublishOnly": "npm run build",
     "build:stickers": "tsx scripts/build-stickers.ts"
   },
   "keywords": [
@@ -50,13 +51,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "dependencies": {
-    "commander": "^12.1.0",
-    "pdf-lib": "^1.17.1",
-    "puppeteer": "^23.11.1",
-    "sharp": "^0.33.5",
-    "zod": "3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

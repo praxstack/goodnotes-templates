@@ -29,13 +29,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { buildPageSequence } from '../src/core/splice.js';
+import { buildPageSequence } from '../packages/core/src/splice.js';
 import {
   resolvePageSpecFiles,
   substituteProfile,
   V5_PACK_DIR,
-} from '../src/core/prax-journal-renderer.js';
-import { parseProfile, type Profile } from '../src/types/profile.js';
+} from '../packages/core/src/prax-journal-renderer.js';
+import { parseProfile, type Profile } from '../packages/core/src/types/profile.js';
 
 // ─── Args ───────────────────────────────────────────────────────
 
