@@ -33,6 +33,46 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **The Praxis Ledger · monthly release pipeline** — `scripts/bundle-release.ts`
+  assembles a self-contained release folder under `output/The Praxis Ledger —
+  <Month YYYY>/` containing the bookmarked PDF, a standalone HTML export, all
+  fonts / CSS / source templates, and the 60-sticker pack (PNG + SVG, bucketed
+  by dimension). Everything is a real file copy — no symlinks.
+- **`scripts/build-standalone-html.ts`** — replays the splice pipeline
+  (`buildPageSequence → resolvePageSpecFiles → substituteProfile`) in-process
+  without Puppeteer, extracts each page's `<body>`, dedupes `<style>` blocks
+  via `Set<string>`, and stitches a single self-contained HTML with
+  `@page { size: A4 portrait }` + `break-after: page` per section. A 135-page
+  May 2026 export lands at ~1.5 MB because base64-inlined fonts dedupe to
+  one copy instead of being repeated per page.
+- **60-sticker skeuomorphic pack** — four deep-paper archetypes
+  (field-note · ledger · herbarium · clinic) rendered at three dimension
+  classes (compact 400×600 · standard 600×600 · expanded 800×600) across
+  four accents (sage · clay · amber · lavender). 8-layer tactile filter
+  stack (drop shadow · vignette · fiber turbulence · edge highlights).
+  Built via `scripts/build-stickers.ts` which orchestrates Wave-1 (20),
+  Wave-2 (28), and the original 12.
+- **`output/all-stickers/` gallery** — `scripts/rebuild-all-stickers-index.ts`
+  classifies every sticker PNG by dimension via `sips` and copies it into
+  `all/` plus `compact-400x600/` · `standard-600x600/` · `expanded-800x600/`
+  for quick browsing. Real PNG copies (not symlinks); gitignored.
+- **DAY_* date tokens on daily pages.** `DAY_DATE` / `DAY_WEEKDAY` /
+  `DAY_OF_YEAR` / `DAYS_IN_YEAR` added to the PII whitelist and wired
+  through `substituteProfile(html, profile?, page?)` via a new
+  `deriveDateFields()` helper (UTC-only leap-year math). All four v5
+  daily HTMLs (today · midday · reflect · brain-dump) carry the tokens.
+  14 new unit tests in `tests/unit/prax-journal-renderer.test.ts`.
+- **`.clineignore`** — per-turn file-tree pruning for Cline sessions.
+  Excludes `output/`, `node_modules/`, generated PDFs/PNGs, fonts, audit
+  runtime artifacts, and PII profiles. File-tree size down ~80%
+  (1,269 → 245 files) per turn.
+- **`docs/llm-council-context-window-debug.md`** — 3-stage LLM Council Plus
+  transcript (3 deliberators → 3 anonymized peer reviews → chairman synthesis)
+  diagnosing the Cline context-window display, plus the applied fix.
+- **`docs/plan-ceo-review-sticker-expansion-v1.md`** — 95 evidence-backed
+  sticker candidates from 3 parallel research subagents (CBT/DBT/ACT/ERP/
+  MI/CBT-I · Barkley-ADHD · Bryant-Veroff/Neff/Keltner). Drove the
+  60-sticker build.
 - **FIND-0016 — T1-module tests.** 22 new tests across 3 files
   (`tests/unit/preview-server.test.ts`, `pdf-postprocess.test.ts`,
   `svg-renderer.test.ts`). Test count: 25 → 47.
