@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const packs = await getCollection('packs');
+const sorted = [...packs].sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const grouped = sorted.reduce<Record<string, typeof sorted>>((acc, p) => {
+  (acc[p.data.category] ??= []).push(p);
+  return acc;
+}, {});
+const categories = Object.keys(grouped).sort();
+---
+
+<Layout title="Browse · pretext-templates">
+  <section class="browse container">
+    <header class="browse__head">
+      <p class="meta">Browse</p>
+      <h1>Every pack.</h1>
+      <p class="browse__lede">
+        Filter by category. Seven packs today; more as the sprint progresses.
+      </p>
+    </header>
+
+    {
+      categories.map((cat) => (
+        <section class="browse__category" aria-labelledby={`cat-${cat}`}>
+          <h2 id={`cat-${cat}`} class="browse__cat-head">
+            {cat}
+          </h2>
+          <ul class="browse__list" role="list">
+            {grouped[cat].map((pack) => (
+              <li class="browse__row">
+                <a href={`/packs/${pack.data.id}`} class="browse__link">
+                  <span class="browse__title">{pack.data.title}</span>
+                  <span class="browse__oneliner">{pack.data.oneLiner}</span>
+                  <span class="browse__status meta">
+                    {pack.data.status} · v{pack.data.version}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </section>
+</Layout>
+
+<style>
+  .browse {
+    padding-top: 48px;
+  }
+  .browse__head {
+    margin-bottom: 48px;
+  }
+  .browse__head h1 {
+    margin-top: 8px;
+  }
+  .browse__lede {
+    color: var(--ink-soft);
+    margin-top: 16px;
+    max-width: 50ch;
+  }
+  .browse__category {
+    margin-bottom: 48px;
+  }
+  .browse__cat-head {
+    font-size: 1.25rem;
+    font-family: var(--mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-quiet);
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+  .browse__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .browse__link {
+    display: grid;
+    grid-template-columns: 240px 1fr 160px;
+    gap: 32px;
+    align-items: baseline;
+    padding: 16px 0;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease-paper);
+  }
+  .browse__link:hover {
+    border-bottom-color: var(--ink-whisper);
+  }
+  .browse__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+  .browse__oneliner {
+    color: var(--ink-soft);
+  }
+  .browse__status {
+    text-align: right;
+  }
+  @media (max-width: 768px) {
+    .browse__link {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .browse__status {
+      text-align: left;
+    }
+  }
+</style>

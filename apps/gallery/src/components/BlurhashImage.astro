@@ -1,0 +1,73 @@
+---
+/**
+ * BlurhashImage — static <img> with a CSS-gradient blurhash placeholder.
+ *
+ * We decode the blurhash at build-time (see scripts/encode-blurhash.ts) into a
+ * low-res data: URL used as the `background-image` on a wrapper. The real image
+ * lazy-loads on top. No client JS required — the placeholder is just CSS.
+ *
+ * Contract: `blurhashDataUrl` is the 32x32 PNG data-URL produced by the encoder.
+ * If omitted we render the image without a placeholder (no client error).
+ */
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  blurhashDataUrl?: string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  blurhashDataUrl,
+  loading = 'lazy',
+  class: className,
+} = Astro.props;
+
+const aspectRatio = `${width} / ${height}`;
+---
+
+<div
+  class:list={['bh', className]}
+  style={{
+    aspectRatio,
+    backgroundImage: blurhashDataUrl ? `url(${blurhashDataUrl})` : undefined,
+  }}
+>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding="async"
+  />
+</div>
+
+<style>
+  .bh {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--paper-deep);
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+  }
+  .bh > img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity var(--dur-slow) var(--ease-paper);
+  }
+  .bh > img[src] {
+    opacity: 1;
+  }
+</style>

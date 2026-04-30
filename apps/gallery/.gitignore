@@ -1,0 +1,12 @@
+# build output
+dist/
+.astro/
+
+# generated assets (reproducible via npm scripts)
+public/specimens/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
