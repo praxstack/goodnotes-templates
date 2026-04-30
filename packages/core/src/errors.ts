@@ -50,17 +50,18 @@ function composeMessage(tiers: {
  * Base class. Never thrown directly — subclasses tag a specific failure
  * mode. Callers catch `PretextError` if they want to handle any of our
  * errors uniformly (e.g. to render a friendly CLI banner).
+ *
+ * Uses the ES2022 native `ErrorOptions.cause` (Node 18+ per
+ * package.json engines), so `err.cause` is the same field DevTools,
+ * Node stack traces, and modern frameworks look for — no custom
+ * plumbing on top of the platform.
  */
 export abstract class PretextError extends Error {
   /** Stable machine-readable code. Never renamed once shipped. */
   abstract readonly code: string;
 
-  constructor(
-    message: string,
-    /** The error that triggered this one, if any — preserves root cause. */
-    public readonly cause?: unknown,
-  ) {
-    super(message);
+  constructor(message: string, cause?: unknown) {
+    super(message, cause !== undefined ? { cause } : undefined);
     this.name = new.target.name;
     // Keep a clean stack trace in v8 engines (Node, Chromium, Bun).
     if (typeof Error.captureStackTrace === 'function') {

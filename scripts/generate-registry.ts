@@ -29,7 +29,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 
 import {
   parseManifest,
@@ -106,7 +106,9 @@ async function findManifests(): Promise<string[]> {
  */
 function currentGitSha(): string | undefined {
   try {
-    return execSync('git rev-parse HEAD', {
+    // Argv array (not a shell string) — immune to any future refactor
+    // that concatenates a variable into the command. See code-review P3-6.
+    return execFileSync('git', ['rev-parse', 'HEAD'], {
       cwd: REPO_ROOT,
       encoding: 'utf-8',
       stdio: ['ignore', 'pipe', 'ignore'],
@@ -136,6 +138,21 @@ async function main(): Promise<void> {
       const raw = await fs.readFile(manifestPath, 'utf-8');
       const json = JSON.parse(raw) as unknown;
       const manifest = parseManifest(relPath, json);
+      // Invariant: the manifest's declared `id` must match its containing
+      // directory name (`packages/packs-<id>/manifest.json`). The gallery
+      // URL contract and the installer's path resolver both rely on this
+      // (code-review P3-7). Zod validates id *shape*; this validates id
+      // *identity* against the filesystem.
+      const parentDirName = path.basename(path.dirname(manifestPath));
+      const expectedDirName = `packs-${manifest.id}`;
+      if (parentDirName !== expectedDirName) {
+        throw new Error(
+          `manifest ${relPath} declares id '${manifest.id}' but lives in ` +
+            `directory '${parentDirName}'; expected directory name ` +
+            `'${expectedDirName}'. Rename the directory or fix the id so ` +
+            `they match.`,
+        );
+      }
       packs.push(manifest);
       console.log(`  ✓ ${relPath}  · ${manifest.id}@${manifest.version}`);
     } catch (err) {
@@ -150,16 +167,18 @@ async function main(): Promise<void> {
   }
 
   // Detect duplicate ids (would silently overwrite in the registry).
-  const seen = new Map<string, string>();
+  // Any duplicate is an error — same-version duplicates are also wrong,
+  // since two manifest files cannot both own the same id (fixed per
+  // code-review P2-3).
+  const seen = new Set<string>();
   for (const p of packs) {
-    const prev = seen.get(p.id);
-    if (prev !== undefined && prev !== p.version) {
+    if (seen.has(p.id)) {
       throw new Error(
-        `duplicate pack id '${p.id}' — found versions ${prev} and ${p.version} in different manifests; ` +
-          `ids must be globally unique`,
+        `duplicate pack id '${p.id}' — found in more than one manifest; ` +
+          `pack ids must be globally unique`,
       );
     }
-    seen.set(p.id, p.version);
+    seen.add(p.id);
   }
 
   const registry: Registry = {

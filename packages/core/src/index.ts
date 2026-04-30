@@ -70,11 +70,13 @@ export {
 } from './types/profile.js';
 
 // ── Locale (UTC-only date math) ───────────────────────────────────
+// `isLeapYear` is re-exported from prax-journal-renderer.ts above; the
+// canonical implementation lives in `./utils/locale.ts` since the
+// prax-journal-renderer dedupe (code-review P2-4 follow-up).
 export {
   getMonthNames,
   getDayNames,
   getDaysInMonth,
-  isLeapYear as isLeapYearLocale,
   getMonthGrid,
   getISOWeekNumber,
   validateYear,
