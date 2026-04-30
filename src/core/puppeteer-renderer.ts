@@ -24,6 +24,72 @@ let browserInstance: Browser | null = null;
 // share one launch instead of racing to spawn two Chromiums (FIND-0025).
 let browserPromise: Promise<Browser> | null = null;
 
+// ─── C7b.3: memory-aware browser-restart ────────────────────────────
+//
+// Rationale: Chromium RSS grows roughly linearly with the number of pages
+// it renders in one lifetime. For the >100-spec runs that year-long or
+// multi-pack bundles produce, the cumulative Chromium process can easily
+// top 2 GB on a developer workstation. The symptom is progressive
+// slowdown, then an OOM-kill that leaves a half-written PDF.
+//
+// The fix is the simplest thing that works: count how many pages we've
+// rendered, and every N renders, close the browser and relaunch. Because
+// `getBrowser()` already lazily re-creates the instance when needed, the
+// only new primitive is a "mark this render done" counter plus a
+// tripwire that flips `browserPromise` and `browserInstance` to null
+// after the threshold.
+//
+// Threshold is read from PRAX_BROWSER_RESTART_EVERY (default 50). Set
+// to 0 to disable the feature — useful when running short bundles
+// where the restart overhead (~2s) is wasted.
+//
+// We intentionally do NOT probe Chromium's RSS directly: it runs in a
+// separate process tree from Node, so `process.memoryUsage()` measures
+// the wrong thing, and polling /proc or sysctl is not portable. Spec
+// count is a cheap, deterministic proxy (AGENTS.md principle 2).
+let renderCount = 0;
+
+/** Read the restart threshold; 0 disables. */
+function getRestartThreshold(): number {
+  const raw = process.env.PRAX_BROWSER_RESTART_EVERY;
+  if (raw === undefined) return 50;
+  const n = Number.parseInt(raw, 10);
+  return Number.isFinite(n) && n >= 0 ? n : 50;
+}
+
+/**
+ * Internal: trip the restart flag if we've rendered >= threshold pages
+ * since the last browser launch. Exported as `maybeRestartBrowser` for
+ * tests. Returns true if a restart actually happened.
+ */
+export async function maybeRestartBrowser(): Promise<boolean> {
+  const threshold = getRestartThreshold();
+  if (threshold === 0) return false;
+  if (renderCount < threshold) return false;
+
+  // Log once per restart so long runs show a trail, not silence.
+  // Keep the prefix consistent with the existing progress log so
+  // a grep on "Render:" or "puppeteer" still finds everything.
+  // eslint-disable-next-line no-console
+  console.log(
+    `  · puppeteer: restarting Chromium after ${renderCount} renders ` +
+      `(PRAX_BROWSER_RESTART_EVERY=${threshold})`,
+  );
+  await closeBrowser();
+  renderCount = 0;
+  return true;
+}
+
+/** Test-only: reset the internal counter without touching the browser. */
+export function _resetRenderCountForTest(): void {
+  renderCount = 0;
+}
+
+/** Test-only: read the current render counter. */
+export function _renderCountForTest(): number {
+  return renderCount;
+}
+
 /**
  * Build the Chromium launch args for the current environment.
  *
@@ -72,6 +138,10 @@ async function getBrowser(): Promise<Browser> {
 
 /**
  * Close the shared browser instance. Call when done generating.
+ *
+ * Safe to call even if no browser is live — the guard below handles the
+ * post-crash or first-call case. After this returns the next
+ * `getBrowser()` will cold-launch a fresh instance.
  */
 export async function closeBrowser(): Promise<void> {
   if (browserInstance && browserInstance.connected) {
@@ -160,6 +230,11 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
 
   // NO theme injection. NO font override. Template CSS is the source of truth.
 
+  // C7b.3: restart Chromium before we claim our next page handle if we've
+  // rendered past the configured threshold since the last launch. This
+  // is the ONE wiring point — everything else is internal to the helper.
+  await maybeRestartBrowser();
+
   const browser = await getBrowser();
   const page = await browser.newPage();
 
@@ -215,6 +290,12 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
       });
     }
 
+    // C7b.3: every successful render bumps the counter. The counter is
+    // only read by `maybeRestartBrowser()` at the start of the next
+    // render, so failed renders don't count (which matches the intent —
+    // a failed render leaves the browser no more cumulatively stressed
+    // than a skipped one).
+    renderCount += 1;
     return Buffer.from(pdfBuffer);
   } finally {
     await page.close();
