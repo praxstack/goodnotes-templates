@@ -46,6 +46,12 @@ const shelfPacks = packs
           Copy
         </button>
       </div>
+      <span
+        class="sr-only"
+        role="status"
+        aria-live="polite"
+        id="copy-announce"
+      ></span>
     </div>
     {hero && (
       <figure class="hero__specimen">
@@ -232,18 +238,30 @@ const shelfPacks = packs
 </style>
 
 <script>
-  // Copy-on-click for the install command. A11Y-6 · role="status" toast.
+  // Copy-on-click for the install command.
+  // A11Y-6 · visible button label flip + polite announcement in a dedicated
+  // aria-live region so screen readers actually speak "Copied" instead of
+  // silently replaying the unchanged button name.
   const btn = document.querySelector<HTMLButtonElement>('.hero__copy-btn');
   const codeEl = document.querySelector<HTMLElement>('.hero__install code');
+  const announce = document.querySelector<HTMLElement>('#copy-announce');
   if (btn && codeEl) {
     btn.addEventListener('click', async () => {
       const text = codeEl.textContent?.trim() ?? '';
+      const say = (msg: string) => {
+        if (announce) announce.textContent = msg;
+      };
       try {
         await navigator.clipboard.writeText(text);
         btn.textContent = 'Copied';
-        setTimeout(() => (btn.textContent = 'Copy'), 1200);
+        say('Install command copied to clipboard.');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          say('');
+        }, 1800);
       } catch {
         btn.textContent = 'Press ⌘C';
+        say('Clipboard blocked — press command C to copy.');
       }
     });
   }
