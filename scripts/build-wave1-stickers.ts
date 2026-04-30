@@ -47,7 +47,7 @@ import {
   type Accent,
   type StickerSize,
   type SkeuoArchetype,
-} from '../src/core/sticker-renderer.js';
+} from '../packages/core/src/sticker-renderer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, '..');

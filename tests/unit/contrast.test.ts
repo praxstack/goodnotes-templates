@@ -16,7 +16,7 @@ import { describe, it, expect } from 'vitest';
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const THEMES_DIR = 'shared/themes';
+const THEMES_DIR = 'packages/core/assets/themes';
 
 // Minimum WCAG 2.2 AA contrast ratios.
 const AA_NORMAL = 4.5;

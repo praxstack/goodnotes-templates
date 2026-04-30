@@ -48,16 +48,25 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { renderHTMLToPDF } from './puppeteer-renderer.js';
 import { getPageDimensions } from './dimensions.js';
 import type { PageSpec } from './splice.js';
-import type { Profile } from '../types/profile.js';
+import type { Profile } from './types/profile.js';
 
 /**
  * Root of the v5 HTML pack (the only version wired today). Exposed so
  * tests and CLI flags can override it without string-munging paths.
+ *
+ * Resolved relative to this module's location (walk up from
+ * `packages/core/src/` → repo root → `packs/...`) so the path is correct
+ * regardless of CWD. Fixes F10 of eng-review: the previous
+ * `path.resolve('packs/...')` broke under the monorepo layout when
+ * commands ran from a workspace subdirectory.
  */
-export const V5_PACK_DIR = path.resolve('packs/journals/prax-journal/versions/v5');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
+export const V5_PACK_DIR = path.join(REPO_ROOT, 'packs/journals/prax-journal/versions/v5');
 
 /**
  * Filenames that make up one daily spread, in render order. Exported so
