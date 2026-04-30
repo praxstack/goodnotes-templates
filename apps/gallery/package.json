@@ -2,10 +2,25 @@
   "name": "@pretext-templates/gallery",
   "version": "0.0.0",
   "private": true,
-  "description": "Astro gallery — scaffold (see Week 4-6 of eng-review). Stub package for W1 workspace wiring only.",
+  "type": "module",
+  "description": "Astro gallery for pretext-templates. Home + pack detail + browse routes. Blurhash placeholders for specimen imagery.",
   "scripts": {
-    "build": "echo 'gallery W4 — stub' && exit 0",
-    "test": "echo 'no tests yet' && exit 0"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "generate:specimens": "tsx scripts/generate-specimens.ts",
+    "test": "echo 'gallery tests land in W5' && exit 0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/mdx": "5.0.4",
+    "astro": "6.2.1",
+    "blurhash": "2.0.5",
+    "sharp": "0.34.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.4",
+    "typescript": "5.7.3"
+  }
 }

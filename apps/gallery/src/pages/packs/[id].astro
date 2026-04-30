@@ -1,0 +1,136 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlurhashImage from '../../components/BlurhashImage.astro';
+import { getCollection, render } from 'astro:content';
+import blurhashManifest from '../../data/blurhash-manifest.json';
+
+export async function getStaticPaths() {
+  const packs = await getCollection('packs');
+  return packs.map((pack) => ({ params: { id: pack.data.id }, props: { pack } }));
+}
+
+const { pack } = Astro.props;
+const { Content } = await render(pack);
+
+const manifest = blurhashManifest as Record<
+  string,
+  { width: number; height: number; blurhash: string; dataUrl: string }
+>;
+const entry = manifest[pack.data.id];
+---
+
+<Layout
+  title={`${pack.data.title} · pretext-templates`}
+  description={pack.data.oneLiner}
+>
+  <article class="pack container">
+    <nav class="pack__crumb meta" aria-label="breadcrumb">
+      <a href="/">home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/browse">browse</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{pack.data.title}</span>
+    </nav>
+
+    <header class="pack__head">
+      <p class="meta">
+        {pack.data.category} · v{pack.data.version} · est. {pack.data.bylineYear}
+      </p>
+      <h1>{pack.data.title}</h1>
+      <p class="pack__lede">{pack.data.oneLiner}</p>
+    </header>
+
+    {
+      pack.data.heroImage && (
+        <figure class="pack__specimen">
+          <BlurhashImage
+            src={pack.data.heroImage}
+            alt={`${pack.data.title} specimen`}
+            width={entry?.width ?? 1200}
+            height={entry?.height ?? 1600}
+            blurhashDataUrl={entry?.dataUrl}
+            loading="eager"
+          />
+        </figure>
+      )
+    }
+
+    <div class="pack__body">
+      <Content />
+    </div>
+
+    <hr class="rule" />
+
+    <footer class="pack__colophon">
+      <p class="meta">Colophon</p>
+      <p>
+        Typeset in Fraunces & JetBrains Mono. MIT-licensed. Built with the
+        <a href="https://github.com/praxstack/pretext-templates">
+          @pretext-templates/cli
+        </a>.
+      </p>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .pack {
+    padding-top: 32px;
+    padding-bottom: 64px;
+    max-width: 780px;
+  }
+  .pack__crumb {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .pack__crumb a {
+    color: var(--ink-quiet);
+    text-decoration: none;
+  }
+  .pack__crumb a:hover {
+    color: var(--ink);
+  }
+  .pack__head h1 {
+    margin-top: 12px;
+  }
+  .pack__lede {
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--ink-soft);
+    margin-top: 16px;
+  }
+  .pack__specimen {
+    margin: 48px 0;
+  }
+  .pack__body {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .pack__body :global(h2) {
+    margin-top: 40px;
+    margin-bottom: 12px;
+  }
+  .pack__body :global(ul) {
+    padding-left: 20px;
+  }
+  .pack__body :global(li) {
+    margin-bottom: 6px;
+  }
+  .pack__body :global(blockquote) {
+    border-left: 3px solid var(--sage);
+    background: var(--sage-tint);
+    padding: 12px 20px;
+    margin: 20px 0;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .pack__colophon {
+    margin-top: 48px;
+    color: var(--ink-soft);
+  }
+  .pack__colophon .meta {
+    margin-bottom: 8px;
+  }
+</style>

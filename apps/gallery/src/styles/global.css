@@ -1,0 +1,165 @@
+/* pretext-templates gallery · global styles
+ *
+ * Tokens inherit from wireframes-v2 (design-review approved).
+ * See ../../DESIGN.md for usage rules & A11Y overrides.
+ *
+ * D-1 note: 6 fonts here match the approved v2 mockup. Production cut to
+ * Fraunces + JetBrains Mono + Caveat lands as a follow-up polish commit.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,500;1,9..144,600;1,9..144,700&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@400;600&family=Reenie+Beanie&display=swap');
+
+:root {
+  /* palette */
+  --paper: #f9f5ec;
+  --paper-dark: #f0ead9;
+  --paper-deep: #e6dec6;
+  --ink: #2a2824;
+  --ink-soft: #4a453d;
+  --ink-quiet: #7d7668;
+  --ink-whisper: #b5ad9f;
+  --sage: #7b9476;
+  --sage-ink: #4e6249;
+  --sage-tint: rgba(123, 148, 118, 0.12);
+  --sage-deep: #4e6249;
+  --clay: #b85a44;
+  --clay-deep: #8b3e2e;
+  --amber: #d4a853;
+  --amber-accessible: #c69830; /* A11Y-1 — body-safe */
+  --washi-blue: #b4cde6;
+  --washi-pink: #f5c8c2;
+  --washi-sage: #cfd9c4;
+  --highlighter: rgba(255, 240, 120, 0.55);
+  --hairline: #d8d0be;
+
+  /* typography */
+  --sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
+  --italic: 'Instrument Serif', Georgia, serif;
+  --mono: 'JetBrains Mono', Menlo, monospace;
+  --hand: 'Caveat', cursive;
+  --marker: 'Reenie Beanie', cursive;
+
+  /* motion */
+  --ease-paper: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0 0 1em 0;
+}
+
+a {
+  color: var(--ink);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--sage-deep);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sage);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Minimum touch target per A11Y-3 — applied to interactive elements */
+button,
+[role='button'],
+a.btn,
+a.cta,
+.touch {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Mono/code conventions */
+code,
+kbd,
+samp {
+  font-family: var(--mono);
+  font-size: 0.95em;
+}
+
+/* Reduced motion — A11Y-5 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Shared layout helpers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 96px);
+}
+
+.rule {
+  border: 0;
+  height: 1px;
+  background: var(--hairline);
+  margin: 48px 0;
+}
+
+.meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+}
