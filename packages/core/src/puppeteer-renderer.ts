@@ -195,8 +195,12 @@ const DEFAULT_REQUEST_ALLOWLIST = /^(data:|file:|https:\/\/fonts\.(googleapis|gs
 //   1.0 = default (same bytes as today — byte-identical baseline)
 //   0.5 = every page rendered at half linear dimension (~¼ memory)
 //
-// Chromium enforces 0.1 ≤ scale ≤ 2.0. We clamp in that range and
-// return the resolved number so callers can log what was actually used.
+// Chromium enforces 0.1 ≤ scale ≤ 2.0 per Puppeteer docs:
+//   https://pptr.dev/api/puppeteer.pdfoptions#scale
+// Puppeteer itself will throw an Error with 'scale must be between 0.1
+// and 2' outside that range, so our resolver rejects out-of-range
+// inputs and falls back to 1.0 instead of letting a user surprise
+// themselves with a thrown error mid-run.
 // Default behaviour is unchanged from pre-W3: no scaling applied.
 const MIN_RENDER_SCALE = 0.1;
 const MAX_RENDER_SCALE = 2.0;
