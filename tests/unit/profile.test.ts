@@ -376,7 +376,9 @@ describe('ProfileSchema shape stability — regression guard', () => {
     const keys = Object.keys(ProfileSchema.shape).sort();
     expect(keys).toEqual(
       [
+        'allergies',           // v2
         'baselines',
+        'emergency_contact',   // v2
         'medications',
         'named_patterns',
         'schema_version',
@@ -445,5 +447,206 @@ describe('Baselines record — empty-string keys rejected (P2 fix)', () => {
     expect(() =>
       parseProfile(makeProfile({ baselines: { cigs_per_day: 10 } })),
     ).not.toThrow();
+  });
+});
+
+// ─── schema v2: backwards compatibility ─────────────────────────────
+//
+// v1 → v2 is an additive change: all new fields are optional, so every
+// profile that parsed as v1 must still parse as v2 without modification.
+// A v1 profile that declared `schema_version: 1` must also still parse
+// — the fast-path only rejects versions > PROFILE_SCHEMA_VERSION.
+describe('schema v2 — additive compatibility', () => {
+  it('PROFILE_SCHEMA_VERSION is 2', () => {
+    expect(PROFILE_SCHEMA_VERSION).toBe(2);
+  });
+
+  it('still accepts a v1-shaped profile (schema_version: 1) unchanged', () => {
+    const v1 = {
+      schema_version: 1,
+      user: { name: 'V1 User' },
+    };
+    expect(() => parseProfile(v1)).not.toThrow();
+  });
+
+  it('defaults allergies to []', () => {
+    const p = parseProfile(makeProfile());
+    expect(p.allergies).toEqual([]);
+  });
+
+  it('emergency_contact is undefined when absent', () => {
+    const p = parseProfile(makeProfile());
+    expect(p.emergency_contact).toBeUndefined();
+  });
+
+  it('v1 example profile parses as v2 with schema_version: 1 preserved', () => {
+    const examplePath = path.join(
+      REPO_ROOT,
+      'packs/journals/prax-journal/profile.example.json',
+    );
+    const raw = JSON.parse(readFileSync(examplePath, 'utf-8'));
+    // Mutate to v1 shape for this specific test
+    raw.schema_version = 1;
+    expect(() => parseProfile(raw)).not.toThrow();
+  });
+});
+
+// ─── schema v2: new optional fields ─────────────────────────────────
+describe('schema v2 — user.dob', () => {
+  it('accepts a valid ISO dob', () => {
+    const p = parseProfile(
+      makeProfile({ user: { name: 'U', dob: '1992-08-14' } }),
+    );
+    expect(p.user.dob).toBe('1992-08-14');
+  });
+
+  it('rejects a non-ISO dob with a path-specific message', () => {
+    try {
+      parseProfile(makeProfile({ user: { name: 'U', dob: '14 Aug 1992' } }));
+      throw new Error('expected throw');
+    } catch (e) {
+      expect(e).toBeInstanceOf(ProfileParseError);
+      const err = e as ProfileParseError;
+      expect(err.issues.some((i) => i.path === 'user.dob')).toBe(true);
+    }
+  });
+
+  it('omits dob when absent (no default)', () => {
+    const p = parseProfile(makeProfile());
+    expect(p.user.dob).toBeUndefined();
+  });
+});
+
+describe('schema v2 — user.weight_kg', () => {
+  it('accepts a positive finite number', () => {
+    const p = parseProfile(
+      makeProfile({ user: { name: 'U', weight_kg: 71.2 } }),
+    );
+    expect(p.user.weight_kg).toBe(71.2);
+  });
+
+  it('rejects zero weight', () => {
+    expect(() =>
+      parseProfile(makeProfile({ user: { name: 'U', weight_kg: 0 } })),
+    ).toThrow(ProfileParseError);
+  });
+
+  it('rejects negative weight', () => {
+    expect(() =>
+      parseProfile(makeProfile({ user: { name: 'U', weight_kg: -10 } })),
+    ).toThrow(ProfileParseError);
+  });
+
+  it('rejects non-finite (Infinity)', () => {
+    expect(() =>
+      parseProfile(
+        makeProfile({ user: { name: 'U', weight_kg: Number.POSITIVE_INFINITY } }),
+      ),
+    ).toThrow(ProfileParseError);
+  });
+
+  it('rejects weight_kg as a string', () => {
+    expect(() =>
+      parseProfile(makeProfile({ user: { name: 'U', weight_kg: '71 kg' } })),
+    ).toThrow(ProfileParseError);
+  });
+});
+
+describe('schema v2 — allergies', () => {
+  it('accepts a flat list of non-empty strings', () => {
+    const p = parseProfile(
+      makeProfile({ allergies: ['penicillin', 'peanuts'] }),
+    );
+    expect(p.allergies).toEqual(['penicillin', 'peanuts']);
+  });
+
+  it('rejects an empty string entry', () => {
+    expect(() =>
+      parseProfile(makeProfile({ allergies: ['penicillin', ''] })),
+    ).toThrow(ProfileParseError);
+  });
+
+  it('rejects non-string entries', () => {
+    expect(() =>
+      parseProfile(makeProfile({ allergies: [{ name: 'penicillin' }] })),
+    ).toThrow(ProfileParseError);
+  });
+});
+
+describe('schema v2 — emergency_contact', () => {
+  it('accepts a minimal contact (name + phone)', () => {
+    const p = parseProfile(
+      makeProfile({
+        emergency_contact: { name: 'Jamie', phone: '+91 98xxx 00000' },
+      }),
+    );
+    expect(p.emergency_contact?.name).toBe('Jamie');
+    expect(p.emergency_contact?.phone).toBe('+91 98xxx 00000');
+    expect(p.emergency_contact?.relationship).toBeUndefined();
+  });
+
+  it('accepts an optional relationship', () => {
+    const p = parseProfile(
+      makeProfile({
+        emergency_contact: {
+          name: 'Jamie',
+          phone: '+91 98xxx 00000',
+          relationship: 'partner',
+        },
+      }),
+    );
+    expect(p.emergency_contact?.relationship).toBe('partner');
+  });
+
+  it('rejects a contact missing phone', () => {
+    expect(() =>
+      parseProfile(makeProfile({ emergency_contact: { name: 'Jamie' } })),
+    ).toThrow(ProfileParseError);
+  });
+
+  it('rejects unknown fields (strict object)', () => {
+    expect(() =>
+      parseProfile(
+        makeProfile({
+          emergency_contact: {
+            name: 'Jamie',
+            phone: '123',
+            email: 'oops@no.com',
+          },
+        }),
+      ),
+    ).toThrow(ProfileParseError);
+  });
+});
+
+describe('schema v2 — therapist.specialty', () => {
+  it('accepts a non-empty specialty string', () => {
+    const p = parseProfile(
+      makeProfile({
+        therapists: [
+          { role: 'psychology', name: 'Dr X', specialty: 'ADHD' },
+        ],
+      }),
+    );
+    expect(p.therapists[0]?.specialty).toBe('ADHD');
+  });
+
+  it('rejects an empty-string specialty', () => {
+    expect(() =>
+      parseProfile(
+        makeProfile({
+          therapists: [{ role: 'psychology', name: 'Dr X', specialty: '' }],
+        }),
+      ),
+    ).toThrow(ProfileParseError);
+  });
+
+  it('still accepts a therapist without specialty (v1 shape)', () => {
+    const p = parseProfile(
+      makeProfile({
+        therapists: [{ role: 'psychology', name: 'Dr X' }],
+      }),
+    );
+    expect(p.therapists[0]?.specialty).toBeUndefined();
   });
 });

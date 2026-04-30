@@ -38,7 +38,12 @@ import { z } from 'zod';
 // ─── Current schema version ─────────────────────────────────────────
 // Bump when the shape changes in a backwards-incompatible way.
 // schema_version 1: initial v5.3 shape (2026-04-29).
-export const PROFILE_SCHEMA_VERSION = 1;
+// schema_version 2: adds optional user.dob, user.weight_kg, top-level
+//   allergies, emergency_contact, and Therapist.specialty. All new
+//   fields are optional, so every v1 profile parses as v2 unchanged —
+//   we still bump the number to signal shape growth for newer
+//   consumers that want to light up features guarded by "has DOB".
+export const PROFILE_SCHEMA_VERSION = 2;
 
 // ─── Leaf schemas ──────────────────────────────────────────────────
 
@@ -86,6 +91,14 @@ const Therapist = z
       .int()
       .positive('follow_up_days must be a positive integer')
       .optional(),
+    /**
+     * v2: free-form specialty tag — e.g. "ADHD", "trauma", "couples".
+     * Consumed by AI reviews for "is this provider the right fit for
+     * the pattern we're seeing" prompts. Optional string, no enum, so
+     * users don't hit a wall if their provider's specialty isn't
+     * in our list.
+     */
+    specialty: z.string().min(1).optional(),
   })
   .strict();
 
@@ -140,6 +153,38 @@ const User = z
       )
       .default('Asia/Kolkata'),
     locale: z.string().default('en-IN'),
+    /**
+     * v2: optional date of birth (ISO YYYY-MM-DD). Used by AI reviews
+     * for age-derived context (titration risk, sleep debt norms).
+     * Never printed on templates.
+     */
+    dob: IsoDate.optional(),
+    /**
+     * v2: optional body weight in kilograms. Enables dose-per-kg
+     * normalisation in AI reviews. Positive finite number or absent —
+     * no partial units, no strings.
+     */
+    weight_kg: z
+      .number()
+      .positive('user.weight_kg must be positive')
+      .finite('user.weight_kg must be finite')
+      .optional(),
+  })
+  .strict();
+
+/**
+ * v2: emergency contact — shown in the private cover-sheet of a
+ * physical print, NEVER interpolated into template HTML.
+ *
+ * Shape is deliberately shallow (name + phone + optional relationship).
+ * If richer contact metadata is ever needed (email, alternate phone,
+ * address), bump the schema — don't expand this shape silently.
+ */
+const EmergencyContact = z
+  .object({
+    name: z.string().min(1, 'emergency_contact.name cannot be empty'),
+    phone: z.string().min(1, 'emergency_contact.phone cannot be empty'),
+    relationship: z.string().min(1).optional(),
   })
   .strict();
 
@@ -156,6 +201,21 @@ export const ProfileSchema = z
     medications: z.array(Medication).default([]),
     named_patterns: z.array(NamedPattern).default([]),
     baselines: Baselines.default({}),
+    /**
+     * v2: flat list of allergy strings. Deliberately not structured
+     * as `{ substance, severity }[]` — no consumer reads severity
+     * today, and adding structure before it's needed violates AGENTS.md
+     * principle 2 (Simplicity First). If severity ever matters, bump
+     * the schema and migrate.
+     */
+    allergies: z.array(z.string().min(1)).default([]),
+    /**
+     * v2: optional single emergency contact. If the user has multiple,
+     * they can add a notes field to `user.pronouns`-adjacent freeform
+     * space — we deliberately don't array this until a real use case
+     * emerges.
+     */
+    emergency_contact: EmergencyContact.optional(),
   })
   .strict();
 

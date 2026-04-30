@@ -1,20 +1,24 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "user": {
     "name": "Your Name Here",
     "pronouns": "they/them",
     "tz": "Asia/Kolkata",
-    "locale": "en-IN"
+    "locale": "en-IN",
+    "dob": "1990-01-01",
+    "weight_kg": 70
   },
   "therapists": [
     {
       "role": "psychology",
       "name": "Your Psychologist Here",
+      "specialty": "ADHD",
       "notes": "describe approach (e.g. CBT, IFS, somatic) so AI reviews can reference technique"
     },
     {
       "role": "psychiatry",
       "name": "Your Psychiatrist Here",
+      "specialty": "adult psychiatry",
       "credentials": "MBBS, MD (Psych)",
       "registration_number": "MCI-000000",
       "follow_up_days": 14
@@ -38,5 +42,14 @@
   "baselines": {
     "cigs_per_day": 10,
     "chest_kg": 0
+  },
+  "allergies": [
+    "penicillin",
+    "shellfish"
+  ],
+  "emergency_contact": {
+    "name": "Your Contact Here",
+    "phone": "+91 00000 00000",
+    "relationship": "partner"
   }
 }
