@@ -118,19 +118,31 @@ describe('buildStandaloneHtml()', () => {
     expect(out).not.toContain('data-body-class');
   });
 
-  it('escapes " and < in label attribute', () => {
-    const p = makePage({ label: 'evil"<script>' });
+  it('escapes &, ", <, > in label attribute (full attribute hardening)', () => {
+    const p = makePage({ label: 'evil"<script>&amp;' });
     const out = buildStandaloneHtml({ title: 't', pages: [p] });
-    expect(out).toContain('data-label="evil&quot;&lt;script>"');
-    // And it should not inject a raw <script>:
+    // Four reserved chars escaped in order: & first (so later passes
+    // don't double-encode), then " < >. The literal `&amp;` the user
+    // wrote becomes `&amp;amp;` (expected — user passed a string that
+    // already contained an ampersand; we defensively re-escape).
+    expect(out).toContain('data-label="evil&quot;&lt;script&gt;&amp;amp;"');
     expect(out).not.toContain('<script>');
   });
 
-  it('escapes title for safety', () => {
+  it('escapes & first to avoid double-encoding', () => {
+    const p = makePage({ label: 'a & b' });
+    const out = buildStandaloneHtml({ title: 't', pages: [p] });
+    // Must be `&amp;`, NOT `&amp;amp;` or similar.
+    expect(out).toContain('data-label="a &amp; b"');
+  });
+
+  it('escapes title for safety (& " < >)', () => {
     const out = buildStandaloneHtml({
-      title: 'May "2026"',
+      title: 'May "2026" & <beyond>',
       pages: [makePage({ label: 'p' })],
     });
-    expect(out).toContain('<title>May &quot;2026&quot;</title>');
+    expect(out).toContain(
+      '<title>May &quot;2026&quot; &amp; &lt;beyond&gt;</title>',
+    );
   });
 });

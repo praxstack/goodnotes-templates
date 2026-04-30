@@ -51,8 +51,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderHTMLToPDF } from './puppeteer-renderer.js';
 import { getPageDimensions } from './dimensions.js';
+import { isLeapYear } from './utils/locale.js';
 import type { PageSpec } from './splice.js';
 import type { Profile } from './types/profile.js';
+
+// Re-export so external callers (and tests that predate the dedupe)
+// keep importing `isLeapYear` from this module. Single source of truth
+// now lives in `./utils/locale.ts` (see code-review finding P2-4).
+export { isLeapYear };
 
 /**
  * Root of the v5 HTML pack (the only version wired today). Exposed so
@@ -190,14 +196,6 @@ function extractRxFields(profile: Profile): Partial<Record<ProfilePlaceholder, s
   return out;
 }
 
-
-/**
- * Decide whether a year is a leap year (Gregorian rules).
- * Exported for tests.
- */
-export function isLeapYear(year: number): boolean {
-  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-}
 
 /**
  * Derive the `DAY_*` placeholder values from an ISO `YYYY-MM-DD` date
