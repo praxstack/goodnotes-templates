@@ -1,0 +1,250 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlurhashImage from '../components/BlurhashImage.astro';
+import { getCollection } from 'astro:content';
+import blurhashManifest from '../data/blurhash-manifest.json';
+
+const packs = await getCollection('packs');
+// Home hero pulls the stable pack first if present; falls back to the first.
+const hero =
+  packs.find((p) => p.data.status === 'stable' && p.data.heroImage) ?? packs[0];
+const stem = hero?.data.id ?? 'prax-journal';
+const manifest = blurhashManifest as Record<
+  string,
+  { width: number; height: number; blurhash: string; dataUrl: string }
+>;
+const entry = manifest[stem];
+
+const shelfPacks = packs
+  .filter((p) => p.id !== hero?.id)
+  .slice(0, 4);
+---
+
+<Layout
+  title="pretext-templates · warm analog planning templates"
+  description="Specimen-first gallery of hand-tuned planning PDFs for GoodNotes and friends. MIT-licensed, themeable, build locally in 90 seconds."
+>
+  <section class="hero container">
+    <div class="hero__copy">
+      <p class="meta">Warm analog editorial · est. 2026</p>
+      <h1>
+        Templates for people who<br />
+        <em class="hero__em">write by hand.</em>
+      </h1>
+      <p class="hero__lede">
+        Seven packs. Twelve themes. Zero slop. Build any pack into a clean PDF
+        in 90 seconds — locally, on your laptop.
+      </p>
+      <div class="hero__install" aria-label="install command">
+        <span class="hero__install-prompt" aria-hidden="true">$</span>
+        <code>npx @pretext-templates/cli init prax-journal</code>
+        <button
+          type="button"
+          class="hero__copy-btn"
+          aria-label="copy install command"
+        >
+          Copy
+        </button>
+      </div>
+    </div>
+    {hero && (
+      <figure class="hero__specimen">
+        {hero.data.heroImage && (
+          <BlurhashImage
+            src={hero.data.heroImage}
+            alt={`${hero.data.title} specimen preview`}
+            width={entry?.width ?? 1200}
+            height={entry?.height ?? 1600}
+            blurhashDataUrl={entry?.dataUrl}
+            loading="eager"
+            class="hero__img"
+          />
+        )}
+        <figcaption class="hero__caption meta">
+          {hero.data.title} · v{hero.data.version}
+        </figcaption>
+      </figure>
+    )}
+  </section>
+
+  <hr class="rule container" />
+
+  <section class="shelf container">
+    <header class="shelf__head">
+      <p class="meta">Browse the shelf</p>
+      <h2>Seven packs, each with its own hand.</h2>
+    </header>
+    <ul class="shelf__grid" role="list">
+      {
+        shelfPacks.map((pack) => (
+          <li class={`shelf__card shelf__card--${pack.data.accent}`}>
+            <a href={`/packs/${pack.data.id}`} class="shelf__link">
+              <p class="meta">{pack.data.category}</p>
+              <h3>{pack.data.title}</h3>
+              <p class="shelf__oneliner">{pack.data.oneLiner}</p>
+              <span class="shelf__cta">Read pack →</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="shelf__more">
+      <a href="/browse" class="cta">See all packs →</a>
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    align-items: center;
+  }
+  .hero__em {
+    font-family: var(--italic);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--sage-deep);
+  }
+  .hero__lede {
+    margin-top: 24px;
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .hero__install {
+    margin-top: 40px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border-radius: 2px;
+  }
+  .hero__install code {
+    flex: 1;
+    color: var(--paper);
+    font-size: 0.95rem;
+  }
+  .hero__install-prompt {
+    color: var(--amber);
+    font-family: var(--mono);
+    font-weight: 700;
+  }
+  .hero__copy-btn {
+    background: var(--sage);
+    color: var(--paper);
+    border: 0;
+    padding: 0 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-paper);
+  }
+  .hero__copy-btn:hover {
+    background: var(--sage-deep);
+  }
+  .hero__specimen {
+    margin: 0;
+  }
+  .hero__img {
+    box-shadow: 0 24px 48px -24px rgba(42, 40, 36, 0.28);
+  }
+  .hero__caption {
+    margin-top: 12px;
+  }
+  .shelf__head {
+    margin-bottom: 32px;
+  }
+  .shelf__head h2 {
+    margin-top: 8px;
+  }
+  .shelf__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .shelf__card {
+    background: var(--paper-dark);
+    border-top: 3px solid var(--ink);
+    padding: 24px;
+    transition: transform var(--dur-fast) var(--ease-paper);
+  }
+  .shelf__card:hover {
+    transform: translateY(-2px);
+  }
+  .shelf__card--sage {
+    border-top-color: var(--sage);
+  }
+  .shelf__card--clay {
+    border-top-color: var(--clay);
+  }
+  .shelf__card--amber {
+    border-top-color: var(--amber-accessible);
+  }
+  .shelf__link {
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .shelf__oneliner {
+    color: var(--ink-soft);
+    margin-top: 12px;
+  }
+  .shelf__cta {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+  .shelf__more {
+    margin-top: 40px;
+  }
+
+  @media (max-width: 1023px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .shelf__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 599px) {
+    .hero {
+      padding-top: 40px;
+    }
+    .shelf__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Copy-on-click for the install command. A11Y-6 · role="status" toast.
+  const btn = document.querySelector<HTMLButtonElement>('.hero__copy-btn');
+  const codeEl = document.querySelector<HTMLElement>('.hero__install code');
+  if (btn && codeEl) {
+    btn.addEventListener('click', async () => {
+      const text = codeEl.textContent?.trim() ?? '';
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'Copied';
+        setTimeout(() => (btn.textContent = 'Copy'), 1200);
+      } catch {
+        btn.textContent = 'Press ⌘C';
+      }
+    });
+  }
+</script>

@@ -1,0 +1,116 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Warm analog planning templates for digital notebooks.' } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="/" class="site-header__brand" aria-label="pretext-templates home">
+          <span class="site-header__mark">PT</span>
+          <span class="site-header__wordmark">pretext-templates</span>
+        </a>
+        <nav class="site-header__nav" aria-label="primary">
+          <a href="/browse">Browse</a>
+          <a href="https://github.com/praxstack/pretext-templates">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <span class="meta">MIT · v0.6.1</span>
+        <span class="meta">pretext-templates.dev</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--hairline);
+    padding: 20px 0;
+    background: var(--paper);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .site-header__mark {
+    width: 32px;
+    height: 32px;
+    display: inline-grid;
+    place-items: center;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  .site-header__wordmark {
+    font-family: var(--mono);
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+  .site-header__nav {
+    display: flex;
+    gap: 24px;
+  }
+  .site-header__nav a {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+  .site-header__nav a:hover {
+    color: var(--sage-deep);
+  }
+  .site-footer {
+    border-top: 1px solid var(--hairline);
+    padding: 32px 0;
+    margin-top: 96px;
+  }
+  .site-footer__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  @media (max-width: 599px) {
+    .site-header__wordmark {
+      display: none;
+    }
+    .site-footer__inner {
+      flex-direction: column;
+    }
+  }
+</style>
