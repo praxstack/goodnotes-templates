@@ -1,16 +1,19 @@
 #!/usr/bin/env node
 /**
- * CLI for goodnotes-templates generation engine.
+ * CLI for pretext-templates (née goodnotes-templates).
  *
  * Commands:
  *   render    — Render HTML templates to PDF
  *   list      — List available templates and paper sizes
  *   preview   — Start local preview server
+ *   init      — Scaffold a new pack skeleton (W15.5)
+ *   remix     — Print fork-and-rebrand commands for an existing pack (W15.5)
  */
 
 import { Command } from 'commander';
 import { PAGE_SIZES } from '../../core/src/dimensions.js';
 import { SUPPORTED_LOCALES } from '../../core/src/utils/locale.js';
+import { buildInitTemplate, buildRemixCommands } from './scaffold.js';
 
 const program = new Command();
 
@@ -201,6 +204,70 @@ program
 
     const { startPreviewServer } = await import('./preview-server.js');
     await startPreviewServer(opts.dir, parseInt(opts.port, 10));
+  });
+
+// ─── init command (W15.5) ───────────────────────────────────────
+
+program
+  .command('init')
+  .description('Scaffold a new pack (packages/packs-<id>/)')
+  .argument('<id>', 'Pack id in kebab-case (e.g., my-pack)')
+  .option('-t, --title <title>', 'Human-readable title (defaults to id)')
+  .option('--dry-run', 'Print what would be written, do not touch disk')
+  .action(async (id, opts) => {
+    const title = opts.title ?? id;
+    let files;
+    try {
+      files = buildInitTemplate(id, { title });
+    } catch (err) {
+      console.error(`Error: ${(err as Error).message}`);
+      process.exit(1);
+    }
+
+    const fs = await import('node:fs/promises');
+    const path = await import('node:path');
+
+    // Refuse to clobber — reversibility rule.
+    const dir = `packages/packs-${id}`;
+    try {
+      await fs.access(dir);
+      console.error(`Error: ${dir} already exists. Pick a different id or delete it first.`);
+      process.exit(1);
+    } catch {
+      // good — does not exist
+    }
+
+    console.log(`\n📦 pretext init ${id}\n`);
+    for (const f of files) {
+      console.log(`  ${opts.dryRun ? '[dry-run] ' : ''}${f.path}  (${f.content.length} B)`);
+      if (!opts.dryRun) {
+        await fs.mkdir(path.dirname(f.path), { recursive: true });
+        await fs.writeFile(f.path, f.content, 'utf8');
+      }
+    }
+    console.log(`\n✓ ${opts.dryRun ? 'would create' : 'created'} ${files.length} files in ${dir}/\n`);
+  });
+
+// ─── remix command (W15.5) ──────────────────────────────────────
+
+program
+  .command('remix')
+  .description('Print the commands to fork an existing pack into a new id (non-destructive)')
+  .argument('<source>', 'Existing pack id (e.g., prax-journal)')
+  .argument('<target>', 'New pack id (e.g., my-journal)')
+  .action((source, target) => {
+    let out;
+    try {
+      out = buildRemixCommands({ sourceId: source, targetId: target });
+    } catch (err) {
+      console.error(`Error: ${(err as Error).message}`);
+      process.exit(1);
+    }
+    console.log(`\n${out.preamble}\n`);
+    for (const step of out.steps) {
+      console.log(step);
+      console.log('');
+    }
   });
 
 program.parse();
