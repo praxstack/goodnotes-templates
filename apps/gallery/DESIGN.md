@@ -130,4 +130,5 @@ No gallery dark mode · no i18n · no print stylesheet for the gallery itself ·
 
 ## Changelog
 
+- **2026-05-04 · W6** — D-1 production font cut 6 → 3 (Fraunces + JetBrains Mono + Caveat). `--sans` and `--marker` tokens removed; `--italic` now aliases `--serif` (Fraunces ital=1). A11Y-3 48 px rule extended to `.touch-target` so primary tap surfaces (header nav, CTAs) pass mobile without inflating inline text-flow links. Home + browse copy updated to reflect the real 22 packs.
 - **2026-04-30 · W4 kickoff** — initial DESIGN.md extracted from wireframes-v2 per design-review D-3.

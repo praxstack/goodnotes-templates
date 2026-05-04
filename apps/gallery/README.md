@@ -47,16 +47,21 @@ cd apps/gallery && npx tsx scripts/encode-blurhash.ts
 npm run build -w @pretext-templates/gallery
 ```
 
-## W4 scope (complete)
+## Current state (through W6)
 
-- ✅ Astro 6.2.1 scaffold, MDX integration, strict tsconfig
-- ✅ Content collection `packs` with Zod-validated frontmatter
-- ✅ Three routes: home, browse, pack-detail
-- ✅ Three seed MDX packs (`prax-journal` stable, `cornell-notes`/`morning-pages` stub)
-- ✅ BlurhashImage component (zero client JS — CSS placeholder only)
-- ✅ Build-time blurhash pipeline (`sharp` + `blurhash` npm)
-- ✅ Specimen generator for one real hero (prax-journal)
-- ✅ `DESIGN.md` extracted from approved wireframes-v2 (design-review D-3)
+- ✅ Astro 6.2.1 scaffold, MDX integration, strict tsconfig (W4)
+- ✅ Content collection `packs` with Zod-validated frontmatter (W4)
+- ✅ Three routes: home · browse · pack-detail (W4)
+- ✅ BlurhashImage component — zero client JS · CSS placeholder only (W4)
+- ✅ Build-time blurhash pipeline (`sharp` + `blurhash` npm) (W4)
+- ✅ Specimen generator for prax-journal hero (W4)
+- ✅ `DESIGN.md` extracted from approved wireframes-v2 (design-review D-3) (W4)
+- ✅ 22 pack manifests + 22 MDX files wired into the gallery (W5)
+- ✅ 21 MDX bodies enriched from per-pack READMEs (W6)
+- ✅ CLI `--render-scale` flag (W6, deferred from W3 T3)
+- ✅ D-1 production font cut 6 → 3 (W6)
+- ✅ D-5 / D-6 / D-7 a11y audit complete (W6)
+- ✅ D-12 mobile specimen collapse (W6)
 
 ## Deferred
 
@@ -64,7 +69,8 @@ npm run build -w @pretext-templates/gallery
 - `/search` (W8) · `/contribute` (W11) · `/remix` (W12) routes
 - Theme-swap demo surface (W7)
 - Codespaces tour surface (W3 backfill — lives in MDX docs)
-- Pack-migration integration: wire remaining 6 MDX files when `packages/packs-*` lands (W5–W6)
+- Playwright E2E test for the mobile D-12 layout — lands in W14 alongside the other 5 E2E flows
+- P3 #5 from the W6 review · share MIN/MAX render-scale constants between core and CLI (trivial, batch with a future core touch)
 
 ## References
 
