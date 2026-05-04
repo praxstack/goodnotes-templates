@@ -3,11 +3,14 @@
  * Tokens inherit from wireframes-v2 (design-review approved).
  * See ../../DESIGN.md for usage rules & A11Y overrides.
  *
- * D-1 note: 6 fonts here match the approved v2 mockup. Production cut to
- * Fraunces + JetBrains Mono + Caveat lands as a follow-up polish commit.
+ * Production font set (design-review D-1): Fraunces + JetBrains Mono +
+ * Caveat. The earlier v2 mockup loaded 6; Instrument Sans / Instrument
+ * Serif / Reenie Beanie were dev-only placeholders and are retired.
+ * Italic variants use Fraunces ital=1 so the serif italic voice lives
+ * on inside the Fraunces family.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,500;1,9..144,600;1,9..144,700&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@400;600&family=Reenie+Beanie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,500;1,9..144,600;1,9..144,700&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@400;600&display=swap');
 
 :root {
   /* palette */
@@ -32,13 +35,15 @@
   --highlighter: rgba(255, 240, 120, 0.55);
   --hairline: #d8d0be;
 
-  /* typography */
-  --sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* typography — 3 families in production (design-review D-1) */
   --serif: 'Fraunces', Georgia, serif;
-  --italic: 'Instrument Serif', Georgia, serif;
+  /* Italic voice lives inside Fraunces via font-style: italic — not a
+     separate family. Kept as a var so callers can write `font-family:
+     var(--italic)` for readability; add `font-style: italic` at the
+     call site. */
+  --italic: 'Fraunces', Georgia, serif;
   --mono: 'JetBrains Mono', Menlo, monospace;
   --hand: 'Caveat', cursive;
-  --marker: 'Reenie Beanie', cursive;
 
   /* motion */
   --ease-paper: cubic-bezier(0.2, 0.8, 0.2, 1);
