@@ -1,11 +1,18 @@
 /**
  * migrate-packs-w5 — W5 pack migration driver.
  *
- * Moves every pack from packs/<category>/<id>/ to packages/packs-<id>/
- * (git mv to preserve history), authors a manifest.json per pack that
- * validates against PackManifestSchema, and seeds MDX stubs into
- * apps/gallery/src/content/packs/ for any pack that doesn't already
- * have one.
+ * ONE-SHOT SCRIPT · HISTORICAL ARTEFACT.
+ *
+ * This ran exactly once (2026-04-30, commit `dcf13a7`) to land the
+ * big-bang pack migration from `packs/<category>/<id>/` to flat
+ * `packages/packs-<id>/`. It is preserved for audit trail and as a
+ * reference for how the 22 packs were seeded (descriptions, tags,
+ * category mapping, MDX stubs).
+ *
+ * **Safe to delete after W6 lands** once we're confident no follow-up
+ * migrations want to read from the seed table below. Until then it
+ * sits here inert — the idempotent guards (directory-exists / file-
+ * exists checks) mean re-running it on a clean tree is a no-op.
  *
  * Runs exactly once. Idempotent: if a pack is already at its new
  * location, we skip it. If a manifest already exists, we leave it
@@ -16,15 +23,7 @@
  *   tsx scripts/migrate-packs-w5.ts --apply  # actually move + write
  */
 
-import {
-  access,
-  mkdir,
-  readFile,
-  readdir,
-  rename,
-  writeFile,
-} from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { access, mkdir, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -445,9 +444,3 @@ for (const s of SEEDS) {
 }
 
 await main();
-
-// Silence unused import when dry-running:
-void readFile;
-void readdir;
-void rename;
-void existsSync;
