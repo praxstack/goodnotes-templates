@@ -1,0 +1,212 @@
+---
+/**
+ * /remix — fork + rebrand flow for pack authors.
+ *
+ * W12 · CEO plan E6 · design-review D-18.
+ *
+ * Current status: route stub — surfaces the intent + the 3-step flow
+ * described in the design review, with real links to the GitHub
+ * compare / fork flow users can complete manually today. The
+ * `pretext-templates remix <base-pack>` CLI that would automate
+ * fork + rename + rebrand is the W12 follow-up that ships alongside
+ * the CLI `init` subcommand (also referenced on /contribute).
+ *
+ * Zero client JS. Pure SSG.
+ */
+
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config/site';
+import { getCollection } from 'astro:content';
+
+const packs = await getCollection('packs');
+const sorted = [...packs].sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<Layout
+  title="Remix · pretext-templates"
+  description="Fork any pack, rebrand it, publish it back — all from one manifest.json edit."
+>
+  <article class="remix container">
+    <header class="remix__head">
+      <p class="meta">Remix</p>
+      <h1>Fork. Rebrand. Ship.</h1>
+      <p class="remix__lede">
+        Every pack is MIT-licensed and designed to fork. Start from
+        any existing pack, change what you want, and open a PR — or
+        publish under your own namespace.
+      </p>
+    </header>
+
+    <section class="remix__section">
+      <h2>1 · Pick a base pack</h2>
+      <p>Choose the pack closest to what you want to build:</p>
+      <ul class="remix__packs" role="list">
+        {
+          sorted.map((p) => (
+            <li class="remix__pack">
+              <a href={`/packs/${p.data.id}`} class="remix__pack-link">
+                <span class="remix__pack-name">{p.data.title}</span>
+                <span class="remix__pack-meta meta">
+                  {p.data.category} · v{p.data.version}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="remix__section">
+      <h2>2 · Fork + rename</h2>
+      <p>
+        Fork the repo on GitHub, then copy the pack you picked and
+        rename the directory + manifest id:
+      </p>
+      <pre class="remix__code">
+<code>{`git clone https://github.com/<your-user>/pretext-templates
+cd pretext-templates
+cp -r packages/packs-eat-the-frog packages/packs-your-id
+
+# Edit the manifest
+sed -i '' 's/eat-the-frog/your-id/g' packages/packs-your-id/manifest.json
+sed -i '' 's/"name": "Eat the Frog"/"name": "Your Pack"/' packages/packs-your-id/manifest.json
+sed -i '' 's/"version": "0.1.0"/"version": "0.1.0-fork.0"/' packages/packs-your-id/manifest.json`}</code></pre>
+
+      <p class="meta remix__note">
+        The <code>pretext-templates remix &lt;base-id&gt; --as &lt;new-id&gt;</code>
+        CLI subcommand (W12 follow-up · tracked in CEO plan E6) will
+        automate this three-command dance. Until then, the sed lines
+        above do the same work deterministically.
+      </p>
+    </section>
+
+    <section class="remix__section">
+      <h2>3 · Ship</h2>
+      <p>Two paths:</p>
+      <ul class="remix__checklist">
+        <li>
+          <strong>Back to the registry</strong> — open a PR at
+          <a href={SITE.repoUrl + '/compare'}>{SITE.domain}/compare</a>.
+          See <a href="/contribute">Contribute</a> for the full contract.
+        </li>
+        <li>
+          <strong>Your own namespace</strong> — publish your fork under
+          <code>@your-scope/pretext-pack-your-id</code>; the gallery
+          stays MIT so downstream distribution is yours to run.
+        </li>
+      </ul>
+    </section>
+
+    <hr class="rule" />
+
+    <footer class="remix__footer meta">
+      <p>
+        Starting fresh instead? See <a href="/contribute">Contribute</a>
+        for the scaffold-from-empty path.
+      </p>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .remix {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    max-width: 780px;
+  }
+  .remix__head {
+    margin-bottom: 48px;
+  }
+  .remix__head h1 {
+    margin-top: 8px;
+  }
+  .remix__lede {
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    margin-top: 16px;
+    max-width: 58ch;
+  }
+  .remix__section {
+    margin: 40px 0;
+  }
+  .remix__section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .remix__section p {
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .remix__packs {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    display: grid;
+    gap: 2px;
+  }
+  .remix__pack-link {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 24px;
+    align-items: baseline;
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease-paper);
+  }
+  .remix__pack-link:hover {
+    border-bottom-color: var(--ink-whisper);
+  }
+  .remix__pack-name {
+    font-family: var(--serif);
+    font-weight: 500;
+  }
+  .remix__pack-meta {
+    text-align: right;
+  }
+  .remix__code {
+    background: var(--paper-dark);
+    border-left: 3px solid var(--sage);
+    padding: 16px 20px;
+    margin: 16px 0;
+    overflow-x: auto;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+  .remix__code code {
+    color: var(--ink);
+    font-family: var(--mono);
+    background: transparent;
+  }
+  .remix__checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .remix__checklist li {
+    padding: 8px 0;
+    color: var(--ink-soft);
+  }
+  .remix__note {
+    margin-top: 8px;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .remix__footer {
+    margin-top: 48px;
+  }
+  @media (max-width: 768px) {
+    .remix__pack-link {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .remix__pack-meta {
+      text-align: left;
+    }
+  }
+</style>
