@@ -66,3 +66,8 @@ output/
 packages/*/tsconfig.tsbuildinfo
 packages/*/dist/
 apps/*/dist/
+
+# Playwright artefacts
+test-results/
+playwright-report/
+/tests/e2e/.auth/
