@@ -224,6 +224,18 @@ const { initial = themes[0]?.id ?? '', label = 'Preview theme' } = Astro.props;
     const fromUrl = urlTheme
       ? buttons.find((b) => b.dataset.themeId === urlTheme) ?? null
       : null;
+    // If the URL carries a theme id we don't know about, scrub it so
+    // a share-link like ?theme=goodbye-world doesn't linger. Write the
+    // resolved id back (or unset if we fell through to the default).
+    if (urlTheme && !fromUrl) {
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('theme');
+        window.history.replaceState(null, '', url.toString());
+      } catch {
+        /* best-effort */
+      }
+    }
     const initialBtn =
       fromUrl ??
       buttons.find((b) => b.getAttribute('aria-checked') === 'true') ??
