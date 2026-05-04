@@ -54,10 +54,15 @@ const { initial = themes[0]?.id ?? '', label = 'Preview theme' } = Astro.props;
           aria-label={`Preview ${t.name} theme`}
           title={t.name}
           style={{
-            '--swatch-bg': t.palette.background,
-            '--swatch-fg': t.palette.foreground,
+            /* Names match palette.json tokens exactly so the script can
+             * rewrite --swatch-<name> → --theme-<name> without translation.
+             * The frame CSS then reads var(--theme-background), matching. */
+            '--swatch-background': t.palette.background,
+            '--swatch-foreground': t.palette.foreground,
             '--swatch-primary': t.palette.primary,
             '--swatch-accent': t.palette.accent,
+            '--swatch-border': t.palette.border,
+            '--swatch-muted': t.palette.muted,
           }}
         >
           <span class="theme-swap__swatch-dot" aria-hidden="true" />
@@ -119,7 +124,7 @@ const { initial = themes[0]?.id ?? '', label = 'Preview theme' } = Astro.props;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: var(--swatch-bg);
+    background: var(--swatch-background);
     border: 1px solid var(--swatch-primary);
     box-shadow: inset 0 0 0 3px var(--swatch-accent);
     flex-shrink: 0;
