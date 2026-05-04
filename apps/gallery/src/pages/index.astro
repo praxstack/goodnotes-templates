@@ -227,12 +227,36 @@ const shelfPacks = packs
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  /* Mobile — design-review D-12.
+   * 1 specimen only · install command above the fold · card list stacks.
+   * Specimen is reduced (max 70vw) so the install command stays visible
+   * without scrolling on a 375 × 667 pt viewport. */
   @media (max-width: 599px) {
     .hero {
-      padding-top: 40px;
+      padding-top: 32px;
+      padding-bottom: 48px;
+      gap: 32px;
+    }
+    .hero__specimen {
+      max-width: 70vw;
+      margin: 0 auto;
+    }
+    .hero__install {
+      padding: 14px 14px;
+      gap: 8px;
+    }
+    .hero__install code {
+      font-size: 0.85rem;
+    }
+    .shelf__head {
+      margin-bottom: 24px;
     }
     .shelf__grid {
       grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .shelf__card {
+      padding: 20px;
     }
   }
 </style>
