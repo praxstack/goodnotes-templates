@@ -181,6 +181,24 @@ const { initial = themes[0]?.id ?? '', label = 'Preview theme' } = Astro.props;
       btn.addEventListener('click', () => applyTheme(btn));
     });
 
+    // Paint the initial theme on load so the `aria-checked="true"`
+    // pill visually matches the frame. Without this the first pill
+    // reads "active" but the frame is still warm-analog until the
+    // user clicks. We do NOT call .focus() on load — that would steal
+    // keyboard focus from the page top — so split the paint from the
+    // focus management the click handler does.
+    const initialBtn =
+      buttons.find((b) => b.getAttribute('aria-checked') === 'true') ??
+      buttons[0];
+    if (initialBtn) {
+      const style = initialBtn.getAttribute('style') ?? '';
+      const matches = [...style.matchAll(/--swatch-([a-z-]+):\s*([^;]+)/gu)];
+      for (const m of matches) {
+        target.style.setProperty(`--theme-${m[1]}`, m[2].trim());
+      }
+      target.setAttribute('data-theme', initialBtn.dataset.themeId ?? '');
+    }
+
     // Arrow-key navigation (A11Y-7). Home/End jump to ends. Enter/Space
     // also trigger the native button click, so we don't intercept them.
     group.addEventListener('keydown', (evt) => {
