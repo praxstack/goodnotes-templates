@@ -117,14 +117,31 @@ a:hover {
   border-radius: 2px;
 }
 
-/* Minimum touch target per A11Y-3 — applied to interactive elements */
+/* Minimum touch target per A11Y-3 — applied to standalone tap surfaces.
+ *
+ * Scope: <button> · ARIA buttons · .btn / .cta / .touch classes · any <a>
+ * marked .touch-target. Inline links inside running text are excluded on
+ * purpose — the spec targets primary interactions (nav, cards, CTAs), not
+ * every word-level link. Breadcrumbs + inline repo links are text-flow
+ * and don't count as primary tap surfaces.
+ */
 button,
 [role='button'],
 a.btn,
 a.cta,
+a.touch-target,
 .touch {
   min-height: 48px;
   min-width: 48px;
+}
+
+/* Align-to-center for links-as-buttons so the expanded hit area
+ * doesn't push text off-baseline. */
+a.btn,
+a.cta,
+a.touch-target {
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Mono/code conventions */
