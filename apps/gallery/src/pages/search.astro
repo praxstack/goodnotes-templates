@@ -243,9 +243,14 @@ const index = entries
       }
     };
 
+    // Cap reads at 200 chars — defends shared links against the common
+    // ~2000-char URL limit (Twitter, older proxies, some email clients)
+    // and incidentally limits the tokenizer's worst-case work.
+    const MAX_Q = 200;
     const readUrl = (): string => {
       try {
-        return new URL(window.location.href).searchParams.get('q') ?? '';
+        const raw = new URL(window.location.href).searchParams.get('q') ?? '';
+        return raw.slice(0, MAX_Q);
       } catch {
         return '';
       }
