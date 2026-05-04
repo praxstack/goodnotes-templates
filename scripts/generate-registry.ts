@@ -24,6 +24,14 @@
  *   npx tsx scripts/generate-registry.ts
  *   npx tsx scripts/generate-registry.ts --out dist/registry.json
  *   npx tsx scripts/generate-registry.ts --dry-run
+ *   npx tsx scripts/generate-registry.ts --frozen   # omit generated_at + source_commit
+ *
+ * The `--frozen` flag produces a byte-stable registry — `generated_at`
+ * is omitted and `source_commit` is not probed. Use in CI / the repo-
+ * committed copy so routine rebuilds don't churn history. Local dev
+ * and production builds should run without --frozen so the gallery
+ * footer can show "registry updated X minutes ago".
+ * Addresses post-W5 code-review P2 #2.
  */
 
 import fs from 'node:fs/promises';
@@ -53,6 +61,7 @@ const PACKAGES_DIR = path.join(REPO_ROOT, 'packages');
 interface Args {
   outPath: string;
   dryRun: boolean;
+  frozen: boolean;
 }
 
 function parseArgs(argv: readonly string[]): Args {
@@ -62,7 +71,8 @@ function parseArgs(argv: readonly string[]): Args {
       ? path.resolve(argv[outIdx + 1])
       : path.join(REPO_ROOT, 'registry.json');
   const dryRun = argv.includes('--dry-run');
-  return { outPath, dryRun };
+  const frozen = argv.includes('--frozen');
+  return { outPath, dryRun, frozen };
 }
 
 // ─── Scanning ───────────────────────────────────────────────────────
@@ -181,10 +191,16 @@ async function main(): Promise<void> {
     seen.add(p.id);
   }
 
+  // Frozen mode: use an epoch placeholder timestamp and omit the git SHA
+  // so the emitted JSON is byte-stable across runs on the same tree. The
+  // schema still requires `generated_at` (consumers display it), so we
+  // stamp a canonical "not tracked" value that parses but communicates
+  // the mode clearly in the footer.
+  const FROZEN_TIMESTAMP = '1970-01-01T00:00:00Z';
   const registry: Registry = {
     schema_version: REGISTRY_SCHEMA_VERSION,
-    generated_at: new Date().toISOString(),
-    source_commit: currentGitSha(),
+    generated_at: args.frozen ? FROZEN_TIMESTAMP : new Date().toISOString(),
+    source_commit: args.frozen ? undefined : currentGitSha(),
     packs,
   };
 
