@@ -225,7 +225,14 @@ async function buildPdfProbe(
         }),
       );
     }
-    renders.push({ spec, buffers, bookmark: bookmarkTitle(spec) });
+    // SpecRender shape is { page, buffers } — keep aligned with the
+    // exported interface so the splicer's `bookmarkTitle(render.page)`
+    // doesn't read undefined. The previous `spec`/`bookmark` shape
+    // was silently wrong and surfaced as a runtime crash when the
+    // splicer walked render.page. The probe now drives the same
+    // contract the Prax-Journal renderer does, so this script is a
+    // real integration smoke test.
+    renders.push({ page: spec, buffers });
     pageCount += buffers.length;
 
     if ((i + 1) % 10 === 0 || i === specs.length - 1) {
