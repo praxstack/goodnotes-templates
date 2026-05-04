@@ -1,0 +1,208 @@
+---
+/**
+ * /contribute — onboarding for new pack authors + submitters.
+ *
+ * Design-review D-14. Satisfies the Persona A journey gap the design
+ * review called out: "creator who wants to publish" had no surface.
+ *
+ * Content-heavy, zero interactive state. Zero client-JS. Pure SSG.
+ * A `pretext-templates submit` CLI subcommand is aspirational here —
+ * the page describes the contract, the CLI lands in a later commit.
+ */
+
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config/site';
+---
+
+<Layout
+  title="Contribute · pretext-templates"
+  description="How to add your own pack to the pretext-templates registry — from zero to a merged PR in under 30 minutes."
+>
+  <article class="contribute container">
+    <header class="contribute__head">
+      <p class="meta">Contribute</p>
+      <h1>Add your pack.</h1>
+      <p class="contribute__lede">
+        pretext-templates is MIT-licensed and deliberately built to be
+        forked. If your pack fits the warm-analog brief, the registry
+        would love to carry it. From clone to merged PR in under thirty
+        minutes.
+      </p>
+    </header>
+
+    <section class="contribute__section">
+      <h2>1 · What fits</h2>
+      <p>
+        A pretext-templates pack is <em>one HTML file</em> that renders
+        to a PDF. Self-contained styles. A single <code>manifest.json</code>
+        describing it. That's it.
+      </p>
+      <ul class="contribute__checklist">
+        <li>✔ Warm analog-leaning typography (serif primary · one accent)</li>
+        <li>✔ Prints cleanly in A4 or Letter</li>
+        <li>✔ Works on GoodNotes 6 / Notability / Noteshelf / CollaNote</li>
+        <li>✔ MIT-licensed or a compatible permissive license</li>
+        <li>✔ No JavaScript in the template itself (print fidelity)</li>
+      </ul>
+    </section>
+
+    <section class="contribute__section">
+      <h2>2 · Clone + scaffold</h2>
+      <pre class="contribute__code">
+<code>git clone {SITE.repoUrl}
+cd pretext-templates
+npm ci
+npm run dev                           # starts the gallery preview</code></pre>
+
+      <p>
+        Once the dev server is up, the CLI scaffolder creates a new
+        pack directory with a blank template + <code>manifest.json</code>:
+      </p>
+
+      <pre class="contribute__code">
+<code>npx @pretext-templates/cli init my-pack-id --category worksheet</code></pre>
+
+      <p class="meta contribute__note">
+        The <code>init</code> subcommand is on the W11 milestone; until
+        it lands, copy the <code>packages/packs-eat-the-frog/</code>
+        directory and rename it as a starting point.
+      </p>
+    </section>
+
+    <section class="contribute__section">
+      <h2>3 · manifest.json contract</h2>
+      <p>
+        Every pack owns a <code>manifest.json</code> that validates against
+        the Zod schema in
+        <code>packages/core/src/types/registry.ts</code>. The minimum is:
+      </p>
+      <pre class="contribute__code">
+<code>{`{
+  "schema_version": 1,
+  "id": "my-pack-id",
+  "name": "My Pack",
+  "description": "One-line summary ≤ 140 chars.",
+  "category": "worksheet",
+  "version": "0.1.0",
+  "author": "Your GitHub handle",
+  "entry": "my-pack-id.html",
+  "license": "MIT",
+  "tags": ["worksheet", "your-tag"]
+}`}</code></pre>
+
+      <p>
+        <code>id</code> must match the directory name exactly
+        (<code>packages/packs-<strong>&lt;id&gt;</strong>/</code>).
+        Kebab-case only. The build-time validator at
+        <code>apps/gallery/scripts/validate-pack-ids.ts</code> enforces
+        this on every run.
+      </p>
+    </section>
+
+    <section class="contribute__section">
+      <h2>4 · Check before PR</h2>
+      <pre class="contribute__code">
+<code>npm test                              # 211 unit tests must stay green
+npm run test:e2e                      # 25 Playwright smokes must pass
+npx tsc -b                            # TypeScript clean
+npx astro check                       # 0 errors</code></pre>
+
+      <p>
+        If all four pass, you're in the clear. The registry regenerates
+        automatically; the gallery picks up your MDX stub (one file, next
+        to the others in <code>apps/gallery/src/content/packs/</code>).
+      </p>
+    </section>
+
+    <section class="contribute__section">
+      <h2>5 · Submit</h2>
+      <p>
+        Open a PR at <a href={SITE.repoUrl + '/compare'}>{SITE.domain}</a>.
+        The PR template asks for a one-line pack description, a screenshot
+        of the rendered PDF, and a checkbox confirming the WCAG 2.2 AA
+        audit on the template itself (contrast ≥ 4.5:1 on body copy).
+      </p>
+      <p>
+        Every PR runs the same four checks above in CI; green = ready
+        for review. First-pass review typically lands within 48 hours.
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <footer class="contribute__footer meta">
+      <p>
+        Questions? Open a discussion at
+        <a href={SITE.repoUrl + '/discussions'}>{SITE.domain}/discussions</a>.
+      </p>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .contribute {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    max-width: 780px;
+  }
+  .contribute__head {
+    margin-bottom: 48px;
+  }
+  .contribute__head h1 {
+    margin-top: 8px;
+  }
+  .contribute__lede {
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    margin-top: 16px;
+    max-width: 58ch;
+  }
+  .contribute__section {
+    margin: 40px 0;
+  }
+  .contribute__section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .contribute__section p {
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .contribute__checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    color: var(--ink);
+  }
+  .contribute__checklist li {
+    padding: 6px 0;
+    font-family: var(--mono);
+    font-size: 0.95rem;
+  }
+  .contribute__code {
+    background: var(--paper-dark);
+    border-left: 3px solid var(--sage);
+    padding: 16px 20px;
+    margin: 16px 0;
+    overflow-x: auto;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  .contribute__code code {
+    color: var(--ink);
+    font-family: var(--mono);
+    background: transparent;
+  }
+  .contribute__note {
+    margin-top: 8px;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .contribute__footer {
+    margin-top: 48px;
+  }
+</style>
