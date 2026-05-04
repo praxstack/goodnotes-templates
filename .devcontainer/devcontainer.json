@@ -5,8 +5,8 @@
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "//postCreate": "Runs once on codespace creation. `npm ci` pulls workspace deps + puppeteer's Chromium (~280 MB); `npm test` verifies the 194-test regression gate before the user opens a single file. Both fast enough to keep total <60s on Codespaces 4-core.",
-  "postCreateCommand": "npm ci && npm test",
+  "//postCreate": "Runs once on codespace creation. `npm ci` pulls workspace deps + puppeteer's Chromium (~280 MB); `npm test` verifies the 211-test regression gate; `astro build` prewarms the gallery so the preview server is instant. All three stay under 60s on Codespaces 4-core.",
+  "postCreateCommand": "npm ci && npm test && npm run build -w @pretext-templates/gallery",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -21,10 +21,14 @@
       }
     }
   },
-  "forwardPorts": [4040],
+  "forwardPorts": [4040, 4321],
   "portsAttributes": {
     "4040": {
-      "label": "preview-server",
+      "label": "cli-preview-server",
+      "onAutoForward": "silent"
+    },
+    "4321": {
+      "label": "astro-gallery",
       "onAutoForward": "notify"
     }
   },
