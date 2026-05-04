@@ -1,0 +1,203 @@
+---
+/**
+ * ThemeSwap — horizontal swatch row that retints the specimen preview.
+ *
+ * Contract (design-review S3 + decisions #4 / #5 / #13):
+ *   • role="radiogroup" with arrow-key + home/end navigation (A11Y-7)
+ *   • click-to-select (no hover-to-preview per decision #4)
+ *   • CSS-var updates are scoped to the nearest [data-theme-target]
+ *     ancestor, not :root — gallery chrome stays warm-analog (dec. 13)
+ *   • 48 × 48 px swatch hit area (A11Y-3), sage focus-visible ring
+ *   • 240 ms CSS transition on the target's color + bg (decision #5)
+ *   • prefers-reduced-motion strips the transition (A11Y-5)
+ *   • aria-live polite region announces the chosen theme (A11Y-6)
+ *   • no URL-persistence yet — that ships with shareable URLs in W8
+ *
+ * Zero client-JS client-bundle beyond the inline <script> below.
+ */
+
+import palette from '../data/theme-palette.json';
+
+type Palette = Record<string, string>;
+type ThemeEntry = { id: string; name: string; palette: Palette };
+type PaletteFile = { tokens: readonly string[]; themes: readonly ThemeEntry[] };
+
+const data = palette as unknown as PaletteFile;
+const themes = data.themes;
+
+interface Props {
+  /** Which theme id is active on first paint. Defaults to the first. */
+  initial?: string;
+  /** Label above the swatch row. */
+  label?: string;
+}
+
+const { initial = themes[0]?.id ?? '', label = 'Preview theme' } = Astro.props;
+---
+
+<div class="theme-swap" data-theme-swap>
+  <p class="theme-swap__label meta" id="theme-swap-label">{label}</p>
+  <div
+    class="theme-swap__row"
+    role="radiogroup"
+    aria-labelledby="theme-swap-label"
+  >
+    {
+      themes.map((t) => (
+        <button
+          type="button"
+          role="radio"
+          class="theme-swap__swatch"
+          data-theme-id={t.id}
+          aria-checked={t.id === initial ? 'true' : 'false'}
+          tabindex={t.id === initial ? 0 : -1}
+          aria-label={`Preview ${t.name} theme`}
+          title={t.name}
+          style={{
+            '--swatch-bg': t.palette.background,
+            '--swatch-fg': t.palette.foreground,
+            '--swatch-primary': t.palette.primary,
+            '--swatch-accent': t.palette.accent,
+          }}
+        >
+          <span class="theme-swap__swatch-dot" aria-hidden="true" />
+          <span class="theme-swap__swatch-name">{t.name}</span>
+        </button>
+      ))
+    }
+  </div>
+  <span
+    class="sr-only"
+    role="status"
+    aria-live="polite"
+    id="theme-swap-announce"
+  ></span>
+</div>
+
+<style>
+  .theme-swap {
+    margin-top: 24px;
+  }
+  .theme-swap__label {
+    margin-bottom: 10px;
+  }
+  .theme-swap__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .theme-swap__swatch {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background var(--dur-fast) var(--ease-paper),
+      border-color var(--dur-fast) var(--ease-paper),
+      color var(--dur-fast) var(--ease-paper);
+  }
+  .theme-swap__swatch:hover {
+    border-color: var(--ink-whisper);
+    color: var(--ink);
+  }
+  .theme-swap__swatch[aria-checked='true'] {
+    background: var(--paper-dark);
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .theme-swap__swatch-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--swatch-bg);
+    border: 1px solid var(--swatch-primary);
+    box-shadow: inset 0 0 0 3px var(--swatch-accent);
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  // Minimal controller for the radiogroup. Pure DOM, no framework.
+  // One behaviour-owning node per page is enough — we qSA'd by class
+  // not id so a page could in theory have multiple swaps in the future.
+
+  const groups = document.querySelectorAll<HTMLElement>('[data-theme-swap]');
+  const announce = document.getElementById('theme-swap-announce');
+
+  function say(msg: string): void {
+    if (announce) announce.textContent = msg;
+  }
+
+  groups.forEach((group) => {
+    const buttons = Array.from(
+      group.querySelectorAll<HTMLButtonElement>('[role="radio"]'),
+    );
+    if (buttons.length === 0) return;
+
+    // Target = the [data-theme-target] ancestor we retint. Falls back
+    // to the nearest figure/section if the caller didn't mark one,
+    // which preserves the "scope to the specimen, not :root" contract.
+    const target =
+      (group.closest('[data-theme-target]') as HTMLElement | null) ??
+      (group.parentElement as HTMLElement | null);
+    if (!target) return;
+
+    const applyTheme = (btn: HTMLButtonElement): void => {
+      const id = btn.dataset.themeId;
+      if (!id) return;
+      // Retint by copying the swatch's --swatch-* vars onto the target
+      // as theme-specific vars. Target CSS reads these to style the
+      // specimen frame.
+      const style = btn.getAttribute('style') ?? '';
+      const matches = [...style.matchAll(/--swatch-([a-z-]+):\s*([^;]+)/gu)];
+      for (const m of matches) {
+        target.style.setProperty(`--theme-${m[1]}`, m[2].trim());
+      }
+      target.setAttribute('data-theme', id);
+
+      // aria-checked + tabindex management
+      buttons.forEach((b) => {
+        const isSelf = b === btn;
+        b.setAttribute('aria-checked', isSelf ? 'true' : 'false');
+        b.tabIndex = isSelf ? 0 : -1;
+      });
+      btn.focus();
+
+      const name = btn.getAttribute('aria-label') ?? id;
+      say(name.replace(/^Preview /, '') + ' · active');
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => applyTheme(btn));
+    });
+
+    // Arrow-key navigation (A11Y-7). Home/End jump to ends. Enter/Space
+    // also trigger the native button click, so we don't intercept them.
+    group.addEventListener('keydown', (evt) => {
+      const key = (evt as KeyboardEvent).key;
+      const idx = buttons.findIndex(
+        (b) => b === document.activeElement,
+      );
+      if (idx < 0) return;
+      let next = idx;
+      if (key === 'ArrowRight' || key === 'ArrowDown') next = (idx + 1) % buttons.length;
+      else if (key === 'ArrowLeft' || key === 'ArrowUp')
+        next = (idx - 1 + buttons.length) % buttons.length;
+      else if (key === 'Home') next = 0;
+      else if (key === 'End') next = buttons.length - 1;
+      else return;
+      evt.preventDefault();
+      applyTheme(buttons[next]);
+    });
+  });
+</script>

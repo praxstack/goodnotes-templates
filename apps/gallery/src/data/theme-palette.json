@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "generated_from": "packages/core/assets/themes/*.css",
+  "tokens": [
+    "background",
+    "foreground",
+    "primary",
+    "accent",
+    "border",
+    "muted"
+  ],
+  "themes": [
+    {
+      "id": "bold-tech",
+      "name": "Bold Tech",
+      "palette": {
+        "background": "#f8f5ff",
+        "foreground": "#1e1b4b",
+        "primary": "#7c3aed",
+        "muted": "#a78bfa",
+        "accent": "#3b82f6",
+        "border": "#c4b5fd"
+      }
+    },
+    {
+      "id": "bubblegum",
+      "name": "Bubblegum",
+      "palette": {
+        "background": "#f6e6ee",
+        "foreground": "#3d2040",
+        "primary": "#c0408a",
+        "muted": "#d4a0c0",
+        "accent": "#d09030",
+        "border": "#d88ab0"
+      }
+    },
+    {
+      "id": "caffeine",
+      "name": "Caffeine",
+      "palette": {
+        "background": "#f5f0eb",
+        "foreground": "#2c1e14",
+        "primary": "#6b4330",
+        "muted": "#c4a882",
+        "accent": "#d4a060",
+        "border": "#d5c4aa"
+      }
+    },
+    {
+      "id": "candyland",
+      "name": "Candyland",
+      "palette": {
+        "background": "#f5f0f5",
+        "foreground": "#2a2040",
+        "primary": "#d060a0",
+        "muted": "#c0a0c0",
+        "accent": "#d0a020",
+        "border": "#d0b0d0"
+      }
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "palette": {
+        "background": "#f8f5ef",
+        "foreground": "#28261b",
+        "primary": "#b85535",
+        "muted": "#a09880",
+        "accent": "#9080d0",
+        "border": "#d0c8b8"
+      }
+    },
+    {
+      "id": "cyberpunk",
+      "name": "Cyberpunk",
+      "palette": {
+        "background": "#f0f0fa",
+        "foreground": "#0c0c28",
+        "primary": "#c800a0",
+        "muted": "#8080c0",
+        "accent": "#00c0a0",
+        "border": "#b0b0e0"
+      }
+    },
+    {
+      "id": "doom64",
+      "name": "Doom64",
+      "palette": {
+        "background": "#c8c4c0",
+        "foreground": "#1a1a18",
+        "primary": "#a01818",
+        "muted": "#808078",
+        "accent": "#3868a0",
+        "border": "#808078"
+      }
+    }
+  ]
+}

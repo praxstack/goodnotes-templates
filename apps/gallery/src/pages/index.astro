@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BlurhashImage from '../components/BlurhashImage.astro';
+import ThemeSwap from '../components/ThemeSwap.astro';
 import { getCollection } from 'astro:content';
 import blurhashManifest from '../data/blurhash-manifest.json';
 
@@ -54,21 +55,24 @@ const shelfPacks = packs
       ></span>
     </div>
     {hero && (
-      <figure class="hero__specimen">
-        {hero.data.heroImage && (
-          <BlurhashImage
-            src={hero.data.heroImage}
-            alt={`${hero.data.title} specimen preview`}
-            width={entry?.width ?? 1200}
-            height={entry?.height ?? 1600}
-            blurhashDataUrl={entry?.dataUrl}
-            loading="eager"
-            class="hero__img"
-          />
-        )}
+      <figure class="hero__specimen" data-theme-target>
+        <div class="hero__frame">
+          {hero.data.heroImage && (
+            <BlurhashImage
+              src={hero.data.heroImage}
+              alt={`${hero.data.title} specimen preview`}
+              width={entry?.width ?? 1200}
+              height={entry?.height ?? 1600}
+              blurhashDataUrl={entry?.dataUrl}
+              loading="eager"
+              class="hero__img"
+            />
+          )}
+        </div>
         <figcaption class="hero__caption meta">
           {hero.data.title} · v{hero.data.version}
         </figcaption>
+        <ThemeSwap label="Try a theme" />
       </figure>
     )}
   </section>
@@ -160,8 +164,23 @@ const shelfPacks = packs
   .hero__specimen {
     margin: 0;
   }
-  .hero__img {
+  /* Frame acts as the paint surface for the theme swap. Starts with
+   * the gallery's warm-analog tokens, then ThemeSwap overwrites the
+   * --theme-* variables when the user picks a theme. The transition
+   * lives here (decision #5: 240 ms). */
+  .hero__frame {
+    padding: 12px;
+    background: var(--theme-background, var(--paper-dark));
+    border: 1px solid var(--theme-border, var(--hairline));
+    border-radius: 4px;
+    transition: background var(--dur-base) var(--ease-paper),
+      border-color var(--dur-base) var(--ease-paper),
+      box-shadow var(--dur-base) var(--ease-paper);
     box-shadow: 0 24px 48px -24px rgba(42, 40, 36, 0.28);
+  }
+  .hero__img {
+    /* Box-shadow lives on the frame now; keep the image crisp. */
+    display: block;
   }
   .hero__caption {
     margin-top: 12px;
