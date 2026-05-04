@@ -67,6 +67,14 @@
 | 26 | Dual project · Desktop Chrome + iPhone 13 | Lightweight enough for per-commit run · covers D-12 responsive | W7.5 `ccd7a38` |
 | 27 | Mobile clipboard test skipped | Playwright iPhone Chromium rejects `clipboard-write` permission | W14 `96c6029` |
 
+### Ship + docs (W13)
+
+| # | Decision | Rationale | Commit |
+|---|---|---|---|
+| 28 | Codespaces `postCreateCommand` prewarms gallery build | First `npm run preview` is instant; boot still under the 60 s D5 target on 4-core Codespaces | W13 `04b8e40` |
+| 29 | Forward both ports 4040 + 4321 in devcontainer | 4040 = legacy CLI preview server, 4321 = Astro dev · only 4321 notifies so users don't get double-prompted | W13 `04b8e40` |
+| 30 | MIGRATION.md audience-split (users / authors / registry consumers / scripters) | Each cohort has a different action surface · the one-liner perl rewrite is the exact shape the sprint used internally in `dcf13a7` | W13 `04b8e40` |
+
 ---
 
 ## Active blockers
