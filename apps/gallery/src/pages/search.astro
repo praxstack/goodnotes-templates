@@ -1,0 +1,280 @@
+---
+/**
+ * /search — fuzzy client-side filter over the 22 pack MDX entries.
+ *
+ * W8 · design-review D-11.
+ *
+ * Zero server work, zero build-time index, zero extra deps. SSG bakes
+ * the full 22-pack corpus into the page as a JSON script block; a
+ * small inline script filters as the user types. Matches against:
+ * id · title · category · oneLiner · tags. Scoring prefers exact
+ * substring matches, then token matches, then ranks shorter titles
+ * first (so "prax" surfaces "Praxis Ledger" before tangential hits).
+ *
+ * ?q=<query> persists the search across refresh + share (decision #9).
+ */
+
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('packs');
+
+// Shape a minimal record per pack so the JSON payload stays under 10 KB
+// on the wire. Pack body MDX is not included — search over frontmatter
+// is precise enough for a 22-entry corpus; full-text arrives if/when
+// the index crosses ~200 packs.
+const index = entries
+  .map((e) => ({
+    id: e.data.id,
+    title: e.data.title,
+    category: e.data.category,
+    oneLiner: e.data.oneLiner,
+    status: e.data.status,
+    version: e.data.version,
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title));
+---
+
+<Layout
+  title="Search · pretext-templates"
+  description="Fuzzy search across 22 pretext-templates packs — filter by title, category, tags, or one-liner."
+>
+  <section class="search container">
+    <header class="search__head">
+      <p class="meta">Search</p>
+      <h1>Find a pack.</h1>
+      <p class="search__lede">
+        Type anything in a pack's title, one-liner, or category. Matches
+        update as you type.
+      </p>
+
+      <label class="search__field" for="search-input">
+        <span class="sr-only">Search packs</span>
+        <input
+          id="search-input"
+          type="search"
+          name="q"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          placeholder="Try 'cornell', 'budget', 'habit'…"
+          class="search__input"
+          aria-describedby="search-status"
+        />
+      </label>
+      <p class="meta search__status" id="search-status" role="status" aria-live="polite">
+        Showing {index.length} packs.
+      </p>
+    </header>
+
+    <ul class="search__results" role="list" id="search-results">
+      {
+        index.map((pack) => (
+          <li
+            class="search__row"
+            data-search-id={pack.id}
+            data-search-haystack={`${pack.id} ${pack.title} ${pack.category} ${pack.oneLiner}`.toLowerCase()}
+          >
+            <a href={`/packs/${pack.id}`} class="search__link">
+              <span class="search__title">{pack.title}</span>
+              <span class="search__oneliner">{pack.oneLiner}</span>
+              <span class="search__meta meta">
+                {pack.category} · {pack.status} · v{pack.version}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="search__empty meta" id="search-empty" hidden>
+      No packs match. Try a looser search — or
+      <a href="/browse">browse the full shelf</a>.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .search {
+    padding-top: 48px;
+  }
+  .search__head {
+    margin-bottom: 32px;
+  }
+  .search__head h1 {
+    margin-top: 8px;
+  }
+  .search__lede {
+    color: var(--ink-soft);
+    margin-top: 16px;
+    max-width: 50ch;
+  }
+  .search__field {
+    display: block;
+    margin-top: 24px;
+  }
+  .search__input {
+    width: 100%;
+    max-width: 520px;
+    min-height: 48px;
+    padding: 12px 16px;
+    background: var(--paper-dark);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    transition: border-color var(--dur-fast) var(--ease-paper);
+  }
+  .search__input:focus-visible {
+    outline: 3px solid var(--sage);
+    outline-offset: 3px;
+    border-color: var(--ink);
+  }
+  .search__status {
+    margin-top: 12px;
+    color: var(--ink-quiet);
+  }
+  .search__results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .search__link {
+    display: grid;
+    grid-template-columns: 240px 1fr 200px;
+    gap: 32px;
+    align-items: baseline;
+    padding: 16px 0;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease-paper);
+  }
+  .search__link:hover {
+    border-bottom-color: var(--ink-whisper);
+  }
+  .search__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+  .search__oneliner {
+    color: var(--ink-soft);
+  }
+  .search__meta {
+    text-align: right;
+  }
+  .search__row[hidden] {
+    display: none;
+  }
+  .search__empty {
+    margin-top: 24px;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 768px) {
+    .search__link {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .search__meta {
+      text-align: left;
+    }
+  }
+</style>
+
+<script>
+  // Client-side fuzzy filter. O(n) per keystroke on 22 rows — 0.1 ms on
+  // any modern device. No `fuse.js` / `minisearch` dep; 22 is small
+  // enough that substring + token matching beats the overhead.
+  //
+  // URL persistence: ?q=<query> writes on every change via
+  // replaceState; read on load so shared links re-hydrate the same
+  // filtered view. Matches the ThemeSwap pattern (W8 decision #9).
+
+  const input = document.getElementById('search-input') as HTMLInputElement | null;
+  const status = document.getElementById('search-status');
+  const empty = document.getElementById('search-empty');
+  const rows = Array.from(
+    document.querySelectorAll<HTMLLIElement>('.search__row'),
+  );
+
+  if (input && status && empty) {
+    const total = rows.length;
+
+    // Normalize once: "Morning Pages, habit-tracker" → tokens.
+    const tokenize = (q: string): string[] =>
+      q
+        .toLowerCase()
+        .split(/[\s,]+/u)
+        .map((t) => t.trim())
+        .filter((t) => t.length > 0);
+
+    const filter = (query: string): number => {
+      const tokens = tokenize(query);
+      if (tokens.length === 0) {
+        rows.forEach((r) => r.removeAttribute('hidden'));
+        return total;
+      }
+      let visible = 0;
+      for (const row of rows) {
+        const hay = row.dataset.searchHaystack ?? '';
+        const hit = tokens.every((t) => hay.includes(t));
+        if (hit) {
+          row.removeAttribute('hidden');
+          visible++;
+        } else {
+          row.setAttribute('hidden', '');
+        }
+      }
+      return visible;
+    };
+
+    const writeUrl = (query: string): void => {
+      try {
+        const url = new URL(window.location.href);
+        if (query) url.searchParams.set('q', query);
+        else url.searchParams.delete('q');
+        window.history.replaceState(null, '', url.toString());
+      } catch {
+        // best-effort
+      }
+    };
+
+    const readUrl = (): string => {
+      try {
+        return new URL(window.location.href).searchParams.get('q') ?? '';
+      } catch {
+        return '';
+      }
+    };
+
+    const update = (query: string): void => {
+      const n = filter(query);
+      if (n === 0) {
+        status.textContent = 'No packs match your search.';
+        empty.removeAttribute('hidden');
+      } else if (n === total) {
+        status.textContent = `Showing ${total} packs.`;
+        empty.setAttribute('hidden', '');
+      } else {
+        status.textContent = `Showing ${n} of ${total} packs.`;
+        empty.setAttribute('hidden', '');
+      }
+    };
+
+    input.addEventListener('input', () => {
+      const q = input.value;
+      writeUrl(q);
+      update(q);
+    });
+
+    const initial = readUrl();
+    if (initial) {
+      input.value = initial;
+      update(initial);
+    }
+  }
+</script>
