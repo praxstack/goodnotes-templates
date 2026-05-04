@@ -269,6 +269,24 @@ test.describe('Gallery · W7 smoke', () => {
     }
   });
 
+  // D-14 · /contribute onboarding page · static content + header nav link.
+  test('/contribute renders + appears in primary nav', async ({ page }) => {
+    await page.goto('/');
+    await expect(
+      page.getByRole('navigation', { name: 'primary' }).getByRole('link', { name: 'Contribute' }),
+    ).toBeVisible();
+
+    await page.goto('/contribute');
+    await expect(
+      page.getByRole('heading', { name: 'Add your pack.' }),
+    ).toBeVisible();
+    // Five step-headings in order · verifies copy intent
+    const sectionHeadings = page.getByRole('heading', { level: 2 });
+    await expect(sectionHeadings).toHaveCount(5);
+    await expect(sectionHeadings.first()).toContainText(/What fits/i);
+    await expect(sectionHeadings.last()).toContainText(/Submit/i);
+  });
+
   // W14 · E2E flow #3 · OG card matrix coverage.
   // W10 emits 22 × 7 = 154 cards + 1 default. If the sharp pipeline
   // or astro's public/ copy regresses, social unfurlers silently break.
