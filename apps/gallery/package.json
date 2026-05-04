@@ -11,6 +11,7 @@
     "check": "astro check",
     "generate:specimens": "tsx scripts/generate-specimens.ts",
     "build:theme-palette": "tsx scripts/build-theme-palette.ts",
+    "build:og": "tsx scripts/build-og-cards.ts",
     "validate": "tsx scripts/validate-pack-ids.ts",
     "test": "echo 'gallery tests land in W5' && exit 0"
   },
