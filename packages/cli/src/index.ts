@@ -28,6 +28,12 @@ program
   .option('--color-mode <mode>', 'Color mode (e.g., dark). Omit for default.')
   .option('--paper-size <size>', 'Paper size: a4, letter, ipad-landscape, etc.', 'a4')
   .option('--orientation <dir>', 'portrait or landscape', 'portrait')
+  .option(
+    '--render-scale <n>',
+    'Render scale 0.1–2.0 (default 1.0). Lowers resolution to survive ' +
+      'Safari WebKit 200 MB heap ceiling on long renders. Also respects ' +
+      'PRAX_RENDER_SCALE env var. See W3 T3 of the eng review for context.',
+  )
   .option('-o, --output <path>', 'Output PDF path')
   .option('-v, --verbose', 'Verbose logging')
   .action(async (template, opts) => {
@@ -55,15 +61,45 @@ program
     console.log(`  Output: ${outputPath}\n`);
 
     // Dynamic import to avoid loading Puppeteer for --help
-    const { renderHTMLToPDFFile, closeBrowser } = await import('../../core/src/puppeteer-renderer.js');
+    const { renderHTMLToPDFFile, closeBrowser } = await import(
+      '../../core/src/puppeteer-renderer.js'
+    );
     const { getPageDimensions } = await import('../../core/src/dimensions.js');
 
     const dims = getPageDimensions(opts.paperSize, opts.orientation);
 
+    // Validate --render-scale loudly when the user passed the flag explicitly.
+    // Note: core's resolveRenderScale() silently falls back to 1.0 on bad input
+    // (a design choice so a typo'd env var can't brick a year-long run), but
+    // that would silently accept `--render-scale 5.0` on the CLI — which is
+    // worse than erroring. So we bounds-check here before delegating.
+    const MIN_SCALE = 0.1;
+    const MAX_SCALE = 2.0;
+    let renderScale: number | undefined;
+    if (opts.renderScale !== undefined) {
+      const parsed = Number(opts.renderScale);
+      if (!Number.isFinite(parsed) || parsed < MIN_SCALE || parsed > MAX_SCALE) {
+        console.error(
+          `Error: --render-scale must be a finite number in [${MIN_SCALE}, ${MAX_SCALE}] ` +
+            `(got '${opts.renderScale}').`,
+        );
+        process.exit(1);
+      }
+      renderScale = parsed;
+      if (renderScale !== 1.0) {
+        console.log(`  Render scale: ${renderScale}×`);
+      }
+    }
+
     try {
       const result = await renderHTMLToPDFFile(
-        { htmlPath: template, dimensions: dims, colorMode: opts.colorMode },
-        outputPath
+        {
+          htmlPath: template,
+          dimensions: dims,
+          colorMode: opts.colorMode,
+          renderScale,
+        },
+        outputPath,
       );
       console.log(`  ✅ ${(result.size / 1024).toFixed(0)} KB → ${outputPath}\n`);
     } finally {
