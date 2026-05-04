@@ -60,8 +60,7 @@ npm run build -w @pretext-templates/gallery
 
 ## Deferred
 
-- **D-1** production font cut 6→3 (Fraunces + JetBrains Mono + Caveat) — polish before ship
-- **D-2** remove "the stamp is real" meta-annotation + hand-drawn arrow when the full v2 layout is implemented
+- **D-2** remove "the stamp is real" meta-annotation + hand-drawn arrow when the full v2 layout is implemented (lives in wireframes-v2.html, not yet in the Astro routes)
 - `/search` (W8) · `/contribute` (W11) · `/remix` (W12) routes
 - Theme-swap demo surface (W7)
 - Codespaces tour surface (W3 backfill — lives in MDX docs)

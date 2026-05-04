@@ -38,15 +38,16 @@ Extracted per design-review D-3 (lands before any Astro component ships).
 
 ## Typography
 
-Production target is **3 fonts** (design-review D-1):
+Production ships **3 fonts** (design-review D-1, landed W6):
 
-| Token | Family | Fallback |
+| Token | Family | Role |
 |---|---|---|
-| `--serif` | Fraunces | Georgia, serif |
-| `--mono` | JetBrains Mono | Menlo, monospace |
-| `--hand` | Caveat | cursive |
+| `--serif` | Fraunces | Primary voice · display + body. Italic via `font-style: italic` on the same family (variable font · ital=1). |
+| `--italic` | Fraunces | Alias pointing at the same family — kept for call-site readability; always pair with `font-style: italic`. |
+| `--mono` | JetBrains Mono | Meta · kickers · code · install commands. |
+| `--hand` | Caveat | Warm accent · margin notes · captions. |
 
-The wireframes currently load 6 (adds Instrument Sans, Instrument Serif, Reenie Beanie). Those three are **dev-only placeholders** for v2 mockup rendering; the W4 scaffold inherits that set to match the approved look, and D-1 polish cuts the extras in a follow-up commit before ship.
+The earlier v2 mockup loaded 6 (Instrument Sans, Instrument Serif, Reenie Beanie on top) — those were dev-only placeholders for the mockup stage and have been retired from the gallery. Any future reintroduction requires a DESIGN.md entry justifying the LCP cost.
 
 Self-hosted via `shared/fonts/` (see `packages/packs-prax-journal/DESIGN.md` for license details). Google Fonts CDN is the dev fallback with `display=swap`.
 
