@@ -93,4 +93,56 @@ test.describe('Gallery · W7 smoke', () => {
     // Colophon line
     await expect(page.getByText(/typeset in fraunces/i)).toBeVisible();
   });
+
+  // W8 · E1 shareable URLs: theme persists via ?theme= query param.
+  test('theme swap persists via ?theme= URL', async ({ page }) => {
+    await page.goto('/?theme=bubblegum');
+
+    // Server renders first-pill aria-checked=true, but client script
+    // should overwrite it from the URL on load.
+    const bubblegum = page.getByRole('radio', { name: /bubblegum/i });
+    await expect(bubblegum).toHaveAttribute('aria-checked', 'true');
+
+    // The frame's data-theme should match the URL choice.
+    const figure = page.locator('[data-theme-target]');
+    await expect(figure).toHaveAttribute('data-theme', 'bubblegum');
+
+    // Clicking a different swatch should update ?theme= (replaceState).
+    const claude = page.getByRole('radio', { name: /claude/i });
+    await claude.click();
+    await expect(page).toHaveURL(/[?&]theme=claude\b/);
+  });
+
+  // W8 · D-11 search route: client-side filter, status region updates.
+  test('search route filters 22 packs live + persists via ?q=', async ({ page }) => {
+    await page.goto('/search');
+    await expect(page.getByRole('heading', { name: 'Find a pack.' })).toBeVisible();
+
+    const allRows = page.locator('.search__row');
+    await expect(allRows).toHaveCount(22);
+
+    const input = page.getByRole('searchbox');
+    await input.fill('cornell');
+
+    // Status copy reflects filtered count
+    await expect(page.locator('#search-status')).toContainText(/Showing 1 of 22/);
+    await expect(page).toHaveURL(/[?&]q=cornell\b/);
+
+    // The visible rows (not [hidden]) should be exactly 1.
+    const visibleRows = page.locator('.search__row:not([hidden])');
+    await expect(visibleRows).toHaveCount(1);
+    await expect(visibleRows.first()).toContainText(/Cornell Notes/i);
+
+    // No-match path
+    await input.fill('zzz-nothing-matches-this');
+    await expect(page.locator('#search-empty')).toBeVisible();
+  });
+
+  // W8 · ?q= persists across reloads (deep-link contract).
+  test('search ?q= re-hydrates on page load', async ({ page }) => {
+    await page.goto('/search?q=habit');
+    const input = page.getByRole('searchbox');
+    await expect(input).toHaveValue('habit');
+    await expect(page.locator('#search-status')).toContainText(/Showing \d+ of 22/);
+  });
 });

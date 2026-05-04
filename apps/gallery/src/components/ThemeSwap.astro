@@ -11,7 +11,9 @@
  *   • 240 ms CSS transition on the target's color + bg (decision #5)
  *   • prefers-reduced-motion strips the transition (A11Y-5)
  *   • aria-live polite region announces the chosen theme (A11Y-6)
- *   • no URL-persistence yet — that ships with shareable URLs in W8
+ *   • URL-persistence via ?theme=<id> (W8 · design-review decision #9).
+ *     On load, a query param wins over the SSR initial pill; on click
+ *     we push a replaceState so refresh + share-link both re-hydrate.
  *
  * Zero client-JS client-bundle beyond the inline <script> below.
  */
@@ -157,27 +159,52 @@ const { initial = themes[0]?.id ?? '', label = 'Preview theme' } = Astro.props;
       (group.parentElement as HTMLElement | null);
     if (!target) return;
 
-    const applyTheme = (btn: HTMLButtonElement): void => {
+    // W8 URL persistence helpers. Kept tiny: one query key, no fancy
+    // router. `replaceState` instead of `pushState` so back-button
+    // doesn't cycle through swatch picks — treat theme like a filter,
+    // not a navigation.
+    const writeUrl = (id: string): void => {
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('theme', id);
+        window.history.replaceState(null, '', url.toString());
+      } catch {
+        // Non-browser / sandboxed env — persistence is best-effort.
+      }
+    };
+    const readUrl = (): string | null => {
+      try {
+        return new URL(window.location.href).searchParams.get('theme');
+      } catch {
+        return null;
+      }
+    };
+
+    const paint = (btn: HTMLButtonElement): void => {
+      // Pure retint — no focus, no announce, no URL write. Used by the
+      // initial-paint path on load (decision #4: click-to-select, so
+      // load-from-URL must not mimic a click).
       const id = btn.dataset.themeId;
       if (!id) return;
-      // Retint by copying the swatch's --swatch-* vars onto the target
-      // as theme-specific vars. Target CSS reads these to style the
-      // specimen frame.
       const style = btn.getAttribute('style') ?? '';
       const matches = [...style.matchAll(/--swatch-([a-z-]+):\s*([^;]+)/gu)];
       for (const m of matches) {
         target.style.setProperty(`--theme-${m[1]}`, m[2].trim());
       }
       target.setAttribute('data-theme', id);
-
-      // aria-checked + tabindex management
       buttons.forEach((b) => {
         const isSelf = b === btn;
         b.setAttribute('aria-checked', isSelf ? 'true' : 'false');
         b.tabIndex = isSelf ? 0 : -1;
       });
-      btn.focus();
+    };
 
+    const applyTheme = (btn: HTMLButtonElement): void => {
+      const id = btn.dataset.themeId;
+      if (!id) return;
+      paint(btn);
+      btn.focus();
+      writeUrl(id);
       const name = btn.getAttribute('aria-label') ?? id;
       say(name.replace(/^Preview /, '') + ' · active');
     };
@@ -186,23 +213,22 @@ const { initial = themes[0]?.id ?? '', label = 'Preview theme' } = Astro.props;
       btn.addEventListener('click', () => applyTheme(btn));
     });
 
-    // Paint the initial theme on load so the `aria-checked="true"`
-    // pill visually matches the frame. Without this the first pill
-    // reads "active" but the frame is still warm-analog until the
-    // user clicks. We do NOT call .focus() on load — that would steal
-    // keyboard focus from the page top — so split the paint from the
-    // focus management the click handler does.
+    // Paint the initial theme on load. Priority order:
+    //   1. ?theme=<id> query param (W8 persistence · decision #9)
+    //   2. server-rendered aria-checked=true swatch (prop or default)
+    //   3. first swatch (total fallback · shouldn't happen in practice)
+    // We do NOT call .focus() on load — that would steal focus from
+    // the page top — so split the paint from the focus management
+    // the click handler does.
+    const urlTheme = readUrl();
+    const fromUrl = urlTheme
+      ? buttons.find((b) => b.dataset.themeId === urlTheme) ?? null
+      : null;
     const initialBtn =
+      fromUrl ??
       buttons.find((b) => b.getAttribute('aria-checked') === 'true') ??
       buttons[0];
-    if (initialBtn) {
-      const style = initialBtn.getAttribute('style') ?? '';
-      const matches = [...style.matchAll(/--swatch-([a-z-]+):\s*([^;]+)/gu)];
-      for (const m of matches) {
-        target.style.setProperty(`--theme-${m[1]}`, m[2].trim());
-      }
-      target.setAttribute('data-theme', initialBtn.dataset.themeId ?? '');
-    }
+    if (initialBtn) paint(initialBtn);
 
     // Arrow-key navigation (A11Y-7). Home/End jump to ends. Enter/Space
     // also trigger the native button click, so we don't intercept them.
