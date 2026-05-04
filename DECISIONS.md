@@ -75,6 +75,14 @@
 | 29 | Forward both ports 4040 + 4321 in devcontainer | 4040 = legacy CLI preview server, 4321 = Astro dev · only 4321 notifies so users don't get double-prompted | W13 `04b8e40` |
 | 30 | MIGRATION.md audience-split (users / authors / registry consumers / scripters) | Each cohort has a different action surface · the one-liner perl rewrite is the exact shape the sprint used internally in `dcf13a7` | W13 `04b8e40` |
 
+### Resolver + CLI rollup (W11 · W12 · W16-prep)
+
+| # | Decision | Rationale | Commit |
+|---|---|---|---|
+| 31 | W11 resolver is **additive** — NO `schema_version` bump | `resolvePackVersion()` reads existing `registry.json` v1 fields only (`id`, `versions[].version`). Zero consumer churn. Resolves the blocker by making it a non-decision. | W11 `a23a942` |
+| 32 | CLI `init` uses inline minimal template (not `git clone` the monorepo) | Contributors don't need 200 MB of historical stickers to start a new pack · keeps `pretext init my-pack` under 2 s · fork-full-repo flow is what `/remix` covers in the gallery | W15.5 (this commit) |
+| 33 | CLI `remix` prints commands, does NOT execute | Reversibility + blast-radius: a CLI that `rm -rf`s user dirs is a footgun. Printing the exact `cp`/`sed`/`git` commands lets users review before running. Mirrors the gallery `/remix` page for consistency. | W15.5 (this commit) |
+
 ---
 
 ## Active blockers
@@ -82,7 +90,7 @@
 | Block | Who decides | Impact if ignored |
 |---|---|---|
 | Safari iPad probe (D7) | Operator on physical device | W9 E3 browser-PDF ships blind; F2 rescue (CF Workers) burns slack |
-| Semver schema-version bump (W11) | llm-council-plus ideally | Registry v1 consumers break if we bump without deprecation window |
+| ~~Semver schema-version bump (W11)~~ | ~~llm-council-plus~~ | **RESOLVED** by row 31 — resolver is additive, no bump needed |
 
 ---
 
