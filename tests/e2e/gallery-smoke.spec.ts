@@ -145,4 +145,49 @@ test.describe('Gallery · W7 smoke', () => {
     await expect(input).toHaveValue('habit');
     await expect(page.locator('#search-status')).toContainText(/Showing \d+ of 22/);
   });
+
+  // W10 · E4 · OG cards wired. Every pack page surfaces an og:image
+  // pointing at the 1200×630 card the sharp pipeline emits.
+  test('pack detail sets og:image + twitter:image to pack OG card', async ({ page }) => {
+    await page.goto('/packs/prax-journal');
+    const og = await page
+      .locator('meta[property="og:image"]')
+      .getAttribute('content');
+    const tw = await page
+      .locator('meta[name="twitter:image"]')
+      .getAttribute('content');
+    expect(og).toContain('/og/prax-journal/');
+    expect(og).toMatch(/\.png$/);
+    expect(tw).toEqual(og);
+
+    // Dimensions claimed by the page must match the emitted file.
+    await expect(
+      page.locator('meta[property="og:image:width"]'),
+    ).toHaveAttribute('content', '1200');
+    await expect(
+      page.locator('meta[property="og:image:height"]'),
+    ).toHaveAttribute('content', '630');
+
+    // OG image URL: the meta tag serializes as an absolute URL against
+    // the site's canonical domain (pretext-templates.dev) since that's
+    // what Astro.site is set to. Social unfurlers need absolute; tests
+    // hit the local preview server, so translate to a same-origin path
+    // before probing the asset.
+    if (og) {
+      const pathname = new URL(og).pathname;
+      const res = await page.request.get(pathname);
+      expect(res.status()).toBe(200);
+      expect(res.headers()['content-type'] ?? '').toContain('image/png');
+    }
+  });
+
+  test('home uses the default og:image + card has summary_large_image type', async ({ page }) => {
+    await page.goto('/');
+    await expect(
+      page.locator('meta[property="og:image"]'),
+    ).toHaveAttribute('content', /\/og\/default\.png$/);
+    await expect(
+      page.locator('meta[name="twitter:card"]'),
+    ).toHaveAttribute('content', 'summary_large_image');
+  });
 });
