@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>pretext-templates.dev — design wireframes (2026-04-30)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --paper: #F9F5EC;
+    --paper-dark: #F0EAD9;
+    --ink: #2A2824;
+    --ink-soft: #4A453D;
+    --ink-quiet: #7D7668;
+    --ink-whisper: #B5AD9F;
+    --sage: #7B9476;
+    --sage-ink: #4E6249;
+    --sage-tint: rgba(123, 148, 118, 0.08);
+    --sage-edge: rgba(123, 148, 118, 0.22);
+    --clay: #B85A44;
+    --hairline: #D8D0BE;
+    --sans: 'Instrument Sans', -apple-system, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', Menlo, monospace;
+    --s1: 4px;
+    --s2: 8px;
+    --s3: 16px;
+    --s4: 24px;
+    --s5: 40px;
+    --s6: 64px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #2a2824;
+    font-family: var(--sans);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: var(--s5) 0;
+  }
+
+  .review-banner {
+    max-width: 1440px;
+    margin: 0 auto var(--s5);
+    padding: var(--s4) var(--s6);
+    color: #F9F5EC;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .review-banner h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: var(--s2);
+    color: #F9F5EC;
+  }
+
+  .review-banner p {
+    color: #B5AD9F;
+    margin-bottom: var(--s1);
+  }
+
+  .surface {
+    max-width: 1440px;
+    margin: 0 auto var(--s6);
+    background: var(--paper);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .surface-label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #B5AD9F;
+    background: #2a2824;
+    padding: 2px 8px;
+    border-radius: 2px;
+    z-index: 100;
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 1 — GALLERY HOME (pretext-templates.dev) — 1440×900
+     ═══════════════════════════════════════════════════════════════ */
+
+  .home {
+    width: 1440px;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 56px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .home-logo {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+  }
+
+  .home-nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .home-nav-links a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .home-nav-links a:hover { color: var(--sage-ink); }
+
+  .home-hero {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 56px;
+    padding: 72px 56px 48px;
+    flex: 1;
+    align-items: center;
+  }
+
+  .home-headline {
+    font-family: var(--serif);
+    font-size: 68px;
+    line-height: 1.02;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+
+  .home-headline em {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .home-sub {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 540px;
+  }
+
+  .home-install {
+    display: flex;
+    align-items: center;
+    background: var(--ink);
+    color: #F9F5EC;
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 14px 18px;
+    border-radius: 4px;
+    max-width: 520px;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .home-install::before {
+    content: "$";
+    color: var(--sage);
+    opacity: 0.8;
+  }
+
+  .home-install-copy {
+    margin-left: auto;
+    color: var(--ink-whisper);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .home-secondary {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--ink-quiet);
+  }
+
+  .home-secondary a {
+    color: var(--sage-ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .home-specimen {
+    position: relative;
+    aspect-ratio: 210/297;
+    max-height: 540px;
+    margin-left: auto;
+    background: var(--paper-dark);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 8px 24px rgba(42, 40, 36, 0.12), 0 40px 80px rgba(42, 40, 36, 0.08);
+    transform: rotate(2deg);
+    padding: 28px;
+    font-family: var(--serif);
+  }
+
+  .home-specimen-kicker {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-quiet);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .home-specimen-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .home-specimen-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    margin-bottom: 20px;
+  }
+
+  .home-specimen-rule {
+    height: 1px;
+    background: var(--ink-whisper);
+    margin-bottom: 18px;
+  }
+
+  .home-specimen-section {
+    margin-bottom: 16px;
+  }
+
+  .home-specimen-section-title {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--ink-quiet);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .home-specimen-frog {
+    background: var(--sage-tint);
+    border-left: 2px solid var(--sage);
+    padding: 8px 10px;
+    font-family: var(--serif);
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--sage-ink);
+    margin-bottom: 10px;
+  }
+
+  .home-specimen-line {
+    height: 1px;
+    background: var(--ink-whisper);
+    margin: 10px 0;
+    opacity: 0.6;
+  }
+
+  .home-specimen-clay {
+    background: rgba(184, 90, 68, 0.06);
+    padding: 6px 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--clay);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .home-specimen-stamp {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 50px;
+    height: 50px;
+    background: var(--clay);
+    color: #F9F5EC;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 10px;
+    font-weight: 600;
+    transform: rotate(-12deg);
+    box-shadow: 0 2px 8px rgba(184, 90, 68, 0.3);
+    line-height: 1;
+    text-align: center;
+  }
+
+  .home-pin {
+    position: absolute;
+    top: -14px;
+    left: 40px;
+    width: 16px;
+    height: 16px;
+    background: var(--clay);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(0,0,0,0.2);
+  }
+
+  .home-pack-row {
+    padding: 0 56px 32px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 24px;
+  }
+
+  .home-pack-row-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .home-pack-strip {
+    display: flex;
+    gap: 16px;
+    overflow-x: hidden;
+  }
+
+  .home-pack-thumb {
+    width: 180px;
+    aspect-ratio: 210/297;
+    background: var(--paper-dark);
+    border: 1px solid var(--hairline);
+    padding: 12px;
+    font-family: var(--serif);
+    transform: rotate(-1deg);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .home-pack-thumb:nth-child(2) { transform: rotate(1.5deg); }
+  .home-pack-thumb:nth-child(3) { transform: rotate(-1.5deg); }
+  .home-pack-thumb:nth-child(4) { transform: rotate(0.8deg); }
+
+  .home-pack-thumb-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .home-pack-thumb-meta {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--ink-quiet);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .home-pack-thumb-preview {
+    background: var(--paper);
+    height: calc(100% - 40px);
+    padding: 8px;
+    font-size: 7px;
+    line-height: 1.4;
+    color: var(--ink-quiet);
+  }
+
+  .home-pack-thumb-line {
+    height: 1px;
+    background: var(--ink-whisper);
+    margin: 4px 0;
+    opacity: 0.5;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 2 — PACK DETAIL — 1440×900
+     ═══════════════════════════════════════════════════════════════ */
+
+  .detail {
+    width: 1440px;
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-crumbs {
+    padding: 16px 56px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-quiet);
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .detail-crumbs a { color: inherit; text-decoration: none; }
+  .detail-crumbs .sep { color: var(--ink-whisper); }
+  .detail-crumbs .current { color: var(--ink); font-weight: 500; }
+
+  .detail-hero {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 48px;
+    padding: 32px 56px;
+    align-items: start;
+  }
+
+  .detail-preview {
+    position: relative;
+    aspect-ratio: 210/297;
+    background: var(--paper-dark);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 12px 40px rgba(42, 40, 36, 0.15);
+    padding: 32px;
+    font-family: var(--serif);
+  }
+
+  .detail-preview-page-count {
+    position: absolute;
+    bottom: -28px;
+    right: 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 1px;
+  }
+
+  .detail-preview-content {
+    /* Reuse specimen styling */
+    font-family: var(--serif);
+  }
+
+  .detail-sidebar {
+    padding-top: 16px;
+  }
+
+  .detail-kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--sage-ink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .detail-title {
+    font-family: var(--serif);
+    font-size: 52px;
+    line-height: 1.05;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .detail-byline {
+    font-size: 14px;
+    color: var(--ink-quiet);
+    margin-bottom: 24px;
+  }
+
+  .detail-byline strong { color: var(--ink-soft); font-weight: 500; }
+
+  .detail-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+
+  .detail-install-block {
+    background: var(--ink);
+    color: #F9F5EC;
+    padding: 14px 18px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 13px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .detail-install-block::before { content: "$"; color: var(--sage); opacity: 0.7; }
+
+  .detail-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .detail-btn {
+    padding: 12px 16px;
+    border: 1px solid var(--hairline);
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .detail-btn:hover { background: var(--sage-tint); border-color: var(--sage-edge); }
+
+  .detail-meta-block {
+    border-top: 1px solid var(--hairline);
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
+  .detail-meta-label {
+    color: var(--ink-quiet);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    font-size: 9px;
+  }
+
+  .detail-meta-val { color: var(--ink); font-weight: 500; }
+
+  .detail-themes-row {
+    padding: 32px 56px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .detail-themes-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .detail-theme-swatches {
+    display: flex;
+    gap: 12px;
+  }
+
+  .detail-theme-swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .detail-theme-dot {
+    width: 56px;
+    height: 56px;
+    border-radius: 2px;
+    border: 1px solid var(--hairline);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .detail-theme-dot div { flex: 1; }
+
+  .detail-theme-name {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .detail-theme-swatch.active .detail-theme-dot {
+    outline: 2px solid var(--sage-ink);
+    outline-offset: 2px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 3 — THEME-SWAP interaction state — 1440×900
+     Split: left = user hovering over swatch, right = live preview
+     ═══════════════════════════════════════════════════════════════ */
+
+  .theme-swap {
+    width: 1440px;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .theme-swap-header {
+    padding: 24px 56px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .theme-swap-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .theme-swap-toast {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--sage-ink);
+    color: #F9F5EC;
+    padding: 6px 12px;
+    border-radius: 3px;
+    animation: fadein 0.3s;
+  }
+
+  @keyframes fadein { from { opacity: 0; transform: translateY(-4px); } }
+
+  .theme-swap-body {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+    flex: 1;
+  }
+
+  .theme-swap-sidebar {
+    padding: 24px;
+    border-right: 1px solid var(--hairline);
+  }
+
+  .theme-swap-sidebar h3 {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .theme-swap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .theme-swap-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: var(--sans);
+    color: var(--ink-soft);
+  }
+
+  .theme-swap-row:hover { background: var(--sage-tint); }
+
+  .theme-swap-row.active {
+    background: var(--ink);
+    color: #F9F5EC;
+  }
+
+  .theme-swap-row .dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .theme-swap-row .dim {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+
+  .theme-swap-preview {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper-dark);
+  }
+
+  .theme-swap-doc {
+    aspect-ratio: 210/297;
+    height: 100%;
+    max-height: 720px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 8px 24px rgba(42,40,36,0.1);
+    padding: 32px;
+    font-family: var(--serif);
+    transition: all 0.3s;
+  }
+
+  .theme-swap-doc.caffeine {
+    background: #1A1814;
+    color: #E8DEC8;
+    --preview-ink: #E8DEC8;
+    --preview-accent: #D4A853;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 4 — CODESPACES LANDING — 1440×900
+     The moment a user clicks "Open in Codespaces" and waits 45s
+     ═══════════════════════════════════════════════════════════════ */
+
+  .codespaces {
+    width: 1440px;
+    height: 900px;
+    background: #0d1117;
+    color: #c9d1d9;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--sans);
+  }
+
+  .cs-header {
+    background: #161b22;
+    padding: 12px 24px;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  .cs-header-tab {
+    padding: 4px 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #8b949e;
+  }
+
+  .cs-header-tab.active { background: #0d1117; color: #c9d1d9; }
+
+  .cs-header-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2ea043;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  .cs-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 0;
+  }
+
+  .cs-pane {
+    padding: 48px 56px;
+    overflow: auto;
+  }
+
+  .cs-pane.left {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+  }
+
+  .cs-pane.right {
+    background: #0d1117;
+    color: #c9d1d9;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .cs-welcome {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-quiet);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .cs-headline {
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .cs-sub {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+
+  .cs-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+  }
+
+  .cs-step {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+
+  .cs-step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--paper-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+
+  .cs-step.done .cs-step-num { background: var(--sage); color: #F9F5EC; }
+  .cs-step.active .cs-step-num { background: var(--ink); color: #F9F5EC; animation: pulse 2s infinite; }
+  .cs-step.pending { opacity: 0.4; }
+
+  .cs-step-label { flex: 1; }
+
+  .cs-step-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-quiet);
+  }
+
+  .cs-tip {
+    background: var(--sage-tint);
+    border-left: 2px solid var(--sage);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--sage-ink);
+    line-height: 1.5;
+    font-family: var(--serif);
+  }
+
+  .cs-tip strong { font-weight: 600; display: block; margin-bottom: 4px; }
+
+  .cs-terminal-prompt { color: #58a6ff; }
+  .cs-terminal-success { color: #2ea043; }
+  .cs-terminal-muted { color: #6e7681; }
+  .cs-terminal-hash { color: #d29922; }
+
+  .cs-progress-bar {
+    margin-top: 24px;
+    height: 6px;
+    background: #21262d;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .cs-progress-fill {
+    width: 62%;
+    height: 100%;
+    background: linear-gradient(90deg, #2ea043, #56d364);
+    animation: progress-slide 2s ease infinite;
+  }
+
+  @keyframes progress-slide {
+    0%,100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     notes block at the end
+     ═══════════════════════════════════════════════════════════════ */
+
+  .notes-block {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--s5) var(--s6);
+    color: #F9F5EC;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .notes-block h2 {
+    font-family: var(--serif);
+    font-size: 20px;
+    margin-bottom: var(--s3);
+    color: #F9F5EC;
+  }
+
+  .notes-block ul { padding-left: 24px; color: #B5AD9F; }
+  .notes-block li { margin-bottom: 4px; }
+  .notes-block code { color: #7B9476; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="review-banner">
+  <h1>pretext-templates.dev — design wireframes</h1>
+  <p>Plan source: <code>ceo-plans/2026-04-30-shadcn-for-goodnotes.md</code> (16-week sprint after eng-review)</p>
+  <p>Design DNA inherits from <code>packs/journals/prax-journal/DESIGN.md</code> (Warm Analog Editorial). Dialed for a developer-tool register.</p>
+  <p>Palette: <code>--paper #F9F5EC</code> · <code>--ink #2A2824</code> · <code>--sage #7B9476</code> · <code>--clay #B85A44</code> · no purple, no gradients, no decorative shadows, no 3-col feature grid.</p>
+  <p>4 surfaces × 1 deterministic wireframe each. Opens in any browser. Free. No OpenAI dependency.</p>
+</div>
+
+<!-- ═══ SURFACE 1 — GALLERY HOME ═══ -->
+<div class="surface">
+  <span class="surface-label">S1 · pretext-templates.dev/ · 1440×900</span>
+  <div class="home">
+    <nav class="home-nav">
+      <div class="home-logo"><em>pretext</em></div>
+      <div class="home-nav-links">
+        <a href="#">Browse</a>
+        <a href="#">Docs</a>
+        <a href="#">GitHub ↗</a>
+      </div>
+    </nav>
+
+    <div class="home-hero">
+      <div>
+        <h1 class="home-headline">Templates for people who write <em>by hand.</em></h1>
+        <p class="home-sub">Open-source notebook templates that ship as code. Drop into GoodNotes, Apple Pencil, or print. Commander CLI. Fraunces, Instrument Sans, and JetBrains Mono on every page.</p>
+
+        <div class="home-install">
+          <span>npx @pretext-templates/cli add prax-journal</span>
+          <span class="home-install-copy">⌘C to copy</span>
+        </div>
+        <div class="home-secondary">or <a href="#">browse all 7 packs →</a></div>
+      </div>
+
+      <div class="home-specimen">
+        <div class="home-pin"></div>
+        <div class="home-specimen-stamp">The<br>Praxis<br>Ledger</div>
+        <div class="home-specimen-kicker">PRAXIS · DAILY</div>
+        <div class="home-specimen-title">Wednesday</div>
+        <div class="home-specimen-date">2026 · 05 · 06</div>
+        <div class="home-specimen-rule"></div>
+
+        <div class="home-specimen-section">
+          <div class="home-specimen-section-title">The frog</div>
+          <div class="home-specimen-frog">Finish the eng-review plan artefact. 30 min. No Twitter.</div>
+        </div>
+
+        <div class="home-specimen-section">
+          <div class="home-specimen-section-title">Rule of three</div>
+          <div class="home-specimen-line"></div>
+          <div class="home-specimen-line"></div>
+          <div class="home-specimen-line"></div>
+        </div>
+
+        <div class="home-specimen-section">
+          <div class="home-specimen-section-title">Horror metric</div>
+          <div class="home-specimen-clay">
+            <span>Cigarettes</span>
+            <span>□ □ □ □ □ □ □</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-pack-row">
+      <div class="home-pack-row-label">
+        <span>7 packs · all open source</span>
+        <span>→ all packs</span>
+      </div>
+      <div class="home-pack-strip">
+        <div class="home-pack-thumb">
+          <div class="home-pack-thumb-name">Praxis Ledger</div>
+          <div class="home-pack-thumb-meta">JOURNAL · 130pp · 12 themes</div>
+          <div class="home-pack-thumb-preview">
+            <strong>Wed</strong>
+            <div class="home-pack-thumb-line"></div>
+            <div class="home-pack-thumb-line"></div>
+            <div class="home-pack-thumb-line"></div>
+          </div>
+        </div>
+        <div class="home-pack-thumb">
+          <div class="home-pack-thumb-name">Cornell Notes</div>
+          <div class="home-pack-thumb-meta">NOTES · 1pp · 3 themes</div>
+          <div class="home-pack-thumb-preview">
+            Lecture title<br><br>
+            Cue&nbsp;&nbsp;|&nbsp;Notes<br>
+            ────|────<br>
+          </div>
+        </div>
+        <div class="home-pack-thumb">
+          <div class="home-pack-thumb-name">Habit Tracker</div>
+          <div class="home-pack-thumb-meta">TRACKER · 31pp · 4 themes</div>
+          <div class="home-pack-thumb-preview">
+            Mon · Tue · Wed<br>
+            ● ○ ●<br>
+            ● ● ●<br>
+          </div>
+        </div>
+        <div class="home-pack-thumb">
+          <div class="home-pack-thumb-name">Meeting Notes</div>
+          <div class="home-pack-thumb-meta">NOTES · 1pp · 3 themes</div>
+          <div class="home-pack-thumb-preview">
+            Attendees<br>
+            ────────<br>
+            Decisions<br>
+            ────────<br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SURFACE 2 — PACK DETAIL (prax-journal) ═══ -->
+<div class="surface">
+  <span class="surface-label">S2 · /packs/prax-journal · 1440×1100</span>
+  <div class="detail">
+    <div class="detail-crumbs">
+      <a href="#">pretext</a>
+      <span class="sep">/</span>
+      <a href="#">packs</a>
+      <span class="sep">/</span>
+      <span class="current">prax-journal</span>
+      <span style="margin-left:auto; color: var(--ink-whisper)">v5.2 · 30 KB · MIT · 130pp</span>
+    </div>
+
+    <div class="detail-hero">
+      <div class="detail-preview">
+        <div class="home-specimen-kicker">PRAXIS · DAILY</div>
+        <div class="home-specimen-title">Wednesday</div>
+        <div class="home-specimen-date">2026 · 05 · 06</div>
+        <div class="home-specimen-rule"></div>
+        <div class="home-specimen-section">
+          <div class="home-specimen-section-title">The frog</div>
+          <div class="home-specimen-frog">Finish the eng-review plan artefact. 30 min. No Twitter.</div>
+        </div>
+        <div class="home-specimen-section">
+          <div class="home-specimen-section-title">Rule of three</div>
+          <div class="home-specimen-line"></div>
+          <div class="home-specimen-line"></div>
+          <div class="home-specimen-line"></div>
+        </div>
+        <div class="home-specimen-section">
+          <div class="home-specimen-section-title">Horror metric</div>
+          <div class="home-specimen-clay">
+            <span>Cigarettes</span><span>□ □ □ □ □</span>
+          </div>
+        </div>
+        <div class="detail-preview-page-count">1 / 130 · Warm Analog</div>
+      </div>
+
+      <div class="detail-sidebar">
+        <div class="detail-kicker">JOURNAL PACK</div>
+        <h2 class="detail-title">The Praxis Ledger</h2>
+        <div class="detail-byline">A <strong>130-page A4 journal</strong> for people whose calendars make them lie. Daily · weekly · monthly · brain-dump · 60 stickers.</div>
+        <p class="detail-desc">Barkley's rule-of-3, Tracy's frog, Marlatt urge-surfing, Newport shutdown — all wired into the page so you don't have to remember them. One horror metric per day. Nothing shouts. Everything breathes.</p>
+
+        <div class="detail-install-block">npx @pretext-templates/cli add prax-journal</div>
+        <div class="detail-controls">
+          <button class="detail-btn">↓ Download PDF</button>
+          <button class="detail-btn">⇢ Open in Codespaces</button>
+          <button class="detail-btn">⟳ Remix in gallery</button>
+          <button class="detail-btn">↗ Share this config</button>
+        </div>
+
+        <div class="detail-meta-block">
+          <div>
+            <div class="detail-meta-label">Format</div>
+            <div class="detail-meta-val">A4 · 210×297mm</div>
+          </div>
+          <div>
+            <div class="detail-meta-label">Paper</div>
+            <div class="detail-meta-val">5mm dot-grid</div>
+          </div>
+          <div>
+            <div class="detail-meta-label">Typography</div>
+            <div class="detail-meta-val">Fraunces · Instrument · Mono</div>
+          </div>
+          <div>
+            <div class="detail-meta-label">Works with</div>
+            <div class="detail-meta-val">GoodNotes · Apple Pencil · print</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-themes-row">
+      <div class="detail-themes-label">12 themes · tap to preview · URL updates instantly</div>
+      <div class="detail-theme-swatches">
+        <div class="detail-theme-swatch active">
+          <div class="detail-theme-dot">
+            <div style="background:#F9F5EC"></div>
+            <div style="background:#7B9476;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">warm analog</div>
+        </div>
+        <div class="detail-theme-swatch">
+          <div class="detail-theme-dot">
+            <div style="background:#1A1814"></div>
+            <div style="background:#D4A853;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">caffeine</div>
+        </div>
+        <div class="detail-theme-swatch">
+          <div class="detail-theme-dot">
+            <div style="background:#F4ECE0"></div>
+            <div style="background:#B85A44;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">claude</div>
+        </div>
+        <div class="detail-theme-swatch">
+          <div class="detail-theme-dot">
+            <div style="background:#0B1116"></div>
+            <div style="background:#3FB950;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">doom64</div>
+        </div>
+        <div class="detail-theme-swatch">
+          <div class="detail-theme-dot">
+            <div style="background:#FCD8DE"></div>
+            <div style="background:#E53888;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">bubblegum</div>
+        </div>
+        <div class="detail-theme-swatch">
+          <div class="detail-theme-dot">
+            <div style="background:#FFF2A8"></div>
+            <div style="background:#9C27B0;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">candyland</div>
+        </div>
+        <div class="detail-theme-swatch">
+          <div class="detail-theme-dot">
+            <div style="background:#0D0D0D"></div>
+            <div style="background:#FF00AA;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">cyberpunk</div>
+        </div>
+        <div class="detail-theme-swatch" style="opacity:0.4">
+          <div class="detail-theme-dot">
+            <div style="background:#fff"></div>
+            <div style="background:#888;flex:0 0 10px"></div>
+          </div>
+          <div class="detail-theme-name">+ 5 more</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SURFACE 3 — THEME SWAP interaction ═══ -->
+<div class="surface">
+  <span class="surface-label">S3 · theme-swap interaction (caffeine selected · 240ms transition done) · 1440×900</span>
+  <div class="theme-swap">
+    <div class="theme-swap-header">
+      <div class="theme-swap-title">Praxis Ledger · <em style="font-style:italic;font-weight:500">caffeine</em></div>
+      <div class="theme-swap-toast">✓ theme: caffeine · URL updated · 240ms</div>
+    </div>
+    <div class="theme-swap-body">
+      <aside class="theme-swap-sidebar">
+        <h3>12 THEMES</h3>
+        <div class="theme-swap-list">
+          <div class="theme-swap-row">
+            <span class="dot" style="background:#F9F5EC;border-right:4px solid #7B9476"></span>
+            <span>Warm Analog</span>
+            <span class="dim">LIGHT</span>
+          </div>
+          <div class="theme-swap-row active">
+            <span class="dot" style="background:#1A1814;border-right:4px solid #D4A853"></span>
+            <span>Caffeine</span>
+            <span class="dim">DARK</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="dot" style="background:#F4ECE0;border-right:4px solid #B85A44"></span>
+            <span>Claude</span>
+            <span class="dim">LIGHT</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="dot" style="background:#0B1116;border-right:4px solid #3FB950"></span>
+            <span>Doom64</span>
+            <span class="dim">DARK</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="dot" style="background:#FCD8DE;border-right:4px solid #E53888"></span>
+            <span>Bubblegum</span>
+            <span class="dim">LIGHT</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="dot" style="background:#0D0D0D;border-right:4px solid #FF00AA"></span>
+            <span>Cyberpunk</span>
+            <span class="dim">DARK</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="dot" style="background:#FFF2A8;border-right:4px solid #9C27B0"></span>
+            <span>Candyland</span>
+            <span class="dim">LIGHT</span>
+          </div>
+          <div class="theme-swap-row" style="opacity:0.5">
+            <span class="dot" style="background:#eee"></span>
+            <span>+ 5 more themes</span>
+          </div>
+        </div>
+        <div style="margin-top:24px;font-size:11px;color:var(--ink-quiet);font-family:var(--mono);line-height:1.7">
+          URL: pretext-templates.dev/<br>
+          &nbsp;&nbsp;packs/prax-journal<br>
+          &nbsp;&nbsp;?theme=<strong style="color:var(--sage-ink)">caffeine</strong>&month=2026-06
+        </div>
+      </aside>
+
+      <div class="theme-swap-preview">
+        <div class="theme-swap-doc caffeine">
+          <div style="font-family:var(--mono);font-size:9px;color:#D4A853;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;opacity:0.7">PRAXIS · DAILY</div>
+          <div style="font-family:var(--serif);font-size:32px;font-weight:600;color:#E8DEC8;line-height:1;margin-bottom:4px">Wednesday</div>
+          <div style="font-family:var(--mono);font-size:10px;color:#D4A853;margin-bottom:20px;opacity:0.7">2026 · 05 · 06</div>
+          <div style="height:1px;background:#5c5647;margin-bottom:18px"></div>
+          <div style="margin-bottom:16px">
+            <div style="font-family:var(--mono);font-size:8px;color:#D4A853;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;opacity:0.7">The frog</div>
+            <div style="background:rgba(212,168,83,0.12);border-left:2px solid #D4A853;padding:8px 10px;font-family:var(--serif);font-size:13px;line-height:1.4;color:#D4A853">Finish the eng-review plan artefact. 30 min. No Twitter.</div>
+          </div>
+          <div style="margin-bottom:16px">
+            <div style="font-family:var(--mono);font-size:8px;color:#D4A853;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;opacity:0.7">Rule of three</div>
+            <div style="height:1px;background:#5c5647;margin:10px 0;opacity:0.6"></div>
+            <div style="height:1px;background:#5c5647;margin:10px 0;opacity:0.6"></div>
+            <div style="height:1px;background:#5c5647;margin:10px 0;opacity:0.6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SURFACE 4 — CODESPACES LANDING ═══ -->
+<div class="surface">
+  <span class="surface-label">S4 · Codespaces boot · 45s in · 1440×900</span>
+  <div class="codespaces">
+    <div class="cs-header">
+      <span class="cs-header-dot"></span>
+      <span style="font-family:var(--mono);font-size:13px;color:#8b949e">praxstack/pretext-templates</span>
+      <span style="margin-left:auto;color:#8b949e;font-size:12px;font-family:var(--mono)">Codespaces · friendly-octopus-2</span>
+    </div>
+    <div class="cs-body">
+      <div class="cs-pane left">
+        <div class="cs-welcome">while you wait · ~45s left</div>
+        <h1 class="cs-headline">You're almost in the repo.</h1>
+        <p class="cs-sub">Your Codespace is booting a Node 20 container and installing dependencies. When it's ready, you can run <code style="background:#eae4d3;padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:13px">npm run generate 2026-06</code> and your first <em>Praxis Ledger</em> PDF will appear in <code style="background:#eae4d3;padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:13px">output/</code>.</p>
+
+        <ul class="cs-steps">
+          <li class="cs-step done">
+            <div class="cs-step-num">✓</div>
+            <div class="cs-step-label">Container image pulled</div>
+            <div class="cs-step-time">8s</div>
+          </li>
+          <li class="cs-step done">
+            <div class="cs-step-num">✓</div>
+            <div class="cs-step-label">Repository cloned</div>
+            <div class="cs-step-time">3s</div>
+          </li>
+          <li class="cs-step active">
+            <div class="cs-step-num">3</div>
+            <div class="cs-step-label">npm ci (installing 247 packages)</div>
+            <div class="cs-step-time">~25s</div>
+          </li>
+          <li class="cs-step pending">
+            <div class="cs-step-num">4</div>
+            <div class="cs-step-label">npm test (143 tests, baseline check)</div>
+            <div class="cs-step-time">~8s</div>
+          </li>
+          <li class="cs-step pending">
+            <div class="cs-step-num">5</div>
+            <div class="cs-step-label">Launch preview server on :4040</div>
+            <div class="cs-step-time">~1s</div>
+          </li>
+        </ul>
+
+        <div class="cs-tip">
+          <strong>Tip while you wait:</strong> if anything breaks, the Codespace is disposable. Close and reopen — nothing is lost.
+        </div>
+      </div>
+
+      <div class="cs-pane right">
+        <div><span class="cs-terminal-muted">2026-04-30T14:52:31Z</span> <span style="color:#c9d1d9">Creating codespace from branch <span class="cs-terminal-hash">main</span>...</span></div>
+        <div><span class="cs-terminal-muted">2026-04-30T14:52:33Z</span> <span class="cs-terminal-success">✓</span> Using image <span style="color:#79c0ff">mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm</span></div>
+        <div><span class="cs-terminal-muted">2026-04-30T14:52:39Z</span> <span class="cs-terminal-success">✓</span> Container started</div>
+        <br>
+        <div><span class="cs-terminal-prompt">@praxlannister</span>:<span style="color:#a5d6ff">/workspaces/pretext-templates</span>$ <span style="color:#c9d1d9">npm ci</span></div>
+        <div style="margin-left:12px">added <span class="cs-terminal-hash">237</span> packages, and resolved <span class="cs-terminal-hash">247</span> in 12s</div>
+        <div style="margin-left:12px"><span class="cs-terminal-muted">  ▸ puppeteer@23.11.1 · postinstall</span></div>
+        <div style="margin-left:12px"><span class="cs-terminal-muted">    Chromium (193MB)  ████████████████░░░  <strong style="color:#d29922">62%</strong></span></div>
+        <div class="cs-progress-bar"><div class="cs-progress-fill"></div></div>
+        <br>
+        <div><span class="cs-terminal-muted">Up next:</span></div>
+        <div><span class="cs-terminal-muted">  $ npm test</span></div>
+        <div><span class="cs-terminal-muted">  $ npm run preview  # http://localhost:4040</span></div>
+        <br>
+        <div><span class="cs-terminal-muted"># while you wait, the left pane has a tour</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DESIGN NOTES ═══ -->
+<div class="notes-block">
+  <h2>What these wireframes encode</h2>
+  <ul>
+    <li><code>S1</code> · <strong>gallery home</strong> — one specimen, not a card grid. <em>Subtraction default</em>. Signature serif italic for "templates" and the masthead. Install command styled as a terminal block. Pack row below fold is a horizontal scroll of real-looking printed pages at slight angles (field notes on a desk), not 3-column tiled icons.</li>
+    <li><code>S2</code> · <strong>pack detail</strong> — full-bleed PDF preview on the left (real content, not lorem-ipsum), tight metadata sidebar on the right. Theme swatches below. Four buttons (download / Codespaces / remix / share) — boring-by-default CTA set, each a different two-way-door.</li>
+    <li><code>S3</code> · <strong>theme-swap interaction state</strong> — captured at the moment the user clicks "caffeine". 240ms transition just completed, toast confirms theme + URL update + render time, preview re-rendered in dark. URL in the sidebar shows the shareable-URL encoding.</li>
+    <li><code>S4</code> · <strong>Codespaces landing UX</strong> — the boot-wait moment (45s target). Not a blank screen. Left pane: a calm "while you wait" tour with progress steps, pedagogy baked in. Right pane: the actual <code>npm ci</code> progress. Makes the <em>60-second boot commitment</em> feel deliberate instead of slow.</li>
+  </ul>
+
+  <h2 style="margin-top:32px">Key design decisions encoded (for Pass 7)</h2>
+  <ul>
+    <li>Masthead logo is <strong>Fraunces italic lowercase "pretext"</strong> — signature move.</li>
+    <li>Primary CTA on home is the <strong>install command itself</strong>, styled as a terminal block. Not "Get started".</li>
+    <li><strong>One accent color</strong> per screen. Sage for home + detail. Amber for caffeine. Red for clay horror metric. Never multiple.</li>
+    <li><strong>No cards</strong> on home. Pack row uses angled "polaroid" thumbnails to signal "physical artefact" not "SaaS listing".</li>
+    <li>Theme-swap interaction has a <strong>toast that confirms render time</strong> — developers respect latency numbers.</li>
+    <li>Codespaces landing <strong>treats the 45s wait as a product moment</strong> — the tour reduces perceived wait.</li>
+  </ul>
+</div>
+
+</body>
+</html>
