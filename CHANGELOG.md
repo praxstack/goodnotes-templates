@@ -6,6 +6,58 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- **CLI `pretext init <id>`** — scaffold a new pack with a 3-file minimal
+  template (manifest · html · README). `--dry-run` prints what would be
+  written; refuses to clobber existing directories. (W15.5 · `7398110`)
+- **CLI `pretext remix <source> <target>`** — prints the exact
+  `clone → cp → sed → commit` recipe to fork an existing pack and
+  rebrand it, without executing. Mirrors the gallery `/remix` page so
+  there is one canonical rebrand recipe. (W15.5 · `7398110`)
+- **Pack id validation (`isValidPackId`)** — kebab-case ASCII, 1–64
+  chars, no shell metacharacters. Defense-in-depth on the only
+  user-controlled string that reaches the printed shell commands.
+  (W15.5 · `7398110`)
+
+### Changed
+
+- **Registry resolver (`resolvePackVersion`)** is **additive** — registry
+  schema stays at v1, no `schema_version` bump. Consumers that never call
+  the resolver are unaffected; those that do get semver-range support
+  (`^5.0.0`, `~5.3`, `*`, exact) wrapping `semver.maxSatisfying`. (W11 ·
+  `a23a942` · DECISIONS row 31)
+- **Gallery** now surfaces a fifth nav link, `/remix`, carrying the
+  same three-phase recipe for web-first contributors. (W12 · `b3bd75b`)
+- **Devcontainer** `postCreateCommand` prewarms `@pretext-templates/gallery`
+  so the first `npm run preview` is instant on Codespaces. Both ports
+  4040 (legacy CLI preview) and 4321 (Astro dev) forwarded; only 4321
+  notifies. (W13 · `04b8e40` · DECISIONS rows 28–29)
+- **Docs** MIGRATION.md audience-split (users / authors / registry
+  consumers / scripters), each with its own action surface including
+  a one-liner perl rewrite for stale paths. (W13 · `04b8e40` · DECISIONS
+  row 30)
+
+## [1.0.0-rc.1] — rebrand sprint snapshot
+
+Snapshot of the pretext-templates rebrand sprint covering weeks W1–W15.5
+(27 commits from `88e291b` → `7398110`). Not a published tag yet — this
+line exists so downstream consumers can cite a stable label for the
+pre-ship state that CI has already verified. Gates at snapshot time:
+
+- **235/235** vitest unit tests · 18 files (13 added in W15.5)
+- **27/28** Playwright E2E · 1 documented skip (mobile clipboard · W14)
+- **`tsc -b`** clean across all three workspaces
+- **`astro check`** · 0 errors · 27 pages built
+
+Substantive weeks shipped: W1 rebrand · W2 schemas · W3 renderer split ·
+W4 gallery · W5 22-pack flat migration · W6 design polish · W7 theme swap ·
+W7.5 Playwright · W8 search + URL state · W10 154 OG cards · W11 resolver ·
+W12 `/remix` · W13 Codespaces + MIGRATION · W14 E2E hardening · W15.5 CLI
+`init` + `remix`. Deferred with documented justification: W9 Safari iPad
+probe (physical device needed), W15 Docker (user-declined twice), CEO E8
+Playground CF Worker (queued for a fresh session).
+
 ### Security
 
 - **FIND-0022 (High, CVSS 7.1, CWE-59)** — Preview HTTP server symlink
