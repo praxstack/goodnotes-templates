@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>pretext-templates.dev — wireframes v2 (more weight + personality)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,500;1,9..144,600;1,9..144,700&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@400;600&family=Reenie+Beanie&display=swap');
+
+  :root {
+    --paper: #F9F5EC;
+    --paper-dark: #F0EAD9;
+    --paper-deep: #E6DEC6;
+    --ink: #2A2824;
+    --ink-soft: #4A453D;
+    --ink-quiet: #7D7668;
+    --ink-whisper: #B5AD9F;
+    --sage: #7B9476;
+    --sage-ink: #4E6249;
+    --sage-tint: rgba(123, 148, 118, 0.12);
+    --sage-deep: #4E6249;
+    --clay: #B85A44;
+    --clay-deep: #8B3E2E;
+    --amber: #D4A853;
+    --washi-blue: #B4CDE6;
+    --washi-pink: #F5C8C2;
+    --washi-sage: #CFD9C4;
+    --highlighter: rgba(255, 240, 120, 0.55);
+    --hairline: #D8D0BE;
+    --sans: 'Instrument Sans', -apple-system, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --italic: 'Instrument Serif', Georgia, serif;
+    --mono: 'JetBrains Mono', Menlo, monospace;
+    --hand: 'Caveat', cursive;
+    --marker: 'Reenie Beanie', cursive;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1f1c17;
+    font-family: var(--sans);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 40px 0;
+  }
+
+  /* paper grain everywhere */
+  .paper-grain {
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(rgba(42,40,36,0.03) 1px, transparent 1px),
+      radial-gradient(rgba(42,40,36,0.02) 1px, transparent 1px),
+      linear-gradient(180deg, transparent 0%, rgba(42,40,36,0.015) 100%);
+    background-size: 3px 3px, 7px 7px, 100% 100%;
+    background-position: 0 0, 1px 2px, 0 0;
+  }
+
+  .review-banner {
+    max-width: 1440px;
+    margin: 0 auto 40px;
+    padding: 24px 64px;
+    color: #F9F5EC;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .review-banner h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 34px;
+    margin-bottom: 8px;
+    color: #F9F5EC;
+  }
+
+  .review-banner p { color: #B5AD9F; margin-bottom: 4px; }
+  .review-banner code { color: #D4A853; font-weight: 500; }
+
+  .surface {
+    max-width: 1440px;
+    margin: 0 auto 64px;
+    background: var(--paper);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .surface-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #B5AD9F;
+    background: #2a2824;
+    padding: 3px 10px;
+    border-radius: 2px;
+    z-index: 100;
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 1 — GALLERY HOME — 1440×1300 (taller, more breathing)
+     ═══════════════════════════════════════════════════════════════ */
+  .home {
+    width: 1440px;
+    height: 1300px;
+    position: relative;
+  }
+
+  .home::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(42,40,36,0.04) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* Top brand bar — much more personality */
+  .home-topbar {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 56px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+  }
+  .home-topbar-left { display: flex; gap: 18px; color: var(--ink-whisper); }
+  .home-topbar-left strong { color: var(--paper); letter-spacing: 3px; }
+  .home-topbar-right { display: flex; gap: 14px; color: var(--ink-whisper); }
+  .home-topbar-right .pulse {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--amber);
+  }
+  .home-topbar-right .pulse::before {
+    content: ''; width: 6px; height: 6px; background: var(--amber);
+    border-radius: 50%; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .home-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 56px 24px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .home-logo {
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -1.5px;
+    line-height: 1;
+  }
+  .home-logo-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 9px;
+    font-style: normal;
+    color: var(--sage-ink);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .home-nav-center {
+    display: flex;
+    gap: 40px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .home-nav-center a { color: inherit; text-decoration: none; position: relative; }
+  .home-nav-center a.active { color: var(--ink); }
+  .home-nav-center a.active::after {
+    content: ''; position: absolute; bottom: -6px; left: 0; right: 0;
+    height: 2px; background: var(--sage); border-radius: 1px;
+  }
+
+  .home-nav-right {
+    display: flex; align-items: center; gap: 20px;
+    font-size: 13px;
+  }
+  .home-nav-right .star {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-quiet);
+    padding: 6px 10px; border: 1px solid var(--hairline); border-radius: 3px;
+  }
+  .home-nav-right .star strong { color: var(--ink); font-weight: 600; }
+
+  /* Hero — much denser, multiple specimens, washi tape, sticker artifacts */
+  .home-hero {
+    position: relative;
+    padding: 48px 56px 24px;
+    display: grid;
+    grid-template-columns: 520px 1fr;
+    gap: 64px;
+    align-items: start;
+    z-index: 5;
+  }
+
+  .home-hero-left { padding-top: 40px; }
+
+  .home-hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--clay);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .home-hero-eyebrow::before {
+    content: '●'; color: var(--clay); animation: pulse 2s infinite;
+  }
+
+  .home-headline {
+    font-family: var(--serif);
+    font-size: 78px;
+    line-height: 0.95;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -2.5px;
+    margin-bottom: 24px;
+  }
+  .home-headline em {
+    font-family: var(--italic);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--sage-deep);
+  }
+  .home-headline .hand {
+    font-family: var(--hand);
+    font-size: 0.92em;
+    font-weight: 600;
+    color: var(--clay);
+    position: relative;
+    display: inline-block;
+    transform: rotate(-2deg);
+    padding: 0 8px;
+  }
+  .home-headline .hand::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 32%;
+    background: var(--highlighter);
+    z-index: -1;
+    transform: skew(-4deg);
+  }
+
+  .home-sub {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    max-width: 460px;
+  }
+  .home-sub strong { color: var(--ink); font-weight: 600; }
+
+  .home-install {
+    display: flex;
+    align-items: center;
+    background: var(--ink);
+    color: #F9F5EC;
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 16px 20px;
+    border-radius: 6px;
+    max-width: 480px;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--clay-deep), 0 8px 24px rgba(42,40,36,0.15);
+    transition: transform 0.08s;
+  }
+  .home-install:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--clay-deep); }
+  .home-install::before { content: "$"; color: var(--amber); font-weight: 700; }
+  .home-install-copy {
+    margin-left: auto;
+    color: var(--ink-whisper);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid rgba(181,173,159,0.3);
+    border-radius: 2px;
+  }
+
+  .home-meta-row {
+    display: flex; gap: 20px; margin-top: 18px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-quiet);
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .home-meta-row span { display: inline-flex; align-items: center; gap: 6px; }
+  .home-meta-row .dot { width: 6px; height: 6px; background: var(--sage); border-radius: 50%; }
+  .home-meta-row .dot.a { background: var(--amber); }
+  .home-meta-row .dot.c { background: var(--clay); }
+
+  .home-annot {
+    position: absolute;
+    font-family: var(--hand);
+    font-size: 24px;
+    color: var(--clay);
+    transform: rotate(-4deg);
+    line-height: 1.1;
+  }
+  .home-annot-1 { top: 210px; left: 418px; }
+  .home-annot-arrow {
+    position: absolute;
+    font-family: var(--hand);
+    font-size: 32px;
+    color: var(--clay);
+    top: 230px; left: 520px;
+    transform: rotate(12deg);
+  }
+
+  /* Hero right — stack of specimens with tape + sticker + pin */
+  .home-hero-right {
+    position: relative;
+    min-height: 620px;
+  }
+
+  .home-specimen {
+    position: absolute;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 6px 18px rgba(42, 40, 36, 0.08), 0 30px 60px rgba(42, 40, 36, 0.12);
+    padding: 24px;
+    font-family: var(--serif);
+    aspect-ratio: 210/297;
+    width: 340px;
+  }
+
+  .home-specimen.primary {
+    top: 40px;
+    right: 40px;
+    transform: rotate(3deg);
+    z-index: 3;
+    width: 380px;
+    background-color: var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0, transparent 7px, rgba(42,40,36,0.04) 7px, rgba(42,40,36,0.04) 8px),
+      radial-gradient(rgba(42,40,36,0.02) 1px, transparent 1px);
+    background-size: auto, 4px 4px;
+  }
+
+  .home-specimen.secondary {
+    top: 220px;
+    right: 260px;
+    transform: rotate(-6deg);
+    z-index: 1;
+    width: 280px;
+    opacity: 0.95;
+    background: #1A1814;
+    color: #E8DEC8;
+  }
+
+  .home-specimen.tertiary {
+    top: 380px;
+    right: 180px;
+    transform: rotate(4deg);
+    z-index: 2;
+    width: 240px;
+    background: #FCD8DE;
+  }
+
+  /* Washi tape on primary */
+  .home-washi {
+    position: absolute;
+    top: -12px;
+    left: 40%;
+    width: 120px;
+    height: 32px;
+    background: var(--washi-sage);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 8px,
+      rgba(78,98,73,0.15) 8px 10px
+    );
+    transform: rotate(-4deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 10;
+    opacity: 0.92;
+  }
+
+  .home-washi.blue {
+    background: var(--washi-blue);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 10px,
+      rgba(70,90,120,0.15) 10px 12px
+    );
+  }
+
+  /* Signature stamp */
+  .home-stamp {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 74px;
+    height: 74px;
+    background: var(--clay);
+    color: #F9F5EC;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 400;
+    transform: rotate(-8deg);
+    box-shadow: 0 4px 12px rgba(184, 90, 68, 0.4), inset 0 -3px 8px rgba(0,0,0,0.15);
+    line-height: 1.1;
+    text-align: center;
+    letter-spacing: 0.5px;
+    z-index: 12;
+    border: 2px solid var(--clay);
+    outline: 1px dashed rgba(249,245,236,0.5);
+    outline-offset: -5px;
+  }
+
+  /* Sticker on secondary specimen */
+  .home-sticker {
+    position: absolute;
+    bottom: 20px;
+    right: -24px;
+    width: 80px;
+    height: 80px;
+    background: var(--amber);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+    transform: rotate(14deg);
+    box-shadow: 0 4px 10px rgba(212,168,83,0.4);
+    z-index: 15;
+    padding: 8px;
+  }
+  .home-sticker strong {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 800;
+    display: block;
+    letter-spacing: 0;
+  }
+
+  /* Content inside primary specimen */
+  .hs-kicker {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-quiet);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex; justify-content: space-between;
+  }
+  .hs-title {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 0.95;
+    margin-bottom: 2px;
+    letter-spacing: -1.5px;
+  }
+  .hs-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+  }
+  .hs-rule {
+    height: 1px;
+    background: var(--ink-whisper);
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .hs-rule::after {
+    content: '';
+    position: absolute;
+    left: 30%;
+    top: -4px;
+    width: 3px; height: 9px; background: var(--sage);
+    transform: rotate(15deg);
+  }
+
+  .hs-section { margin-bottom: 14px; }
+  .hs-section-title {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--ink-quiet);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .hs-frog {
+    background: var(--sage-tint);
+    border-left: 3px solid var(--sage);
+    padding: 10px 12px;
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.35;
+    color: var(--sage-deep);
+    position: relative;
+  }
+  .hs-frog::before {
+    content: '🐸';
+    position: absolute;
+    right: 8px; top: 8px;
+    opacity: 0.4;
+    font-size: 16px;
+  }
+
+  .hs-line { height: 1px; background: var(--ink-whisper); margin: 8px 0; opacity: 0.5; }
+  .hs-line.handwritten { border: none; background: none; font-family: var(--hand); font-size: 14px; color: var(--ink-soft); margin: 4px 0; height: auto; opacity: 1; }
+
+  .hs-clay-row {
+    background: rgba(184, 90, 68, 0.08);
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--clay);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 2px;
+  }
+  .hs-clay-row .val { font-family: var(--serif); font-weight: 700; }
+
+  /* Secondary (dark) specimen content */
+  .home-specimen.secondary .hs-kicker { color: #BFA670; }
+  .home-specimen.secondary .hs-title { color: #E8DEC8; font-size: 30px; }
+  .home-specimen.secondary .hs-date { color: #BFA670; }
+  .home-specimen.secondary .hs-rule { background: #5C5647; }
+  .home-specimen.secondary .hs-section-title { color: #BFA670; }
+  .home-specimen.secondary .hs-frog {
+    background: rgba(212,168,83,0.15);
+    border-left-color: var(--amber);
+    color: var(--amber);
+    font-size: 13px;
+  }
+
+  /* Tertiary (bubblegum) specimen content */
+  .home-specimen.tertiary .hs-kicker { color: #B4324F; }
+  .home-specimen.tertiary .hs-title { color: #7C2240; font-size: 24px; font-family: var(--hand); font-weight: 600; }
+  .home-specimen.tertiary .hs-date { color: #B4324F; }
+
+  /* The sticker sheet callout — bottom-left of hero */
+  .home-sticker-sheet {
+    position: absolute;
+    bottom: -60px;
+    left: -30px;
+    z-index: 0;
+    transform: rotate(-10deg);
+    width: 200px;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    padding: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .home-sticker-sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .home-sticker-sheet-dot {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    font-family: var(--serif);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink);
+  }
+  .home-sticker-sheet-dot:nth-child(1) { background: var(--sage); color: #fff; }
+  .home-sticker-sheet-dot:nth-child(2) { background: var(--clay); color: #fff; }
+  .home-sticker-sheet-dot:nth-child(3) { background: var(--amber); }
+  .home-sticker-sheet-dot:nth-child(4) { background: var(--washi-blue); }
+  .home-sticker-sheet-dot:nth-child(5) { background: var(--washi-pink); }
+  .home-sticker-sheet-dot:nth-child(6) { background: var(--washi-sage); }
+  .home-sticker-sheet-dot:nth-child(7) { background: var(--ink); color: var(--paper); }
+  .home-sticker-sheet-dot:nth-child(8) { background: var(--paper-deep); }
+  .home-sticker-sheet-kicker {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--ink-quiet);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* Pack shelf — richer than a strip, real thumbnails */
+  .home-shelf {
+    position: relative;
+    padding: 48px 56px 72px;
+    margin-top: 16px;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-dark) 100%);
+    border-top: 1px solid var(--hairline);
+  }
+
+  .home-shelf-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 32px;
+  }
+  .home-shelf-title {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .home-shelf-title em { font-family: var(--italic); font-style: italic; font-weight: 400; color: var(--sage-deep); }
+  .home-shelf-sub {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-quiet);
+    letter-spacing: 1px;
+  }
+
+  .home-shelf-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .pack-card {
+    position: relative;
+    background: var(--paper);
+    padding: 20px;
+    box-shadow: 0 12px 28px rgba(42,40,36,0.08);
+    transform: rotate(-1deg);
+    transition: transform 0.15s;
+  }
+  .pack-card:nth-child(2) { transform: rotate(1.4deg); background: #F4ECE0; }
+  .pack-card:nth-child(3) { transform: rotate(-1.8deg); background: #1A1814; color: #E8DEC8; }
+  .pack-card:nth-child(4) { transform: rotate(1deg); background: #FCD8DE; }
+
+  .pack-card-preview {
+    aspect-ratio: 210/297;
+    background: rgba(0,0,0,0.04);
+    margin-bottom: 16px;
+    padding: 14px;
+    font-family: var(--serif);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pack-card:nth-child(3) .pack-card-preview { background: rgba(255,255,255,0.04); }
+
+  .pack-card-pin {
+    position: absolute; top: -8px; left: 16px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--clay);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3), inset -1px -1px 2px rgba(0,0,0,0.2);
+    z-index: 5;
+  }
+  .pack-card:nth-child(2) .pack-card-pin { background: var(--amber); }
+  .pack-card:nth-child(3) .pack-card-pin { background: var(--sage); }
+  .pack-card:nth-child(4) .pack-card-pin { background: var(--washi-blue); }
+
+  .pack-card-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .pack-card:nth-child(3) .pack-card-name { color: #E8DEC8; }
+  .pack-card:nth-child(4) .pack-card-name { color: #7C2240; font-family: var(--hand); font-size: 28px; }
+
+  .pack-card-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: flex; gap: 8px; align-items: center;
+  }
+  .pack-card:nth-child(3) .pack-card-meta { color: #BFA670; }
+  .pack-card-meta .star { color: var(--amber); }
+
+  .pack-card-line { height: 2px; background: var(--ink-whisper); margin: 10px 0; opacity: 0.45; }
+  .pack-card-line.short { width: 60%; }
+  .pack-card-line.med { width: 85%; }
+  .pack-card-block { height: 14px; background: var(--sage-tint); border-left: 2px solid var(--sage); margin: 10px 0; }
+  .pack-card-dots { font-family: var(--mono); font-size: 10px; margin: 10px 0; color: var(--ink-quiet); }
+  .pack-card:nth-child(3) .pack-card-line { background: #5C5647; }
+
+  /* Bottom strip — social proof band */
+  .home-proof-strip {
+    padding: 28px 56px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-top: 6px solid var(--amber);
+  }
+  .home-proof-strip-item { display: flex; align-items: center; gap: 10px; }
+  .home-proof-strip-item strong { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--amber); letter-spacing: -0.5px; text-transform: none; }
+  .home-proof-strip-item em { color: var(--ink-whisper); font-style: normal; font-size: 10px; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 2 — PACK DETAIL — 1440×1400
+     ═══════════════════════════════════════════════════════════════ */
+  .detail {
+    width: 1440px;
+    min-height: 1400px;
+    position: relative;
+  }
+
+  .detail-topbar {
+    background: var(--paper-dark);
+    padding: 14px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .detail-topbar-crumbs { display: flex; align-items: center; gap: 10px; color: var(--ink-quiet); }
+  .detail-topbar-crumbs a { color: inherit; text-decoration: none; }
+  .detail-topbar-crumbs .current { color: var(--ink); font-weight: 600; }
+  .detail-topbar-meta { display: flex; gap: 16px; color: var(--ink-quiet); letter-spacing: 1px; }
+  .detail-topbar-meta strong { color: var(--ink); }
+
+  .detail-hero {
+    padding: 48px 56px 32px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 64px;
+    align-items: start;
+    position: relative;
+  }
+
+  .detail-preview-stack {
+    position: relative;
+    min-height: 720px;
+  }
+
+  .detail-preview-main {
+    position: relative;
+    aspect-ratio: 210/297;
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 8px 24px rgba(42,40,36,0.1), 0 40px 80px rgba(42,40,36,0.12);
+    padding: 40px;
+    font-family: var(--serif);
+    z-index: 3;
+    transform: rotate(1deg);
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0, transparent 7px, rgba(42,40,36,0.03) 7px, rgba(42,40,36,0.03) 8px);
+  }
+
+  .detail-preview-behind {
+    position: absolute;
+    top: 40px;
+    right: -30px;
+    aspect-ratio: 210/297;
+    width: 85%;
+    background: var(--paper-dark);
+    border: 1px solid var(--hairline);
+    z-index: 1;
+    transform: rotate(-3deg);
+    box-shadow: 0 6px 18px rgba(42,40,36,0.08);
+  }
+
+  .detail-preview-tape {
+    position: absolute;
+    top: -16px;
+    left: 30%;
+    width: 140px;
+    height: 36px;
+    background: var(--washi-blue);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 10px,
+      rgba(70,90,120,0.2) 10px 12px
+    );
+    transform: rotate(-3deg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+
+  .detail-preview-badge {
+    position: absolute;
+    top: 24px;
+    right: -30px;
+    width: 94px; height: 94px;
+    background: var(--sage);
+    color: var(--paper);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1;
+    transform: rotate(-14deg);
+    box-shadow: 0 4px 14px rgba(78,98,73,0.4);
+    z-index: 15;
+    letter-spacing: 0.5px;
+  }
+  .detail-preview-badge strong {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 800;
+    display: block;
+    margin: 2px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .detail-preview-footer {
+    position: absolute;
+    bottom: -36px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 1px;
+  }
+  .detail-preview-footer .page-n { font-family: var(--serif); font-size: 12px; color: var(--ink); font-weight: 500; }
+
+  .detail-preview-pager {
+    display: flex; gap: 4px; margin-top: 2px;
+  }
+  .detail-preview-pager .pip {
+    width: 20px; height: 3px; background: var(--ink-whisper); border-radius: 1px;
+  }
+  .detail-preview-pager .pip.active { background: var(--sage); width: 32px; }
+
+  /* Sidebar: louder typography, pull-quote, byline with avatar */
+  .detail-sidebar { padding-top: 8px; }
+
+  .detail-kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--clay);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .detail-kicker::before {
+    content: '';
+    width: 24px; height: 2px; background: var(--clay);
+  }
+
+  .detail-title {
+    font-family: var(--serif);
+    font-size: 64px;
+    line-height: 0.98;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+  }
+  .detail-title em {
+    font-family: var(--italic); font-style: italic; font-weight: 400;
+    color: var(--sage-deep);
+  }
+
+  .detail-byline {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .detail-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--amber);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 700; color: var(--ink);
+    font-size: 15px;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--hairline);
+  }
+
+  .detail-pullquote {
+    font-family: var(--italic);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.35;
+    color: var(--ink);
+    border-left: 4px solid var(--sage);
+    padding-left: 20px;
+    margin: 24px 0 32px;
+  }
+  .detail-pullquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-quiet);
+    font-weight: 500;
+  }
+
+  .detail-install-big {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px 22px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 15px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 0 var(--clay-deep), 0 12px 24px rgba(42,40,36,0.15);
+  }
+  .detail-install-big::before { content: "$"; color: var(--amber); font-weight: 700; }
+  .detail-install-big .time {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink-whisper);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .detail-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .detail-btn {
+    padding: 14px 18px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: all 0.08s;
+  }
+  .detail-btn:hover { background: var(--sage); color: var(--paper); border-color: var(--ink); }
+  .detail-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .detail-btn strong { display: block; font-family: var(--serif); font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+  .detail-btn small { font-family: var(--mono); font-size: 10px; color: var(--ink-quiet); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* Meta chips */
+  .detail-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .detail-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 12px;
+    background: var(--paper-dark);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.5px;
+  }
+  .detail-chip strong { color: var(--ink); font-weight: 600; }
+  .detail-chip.pill-sage { background: var(--sage-tint); border-color: var(--sage-edge); color: var(--sage-ink); }
+  .detail-chip.pill-clay { background: rgba(184,90,68,0.1); border-color: rgba(184,90,68,0.3); color: var(--clay-deep); }
+  .detail-chip.pill-amber { background: rgba(212,168,83,0.12); border-color: rgba(212,168,83,0.4); color: #8a6818; }
+
+  /* Themes grid — big swatches showing ACTUAL pages */
+  .detail-themes-row {
+    padding: 48px 56px;
+    background: var(--paper-dark);
+    border-top: 2px solid var(--ink);
+  }
+
+  .detail-themes-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 28px;
+  }
+  .detail-themes-title {
+    font-family: var(--serif); font-size: 36px; font-weight: 600;
+    letter-spacing: -1px; color: var(--ink);
+  }
+  .detail-themes-title em { font-family: var(--italic); font-style: italic; color: var(--clay); font-weight: 400; }
+  .detail-themes-sub {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-quiet);
+    letter-spacing: 1px;
+  }
+
+  .detail-themes-big-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+
+  .theme-mini {
+    aspect-ratio: 210/297;
+    padding: 14px;
+    font-family: var(--serif);
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    transition: transform 0.12s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  }
+  .theme-mini:hover { transform: translateY(-3px); }
+  .theme-mini.active { border-color: var(--ink); }
+  .theme-mini.active::after {
+    content: '✓ ACTIVE';
+    position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--amber);
+    padding: 3px 10px; border-radius: 10px;
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+  .theme-mini-name {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .theme-mini-date {
+    font-family: var(--serif); font-size: 16px; font-weight: 700;
+    margin-bottom: 4px; letter-spacing: -0.3px;
+  }
+  .theme-mini-meta {
+    font-family: var(--mono); font-size: 7px; letter-spacing: 1px; opacity: 0.6;
+    margin-bottom: 10px;
+  }
+  .theme-mini-box { height: 14px; margin-bottom: 5px; }
+  .theme-mini-line { height: 1px; margin: 4px 0; opacity: 0.4; }
+
+  .theme-mini.warm { background: var(--paper); color: var(--ink); }
+  .theme-mini.warm .theme-mini-box { background: var(--sage-tint); border-left: 2px solid var(--sage); }
+  .theme-mini.warm .theme-mini-line { background: var(--ink-whisper); }
+
+  .theme-mini.caffeine { background: #1A1814; color: #E8DEC8; }
+  .theme-mini.caffeine .theme-mini-box { background: rgba(212,168,83,0.15); border-left: 2px solid var(--amber); }
+  .theme-mini.caffeine .theme-mini-line { background: #5C5647; }
+
+  .theme-mini.claude { background: #F4ECE0; color: #6b2c1e; }
+  .theme-mini.claude .theme-mini-box { background: rgba(184,90,68,0.12); border-left: 2px solid var(--clay); }
+  .theme-mini.claude .theme-mini-line { background: #cab09f; }
+
+  .theme-mini.doom { background: #0B1116; color: #7cdf85; font-family: var(--mono); }
+  .theme-mini.doom .theme-mini-box { background: rgba(63,185,80,0.15); border-left: 2px solid #3FB950; }
+  .theme-mini.doom .theme-mini-line { background: #234028; }
+  .theme-mini.doom .theme-mini-date { font-family: var(--mono); }
+
+  .theme-mini.bubble { background: #FCD8DE; color: #7C2240; }
+  .theme-mini.bubble .theme-mini-box { background: rgba(229,56,136,0.12); border-left: 2px solid #E53888; }
+  .theme-mini.bubble .theme-mini-line { background: #e4a8b6; }
+  .theme-mini.bubble .theme-mini-date { font-family: var(--hand); font-size: 20px; }
+
+  .theme-mini.candy { background: #FFF2A8; color: #5a1e72; }
+  .theme-mini.candy .theme-mini-box { background: rgba(156,39,176,0.12); border-left: 2px solid #9C27B0; }
+  .theme-mini.candy .theme-mini-line { background: #dccb7a; }
+
+  .theme-mini.cyber { background: #0D0D0D; color: #FF00AA; }
+  .theme-mini.cyber .theme-mini-box { background: rgba(255,0,170,0.15); border-left: 2px solid #FF00AA; }
+  .theme-mini.cyber .theme-mini-line { background: #2a0018; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 3 — THEME SWAP interaction — 1440×900
+     Much more dramatic: live cursor, animated sidebar row, richer preview
+     ═══════════════════════════════════════════════════════════════ */
+  .theme-swap {
+    width: 1440px;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--paper-dark);
+  }
+
+  .theme-swap-top {
+    padding: 20px 40px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .theme-swap-title {
+    font-family: var(--serif); font-size: 26px; font-weight: 700;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .theme-swap-title em { font-family: var(--italic); font-style: italic; font-weight: 400; color: var(--amber); }
+  .theme-swap-title .badge {
+    font-family: var(--mono); font-size: 11px;
+    padding: 3px 8px; background: var(--amber); color: var(--ink);
+    border-radius: 3px; letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .theme-swap-toast {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--sage);
+    color: var(--paper);
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: flex; align-items: center; gap: 12px;
+    animation: toast-in 0.4s ease;
+    box-shadow: 0 4px 12px rgba(78,98,73,0.3);
+    font-weight: 500;
+  }
+  .theme-swap-toast::before { content: '✓'; font-weight: 700; }
+  .theme-swap-toast .meta { color: rgba(249,245,236,0.7); font-size: 10px; }
+  @keyframes toast-in { from { opacity: 0; transform: translateY(-8px); } }
+
+  .theme-swap-body {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    flex: 1;
+  }
+
+  .theme-swap-sidebar {
+    padding: 32px 24px;
+    background: var(--paper);
+    border-right: 2px solid var(--ink);
+    overflow-y: auto;
+  }
+  .theme-swap-sidebar h3 {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-quiet);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .theme-swap-sidebar h3.big {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+    text-transform: none;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .theme-swap-sidebar h3.big em { font-family: var(--italic); font-style: italic; font-weight: 400; color: var(--sage-deep); }
+
+  .theme-swap-list { display: flex; flex-direction: column; gap: 4px; }
+
+  .theme-swap-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: var(--sans);
+    color: var(--ink-soft);
+    transition: all 0.12s;
+    position: relative;
+  }
+  .theme-swap-row:hover { background: var(--sage-tint); }
+  .theme-swap-row.active {
+    background: var(--ink); color: var(--paper);
+    transform: translateX(4px);
+    box-shadow: -4px 0 0 var(--amber);
+  }
+  .theme-swap-row .swatch {
+    width: 32px; height: 32px; border-radius: 3px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  .theme-swap-row .swatch div { flex: 1; }
+  .theme-swap-row .name { font-weight: 600; }
+  .theme-swap-row .dim {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  .theme-swap-url {
+    margin-top: 28px;
+    padding: 14px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.7;
+    border: 2px dashed var(--amber);
+  }
+  .theme-swap-url .k { color: var(--ink-whisper); }
+  .theme-swap-url .v { color: var(--amber); font-weight: 700; }
+  .theme-swap-url .comment { color: var(--sage); display: block; margin-top: 6px; }
+
+  .theme-swap-preview {
+    padding: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--paper-dark);
+    background-image:
+      radial-gradient(rgba(42,40,36,0.04) 1px, transparent 1px);
+    background-size: 6px 6px;
+    position: relative;
+  }
+
+  .theme-swap-cursor {
+    position: absolute;
+    top: 340px; left: 310px;
+    width: 24px; height: 24px;
+    z-index: 50;
+    pointer-events: none;
+    animation: cursor-move 2.4s ease-in-out infinite;
+  }
+  .theme-swap-cursor svg { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+  @keyframes cursor-move {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(-20px, 4px); }
+  }
+
+  .theme-swap-doc {
+    aspect-ratio: 210/297;
+    height: 100%;
+    max-height: 740px;
+    background: #1A1814;
+    color: #E8DEC8;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.35), 0 40px 100px rgba(0,0,0,0.25);
+    padding: 38px;
+    font-family: var(--serif);
+    position: relative;
+    transform: rotate(1deg);
+  }
+
+  .theme-swap-doc-kicker {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--amber); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex; justify-content: space-between;
+    opacity: 0.8;
+  }
+  .theme-swap-doc-title {
+    font-family: var(--serif); font-size: 52px; font-weight: 700;
+    color: #F4ECE0; line-height: 0.95;
+    letter-spacing: -1.5px; margin-bottom: 4px;
+  }
+  .theme-swap-doc-date { font-family: var(--mono); font-size: 11px; color: var(--amber); margin-bottom: 22px; letter-spacing: 1px; opacity: 0.8; }
+  .theme-swap-doc-rule { height: 1px; background: #5C5647; margin-bottom: 20px; }
+  .theme-swap-doc-sec { margin-bottom: 20px; }
+  .theme-swap-doc-sec-title {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--amber); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 8px; opacity: 0.7;
+  }
+  .theme-swap-doc-frog {
+    background: rgba(212,168,83,0.15);
+    border-left: 3px solid var(--amber);
+    padding: 10px 14px;
+    font-family: var(--italic); font-style: italic;
+    font-size: 16px; line-height: 1.35;
+    color: var(--amber);
+  }
+  .theme-swap-doc-line { height: 1px; background: #5C5647; margin: 12px 0; opacity: 0.6; }
+  .theme-swap-doc-ring {
+    position: absolute;
+    top: -12px; right: -12px;
+    width: 68px; height: 68px;
+    background: var(--amber);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 800;
+    font-size: 14px;
+    transform: rotate(-12deg);
+    box-shadow: 0 4px 12px rgba(212,168,83,0.3);
+    border: 2px solid var(--ink);
+    outline: 1px dashed rgba(42,40,36,0.4);
+    outline-offset: -5px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SURFACE 4 — CODESPACES LANDING — 1440×1050
+     ═══════════════════════════════════════════════════════════════ */
+  .cs {
+    width: 1440px;
+    min-height: 1050px;
+    background: #0d1117;
+    color: #c9d1d9;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--sans);
+    position: relative;
+  }
+
+  .cs-topbar {
+    background: #161b22;
+    padding: 10px 24px;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    position: relative;
+  }
+  .cs-topbar-live {
+    width: 10px; height: 10px;
+    background: #2ea043; border-radius: 50%;
+    animation: pulse 1.8s infinite;
+    box-shadow: 0 0 8px rgba(46,160,67,0.5);
+  }
+  .cs-topbar-repo { font-family: var(--mono); font-size: 13px; color: #c9d1d9; }
+  .cs-topbar-repo strong { color: #58a6ff; font-weight: 600; }
+  .cs-topbar-branch {
+    background: #21262d; padding: 2px 10px; border-radius: 12px;
+    font-family: var(--mono); font-size: 11px; color: #d29922;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .cs-topbar-branch::before { content: '⎇'; }
+  .cs-topbar-codespace {
+    margin-left: auto;
+    font-family: var(--mono); font-size: 11px; color: #8b949e;
+  }
+  .cs-topbar-codespace strong { color: #79c0ff; }
+
+  /* Hero banner — big beautiful intro block, paper texture over dark */
+  .cs-hero {
+    background: var(--paper);
+    padding: 56px 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+    border-bottom: 2px solid var(--amber);
+    position: relative;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 8px, rgba(42,40,36,0.02) 8px 9px);
+  }
+
+  .cs-hero-eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--clay); letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cs-hero-eyebrow::before { content: '⌨'; font-size: 14px; }
+
+  .cs-hero-headline {
+    font-family: var(--serif);
+    font-size: 64px; font-weight: 700; line-height: 0.98;
+    color: var(--ink); letter-spacing: -2px;
+    margin-bottom: 16px;
+  }
+  .cs-hero-headline em {
+    font-family: var(--italic); font-style: italic; font-weight: 400;
+    color: var(--sage-deep);
+  }
+
+  .cs-hero-sub {
+    font-size: 18px; line-height: 1.55; color: var(--ink-soft);
+    max-width: 520px;
+  }
+  .cs-hero-sub code {
+    background: var(--ink); color: var(--amber);
+    padding: 2px 8px; border-radius: 3px;
+    font-family: var(--mono); font-size: 15px;
+    font-weight: 500;
+  }
+
+  .cs-hero-clock {
+    width: 180px; height: 180px;
+    position: relative;
+  }
+  .cs-hero-clock-ring {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(var(--sage) 0% 62%, var(--paper-dark) 62% 100%);
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(78,98,73,0.2);
+  }
+  .cs-hero-clock-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--paper);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 2px solid var(--ink);
+  }
+  .cs-hero-clock-num {
+    font-family: var(--serif); font-size: 56px; font-weight: 800;
+    color: var(--ink); line-height: 1; letter-spacing: -2px;
+  }
+  .cs-hero-clock-unit {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-quiet); letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .cs-hero-clock-label {
+    font-family: var(--italic); font-style: italic;
+    font-size: 13px; color: var(--sage-deep);
+    text-align: center; margin-top: 12px;
+  }
+
+  /* Body — side-by-side tour + terminal */
+  .cs-body {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    flex: 1;
+  }
+
+  .cs-tour {
+    padding: 48px 56px;
+    background: var(--paper);
+  }
+
+  .cs-tour-kicker {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-quiet); letter-spacing: 2.5px; text-transform: uppercase;
+    margin-bottom: 12px; font-weight: 600;
+  }
+
+  .cs-tour-title {
+    font-family: var(--serif); font-size: 34px; font-weight: 700;
+    letter-spacing: -1px; color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .cs-tour-step {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 18px;
+    align-items: center;
+  }
+  .cs-tour-step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--paper-dark); border: 2px solid var(--hairline);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 16px; font-weight: 700;
+    color: var(--ink-quiet);
+  }
+  .cs-tour-step.done .cs-tour-step-num {
+    background: var(--sage); color: var(--paper); border-color: var(--sage);
+  }
+  .cs-tour-step.active .cs-tour-step-num {
+    background: var(--ink); color: var(--amber); border-color: var(--amber);
+    animation: pulse 1.8s infinite;
+  }
+  .cs-tour-step.pending { opacity: 0.4; }
+  .cs-tour-step-body { }
+  .cs-tour-step-label {
+    font-family: var(--serif); font-size: 18px; font-weight: 600;
+    color: var(--ink); margin-bottom: 2px;
+  }
+  .cs-tour-step-detail {
+    font-size: 13px; color: var(--ink-quiet);
+    font-family: var(--mono); letter-spacing: 0.5px;
+  }
+  .cs-tour-step-time {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-quiet);
+    letter-spacing: 1px;
+    background: var(--paper-dark); padding: 4px 10px;
+    border-radius: 12px;
+  }
+  .cs-tour-step.active .cs-tour-step-time {
+    background: var(--amber); color: var(--ink); font-weight: 700;
+  }
+
+  .cs-tour-tip {
+    margin-top: 32px;
+    background: var(--sage-tint);
+    border-left: 4px solid var(--sage);
+    padding: 18px 22px;
+    position: relative;
+  }
+  .cs-tour-tip-label {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--sage-deep); letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cs-tour-tip-label::before { content: '💡'; font-size: 14px; }
+  .cs-tour-tip-body {
+    font-family: var(--italic); font-style: italic;
+    font-size: 17px; line-height: 1.45;
+    color: var(--sage-deep);
+  }
+
+  /* Terminal — richer, more artful */
+  .cs-term {
+    background: #0d1117;
+    padding: 48px 48px;
+    font-family: var(--mono); font-size: 13px; line-height: 1.7;
+    color: #c9d1d9;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cs-term-header {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #30363d;
+  }
+  .cs-term-dot { width: 11px; height: 11px; border-radius: 50%; }
+  .cs-term-dot.r { background: #ff5f57; }
+  .cs-term-dot.y { background: #febc2e; }
+  .cs-term-dot.g { background: #28c840; }
+  .cs-term-header-title { margin-left: 16px; font-size: 11px; color: #8b949e; }
+
+  .cs-term-line { margin-bottom: 2px; }
+  .cs-term-line .ts { color: #6e7681; font-size: 11px; }
+  .cs-term-line .ok { color: #2ea043; }
+  .cs-term-line .warn { color: #d29922; }
+  .cs-term-line .hash { color: #d29922; font-weight: 700; }
+  .cs-term-line .muted { color: #6e7681; }
+  .cs-term-line .path { color: #79c0ff; }
+  .cs-term-line .prompt { color: #58a6ff; }
+  .cs-term-line .cmd { color: #c9d1d9; }
+  .cs-term-line .hl { color: #7ee787; }
+
+  .cs-term-progress {
+    margin: 12px 0 20px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; color: #8b949e;
+  }
+  .cs-term-progress-bar {
+    flex: 1; height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; position: relative;
+  }
+  .cs-term-progress-fill {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, #2ea043, #56d364);
+    width: 62%;
+    animation: progress-slide 2s ease infinite;
+    border-radius: 3px;
+  }
+  @keyframes progress-slide {
+    0%,100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .cs-term-spinner { animation: spin 1s linear infinite; display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .cs-term-blink::after {
+    content: '▋'; color: #7ee787; animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* notes block */
+  .notes-block {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 64px 80px;
+    color: #F9F5EC;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .notes-block h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #F9F5EC;
+    letter-spacing: -0.5px;
+  }
+  .notes-block h2 em { font-family: var(--italic); font-style: italic; color: #D4A853; font-weight: 400; }
+  .notes-block ul { padding-left: 26px; color: #B5AD9F; }
+  .notes-block li { margin-bottom: 6px; }
+  .notes-block li strong { color: #F9F5EC; font-weight: 600; }
+  .notes-block li em { color: #7B9476; font-style: normal; font-family: var(--italic); font-style: italic; }
+  .notes-block code { color: #D4A853; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="review-banner">
+  <h1>pretext-templates.dev — wireframes <em style="font-family:'Instrument Serif';font-style:italic;color:#D4A853;font-weight:400">v2</em></h1>
+  <p>v1 read austere. This version dials up visual weight: real specimen stacks, washi tape, handwritten annotations, sticker sheets, colored pack cards, typography at display scale, bold 4px-offset button shadows, and hand-drawn accent marks.</p>
+  <p>Palette still from <code>packs/journals/prax-journal/DESIGN.md</code>. No purple gradients. No 3-col icon grid. But now the page <em>earns its space</em>.</p>
+  <p>4 surfaces, 1 wireframe each, more dense and more opinionated.</p>
+</div>
+
+<!-- ═══ SURFACE 1 — GALLERY HOME (denser, tape + sticker + specimen stack) ═══ -->
+<div class="surface">
+  <span class="surface-label">S1 · pretext-templates.dev/ · 1440×1300</span>
+
+  <div class="home">
+    <div class="home-topbar">
+      <div class="home-topbar-left">
+        <strong>PRETEXT v0.6.1</strong>
+        <span>· 7 packs · 12 themes · MIT</span>
+      </div>
+      <div class="home-topbar-right">
+        <span class="pulse">JUNE 2026 RELEASE · LIVE</span>
+        <span>→ CHANGELOG</span>
+      </div>
+    </div>
+
+    <nav class="home-nav">
+      <div class="home-logo">
+        pretext
+        <span class="home-logo-kicker">TEMPLATES · EST. 2026</span>
+      </div>
+      <div class="home-nav-center">
+        <a href="#" class="active">Browse</a>
+        <a href="#">Docs</a>
+        <a href="#">Themes</a>
+        <a href="#">Contribute</a>
+      </div>
+      <div class="home-nav-right">
+        <span class="star">★ <strong>1.4k</strong></span>
+        <span>GitHub ↗</span>
+      </div>
+    </nav>
+
+    <div class="home-hero">
+      <div class="home-hero-left">
+        <div class="home-hero-eyebrow">Open Source · Developer-First</div>
+        <h1 class="home-headline">Templates for people who <em>write</em> <span class="hand">by hand.</span></h1>
+        <p class="home-sub"><strong>Open-source notebook templates</strong> that ship as code. Drop into your GoodNotes, Apple Pencil workflow, or print to paper. One command installs, every surface themeable, every pack owns its CSS.</p>
+
+        <div class="home-install">
+          <span>npx @pretext-templates/cli add prax-journal</span>
+          <span class="home-install-copy">⌘C</span>
+        </div>
+
+        <div class="home-meta-row">
+          <span><span class="dot"></span>Node 20</span>
+          <span><span class="dot a"></span>56 stickers</span>
+          <span><span class="dot c"></span>12 themes</span>
+        </div>
+
+        <!-- Hand-drawn annotation + arrow -->
+        <div class="home-annot home-annot-1">the stamp is real</div>
+        <svg class="home-annot-arrow" width="80" height="40" style="top:240px; left:500px; position:absolute; transform:rotate(15deg);">
+          <path d="M 5 30 Q 40 10 70 25" stroke="#B85A44" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <path d="M 62 18 L 72 26 L 60 30" stroke="#B85A44" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <div class="home-hero-right">
+        <!-- Behind specimen (bubblegum) -->
+        <div class="home-specimen tertiary">
+          <div class="hs-kicker"><span>REFLECTION</span><span>bubblegum</span></div>
+          <div class="hs-title" style="color:#7C2240">Tiny win</div>
+          <div class="hs-date">2026·05·07</div>
+          <div class="hs-rule" style="background:#e4a8b6"></div>
+          <div class="hs-section">
+            <div class="hs-line handwritten">walked 4km before meetings</div>
+            <div class="hs-line handwritten">didn't check phone 'til noon</div>
+          </div>
+        </div>
+
+        <!-- Middle specimen (caffeine dark) -->
+        <div class="home-specimen secondary">
+          <div class="hs-kicker"><span>BRAIN DUMP</span><span>caffeine</span></div>
+          <div class="hs-title">Thursday</div>
+          <div class="hs-date">2026·05·14</div>
+          <div class="hs-rule"></div>
+          <div class="hs-section">
+            <div class="hs-section-title">Top of mind</div>
+            <div class="hs-frog">Ship the CLI. Cut Codespaces scope if Week 3 slips.</div>
+          </div>
+          <div class="hs-section">
+            <div class="hs-section-title">Dots</div>
+            <div style="font-family: var(--mono); font-size: 14px; color: var(--amber); opacity: 0.6; line-height: 1.8;">· · · · · · · · · ·<br>· · · · · · · · · ·<br>· · · · · · · · · ·</div>
+          </div>
+          <div class="home-sticker" style="bottom: auto; top: -20px; left: -20px; right: auto;"><strong>60</strong>STICKERS</div>
+        </div>
+
+        <!-- Primary specimen (warm paper) -->
+        <div class="home-specimen primary">
+          <div class="home-washi"></div>
+          <div class="home-stamp">THE<br>PRAXIS<br>LEDGER</div>
+
+          <div class="hs-kicker"><span>PRAXIS · DAILY</span><span>05·06</span></div>
+          <div class="hs-title">Wednesday</div>
+          <div class="hs-date">2026 · 05 · 06 · WEEK 19</div>
+          <div class="hs-rule"></div>
+
+          <div class="hs-section">
+            <div class="hs-section-title">The frog — Brian Tracy</div>
+            <div class="hs-frog">Finish the eng-review plan artefact. 30 min. No Twitter.</div>
+          </div>
+
+          <div class="hs-section">
+            <div class="hs-section-title">Rule of three — Russ Barkley</div>
+            <div class="hs-line handwritten">1. ship preview — plan-design-review</div>
+            <div class="hs-line handwritten">2. write CODESPACES.md</div>
+            <div class="hs-line handwritten">3. reply to Sarah re: pack CSS</div>
+          </div>
+
+          <div class="hs-section">
+            <div class="hs-section-title">Horror metric</div>
+            <div class="hs-clay-row">
+              <span>Cigarettes today</span>
+              <span class="val">3 / 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticker sheet callout -->
+        <div class="home-sticker-sheet">
+          <div class="home-sticker-sheet-kicker">Bonus · 60 stickers</div>
+          <div class="home-sticker-sheet-grid">
+            <div class="home-sticker-sheet-dot">★</div>
+            <div class="home-sticker-sheet-dot">✓</div>
+            <div class="home-sticker-sheet-dot">!</div>
+            <div class="home-sticker-sheet-dot">♥</div>
+            <div class="home-sticker-sheet-dot">→</div>
+            <div class="home-sticker-sheet-dot">✂</div>
+            <div class="home-sticker-sheet-dot">●</div>
+            <div class="home-sticker-sheet-dot">○</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pack shelf -->
+    <div class="home-shelf">
+      <div class="home-shelf-header">
+        <div class="home-shelf-title">Browse the <em>shelf.</em></div>
+        <div class="home-shelf-sub">7 PACKS · 140+ PAGES · ALL OPEN SOURCE</div>
+      </div>
+
+      <div class="home-shelf-grid">
+        <div class="pack-card">
+          <div class="pack-card-pin"></div>
+          <div class="pack-card-preview">
+            <div style="font-family: var(--mono); font-size: 8px; color: var(--ink-quiet); letter-spacing: 1px; margin-bottom: 6px">PRAXIS · DAILY</div>
+            <div style="font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 10px">Wed</div>
+            <div class="pack-card-block"></div>
+            <div class="pack-card-line med"></div>
+            <div class="pack-card-line"></div>
+            <div class="pack-card-line short"></div>
+          </div>
+          <div class="pack-card-name">Praxis Ledger</div>
+          <div class="pack-card-meta">130pp · 12 themes <span class="star">★ 890</span></div>
+        </div>
+
+        <div class="pack-card">
+          <div class="pack-card-pin"></div>
+          <div class="pack-card-preview">
+            <div style="font-family: var(--mono); font-size: 8px; color: var(--ink-quiet); letter-spacing: 1px; margin-bottom: 6px">CORNELL</div>
+            <div style="font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px">Lecture 04</div>
+            <div style="font-family: var(--mono); font-size: 7px; color: var(--ink-quiet); margin-bottom: 6px">CUE  │  NOTES</div>
+            <div class="pack-card-line short"></div>
+            <div class="pack-card-line med"></div>
+            <div class="pack-card-line"></div>
+            <div class="pack-card-line short"></div>
+          </div>
+          <div class="pack-card-name">Cornell Notes</div>
+          <div class="pack-card-meta">1pp · 3 themes <span class="star">★ 120</span></div>
+        </div>
+
+        <div class="pack-card">
+          <div class="pack-card-pin"></div>
+          <div class="pack-card-preview">
+            <div style="font-family: var(--mono); font-size: 8px; color: #BFA670; letter-spacing: 1px; margin-bottom: 6px">HABIT · WEEK 19</div>
+            <div style="font-family: var(--serif); font-size: 18px; font-weight: 700; color: #E8DEC8; margin-bottom: 10px">May 04 → 10</div>
+            <div style="font-family: var(--mono); font-size: 11px; color: #7ee787; line-height: 1.8">
+              ● ○ ● ● ● ○ ●<br>
+              ● ● ● ● ○ ● ●<br>
+              ○ ● ● ○ ● ● ●
+            </div>
+          </div>
+          <div class="pack-card-name">Habit Tracker</div>
+          <div class="pack-card-meta">31pp · 4 themes <span class="star">★ 210</span></div>
+        </div>
+
+        <div class="pack-card">
+          <div class="pack-card-pin"></div>
+          <div class="pack-card-preview">
+            <div style="font-family: var(--mono); font-size: 8px; color: #B4324F; letter-spacing: 1px; margin-bottom: 6px">MOOD</div>
+            <div style="font-family: var(--hand); font-size: 26px; color: #7C2240; margin-bottom: 10px">gentle week</div>
+            <div class="pack-card-dots" style="color:#E53888">● ● ○ ● ● ● ○</div>
+            <div class="pack-card-line short" style="background:#e4a8b6"></div>
+            <div class="pack-card-line" style="background:#e4a8b6"></div>
+          </div>
+          <div class="pack-card-name">Mood Tracker</div>
+          <div class="pack-card-meta">1pp · 3 themes <span class="star">★ 95</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom proof strip -->
+    <div class="home-proof-strip">
+      <div class="home-proof-strip-item"><strong>1,432</strong> <em>GitHub ★</em></div>
+      <div class="home-proof-strip-item"><strong>56</strong> <em>Contributors</em></div>
+      <div class="home-proof-strip-item"><strong>8k+</strong> <em>npm installs/week</em></div>
+      <div class="home-proof-strip-item"><strong>12</strong> <em>Community packs</em></div>
+      <div class="home-proof-strip-item"><strong>MIT</strong> <em>License, always</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SURFACE 2 — PACK DETAIL (louder) ═══ -->
+<div class="surface">
+  <span class="surface-label">S2 · /packs/prax-journal · 1440×1400</span>
+  <div class="detail">
+    <div class="detail-topbar">
+      <div class="detail-topbar-crumbs">
+        <a href="#">pretext</a>
+        <span>/</span>
+        <a href="#">packs</a>
+        <span>/</span>
+        <span class="current">prax-journal</span>
+      </div>
+      <div class="detail-topbar-meta">
+        <span><strong>v5.2</strong></span>
+        <span>30 KB</span>
+        <span>MIT</span>
+        <span>updated <strong>2d ago</strong></span>
+        <span>★ <strong>890</strong></span>
+      </div>
+    </div>
+
+    <div class="detail-hero">
+      <div class="detail-preview-stack">
+        <div class="detail-preview-behind"></div>
+        <div class="detail-preview-main">
+          <div class="detail-preview-tape"></div>
+          <div class="detail-preview-badge">
+            <span>PACK</span>
+            <strong>130pp</strong>
+            <span>A4 · MIT</span>
+          </div>
+          <div class="hs-kicker"><span>PRAXIS · DAILY</span><span>05·06</span></div>
+          <div class="hs-title" style="font-size:52px">Wednesday</div>
+          <div class="hs-date">2026 · 05 · 06 · WEEK 19</div>
+          <div class="hs-rule"></div>
+          <div class="hs-section">
+            <div class="hs-section-title">The frog — Brian Tracy</div>
+            <div class="hs-frog" style="font-size:17px">Finish the eng-review plan artefact. 30 min. No Twitter.</div>
+          </div>
+          <div class="hs-section">
+            <div class="hs-section-title">Rule of three — Russ Barkley</div>
+            <div class="hs-line handwritten" style="font-size:16px">1. ship preview</div>
+            <div class="hs-line handwritten" style="font-size:16px">2. write CODESPACES.md</div>
+            <div class="hs-line handwritten" style="font-size:16px">3. reply to Sarah</div>
+          </div>
+          <div class="hs-section">
+            <div class="hs-section-title">Horror metric</div>
+            <div class="hs-clay-row"><span>Cigarettes today</span><span class="val">3 / 0</span></div>
+          </div>
+          <div class="detail-preview-footer">
+            <div>
+              <span>1 / 130 · Warm Analog</span>
+              <div class="detail-preview-pager">
+                <span class="pip active"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span>
+              </div>
+            </div>
+            <span>⇠ ⇢ flip pages</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-sidebar">
+        <div class="detail-kicker">JOURNAL PACK · FEATURED</div>
+        <h2 class="detail-title">The Praxis <em>Ledger</em></h2>
+        <div class="detail-byline">
+          <div class="detail-avatar">P</div>
+          <div>by <strong style="color:var(--ink);font-weight:600">praxlannister</strong> · first published Apr 2026 · <strong style="color:var(--sage-deep);font-weight:600">open source</strong></div>
+        </div>
+
+        <div class="detail-pullquote">
+          "An ADHD planner that finally got out of my way. Nothing shouts. Everything breathes."
+          <cite>— HN commenter · 2026-03-20 · 184 points</cite>
+        </div>
+
+        <div class="detail-install-big">
+          <span>npx @pretext-templates/cli add prax-journal</span>
+          <span class="time">~90s</span>
+        </div>
+
+        <div class="detail-controls">
+          <button class="detail-btn">
+            <strong>↓ PDF</strong>
+            <small>DOWNLOAD · MAY 2026</small>
+          </button>
+          <button class="detail-btn">
+            <strong>⇢ Codespaces</strong>
+            <small>RUN IN BROWSER · 60s</small>
+          </button>
+          <button class="detail-btn">
+            <strong>⟳ Remix</strong>
+            <small>FORK + REBRAND</small>
+          </button>
+          <button class="detail-btn">
+            <strong>↗ Share</strong>
+            <small>COPY LINK</small>
+          </button>
+        </div>
+
+        <div class="detail-chips">
+          <span class="detail-chip pill-sage">A4 · 210×297mm</span>
+          <span class="detail-chip">5mm dot-grid</span>
+          <span class="detail-chip">Fraunces · Instrument · Mono</span>
+          <span class="detail-chip pill-amber">60 stickers</span>
+          <span class="detail-chip pill-clay">1 horror metric / day</span>
+          <span class="detail-chip">GoodNotes · Pencil · print</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-themes-row">
+      <div class="detail-themes-header">
+        <div class="detail-themes-title">12 <em>themes,</em> one pack.</div>
+        <div class="detail-themes-sub">TAP ANY SWATCH · URL UPDATES LIVE · 240MS</div>
+      </div>
+      <div class="detail-themes-big-grid">
+        <div class="theme-mini warm active">
+          <div class="theme-mini-name">WARM ANALOG</div>
+          <div class="theme-mini-date">Wed</div>
+          <div class="theme-mini-meta">CREAM · SAGE</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+        <div class="theme-mini caffeine">
+          <div class="theme-mini-name">CAFFEINE</div>
+          <div class="theme-mini-date">Wed</div>
+          <div class="theme-mini-meta">DARK · AMBER</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+        <div class="theme-mini claude">
+          <div class="theme-mini-name">CLAUDE</div>
+          <div class="theme-mini-date">Wed</div>
+          <div class="theme-mini-meta">WARM · CLAY</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+        <div class="theme-mini doom">
+          <div class="theme-mini-name">DOOM64</div>
+          <div class="theme-mini-date">WED</div>
+          <div class="theme-mini-meta">DARK · TERMINAL</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+        <div class="theme-mini bubble">
+          <div class="theme-mini-name">BUBBLEGUM</div>
+          <div class="theme-mini-date">wed</div>
+          <div class="theme-mini-meta">PINK · HAND</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+        <div class="theme-mini candy">
+          <div class="theme-mini-name">CANDYLAND</div>
+          <div class="theme-mini-date">Wed</div>
+          <div class="theme-mini-meta">YELLOW · PURPLE</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+        <div class="theme-mini cyber">
+          <div class="theme-mini-name">CYBERPUNK</div>
+          <div class="theme-mini-date">Wed</div>
+          <div class="theme-mini-meta">BLACK · NEON</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+        <div class="theme-mini warm" style="opacity:0.35">
+          <div class="theme-mini-name">+ 5 MORE</div>
+          <div class="theme-mini-date">···</div>
+          <div class="theme-mini-meta">SHOW ALL</div>
+          <div class="theme-mini-box"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+          <div class="theme-mini-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SURFACE 3 — THEME SWAP (louder) ═══ -->
+<div class="surface">
+  <span class="surface-label">S3 · theme-swap · CAFFEINE · 240ms transition just fired · 1440×900</span>
+
+  <div class="theme-swap">
+    <div class="theme-swap-top">
+      <div class="theme-swap-title">
+        <span>Praxis Ledger</span>
+        <em>caffeine</em>
+        <span class="badge">DARK MODE</span>
+      </div>
+      <div class="theme-swap-toast">
+        <span>Theme: <strong style="font-weight:700">caffeine</strong></span>
+        <span class="meta">· URL updated · 240ms render</span>
+      </div>
+    </div>
+
+    <div class="theme-swap-body">
+      <aside class="theme-swap-sidebar">
+        <h3>12 THEMES · ALL INCLUDED</h3>
+        <h3 class="big">Switch the <em>mood.</em></h3>
+
+        <div class="theme-swap-list">
+          <div class="theme-swap-row">
+            <span class="swatch"><div style="background:#F9F5EC"></div><div style="background:#7B9476;flex:0 0 6px"></div></span>
+            <span class="name">Warm Analog</span>
+            <span class="dim">Light</span>
+          </div>
+          <div class="theme-swap-row active">
+            <span class="swatch"><div style="background:#1A1814"></div><div style="background:#D4A853;flex:0 0 6px"></div></span>
+            <span class="name">Caffeine</span>
+            <span class="dim">Dark</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="swatch"><div style="background:#F4ECE0"></div><div style="background:#B85A44;flex:0 0 6px"></div></span>
+            <span class="name">Claude</span>
+            <span class="dim">Light</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="swatch"><div style="background:#0B1116"></div><div style="background:#3FB950;flex:0 0 6px"></div></span>
+            <span class="name">Doom64</span>
+            <span class="dim">Dark</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="swatch"><div style="background:#FCD8DE"></div><div style="background:#E53888;flex:0 0 6px"></div></span>
+            <span class="name">Bubblegum</span>
+            <span class="dim">Light</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="swatch"><div style="background:#0D0D0D"></div><div style="background:#FF00AA;flex:0 0 6px"></div></span>
+            <span class="name">Cyberpunk</span>
+            <span class="dim">Dark</span>
+          </div>
+          <div class="theme-swap-row">
+            <span class="swatch"><div style="background:#FFF2A8"></div><div style="background:#9C27B0;flex:0 0 6px"></div></span>
+            <span class="name">Candyland</span>
+            <span class="dim">Light</span>
+          </div>
+          <div class="theme-swap-row" style="opacity:0.55">
+            <span class="swatch"><div style="background:#eee"></div></span>
+            <span class="name">+ 5 more</span>
+            <span class="dim">SHOW ALL</span>
+          </div>
+        </div>
+
+        <div class="theme-swap-url">
+          <span class="comment"># live URL · copy to share</span>
+          <div><span class="k">GET</span> pretext-templates.dev</div>
+          <div>&nbsp;&nbsp;/packs/prax-journal</div>
+          <div>&nbsp;&nbsp;?theme=<span class="v">caffeine</span></div>
+          <div>&nbsp;&nbsp;&amp;month=<span class="v">2026-06</span></div>
+        </div>
+      </aside>
+
+      <div class="theme-swap-preview">
+        <div class="theme-swap-doc">
+          <div class="theme-swap-doc-ring">v5.2</div>
+          <div class="theme-swap-doc-kicker">
+            <span>PRAXIS · DAILY</span>
+            <span>CAFFEINE · DARK</span>
+          </div>
+          <div class="theme-swap-doc-title">Wednesday</div>
+          <div class="theme-swap-doc-date">2026 · 05 · 06 · WEEK 19</div>
+          <div class="theme-swap-doc-rule"></div>
+          <div class="theme-swap-doc-sec">
+            <div class="theme-swap-doc-sec-title">The frog — Brian Tracy</div>
+            <div class="theme-swap-doc-frog">Finish the eng-review plan artefact. 30 min. No Twitter.</div>
+          </div>
+          <div class="theme-swap-doc-sec">
+            <div class="theme-swap-doc-sec-title">Rule of three — Russ Barkley</div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--amber);opacity:0.8;line-height:1.8">
+              1 &gt; ship preview — design review<br>
+              2 &gt; write CODESPACES.md<br>
+              3 &gt; reply to Sarah re: pack CSS
+            </div>
+          </div>
+          <div class="theme-swap-doc-sec">
+            <div class="theme-swap-doc-sec-title">Horror metric</div>
+            <div style="background:rgba(184,90,68,0.18);border-left:3px solid var(--clay);padding:10px 14px;font-family:var(--mono);font-size:12px;color:#F5A890;display:flex;justify-content:space-between;">
+              <span>Cigarettes today</span>
+              <span style="font-family:var(--serif);font-weight:700">3 / 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animated cursor -->
+        <div class="theme-swap-cursor">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path d="M 2 2 L 2 18 L 7 14 L 10 22 L 13 21 L 10 13 L 16 13 Z" fill="#fff" stroke="#000" stroke-width="1" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SURFACE 4 — CODESPACES LANDING (louder, proper hero) ═══ -->
+<div class="surface">
+  <span class="surface-label">S4 · Codespaces boot · 45s remaining · 1440×1050</span>
+  <div class="cs">
+    <div class="cs-topbar">
+      <span class="cs-topbar-live"></span>
+      <span class="cs-topbar-repo"><strong>praxstack</strong> / pretext-templates</span>
+      <span class="cs-topbar-branch">main</span>
+      <span class="cs-topbar-codespace">Codespaces · <strong>friendly-octopus-2</strong> · 4-core · 8GB</span>
+    </div>
+
+    <!-- HERO block on paper, making the 45s wait feel intentional -->
+    <div class="cs-hero">
+      <div>
+        <div class="cs-hero-eyebrow">BOOTING · 45s REMAINING</div>
+        <h1 class="cs-hero-headline">You're almost <em>in the repo.</em></h1>
+        <p class="cs-hero-sub">Your Codespace is pulling a Node 20 container, cloning the repo, running <code>npm ci</code>, and warming the test suite. When it's done you can type <code>npm run generate 2026-06</code> and your first <em style="font-family:var(--italic);font-style:italic;color:var(--sage-deep)">Praxis Ledger</em> PDF appears in <code>output/</code>.</p>
+      </div>
+
+      <div class="cs-hero-clock">
+        <div class="cs-hero-clock-ring">
+          <div class="cs-hero-clock-inner">
+            <div class="cs-hero-clock-num">62%</div>
+            <div class="cs-hero-clock-unit">READY</div>
+          </div>
+        </div>
+        <div class="cs-hero-clock-label">≈ 45 seconds left</div>
+      </div>
+    </div>
+
+    <div class="cs-body">
+      <div class="cs-tour">
+        <div class="cs-tour-kicker">WHILE YOU WAIT · A QUICK TOUR</div>
+        <h2 class="cs-tour-title">What's about to load.</h2>
+
+        <div class="cs-tour-step done">
+          <div class="cs-tour-step-num">✓</div>
+          <div class="cs-tour-step-body">
+            <div class="cs-tour-step-label">Container image pulled</div>
+            <div class="cs-tour-step-detail">mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm</div>
+          </div>
+          <div class="cs-tour-step-time">8s</div>
+        </div>
+        <div class="cs-tour-step done">
+          <div class="cs-tour-step-num">✓</div>
+          <div class="cs-tour-step-body">
+            <div class="cs-tour-step-label">Repository cloned</div>
+            <div class="cs-tour-step-detail">praxstack/pretext-templates @ main</div>
+          </div>
+          <div class="cs-tour-step-time">3s</div>
+        </div>
+        <div class="cs-tour-step active">
+          <div class="cs-tour-step-num">3</div>
+          <div class="cs-tour-step-body">
+            <div class="cs-tour-step-label">npm ci · installing 247 packages</div>
+            <div class="cs-tour-step-detail">puppeteer chromium (193MB · 62%)</div>
+          </div>
+          <div class="cs-tour-step-time">~25s</div>
+        </div>
+        <div class="cs-tour-step pending">
+          <div class="cs-tour-step-num">4</div>
+          <div class="cs-tour-step-body">
+            <div class="cs-tour-step-label">npm test · baseline check (143 tests)</div>
+            <div class="cs-tour-step-detail">verifies your Codespace is healthy</div>
+          </div>
+          <div class="cs-tour-step-time">~8s</div>
+        </div>
+        <div class="cs-tour-step pending">
+          <div class="cs-tour-step-num">5</div>
+          <div class="cs-tour-step-body">
+            <div class="cs-tour-step-label">Preview server · :4040</div>
+            <div class="cs-tour-step-detail">live-reload HTML with inlined fonts</div>
+          </div>
+          <div class="cs-tour-step-time">~1s</div>
+        </div>
+
+        <div class="cs-tour-tip">
+          <div class="cs-tour-tip-label">If anything breaks</div>
+          <div class="cs-tour-tip-body">The Codespace is disposable. Close it, re-open from the pack page, and you're back in 60s. Nothing local is lost — your work lives in the repo.</div>
+        </div>
+      </div>
+
+      <div class="cs-term">
+        <div class="cs-term-header">
+          <span class="cs-term-dot r"></span>
+          <span class="cs-term-dot y"></span>
+          <span class="cs-term-dot g"></span>
+          <span class="cs-term-header-title">friendly-octopus-2 — zsh — 132×40</span>
+        </div>
+
+        <div class="cs-term-line"><span class="ts">2026-04-30T14:52:31Z</span> <span class="cmd">Creating codespace from branch <span class="hash">main</span>...</span></div>
+        <div class="cs-term-line"><span class="ts">2026-04-30T14:52:33Z</span> <span class="ok">✓</span> Using image <span class="path">mcr.microsoft.com/devcontainers/typescript-node</span>:<span class="hash">1-20-bookworm</span></div>
+        <div class="cs-term-line"><span class="ts">2026-04-30T14:52:39Z</span> <span class="ok">✓</span> Container started · PID <span class="hash">1</span></div>
+        <div class="cs-term-line"><span class="ts">2026-04-30T14:52:40Z</span> <span class="ok">✓</span> Workspace mounted at <span class="path">/workspaces/pretext-templates</span></div>
+        <div class="cs-term-line"><span class="ts">2026-04-30T14:52:41Z</span> <span class="muted">→ postCreateCommand: <span class="hl">npm ci &amp;&amp; npm test</span></span></div>
+        <br>
+        <div class="cs-term-line"><span class="prompt">@praxlannister</span>:<span class="path">/workspaces/pretext-templates</span>$ <span class="cmd">npm ci</span></div>
+        <div class="cs-term-line"><span class="muted">&nbsp;&nbsp;npm warn using --force flag is not recommended</span></div>
+        <div class="cs-term-line">&nbsp;&nbsp;added <span class="hash">237</span> packages, resolved <span class="hash">247</span> in <span class="hash">12.4s</span></div>
+        <div class="cs-term-line"><span class="warn">▸</span> puppeteer@23.11.1 · postinstall</div>
+        <div class="cs-term-line"><span class="muted">&nbsp;&nbsp;downloading chromium (193.4 MB)...</span></div>
+
+        <div class="cs-term-progress">
+          <span>chromium</span>
+          <div class="cs-term-progress-bar">
+            <div class="cs-term-progress-fill"></div>
+          </div>
+          <span class="warn">62% · 121 MB · 18 MB/s</span>
+        </div>
+
+        <div class="cs-term-line"><span class="ts">2026-04-30T14:52:59Z</span> <span class="muted">→ up next:</span></div>
+        <div class="cs-term-line">&nbsp;&nbsp;<span class="prompt">$</span> <span class="hl">npm test</span> <span class="muted"># verify 143 tests</span></div>
+        <div class="cs-term-line">&nbsp;&nbsp;<span class="prompt">$</span> <span class="hl">npm run preview</span> <span class="muted"># http://localhost:4040</span></div>
+        <div class="cs-term-line">&nbsp;&nbsp;<span class="prompt">$</span> <span class="hl">npm run generate 2026-06</span> <span class="muted"># your first PDF</span></div>
+        <br>
+        <div class="cs-term-line"><span class="cs-term-blink"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DESIGN NOTES v2 ═══ -->
+<div class="notes-block">
+  <h2>What <em>v2</em> changed vs v1</h2>
+  <ul>
+    <li><strong>S1 home</strong> — added a top system bar (version/pack count/live status), multi-specimen stack (warm + caffeine + bubblegum simultaneously), washi tape, rubber-stamp in clay, 60-sticker callout sheet, handwritten annotation + hand-drawn arrow, a social-proof strip at bottom with <em>real numbers</em>, <em>horizontal pack shelf</em> with 4 richly-colored cards (not a grid of cards, but 4 deliberately different colored sheets with varied typography per pack).</li>
+    <li><strong>S2 pack detail</strong> — preview now a <em>stack</em> (two sheets overlapping), washi tape on top, circular badge "130pp", breadcrumb bar with metadata chips, pull-quote from HN, 4 CTA buttons with <strong>4px offset solid shadow</strong> (clicky, retro-terminal-product feel), metadata as colored chips, <em>12 actual mini-page-previews</em> (not dot swatches) for the themes row — each shows a real-looking page in that theme.</li>
+    <li><strong>S3 theme-swap</strong> — dark top banner with mode badge, large green success toast with render time, dashed-amber URL block showing the live shareable-URL, <em>animated cursor</em> overlay, specimen rotated on the preview, ring stamp on the specimen ("v5.2"), much bolder typography throughout.</li>
+    <li><strong>S4 Codespaces</strong> — now has a proper paper-textured hero banner above the terminal, a <em>progress ring clock</em> (conic-gradient, 62% ready), 5 numbered tour steps with avatars and detail lines, a big "while you wait" tip box, and a terminal pane with mac window-chrome, timestamps, colored log lines, live progress bar, and a blinking cursor.</li>
+  </ul>
+
+  <h2 style="margin-top:32px">Weight sources (each <em>earns</em> its pixels)</h2>
+  <ul>
+    <li><strong>Multiple real specimens</strong> on home — the product IS the art direction</li>
+    <li><strong>Washi tape + rubber stamps + sticker sheets</strong> — physical artefact energy, not SaaS slickness</li>
+    <li><strong>Handwritten annotations</strong> (Caveat + Reenie Beanie) — human in the loop</li>
+    <li><strong>Bold shadows on CTAs</strong> — Swiss-adjacent, retro-terminal, click-feedback</li>
+    <li><strong>Typography at display scale</strong> — 78px headline, 64px title, Fraunces 800</li>
+    <li><strong>Real numbers</strong> in proof strip and chips — concrete not aspirational</li>
+    <li><strong>Colored pack cards</strong> — each pack OWNS its own color, no sea of white</li>
+    <li><strong>Pull-quote with attribution</strong> — social proof baked into the detail page</li>
+    <li><strong>Meta as pills</strong> — readable, colored, scannable</li>
+  </ul>
+</div>
+
+</body>
+</html>

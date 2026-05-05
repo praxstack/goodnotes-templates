@@ -13,10 +13,10 @@ dist/
 coverage/
 
 # Generated output (PDFs, PNGs — some are 50–70 MB each)
-output/
+! output/
 
 # Generated sticker PNGs (SVG is source of truth)
-packs/journals/prax-journal/stickers/*/*.png
+! packs/journals/prax-journal/stickers/*/*.png
 
 # Example PDFs / HTML exports
 examples/**/*.pdf
@@ -44,8 +44,8 @@ package-lock.json
 .DS_Store
 
 # Editor / tooling state
-.superpowers/
-.gstack/
+!.superpowers/
+!.gstack/
 .vscode/
 .idea/
 
