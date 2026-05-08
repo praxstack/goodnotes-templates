@@ -220,12 +220,12 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     <div class="mh-r">
       <div class="month-row">
         <span class="label">Month</span>
-        <span class="field" data-inject="month-name"></span>
+        <span class="field" data-inject="month-name">{{MONTH_NAME}}</span>
       </div>
       <div class="mo-counter">
-        Month <span class="big" data-inject="month-num">__</span><span class="slash">·</span>
-        <span data-inject="quarter">Q_</span><span class="slash">·</span>
-        <span data-inject="year">____</span>
+        Month <span class="big" data-inject="month-num">{{MONTH_NUM}}</span><span class="slash">·</span>
+        <span data-inject="quarter">{{QUARTER}}</span><span class="slash">·</span>
+        <span data-inject="year">{{YEAR}}</span>
       </div>
     </div>
   </header>

@@ -152,6 +152,15 @@ export const PROFILE_PLACEHOLDERS = {
   DAY_WEEKDAY:     '___',
   DAY_OF_YEAR:     '___',
   DAYS_IN_YEAR:    '365',
+  // ── Weekly review tokens (filled from PageSpec.weekEnding) ─────────────
+  WEEK_DATE:       '__________',
+  WEEK_NUM:        '__',
+  // ── Monthly review tokens (filled from PageSpec.monthEnding) ───────────
+  MONTH_NAME:      '__________',
+  MONTH_NUM:       '__',
+  // ── Shared across weekly + monthly ─────────────────────────────────────
+  QUARTER:         'Q_',
+  YEAR:            '____',
 } as const;
 
 export type ProfilePlaceholder = keyof typeof PROFILE_PLACEHOLDERS;
@@ -246,6 +255,95 @@ export function deriveDateFields(
 }
 
 /**
+ * Quarter number (1–4) from a 1-based month (1–12).
+ * Q1=Jan-Mar, Q2=Apr-Jun, Q3=Jul-Sep, Q4=Oct-Dec.
+ */
+function quarterFromMonth(month: number): number {
+  return Math.floor((month - 1) / 3) + 1;
+}
+
+/**
+ * ISO 8601 week number for a UTC timestamp. Week 1 is the week
+ * containing the first Thursday of the year; weeks start on Monday.
+ *
+ * Matches what most date libraries call "ISO week" — stable, calendar-
+ * correct across year boundaries. Pure; no external deps.
+ */
+function isoWeekNumber(isoDate: string): number {
+  const [yStr, mStr, dStr] = isoDate.split('-');
+  const d = new Date(Date.UTC(Number(yStr), Number(mStr) - 1, Number(dStr)));
+  // Shift to the Thursday of the current ISO week so the year of that
+  // Thursday is the correct "ISO year" for numbering purposes.
+  const day = d.getUTCDay() || 7; // Sun=0 → 7
+  d.setUTCDate(d.getUTCDate() + 4 - day);
+  const yearStart = Date.UTC(d.getUTCFullYear(), 0, 1);
+  return Math.ceil(((d.getTime() - yearStart) / 86_400_000 + 1) / 7);
+}
+
+/**
+ * Derive `WEEK_*` + shared (`QUARTER`, `YEAR`) placeholder values from
+ * a Sunday week-ending ISO date (`YYYY-MM-DD`). Called for weekly review
+ * pages, where the cadence is Sunday-terminal.
+ *
+ * Produces, for e.g. `'2026-05-10'` (a Sunday):
+ *   - `WEEK_DATE` → `'May 10'`
+ *   - `WEEK_NUM`  → `'19'`   (ISO week)
+ *   - `QUARTER`   → `'Q2'`
+ *   - `YEAR`      → `'2026'`
+ */
+export function deriveWeeklyFields(
+  isoDate: string,
+): Partial<Record<ProfilePlaceholder, string>> {
+  const [yStr, mStr, dStr] = isoDate.split('-');
+  const year = Number(yStr);
+  const month = Number(mStr);
+  const day = Number(dStr);
+  const utc = Date.UTC(year, month - 1, day);
+  const dateFmt = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+  return {
+    WEEK_DATE: dateFmt.format(utc),
+    WEEK_NUM:  String(isoWeekNumber(isoDate)),
+    QUARTER:   `Q${quarterFromMonth(month)}`,
+    YEAR:      String(year),
+  };
+}
+
+/**
+ * Derive `MONTH_*` + shared (`QUARTER`, `YEAR`) placeholder values from a
+ * month-ending ISO date. Called for monthly review pages (last day of the
+ * calendar month per `splice.ts`).
+ *
+ * Produces, for e.g. `'2026-05-31'`:
+ *   - `MONTH_NAME` → `'May'`
+ *   - `MONTH_NUM`  → `'05'`
+ *   - `QUARTER`    → `'Q2'`
+ *   - `YEAR`       → `'2026'`
+ */
+export function deriveMonthlyFields(
+  isoDate: string,
+): Partial<Record<ProfilePlaceholder, string>> {
+  const [yStr, mStr, dStr] = isoDate.split('-');
+  const year = Number(yStr);
+  const month = Number(mStr);
+  const day = Number(dStr);
+  const utc = Date.UTC(year, month - 1, day);
+  const monthFmt = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    timeZone: 'UTC',
+  });
+  return {
+    MONTH_NAME: monthFmt.format(utc),
+    MONTH_NUM:  String(month).padStart(2, '0'),
+    QUARTER:    `Q${quarterFromMonth(month)}`,
+    YEAR:       String(year),
+  };
+}
+
+/**
  * Replace every `{{PLACEHOLDER}}` token in `html` with its resolved value,
  * or the fallback from `PROFILE_PLACEHOLDERS` when neither the profile
  * nor the page supplies it. Pure, no IO.
@@ -270,7 +368,9 @@ export function substituteProfile(
 ): string {
   const filled: Partial<Record<ProfilePlaceholder, string>> = {
     ...(profile ? extractRxFields(profile) : {}),
-    ...(page && page.kind === 'daily' ? deriveDateFields(page.date) : {}),
+    ...(page && page.kind === 'daily'   ? deriveDateFields(page.date)            : {}),
+    ...(page && page.kind === 'weekly'  ? deriveWeeklyFields(page.weekEnding)    : {}),
+    ...(page && page.kind === 'monthly' ? deriveMonthlyFields(page.monthEnding)  : {}),
   };
 
   const keys = Object.keys(PROFILE_PLACEHOLDERS) as ProfilePlaceholder[];
