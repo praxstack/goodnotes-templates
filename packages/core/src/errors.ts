@@ -1,5 +1,5 @@
 /**
- * @pretext-templates/core — typed error hierarchy.
+ * @praxlannister/pretext-core — typed error hierarchy.
  *
  * Five error classes that cover every failure mode the renderer + registry
  * pipeline can surface to callers. Each one:

@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "build": "tsc -b packages/core packages/cli && chmod +x packages/cli/dist/index.js",
-    "build:core": "npm run build -w @pretext-templates/core",
-    "build:cli": "npm run build -w @pretext-templates/cli && chmod +x packages/cli/dist/index.js",
+    "build:core": "npm run build -w @praxlannister/pretext-core",
+    "build:cli": "npm run build -w @praxlannister/pretext-cli && chmod +x packages/cli/dist/index.js",
     "prepack": "npm run build",
     "dev": "tsx watch packages/cli/src/index.ts",
     "start": "tsx packages/cli/src/index.ts",

@@ -1,11 +1,11 @@
 /**
- * @pretext-templates/core — barrel export.
+ * @praxlannister/pretext-core — barrel export.
  *
  * Re-exports the stable public surface of the rendering pipeline so
  * downstream packages (CLI, apps/gallery, future registry tools) import
- * from `@pretext-templates/core` instead of reaching into subpaths.
+ * from `@praxlannister/pretext-core` instead of reaching into subpaths.
  *
- * Subpath imports (e.g. `@pretext-templates/core/dimensions`) remain
+ * Subpath imports (e.g. `@praxlannister/pretext-core/dimensions`) remain
  * supported via the `exports["./*"]` map in package.json — used today
  * by tests and scripts that predate this barrel.
  */

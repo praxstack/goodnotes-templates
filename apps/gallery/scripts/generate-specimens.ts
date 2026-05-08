@@ -4,7 +4,7 @@
  * `prax-journal` hero from examples/prax-journal/prax_adhd_planner.html.
  *
  * Rendering is delegated to a minimal puppeteer wrapper here rather than
- * importing @pretext-templates/core to avoid coupling the gallery to the
+ * importing @praxlannister/pretext-core to avoid coupling the gallery to the
  * full renderer surface at W4. The pack-migration weeks (W5-W6) will wire
  * this to use core's pipeline uniformly.
  */
