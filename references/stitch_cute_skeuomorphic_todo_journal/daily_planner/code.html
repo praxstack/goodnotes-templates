@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Planner - Digital Cozy</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@700&amp;family=Comfortaa:wght@400;700&amp;family=Nunito+Sans:ital,opsz,wght@0,6..12,400;1,6..12,400&amp;family=Quicksand:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom Claymorphic Utilities (Built from design tokens) */
+        .clay-card {
+            box-shadow: inset -2px -2px 6px rgba(0,0,0,0.04), inset 2px 2px 6px rgba(255,255,255,0.9), 0 4px 12px rgba(130,80,92,0.08);
+        }
+        .clay-input {
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.06), inset -2px -2px 5px rgba(255,255,255,0.9);
+        }
+        .clay-button {
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.1), inset 2px 2px 4px rgba(255,255,255,0.8), 0 2px 4px rgba(130,80,92,0.15);
+        }
+        .clay-button:active {
+            box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+            transform: scale(0.98);
+        }
+        
+        /* Washi Tape Effect */
+        .washi-tape {
+            position: relative;
+        }
+        .washi-tape::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -10px;
+            right: -10px;
+            bottom: -5px;
+            background-color: var(--tw-color-secondary-container);
+            opacity: 0.4;
+            transform: rotate(-1deg);
+            z-index: 0;
+            border-radius: 2px;
+        }
+        .washi-tape > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hide scrollbar for schedule */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f0eee9",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-tertiary-container": "#463f5c",
+                      "on-error": "#ffffff",
+                      "on-primary-container": "#633641",
+                      "surface-dim": "#dbdad5",
+                      "surface-container-low": "#f5f3ee",
+                      "primary-container": "#dda0ad",
+                      "primary-fixed": "#ffd9e0",
+                      "primary-fixed-dim": "#f5b6c3",
+                      "on-tertiary-fixed-variant": "#4a4360",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#340f1a",
+                      "inverse-primary": "#f5b6c3",
+                      "secondary-fixed-dim": "#adceba",
+                      "on-tertiary": "#ffffff",
+                      "inverse-on-surface": "#f2f1ec",
+                      "outline-variant": "#d5c2c5",
+                      "on-secondary": "#ffffff",
+                      "outline": "#837376",
+                      "on-primary-fixed-variant": "#673944",
+                      "tertiary-container": "#b5abcd",
+                      "tertiary-fixed": "#e8ddff",
+                      "secondary-fixed": "#c8ebd5",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed-dim": "#cbc1e5",
+                      "on-tertiary-fixed": "#1e1732",
+                      "surface-variant": "#e4e2dd",
+                      "on-surface-variant": "#514346",
+                      "primary": "#82505c",
+                      "on-secondary-fixed": "#022114",
+                      "background": "#fbf9f4",
+                      "inverse-surface": "#30312e",
+                      "tertiary": "#625a78",
+                      "secondary-container": "#c8ebd5",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#fbf9f4",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "on-background": "#1b1c19",
+                      "secondary": "#466554",
+                      "on-secondary-container": "#4c6b5a",
+                      "surface-tint": "#82505c",
+                      "surface": "#fbf9f4",
+                      "surface-container-high": "#eae8e3",
+                      "on-secondary-fixed-variant": "#2f4d3d",
+                      "on-surface": "#1b1c19"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px",
+                      "blob": "60% 40% 30% 70% / 60% 30% 70% 40%"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "gutter-binder": "64px",
+                      "stack-lg": "32px",
+                      "margin-a4": "48px"
+              },
+              "fontFamily": {
+                      "h2-rounded": ["Quicksand"],
+                      "handwritten-note": ["Comfortaa"],
+                      "body-main": ["Nunito Sans"],
+                      "display-accent": ["Comfortaa"],
+                      "h1-rounded": ["Quicksand"],
+                      "label-caps": ["Be Vietnam Pro"]
+              },
+              "fontSize": {
+                      "h2-rounded": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                      "handwritten-note": ["18px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                      "body-main": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                      "display-accent": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "h1-rounded": ["32px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                      "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-main antialiased min-h-screen flex">
+<!-- Top App Bar (Mobile mainly, or floating at top) -->
+<header class="bg-surface dark:bg-surface shadow-sm md:hidden fixed top-0 w-full z-30 flex justify-between items-center px-margin-a4 py-stack-md">
+<div class="font-display-accent text-display-accent text-primary dark:text-primary-fixed">
+            Digital Cozy Planner
+        </div>
+<div class="flex items-center gap-stack-sm text-primary dark:text-primary-fixed-dim">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="book_2">book_2</span>
+</button>
+<img alt="User avatar" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnWP3j7vm41HhDtTHbq5P3wt7e4LjfNugE7bQx5Ua8P5SKwI4A1OAwT9-FWginoP00sq-jHOXXjJZ1A-94ffQ5oeyI27ftcEMtUmmMe-3qK-P9DFxq5N66r8h_t25bw9ylW6xwlv-os9U7QIAnkeSZASKjml3bH5SITmW45uuUeF794rzRkpebuhT052xbv0kQJ0c45PWOuSJI1Uhs6_zhYzhbydDfB0anczTx5RFKKKE37cgYYUMyHs1flnac_hKu6gaG0_dPEqk"/>
+</div>
+</header>
+<!-- Side Navigation Bar (Desktop) -->
+<nav class="hidden md:flex flex-col items-center py-stack-lg z-40 bg-surface-container dark:bg-surface-dim shadow-md border-r border-outline-variant h-full w-gutter-binder left-0 fixed">
+<!-- Binder Spine Detail (Skeuomorphic) -->
+<div class="absolute right-0 top-0 bottom-0 w-4 border-l border-outline-variant opacity-30 bg-gradient-to-r from-transparent to-surface-container-highest"></div>
+<div class="absolute right-[-6px] top-32 w-3 h-12 rounded-full bg-surface shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_1px_1px_3px_rgba(0,0,0,0.2)] border border-outline-variant"></div>
+<div class="absolute right-[-6px] top-64 w-3 h-12 rounded-full bg-surface shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_1px_1px_3px_rgba(0,0,0,0.2)] border border-outline-variant"></div>
+<div class="absolute right-[-6px] top-96 w-3 h-12 rounded-full bg-surface shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_1px_1px_3px_rgba(0,0,0,0.2)] border border-outline-variant"></div>
+<div class="mb-stack-lg flex flex-col items-center">
+<img alt="Digital Planner Profile" class="w-10 h-10 rounded-full mb-stack-sm shadow-sm border-2 border-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7CPv4X0EfgdkAEXAESgTGmVZYIzIHnHxZFJCuCCME9YFa7_dLSRajn2Db6Tmisnl7vsoS6CyWX7Nuf1qmIficPP1gyqGZlD7qhHMHVOsaiaF3DFWx-F4hX2g7yCYXklYI_9GPkCFRG_HCbJvvBmeA9ODuZexPV-3pf9XMP2pD90lbHGAAPKfKKlKymEBs_ybwaEGvofbu-1al70xj1M72WoaNLUTKbrhkvMdm-_QesGfXPb1WpD8XadVKi5X4oDYXlAi7UHOiCgc"/>
+</div>
+<ul class="flex flex-col gap-stack-md w-full px-2 mt-8 z-10">
+<!-- Active Tab -->
+<li>
+<a class="flex flex-col items-center justify-center text-center bg-primary-container text-on-primary-container rounded-xl p-stack-sm shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.1),inset_2px_2px_4px_rgba(255,255,255,0.8)] active:translate-y-0.5 duration-150 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="calendar_today" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</a>
+</li>
+<!-- Inactive Tabs -->
+<li>
+<a class="flex flex-col items-center justify-center text-center text-on-tertiary-fixed-variant p-stack-sm hover:bg-surface-container-highest transition-colors rounded-xl active:translate-y-0.5 duration-150 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="checklist">checklist</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center text-center text-on-tertiary-fixed-variant p-stack-sm hover:bg-surface-container-highest transition-colors rounded-xl active:translate-y-0.5 duration-150 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="auto_awesome_motion">auto_awesome_motion</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center text-center text-on-tertiary-fixed-variant p-stack-sm hover:bg-surface-container-highest transition-colors rounded-xl active:translate-y-0.5 duration-150 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="edit_note">edit_note</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto mb-stack-lg z-10">
+<button class="bg-primary text-on-primary rounded-full w-12 h-12 flex items-center justify-center clay-button shadow-md">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area (The A4 Paper Canvas) -->
+<main class="flex-1 md:ml-gutter-binder pt-24 md:pt-stack-lg px-stack-md md:px-margin-a4 pb-24 max-w-5xl mx-auto w-full relative">
+<!-- Decorative Elements -->
+<div class="absolute top-4 right-8 w-24 h-24 opacity-80 mix-blend-multiply bg-[url('https://images.unsplash.com/photo-1594244589087-21a478b87ce3?w=200&amp;q=80')] bg-contain bg-no-repeat bg-center" data-alt="A small, cute, hand-drawn illustration of a sleepy white cat curled up into a ball, resting softly on the top right corner of a digital page. The drawing style is minimalist and sketch-like, using soft pastel colors primarily faint pink and warm grey. The cat appears whimsical and cozy, contributing to a calm, relaxed aesthetic. The background is completely transparent, allowing the cat to float on the cream-colored digital paper surface."></div>
+<div class="absolute bottom-12 left-4 md:left-12 w-24 h-24 opacity-80 mix-blend-multiply bg-[url('https://images.unsplash.com/photo-1593976839352-0941d3f9b28f?w=200&amp;q=80')] bg-contain bg-no-repeat bg-center" data-alt="A small, charming watercolor illustration of a chubby little brown bear holding a tiny yellow flower, placed in the bottom left corner. The art style is childlike, gentle, and softly blended, perfectly matching a cozy, nostalgic scrapbook theme. The colors are muted earth tones with soft edges. The bear adds a touch of playful warmth and gentle encouragement to the digital planner page layout."></div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack-lg pb-stack-sm border-b border-outline-variant/30">
+<div>
+<h1 class="font-display-accent text-display-accent text-primary mb-2 tracking-tight">Daily Planner</h1>
+<div class="font-handwritten-note text-handwritten-note text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    Wednesday, October 25th
+                </div>
+</div>
+<div class="mt-4 md:mt-0 flex items-center bg-surface-container-low clay-card rounded-xl px-4 py-2">
+<span class="material-symbols-outlined text-secondary-container text-3xl mr-2" style="font-variation-settings: 'FILL' 1;">partly_cloudy_day</span>
+<div>
+<div class="font-h2-rounded text-h2-rounded text-on-surface">22°C</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Sunny</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-stack-md relative z-10">
+<!-- Left Column: Schedule (Span 7) -->
+<section class="col-span-1 md:col-span-7 bg-surface-container clay-card rounded-2xl p-6 flex flex-col h-[600px]">
+<div class="washi-tape inline-block mb-6">
+<h2 class="font-h2-rounded text-h2-rounded text-primary relative z-10 px-2">Today's Flow</h2>
+</div>
+<div class="flex-1 overflow-y-auto no-scrollbar pr-2 space-y-4">
+<!-- Schedule Items -->
+<div class="flex gap-4 items-start group">
+<div class="w-16 text-right font-label-caps text-label-caps text-outline pt-3">06:00</div>
+<div class="flex-1 clay-input bg-surface-container-low rounded-xl p-3 text-on-surface font-body-main text-body-main focus-within:ring-2 focus-within:ring-primary-fixed transition-all">
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface placeholder-outline-variant" placeholder="What's happening?" type="text" value="Morning stretches &amp; tea 🍵"/>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<div class="w-16 text-right font-label-caps text-label-caps text-outline pt-3">08:00</div>
+<div class="flex-1 clay-input bg-surface-container-low rounded-xl p-3 text-on-surface font-body-main text-body-main focus-within:ring-2 focus-within:ring-primary-fixed transition-all">
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface placeholder-outline-variant" placeholder="What's happening?" type="text" value="Deep work block: Design System"/>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<div class="w-16 text-right font-label-caps text-label-caps text-outline pt-3">10:00</div>
+<div class="flex-1 clay-input bg-surface-container-low rounded-xl p-3 text-on-surface font-body-main text-body-main focus-within:ring-2 focus-within:ring-primary-fixed transition-all">
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface placeholder-outline-variant" placeholder="What's happening?" type="text" value="Team sync call"/>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<div class="w-16 text-right font-label-caps text-label-caps text-outline pt-3">12:30</div>
+<div class="flex-1 clay-input bg-secondary-container rounded-xl p-3 text-on-secondary-container font-body-main text-body-main focus-within:ring-2 focus-within:ring-primary-fixed transition-all opacity-80">
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 placeholder-outline-variant" placeholder="What's happening?" type="text" value="Lunch break &amp; walk outside"/>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<div class="w-16 text-right font-label-caps text-label-caps text-outline pt-3">14:00</div>
+<div class="flex-1 clay-input bg-surface-container-low rounded-xl p-3 text-on-surface font-body-main text-body-main focus-within:ring-2 focus-within:ring-primary-fixed transition-all">
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface placeholder-outline-variant" placeholder="Focus time..." type="text"/>
+</div>
+</div>
+<div class="flex gap-4 items-start group">
+<div class="w-16 text-right font-label-caps text-label-caps text-outline pt-3">16:00</div>
+<div class="flex-1 clay-input bg-surface-container-low rounded-xl p-3 text-on-surface font-body-main text-body-main focus-within:ring-2 focus-within:ring-primary-fixed transition-all">
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface placeholder-outline-variant" placeholder="Review PRs..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Widgets (Span 5) -->
+<div class="col-span-1 md:col-span-5 flex flex-col gap-stack-md">
+<!-- Mood Tracker -->
+<section class="bg-surface-container clay-card rounded-2xl p-5">
+<h3 class="font-h2-rounded text-h2-rounded text-on-surface mb-4">Mood Tracker</h3>
+<div class="flex justify-between items-center px-2">
+<button class="w-12 h-12 rounded-full clay-button bg-surface flex items-center justify-center text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">sentiment_very_dissatisfied</span>
+</button>
+<button class="w-12 h-12 rounded-full clay-button bg-surface flex items-center justify-center text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">sentiment_dissatisfied</span>
+</button>
+<button class="w-12 h-12 rounded-full clay-button bg-primary-container flex items-center justify-center text-on-primary-container shadow-inner">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">sentiment_neutral</span>
+</button>
+<button class="w-12 h-12 rounded-full clay-button bg-surface flex items-center justify-center text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">sentiment_satisfied</span>
+</button>
+<button class="w-12 h-12 rounded-full clay-button bg-surface flex items-center justify-center text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">sentiment_very_satisfied</span>
+</button>
+</div>
+</section>
+<!-- Water & Exercise Row -->
+<div class="grid grid-cols-2 gap-stack-md">
+<!-- Water Intake -->
+<section class="bg-tertiary-fixed clay-card rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+<h3 class="font-label-caps text-label-caps text-on-tertiary-fixed mb-3">Hydration</h3>
+<div class="flex flex-wrap justify-center gap-2 max-w-[120px]">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim">water_drop</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim">water_drop</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim">water_drop</span>
+</div>
+</section>
+<!-- Exercise Stats -->
+<section class="bg-secondary-fixed clay-card rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+<h3 class="font-label-caps text-label-caps text-on-secondary-fixed mb-2">Movement</h3>
+<div class="bg-surface/50 rounded-full p-2 mb-2 inline-block shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">directions_run</span>
+</div>
+<div class="font-h2-rounded text-[20px] font-bold text-on-secondary-fixed">10k</div>
+<div class="font-body-main text-[12px] text-on-secondary-fixed-variant">steps</div>
+</section>
+</div>
+<!-- Gratitude Cloud -->
+<section class="flex-1 bg-surface-container-low border-2 border-primary-fixed border-dashed rounded-[40px_10px_40px_20px] p-6 shadow-sm relative">
+<div class="absolute -top-3 -right-2 bg-primary-container text-on-primary-container text-xs font-bold px-3 py-1 rounded-full shadow-sm transform rotate-6">
+                        Daily Joy ✨
+                    </div>
+<h3 class="font-handwritten-note text-handwritten-note text-primary mb-3">Today I'm grateful for...</h3>
+<textarea class="w-full h-full min-h-[100px] bg-transparent border-none focus:ring-0 p-0 font-body-main text-body-main text-on-surface-variant resize-none" placeholder="A warm cup of coffee, a good friend..."></textarea>
+</section>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container-low dark:bg-surface-container-lowest shadow-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-stack-md pb-stack-sm pt-stack-sm rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full p-2 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.1)] active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="today" style="font-variation-settings: 'FILL' 1;">today</span>
+<span class="font-label-caps text-label-caps hidden">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-highest transition-all rounded-full active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="event_available">event_available</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-highest transition-all rounded-full active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="verified">verified</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-highest transition-all rounded-full active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="history_edu">history_edu</span>
+</a>
+</nav>
+</body></html>
