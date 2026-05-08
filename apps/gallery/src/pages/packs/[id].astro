@@ -40,6 +40,21 @@ const entry = manifest[pack.data.id];
       </p>
       <h1>{pack.data.title}</h1>
       <p class="pack__lede">{pack.data.oneLiner}</p>
+
+      <div class="pack__actions">
+        <a
+          class="pack__download"
+          href={`/packs/${pack.data.id}.pdf`}
+          download
+          data-pack-id={pack.data.id}
+        >
+          <span class="pack__download-label">Download PDF</span>
+          <span class="pack__download-meta">A4 · self-contained · GoodNotes-ready</span>
+        </a>
+        <a class="pack__npm" href="https://www.npmjs.com/package/@praxlannister/pretext-cli">
+          or render your own via <code>npx pretext-templates</code>
+        </a>
+      </div>
     </header>
 
     {
@@ -102,6 +117,57 @@ const entry = manifest[pack.data.id];
     font-size: 1.3rem;
     color: var(--ink-soft);
     margin-top: 16px;
+  }
+  .pack__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .pack__download {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    transition: transform var(--dur-fast) var(--ease-paper), background var(--dur-fast) var(--ease-paper);
+  }
+  .pack__download:hover {
+    transform: translateY(-1px);
+    background: var(--ink-soft);
+  }
+  .pack__download-label {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .pack__download-meta {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    opacity: 0.8;
+    letter-spacing: 0.04em;
+  }
+  .pack__npm {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--ink-whisper);
+  }
+  .pack__npm code {
+    font-family: var(--mono);
+    font-size: 0.9em;
+    background: var(--paper-tint, rgba(0, 0, 0, 0.04));
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  .pack__npm:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
   }
   .pack__specimen {
     margin: 48px 0;
