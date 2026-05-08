@@ -1,0 +1,19 @@
+{
+  "author": "prax",
+  "category": "planner",
+  "description": "Claymorphic A4 daily planner with binder rings, time-block schedule, mood + hydration + movement widgets, and a gratitude cloud.",
+  "entry": "tactile-daily-planner.html",
+  "id": "tactile-daily-planner",
+  "license": "MIT",
+  "name": "Tactile Daily Planner",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "planner",
+    "daily",
+    "claymorphism",
+    "skeuomorphic",
+    "cozy"
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tactile Evening Reflections — Digital Cozy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&family=Comfortaa:wght@400;600;700&family=Be+Vietnam+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   TACTILE EVENING REFLECTIONS — "Digital Cozy"
+   Port of Stitch ref: daily_reflections_refined → A4 print
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --gutter-binder: 14mm;
+
+  --surface:                  #fbf9f4;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low:    #f5f3ee;
+  --surface-container:        #f0eee9;
+  --surface-container-high:   #eae8e3;
+  --surface-container-highest:#e4e2dd;
+  --surface-dim:              #dbdad5;
+
+  --on-surface:         #1b1c19;
+  --on-surface-variant: #514346;
+  --outline:            #837376;
+  --outline-variant:    #d5c2c5;
+
+  --primary:             #82505c;
+  --primary-container:   #dda0ad;
+  --primary-fixed:       #ffd9e0;
+  --primary-fixed-dim:   #f5b6c3;
+  --on-primary:          #ffffff;
+  --on-primary-container:#633641;
+
+  --secondary:             #466554;
+  --secondary-container:   #c8ebd5;
+  --secondary-fixed:       #c8ebd5;
+  --on-secondary-container:#4c6b5a;
+
+  --tertiary:              #625a78;
+  --tertiary-container:    #b5abcd;
+  --tertiary-fixed:        #e8ddff;
+  --on-tertiary-container: #463f5c;
+
+  --clay-card:
+    inset -1px -1px 2px rgba(0,0,0,0.04),
+    inset  1px  1px 2px rgba(255,255,255,0.9),
+    0 1.5px 3px rgba(130,80,92,0.12);
+  --clay-input:
+    inset  1.5px 1.5px 3px rgba(0,0,0,0.06),
+    inset -1.5px -1.5px 3px rgba(255,255,255,0.85);
+  --clay-button:
+    inset -1.5px -1.5px 2px rgba(0,0,0,0.1),
+    inset  1.5px  1.5px 2px rgba(255,255,255,0.85),
+    0 1px 2px rgba(130,80,92,0.16);
+
+  --font-display: 'Comfortaa', cursive, sans-serif;
+  --font-heading: 'Quicksand', sans-serif;
+  --font-body:    'Nunito Sans', sans-serif;
+  --font-hand:    'Comfortaa', cursive, sans-serif;
+  --font-label:   'Be Vietnam Pro', sans-serif;
+
+  --s1: 1.5mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
+
+  --radius-sm: 3mm;
+  --radius:    4mm;
+  --radius-lg: 6mm;
+  --radius-xl: 8mm;
+  --radius-pill: 999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--surface-container-highest);
+  font-family: var(--font-body);
+  font-size: 9pt;
+  color: var(--on-surface);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--surface);
+  margin: 10mm auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 30px rgba(130,80,92,0.14);
+  display: grid;
+  grid-template-columns: var(--gutter-binder) 1fr;
+}
+
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Binder spine (shared) ─── */
+.binder {
+  background: linear-gradient(to right,
+    var(--surface-container-highest) 0%,
+    var(--surface-container) 60%,
+    var(--surface-dim) 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 18mm 0;
+  border-right: 0.3mm solid var(--outline-variant);
+}
+.binder::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 1.5mm;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.06));
+}
+.ring {
+  width: 7mm; height: 7mm;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #c0b7ba 45%, #837376 90%);
+  box-shadow: inset 0.3mm 0.3mm 0.6mm rgba(255,255,255,0.8), 0 0.4mm 0.8mm rgba(0,0,0,0.22);
+  position: relative;
+}
+.ring::before {
+  content: '';
+  position: absolute;
+  inset: 1.8mm;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: inset 0 0.3mm 0.6mm rgba(0,0,0,0.35);
+}
+
+/* ─── Canvas ─── */
+.canvas {
+  padding: var(--s5) var(--s5) var(--s4) var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+}
+.header-star {
+  width: 9mm; height: 9mm;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.header-star svg { width: 100%; height: 100%; fill: currentColor; }
+.header-text {
+  flex: 1;
+}
+.header-title {
+  font-family: var(--font-display);
+  font-size: 26pt;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+.header-sub {
+  font-family: var(--font-hand);
+  font-size: 11pt;
+  color: var(--on-surface-variant);
+  margin-top: 1.5mm;
+}
+
+/* ─── Date washi tape ─── */
+.date-tape {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 2mm 5mm;
+  background: var(--primary-fixed);
+  border: 0.3mm solid var(--primary-fixed-dim);
+  border-radius: 1.2mm;
+  box-shadow: 0 1mm 2mm rgba(130,80,92,0.14);
+  transform: rotate(-1.2deg);
+  font-family: var(--font-label);
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--on-primary-container);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.date-tape svg {
+  width: 4mm; height: 4mm;
+  color: var(--on-primary-container);
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+}
+.date-tape .date-line {
+  min-width: 52mm;
+  border-bottom: 0.3mm solid var(--on-primary-container);
+  height: 3.5mm;
+  opacity: 0.6;
+}
+
+/* ─── Bento grid: brain-dump + prompt column ─── */
+.bento {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: var(--s3);
+  flex: 1;
+  min-height: 0;
+}
+
+/* ─── Brain dump canvas (lined paper) ─── */
+.brain {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  padding: var(--s4);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.brain-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  color: var(--secondary);
+  margin-bottom: var(--s2);
+}
+.brain-header svg { width: 5mm; height: 5mm; fill: currentColor; }
+.brain-title {
+  font-family: var(--font-heading);
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+.brain-lines {
+  flex: 1;
+  background-image: linear-gradient(to bottom, transparent 7.5mm, var(--outline-variant) 7.5mm, var(--outline-variant) 7.8mm, transparent 7.8mm);
+  background-size: 100% 8mm;
+  background-position: 0 0;
+  padding-top: 1mm;
+}
+.brain-sticker {
+  position: absolute;
+  bottom: 6mm; right: 6mm;
+  width: 16mm; height: 16mm;
+  background: var(--surface-container-low);
+  border: 0.8mm solid white;
+  border-radius: 50%;
+  box-shadow: var(--clay-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-6deg);
+  color: var(--primary-fixed-dim);
+  font-size: 18pt;
+  line-height: 1;
+}
+
+/* ─── Prompt column ─── */
+.prompts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+.prompt-card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.prompt-card.mint     { background: var(--secondary-fixed); color: var(--on-secondary-container); }
+.prompt-card.lavender { background: var(--tertiary-fixed);  color: var(--on-tertiary-container); }
+.prompt-card.rose     { background: var(--primary-fixed);   color: var(--on-primary-container); }
+
+.prompt-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 2.5mm;
+}
+.prompt-header svg { width: 5mm; height: 5mm; fill: currentColor; }
+.prompt-title {
+  font-family: var(--font-heading);
+  font-size: 11.5pt;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.prompt-body {
+  background: rgba(255,255,255,0.55);
+  border-radius: var(--radius);
+  box-shadow: var(--clay-input);
+  padding: 2.5mm 3mm;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+  min-height: 20mm;
+}
+.prompt-line {
+  border-bottom: 0.3mm dotted currentColor;
+  opacity: 0.4;
+  height: 0;
+}
+
+/* ─── Footer close-diary button ─── */
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: var(--s2);
+}
+.close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2mm;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-heading);
+  font-size: 11pt;
+  font-weight: 700;
+  padding: 3mm 8mm;
+  border-radius: var(--radius-pill);
+  box-shadow:
+    inset -1mm -1mm 1.5mm rgba(0,0,0,0.12),
+    inset  1mm  1mm 1.5mm rgba(255,255,255,0.18),
+    0 1.5mm 3mm rgba(130,80,92,0.25);
+}
+.close-btn svg {
+  width: 5mm; height: 5mm;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ─── Decorative watercolor corner (abstract, no external asset) ─── */
+.corner {
+  position: absolute;
+  top: -8mm; right: -8mm;
+  width: 44mm; height: 44mm;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(245,182,195,0.55), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(200,235,213,0.45), transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(232,221,255,0.35), transparent 70%);
+  transform: rotate(12deg);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  opacity: 0.85;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Binder spine -->
+  <aside class="binder" aria-hidden="true">
+    <span class="ring"></span>
+    <span class="ring"></span>
+    <span class="ring"></span>
+    <span class="ring"></span>
+    <span class="ring"></span>
+    <span class="ring"></span>
+    <span class="ring"></span>
+  </aside>
+
+  <main class="canvas">
+    <!-- Decorative watercolor corner -->
+    <span class="corner" aria-hidden="true"></span>
+
+    <!-- Header -->
+    <header class="header">
+      <span class="header-star">
+        <!-- sparkle -->
+        <svg viewBox="0 0 24 24"><path d="M12 2l1.8 5.7L19.5 9.5l-5.7 1.8L12 17l-1.8-5.7L4.5 9.5l5.7-1.8zM19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6L15.5 17.5l2.6-.9z"/></svg>
+      </span>
+      <div class="header-text">
+        <div class="header-title">Evening Reflections</div>
+        <div class="header-sub">Take a deep breath. Today is done.</div>
+      </div>
+    </header>
+
+    <!-- Washi date tape -->
+    <div class="date-tape">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="4.5" width="17" height="16" rx="2"/>
+        <path d="M3.5 9.5h17M8 3v3M16 3v3"/>
+      </svg>
+      <span>Evening of</span>
+      <span class="date-line"></span>
+    </div>
+
+    <!-- Main bento -->
+    <div class="bento">
+
+      <!-- Brain dump canvas -->
+      <section class="brain">
+        <div class="brain-header">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z"/></svg>
+          <span class="brain-title">Brain Dump &amp; Thoughts</span>
+        </div>
+        <div class="brain-lines"></div>
+        <span class="brain-sticker" aria-hidden="true">☾</span>
+      </section>
+
+      <!-- Prompt column -->
+      <aside class="prompts">
+        <section class="prompt-card mint">
+          <div class="prompt-header">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.8 6.6 7.2.6-5.5 4.8 1.7 7-6.2-3.8-6.2 3.8 1.7-7L2 9.2l7.2-.6z"/></svg>
+            <span class="prompt-title">Highlights of the day</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+          </div>
+        </section>
+
+        <section class="prompt-card lavender">
+          <div class="prompt-header">
+            <svg viewBox="0 0 24 24"><path d="M9 18h6v1.5a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V18zm3-16a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></svg>
+            <span class="prompt-title">Something I learned</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+          </div>
+        </section>
+
+        <section class="prompt-card rose">
+          <div class="prompt-header">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5 5l1.8 1.8M17.2 17.2L19 19M5 19l1.8-1.8M17.2 6.8L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+            <span class="prompt-title">For tomorrow</span>
+          </div>
+          <div class="prompt-body">
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+            <div class="prompt-line"></div>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <!-- Footer close button -->
+    <div class="footer">
+      <div class="close-btn">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+        <span>Close the diary</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
