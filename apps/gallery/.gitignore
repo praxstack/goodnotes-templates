@@ -4,6 +4,7 @@ dist/
 
 # generated assets (reproducible via npm scripts)
 public/specimens/
+public/packs/
 
 # Node
 node_modules/

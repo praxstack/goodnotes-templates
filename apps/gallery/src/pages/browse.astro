@@ -18,8 +18,10 @@ const categories = Object.keys(grouped).sort();
       <p class="meta">Browse</p>
       <h1>Every pack.</h1>
       <p class="browse__lede">
-        Filter by category. Twenty-two packs today across journals, notes,
-        planners, trackers, and worksheets.
+        Filter by category. Twenty-six packs today across journals, notes,
+        planners, trackers, and worksheets. Every row links to the pack
+        detail page; the <span class="dl-chip">↓ PDF</span> button downloads
+        the A4 render direct.
       </p>
     </header>
 
@@ -38,6 +40,14 @@ const categories = Object.keys(grouped).sort();
                   <span class="browse__status meta">
                     {pack.data.status} · v{pack.data.version}
                   </span>
+                </a>
+                <a
+                  href={`/packs/${pack.data.id}.pdf`}
+                  class="browse__dl"
+                  download
+                  aria-label={`Download ${pack.data.title} PDF`}
+                >
+                  ↓ PDF
                 </a>
               </li>
             ))}
@@ -84,6 +94,13 @@ const categories = Object.keys(grouped).sort();
     display: grid;
     gap: 4px;
   }
+  .browse__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid var(--hairline);
+  }
   .browse__link {
     display: grid;
     grid-template-columns: 240px 1fr 160px;
@@ -98,6 +115,32 @@ const categories = Object.keys(grouped).sort();
   .browse__link:hover {
     border-bottom-color: var(--ink-whisper);
   }
+  .browse__dl {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    transition:
+      background var(--dur-fast) var(--ease-paper),
+      color var(--dur-fast) var(--ease-paper),
+      border-color var(--dur-fast) var(--ease-paper);
+  }
+  .browse__dl:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .dl-chip {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--paper-tint, rgba(0, 0, 0, 0.04));
+    padding: 1px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
   .browse__title {
     font-family: var(--serif);
     font-weight: 600;
@@ -110,12 +153,20 @@ const categories = Object.keys(grouped).sort();
     text-align: right;
   }
   @media (max-width: 768px) {
+    .browse__row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
     .browse__link {
       grid-template-columns: 1fr;
       gap: 4px;
     }
     .browse__status {
       text-align: left;
+    }
+    .browse__dl {
+      margin: 0 0 12px 0;
+      justify-self: start;
     }
   }
 </style>
