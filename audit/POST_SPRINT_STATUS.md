@@ -75,7 +75,7 @@ Each of these requires substantive design work or content churn the audit author
 ### FIND-0012-companion: color-mode resolver caller update
 
 - **Why defer:** `scripts/generate-4week.ts` still has its own two-step `resolveColorModeCSS` equivalent. `puppeteer-renderer.ts` now exports the helper, but flipping the script to use it is one of many script-file touch-ups that should happen when the scripts see their next refresh. Not a regression today.
-- **Acceptance:** `rg 'presetPath.*themes.*\\.css' scripts/` returns 0 matches.
+- **Acceptance:** `rg 'presetPath.*themes.*\.css' scripts/` returns 0 matches.
 
 ## Backlog hygiene
 
@@ -83,3 +83,52 @@ Two tiny carry-overs in the fix batch:
 
 - **Font allow-list tightening** — the Puppeteer URL allow-list today is `data:|file:|fonts.googleapis.com|fonts.gstatic.com`. Once FIND-0014 ships it becomes `data:|file:` only. Record as a companion todo in `src/core/puppeteer-renderer.ts` line ~107.
 - **`vitest.visual.config.ts`** — referenced by `package.json.scripts.test:visual` but missing from disk. Either create it (alongside a concrete visual-regression setup) or drop the script entry. Low priority; no tool currently invokes it.
+
+---
+
+## 2026-05-08 · Post-v1.0.0 audit re-evaluation
+
+After shipping v1.0.0 (tag `f5a4528`, gallery live at `pretext-templates.vercel.app`, 27 packs, 14 themes), we re-examined the 4 remaining deferred items. Architecture has shifted enough that the original findings no longer map cleanly. Verdict per item:
+
+### FIND-0012 — cheerio swap — **CLOSED (file deleted)**
+
+- `daily-year-v2.ts` no longer exists on HEAD. The rebrand sprint's splice/render pipeline (`scripts/generate-journal.ts` → `packages/core/src/pdf-splice.ts`) replaced it with pdf-lib-native page composition; no HTML parsing happens outside Puppeteer.
+- No follow-up needed. If a future feature re-introduces HTML parsing outside the renderer, reach for `cheerio` from day one.
+
+### FIND-0012-companion — color-mode resolver caller update — **CLOSED (scripts deleted)**
+
+- `scripts/generate-4week.ts` was deleted during the rebrand. The modern renderer entry point is `packages/cli/src/index.ts`, which uses `@praxlannister/pretext-core/puppeteer-renderer` via the subpath export. The helper is consumed through the published API now, not via file-path probing.
+
+### FIND-0014 — Self-host Google Fonts — **RE-DEFERRED with updated rationale**
+
+Original reason (SSRF via CDN) is already mitigated by FIND-0004 — the Puppeteer request allow-list locks outbound to `data:`, `file:`, `fonts.googleapis.com`, `fonts.gstatic.com`. The surviving reason to self-host is `docker run --network=none` support and carrier-grade offline rendering.
+
+- **Cost now:** 27 packs pull Google Fonts (`cornell-notes.html` alone cites Poppins + Lora + Fira Code). Base64-inlining fonts into every pack would add ~1.2-1.8 MB per PDF (already proven on prax-journal v5) = +30-50 MB across the release zip.
+- **Acceptance (revised):** opt-in not default. Add `--inline-fonts` flag to `@praxlannister/pretext-cli render` that downloads, subsets, and base64-inlines fonts at render time. Default off. Self-hosted-fonts CI gate only runs on packs flagged `"offline": true` in their manifest.
+- **When:** when a real user asks for offline rendering. Until then the allow-list is a defensible posture.
+
+### FIND-0018 — Dark-mode parity — **OBSOLETED — deliverable already shipped via theme system**
+
+Re-audited on 2026-05-08: **27 pack HTMLs, 0 `.dark.css` siblings in the current pack dirs.** But the premise — "mechanically add 21 `.dark.css` siblings" — is wrong for the 2026 pack catalog:
+
+1. Each pack uses a bespoke design-token palette (the tactile claymorphic family alone declares 20+ variables for cream paper + dusty rose + mint rings; a `prefers-color-scheme: dark` invert would obliterate the skeuomorphic gradients).
+2. The v1/v2/v3/v4 prax-journal `.dark.css` files that existed pre-rebrand were variable overrides, not theme recolors; they are still on disk at `packages/packs-prax-journal/versions/v{1,2,3,4}/`.
+3. The theme system that does work (`packages/core/assets/themes/*.css` → `apps/gallery/src/data/theme-palette.json`) is orthogonal to per-pack `.dark.css`. With v1.0.0 + this session's commit `bb10a15`, all 14 light + dark palettes are surfaced in the gallery and baked into 378 OG cards.
+4. The README claim "14 light + dark pairs" refers to **the theme palette system**, which is now honest. The `.dark.css` sibling pattern is a legacy concept the pack catalog abandoned.
+
+**Decision:** FIND-0018 is obsoleted. The advertised deliverable — dark-mode parity — is shipped via commit `bb10a15`. Per-pack `.dark.css` is no longer a live architectural concept; if a future pack needs a hand-tuned dark variant, the author writes one and reviews it visually. There is no bulk-generate path that preserves design intent.
+
+**Acceptance for any future dark.css additions:** author-authored only, visual-diff reviewed, must match the pack's existing design tokens. Not CI-mechanical.
+
+---
+
+## Final deferral status after 2026-05-08 re-audit
+
+| ID | Was | Is now |
+|---|---|---|
+| FIND-0012 | Deferred (audit row) | **Closed — file deleted** |
+| FIND-0012-companion | Deferred | **Closed — script deleted** |
+| FIND-0014 | Deferred (self-host fonts) | **Re-deferred with revised `--inline-fonts` opt-in acceptance** |
+| FIND-0018 | Deferred (21 missing dark.css) | **Obsoleted — deliverable shipped via theme palette system (commit bb10a15)** |
+
+Net: 2 findings closed, 2 re-scoped with honest rationale. The audit is no longer a hidden debt — it's a visible deferral with a reason each remaining item doesn't ship.
