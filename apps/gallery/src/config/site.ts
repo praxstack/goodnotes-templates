@@ -13,5 +13,5 @@ export const SITE = {
   license: 'MIT',
   // Kept in step with root package.json; tracked manually until we wire an
   // import from the workspace root (deferred — see README Deferred list).
-  version: '0.6.1',
+  version: '0.6.2',
 } as const;
