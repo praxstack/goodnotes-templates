@@ -11,8 +11,8 @@
  */
 
 import { Command } from 'commander';
-import { PAGE_SIZES } from '../../core/src/dimensions.js';
-import { SUPPORTED_LOCALES } from '../../core/src/utils/locale.js';
+import { PAGE_SIZES } from '@pretext-templates/core/dimensions';
+import { SUPPORTED_LOCALES } from '@pretext-templates/core/utils/locale';
 import { buildInitTemplate, buildRemixCommands } from './scaffold.js';
 
 const program = new Command();
@@ -65,9 +65,9 @@ program
 
     // Dynamic import to avoid loading Puppeteer for --help
     const { renderHTMLToPDFFile, closeBrowser } = await import(
-      '../../core/src/puppeteer-renderer.js'
+      '@pretext-templates/core/puppeteer-renderer'
     );
-    const { getPageDimensions } = await import('../../core/src/dimensions.js');
+    const { getPageDimensions } = await import('@pretext-templates/core/dimensions');
 
     const dims = getPageDimensions(opts.paperSize, opts.orientation);
 
