@@ -121,7 +121,7 @@ function svgDefault(): string {
   <circle cx="80" cy="80" r="16" fill="#7B9476" stroke="#B85A44" stroke-width="4"/>
   <text x="80" y="260" font-family="ui-serif, Georgia, 'Fraunces', serif" font-weight="700" font-size="112" fill="#2A2824" letter-spacing="-1">pretext-templates</text>
   <text x="80" y="340" font-family="ui-serif, Georgia, 'Fraunces', serif" font-size="32" fill="#4A453D">Warm analog planning templates for digital notebooks.</text>
-  <text x="80" y="${H - 96}" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="22" fill="#7B9476" letter-spacing="3">26 PACKS · 7 THEMES · MIT</text>
+  <text x="80" y="${H - 96}" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="22" fill="#7B9476" letter-spacing="3">27 PACKS · 7 THEMES · MIT</text>
 </svg>`;
 }
 

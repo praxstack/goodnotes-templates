@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-08T11:57:55.286Z",
-  "source_commit": "ae4b9653bfaeb90312ad1a75e370b64ffed246da",
+  "generated_at": "2026-05-08T15:04:41.111Z",
+  "source_commit": "a65f26c4cc1ad2f211eb0bba7a57c4c5127048c6",
   "packs": [
     {
       "schema_version": 1,
@@ -323,6 +323,28 @@
         "daily"
       ],
       "repository": "https://github.com/praxstack/pretext-templates",
+      "license": "MIT"
+    },
+    {
+      "schema_version": 1,
+      "id": "simple-pages",
+      "version": "0.1.0",
+      "name": "Simple Pages",
+      "description": "Six utility A4 pages in one PDF — lined, grid, dot-grid, blank, isometric, and music-staff. Cream paper, warm analog palette.",
+      "category": "worksheet",
+      "author": "prax",
+      "entry": "simple-pages.html",
+      "tags": [
+        "worksheet",
+        "lined",
+        "grid",
+        "dot-grid",
+        "blank",
+        "isometric",
+        "music-staff",
+        "utility"
+      ],
+      "repository": "https://github.com/praxstack/goodnotes-templates",
       "license": "MIT"
     },
     {
