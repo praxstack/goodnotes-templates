@@ -232,12 +232,23 @@ body {
   margin-bottom: 1mm;
 }
 .spotlight-title svg { width: 5mm; height: 5mm; fill: var(--secondary); }
-.spotlight-quote {
-  font-family: var(--font-hand);
-  font-style: italic;
-  font-size: 10pt;
-  color: var(--on-surface-variant);
+.spotlight-quote-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
   margin-bottom: var(--s2);
+  padding: 1mm 0;
+}
+.spotlight-quote-line {
+  border-bottom: 0.3mm dotted var(--outline-variant);
+  height: 0;
+}
+.progress-field {
+  display: inline-block;
+  min-width: 9mm;
+  border-bottom: 0.3mm dotted var(--on-surface-variant);
+  height: 3.2mm;
+  vertical-align: baseline;
 }
 .spotlight-progress-row {
   display: flex;
@@ -257,12 +268,6 @@ body {
   border-radius: var(--radius-pill);
   box-shadow: var(--clay-input);
   overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  width: 38%;
-  background: linear-gradient(to right, var(--secondary-container), var(--secondary));
-  border-radius: var(--radius-pill);
 }
 
 /* ─── Grid card ─── */
@@ -468,14 +473,15 @@ body {
             <svg viewBox="0 0 24 24"><path d="M12 2l2.8 6.6 7.2.6-5.5 4.8 1.7 7-6.2-3.8-6.2 3.8 1.7-7L2 9.2l7.2-.6z"/></svg>
             Habit of the Month
           </div>
-          <div class="spotlight-quote">"Read 15 pages before bed instead of scrolling."</div>
+          <div class="spotlight-quote-lines">
+            <div class="spotlight-quote-line"></div>
+            <div class="spotlight-quote-line"></div>
+          </div>
           <div class="spotlight-progress-row">
             <span>Progress</span>
-            <span>12 / 31 Days</span>
+            <span><span class="progress-field"></span> / 31 Days</span>
           </div>
-          <div class="progress-track">
-            <div class="progress-fill"></div>
-          </div>
+          <div class="progress-track"></div>
         </div>
       </div>
     </section>
