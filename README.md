@@ -125,7 +125,7 @@
 
 One repo. One generator. Two shippable surfaces:
 
-1. A **pack library** — 26 GoodNotes-ready HTML templates across journals, planners, trackers, notes, and worksheets.
+1. A **pack library** — 27 GoodNotes-ready HTML templates across journals, planners, trackers, notes, and worksheets.
 2. **The Praxis Ledger** — a monthly release of a personal ADHD + depression journal (bookmarked PDF · standalone HTML · 60-sticker pack · fonts + CSS + source templates), assembled in one command.
 
 </div>
@@ -146,7 +146,7 @@ If you ever want to generate a year of planners in every locale, swap the base f
 goodnotes-templates/
 ├── AGENTS.md                  ← read first if you're an AI agent
 ├── CLAUDE.md                  ← local project context
-├── packs/                     ← 26 shippable templates (journals · planners · trackers · notes · worksheets)
+├── packs/                     ← 27 shippable templates (journals · planners · trackers · notes · worksheets)
 │   ├── journals/prax-journal/ ← The Praxis Ledger — v5 daily/midday/reflect/brain-dump + weekly/monthly/quarterly
 │   │   ├── versions/v5/       ← 8 source HTML templates (fonts base64-inlined)
 │   │   └── stickers/          ← 60 skeuomorphic stickers (4 archetypes × 3 sizes × 4 accents)
