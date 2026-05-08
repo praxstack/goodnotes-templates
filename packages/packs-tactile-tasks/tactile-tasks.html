@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tactile Tasks &amp; Notes — Digital Cozy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&family=Comfortaa:wght@400;600;700&family=Be+Vietnam+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   TACTILE TASKS & NOTES — "Digital Cozy"
+   Port of Stitch ref: tasks_notes_refined → A4 print
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --gutter-binder: 14mm;
+
+  --surface:                  #fbf9f4;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low:    #f5f3ee;
+  --surface-container:        #f0eee9;
+  --surface-container-highest:#e4e2dd;
+  --surface-dim:              #dbdad5;
+
+  --on-surface:         #1b1c19;
+  --on-surface-variant: #514346;
+  --outline:            #837376;
+  --outline-variant:    #d5c2c5;
+
+  --primary:             #82505c;
+  --primary-container:   #dda0ad;
+  --primary-fixed:       #ffd9e0;
+  --primary-fixed-dim:   #f5b6c3;
+  --on-primary:          #ffffff;
+  --on-primary-container:#633641;
+  --on-primary-fixed:    #340f1a;
+  --on-primary-fixed-variant:#673944;
+
+  --secondary:             #466554;
+  --secondary-container:   #c8ebd5;
+  --on-secondary-container:#4c6b5a;
+
+  --tertiary:              #625a78;
+  --tertiary-container:    #b5abcd;
+  --tertiary-fixed:        #e8ddff;
+  --on-tertiary-container: #463f5c;
+
+  --clay-card:
+    inset -1px -1px 2px rgba(0,0,0,0.04),
+    inset  1px  1px 2px rgba(255,255,255,0.9),
+    0 1.5px 3px rgba(130,80,92,0.12);
+  --clay-input:
+    inset  1.2px 1.2px 2.5px rgba(0,0,0,0.07),
+    inset -1.2px -1.2px 2.5px rgba(255,255,255,0.85);
+  --clay-button:
+    inset -1.2px -1.2px 1.8px rgba(0,0,0,0.1),
+    inset  1.2px  1.2px 1.8px rgba(255,255,255,0.85),
+    0 0.8px 1.8px rgba(130,80,92,0.16);
+
+  --font-display: 'Comfortaa', cursive, sans-serif;
+  --font-heading: 'Quicksand', sans-serif;
+  --font-body:    'Nunito Sans', sans-serif;
+  --font-hand:    'Comfortaa', cursive, sans-serif;
+  --font-label:   'Be Vietnam Pro', sans-serif;
+
+  --s1: 1.5mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
+
+  --radius-sm: 3mm;
+  --radius:    4mm;
+  --radius-lg: 6mm;
+  --radius-pill: 999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--surface-container-highest);
+  font-family: var(--font-body);
+  font-size: 9pt;
+  color: var(--on-surface);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--surface);
+  margin: 10mm auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 30px rgba(130,80,92,0.14);
+  display: grid;
+  grid-template-columns: var(--gutter-binder) 1fr;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Binder spine ─── */
+.binder {
+  background: linear-gradient(to right, var(--surface-container-highest) 0%, var(--surface-container) 60%, var(--surface-dim) 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 18mm 0;
+  border-right: 0.3mm solid var(--outline-variant);
+}
+.binder::after {
+  content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 1.5mm;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.06));
+}
+.ring {
+  width: 7mm; height: 7mm; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #c0b7ba 45%, #837376 90%);
+  box-shadow: inset 0.3mm 0.3mm 0.6mm rgba(255,255,255,0.8), 0 0.4mm 0.8mm rgba(0,0,0,0.22);
+  position: relative;
+}
+.ring::before {
+  content: ''; position: absolute; inset: 1.8mm; border-radius: 50%;
+  background: var(--surface); box-shadow: inset 0 0.3mm 0.6mm rgba(0,0,0,0.35);
+}
+
+/* ─── Canvas ─── */
+.canvas {
+  padding: var(--s5) var(--s5) var(--s4) var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--s2);
+  border-bottom: 0.3mm dashed var(--outline-variant);
+}
+.header-title {
+  font-family: var(--font-display);
+  font-size: 26pt;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+.header-sub {
+  font-family: var(--font-hand);
+  font-size: 10pt;
+  color: var(--on-surface-variant);
+  margin-top: 1.5mm;
+}
+.today-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 2.5mm 5mm;
+  background: var(--primary-fixed);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--clay-card);
+  color: var(--on-primary-container);
+  font-family: var(--font-label);
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.today-pill svg { width: 4mm; height: 4mm; fill: currentColor; }
+.today-pill .field {
+  border-bottom: 0.3mm solid var(--on-primary-container);
+  opacity: 0.55;
+  min-width: 28mm;
+  height: 4mm;
+}
+
+/* ─── Top priorities ─── */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  font-family: var(--font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-bottom: var(--s2);
+}
+.section-title svg { width: 5.5mm; height: 5.5mm; fill: var(--primary); }
+
+.priorities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+}
+.priority {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  padding: var(--s3);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s2);
+  min-height: 26mm;
+}
+.priority.rose     { background: var(--primary-fixed); color: var(--on-primary-fixed-variant); }
+.priority.mint     { background: var(--secondary-container); color: var(--on-secondary-container); }
+.priority.lavender { background: var(--tertiary-fixed); color: var(--on-tertiary-container); }
+
+.priority-check {
+  width: 6mm; height: 6mm;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--clay-input);
+  flex-shrink: 0;
+  margin-top: 0.3mm;
+}
+.priority-body { flex: 1; display: flex; flex-direction: column; gap: 1.5mm; }
+.priority-num {
+  font-family: var(--font-label);
+  font-size: 6pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+.priority-title-line {
+  border-bottom: 0.3mm dotted currentColor;
+  height: 3.2mm;
+  opacity: 0.5;
+}
+.priority-sub-line {
+  border-bottom: 0.3mm dotted currentColor;
+  height: 3mm;
+  opacity: 0.35;
+}
+.priority-tag {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2mm;
+  background: rgba(255,255,255,0.45);
+  border-radius: var(--radius-pill);
+  padding: 1mm 3mm;
+  font-family: var(--font-label);
+  font-size: 6pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.priority-tag svg { width: 3mm; height: 3mm; fill: currentColor; }
+
+/* ─── 3-col lower layout ─── */
+.lower {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--s3);
+  flex: 1;
+  min-height: 0;
+}
+
+/* ─── To-do list ─── */
+.todo {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+}
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  padding: 1.2mm 1.5mm;
+  border-radius: var(--radius);
+}
+.todo-item:hover { background: var(--surface-container-low); }
+.todo-box {
+  width: 5mm; height: 5mm;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--clay-input);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todo-box.done {
+  background: var(--primary);
+  color: white;
+  box-shadow:
+    inset 0.5mm 0.5mm 1mm rgba(0,0,0,0.18),
+    inset -0.3mm -0.3mm 0.5mm rgba(255,255,255,0.2),
+    0 0.3mm 0.6mm rgba(130,80,92,0.22);
+}
+.todo-box.done svg { width: 3.2mm; height: 3.2mm; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.todo-text-line {
+  flex: 1;
+  border-bottom: 0.3mm dotted var(--outline-variant);
+  height: 4mm;
+}
+.todo-text-done {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  color: var(--on-surface-variant);
+  text-decoration: line-through;
+  text-decoration-color: var(--outline-variant);
+  opacity: 0.7;
+}
+.todo-divider {
+  border-top: 0.3mm solid var(--outline-variant);
+  opacity: 0.5;
+  margin: var(--s2) 0 2mm;
+}
+.completed-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  font-family: var(--font-label);
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+  margin-bottom: 2mm;
+}
+.completed-header svg { width: 3.5mm; height: 3.5mm; fill: currentColor; }
+.todo-add {
+  margin-top: auto;
+  padding-top: var(--s2);
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  background: var(--surface-container-low);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--clay-input);
+  padding: 2mm 4mm;
+  color: var(--outline);
+  font-family: var(--font-body);
+  font-size: 8pt;
+  font-style: italic;
+}
+.todo-add svg { width: 4mm; height: 4mm; stroke: currentColor; stroke-width: 1.6; fill: none; stroke-linecap: round; }
+
+/* ─── Right column: important + brain dump ─── */
+.notes-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  min-height: 0;
+}
+.important {
+  background: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  padding: var(--s3);
+  position: relative;
+  overflow: hidden;
+}
+.important::before {
+  content: '';
+  position: absolute;
+  top: -6mm; right: -6mm;
+  width: 22mm; height: 22mm;
+  background: rgba(255,255,255,0.35);
+  border-radius: 50%;
+  filter: blur(2mm);
+}
+.important-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 1.5mm;
+  position: relative;
+}
+.important-header svg { width: 5.5mm; height: 5.5mm; fill: currentColor; }
+.important-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 12pt;
+}
+.important-body {
+  font-family: var(--font-hand);
+  font-size: 10.5pt;
+  line-height: 1.5;
+  position: relative;
+}
+.important-line {
+  border-bottom: 0.3mm dashed currentColor;
+  height: 5mm;
+  opacity: 0.35;
+}
+.important-line + .important-line { margin-top: 2mm; }
+
+.brain {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.brain::before {
+  content: '';
+  position: absolute;
+  top: -2mm; right: 10mm;
+  width: 28mm; height: 5mm;
+  background: var(--secondary-container);
+  opacity: 0.75;
+  transform: rotate(8deg);
+  box-shadow: 0 0.5mm 1mm rgba(0,0,0,0.1);
+}
+.brain-header {
+  background: var(--surface-container);
+  border-bottom: 0.3mm solid var(--outline-variant);
+  padding: 2.5mm var(--s3);
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.brain-header svg { width: 5mm; height: 5mm; fill: var(--tertiary); }
+.brain-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 12pt;
+  color: var(--on-surface);
+}
+.brain-canvas {
+  flex: 1;
+  background-image: linear-gradient(to bottom, transparent 7.5mm, var(--outline-variant) 7.5mm, var(--outline-variant) 7.8mm, transparent 7.8mm);
+  background-size: 100% 8mm;
+  padding: 2mm var(--s3);
+}
+
+/* ─── Footer ─── */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--s2);
+  border-top: 0.3mm solid var(--outline-variant);
+}
+.footer-quote {
+  font-family: var(--font-hand);
+  font-style: italic;
+  font-size: 8pt;
+  color: var(--on-surface-variant);
+  max-width: 75%;
+}
+.footer-page {
+  font-family: var(--font-label);
+  font-size: 6.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--outline);
+  background: var(--surface-container-low);
+  padding: 1.2mm 3mm;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--clay-card);
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <aside class="binder" aria-hidden="true">
+    <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+    <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+    <span class="ring"></span>
+  </aside>
+
+  <main class="canvas">
+
+    <!-- Header -->
+    <header class="header">
+      <div>
+        <div class="header-title">Tasks &amp; Notes</div>
+        <div class="header-sub">One list at a time.</div>
+      </div>
+      <div class="today-pill">
+        <svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 9.5h17" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Today</span>
+        <span class="field"></span>
+      </div>
+    </header>
+
+    <!-- Top priorities -->
+    <section>
+      <h2 class="section-title">
+        <svg viewBox="0 0 24 24"><path d="M5 3l4 4v14l-4-4zM12 3v18M19 3l-4 4v14l4-4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2" fill="currentColor"/></svg>
+        Top Priorities
+      </h2>
+      <div class="priorities">
+        <div class="priority rose">
+          <span class="priority-check"></span>
+          <div class="priority-body">
+            <span class="priority-num">Priority 01</span>
+            <div class="priority-title-line"></div>
+            <div class="priority-sub-line"></div>
+            <span class="priority-tag">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
+              Work
+            </span>
+          </div>
+        </div>
+        <div class="priority mint">
+          <span class="priority-check"></span>
+          <div class="priority-body">
+            <span class="priority-num">Priority 02</span>
+            <div class="priority-title-line"></div>
+            <div class="priority-sub-line"></div>
+            <span class="priority-tag">
+              <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z"/></svg>
+              Personal
+            </span>
+          </div>
+        </div>
+        <div class="priority lavender">
+          <span class="priority-check"></span>
+          <div class="priority-body">
+            <span class="priority-num">Priority 03</span>
+            <div class="priority-title-line"></div>
+            <div class="priority-sub-line"></div>
+            <span class="priority-tag">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.8 6.6 7.2.6-5.5 4.8 1.7 7-6.2-3.8-6.2 3.8 1.7-7L2 9.2l7.2-.6z"/></svg>
+              Home
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lower two-column layout -->
+    <section class="lower">
+
+      <!-- To-do list -->
+      <div class="todo">
+        <h2 class="section-title" style="margin-bottom:var(--s2)">
+          <svg viewBox="0 0 24 24"><path d="M4 6h14v2H4zM4 11h14v2H4zM4 16h14v2H4z"/></svg>
+          To-Do List
+        </h2>
+        <div class="todo-list">
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+        </div>
+
+        <div class="todo-divider"></div>
+        <div class="completed-header">
+          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Completed (3)</span>
+        </div>
+        <div class="todo-list">
+          <div class="todo-item"><span class="todo-box done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"/></svg></span><span class="todo-text-done">Morning meditation</span></div>
+          <div class="todo-item"><span class="todo-box done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"/></svg></span><span class="todo-text-done">Read a few pages</span></div>
+          <div class="todo-item"><span class="todo-box done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"/></svg></span><span class="todo-text-done">Drink first glass of water</span></div>
+        </div>
+
+        <div class="todo-add">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          <span>Add a new task…</span>
+        </div>
+      </div>
+
+      <!-- Notes column -->
+      <div class="notes-col">
+
+        <!-- Important callout -->
+        <section class="important">
+          <div class="important-header">
+            <svg viewBox="0 0 24 24"><path d="M12 2l10 17H2L12 2zm0 7v5m0 3v0.5" fill="currentColor" stroke="var(--tertiary-container)" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span class="important-title">Important</span>
+          </div>
+          <div class="important-body">
+            <div class="important-line"></div>
+            <div class="important-line"></div>
+            <div class="important-line"></div>
+          </div>
+        </section>
+
+        <!-- Brain dump notes -->
+        <section class="brain">
+          <div class="brain-header">
+            <svg viewBox="0 0 24 24"><path d="M4 19h16v2H4zM5 5h14l1 10H4z"/></svg>
+            <span class="brain-title">Brain Dump</span>
+          </div>
+          <div class="brain-canvas"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span class="footer-quote">"The way to get started is to quit talking and begin doing." — Walt Disney</span>
+      <span class="footer-page">Daily · Tasks &amp; Notes</span>
+    </footer>
+  </main>
+</div>
+
+</body>
+</html>

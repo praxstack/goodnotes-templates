@@ -1,0 +1,20 @@
+{
+  "author": "prax",
+  "category": "journal",
+  "description": "Claymorphic A4 evening journal — lined brain-dump canvas plus three prompt cards (Highlights, Learned, For Tomorrow). Washi date tape.",
+  "entry": "tactile-reflections.html",
+  "id": "tactile-reflections",
+  "license": "MIT",
+  "name": "Tactile Evening Reflections",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "journal",
+    "reflection",
+    "evening",
+    "claymorphism",
+    "skeuomorphic",
+    "cozy"
+  ],
+  "version": "0.1.0"
+}
