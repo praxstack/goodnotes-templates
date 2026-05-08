@@ -119,6 +119,9 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/assets-CC%20BY%204.0-8a9a7b?style=flat-square)](LICENSE)
 [![Node.js ≥ 18](https://img.shields.io/badge/node-%E2%89%A518-b87d5a?style=flat-square)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-d4a656?style=flat-square)](tsconfig.json)
+[![Live gallery](https://img.shields.io/badge/gallery-pretext--templates.vercel.app-7c3aed?style=flat-square)](https://pretext-templates.vercel.app)
+[![npm: cli](https://img.shields.io/npm/v/%40praxlannister%2Fpretext-cli?label=npm%20%7C%20cli&style=flat-square&color=8a9a7b)](https://www.npmjs.com/package/@praxlannister/pretext-cli)
+[![npm: core](https://img.shields.io/npm/v/%40praxlannister%2Fpretext-core?label=npm%20%7C%20core&style=flat-square&color=b87d5a)](https://www.npmjs.com/package/@praxlannister/pretext-core)
 
 One repo. One generator. Two shippable surfaces:
 
