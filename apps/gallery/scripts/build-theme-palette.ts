@@ -13,8 +13,15 @@
  * The specimen frame then applies those vars scoped under a
  * [data-theme="<name>"] wrapper — zero :root pollution.
  *
- * Light-only by design (W7 scope); dark variants wait for the W9
- * browser-PDF work where full-document theme swap is needed.
+ * Ships all light + dark variants — 14 palettes total across the
+ * 7 base theme families. Light and dark both expose the same 6 tokens
+ * (background · foreground · primary · accent · border · muted); the
+ * swap is a pure theme-id change at gallery runtime. OG card renders
+ * + specimen previews pick up the dark palette automatically.
+ *
+ * History: this script used to filter `-dark.css` files out (W7 scope
+ * kicked dark to W9); the dark CSS has always existed on disk so
+ * including it now is a pure extraction change, no CSS authoring.
  *
  * Usage: tsx apps/gallery/scripts/build-theme-palette.ts
  */
@@ -65,21 +72,38 @@ function parseVars(css: string): Partial<Palette> {
 }
 
 function prettyName(slug: string): string {
-  // "bold-tech" → "Bold Tech"
-  return slug
+  // "bold-tech"      → "Bold Tech"
+  // "bold-tech-dark" → "Bold Tech (Dark)"
+  // The trailing "-dark" token is a suffix convention, not a theme
+  // family name, so it gets reshaped into parenthetical variant notation.
+  const darkSuffix = slug.endsWith('-dark');
+  const base = darkSuffix ? slug.slice(0, -'-dark'.length) : slug;
+  const title = base
     .split('-')
     .map((w) => w[0].toUpperCase() + w.slice(1))
     .join(' ');
+  return darkSuffix ? `${title} (Dark)` : title;
 }
 
 async function main(): Promise<void> {
-  const all = (await readdir(THEMES_DIR)).filter((f) => f.endsWith('.css'));
-  const lightOnly = all.filter((f) => !f.endsWith('-dark.css')).sort();
+  // Sort light before dark in each family so palettes read naturally
+  // in the gallery picker: bold-tech, bold-tech-dark, bubblegum, ...
+  const all = (await readdir(THEMES_DIR)).filter((f) => f.endsWith('.css')).sort((a, b) => {
+    const aFamily = a.replace(/-dark\.css$/, '.css');
+    const bFamily = b.replace(/-dark\.css$/, '.css');
+    if (aFamily !== bFamily) return aFamily.localeCompare(bFamily);
+    // Same family — light (no -dark suffix) comes first. localeCompare
+    // would put "bold-tech-dark.css" before "bold-tech.css" because '-'
+    // (0x2D) < '.' (0x2E), so we short-circuit on the -dark suffix.
+    const aDark = a.endsWith('-dark.css') ? 1 : 0;
+    const bDark = b.endsWith('-dark.css') ? 1 : 0;
+    return aDark - bDark;
+  });
 
   const themes: Array<{ id: string; name: string; palette: Palette }> = [];
   const missing: Array<{ id: string; need: string[] }> = [];
 
-  for (const f of lightOnly) {
+  for (const f of all) {
     const id = f.replace(/\.css$/, '');
     const raw = await readFile(path.join(THEMES_DIR, f), 'utf8');
     const parsed = parseVars(raw);
@@ -90,9 +114,9 @@ async function main(): Promise<void> {
       continue;
     }
 
-    // Every theme here has all 6 tokens (verified manually on the 7
-    // light themes before shipping this script); the guard above just
-    // keeps a future theme honest.
+    // Every theme here has all 6 tokens (verified manually on the 14
+    // light + dark themes before shipping this script); the guard above
+    // just keeps a future theme honest.
     const palette = parsed as Palette;
     themes.push({ id, name: prettyName(id), palette });
   }
