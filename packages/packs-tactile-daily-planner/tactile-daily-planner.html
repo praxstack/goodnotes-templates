@@ -54,18 +54,16 @@
   --on-tertiary:           #ffffff;
   --on-tertiary-container: #463f5c;
 
-  /* Claymorphic shadows — must survive print-color-adjust */
+  /* Cute claymorphic shadows — flat treatments for print consistency.
+     Inset compositing is unreliable in headless Chrome at print time,
+     so slot-style inputs use a single soft border + tiny drop instead. */
   --clay-card:
-    inset -1px -1px 2px rgba(0,0,0,0.04),
-    inset  1px  1px 2px rgba(255,255,255,0.9),
-    0 1.5px 3px rgba(130,80,92,0.12);
-  --clay-input:
-    inset  1.5px 1.5px 3px rgba(0,0,0,0.06),
-    inset -1.5px -1.5px 3px rgba(255,255,255,0.85);
+    0 0.5mm 1.5mm rgba(130,80,92,0.10),
+    0 0.2mm 0.5mm rgba(130,80,92,0.06);
+  --clay-slot-border: 0.3mm solid var(--outline-variant);
   --clay-button:
-    inset -1.5px -1.5px 2px rgba(0,0,0,0.1),
-    inset  1.5px  1.5px 2px rgba(255,255,255,0.85),
-    0 1px 2px rgba(130,80,92,0.16);
+    0 0.6mm 1.2mm rgba(130,80,92,0.18),
+    0 0.2mm 0.4mm rgba(130,80,92,0.10);
 
   /* Typography */
   --font-display: 'Comfortaa', cursive, sans-serif;
@@ -325,26 +323,20 @@ h2.block-title {
   text-align: right;
   letter-spacing: 0.05em;
 }
+/* Slot renders identically on every row — single border, single subtle tint,
+   one tiny highlight. No inset shadows (which Chrome prints inconsistently). */
 .flow-slot {
   height: 7.5mm;
-  background: var(--surface-container-low);
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 30%, var(--surface-container-low) 100%);
+  border: var(--clay-slot-border);
   border-radius: var(--radius-sm);
-  box-shadow: var(--clay-input);
   padding: 0 2.5mm;
   display: flex;
   align-items: center;
   font-family: var(--font-body);
   font-size: 8.5pt;
   color: var(--on-surface-variant);
-}
-.flow-slot.lunch {
-  background: var(--secondary-container);
-  color: var(--on-secondary-container);
-}
-.flow-slot.lunch::before {
-  content: '🥗';
-  margin-right: 1.5mm;
-  filter: saturate(0.85);
 }
 
 /* ─── Right column ─── */
@@ -391,9 +383,7 @@ h2.block-title {
 .mood-btn.active {
   background: var(--primary-container);
   color: var(--on-primary-container);
-  box-shadow:
-    inset 1mm 1mm 1.5mm rgba(0,0,0,0.12),
-    inset -0.5mm -0.5mm 1mm rgba(255,255,255,0.4);
+  border: 0.3mm solid var(--primary);
 }
 
 /* ─── Widgets row: hydration + movement ─── */
@@ -439,12 +429,12 @@ h2.block-title {
 .step-badge {
   width: 11mm; height: 11mm;
   border-radius: 50%;
-  background: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.7);
+  border: 0.3mm solid rgba(70,101,84,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--secondary);
-  box-shadow: var(--clay-input);
 }
 .step-badge svg { width: 6.5mm; height: 6.5mm; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .step-field {
@@ -524,7 +514,7 @@ h2.block-title {
   width: 5.5mm; height: 5.5mm;
   border-radius: 50%;
   background: var(--surface);
-  box-shadow: var(--clay-input);
+  border: 0.3mm solid var(--outline-variant);
   flex-shrink: 0;
   margin-top: 0.5mm;
 }
