@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple Pages · pretext-templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════════
+   pretext-templates · simple-pages.html
+   Six utility A4 pages in one PDF. Everything pure CSS — no raster.
+
+   Design tokens match prax-journal v5 warm-analog palette:
+     cream paper  #f9f5ec   (slight yellow, comfortable under ink)
+     ink          #1b1815   (warm black, never pure #000)
+     hairline     #c9be9d   (pencil-soft rule)
+     sage         #8a9a7b
+     clay         #b87d5a
+     amber        #d4a656
+
+   Per-page classes pick ONE palette accent so the rule is discernible
+   but never dominant. The whole sheet should feel like heavy pressed
+   paper, not a crisp screen grid.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --paper: #f9f5ec;
+  --ink: #1b1815;
+  --hairline: #c9be9d;
+  --sage: #8a9a7b;
+  --clay: #b87d5a;
+  --amber: #d4a656;
+  --whisper: #6b5d3f;
+
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --page-w: 210mm;
+  --page-h: 297mm;
+}
+
+/* Reset + A4 page contract */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); color: var(--ink); font-family: var(--serif); }
+
+@page { size: A4 portrait; margin: 0; }
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  position: relative;
+  background: var(--paper);
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+
+/* Page label — bottom-left, disappears off the very edge so it never
+   competes with the grid itself. */
+.page__label {
+  position: absolute;
+  bottom: 6mm;
+  left: 14mm;
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--whisper);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.page__label em {
+  font-style: normal;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ─── 1. LINED ────────────────────────────────────────────────────── */
+/* 7 mm ruled. Left margin rule in clay. 28 lines total. */
+.page--lined {
+  background:
+    /* margin rule */
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(14mm + 18mm - 0.12mm),
+      var(--clay) calc(14mm + 18mm - 0.12mm),
+      var(--clay) calc(14mm + 18mm + 0.12mm),
+      transparent calc(14mm + 18mm + 0.12mm)
+    ),
+    /* ruled lines every 7 mm starting at 22 mm from top, ending at 22 mm from bottom */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(7mm - 0.1mm),
+      var(--hairline) calc(7mm - 0.1mm),
+      var(--hairline) 7mm
+    ),
+    var(--paper);
+  background-size:
+    100% 100%,
+    100% 7mm,
+    100% 100%;
+  background-position:
+    0 0,
+    0 22mm,
+    0 0;
+  background-repeat: no-repeat, repeat-y, no-repeat;
+  /* Clip the ruled pattern to the writing area 22–275 mm */
+  background-clip: padding-box;
+}
+.page--lined::before {
+  /* Bottom masker — hides ruled lines past row 28 without doing math-in-gradient */
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: calc(22mm + 28 * 7mm);
+  height: 22mm;
+  background: var(--paper);
+}
+
+/* ─── 2. SWISS GRID ──────────────────────────────────────────────── */
+/* 5 mm square. Sage hairline. Darker every 5 cells (25 mm) for scale-reading. */
+.page--grid {
+  background:
+    /* Heavy every 25 mm */
+    repeating-linear-gradient(to right,
+      var(--sage) 0, var(--sage) 0.18mm,
+      transparent 0.18mm, transparent 25mm
+    ),
+    repeating-linear-gradient(to bottom,
+      var(--sage) 0, var(--sage) 0.18mm,
+      transparent 0.18mm, transparent 25mm
+    ),
+    /* Light every 5 mm */
+    repeating-linear-gradient(to right,
+      var(--hairline) 0, var(--hairline) 0.08mm,
+      transparent 0.08mm, transparent 5mm
+    ),
+    repeating-linear-gradient(to bottom,
+      var(--hairline) 0, var(--hairline) 0.08mm,
+      transparent 0.08mm, transparent 5mm
+    ),
+    var(--paper);
+}
+
+/* ─── 3. DOT GRID ────────────────────────────────────────────────── */
+/* 5 mm dot spacing, amber dots. */
+.page--dots {
+  background:
+    radial-gradient(circle at 0.5mm 0.5mm, var(--amber) 0.28mm, transparent 0.32mm),
+    var(--paper);
+  background-size: 5mm 5mm, 100% 100%;
+  background-position: 10mm 10mm, 0 0;
+}
+
+/* ─── 4. BLANK ───────────────────────────────────────────────────── */
+/* One-point border + corner brackets, otherwise empty. */
+.page--blank {
+  background: var(--paper);
+}
+.page--blank::before {
+  content: "";
+  position: absolute;
+  inset: 14mm;
+  border: 0.12mm solid var(--hairline);
+}
+/* Corner brackets — stronger than the full border so the page has structure */
+.page--blank .corner {
+  position: absolute;
+  width: 8mm;
+  height: 8mm;
+  border-color: var(--ink);
+  border-style: solid;
+}
+.page--blank .corner-tl { top: 12mm; left: 12mm; border-width: 0.35mm 0 0 0.35mm; }
+.page--blank .corner-tr { top: 12mm; right: 12mm; border-width: 0.35mm 0.35mm 0 0; }
+.page--blank .corner-bl { bottom: 12mm; left: 12mm; border-width: 0 0 0.35mm 0.35mm; }
+.page--blank .corner-br { bottom: 12mm; right: 12mm; border-width: 0 0.35mm 0.35mm 0; }
+
+/* ─── 5. ISOMETRIC ───────────────────────────────────────────────── */
+/* Triangle-based isometric grid: vertical + 30° + 150° lines every 5 mm. */
+.page--iso {
+  background:
+    repeating-linear-gradient(60deg,
+      transparent 0, transparent calc(5mm * 0.866 - 0.08mm),
+      var(--hairline) calc(5mm * 0.866 - 0.08mm),
+      var(--hairline) calc(5mm * 0.866)
+    ),
+    repeating-linear-gradient(-60deg,
+      transparent 0, transparent calc(5mm * 0.866 - 0.08mm),
+      var(--hairline) calc(5mm * 0.866 - 0.08mm),
+      var(--hairline) calc(5mm * 0.866)
+    ),
+    repeating-linear-gradient(to right,
+      transparent 0, transparent calc(5mm - 0.08mm),
+      var(--hairline) calc(5mm - 0.08mm),
+      var(--hairline) 5mm
+    ),
+    var(--paper);
+}
+
+/* ─── 6. MUSIC STAFF ─────────────────────────────────────────────── */
+/* 8 staves of 5 lines each. 1.8 mm between staff lines, 14 mm between staves. */
+.page--music {
+  background: var(--paper);
+  padding: 22mm 18mm;
+}
+.page--music .staff {
+  position: relative;
+  height: calc(4 * 1.8mm); /* 5 lines = 4 gaps */
+  margin-bottom: 14mm;
+  /* five horizontal lines via gradient stops */
+  background:
+    linear-gradient(to bottom,
+      var(--ink) 0, var(--ink) 0.12mm, transparent 0.12mm, transparent 1.8mm,
+      var(--ink) 1.8mm, var(--ink) calc(1.8mm + 0.12mm), transparent calc(1.8mm + 0.12mm), transparent 3.6mm,
+      var(--ink) 3.6mm, var(--ink) calc(3.6mm + 0.12mm), transparent calc(3.6mm + 0.12mm), transparent 5.4mm,
+      var(--ink) 5.4mm, var(--ink) calc(5.4mm + 0.12mm), transparent calc(5.4mm + 0.12mm), transparent 7.2mm,
+      var(--ink) 7.2mm, var(--ink) calc(7.2mm + 0.12mm)
+    );
+}
+.page--music .staff::before {
+  /* Treble clef anchor — a short vertical line at the left edge + printed 𝄞 glyph */
+  content: "𝄞";
+  position: absolute;
+  left: 0;
+  top: -1.5mm;
+  font-size: 11mm;
+  line-height: 1;
+  color: var(--ink);
+  font-family: serif;
+}
+.page--music .staff::after {
+  /* Soft guide line between staves */
+  content: "";
+  position: absolute;
+  left: 12mm;
+  right: 0;
+  bottom: -7mm;
+  height: 0.06mm;
+  background: var(--hairline);
+  opacity: 0.5;
+}
+.page--music .staff:last-child::after { display: none; }
+
+/* ─── Print / screen scaling ─────────────────────────────────────── */
+@media screen {
+  html, body { background: #e4ddc9; padding: 16px 0; }
+  .page {
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 24px rgba(27, 24, 21, 0.18);
+  }
+}
+@media print {
+  html, body { background: var(--paper); padding: 0; }
+  .page { margin: 0; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. LINED -->
+<section class="page page--lined">
+  <div class="page__label">pretext-templates · <em>lined</em> · 7 mm · 28 rows · A4</div>
+</section>
+
+<!-- 2. SWISS GRID -->
+<section class="page page--grid">
+  <div class="page__label">pretext-templates · <em>grid</em> · 5 mm square · heavy every 25 mm · A4</div>
+</section>
+
+<!-- 3. DOT GRID -->
+<section class="page page--dots">
+  <div class="page__label">pretext-templates · <em>dot grid</em> · 5 mm pitch · A4</div>
+</section>
+
+<!-- 4. BLANK -->
+<section class="page page--blank">
+  <span class="corner corner-tl"></span>
+  <span class="corner corner-tr"></span>
+  <span class="corner corner-bl"></span>
+  <span class="corner corner-br"></span>
+  <div class="page__label">pretext-templates · <em>blank</em> · A4</div>
+</section>
+
+<!-- 5. ISOMETRIC -->
+<section class="page page--iso">
+  <div class="page__label">pretext-templates · <em>isometric</em> · 5 mm lattice · A4</div>
+</section>
+
+<!-- 6. MUSIC STAFF -->
+<section class="page page--music">
+  <div class="staff"></div>
+  <div class="staff"></div>
+  <div class="staff"></div>
+  <div class="staff"></div>
+  <div class="staff"></div>
+  <div class="staff"></div>
+  <div class="staff"></div>
+  <div class="staff"></div>
+  <div class="page__label">pretext-templates · <em>music staff</em> · 8 × 5-line · A4</div>
+</section>
+
+</body>
+</html>

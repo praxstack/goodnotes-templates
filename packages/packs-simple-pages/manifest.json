@@ -1,0 +1,22 @@
+{
+  "author": "prax",
+  "category": "worksheet",
+  "description": "Six utility A4 pages in one PDF — lined, grid, dot-grid, blank, isometric, and music-staff. Cream paper, warm analog palette.",
+  "entry": "simple-pages.html",
+  "id": "simple-pages",
+  "license": "MIT",
+  "name": "Simple Pages",
+  "repository": "https://github.com/praxstack/goodnotes-templates",
+  "schema_version": 1,
+  "tags": [
+    "worksheet",
+    "lined",
+    "grid",
+    "dot-grid",
+    "blank",
+    "isometric",
+    "music-staff",
+    "utility"
+  ],
+  "version": "0.1.0"
+}
