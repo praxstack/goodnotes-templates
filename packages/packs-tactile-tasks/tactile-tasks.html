@@ -260,6 +260,14 @@ body {
   letter-spacing: 0.08em;
 }
 .priority-tag svg { width: 3mm; height: 3mm; fill: currentColor; }
+.priority-tag .tag-line {
+  display: inline-block;
+  min-width: 12mm;
+  height: 2.8mm;
+  border-bottom: 0.3mm dotted currentColor;
+  opacity: 0.7;
+  vertical-align: baseline;
+}
 
 /* ─── 3-col lower layout ─── */
 .lower {
@@ -522,7 +530,7 @@ body {
             <div class="priority-sub-line"></div>
             <span class="priority-tag">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
-              Work
+              <span class="tag-line"></span>
             </span>
           </div>
         </div>
@@ -533,8 +541,8 @@ body {
             <div class="priority-title-line"></div>
             <div class="priority-sub-line"></div>
             <span class="priority-tag">
-              <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z"/></svg>
-              Personal
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
+              <span class="tag-line"></span>
             </span>
           </div>
         </div>
@@ -545,8 +553,8 @@ body {
             <div class="priority-title-line"></div>
             <div class="priority-sub-line"></div>
             <span class="priority-tag">
-              <svg viewBox="0 0 24 24"><path d="M12 2l2.8 6.6 7.2.6-5.5 4.8 1.7 7-6.2-3.8-6.2 3.8 1.7-7L2 9.2l7.2-.6z"/></svg>
-              Home
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
+              <span class="tag-line"></span>
             </span>
           </div>
         </div>
@@ -576,17 +584,12 @@ body {
         <div class="todo-divider"></div>
         <div class="completed-header">
           <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>Completed (3)</span>
+          <span>Completed</span>
         </div>
         <div class="todo-list">
-          <div class="todo-item"><span class="todo-box done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"/></svg></span><span class="todo-text-done">Morning meditation</span></div>
-          <div class="todo-item"><span class="todo-box done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"/></svg></span><span class="todo-text-done">Read a few pages</span></div>
-          <div class="todo-item"><span class="todo-box done"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"/></svg></span><span class="todo-text-done">Drink first glass of water</span></div>
-        </div>
-
-        <div class="todo-add">
-          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-          <span>Add a new task…</span>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
+          <div class="todo-item"><span class="todo-box"></span><span class="todo-text-line"></span></div>
         </div>
       </div>
 
