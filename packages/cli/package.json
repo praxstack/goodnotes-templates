@@ -1,5 +1,5 @@
 {
-  "name": "@pretext-templates/cli",
+  "name": "@praxlannister/pretext-cli",
   "version": "1.0.0",
   "type": "module",
   "description": "Commander-based CLI for the pretext-templates monorepo.",
@@ -17,7 +17,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@pretext-templates/core": "*",
+    "@praxlannister/pretext-core": "*",
     "commander": "^12.1.0"
   },
   "engines": {

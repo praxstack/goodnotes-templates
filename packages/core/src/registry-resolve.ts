@@ -1,5 +1,5 @@
 /**
- * @pretext-templates/core — semver range resolver for registry packs.
+ * @praxlannister/pretext-core — semver range resolver for registry packs.
  *
  * W11 · CEO plan E5.
  *

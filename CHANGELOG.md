@@ -50,13 +50,26 @@ skeuomorphic set, and an Astro 6 gallery ship alongside.
 
 ### Changed
 
-- **Built CLI actually runs.** `@pretext-templates/cli`'s `index.ts`
-  used relative deep imports (`../../core/src/*.js`) that broke once
-  the package was installed outside the monorepo — the published tarball
-  doesn't ship `packages/core/src`. Switched to the workspace's
-  subpath exports (`@pretext-templates/core/dimensions`, `/utils/locale`,
-  `/puppeteer-renderer`) so `node dist/index.js --help` works against
-  the published artifact. (SPRINT-STATUS §5a now clean)
+- **npm scope renamed `@pretext-templates/*` → `@praxlannister/pretext-*`.**
+  The `@pretext-templates` organization did not exist on npmjs.org; rather
+  than block the 1.0.0 ship on org setup we moved to a scope the maintainer
+  already owns. Install commands become:
+    - `npm i @praxlannister/pretext-cli` (was `@pretext-templates/cli`)
+    - `npm i @praxlannister/pretext-core` (was `@pretext-templates/core`)
+  The `@pretext-templates/gallery` workspace name stays unchanged — it's
+  private (`"private": true`) and never publishes. Rewritten across
+  26 pack MDX files, 3 gallery pages, 4 scripts, and both package
+  manifests. Historical references inside DECISIONS/SPRINT-STATUS/
+  CHANGELOG/MIGRATION/docs-archive are intentionally preserved since
+  they describe what things were called at the time. Bin names
+  (`pretext-templates`, `goodnotes-templates`) are unaffected — those
+  are global so the CLI invocation you type is still `npx pretext-templates`.
+- **Built CLI actually runs.** The CLI's `index.ts` used relative deep
+  imports (`../../core/src/*.js`) that broke once the package was installed
+  outside the monorepo — the published tarball doesn't ship `packages/core/src`.
+  Switched to the core workspace's subpath exports (`/dimensions`,
+  `/utils/locale`, `/puppeteer-renderer`) so `node dist/index.js --help`
+  works against the published artifact. (SPRINT-STATUS §5a now clean)
 - **Registry resolver (`resolvePackVersion`)** is **additive** — registry
   schema stays at v1, no `schema_version` bump. Consumers that never call
   the resolver are unaffected; those that do get semver-range support

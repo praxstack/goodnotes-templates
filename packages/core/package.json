@@ -1,5 +1,5 @@
 {
-  "name": "@pretext-templates/core",
+  "name": "@praxlannister/pretext-core",
   "version": "1.0.0",
   "type": "module",
   "description": "Core rendering pipeline — splice, puppeteer, pdf-postprocess, themes.",

@@ -81,7 +81,7 @@ function readmeUseBullet(readme: string): string | null {
 function mdxBody(m: ManifestLite, readme: string | null): string {
   const lede = readme ? readmeLede(readme) : m.description;
   const use = readme ? readmeUseBullet(readme) : null;
-  const renderCmd = `npx @pretext-templates/cli render \\
+  const renderCmd = `npx @praxlannister/pretext-cli render \\
   packages/packs-${m.id}/${m.entry} \\
   -o output/${m.id}.pdf`;
 

@@ -26,7 +26,7 @@ test.describe('Gallery · W7 smoke', () => {
 
     // Install command visible with the full npx line.
     await expect(
-      page.getByText('npx @pretext-templates/cli init prax-journal'),
+      page.getByText('npx @praxlannister/pretext-cli init prax-journal'),
     ).toBeVisible();
 
     // 7 theme swatches · role=radiogroup. The accessible name comes
@@ -232,7 +232,7 @@ test.describe('Gallery · W7 smoke', () => {
 
     // Clipboard actually received the install command.
     const pasted = await page.evaluate(() => navigator.clipboard.readText());
-    expect(pasted).toBe('npx @pretext-templates/cli init prax-journal');
+    expect(pasted).toBe('npx @praxlannister/pretext-cli init prax-journal');
 
     // Button reverts to 'Copy' within the 1.8s TTL.
     await expect(btn).toHaveText('Copy', { timeout: 3000 });

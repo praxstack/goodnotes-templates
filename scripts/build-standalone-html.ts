@@ -6,7 +6,7 @@
  * an HTML they can open in a browser. This script replays the same page
  * sequence (`buildPageSequence` → `resolvePageSpecFiles` →
  * `substituteProfile`) and hands the per-page HTML to
- * `buildStandaloneHtml()` (from `@pretext-templates/core`) for stitching.
+ * `buildStandaloneHtml()` (from `@praxlannister/pretext-core`) for stitching.
  *
  * As of W2 T1 the stitching logic lives in
  * `packages/core/src/standalone-builder.ts` so the CLI and gallery can

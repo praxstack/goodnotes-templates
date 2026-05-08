@@ -1,5 +1,5 @@
 /**
- * @pretext-templates/core — registry + manifest schemas.
+ * @praxlannister/pretext-core — registry + manifest schemas.
  *
  * Two Zod schemas that govern the pack-metadata lifecycle:
  *
