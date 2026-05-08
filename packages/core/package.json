@@ -73,10 +73,10 @@
   "dependencies": {
     "@types/semver": "7.7.1",
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^23.11.1",
+    "puppeteer": "^24.43.0",
     "semver": "7.7.4",
-    "sharp": "^0.33.5",
-    "zod": "3.23.8"
+    "sharp": "^0.34.5",
+    "zod": "4.4.3"
   },
   "engines": {
     "node": ">=18.0.0"
