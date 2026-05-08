@@ -1,5 +1,5 @@
 /**
- * @pretext-templates/core — standalone HTML builder.
+ * @praxlannister/pretext-core — standalone HTML builder.
  *
  * Takes N pre-substituted HTML documents (one per rendered page) and
  * stitches them into one browser-openable, print-ready combined HTML.

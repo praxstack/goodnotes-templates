@@ -7,7 +7,7 @@
  * v<ver>-packs.zip` that non-technical users can drop into GoodNotes. This
  * script walks every `packages/packs-<id>/manifest.json`, resolves `entry`, and
  * renders it to `dist/packs/<id>.pdf` via the same Puppeteer pipeline that
- * ships inside `@pretext-templates/core`.
+ * ships inside `@praxlannister/pretext-core`.
  *
  * Design notes
  * ------------
