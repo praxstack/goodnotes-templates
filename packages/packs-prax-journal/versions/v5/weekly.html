@@ -218,12 +218,12 @@ html[data-debug~="overflow"] .page { overflow: visible; outline: 2px dashed var(
     <div class="mh-r">
       <div class="week-row">
         <span class="label">Week of</span>
-        <span class="field" data-inject="week-date"></span>
+        <span class="field" data-inject="week-date">{{WEEK_DATE}}</span>
       </div>
       <div class="wk-counter">
-        Week <span class="big" data-inject="week-num">__</span><span class="slash">·</span>
-        <span data-inject="quarter">Q_</span><span class="slash">·</span>
-        <span data-inject="year">____</span>
+        Week <span class="big" data-inject="week-num">{{WEEK_NUM}}</span><span class="slash">·</span>
+        <span data-inject="quarter">{{QUARTER}}</span><span class="slash">·</span>
+        <span data-inject="year">{{YEAR}}</span>
       </div>
     </div>
   </header>
