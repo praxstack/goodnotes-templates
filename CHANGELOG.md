@@ -6,8 +6,32 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+_Nothing landed since v1.0.0._
+
+## [1.0.0] — 2026-05-08
+
+First public release. 26 packs across journals, planners, trackers, notes,
+and worksheets — all self-contained HTML, all renderable to A4 PDF via a
+single Puppeteer pipeline. The Praxis Ledger monthly bundle, a 60-sticker
+skeuomorphic set, and an Astro 6 gallery ship alongside.
+
 ### Added
 
+- **GitHub Release artifact** `pretext-templates-v1.0.0-packs.zip`
+  (3.0 MB · 26 A4 PDFs, one per pack) — drop it into GoodNotes. Non-
+  technical users no longer need to run the CLI.
+- **4 Tactile claymorphic packs** — `tactile-daily-planner`,
+  `tactile-reflections`, `tactile-habits`, `tactile-tasks`. Digital Cozy
+  aesthetic: cream paper · dusty rose + mint + lavender · 14 mm binder
+  spine · 7 skeuomorphic metal rings. Print-first rendering via flat
+  borders + gradient highlights (no inset shadows — those composite
+  inconsistently across rows in headless Chrome). (`2c5dc40` · `888e5c3`
+  · `b90a4b9` · `ae4b965`)
+- **Gallery content parity with the registry** — all 26 packs now appear
+  in `apps/gallery/src/content/packs/`, and the OG card matrix was
+  rebuilt from 22 × 7 = 154 to 26 × 7 = 182 pack cards + 1 default. The
+  default-card "26 PACKS · 7 THEMES · MIT" copy is the public banner.
+  (`6d2ed41` · DECISIONS row 34 *planned*)
 - **CLI `pretext init <id>`** — scaffold a new pack with a 3-file minimal
   template (manifest · html · README). `--dry-run` prints what would be
   written; refuses to clobber existing directories. (W15.5 · `7398110`)
@@ -19,9 +43,20 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   chars, no shell metacharacters. Defense-in-depth on the only
   user-controlled string that reaches the printed shell commands.
   (W15.5 · `7398110`)
+- **`scripts/render-all-packs.ts`** — release-artifact renderer: walks
+  every registry pack and emits `dist/packs/<id>.pdf` sequentially via
+  the shared Puppeteer pipeline. 26 packs in ~30 s on an M-series Mac,
+  4.7 MB uncompressed / 3.0 MB zipped. (v1.0.0 release gate)
 
 ### Changed
 
+- **Built CLI actually runs.** `@pretext-templates/cli`'s `index.ts`
+  used relative deep imports (`../../core/src/*.js`) that broke once
+  the package was installed outside the monorepo — the published tarball
+  doesn't ship `packages/core/src`. Switched to the workspace's
+  subpath exports (`@pretext-templates/core/dimensions`, `/utils/locale`,
+  `/puppeteer-renderer`) so `node dist/index.js --help` works against
+  the published artifact. (SPRINT-STATUS §5a now clean)
 - **Registry resolver (`resolvePackVersion`)** is **additive** — registry
   schema stays at v1, no `schema_version` bump. Consumers that never call
   the resolver are unaffected; those that do get semver-range support
@@ -37,6 +72,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   consumers / scripters), each with its own action surface including
   a one-liner perl rewrite for stale paths. (W13 · `04b8e40` · DECISIONS
   row 30)
+- **README** pack counts and repo-tree comment refreshed 22 → 26.
+  (`6d2ed41`)
 
 ## [1.0.0-rc.1] — rebrand sprint snapshot
 
@@ -197,6 +234,9 @@ Playground CF Worker (queued for a fresh session).
   the local `assets/fonts/fonts.css`. Script for download is shipped.
 - **FIND-0018** — Add the 21 missing `.dark.css` siblings.
 
-## [1.0.0] — 2026-04-09
+## [0.1.0] — 2026-04-09
 
-Initial engine. See git log for commit-level detail.
+Initial engine (superseded by the rebrand sprint and the 1.0.0 public
+release above). Preserved here so historical commit messages that
+reference v1.0.0 don't lie about the published tag — the real public
+1.0.0 is the May 2026 entry. See git log for commit-level detail.
