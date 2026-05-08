@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tactile Habit Tracker — Digital Cozy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&family=Comfortaa:wght@400;600;700&family=Be+Vietnam+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   TACTILE HABIT TRACKER — "Digital Cozy"
+   Port of Stitch ref: habit_tracker_refined → A4 print
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --gutter-binder: 14mm;
+
+  --surface:                  #fbf9f4;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low:    #f5f3ee;
+  --surface-container:        #f0eee9;
+  --surface-container-high:   #eae8e3;
+  --surface-container-highest:#e4e2dd;
+  --surface-dim:              #dbdad5;
+
+  --on-surface:         #1b1c19;
+  --on-surface-variant: #514346;
+  --outline:            #837376;
+  --outline-variant:    #d5c2c5;
+
+  --primary:             #82505c;
+  --primary-container:   #dda0ad;
+  --primary-fixed:       #ffd9e0;
+  --primary-fixed-dim:   #f5b6c3;
+  --on-primary-container:#633641;
+
+  --secondary:             #466554;
+  --secondary-container:   #c8ebd5;
+  --on-secondary-container:#4c6b5a;
+
+  --tertiary:              #625a78;
+  --tertiary-container:    #b5abcd;
+  --tertiary-fixed:        #e8ddff;
+  --on-tertiary-container: #463f5c;
+
+  --clay-card:
+    inset -1px -1px 2px rgba(0,0,0,0.04),
+    inset  1px  1px 2px rgba(255,255,255,0.9),
+    0 1.5px 3px rgba(130,80,92,0.12);
+  --clay-input:
+    inset  1.2px 1.2px 2.5px rgba(0,0,0,0.06),
+    inset -1.2px -1.2px 2.5px rgba(255,255,255,0.85);
+  --clay-cell:
+    inset -0.6px -0.6px 1px rgba(0,0,0,0.05),
+    inset  0.6px  0.6px 1px rgba(255,255,255,0.75);
+
+  --font-display: 'Comfortaa', cursive, sans-serif;
+  --font-heading: 'Quicksand', sans-serif;
+  --font-body:    'Nunito Sans', sans-serif;
+  --font-hand:    'Comfortaa', cursive, sans-serif;
+  --font-label:   'Be Vietnam Pro', sans-serif;
+
+  --s1: 1.5mm;
+  --s2: 3mm;
+  --s3: 5mm;
+  --s4: 7mm;
+  --s5: 10mm;
+
+  --radius-sm: 3mm;
+  --radius:    4mm;
+  --radius-lg: 6mm;
+  --radius-pill: 999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--surface-container-highest);
+  font-family: var(--font-body);
+  font-size: 9pt;
+  color: var(--on-surface);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--surface);
+  margin: 10mm auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 30px rgba(130,80,92,0.14);
+  display: grid;
+  grid-template-columns: var(--gutter-binder) 1fr;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Binder spine ─── */
+.binder {
+  background: linear-gradient(to right, var(--surface-container-highest) 0%, var(--surface-container) 60%, var(--surface-dim) 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 18mm 0;
+  border-right: 0.3mm solid var(--outline-variant);
+}
+.binder::after {
+  content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 1.5mm;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.06));
+}
+.ring {
+  width: 7mm; height: 7mm; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #c0b7ba 45%, #837376 90%);
+  box-shadow: inset 0.3mm 0.3mm 0.6mm rgba(255,255,255,0.8), 0 0.4mm 0.8mm rgba(0,0,0,0.22);
+  position: relative;
+}
+.ring::before {
+  content: ''; position: absolute; inset: 1.8mm; border-radius: 50%;
+  background: var(--surface); box-shadow: inset 0 0.3mm 0.6mm rgba(0,0,0,0.35);
+}
+
+/* ─── Canvas ─── */
+.canvas {
+  padding: var(--s5) var(--s4) var(--s4) var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--s2);
+  border-bottom: 0.3mm dashed var(--outline-variant);
+}
+.header-title {
+  font-family: var(--font-display);
+  font-size: 26pt;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+.header-sub {
+  font-family: var(--font-hand);
+  font-size: 10pt;
+  color: var(--on-surface-variant);
+  margin-top: 1.5mm;
+}
+.month-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2mm;
+  padding: 2.5mm 5mm;
+  background: var(--surface-container-low);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--clay-card);
+  font-family: var(--font-label);
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+}
+.month-pill .field {
+  min-width: 28mm;
+  border-bottom: 0.3mm solid var(--outline-variant);
+  height: 4.5mm;
+  display: inline-block;
+}
+
+/* ─── Habit of the Month spotlight ─── */
+.spotlight {
+  background: var(--surface-container-low);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  border: 0.25mm solid var(--outline-variant);
+  padding: var(--s3) var(--s4);
+  position: relative;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  top: -3mm; left: 10mm;
+  width: 30mm; height: 5mm;
+  background: var(--secondary-container);
+  opacity: 0.65;
+  transform: rotate(-1.5deg);
+  border-radius: 0.5mm;
+  box-shadow: 0 0.5mm 1mm rgba(0,0,0,0.08);
+}
+.spotlight-body {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+.spotlight-star {
+  width: 18mm; height: 18mm;
+  background: var(--surface);
+  border-radius: 50%;
+  box-shadow: var(--clay-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(4deg);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.spotlight-star svg { width: 10mm; height: 10mm; fill: currentColor; }
+.spotlight-text { flex: 1; }
+.spotlight-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13pt;
+  color: var(--on-surface);
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  margin-bottom: 1mm;
+}
+.spotlight-title svg { width: 5mm; height: 5mm; fill: var(--secondary); }
+.spotlight-quote {
+  font-family: var(--font-hand);
+  font-style: italic;
+  font-size: 10pt;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--s2);
+}
+.spotlight-progress-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-label);
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+  margin-bottom: 1.5mm;
+}
+.progress-track {
+  height: 3.5mm;
+  background: var(--surface-dim);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--clay-input);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 38%;
+  background: linear-gradient(to right, var(--secondary-container), var(--secondary));
+  border-radius: var(--radius-pill);
+}
+
+/* ─── Grid card ─── */
+.grid-card {
+  background: var(--surface-container);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  padding: var(--s3);
+  position: relative;
+}
+.grid-card::before {
+  content: '';
+  position: absolute;
+  top: -3mm; right: 14mm;
+  width: 28mm; height: 5mm;
+  background: var(--primary-fixed-dim);
+  opacity: 0.6;
+  transform: rotate(2deg);
+  border-radius: 0.5mm;
+  box-shadow: 0 0.5mm 1mm rgba(0,0,0,0.08);
+}
+.grid-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 12pt;
+  color: var(--on-surface);
+  margin-bottom: var(--s2);
+}
+
+/* ─── Habit grid table ─── */
+.habit-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0.8mm 0.9mm;
+  table-layout: fixed;
+}
+.habit-grid thead th {
+  font-family: var(--font-label);
+  font-size: 6.5pt;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+  text-align: center;
+  padding: 1mm 0;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  line-height: 1;
+}
+.habit-grid th.habit-col {
+  width: 34mm;
+  text-align: left;
+  padding-left: 1mm;
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+}
+.habit-grid th.day-col { width: auto; }
+.habit-grid th.day-col.weekend {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.habit-grid tbody tr { height: 6.5mm; }
+.habit-grid tbody td.habit-cell {
+  font-family: var(--font-body);
+  font-size: 8pt;
+  color: var(--on-surface);
+  padding: 0 1mm;
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  height: 6.5mm;
+}
+.habit-dot {
+  width: 2.8mm; height: 2.8mm;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: var(--clay-cell);
+}
+.habit-dot.mint     { background: var(--secondary-container); }
+.habit-dot.rose     { background: var(--primary-container); }
+.habit-dot.lavender { background: var(--tertiary-container); }
+.habit-dot.sage     { background: #adceba; }
+.habit-name-line {
+  flex: 1;
+  border-bottom: 0.3mm dotted var(--outline-variant);
+  height: 3mm;
+  align-self: flex-end;
+  margin-bottom: 1mm;
+}
+
+.habit-grid tbody td.day-cell {
+  background: var(--surface-container-lowest);
+  border-radius: 1mm;
+  box-shadow: var(--clay-cell);
+  padding: 0;
+}
+.habit-grid tbody td.day-cell.weekend {
+  background: var(--primary-fixed);
+  opacity: 0.55;
+}
+
+/* ─── Bottom row: reflection cards ─── */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+}
+.reflection-card {
+  background: var(--surface-container);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--clay-card);
+  padding: var(--s3) var(--s3) var(--s4);
+}
+.reflection-header {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  color: var(--primary);
+  font-family: var(--font-label);
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2mm;
+}
+.reflection-header svg { width: 4.5mm; height: 4.5mm; fill: currentColor; }
+.reflection-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+  padding-top: 1mm;
+}
+.reflection-line {
+  border-bottom: 0.3mm dotted var(--outline-variant);
+  height: 0;
+}
+
+/* ─── Footer ─── */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--s2);
+  border-top: 0.3mm solid var(--outline-variant);
+}
+.footer-quote {
+  font-family: var(--font-hand);
+  font-style: italic;
+  font-size: 8pt;
+  color: var(--on-surface-variant);
+  max-width: 75%;
+}
+.footer-page {
+  font-family: var(--font-label);
+  font-size: 6.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--outline);
+  background: var(--surface-container-low);
+  padding: 1.2mm 3mm;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--clay-card);
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <aside class="binder" aria-hidden="true">
+    <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+    <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+    <span class="ring"></span>
+  </aside>
+
+  <main class="canvas">
+
+    <!-- Header -->
+    <header class="header">
+      <div>
+        <div class="header-title">Habit Tracker</div>
+        <div class="header-sub">Consistency is cozy.</div>
+      </div>
+      <div class="month-pill">
+        <span>Month</span>
+        <span class="field"></span>
+        <span>/</span>
+        <span class="field" style="min-width:18mm"></span>
+      </div>
+    </header>
+
+    <!-- Spotlight card -->
+    <section class="spotlight">
+      <div class="spotlight-body">
+        <div class="spotlight-star">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.8 6.6 7.2.6-5.5 4.8 1.7 7-6.2-3.8-6.2 3.8 1.7-7L2 9.2l7.2-.6z"/></svg>
+        </div>
+        <div class="spotlight-text">
+          <div class="spotlight-title">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.8 6.6 7.2.6-5.5 4.8 1.7 7-6.2-3.8-6.2 3.8 1.7-7L2 9.2l7.2-.6z"/></svg>
+            Habit of the Month
+          </div>
+          <div class="spotlight-quote">"Read 15 pages before bed instead of scrolling."</div>
+          <div class="spotlight-progress-row">
+            <span>Progress</span>
+            <span>12 / 31 Days</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily tracking grid -->
+    <section class="grid-card">
+      <div class="grid-title">Daily Tracking</div>
+      <table class="habit-grid">
+        <thead>
+          <tr>
+            <th class="habit-col">Habit</th>
+            <th class="day-col">1</th><th class="day-col">2</th><th class="day-col">3</th><th class="day-col">4</th><th class="day-col">5</th>
+            <th class="day-col weekend">6</th><th class="day-col weekend">7</th>
+            <th class="day-col">8</th><th class="day-col">9</th><th class="day-col">10</th><th class="day-col">11</th><th class="day-col">12</th>
+            <th class="day-col weekend">13</th><th class="day-col weekend">14</th>
+            <th class="day-col">15</th><th class="day-col">16</th><th class="day-col">17</th><th class="day-col">18</th><th class="day-col">19</th>
+            <th class="day-col weekend">20</th><th class="day-col weekend">21</th>
+            <th class="day-col">22</th><th class="day-col">23</th><th class="day-col">24</th><th class="day-col">25</th><th class="day-col">26</th>
+            <th class="day-col weekend">27</th><th class="day-col weekend">28</th>
+            <th class="day-col">29</th><th class="day-col">30</th><th class="day-col">31</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot mint"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot rose"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot lavender"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot sage"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot mint"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot rose"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot lavender"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+          <tr>
+            <td class="habit-cell"><span class="habit-dot sage"></span><span class="habit-name-line"></span></td>
+            <td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell weekend"></td><td class="day-cell weekend"></td><td class="day-cell"></td><td class="day-cell"></td><td class="day-cell"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Bottom row: reflection cards -->
+    <section class="bottom-row">
+      <div class="reflection-card">
+        <div class="reflection-header">
+          <svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11a2 2 0 0 1-2 2H4z"/><path d="M14 4v5h5" fill="var(--surface)"/></svg>
+          <span>Monthly Reflection</span>
+        </div>
+        <div class="reflection-lines">
+          <div class="reflection-line"></div>
+          <div class="reflection-line"></div>
+          <div class="reflection-line"></div>
+          <div class="reflection-line"></div>
+        </div>
+      </div>
+      <div class="reflection-card">
+        <div class="reflection-header">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5" fill="var(--surface)"/><circle cx="12" cy="12" r="2"/></svg>
+          <span>Next Month Focus</span>
+        </div>
+        <div class="reflection-lines">
+          <div class="reflection-line"></div>
+          <div class="reflection-line"></div>
+          <div class="reflection-line"></div>
+          <div class="reflection-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span class="footer-quote">"We are what we repeatedly do. Excellence, then, is not an act, but a habit." — Aristotle</span>
+      <span class="footer-page">Monthly · Habits</span>
+    </footer>
+  </main>
+</div>
+
+</body>
+</html>

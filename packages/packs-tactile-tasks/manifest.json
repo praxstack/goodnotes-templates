@@ -1,0 +1,21 @@
+{
+  "author": "prax",
+  "category": "planner",
+  "description": "Claymorphic A4 tasks + notes — three priority cards, soft-clay to-do checkboxes, Important callout, lined Brain Dump canvas, washi accents.",
+  "entry": "tactile-tasks.html",
+  "id": "tactile-tasks",
+  "license": "MIT",
+  "name": "Tactile Tasks & Notes",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "planner",
+    "tasks",
+    "notes",
+    "todo",
+    "claymorphism",
+    "skeuomorphic",
+    "cozy"
+  ],
+  "version": "0.1.0"
+}

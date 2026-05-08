@@ -1,0 +1,20 @@
+{
+  "author": "prax",
+  "category": "tracker",
+  "description": "Claymorphic A4 monthly habit tracker — habit-of-the-month spotlight, 8 habits × 31 days of soft-clay cells, washi accents, binder spine.",
+  "entry": "tactile-habits.html",
+  "id": "tactile-habits",
+  "license": "MIT",
+  "name": "Tactile Habit Tracker",
+  "repository": "https://github.com/praxstack/pretext-templates",
+  "schema_version": 1,
+  "tags": [
+    "tracker",
+    "habits",
+    "monthly",
+    "claymorphism",
+    "skeuomorphic",
+    "cozy"
+  ],
+  "version": "0.1.0"
+}
