@@ -46,16 +46,12 @@
   --tertiary-fixed:        #e8ddff;
   --on-tertiary-container: #463f5c;
 
+  /* Flat, print-safe shadows — inset compositing renders inconsistently
+     in headless Chrome at print time. */
   --clay-card:
-    inset -1px -1px 2px rgba(0,0,0,0.04),
-    inset  1px  1px 2px rgba(255,255,255,0.9),
-    0 1.5px 3px rgba(130,80,92,0.12);
-  --clay-input:
-    inset  1.2px 1.2px 2.5px rgba(0,0,0,0.06),
-    inset -1.2px -1.2px 2.5px rgba(255,255,255,0.85);
-  --clay-cell:
-    inset -0.6px -0.6px 1px rgba(0,0,0,0.05),
-    inset  0.6px  0.6px 1px rgba(255,255,255,0.75);
+    0 0.5mm 1.5mm rgba(130,80,92,0.10),
+    0 0.2mm 0.5mm rgba(130,80,92,0.06);
+  --slot-border: 0.3mm solid var(--outline-variant);
 
   --font-display: 'Comfortaa', cursive, sans-serif;
   --font-heading: 'Quicksand', sans-serif;
@@ -265,8 +261,8 @@ body {
 .progress-track {
   height: 3.5mm;
   background: var(--surface-dim);
+  border: var(--slot-border);
   border-radius: var(--radius-pill);
-  box-shadow: var(--clay-input);
   overflow: hidden;
 }
 
@@ -346,7 +342,6 @@ body {
   width: 2.8mm; height: 2.8mm;
   border-radius: 50%;
   flex-shrink: 0;
-  box-shadow: var(--clay-cell);
 }
 .habit-dot.mint     { background: var(--secondary-container); }
 .habit-dot.rose     { background: var(--primary-container); }
@@ -362,8 +357,8 @@ body {
 
 .habit-grid tbody td.day-cell {
   background: var(--surface-container-lowest);
+  border: 0.25mm solid var(--outline-variant);
   border-radius: 1mm;
-  box-shadow: var(--clay-cell);
   padding: 0;
 }
 .habit-grid tbody td.day-cell.weekend {
