@@ -1,8 +1,20 @@
 # Prax Journal — SPEC.md
 
-**Status:** Stub (Phase 1 · restructure). Grows to full portable implementation contract during Phase 2 (Iteration-1).
+**Status:** v1.1.0 · customisation tier contract added. Core pack contract stable.
 
-**Scope:** This is the machine-readable contract for any AI agent or engineer building/extending the Prax Journal pack. Intended level: principal-engineer-portable. See `docs/plan-ceo-review-v3-refined.md` for the CEO-level rationale.
+**Scope:** This is the machine-readable contract for any AI agent or engineer building/extending the Prax Journal pack. Intended level: principal-engineer-portable. See `docs/plan-ceo-review-v3-refined.md` for the CEO-level rationale. See [`docs/CUSTOMISATION.md`](../../docs/CUSTOMISATION.md) for the repo-wide customisation tier story this pack participates in.
+
+## 0 · Customisation tiers (repo-wide contract)
+
+Every pack in this repo is **self-contained** (single HTML owns colors, fonts, layout). Customisation is an additive, overrideable layer — never a mutation of the source HTML.
+
+| Tier | Applies to | Mechanism | Ship status |
+|---|---|---|---|
+| **1 · Profile** | this pack (and any future pack that declares `customisation.profile` in its manifest) | `substituteProfile()` walks HTML placeholders (`DR_*`, `RX_*`, `DAY_*`) and writes user values from a Zod-validated `profile.json` at render time. PII never persisted. | ✅ v1.0.0 |
+| **2 · Themes** | all packs that use the shared CSS custom-property vocabulary (`--background`, `--foreground`, `--primary`, `--accent`, `--border`) | `scripts/render-all-pack-themes.ts` injects a theme CSS file into each pack's `<head>` AFTER its own `:root`. CSS cascade recolors tokens; layout tokens (`--page-w`, `--s1..s5`, `--font-sans`, `--shadow-card`) stay pack-owned. 27 × 14 = 378 pre-rendered PDFs ship as release artifacts. | ✅ v1.1.0 |
+| **3 · Editor** | future | In-browser "/customise/<pack-id>" route: live-pick theme, fill declared fields, export PDF. Three implementation options under study (CF Worker · `paged.js` · `pdf-lib` overlay). Decision gate: Tier 2 download metrics. | 🔒 Deferred |
+
+A pack opts into Tier 2 by using the shared CSS custom-property vocabulary. Opt into Tier 1 by adding `customisation.profile: true` to its manifest.
 
 ---
 

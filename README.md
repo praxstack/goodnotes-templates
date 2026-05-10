@@ -268,6 +268,30 @@ npx tsx scripts/bundle-release.ts \
 
 ---
 
+## Customisation · three tiers
+
+The original pitch was "programmatic, self-contained templates." v1.1
+layers a **customisation** story on top without breaking that invariant.
+
+| Tier | Who | How | Status |
+|---|---|---|---|
+| **1 · Profile** | CLI users | `profile.json` → Zod-validated placeholders (DR_*, RX_*, DAY_*) substituted at render time into Prax Journal pack | Ships · `prax-journal` today |
+| **2 · Themes** | Any gallery visitor | Click any of 14 palette swatches on a pack page → download same-origin PDF in that palette. 7 families × light+dark = 14 themed PDFs per pack | Ships · v1.1.0 |
+| **3 · Editor** | Future | In-browser fill + live theme preview + export PDF | Deferred · decision gate on Tier 2 demand |
+
+**378 themed PDFs** are pre-rendered at release time (27 packs × 14 themes)
+by `scripts/render-all-pack-themes.ts`. The script injects theme CSS into
+each pack's `<head>` *after* the pack's own `:root` — the CSS cascade
+recolors every token the theme defines (`--background`, `--foreground`,
+`--primary`, `--accent`, `--border`, etc.) while layout tokens
+(`--page-w`, `--s1..s5`, `--font-sans`, `--shadow-card`) stay the pack's
+own. The 27 source HTMLs on disk are never modified — the theme layer is
+composed into a throwaway in-memory string.
+
+Full spec & future work: [`docs/CUSTOMISATION.md`](docs/CUSTOMISATION.md).
+
+---
+
 ## Feature matrix
 
 | What | Where | How many |

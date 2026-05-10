@@ -6,7 +6,47 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-_Nothing landed since v1.0.0._
+### Added
+
+- **Customisation · Tier 2 · Themes.** Every pack page on the gallery now
+  has a 14-swatch theme picker that downloads the pack in any of 14
+  palettes (7 families × light+dark). 27 packs × 14 themes = **378
+  themed PDFs** pre-rendered at release time and served same-origin.
+  Keyboard-accessible, screen-reader-labelled swatches, no JavaScript
+  required. (See [`docs/CUSTOMISATION.md`](docs/CUSTOMISATION.md).)
+- **`scripts/render-all-pack-themes.ts`** — matrix renderer that walks
+  every pack × theme, injects the theme CSS into the pack HTML's `<head>`
+  after the pack's own `:root`, and writes `dist/packs-themed/<id>/<theme>.pdf`.
+  ~7 minutes sequential on an M-series Mac for the full 378 PDFs;
+  failures collected and reported, not aborted. (~67 MB total output,
+  gitignored.)
+- **`scripts/smoke-theme-injection.ts`** — three-PDF smoke test that
+  proves the CSS-cascade mechanism without rendering the full matrix.
+  First run proved `cornell-notes × {claude, cyberpunk}` recoloured
+  tokens (`--background`, `--accent`, `--border`) correctly while
+  preserving layout tokens (fonts, spacing, shadows).
+- **`apps/gallery/scripts/copy-pack-themed-pdfs.ts`** — mirrors the 378
+  PDFs into `apps/gallery/public/packs/<id>/<theme>.pdf` at gallery
+  build time, same idempotent prune pattern as `copy-pack-pdfs.ts`.
+  Soft-exits 0 when source dir is missing (partial dev builds ship
+  without themed PDFs instead of failing).
+- **`docs/CUSTOMISATION.md`** — single source of truth for the
+  3-tier customisation story (Profile · Themes · future Editor) with
+  decision gates and architectural rationale. Linked from the pack
+  page's Customise section and from `README.md`.
+- **Canonical 3-tier contract in `packages/packs-prax-journal/SPEC.md`**
+  — documents how a pack opts into Tier 1 (manifest flag) vs Tier 2
+  (shared CSS custom-property vocabulary).
+
+### Why this was the next thing
+
+v1.0.0's audit exposed a gap: the gallery surfaced 378 OG cards across
+14 palettes (brand assets), but downloading a pack always gave you the
+author's single canonical palette. Users who liked a layout but wanted
+a different colour story had to fork. Tier 2 closes that gap without
+breaking the self-contained-template invariant: source HTMLs on disk
+are still single-authored and unmodified — themes compose into a
+throwaway in-memory HTML string at render time.
 
 ## [1.0.0] — 2026-05-08
 
