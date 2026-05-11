@@ -12,25 +12,28 @@ export default defineConfig({
       // Thresholds are per-file so new T1 code can't regress; thresholds
       // below are computed over the whole project to keep the gate simple.
       //
-      // FIND-I4-004 / TICKET-I4-004 (iter-4):
-      //   The 75 branch threshold was aspirational and silently failed on
-      //   main for months after the W5 monorepo migration. The realistic
-      //   floor is dominated by uncovered error paths in `puppeteer-renderer.ts`
-      //   (stale-browser re-launch, CI env detection permutations, color-mode
-      //   404 fallthrough, batch failure aggregation, fs.writeFile rejection)
-      //   and by `pdf-postprocess.ts`'s link-rewrite branches. Each of those
-      //   needs elaborate Chromium / fs mocking.
+      // FIND-I4-004 / TICKET-I4-004 follow-up (iter-5):
+      //   Iter-4 lowered branches 75 → 65 with an explicit "raise when
+      //   puppeteer-renderer error-path tests land" callout. Iter-5 landed
+      //   those tests (`tests/unit/puppeteer-renderer-mock.test.ts`, 17
+      //   tests mocking puppeteer.launch + request interception + pdf()
+      //   throw paths + fs write + batch partition). Result:
+      //     puppeteer-renderer.ts branches: 33% → 91%
+      //     overall branches: 67.5% → 79.7%
       //
-      //   We set the gate just above current-actual so it catches regressions
-      //   (anything that removes a tested branch trips CI) without blocking
-      //   unrelated work. The path to raising this back toward 75 is covered
-      //   by the `Path A` ticket in IMPLEMENTATION_ROADMAP.md — add 5
-      //   puppeteer-renderer error-path tests when someone has time.
+      //   Raising the gate to reflect the new floor. Delta is deliberately
+      //   just below current-actual so the gate catches genuine regression
+      //   without flapping on unrelated coverage noise. Line/statement
+      //   floors raised in lock-step.
+      //
+      //   To raise further: add tests for `pdf-postprocess.ts` link-rewrite
+      //   branches (currently 61% branch) and `dimensions.ts` `custom`
+      //   paper-size logic (currently 55% stmts). Each is ~1 pd.
       thresholds: {
-        lines: 60,
-        statements: 60,
-        functions: 55,
-        branches: 65,
+        lines: 75,
+        statements: 75,
+        functions: 80,
+        branches: 75,
       },
       include: [
         'packages/core/src/dimensions.ts',

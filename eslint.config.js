@@ -97,6 +97,11 @@ export default [
     },
     plugins: { '@typescript-eslint': tsPlugin },
     rules: {
+      // The base rule doesn't understand argsIgnorePattern, so it fires on
+      // legitimately-ignored callback params like `_req`. Turn it off and
+      // let the TS plugin handle unused-var detection (it honors `^_`
+      // prefix via the config below). Mirrors the TS block above.
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
