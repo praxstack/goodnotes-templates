@@ -148,7 +148,8 @@ now emits a single `console.warn` on unparseable / negative values
 before falling back to 50. Silent fallback used to let a typo'd
 env var disable the memory-aware browser restart for an entire
 long run (e.g. `PRAX_BROWSER_RESTART_EVERY=50o` → effectively
-disabled, `<REDACTED-MED-1>`-shaped bug territory).
+disabled, same class of silent-failure bug as the iter-3 renderer
+regressions).
 
 5 new tests in `tests/unit/puppeteer-renderer-restart.test.ts`
 assert: warns once on junk, warns on negative, does *not* warn
@@ -204,10 +205,12 @@ items FIND-0012, FIND-0014, FIND-0018, FIND-0028 — stay-deferred
 ## Validation commands
 
 ```bash
-# Verify PII purge
-for tok in <REDACTED-USER-FIRST> <REDACTED-PSYCH-FIRST-DR> <REDACTED-PSYCH-FIRST> <REDACTED-MCI-REG> <REDACTED-MED-1>; do
+# Verify PII purge — token list is maintained out-of-tree on purpose.
+# Set PII_TOKENS="<space-separated tokens>" in your local environment
+# before running; do NOT commit the real token list back into the repo.
+for tok in $PII_TOKENS; do
   git grep -l "$tok" $(git rev-list --all) 2>/dev/null | wc -l
-done   # expect: 0 0 0 0 0
+done   # expect: all zeros
 
 # Verify audit
 npm audit                    # expect: 0 vulnerabilities
