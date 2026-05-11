@@ -89,8 +89,14 @@ function checkBox(x: number, y: number, label: string, accent: Accent): string {
   </g>`;
 }
 
-/** N writing lines (solid first, dotted rest). */
-function writingLines(x0: number, x1: number, yStart: number, n: number, gap = 38): string {
+/**
+ * N writing lines (solid first, dotted rest).
+ *
+ * Unused today — kept as a documented primitive that future wave-2
+ * stickers can pull in. `_` prefix satisfies `no-unused-vars` without
+ * forcing us to delete a useful abstraction.
+ */
+function _writingLines(x0: number, x1: number, yStart: number, n: number, gap = 38): string {
   return Array.from({ length: n }, (_, i) => {
     const y = yStart + i * gap;
     return i === 0
@@ -476,7 +482,7 @@ ${dotScale(56, W - 56, 455, 5, 'lavender')}`;
     whisper: 'the self that holds is the self that belongs',
     archetype: 'clinic',
     archetypeOpts: { stampLabel: 'HELD', dateText: 'DBT · 2026' },
-    body: (W) => {
+    body: (_W) => {
       const opts = [['F', 'fair'], ['A', 'apologies · no'], ['S', 'stick to values'], ['T', 'truthful']];
       return opts.map(([k, l], i) => {
         const y = 230 + i * 50;

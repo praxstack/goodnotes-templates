@@ -75,12 +75,10 @@ describe('Prax journal — visual baselines', () => {
       });
 
       if (result.created) {
-        // eslint-disable-next-line no-console
         console.log(`  📸 baseline created: ${path.relative(REPO_ROOT, baselinePath)}`);
         return;
       }
       if (result.updated) {
-        // eslint-disable-next-line no-console
         console.log(`  ♻️  baseline updated: ${path.relative(REPO_ROOT, baselinePath)}`);
         return;
       }

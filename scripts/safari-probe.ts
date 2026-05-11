@@ -48,7 +48,6 @@ import {
 } from '../packages/core/src/prax-journal-renderer.js';
 import {
   splicePdfBuffers,
-  bookmarkTitle,
   type SpecRender,
 } from '../packages/core/src/pdf-splice.js';
 import {

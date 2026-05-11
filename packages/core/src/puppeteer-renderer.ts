@@ -61,7 +61,6 @@ function getRestartThreshold(): number {
   if (raw === undefined) return 50;
   const n = Number.parseInt(raw, 10);
   if (Number.isFinite(n) && n >= 0) return n;
-  // eslint-disable-next-line no-console
   console.warn(
     `  ⚠ PRAX_BROWSER_RESTART_EVERY="${raw}" is not a valid non-negative integer; ` +
       `falling back to 50`,
@@ -82,7 +81,6 @@ export async function maybeRestartBrowser(): Promise<boolean> {
   // Log once per restart so long runs show a trail, not silence.
   // Keep the prefix consistent with the existing progress log so
   // a grep on "Render:" or "puppeteer" still finds everything.
-  // eslint-disable-next-line no-console
   console.log(
     `  · puppeteer: restarting Chromium after ${renderCount} renders ` +
       `(PRAX_BROWSER_RESTART_EVERY=${threshold})`,

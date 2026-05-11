@@ -289,7 +289,6 @@ const PII_GUARD_ROOTS: ReadonlyArray<string> = [
 function* walk(dir: string): Generator<string> {
   // Lazy walk using sync readdir so the test stays deterministic and
   // vitest-friendly. Nothing here is fast-path, so the 40ms cost is fine.
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require('node:fs') as typeof import('node:fs');
   let entries: ReturnType<typeof fs.readdirSync>;
   try {
@@ -682,7 +681,6 @@ describe('schema v2 — therapist.specialty', () => {
 // provide defense-in-depth against the two mutation paths that led to
 // iter-4's finding.
 describe('FIND-I4-001 · profile.local.json must not be tracked', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { execSync } = require('node:child_process') as typeof import('node:child_process');
 
   it('no profile.*.json other than profile.example.json is tracked anywhere', () => {

@@ -108,8 +108,14 @@ function qRow(
 ${dotScale(marginX + 16, W - marginX - 16, scaleY, 4, accent, 10, 0)}`;
 }
 
-/** Horizontal label+line for "THING:" + writing line. */
-function labeledLine(
+/**
+ * Horizontal label+line for "THING:" + writing line.
+ *
+ * Preserved as a utility available for future wave-1 stickers that need
+ * a label-and-line pairing. Currently unreferenced — `_` prefix tells
+ * eslint to keep the code documented without tripping `no-unused-vars`.
+ */
+function _labeledLine(
   label: string, y: number, W: number, accent: Accent,
   dotted = false, pad = 44,
 ): string {

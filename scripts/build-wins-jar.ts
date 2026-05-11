@@ -12,7 +12,6 @@ import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  SIZE_CLASSES,
   PALETTE,
   stickerShell,
   rasterize,
