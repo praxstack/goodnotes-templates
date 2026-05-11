@@ -4,7 +4,7 @@
  * `shared/fonts/` so rendering works offline (FIND-0014).
  *
  * This script is the first half of FIND-0014. The second half — rewriting
- * every `<link>` in `packs/**/*.html` to reference the local
+ * every `<link>` inside the `packs` HTML tree to reference the local
  * `@font-face` file — is left as a follow-up because it's visual and should
  * be diffed template-by-template before shipping.
  *

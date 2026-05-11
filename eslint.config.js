@@ -11,17 +11,26 @@ export default [
   {
     ignores: [
       'dist/**',
+      '**/dist/**',
       'node_modules/**',
+      '**/node_modules/**',
       'output/**',
       'audit/**',
       'assets/**',
-      'scripts/**', // ad-hoc dev scripts; out of scope for now
+      'apps/gallery/.astro/**', // Astro build cache
       '**/*.d.ts',
     ],
   },
   js.configs.recommended,
   {
-    files: ['src/**/*.ts'],
+    // Post-W5 monorepo: TS sources live under packages/, apps/, and scripts/.
+    // Root-level config files (vitest/playwright configs) are intentionally
+    // excluded — they parse fine with tsc but don't need eslint coverage.
+    files: [
+      'packages/**/*.ts',
+      'apps/**/*.ts',
+      'scripts/**/*.ts',
+    ],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -41,6 +50,7 @@ export default [
         clearTimeout: 'readonly',
         setInterval: 'readonly',
         clearInterval: 'readonly',
+        fetch: 'readonly', // Node 18+ global
         // Browser realm (for the page.evaluate callback in puppeteer-renderer)
         document: 'readonly',
         Document: 'readonly',
@@ -68,10 +78,21 @@ export default [
       parser: tsParser,
       parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
       globals: {
+        // Node
         process: 'readonly',
         Buffer: 'readonly',
         console: 'readonly',
         NodeJS: 'readonly',
+        require: 'readonly', // CommonJS interop inside test files
+        fetch: 'readonly', // Node 18+ global
+        Headers: 'readonly',
+        // Browser realm (Playwright page.evaluate callbacks + Puppeteer)
+        document: 'readonly',
+        HTMLElement: 'readonly',
+        URL: 'readonly',
+        navigator: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
       },
     },
     plugins: { '@typescript-eslint': tsPlugin },

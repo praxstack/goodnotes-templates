@@ -238,7 +238,7 @@ main().catch((err: unknown) => {
   if (err instanceof RegistryParseError) {
     console.error('\n' + err.message);
   } else if (err instanceof Error) {
-    console.error('\n' + err.stack ?? err.message);
+    console.error('\n' + (err.stack ?? err.message));
   } else {
     console.error('\nUnknown error:', err);
   }
