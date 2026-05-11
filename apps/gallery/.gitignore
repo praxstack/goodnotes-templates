@@ -6,6 +6,10 @@ dist/
 public/specimens/
 public/packs/
 
+# staged at build time from repo-root vercel.json (source of truth)
+# see apps/gallery/scripts/stage-vercel-config.ts
+public/vercel.json
+
 # Node
 node_modules/
 

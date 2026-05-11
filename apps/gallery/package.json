@@ -6,7 +6,7 @@
   "description": "Astro gallery for pretext-templates. Home + pack detail + browse routes. Blurhash placeholders for specimen imagery.",
   "scripts": {
     "dev": "astro dev",
-    "build": "tsx scripts/validate-pack-ids.ts && tsx scripts/build-theme-palette.ts && tsx scripts/copy-pack-pdfs.ts && tsx scripts/copy-pack-themed-pdfs.ts && astro build",
+    "build": "tsx scripts/validate-pack-ids.ts && tsx scripts/build-theme-palette.ts && tsx scripts/copy-pack-pdfs.ts && tsx scripts/copy-pack-themed-pdfs.ts && tsx scripts/stage-vercel-config.ts && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "generate:specimens": "tsx scripts/generate-specimens.ts",
