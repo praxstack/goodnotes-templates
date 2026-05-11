@@ -9,10 +9,14 @@ into existence, every metric cites a tool, every finding cites a file:line.
 
 | Start here | If you want… |
 |---|---|
-| `CODEBASE_AUDIT_REPORT.md` | One-page executive summary + full methodology + top-5 risks |
-| `POST_SPRINT_STATUS.md` | What got fixed (23/27) and what was deferred (4/27) with acceptance criteria |
-| `IMPLEMENTATION_ROADMAP.md` | Sprint-by-sprint ticket plan |
-| `IMPLEMENTATION_ROADMAP.csv` | Jira / Linear-importable rows (27 tickets, `ticket_id,epic,title,priority,...`) |
+| `iteration-4/STATUS.md` | **Current-of-record status** (post-iter-4 sprint, 2026-05-11). Start here. |
+| `iteration-4/deferred-decisions.md` | Stay-deferred / schedule-now recommendations for iter-1 items |
+| `iteration-4/IMPLEMENTATION_ROADMAP.md` | Iter-4 ticket plan (T-001 → T-008) |
+| `iteration-4/findings.md` | Iter-4 findings with evidence + remediation |
+| `CODEBASE_AUDIT_REPORT.md` | One-page executive summary + full methodology + top-5 risks (iter-1 snapshot) |
+| `POST_SPRINT_STATUS.md` | Frozen iter-3 status (superseded by `iteration-4/STATUS.md`) |
+| `IMPLEMENTATION_ROADMAP.md` | Iter-1 sprint plan |
+| `IMPLEMENTATION_ROADMAP.csv` | Iter-1 Jira / Linear-importable rows (27 tickets) |
 | `SLIDE_OUTLINE.md` | 8 stakeholder slides |
 | `GAPS.md` | What the audit could not measure + how to close the gap |
 

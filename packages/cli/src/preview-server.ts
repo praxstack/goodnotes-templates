@@ -125,6 +125,24 @@ export async function startPreviewServer(outputDir: string, port: number): Promi
   return server;
 }
 
+/**
+ * Generate the dev-only local preview gallery HTML.
+ *
+ * NOTE (FIND-I4-008): This is the *local dev* gallery served by
+ * `npm run preview` from the CLI — NOT the public gallery at
+ * apps/gallery (that's a full Astro static site deployed to Vercel).
+ *
+ * The two exist on purpose:
+ *   - This function renders whatever PDFs/PNGs/SVGs already exist on
+ *     disk under `output/`. Zero-framework, no build step, starts in
+ *     ~20ms. Perfect for iterating on templates.
+ *   - apps/gallery reads registry.json + pack manifests to render a
+ *     curated, searchable public site with pack metadata, previews,
+ *     MDX detail pages, theme preview grids, and a contribution guide.
+ *
+ * Do NOT try to unify them. They serve different audiences and the
+ * shape of "whatever's in output/" is deliberately schemaless.
+ */
 async function generateGalleryHTML(outputDir: string): Promise<string> {
   const categories: Record<string, string[]> = {};
 

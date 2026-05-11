@@ -1,5 +1,9 @@
 # Post-implementation status — CODEX-AUDIT v1.1 findings
 
+> **⚠ SUPERSEDED 2026-05-11.** This document is the frozen iter-3 snapshot.
+> The current-of-record status doc is [`iteration-4/STATUS.md`](./iteration-4/STATUS.md).
+> Kept here for historical reference (FIND-I4-007).
+
 **Date:** 2026-04-18
 **Branch:** `main`
 **Implementation commits:** 7 atomic commits (`4ff4ed8 … 57453b3`) after the audit commit (`53beee8`).
