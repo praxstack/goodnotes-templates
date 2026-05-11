@@ -22,7 +22,7 @@
  *     helper's only job is to call the already-tested `closeBrowser()`.
  */
 
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 
 import {
   maybeRestartBrowser,
@@ -80,5 +80,61 @@ describe('C7b.3 · maybeRestartBrowser — threshold logic', () => {
   it('_resetRenderCountForTest zeroes the counter', () => {
     _resetRenderCountForTest();
     expect(_renderCountForTest()).toBe(0);
+  });
+});
+
+// FIND-I4-006 · getRestartThreshold warns on unparseable env vars
+// before silently falling back to 50. Silent fallback used to let a
+// typo disable the memory-aware restart for an entire long run.
+describe('C7b.3 · getRestartThreshold env-var validation (FIND-I4-006)', () => {
+  const ORIGINAL = process.env.PRAX_BROWSER_RESTART_EVERY;
+
+  afterEach(() => {
+    if (ORIGINAL === undefined) {
+      delete process.env.PRAX_BROWSER_RESTART_EVERY;
+    } else {
+      process.env.PRAX_BROWSER_RESTART_EVERY = ORIGINAL;
+    }
+    _resetRenderCountForTest();
+    vi.restoreAllMocks();
+  });
+
+  it('warns (once) on unparseable string value', async () => {
+    process.env.PRAX_BROWSER_RESTART_EVERY = 'banana';
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await maybeRestartBrowser(); // triggers getRestartThreshold internally
+    expect(warnSpy).toHaveBeenCalledTimes(1);
+    expect(warnSpy.mock.calls[0][0]).toContain('PRAX_BROWSER_RESTART_EVERY');
+    expect(warnSpy.mock.calls[0][0]).toContain('banana');
+    expect(warnSpy.mock.calls[0][0]).toContain('falling back to 50');
+  });
+
+  it('warns on negative integer value', async () => {
+    process.env.PRAX_BROWSER_RESTART_EVERY = '-5';
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await maybeRestartBrowser();
+    expect(warnSpy).toHaveBeenCalledTimes(1);
+    expect(warnSpy.mock.calls[0][0]).toContain('-5');
+  });
+
+  it('does NOT warn on valid integer value', async () => {
+    process.env.PRAX_BROWSER_RESTART_EVERY = '25';
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await maybeRestartBrowser();
+    expect(warnSpy).not.toHaveBeenCalled();
+  });
+
+  it('does NOT warn when env var is absent', async () => {
+    delete process.env.PRAX_BROWSER_RESTART_EVERY;
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await maybeRestartBrowser();
+    expect(warnSpy).not.toHaveBeenCalled();
+  });
+
+  it('does NOT warn on 0 (disable sentinel)', async () => {
+    process.env.PRAX_BROWSER_RESTART_EVERY = '0';
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await maybeRestartBrowser();
+    expect(warnSpy).not.toHaveBeenCalled();
   });
 });

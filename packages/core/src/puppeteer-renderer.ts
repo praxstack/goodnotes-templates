@@ -49,12 +49,24 @@ let browserPromise: Promise<Browser> | null = null;
 // count is a cheap, deterministic proxy (AGENTS.md principle 2).
 let renderCount = 0;
 
-/** Read the restart threshold; 0 disables. */
+/**
+ * Read the restart threshold; 0 disables.
+ *
+ * Unparseable or negative values fall back to 50 with a single warn
+ * (FIND-I4-006). Silent fallback used to let a typo'd env var brick a
+ * long run by disabling the memory-aware restart entirely.
+ */
 function getRestartThreshold(): number {
   const raw = process.env.PRAX_BROWSER_RESTART_EVERY;
   if (raw === undefined) return 50;
   const n = Number.parseInt(raw, 10);
-  return Number.isFinite(n) && n >= 0 ? n : 50;
+  if (Number.isFinite(n) && n >= 0) return n;
+  // eslint-disable-next-line no-console
+  console.warn(
+    `  ⚠ PRAX_BROWSER_RESTART_EVERY="${raw}" is not a valid non-negative integer; ` +
+      `falling back to 50`,
+  );
+  return 50;
 }
 
 /**
