@@ -127,4 +127,65 @@ describe('vercel.json · T-005 security headers (FIND-I4-005)', () => {
     expect(findHeader(cfg.headers, '/(.*)\\.pdf', 'Content-Type')).toBe('application/pdf');
     expect(findHeader(cfg.headers, '/(.*)\\.pdf', 'X-Content-Type-Options')).toBe('nosniff');
   });
+
+  // ── Vercel-schema safety belt ───────────────────────────────────
+  // Vercel silently rejects `vercel.json` files with unknown top-level
+  // properties (e.g. a leading `_comment`). The rejected deploy still
+  // succeeds but with ZERO headers applied. This bug already bit us
+  // once — `_comment` made vercel.json invalid, Vercel returned
+  // `Error: Invalid vercel.json - should NOT have additional property
+  // "_comment"`, and the deploy silently shipped unprotected pages.
+  //
+  // We pin the allow-list of top-level keys to what the Vercel schema
+  // actually accepts (see https://vercel.com/docs/projects/project-
+  // configuration). New keys the team wants to adopt MUST be added here
+  // intentionally, which makes this test the cheapest future tripwire
+  // against reintroducing the silent-rejection bug.
+  it('has no unknown top-level keys (Vercel silently rejects them)', () => {
+    const raw = readFileSync(VERCEL_JSON, 'utf8');
+    const cfg = JSON.parse(raw) as Record<string, unknown>;
+    const ALLOWED = new Set([
+      '$schema',
+      'headers',
+      'redirects',
+      'rewrites',
+      'trailingSlash',
+      'cleanUrls',
+      'regions',
+      'framework',
+      'buildCommand',
+      'devCommand',
+      'installCommand',
+      'outputDirectory',
+      'public',
+      'ignoreCommand',
+      'routes', // legacy, retained if historical
+      'functions',
+      'crons',
+      'env',
+      'build',
+      'git',
+      'images',
+    ]);
+    const extras = Object.keys(cfg).filter((k) => !ALLOWED.has(k));
+    expect(
+      extras,
+      `unknown key(s) in vercel.json will be rejected by Vercel (headers silently drop): ${extras.join(', ')}. ` +
+        `If the key is intentional and valid per Vercel schema, add it to the ALLOWED set in this test.`,
+    ).toEqual([]);
+  });
+
+  it('is not littered with comment-style keys (those are a silent-reject class bug)', () => {
+    const raw = readFileSync(VERCEL_JSON, 'utf8');
+    // Match any top-level key starting with '_' or '//' — the two common
+    // JSON comment conventions. Vercel rejects both. If you need a comment,
+    // keep it in code (this file, the staging script, or a sibling .md
+    // doc), NOT in the JSON.
+    const cfg = JSON.parse(raw) as Record<string, unknown>;
+    const commentish = Object.keys(cfg).filter((k) => k.startsWith('_') || k.startsWith('//'));
+    expect(
+      commentish,
+      `Vercel rejects comment-style keys like ${commentish.join(', ')}. Move comments to tests or README.`,
+    ).toEqual([]);
+  });
 });

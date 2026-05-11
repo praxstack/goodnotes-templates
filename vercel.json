@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "_comment": "Gallery security headers (FIND-I4-005 / TICKET-I4-005). Start permissive on script-src / style-src because Astro hoists inline <script>/<style> blocks; tighten with per-script nonces when FIND-I4-005 follow-up lands. PDFs under /packs/**/*.pdf get X-Content-Type-Options so a mis-served HTML file can't be sniffed as a PDF.",
   "headers": [
     {
       "source": "/(.*)",
