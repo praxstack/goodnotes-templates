@@ -37,6 +37,26 @@ jobs:
       - name: Install deps (exact lockfile)
         run: npm ci
 
+      # FIND-I4-001 (iter-4): hard PR gate that blocks the exact failure
+      # mode that shipped real PII to a public repo. Any non-example
+      # profile.*.json appearing in the git index fails the job before
+      # it costs build minutes. Belt-and-braces vs. the vitest guard
+      # (`profile.test.ts` asserts the same thing); this step runs
+      # earlier and is obvious in the PR status.
+      - name: No-PII gate (FIND-I4-001)
+        run: |
+          set -euo pipefail
+          leaked=$(git ls-files | grep -E '(^|/)profile\..+\.json$' | grep -v -E '(^|/)profile\.example\.json$' || true)
+          if [ -n "$leaked" ]; then
+            echo "::error::FIND-I4-001 · profile.*.json files tracked in git:"
+            echo "$leaked" | sed 's|^|  • |'
+            echo ""
+            echo "These must live only on disk (gitignored). See"
+            echo "audit/iteration-4/findings.md FIND-I4-001."
+            exit 1
+          fi
+          echo "no-PII gate: OK (no profile.*.json other than profile.example.json is tracked)"
+
       - name: TypeScript build
         run: npm run build
 

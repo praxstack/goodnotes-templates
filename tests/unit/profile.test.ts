@@ -270,8 +270,16 @@ const PII_TOKENS: ReadonlyArray<RegExp> = [
 // Directories the guard walks. Kept explicit so a future contributor
 // adding a new top-level dir (e.g. examples/) thinks about whether it
 // needs to be in scope.
+//
+// FIND-I4-001 (iter-4): `packages/` and `apps/` were added after the
+// W5 monorepo migration (commit dcf13a7). The original guard only
+// covered the pre-W5 layout, so a `profile.local.json` at the new
+// `packages/packs-prax-journal/` path slipped past it. Without these
+// two roots, the whole W5 tree is structurally invisible to the guard.
 const PII_GUARD_ROOTS: ReadonlyArray<string> = [
   'packs',
+  'packages',
+  'apps',
   'src',
   'shared',
   'scripts',
@@ -306,7 +314,7 @@ function isTextFile(p: string): boolean {
 }
 
 describe('Repo-wide PII guard (post-code-review P0)', () => {
-  it('no PII token appears in packs/ · src/ · shared/ · scripts/ · docs/', () => {
+  it('no PII token appears in packs/ · packages/ · apps/ · src/ · shared/ · scripts/ · docs/', () => {
     const hits: Array<{ file: string; token: string }> = [];
 
     for (const root of PII_GUARD_ROOTS) {
@@ -649,3 +657,83 @@ describe('schema v2 — therapist.specialty', () => {
     expect(p.therapists[0]?.specialty).toBeUndefined();
   });
 });
+
+// ─── FIND-I4-001: profile.local.json is not tracked by git ───────────
+//
+// Iter-4 found a `packages/packs-prax-journal/profile.local.json` file
+// tracked in git on a public repo, carrying real PII. Root cause: the
+// W5 monorepo migration (`packs/journals/…` → `packages/packs-…`) left
+// `.gitignore` patterns behind. Both rules have been updated to cover
+// the W5 paths — this test locks that in so a future migration can't
+// silently bypass the guard the same way.
+//
+// Two assertions here:
+//   1. `git ls-files` — the file isn't *tracked*. The right answer is
+//      "no file matching `profile.*.json` other than `profile.example.json`
+//      is in the git index, in any workspace". This is the thing that
+//      actually matters: even if the .gitignore is broken, if the file
+//      isn't tracked, nothing ships.
+//   2. `git check-ignore` — the .gitignore rule *would* block the file
+//      if someone ever recreates it. This covers the reverse failure
+//      mode (file was removed from index but rule never added, so next
+//      `git add .` re-commits the leak).
+//
+// Both assertions are cheap (sub-20ms each), so we run both. They
+// provide defense-in-depth against the two mutation paths that led to
+// iter-4's finding.
+describe('FIND-I4-001 · profile.local.json must not be tracked', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { execSync } = require('node:child_process') as typeof import('node:child_process');
+
+  it('no profile.*.json other than profile.example.json is tracked anywhere', () => {
+    const tracked = execSync('git ls-files', { cwd: REPO_ROOT, encoding: 'utf8' })
+      .split('\n')
+      .filter((line) => /(^|\/)profile\..+\.json$/u.test(line))
+      .filter((line) => !/(^|\/)profile\.example\.json$/u.test(line));
+
+    if (tracked.length > 0) {
+      throw new Error(
+        `FIND-I4-001 regressed — these profile.*.json files are tracked:\n` +
+          tracked.map((f) => `  • ${f}`).join('\n') +
+          '\n\nEach contains (or could contain) PII. Run:\n' +
+          '  git rm --cached <path>\n' +
+          'and verify `.gitignore` actually covers it. See\n' +
+          'audit/iteration-4/findings.md FIND-I4-001 for the full runbook.',
+      );
+    }
+    expect(tracked).toEqual([]);
+  });
+
+  it('.gitignore blocks packages/packs-prax-journal/profile.local.json', () => {
+    // git check-ignore exits 0 when the path IS ignored, 1 when it is not.
+    // Use { stdio: 'pipe' } to keep the test output quiet, and catch to
+    // turn the exit code into a typed assertion failure.
+    const target = 'packages/packs-prax-journal/profile.local.json';
+    let exitCode = 0;
+    let stdout = '';
+    try {
+      stdout = execSync(`git check-ignore -v ${target}`, {
+        cwd: REPO_ROOT,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+    } catch (e) {
+      exitCode = (e as { status?: number }).status ?? 1;
+    }
+
+    if (exitCode !== 0) {
+      throw new Error(
+        `FIND-I4-001 regressed — .gitignore does NOT block ${target}.\n` +
+          'The W5-era PII paths must stay in .gitignore forever. See\n' +
+          'audit/iteration-4/findings.md FIND-I4-001.',
+      );
+    }
+    expect(exitCode).toBe(0);
+    // Defensive: the match should name one of the W5 rules, not the
+    // legacy pre-W5 path. Catches "somehow the rule re-applied to the
+    // wrong path" drift.
+    expect(stdout).toMatch(/packages\/packs-prax-journal\/profile\.\*\.json/u);
+  });
+});
+
+

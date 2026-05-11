@@ -1,0 +1,10 @@
+ticket_id,finding_id,priority,severity,category,title,effort_pd,sprint,dependencies,affected_files,acceptance_criteria_summary
+TICKET-I4-001,FIND-I4-001,P0,Critical,security-privacy,Remove PII from git + fix .gitignore,0.5,Sprint 1,,"packages/packs-prax-journal/profile.local.json · .gitignore · .github/workflows/ci.yml · tests/unit/profile.test.ts","git ls-files empty; history purged; CI gate active; regression test asserts absence"
+TICKET-I4-002,FIND-I4-002,P1,Medium,security-supply-chain,npm audit fix --force for @astrojs/check chain,0.25,Sprint 1,,"package-lock.json · apps/gallery/package.json","npm audit exits 0; 235 tests pass; gallery builds"
+TICKET-I4-003,FIND-I4-003,P1,Medium,quality-tooling,Fix ESLint glob for post-W5 paths,0.25,Sprint 1,,"eslint.config.js","npx eslint packages/ inspects >=20 files; deliberate unused var fails lint"
+TICKET-I4-004,FIND-I4-004,P1,Medium,quality-coverage,Restore branch-coverage gate,1.0,Sprint 2,TICKET-I4-003,"tests/unit/puppeteer-renderer-errors.test.ts · vitest.config.ts","npm test --coverage exits 0; CI gate enforced"
+TICKET-I4-005,FIND-I4-005,P2,Low,security-headers,Gallery security headers via vercel.json,0.5,Sprint 2,,"vercel.json (new)","curl -I shows CSP + 3 other headers; no console violations browsing 29 pages"
+TICKET-I4-006,FIND-I4-006,P3,Low,correctness,Env-var validation parity for PRAX_BROWSER_RESTART_EVERY,0.25,Sprint 2,,"packages/core/src/puppeteer-renderer.ts","console.warn on bad env var; unit test covers it"
+TICKET-I4-007,FIND-I4-007,P3,Low,docs,Refresh audit status doc,0.25,Sprint 3,TICKET-I4-002,"audit/POST_SPRINT_STATUS.md · audit/STATUS.md (new) · audit/README.md","README points at current doc; no stale 0-vuln claim"
+TICKET-I4-008,FIND-I4-008,P4,Informational,quality-duplication,Comment deliberate dev-vs-public gallery split,0.25,Sprint 3,,"packages/cli/src/preview-server.ts","Intent-comment added above generateGalleryHTML"
+TICKET-I4-DEF,,P3,,docs-decision,Revisit deferred iter-1 items (FIND-0012/0014/0018/0028),0.5,Sprint 3,,"audit/iteration-4/deferred-decisions.md (new)","Decision recorded per deferred finding"

@@ -53,3 +53,10 @@ package-lock.json
 packs/journals/prax-journal/profile.json
 packs/journals/prax-journal/profile.*.json
 !packs/journals/prax-journal/profile.example.json
+
+# W5-era paths (post-monorepo-migration); mirrors .gitignore.
+# See audit/iteration-4/findings.md FIND-I4-001.
+packages/packs-prax-journal/profile.json
+packages/packs-prax-journal/profile.*.json
+!packages/packs-prax-journal/profile.example.json
+!packages/packs-prax-journal/profile.README.md
