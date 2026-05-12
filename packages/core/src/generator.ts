@@ -191,8 +191,11 @@ export function validateGeneratorInput(input: GeneratorInput): GeneratorInput {
  */
 export const GENERATOR_PACKS = [
   'habit-tracker',
-  // Phase 1 stretch: 'weekly-planner', 'monthly-planner', 'yearly-overview',
-  // 'prax-journal' — all follow the same contract.
+  'yearly-overview',
+  'monthly-planner',
+  'weekly-planner',
+  // Phase 1 stretch: 'prax-journal' — migrates from scripts/generate-journal.ts
+  // in the next commit; same GeneratorFn contract.
 ] as const;
 
 export type GeneratorPackId = (typeof GENERATOR_PACKS)[number];

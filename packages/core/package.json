@@ -27,6 +27,10 @@
       "import": "./dist/generator.js",
       "types": "./dist/generator.d.ts"
     },
+    "./generator-helpers": {
+      "import": "./dist/generator-helpers.js",
+      "types": "./dist/generator-helpers.d.ts"
+    },
     "./pdf-splice": {
       "import": "./dist/pdf-splice.js",
       "types": "./dist/pdf-splice.d.ts"
