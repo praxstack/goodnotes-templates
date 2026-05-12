@@ -270,4 +270,139 @@ program
     }
   });
 
+// ─── generate command (CEO v5 Phase 1 · E1) ────────────────────
+// Dispatch to a per-pack generator function that emits parameterised HTML.
+// The list of generator-enabled packs lives in
+// @praxlannister/pretext-core/generator as `GENERATOR_PACKS`. New packs
+// opt in by (a) adding a `generate.ts` sibling of their HTML, and (b)
+// adding their id to that list.
+
+program
+  .command('generate')
+  .description('Generate a parameterised PDF from a pack (Phase 1 · flagship packs only)')
+  .argument('<pack-id>', 'Pack identifier (run `pretext list` for available ids)')
+  .option('--from <date>', 'ISO date range start (for calendar-based packs)')
+  .option('--to <date>', 'ISO date range end (for calendar-based packs)')
+  .option('--year <n>', 'Year for dated planners', (v) => Number.parseInt(v, 10))
+  .option('--month <n>', 'Month 1-12 for monthly templates', (v) => Number.parseInt(v, 10))
+  .option('--weeks <n>', 'Number of weeks 1-52', (v) => Number.parseInt(v, 10))
+  .option('--habits <list>', 'Comma-separated habit labels (max 12, ≤40 chars each)')
+  .option('--locale <tag>', 'Locale tag (default: en-US)', 'en-US')
+  .option('--theme <id>', 'Theme id (default: pack default)')
+  .option('--week-start <n>', '0 = Sunday, 1 = Monday (default)', (v) => Number.parseInt(v, 10))
+  .option('--profile <path>', 'Profile JSON path (Prax Journal only)')
+  .option('-o, --output <path>', 'Output PDF path (default: output/<pack-id>.pdf)')
+  .option('--paper-size <size>', 'Paper size', 'a4')
+  .option('--orientation <dir>', 'portrait or landscape', 'portrait')
+  .option('-v, --verbose', 'Verbose logging')
+  .action(async (packId, opts) => {
+    const {
+      isGeneratorPack,
+      GENERATOR_PACKS,
+      validateGeneratorInput,
+      InvalidGeneratorInputError,
+    } = await import('@praxlannister/pretext-core/generator');
+
+    if (!isGeneratorPack(packId)) {
+      console.error(
+        `Error: pack "${packId}" does not have a generator.\n\n` +
+          `Generator-enabled packs:\n` +
+          GENERATOR_PACKS.map((p) => `  • ${p}`).join('\n') +
+          `\n\nFor static packs, use: pretext render <template-path>\n`,
+      );
+      process.exit(1);
+    }
+
+    const habits = opts.habits
+      ? String(opts.habits).split(',').map((s) => s.trim()).filter((s) => s.length > 0)
+      : undefined;
+
+    try {
+      validateGeneratorInput({
+        from: opts.from,
+        to: opts.to,
+        year: opts.year,
+        month: opts.month,
+        weeks: opts.weeks,
+        habits,
+        locale: opts.locale,
+        theme: opts.theme,
+        weekStart: opts.weekStart,
+        profilePath: opts.profile,
+      });
+    } catch (err) {
+      if (err instanceof InvalidGeneratorInputError) {
+        console.error(`Error: ${err.message}`);
+        process.exit(1);
+      }
+      throw err;
+    }
+
+    console.log(`\n📝 Generating ${packId}...\n`);
+    if (opts.verbose) {
+      console.log(`  Flags: ${JSON.stringify({ year: opts.year, month: opts.month, habits, locale: opts.locale })}\n`);
+    }
+
+    // Dynamic import of the per-pack generator. Keeps the CLI cold-start
+    // below 200ms for non-generate commands.
+    let generateFn: (input: unknown) => Promise<{ html: string; suggestedFilename?: string; metadata?: unknown }>;
+    try {
+      const mod = (await import(
+        `../../packs-${packId}/generate.ts`
+      )) as { default: typeof generateFn };
+      generateFn = mod.default;
+    } catch (err) {
+      console.error(
+        `Error: could not load generator for ${packId}: ${(err as Error).message}\n` +
+          `(Expected packages/packs-${packId}/generate.ts)`,
+      );
+      process.exit(2);
+    }
+
+    const output = await generateFn({
+      from: opts.from,
+      to: opts.to,
+      year: opts.year,
+      month: opts.month,
+      weeks: opts.weeks,
+      habits,
+      locale: opts.locale,
+      theme: opts.theme,
+      weekStart: opts.weekStart,
+      profilePath: opts.profile,
+    });
+
+    const outputPath = opts.output
+      ?? `output/${output.suggestedFilename ?? packId}.pdf`;
+
+    const fs = await import('node:fs/promises');
+    const path = await import('node:path');
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+
+    const { renderHTMLToPDFFile, closeBrowser } = await import(
+      '@praxlannister/pretext-core/puppeteer-renderer'
+    );
+    const { getPageDimensions } = await import('@praxlannister/pretext-core/dimensions');
+
+    const dims = getPageDimensions(opts.paperSize, opts.orientation);
+
+    try {
+      // Write the parameterised HTML to a temp file so we reuse the
+      // existing file-based renderer (which handles font loading, etc).
+      const tmpHtml = path.join(path.dirname(outputPath), `.tmp-${packId}.html`);
+      await fs.writeFile(tmpHtml, output.html, 'utf-8');
+      await renderHTMLToPDFFile(
+        {
+          htmlPath: tmpHtml,
+          dimensions: dims,
+        },
+        outputPath,
+      );
+      await fs.unlink(tmpHtml).catch(() => { /* best-effort */ });
+      console.log(`✓ ${outputPath}\n`);
+    } finally {
+      await closeBrowser();
+    }
+  });
+
 program.parse();

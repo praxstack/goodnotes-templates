@@ -23,6 +23,10 @@
       "import": "./dist/splice.js",
       "types": "./dist/splice.d.ts"
     },
+    "./generator": {
+      "import": "./dist/generator.js",
+      "types": "./dist/generator.d.ts"
+    },
     "./pdf-splice": {
       "import": "./dist/pdf-splice.js",
       "types": "./dist/pdf-splice.d.ts"
@@ -79,7 +83,7 @@
     "zod": "3.23.8"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.12.0"
   },
   "license": "MIT"
 }
