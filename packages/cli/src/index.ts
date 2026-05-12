@@ -405,4 +405,82 @@ program
     }
   });
 
+// ─── audit command (CEO v5 Phase 3 · E3) ───────────────────────
+// Runs the design-system lint rules against a single pack (or all packs
+// with --all). Emits JSON for CI consumption, or a pretty summary for
+// humans. Exits 0/1/2 per severity — CI gates on exit 2 (error).
+
+program
+  .command('audit')
+  .description('Audit a pack against the design-system lint rules (Phase 3 · 3 rules)')
+  .argument('[pack-id]', 'Pack identifier (omit with --all to audit every pack)')
+  .option('--all', 'Audit every pack under packages/packs-*')
+  .option('--json', 'Emit machine-readable JSON instead of pretty text')
+  .option('--dir <path>', 'Pack directory root (default: packages)')
+  .action(async (packId, opts) => {
+    const { auditPack, formatAuditPretty, AUDIT_RULES } = await import(
+      '@praxlannister/pretext-core/audit'
+    );
+
+    const fs = await import('node:fs/promises');
+    const path = await import('node:path');
+    const packsRoot = opts.dir ?? 'packages';
+
+    // Resolve the list of pack dirs to audit.
+    const targets: { id: string; dir: string }[] = [];
+    if (opts.all) {
+      try {
+        const entries = await fs.readdir(packsRoot, { withFileTypes: true });
+        for (const e of entries) {
+          if (!e.isDirectory()) continue;
+          const m = /^packs-(.+)$/.exec(e.name);
+          if (m) targets.push({ id: m[1], dir: path.join(packsRoot, e.name) });
+        }
+      } catch {
+        console.error(`Error: could not read pack directory: ${packsRoot}`);
+        process.exit(2);
+      }
+    } else if (packId) {
+      targets.push({ id: packId, dir: path.join(packsRoot, `packs-${packId}`) });
+    } else {
+      console.error('Error: pack-id required (or pass --all to audit every pack).');
+      console.error(`Available audit rules:\n${Object.keys(AUDIT_RULES).map((r) => `  • ${r}`).join('\n')}`);
+      process.exit(1);
+    }
+
+    // Aggregate findings across all targets; compute worst exit code.
+    let worst: 0 | 1 | 2 = 0;
+    const results = [];
+    for (const t of targets) {
+      const r = await auditPack(t.id, t.dir);
+      results.push(r);
+      if (r.exitCode > worst) worst = r.exitCode;
+    }
+
+    if (opts.json) {
+      console.log(JSON.stringify(results, null, 2));
+    } else {
+      for (const r of results) {
+        console.log(formatAuditPretty(r));
+      }
+      // Short summary line across all targets.
+      const totalFindings = results.reduce((a, r) => a + r.findings.length, 0);
+      const errors = results.reduce(
+        (a, r) => a + r.findings.filter((f) => f.severity === 'error').length,
+        0,
+      );
+      const warns = results.reduce(
+        (a, r) => a + r.findings.filter((f) => f.severity === 'warn').length,
+        0,
+      );
+      console.log(
+        `Summary: ${results.length} pack${results.length === 1 ? '' : 's'} · ` +
+          `${totalFindings} finding${totalFindings === 1 ? '' : 's'} ` +
+          `(${errors} error${errors === 1 ? '' : 's'}, ${warns} warning${warns === 1 ? '' : 's'})\n`,
+      );
+    }
+
+    process.exit(worst);
+  });
+
 program.parse();

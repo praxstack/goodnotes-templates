@@ -31,6 +31,10 @@
       "import": "./dist/generator-helpers.js",
       "types": "./dist/generator-helpers.d.ts"
     },
+    "./audit": {
+      "import": "./dist/audit.js",
+      "types": "./dist/audit.d.ts"
+    },
     "./pdf-splice": {
       "import": "./dist/pdf-splice.js",
       "types": "./dist/pdf-splice.d.ts"
