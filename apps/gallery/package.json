@@ -17,8 +17,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@astrojs/mdx": "5.0.4",
-    "astro": "6.3.1",
+    "@astrojs/mdx": "5.0.6",
+    "astro": "6.3.3",
     "blurhash": "2.0.5",
     "sharp": "0.34.5"
   },
