@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-budget-tracker/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-budget-tracker/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-budget-tracker/budget-tracker.html",
+      "type": "file",
+      "name": "budget-tracker.html",
+      "filePath": "packages/packs-budget-tracker/budget-tracker.html",
+      "summary": "HTML template (budget-tracker.html, 424 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/packs-budget-tracker/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-budget-tracker/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

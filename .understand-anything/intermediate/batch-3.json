@@ -1,0 +1,1011 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/core/src/audit.ts",
+      "type": "file",
+      "name": "audit.ts",
+      "filePath": "packages/core/src/audit.ts",
+      "summary": "Typescript module exposing 5 functions and 6 exports (311 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/audit.ts:checkManifestValid",
+      "type": "function",
+      "name": "checkManifestValid",
+      "filePath": "packages/core/src/audit.ts",
+      "lineRange": [
+        65,
+        112
+      ],
+      "summary": "Function `checkManifestValid` (48 lines) in audit.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/audit.ts:checkEntryExists",
+      "type": "function",
+      "name": "checkEntryExists",
+      "filePath": "packages/core/src/audit.ts",
+      "lineRange": [
+        121,
+        153
+      ],
+      "summary": "Function `checkEntryExists` (33 lines) in audit.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/audit.ts:checkTokensUsed",
+      "type": "function",
+      "name": "checkTokensUsed",
+      "filePath": "packages/core/src/audit.ts",
+      "lineRange": [
+        167,
+        207
+      ],
+      "summary": "Function `checkTokensUsed` (41 lines) in audit.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/audit.ts:auditPack",
+      "type": "function",
+      "name": "auditPack",
+      "filePath": "packages/core/src/audit.ts",
+      "lineRange": [
+        237,
+        273
+      ],
+      "summary": "Function `auditPack` (37 lines) in audit.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/audit.ts:formatAuditPretty",
+      "type": "function",
+      "name": "formatAuditPretty",
+      "filePath": "packages/core/src/audit.ts",
+      "lineRange": [
+        280,
+        311
+      ],
+      "summary": "Function `formatAuditPretty` (32 lines) in audit.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/core/src/errors.ts",
+      "type": "file",
+      "name": "errors.ts",
+      "filePath": "packages/core/src/errors.ts",
+      "summary": "Typescript module defining 5 classes (~327 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/errors.ts:isPretextError",
+      "type": "function",
+      "name": "isPretextError",
+      "filePath": "packages/core/src/errors.ts",
+      "lineRange": [
+        325,
+        327
+      ],
+      "summary": "Function `isPretextError` (3 lines) in errors.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/core/src/errors.ts:RegistryFetchError",
+      "type": "class",
+      "name": "RegistryFetchError",
+      "filePath": "packages/core/src/errors.ts",
+      "lineRange": [
+        89,
+        109
+      ],
+      "summary": "Class `RegistryFetchError` with 1 method (21 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/core/src/errors.ts:PackNotFoundError",
+      "type": "class",
+      "name": "PackNotFoundError",
+      "filePath": "packages/core/src/errors.ts",
+      "lineRange": [
+        125,
+        149
+      ],
+      "summary": "Class `PackNotFoundError` with 1 method (25 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/core/src/errors.ts:RendererCrashError",
+      "type": "class",
+      "name": "RendererCrashError",
+      "filePath": "packages/core/src/errors.ts",
+      "lineRange": [
+        169,
+        191
+      ],
+      "summary": "Class `RendererCrashError` with 1 method (23 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/core/src/errors.ts:StandaloneCompileError",
+      "type": "class",
+      "name": "StandaloneCompileError",
+      "filePath": "packages/core/src/errors.ts",
+      "lineRange": [
+        210,
+        244
+      ],
+      "summary": "Class `StandaloneCompileError` with 1 method (35 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/core/src/errors.ts:RegistryParseError",
+      "type": "class",
+      "name": "RegistryParseError",
+      "filePath": "packages/core/src/errors.ts",
+      "lineRange": [
+        262,
+        294
+      ],
+      "summary": "Class `RegistryParseError` with 1 method (33 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/registry-resolve.ts",
+      "type": "file",
+      "name": "registry-resolve.ts",
+      "filePath": "packages/core/src/registry-resolve.ts",
+      "summary": "Typescript module exposing 3 functions and 3 exports (147 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/registry-resolve.ts:nearestIds",
+      "type": "function",
+      "name": "nearestIds",
+      "filePath": "packages/core/src/registry-resolve.ts",
+      "lineRange": [
+        39,
+        52
+      ],
+      "summary": "Function `nearestIds` (14 lines) in registry-resolve.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/registry-resolve.ts:resolvePackVersion",
+      "type": "function",
+      "name": "resolvePackVersion",
+      "filePath": "packages/core/src/registry-resolve.ts",
+      "lineRange": [
+        64,
+        115
+      ],
+      "summary": "Function `resolvePackVersion` (52 lines) in registry-resolve.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/registry-resolve.ts:listPackIds",
+      "type": "function",
+      "name": "listPackIds",
+      "filePath": "packages/core/src/registry-resolve.ts",
+      "lineRange": [
+        145,
+        147
+      ],
+      "summary": "Function `listPackIds` (3 lines) in registry-resolve.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/core/src/registry-resolve.ts:PackVersionNotFoundError",
+      "type": "class",
+      "name": "PackVersionNotFoundError",
+      "filePath": "packages/core/src/registry-resolve.ts",
+      "lineRange": [
+        123,
+        139
+      ],
+      "summary": "Class `PackVersionNotFoundError` with 1 method (17 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/standalone-builder.ts",
+      "type": "file",
+      "name": "standalone-builder.ts",
+      "filePath": "packages/core/src/standalone-builder.ts",
+      "summary": "Typescript module exposing 5 functions and 1 export (268 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/standalone-builder.ts:extractBody",
+      "type": "function",
+      "name": "extractBody",
+      "filePath": "packages/core/src/standalone-builder.ts",
+      "lineRange": [
+        102,
+        114
+      ],
+      "summary": "Function `extractBody` (13 lines) in standalone-builder.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/standalone-builder.ts:buildStandaloneHtml",
+      "type": "function",
+      "name": "buildStandaloneHtml",
+      "filePath": "packages/core/src/standalone-builder.ts",
+      "lineRange": [
+        227,
+        268
+      ],
+      "summary": "Function `buildStandaloneHtml` (42 lines) in standalone-builder.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/core/src/types/registry.ts",
+      "type": "file",
+      "name": "registry.ts",
+      "filePath": "packages/core/src/types/registry.ts",
+      "summary": "Typescript module exposing 2 functions and 7 exports (240 lines).",
+      "tags": [
+        "type-definition",
+        "core-engine",
+        "source"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/types/registry.ts:parseManifest",
+      "type": "function",
+      "name": "parseManifest",
+      "filePath": "packages/core/src/types/registry.ts",
+      "lineRange": [
+        220,
+        227
+      ],
+      "summary": "Function `parseManifest` (8 lines) in registry.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/types/registry.ts:parseRegistry",
+      "type": "function",
+      "name": "parseRegistry",
+      "filePath": "packages/core/src/types/registry.ts",
+      "lineRange": [
+        233,
+        240
+      ],
+      "summary": "Function `parseRegistry` (8 lines) in registry.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/generate-registry.ts",
+      "type": "file",
+      "name": "generate-registry.ts",
+      "filePath": "scripts/generate-registry.ts",
+      "summary": "Typescript module exposing 4 functions and 0 exports (246 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/generate-registry.ts:parseArgs",
+      "type": "function",
+      "name": "parseArgs",
+      "filePath": "scripts/generate-registry.ts",
+      "lineRange": [
+        67,
+        76
+      ],
+      "summary": "Function `parseArgs` (10 lines) in generate-registry.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generate-registry.ts:findManifests",
+      "type": "function",
+      "name": "findManifests",
+      "filePath": "scripts/generate-registry.ts",
+      "lineRange": [
+        85,
+        109
+      ],
+      "summary": "Function `findManifests` (25 lines) in generate-registry.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generate-registry.ts:currentGitSha",
+      "type": "function",
+      "name": "currentGitSha",
+      "filePath": "scripts/generate-registry.ts",
+      "lineRange": [
+        117,
+        129
+      ],
+      "summary": "Function `currentGitSha` (13 lines) in generate-registry.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generate-registry.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/generate-registry.ts",
+      "lineRange": [
+        133,
+        235
+      ],
+      "summary": "Function `main` (103 lines) in generate-registry.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/audit.test.ts",
+      "type": "file",
+      "name": "audit.test.ts",
+      "filePath": "tests/unit/audit.test.ts",
+      "summary": "Test file containing 1 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:tests/unit/audit.test.ts:withPackDir",
+      "type": "function",
+      "name": "withPackDir",
+      "filePath": "tests/unit/audit.test.ts",
+      "lineRange": [
+        31,
+        46
+      ],
+      "summary": "Function `withPackDir` (16 lines) in audit.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/errors.test.ts",
+      "type": "file",
+      "name": "errors.test.ts",
+      "filePath": "tests/unit/errors.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/registry-resolve.test.ts",
+      "type": "file",
+      "name": "registry-resolve.test.ts",
+      "filePath": "tests/unit/registry-resolve.test.ts",
+      "summary": "Test file containing 2 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/unit/registry-resolve.test.ts:pack",
+      "type": "function",
+      "name": "pack",
+      "filePath": "tests/unit/registry-resolve.test.ts",
+      "lineRange": [
+        23,
+        32
+      ],
+      "summary": "Function `pack` (10 lines) in registry-resolve.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/registry.test.ts",
+      "type": "file",
+      "name": "registry.test.ts",
+      "filePath": "tests/unit/registry.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/standalone-builder.test.ts",
+      "type": "file",
+      "name": "standalone-builder.test.ts",
+      "filePath": "tests/unit/standalone-builder.test.ts",
+      "summary": "Test file containing 1 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/unit/standalone-builder.test.ts:makePage",
+      "type": "function",
+      "name": "makePage",
+      "filePath": "tests/unit/standalone-builder.test.ts",
+      "lineRange": [
+        22,
+        34
+      ],
+      "summary": "Function `makePage` (13 lines) in standalone-builder.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:checkManifestValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:checkManifestValid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:checkEntryExists",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:checkEntryExists",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:checkTokensUsed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:checkTokensUsed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:auditPack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:auditPack",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:formatAuditPretty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "function:packages/core/src/audit.ts:formatAuditPretty",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "file:packages/core/src/types/registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/audit.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "function:packages/core/src/errors.ts:isPretextError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "function:packages/core/src/errors.ts:isPretextError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:RegistryFetchError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:RegistryFetchError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:PackNotFoundError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:PackNotFoundError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:RendererCrashError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:RendererCrashError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:StandaloneCompileError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:StandaloneCompileError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:RegistryParseError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/errors.ts",
+      "target": "class:packages/core/src/errors.ts:RegistryParseError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "function:packages/core/src/registry-resolve.ts:nearestIds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "function:packages/core/src/registry-resolve.ts:resolvePackVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "function:packages/core/src/registry-resolve.ts:resolvePackVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "function:packages/core/src/registry-resolve.ts:listPackIds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "function:packages/core/src/registry-resolve.ts:listPackIds",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "class:packages/core/src/registry-resolve.ts:PackVersionNotFoundError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "class:packages/core/src/registry-resolve.ts:PackVersionNotFoundError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "file:packages/core/src/types/registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/registry-resolve.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/standalone-builder.ts",
+      "target": "function:packages/core/src/standalone-builder.ts:extractBody",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/standalone-builder.ts",
+      "target": "function:packages/core/src/standalone-builder.ts:buildStandaloneHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/standalone-builder.ts",
+      "target": "function:packages/core/src/standalone-builder.ts:buildStandaloneHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/standalone-builder.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/types/registry.ts",
+      "target": "function:packages/core/src/types/registry.ts:parseManifest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/types/registry.ts",
+      "target": "function:packages/core/src/types/registry.ts:parseManifest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/types/registry.ts",
+      "target": "function:packages/core/src/types/registry.ts:parseRegistry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/types/registry.ts",
+      "target": "function:packages/core/src/types/registry.ts:parseRegistry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/types/registry.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/generate-registry.ts",
+      "target": "function:scripts/generate-registry.ts:parseArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/generate-registry.ts",
+      "target": "function:scripts/generate-registry.ts:findManifests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/generate-registry.ts",
+      "target": "function:scripts/generate-registry.ts:currentGitSha",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/generate-registry.ts",
+      "target": "function:scripts/generate-registry.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/generate-registry.ts",
+      "target": "file:packages/core/src/types/registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/generate-registry.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/audit.test.ts",
+      "target": "function:tests/unit/audit.test.ts:withPackDir",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/audit.test.ts",
+      "target": "file:packages/core/src/audit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/errors.test.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/registry-resolve.test.ts",
+      "target": "function:tests/unit/registry-resolve.test.ts:pack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/registry-resolve.test.ts",
+      "target": "file:packages/core/src/registry-resolve.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/registry-resolve.test.ts",
+      "target": "file:packages/core/src/types/registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/registry-resolve.test.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/registry.test.ts",
+      "target": "file:packages/core/src/types/registry.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/registry.test.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/standalone-builder.test.ts",
+      "target": "function:tests/unit/standalone-builder.test.ts:makePage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/standalone-builder.test.ts",
+      "target": "file:packages/core/src/standalone-builder.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/standalone-builder.test.ts",
+      "target": "file:packages/core/src/errors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

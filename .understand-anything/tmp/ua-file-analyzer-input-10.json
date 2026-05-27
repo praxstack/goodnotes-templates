@@ -1,0 +1,140 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": ".npmrc",
+      "language": "unknown",
+      "sizeLines": 11,
+      "fileCategory": "config"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "sizeLines": 332,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "language": "markdown",
+      "sizeLines": 295,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "CHECKPOINT.md",
+      "language": "markdown",
+      "sizeLines": 43,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "sizeLines": 186,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "language": "markdown",
+      "sizeLines": 316,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "DECISIONS.md",
+      "language": "markdown",
+      "sizeLines": 110,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "MIGRATION.md",
+      "language": "markdown",
+      "sizeLines": 119,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "PROBLEM_STATEMENT.md",
+      "language": "markdown",
+      "sizeLines": 374,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 480,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "RESEARCH.md",
+      "language": "markdown",
+      "sizeLines": 478,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "SPRINT-STATUS.md",
+      "language": "markdown",
+      "sizeLines": 141,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES.md",
+      "language": "markdown",
+      "sizeLines": 149,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "TODOS.md",
+      "language": "markdown",
+      "sizeLines": 296,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeLines": 76,
+      "fileCategory": "config"
+    },
+    {
+      "path": "registry.json",
+      "language": "json",
+      "sizeLines": 480,
+      "fileCategory": "config"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "sizeLines": 10,
+      "fileCategory": "config"
+    },
+    {
+      "path": "vercel.json",
+      "language": "json",
+      "sizeLines": 39,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    ".npmrc": [],
+    "AGENTS.md": [],
+    "CHANGELOG.md": [],
+    "CHECKPOINT.md": [],
+    "CLAUDE.md": [],
+    "CONTRIBUTING.md": [],
+    "DECISIONS.md": [],
+    "MIGRATION.md": [],
+    "PROBLEM_STATEMENT.md": [],
+    "README.md": [],
+    "RESEARCH.md": [],
+    "SPRINT-STATUS.md": [],
+    "THIRD_PARTY_LICENSES.md": [],
+    "TODOS.md": [],
+    "package.json": [],
+    "registry.json": [],
+    "tsconfig.base.json": [],
+    "tsconfig.json": [],
+    "vercel.json": []
+  }
+}

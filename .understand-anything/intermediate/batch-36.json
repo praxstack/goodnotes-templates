@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/packs-prax-journal/versions/v4/brain-dump.html",
+      "type": "file",
+      "name": "brain-dump.html",
+      "filePath": "packages/packs-prax-journal/versions/v4/brain-dump.html",
+      "summary": "HTML template (brain-dump.html, 401 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v4/reflect.html",
+      "type": "file",
+      "name": "reflect.html",
+      "filePath": "packages/packs-prax-journal/versions/v4/reflect.html",
+      "summary": "HTML template (reflect.html, 1251 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v4/today.html",
+      "type": "file",
+      "name": "today.html",
+      "filePath": "packages/packs-prax-journal/versions/v4/today.html",
+      "summary": "HTML template (today.html, 1189 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

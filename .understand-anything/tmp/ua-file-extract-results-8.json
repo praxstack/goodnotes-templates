@@ -1,0 +1,378 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "tests/visual/helpers/diff.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 156,
+      "nonEmptyLines": 141,
+      "functions": [
+        {
+          "name": "diffPng",
+          "startLine": 44,
+          "endLine": 119,
+          "params": [
+            "actual",
+            "expected",
+            "opts"
+          ]
+        },
+        {
+          "name": "compareToBaseline",
+          "startLine": 128,
+          "endLine": 156,
+          "params": [
+            "actual",
+            "baselinePath",
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "diffPng",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "compareToBaseline",
+          "line": 128,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "diffPng",
+          "callee": "Promise.all",
+          "lineNumber": 54
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp(expected).raw().toBuffer",
+          "lineNumber": 55
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp(expected).raw",
+          "lineNumber": 55
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp",
+          "lineNumber": 55
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp(actual).metadata",
+          "lineNumber": 56
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp",
+          "lineNumber": 56
+        },
+        {
+          "caller": "diffPng",
+          "callee": "fs.mkdir",
+          "lineNumber": 62
+        },
+        {
+          "caller": "diffPng",
+          "callee": "path.dirname",
+          "lineNumber": 62
+        },
+        {
+          "caller": "diffPng",
+          "callee": "fs.writeFile",
+          "lineNumber": 63
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp(actual)\n    .raw()\n    .toBuffer",
+          "lineNumber": 73
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp(actual)\n    .raw",
+          "lineNumber": 73
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp",
+          "lineNumber": 73
+        },
+        {
+          "caller": "diffPng",
+          "callee": "Buffer.from",
+          "lineNumber": 88
+        },
+        {
+          "caller": "diffPng",
+          "callee": "Math.abs",
+          "lineNumber": 93
+        },
+        {
+          "caller": "diffPng",
+          "callee": "Math.abs",
+          "lineNumber": 94
+        },
+        {
+          "caller": "diffPng",
+          "callee": "Math.abs",
+          "lineNumber": 95
+        },
+        {
+          "caller": "diffPng",
+          "callee": "fs.mkdir",
+          "lineNumber": 109
+        },
+        {
+          "caller": "diffPng",
+          "callee": "path.dirname",
+          "lineNumber": 109
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp(overlay, {\n      raw: { width, height, channels: channels as 3 | 4 },\n    })\n      .png()\n      .toFile",
+          "lineNumber": 110
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp(overlay, {\n      raw: { width, height, channels: channels as 3 | 4 },\n    })\n      .png",
+          "lineNumber": 110
+        },
+        {
+          "caller": "diffPng",
+          "callee": "sharp",
+          "lineNumber": 110
+        },
+        {
+          "caller": "compareToBaseline",
+          "callee": "fs.access",
+          "lineNumber": 136
+        },
+        {
+          "caller": "compareToBaseline",
+          "callee": "fs.mkdir",
+          "lineNumber": 142
+        },
+        {
+          "caller": "compareToBaseline",
+          "callee": "path.dirname",
+          "lineNumber": 142
+        },
+        {
+          "caller": "compareToBaseline",
+          "callee": "fs.writeFile",
+          "lineNumber": 143
+        },
+        {
+          "caller": "compareToBaseline",
+          "callee": "fs.readFile",
+          "lineNumber": 153
+        },
+        {
+          "caller": "compareToBaseline",
+          "callee": "diffPng",
+          "lineNumber": 154
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/visual/helpers/render.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 126,
+      "nonEmptyLines": 115,
+      "functions": [
+        {
+          "name": "getBrowser",
+          "startLine": 14,
+          "endLine": 32,
+          "params": []
+        },
+        {
+          "name": "closeBrowser",
+          "startLine": 34,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "renderToPng",
+          "startLine": 61,
+          "endLine": 126,
+          "params": [
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getBrowser",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "closeBrowser",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "renderToPng",
+          "line": 61,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getBrowser",
+          "callee": "puppeteer.launch",
+          "lineNumber": 16
+        },
+        {
+          "caller": "closeBrowser",
+          "callee": "b.close",
+          "lineNumber": 37
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "getBrowser",
+          "lineNumber": 63
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "browser.newPage",
+          "lineNumber": 64
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.setViewport",
+          "lineNumber": 66
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.setRequestInterception",
+          "lineNumber": 72
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.on",
+          "lineNumber": 73
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "req.url",
+          "lineNumber": 74
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "url.startsWith",
+          "lineNumber": 75
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "url.startsWith",
+          "lineNumber": 75
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "req.continue",
+          "lineNumber": 76
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "req.abort",
+          "lineNumber": 78
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "fs.readFile",
+          "lineNumber": 82
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.goto",
+          "lineNumber": 85
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.setContent",
+          "lineNumber": 86
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.addStyleTag",
+          "lineNumber": 89
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.evaluate",
+          "lineNumber": 103
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "document.fonts.ready.then",
+          "lineNumber": 107
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "resolve",
+          "lineNumber": 107
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "setTimeout",
+          "lineNumber": 109
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "resolve",
+          "lineNumber": 109
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.screenshot",
+          "lineNumber": 117
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "Buffer.from",
+          "lineNumber": 122
+        },
+        {
+          "caller": "renderToPng",
+          "callee": "page.close",
+          "lineNumber": 124
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/visual/v5-snapshots.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 86,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

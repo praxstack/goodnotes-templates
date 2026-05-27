@@ -1,0 +1,31 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v2.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 2294,
+      "nonEmptyLines": 2130,
+      "metrics": {}
+    },
+    {
+      "path": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v3.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 1831,
+      "nonEmptyLines": 1682,
+      "metrics": {}
+    },
+    {
+      "path": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 1352,
+      "nonEmptyLines": 1205,
+      "metrics": {}
+    }
+  ]
+}

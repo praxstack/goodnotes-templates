@@ -1,0 +1,121 @@
+{
+  "nodes": [
+    {
+      "id": "config:audit/CODEBASE_AUDIT_REPORT.json",
+      "type": "config",
+      "name": "CODEBASE_AUDIT_REPORT.json",
+      "filePath": "audit/CODEBASE_AUDIT_REPORT.json",
+      "summary": "CODEBASE_AUDIT_REPORT.json configuration file (139 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/CODEBASE_AUDIT_REPORT.md",
+      "type": "document",
+      "name": "CODEBASE_AUDIT_REPORT.md",
+      "filePath": "audit/CODEBASE_AUDIT_REPORT.md",
+      "summary": "Documentation: 29 sections, 269 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/GAPS.md",
+      "type": "document",
+      "name": "GAPS.md",
+      "filePath": "audit/GAPS.md",
+      "summary": "Documentation: 8 sections, 62 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "schema:audit/IMPLEMENTATION_ROADMAP.csv",
+      "type": "schema",
+      "name": "IMPLEMENTATION_ROADMAP.csv",
+      "filePath": "audit/IMPLEMENTATION_ROADMAP.csv",
+      "summary": "CSV data file (28 rows).",
+      "tags": [
+        "data",
+        "dataset",
+        "tabular"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/IMPLEMENTATION_ROADMAP.md",
+      "type": "document",
+      "name": "IMPLEMENTATION_ROADMAP.md",
+      "filePath": "audit/IMPLEMENTATION_ROADMAP.md",
+      "summary": "Documentation: 9 sections, 88 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/POST_SPRINT_STATUS.md",
+      "type": "document",
+      "name": "POST_SPRINT_STATUS.md",
+      "filePath": "audit/POST_SPRINT_STATUS.md",
+      "summary": "Documentation: 15 sections, 138 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "audit/README.md",
+      "summary": "Project README with 8 sections (122 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/SLIDE_OUTLINE.md",
+      "type": "document",
+      "name": "SLIDE_OUTLINE.md",
+      "filePath": "audit/SLIDE_OUTLINE.md",
+      "summary": "Documentation: 9 sections, 76 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/TEST_STRATEGY.md",
+      "type": "document",
+      "name": "TEST_STRATEGY.md",
+      "filePath": "audit/TEST_STRATEGY.md",
+      "summary": "Documentation: 13 sections, 104 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

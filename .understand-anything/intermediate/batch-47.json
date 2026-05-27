@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-tactile-tasks/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-tactile-tasks/README.md",
+      "summary": "Project README with 2 sections (21 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-tactile-tasks/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-tactile-tasks/manifest.json",
+      "summary": "manifest.json configuration file (21 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-tactile-tasks/tactile-tasks.html",
+      "type": "file",
+      "name": "tactile-tasks.html",
+      "filePath": "packages/packs-tactile-tasks/tactile-tasks.html",
+      "summary": "HTML template (tactile-tasks.html, 632 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

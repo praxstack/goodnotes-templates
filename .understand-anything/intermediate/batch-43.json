@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-simple-pages/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-simple-pages/README.md",
+      "summary": "Project README with 5 sections (45 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-simple-pages/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-simple-pages/manifest.json",
+      "summary": "manifest.json configuration file (22 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-simple-pages/simple-pages.html",
+      "type": "file",
+      "name": "simple-pages.html",
+      "filePath": "packages/packs-simple-pages/simple-pages.html",
+      "summary": "HTML template (simple-pages.html, 309 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-reading-log/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-reading-log/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-reading-log/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-reading-log/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-reading-log/reading-log.html",
+      "type": "file",
+      "name": "reading-log.html",
+      "filePath": "packages/packs-reading-log/reading-log.html",
+      "summary": "HTML template (reading-log.html, 499 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

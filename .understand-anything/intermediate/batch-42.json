@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-reflection-journal/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-reflection-journal/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-reflection-journal/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-reflection-journal/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-reflection-journal/reflection-journal.html",
+      "type": "file",
+      "name": "reflection-journal.html",
+      "filePath": "packages/packs-reflection-journal/reflection-journal.html",
+      "summary": "HTML template (reflection-journal.html, 338 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

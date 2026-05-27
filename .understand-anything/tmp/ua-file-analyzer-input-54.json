@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-prax-journal/stickers/shame-baggage/README.md",
+      "language": "markdown",
+      "sizeLines": 17,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/thought-flip/README.md",
+      "language": "markdown",
+      "sizeLines": 24,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/three-good-things/README.md",
+      "language": "markdown",
+      "sizeLines": 17,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/win-today/README.md",
+      "language": "markdown",
+      "sizeLines": 17,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/wins-jar/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "playwright.config.ts",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/daily_planner_refined/code.html",
+      "language": "html",
+      "sizeLines": 369,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/daily_planner/code.html",
+      "language": "html",
+      "sizeLines": 368,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/daily_reflections_refined/code.html",
+      "language": "html",
+      "sizeLines": 330,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/daily_reflections/code.html",
+      "language": "html",
+      "sizeLines": 330,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/habit_tracker_refined/code.html",
+      "language": "html",
+      "sizeLines": 500,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/habit_tracker/code.html",
+      "language": "html",
+      "sizeLines": 500,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/tactile_planner_system/DESIGN.md",
+      "language": "markdown",
+      "sizeLines": 167,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/tasks_notes_refined/code.html",
+      "language": "html",
+      "sizeLines": 375,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "references/stitch_cute_skeuomorphic_todo_journal/tasks_notes/code.html",
+      "language": "html",
+      "sizeLines": 375,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "scripts/audit.sh",
+      "language": "shell",
+      "sizeLines": 116,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/build-stickers.ts",
+      "language": "typescript",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/bundle-release.ts",
+      "language": "typescript",
+      "sizeLines": 483,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/download-fonts.ts",
+      "language": "typescript",
+      "sizeLines": 171,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/migrate-packs-w5.ts",
+      "language": "typescript",
+      "sizeLines": 446,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/probe-ink-density.ts",
+      "language": "typescript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/probe-sharp-fraunces.ts",
+      "language": "typescript",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/rebuild-all-stickers-index.ts",
+      "language": "typescript",
+      "sizeLines": 230,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/render-tactile-preview.ts",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/smoke-prod-headers.sh",
+      "language": "shell",
+      "sizeLines": 99,
+      "fileCategory": "script"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-prax-journal/stickers/shame-baggage/README.md": [],
+    "packages/packs-prax-journal/stickers/thought-flip/README.md": [],
+    "packages/packs-prax-journal/stickers/three-good-things/README.md": [],
+    "packages/packs-prax-journal/stickers/win-today/README.md": [],
+    "packages/packs-prax-journal/stickers/wins-jar/README.md": [],
+    "playwright.config.ts": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/daily_planner_refined/code.html": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/daily_planner/code.html": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/daily_reflections_refined/code.html": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/daily_reflections/code.html": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/habit_tracker_refined/code.html": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/habit_tracker/code.html": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/tactile_planner_system/DESIGN.md": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/tasks_notes_refined/code.html": [],
+    "references/stitch_cute_skeuomorphic_todo_journal/tasks_notes/code.html": [],
+    "scripts/audit.sh": [],
+    "scripts/build-stickers.ts": [],
+    "scripts/bundle-release.ts": [],
+    "scripts/download-fonts.ts": [],
+    "scripts/migrate-packs-w5.ts": [],
+    "scripts/probe-ink-density.ts": [],
+    "scripts/probe-sharp-fraunces.ts": [],
+    "scripts/rebuild-all-stickers-index.ts": [],
+    "scripts/render-tactile-preview.ts": [],
+    "scripts/smoke-prod-headers.sh": []
+  }
+}

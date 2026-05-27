@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-travel-planner/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-travel-planner/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/packs-travel-planner/travel-planner.html",
+      "language": "html",
+      "sizeLines": 735,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-travel-planner/README.md": [],
+    "packages/packs-travel-planner/manifest.json": [],
+    "packages/packs-travel-planner/travel-planner.html": []
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "id": "file:docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v2.html",
+      "type": "file",
+      "name": "wireframes-v2.html",
+      "filePath": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v2.html",
+      "summary": "HTML template (wireframes-v2.html, 2294 lines).",
+      "tags": [
+        "html",
+        "template",
+        "design-system",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v3.html",
+      "type": "file",
+      "name": "wireframes-v3.html",
+      "filePath": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v3.html",
+      "summary": "HTML template (wireframes-v3.html, 1831 lines).",
+      "tags": [
+        "html",
+        "template",
+        "design-system",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes.html",
+      "type": "file",
+      "name": "wireframes.html",
+      "filePath": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes.html",
+      "summary": "HTML template (wireframes.html, 1352 lines).",
+      "tags": [
+        "html",
+        "template",
+        "design-system",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,55 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/packs-prax-journal/versions/v1/daily.dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 21,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/daily.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 617,
+      "nonEmptyLines": 584,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/monthly.dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 21,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/monthly.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 188,
+      "nonEmptyLines": 169,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/weekly.dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 21,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/weekly.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 401,
+      "nonEmptyLines": 357,
+      "metrics": {}
+    }
+  ]
+}

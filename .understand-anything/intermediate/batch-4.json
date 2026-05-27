@@ -1,0 +1,262 @@
+{
+  "nodes": [
+    {
+      "id": "file:apps/gallery/src/components/BlurhashImage.astro",
+      "type": "file",
+      "name": "BlurhashImage.astro",
+      "filePath": "apps/gallery/src/components/BlurhashImage.astro",
+      "summary": "Astro source file (73 lines).",
+      "tags": [
+        "component",
+        "gallery",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/src/components/ThemeSwap.astro",
+      "type": "file",
+      "name": "ThemeSwap.astro",
+      "filePath": "apps/gallery/src/components/ThemeSwap.astro",
+      "summary": "Astro source file (264 lines).",
+      "tags": [
+        "component",
+        "gallery",
+        "source"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/gallery/src/config/site.ts",
+      "type": "file",
+      "name": "site.ts",
+      "filePath": "apps/gallery/src/config/site.ts",
+      "summary": "Typescript source file (20 lines).",
+      "tags": [
+        "config",
+        "gallery",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/layouts/Layout.astro",
+      "type": "file",
+      "name": "Layout.astro",
+      "filePath": "apps/gallery/src/layouts/Layout.astro",
+      "summary": "Astro source file (154 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/src/pages/browse.astro",
+      "type": "file",
+      "name": "browse.astro",
+      "filePath": "apps/gallery/src/pages/browse.astro",
+      "summary": "Astro source file (172 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/src/pages/contribute.astro",
+      "type": "file",
+      "name": "contribute.astro",
+      "filePath": "apps/gallery/src/pages/contribute.astro",
+      "summary": "Astro source file (208 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/src/pages/index.astro",
+      "type": "file",
+      "name": "index.astro",
+      "filePath": "apps/gallery/src/pages/index.astro",
+      "summary": "Astro source file (311 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/gallery/src/pages/packs/[id].astro",
+      "type": "file",
+      "name": "[id].astro",
+      "filePath": "apps/gallery/src/pages/packs/[id].astro",
+      "summary": "Astro source file (355 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/gallery/src/pages/remix.astro",
+      "type": "file",
+      "name": "remix.astro",
+      "filePath": "apps/gallery/src/pages/remix.astro",
+      "summary": "Astro source file (212 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/gallery/src/pages/search.astro",
+      "type": "file",
+      "name": "search.astro",
+      "filePath": "apps/gallery/src/pages/search.astro",
+      "summary": "Astro source file (285 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:apps/gallery/src/components/ThemeSwap.astro",
+      "target": "file:apps/gallery/src/data/theme-palette.json",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/layouts/Layout.astro",
+      "target": "file:apps/gallery/src/styles/global.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/layouts/Layout.astro",
+      "target": "file:apps/gallery/src/config/site.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/browse.astro",
+      "target": "file:apps/gallery/src/layouts/Layout.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/contribute.astro",
+      "target": "file:apps/gallery/src/layouts/Layout.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/contribute.astro",
+      "target": "file:apps/gallery/src/config/site.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/index.astro",
+      "target": "file:apps/gallery/src/layouts/Layout.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/index.astro",
+      "target": "file:apps/gallery/src/components/BlurhashImage.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/index.astro",
+      "target": "file:apps/gallery/src/components/ThemeSwap.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/index.astro",
+      "target": "file:apps/gallery/src/data/blurhash-manifest.json",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/packs/[id].astro",
+      "target": "file:apps/gallery/src/layouts/Layout.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/packs/[id].astro",
+      "target": "file:apps/gallery/src/components/BlurhashImage.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/packs/[id].astro",
+      "target": "file:apps/gallery/src/data/blurhash-manifest.json",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/packs/[id].astro",
+      "target": "file:apps/gallery/src/data/theme-palette.json",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/packs/[id].astro",
+      "target": "file:apps/gallery/src/config/site.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/remix.astro",
+      "target": "file:apps/gallery/src/layouts/Layout.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/remix.astro",
+      "target": "file:apps/gallery/src/config/site.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/gallery/src/pages/search.astro",
+      "target": "file:apps/gallery/src/layouts/Layout.astro",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

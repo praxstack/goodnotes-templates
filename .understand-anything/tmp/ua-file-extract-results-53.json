@@ -1,0 +1,1408 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "audit/iteration-5/SESSION-LOG.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 169,
+      "nonEmptyLines": 132,
+      "sections": [
+        {
+          "heading": "Iter-5 · Overnight Session Log — 2026-05-11",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Starting state (verified tonight, 23:08 local)",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Council input (Bedrock · Stage-1 only, 3/4 throttled)",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Path corrections from Haiku's plan (to match actual repo layout)",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "Plan for tonight",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Phase A — T-005 live gap (45-75 min)",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "Phase B — Coverage 65→75 (2-3 h)",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "Phase C — 11 lint warnings (30 min if time remains)",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "Phase D — Dependabot review (if time)",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Phase E — Final verification + comprehensive log (mandatory)",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "Guardrails",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "Execution trace (updated as I go)",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "Execution trace (actual, not planned)",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Phases closed vs deferred",
+          "level": 2,
+          "line": 140
+        },
+        {
+          "heading": "Artefacts this session produced",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "Honest caveats",
+          "level": 2,
+          "line": 165
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "audit/iteration-5/STATUS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 239,
+      "nonEmptyLines": 185,
+      "sections": [
+        {
+          "heading": "Iter-5 Sprint Status — overnight 2026-05-11 → 2026-05-12",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Sprint 1 — P0 remediations (single overnight session)",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "T-I5-001 — stage vercel.json into gallery deploy surface",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "T-I5-002 — drop invalid `_comment` Vercel schema key",
+          "level": 3,
+          "line": 72
+        },
+        {
+          "heading": "T-I5-003 — puppeteer-renderer branch coverage",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "T-I5-004 — 11 lint warnings → 0",
+          "level": 3,
+          "line": 128
+        },
+        {
+          "heading": "Phase D (Dependabot) — explicitly deferred",
+          "level": 2,
+          "line": 155
+        },
+        {
+          "heading": "Post-iter-5 health snapshot",
+          "level": 2,
+          "line": 176
+        },
+        {
+          "heading": "Validation commands (re-run any time)",
+          "level": 2,
+          "line": 193
+        },
+        {
+          "heading": "Remaining debt after iter-5",
+          "level": 2,
+          "line": 214
+        },
+        {
+          "heading": "Traceability",
+          "level": 2,
+          "line": 233
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "audit/iteration-6/STATUS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 264,
+      "nonEmptyLines": 211,
+      "sections": [
+        {
+          "heading": "Iter-6 Sprint Status — CEO v5 execution · 2026-05-12",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Phase 0 · iter-5 debt closure",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Phase 0.0 — CI Node bump 20→22 (P0 fix)",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "Phase 0.5 — pdf-postprocess coverage",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "Phase 0.1/0.2/0.3 — Dependabot subset-merges",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "Phase 0.4 — CSP unsafe-inline hardening (DEFERRED)",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "Phase 1 · parameterised generator framework",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Phase 1.1 — framework + habit-tracker reference (97d322a)",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "Phase 1.2 — 3 more generators + shared helpers (7f078f7)",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "Phase 1.3 — Prax Journal migration (DEFERRED)",
+          "level": 3,
+          "line": 144
+        },
+        {
+          "heading": "Phase 3 · pretext audit CLI (20148cd)",
+          "level": 2,
+          "line": 154
+        },
+        {
+          "heading": "What this sprint did NOT do (honest caveats)",
+          "level": 2,
+          "line": 176
+        },
+        {
+          "heading": "Learnings (feeds Phase 8 SelfImprove ritual)",
+          "level": 2,
+          "line": 195
+        },
+        {
+          "heading": "Session log (autonomous run · 2026-05-12)",
+          "level": 2,
+          "line": 219
+        },
+        {
+          "heading": "Next session starting point",
+          "level": 2,
+          "line": 235
+        },
+        {
+          "heading": "Final metrics",
+          "level": 2,
+          "line": 250
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "docs/gstack-archive/ceo-plans/2026-04-30-shadcn-for-goodnotes.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 437,
+      "nonEmptyLines": 297,
+      "sections": [
+        {
+          "heading": "CEO Plan: pretext-templates — Registry + Gallery + Codespaces",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "Final Scope — 11-week sprint",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Vision",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "10x Check",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "Platonic Ideal",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Scope Decisions",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Accepted Scope (now part of the plan)",
+          "level": 2,
+          "line": 91
+        },
+        {
+          "heading": "Deferred to TODOS.md",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "Rejected (not in scope)",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "Dream State Delta",
+          "level": 2,
+          "line": 108
+        },
+        {
+          "heading": "Review Findings by Section",
+          "level": 2,
+          "line": 130
+        },
+        {
+          "heading": "Section 1 · Architecture — 3 findings",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "Section 2 · Error & Rescue Map — 6 error paths mapped, 2 CRITICAL GAPS",
+          "level": 3,
+          "line": 142
+        },
+        {
+          "heading": "Section 3 · Security & Threat Model — 4 findings",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "Section 4 · Data Flow & Edge Cases — 5 findings",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "Section 5 · Code Quality — 2 findings",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Section 6 · Test Review — Full diagram + gaps",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "Section 7 · Performance — 2 findings",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "Section 8 · Observability — 3 findings",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "Section 9 · Deployment — 4 findings",
+          "level": 3,
+          "line": 232
+        },
+        {
+          "heading": "Section 10 · Long-Term Trajectory — 3 findings",
+          "level": 3,
+          "line": 242
+        },
+        {
+          "heading": "Section 11 · Design & UX (UI scope detected) — 4 findings",
+          "level": 3,
+          "line": 250
+        },
+        {
+          "heading": "Temporal Interrogation (Step 0E)",
+          "level": 2,
+          "line": 269
+        },
+        {
+          "heading": "Reviewer Concerns (unresolved · carry to /plan-eng-review)",
+          "level": 2,
+          "line": 292
+        },
+        {
+          "heading": "Post-outside-voice concerns (added D5 + D6)",
+          "level": 3,
+          "line": 299
+        },
+        {
+          "heading": "Spec-reviewer concerns (integrated from adversarial review)",
+          "level": 3,
+          "line": 305
+        },
+        {
+          "heading": "The Next 3 Actions (this week)",
+          "level": 2,
+          "line": 312
+        },
+        {
+          "heading": "Success Criteria (Week 11 launch)",
+          "level": 2,
+          "line": 320
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT (appended 2026-04-30 post-/plan-eng-review)",
+          "level": 2,
+          "line": 340
+        },
+        {
+          "heading": "/plan-eng-review outcomes that amend this CEO plan",
+          "level": 3,
+          "line": 350
+        },
+        {
+          "heading": "User-accepted risks (explicit)",
+          "level": 3,
+          "line": 366
+        },
+        {
+          "heading": "Next recommended skill",
+          "level": 3,
+          "line": 372
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT — updated post-/plan-design-review (2026-04-30)",
+          "level": 2,
+          "line": 378
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT — FINAL (post-/plan-devex-review, 2026-04-30)",
+          "level": 2,
+          "line": 407
+        },
+        {
+          "heading": "/plan-devex-review outcomes that amend this plan",
+          "level": 3,
+          "line": 417
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 35
+      }
+    },
+    {
+      "path": "docs/gstack-archive/ceo-plans/archive/2026-04-09-full-breadth-engine.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 35,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "CEO Plan: Full Breadth Engine",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "Vision",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "10x Check",
+          "level": 3,
+          "line": 12
+        },
+        {
+          "heading": "Scope Decisions",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Accepted Scope (added to this plan)",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Deferred to TODOS.md",
+          "level": 2,
+          "line": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "docs/gstack-archive/main-reviews.jsonl",
+      "language": "jsonl",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "metrics": {}
+    },
+    {
+      "path": "docs/gstack-archive/timeline.jsonl",
+      "language": "jsonl",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    },
+    {
+      "path": "docs/superpowers/specs/2026-04-10-self-contained-templates-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 445,
+      "nonEmptyLines": 364,
+      "sections": [
+        {
+          "heading": "SPEC: Self-Contained Template Architecture",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Problem Statement",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "2. Goals and Non-Goals",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Goals",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "Non-Goals",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "3. System Overview",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "Current Architecture (BEFORE)",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "New Architecture (AFTER)",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "4. Core Domain Model",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "Template",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "Color Mode Snippet",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "Renderer Options",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "5. Renderer Contract",
+          "level": 2,
+          "line": 159
+        },
+        {
+          "heading": "`renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<Buffer>`",
+          "level": 3,
+          "line": 161
+        },
+        {
+          "heading": "What the renderer does NOT do (DELETED behaviors):",
+          "level": 3,
+          "line": 207
+        },
+        {
+          "heading": "6. Generator Contract",
+          "level": 2,
+          "line": 218
+        },
+        {
+          "heading": "CSS Merge Strategy for Multi-Template Documents",
+          "level": 3,
+          "line": 227
+        },
+        {
+          "heading": "7. Files Changed",
+          "level": 2,
+          "line": 277
+        },
+        {
+          "heading": "DELETE (5 files)",
+          "level": 3,
+          "line": 279
+        },
+        {
+          "heading": "MODIFY (major changes)",
+          "level": 3,
+          "line": 289
+        },
+        {
+          "heading": "CREATE (11 dark-mode CSS files)",
+          "level": 3,
+          "line": 309
+        },
+        {
+          "heading": "V2 Dark Mode Palette (from `themes.ts` midnight theme)",
+          "level": 3,
+          "line": 325
+        },
+        {
+          "heading": "V3 Dark Mode Palette (dark variant of lavender design)",
+          "level": 3,
+          "line": 350
+        },
+        {
+          "heading": "8. Failure Model",
+          "level": 2,
+          "line": 373
+        },
+        {
+          "heading": "9. Testing and Validation",
+          "level": 2,
+          "line": 382
+        },
+        {
+          "heading": "Core Conformance (must-pass)",
+          "level": 3,
+          "line": 384
+        },
+        {
+          "heading": "Visual Validation (manual)",
+          "level": 3,
+          "line": 395
+        },
+        {
+          "heading": "10. Implementation Checklist (Definition of Done)",
+          "level": 2,
+          "line": 403
+        },
+        {
+          "heading": "Phase 1: Renderer Surgery",
+          "level": 3,
+          "line": 405
+        },
+        {
+          "heading": "Phase 2: Type Cleanup",
+          "level": 3,
+          "line": 415
+        },
+        {
+          "heading": "Phase 3: Create Dark Mode CSS Files",
+          "level": 3,
+          "line": 419
+        },
+        {
+          "heading": "Phase 4: Update Generators",
+          "level": 3,
+          "line": 424
+        },
+        {
+          "heading": "Phase 5: Delete Theme System",
+          "level": 3,
+          "line": 430
+        },
+        {
+          "heading": "Phase 6: Update CLI and Docs",
+          "level": 3,
+          "line": 435
+        },
+        {
+          "heading": "Phase 7: Verification",
+          "level": 3,
+          "line": 440
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 35
+      }
+    },
+    {
+      "path": "eslint.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 111,
+      "nonEmptyLines": 109,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "examples/prax-journal/prax_adhd_planner.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 1271,
+      "nonEmptyLines": 1185,
+      "metrics": {}
+    },
+    {
+      "path": "output/.gitkeep",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {}
+    },
+    {
+      "path": "packages/cli/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 27,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "bin",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 23
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "packages/cli/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 12,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "references",
+          "level": 1,
+          "line": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/core/assets/base.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 229,
+      "nonEmptyLines": 209,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 97,
+      "nonEmptyLines": 97,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "//",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 77
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 81
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 85
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 93
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 96
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "packages/core/src/packs.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 493,
+      "nonEmptyLines": 474,
+      "functions": [
+        {
+          "name": "pack",
+          "startLine": 49,
+          "endLine": 55,
+          "params": [
+            "category",
+            "name",
+            "file"
+          ]
+        },
+        {
+          "name": "journal",
+          "startLine": 57,
+          "endLine": 59,
+          "params": [
+            "version",
+            "file"
+          ]
+        },
+        {
+          "name": "getTemplate",
+          "startLine": 477,
+          "endLine": 479,
+          "params": [
+            "id"
+          ]
+        },
+        {
+          "name": "getTemplatesByCategory",
+          "startLine": 484,
+          "endLine": 486,
+          "params": [
+            "category"
+          ]
+        },
+        {
+          "name": "getTemplateIds",
+          "startLine": 491,
+          "endLine": 493,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TEMPLATE_REGISTRY",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "getTemplate",
+          "line": 477,
+          "isDefault": false
+        },
+        {
+          "name": "getTemplatesByCategory",
+          "line": 484,
+          "isDefault": false
+        },
+        {
+          "name": "getTemplateIds",
+          "line": 491,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pack",
+          "callee": "path.join",
+          "lineNumber": 54
+        },
+        {
+          "caller": "journal",
+          "callee": "path.join",
+          "lineNumber": 58
+        },
+        {
+          "caller": "getTemplate",
+          "callee": "TEMPLATE_REGISTRY.find",
+          "lineNumber": 478
+        },
+        {
+          "caller": "getTemplatesByCategory",
+          "callee": "TEMPLATE_REGISTRY.filter",
+          "lineNumber": 485
+        },
+        {
+          "caller": "getTemplateIds",
+          "callee": "TEMPLATE_REGISTRY.map",
+          "lineNumber": 492
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/craving-surf/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 17,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "Craving Surf",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Why this shape",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Build",
+          "level": 2,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/friend-letter/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 26,
+      "nonEmptyLines": 19,
+      "sections": [
+        {
+          "heading": "Friend Letter",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Why this shape",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Grammar",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Build",
+          "level": 2,
+          "line": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/grateful-for/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 17,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "Grateful for",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Why this shape",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Build",
+          "level": 2,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/if-then-plan/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "sections": [
+        {
+          "heading": "If-Then Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Why this shape",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Build",
+          "level": 2,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/mood-dot/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 72,
+      "nonEmptyLines": 55,
+      "sections": [
+        {
+          "heading": "Mood Dot",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What it's for",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Grammar (matches design review §3 rubric)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Data extraction (for the AI month-end aggregator)",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Build",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "Pipeline provenance",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "References",
+          "level": 2,
+          "line": 67
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/named-patterns/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 17,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "Named Patterns",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Why this shape",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Build",
+          "level": 2,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/phq2-lite/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 17,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "PHQ-2 Lite",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Why this shape",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Build",
+          "level": 2,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/stickers/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 100,
+      "nonEmptyLines": 71,
+      "sections": [
+        {
+          "heading": "Prax Journal — Sticker Backlog",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Conventions",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Size classes",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "Data spec format (per-sticker `README.md`)",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "Shipped (v5.3 C5 · all 12 stickers)",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Pipeline provenance",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "Parked / candidates (not scheduled)",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Cut (decided against)",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "How to add a sticker",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "How to remove a sticker",
+          "level": 2,
+          "line": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    }
+  ]
+}

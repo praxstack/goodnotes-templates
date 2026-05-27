@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-project-planning/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-project-planning/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/packs-project-planning/project-planning.html",
+      "language": "html",
+      "sizeLines": 684,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-project-planning/README.md": [],
+    "packages/packs-project-planning/manifest.json": [],
+    "packages/packs-project-planning/project-planning.html": []
+  }
+}

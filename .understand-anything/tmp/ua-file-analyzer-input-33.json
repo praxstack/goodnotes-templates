@@ -1,0 +1,49 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-prax-journal/versions/v1/daily.dark.css",
+      "language": "css",
+      "sizeLines": 21,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/daily.html",
+      "language": "html",
+      "sizeLines": 617,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/monthly.dark.css",
+      "language": "css",
+      "sizeLines": 21,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/monthly.html",
+      "language": "html",
+      "sizeLines": 188,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/weekly.dark.css",
+      "language": "css",
+      "sizeLines": 21,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v1/weekly.html",
+      "language": "html",
+      "sizeLines": 401,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-prax-journal/versions/v1/daily.dark.css": [],
+    "packages/packs-prax-journal/versions/v1/daily.html": [],
+    "packages/packs-prax-journal/versions/v1/monthly.dark.css": [],
+    "packages/packs-prax-journal/versions/v1/monthly.html": [],
+    "packages/packs-prax-journal/versions/v1/weekly.dark.css": [],
+    "packages/packs-prax-journal/versions/v1/weekly.html": []
+  }
+}

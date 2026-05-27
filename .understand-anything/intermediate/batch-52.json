@@ -1,0 +1,326 @@
+{
+  "nodes": [
+    {
+      "id": "file:apps/gallery/src/content/packs/monthly-planner.mdx",
+      "type": "file",
+      "name": "monthly-planner.mdx",
+      "filePath": "apps/gallery/src/content/packs/monthly-planner.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/mood-tracker.mdx",
+      "type": "file",
+      "name": "mood-tracker.mdx",
+      "filePath": "apps/gallery/src/content/packs/mood-tracker.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/morning-pages.mdx",
+      "type": "file",
+      "name": "morning-pages.mdx",
+      "filePath": "apps/gallery/src/content/packs/morning-pages.mdx",
+      "summary": "Mdx source file (40 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/prax-journal.mdx",
+      "type": "file",
+      "name": "prax-journal.mdx",
+      "filePath": "apps/gallery/src/content/packs/prax-journal.mdx",
+      "summary": "Mdx source file (28 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/project-planning.mdx",
+      "type": "file",
+      "name": "project-planning.mdx",
+      "filePath": "apps/gallery/src/content/packs/project-planning.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/prompted-journal.mdx",
+      "type": "file",
+      "name": "prompted-journal.mdx",
+      "filePath": "apps/gallery/src/content/packs/prompted-journal.mdx",
+      "summary": "Mdx source file (40 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/reading-log.mdx",
+      "type": "file",
+      "name": "reading-log.mdx",
+      "filePath": "apps/gallery/src/content/packs/reading-log.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/recipe-card.mdx",
+      "type": "file",
+      "name": "recipe-card.mdx",
+      "filePath": "apps/gallery/src/content/packs/recipe-card.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/reflection-journal.mdx",
+      "type": "file",
+      "name": "reflection-journal.mdx",
+      "filePath": "apps/gallery/src/content/packs/reflection-journal.mdx",
+      "summary": "Mdx source file (40 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/simple-pages.mdx",
+      "type": "file",
+      "name": "simple-pages.mdx",
+      "filePath": "apps/gallery/src/content/packs/simple-pages.mdx",
+      "summary": "Mdx source file (44 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/tactile-daily-planner.mdx",
+      "type": "file",
+      "name": "tactile-daily-planner.mdx",
+      "filePath": "apps/gallery/src/content/packs/tactile-daily-planner.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/tactile-habits.mdx",
+      "type": "file",
+      "name": "tactile-habits.mdx",
+      "filePath": "apps/gallery/src/content/packs/tactile-habits.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/tactile-reflections.mdx",
+      "type": "file",
+      "name": "tactile-reflections.mdx",
+      "filePath": "apps/gallery/src/content/packs/tactile-reflections.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/tactile-tasks.mdx",
+      "type": "file",
+      "name": "tactile-tasks.mdx",
+      "filePath": "apps/gallery/src/content/packs/tactile-tasks.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/travel-planner.mdx",
+      "type": "file",
+      "name": "travel-planner.mdx",
+      "filePath": "apps/gallery/src/content/packs/travel-planner.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/weekly-planner.mdx",
+      "type": "file",
+      "name": "weekly-planner.mdx",
+      "filePath": "apps/gallery/src/content/packs/weekly-planner.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/yearly-overview.mdx",
+      "type": "file",
+      "name": "yearly-overview.mdx",
+      "filePath": "apps/gallery/src/content/packs/yearly-overview.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:apps/gallery/src/data/blurhash-manifest.json",
+      "type": "config",
+      "name": "blurhash-manifest.json",
+      "filePath": "apps/gallery/src/data/blurhash-manifest.json",
+      "summary": "blurhash-manifest.json configuration file (8 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:apps/gallery/src/data/theme-palette.json",
+      "type": "config",
+      "name": "theme-palette.json",
+      "filePath": "apps/gallery/src/data/theme-palette.json",
+      "summary": "theme-palette.json configuration file (182 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/src/styles/global.css",
+      "type": "file",
+      "name": "global.css",
+      "filePath": "apps/gallery/src/styles/global.css",
+      "summary": "Stylesheet (global.css, 200 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:audit/_runtime/capabilities.json",
+      "type": "config",
+      "name": "capabilities.json",
+      "filePath": "audit/_runtime/capabilities.json",
+      "summary": "capabilities.json configuration file (70 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:audit/_runtime/dependency-graph.mmd",
+      "type": "file",
+      "name": "dependency-graph.mmd",
+      "filePath": "audit/_runtime/dependency-graph.mmd",
+      "summary": "Mmd source file (18 lines).",
+      "tags": [
+        "source",
+        "module",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/_runtime/topology.md",
+      "type": "document",
+      "name": "topology.md",
+      "filePath": "audit/_runtime/topology.md",
+      "summary": "Documentation: 11 sections, 179 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:audit/iteration-2/findings.json",
+      "type": "config",
+      "name": "findings.json",
+      "filePath": "audit/iteration-2/findings.json",
+      "summary": "findings.json configuration file (321 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:audit/iteration-3/verification-results.md",
+      "type": "document",
+      "name": "verification-results.md",
+      "filePath": "audit/iteration-3/verification-results.md",
+      "summary": "Documentation: 29 sections, 228 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

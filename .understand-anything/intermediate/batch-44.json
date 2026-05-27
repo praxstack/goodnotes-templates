@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-tactile-daily-planner/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-tactile-daily-planner/README.md",
+      "summary": "Project README with 2 sections (32 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-tactile-daily-planner/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-tactile-daily-planner/manifest.json",
+      "summary": "manifest.json configuration file (19 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-tactile-daily-planner/tactile-daily-planner.html",
+      "type": "file",
+      "name": "tactile-daily-planner.html",
+      "filePath": "packages/packs-tactile-daily-planner/tactile-daily-planner.html",
+      "summary": "HTML template (tactile-daily-planner.html, 751 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

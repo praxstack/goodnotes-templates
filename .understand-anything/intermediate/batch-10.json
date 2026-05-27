@@ -1,0 +1,241 @@
+{
+  "nodes": [
+    {
+      "id": "config:.npmrc",
+      "type": "config",
+      "name": ".npmrc",
+      "filePath": ".npmrc",
+      "summary": "npm/pnpm registry and behavior configuration.",
+      "tags": [
+        "configuration",
+        "npm",
+        "registry"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "Documentation: 18 sections, 332 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:CHANGELOG.md",
+      "type": "document",
+      "name": "CHANGELOG.md",
+      "filePath": "CHANGELOG.md",
+      "summary": "Changelog tracking releases and notable changes (13 sections, 295 lines).",
+      "tags": [
+        "documentation",
+        "release-notes",
+        "history"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:CHECKPOINT.md",
+      "type": "document",
+      "name": "CHECKPOINT.md",
+      "filePath": "CHECKPOINT.md",
+      "summary": "Documentation: 6 sections, 43 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:CLAUDE.md",
+      "type": "document",
+      "name": "CLAUDE.md",
+      "filePath": "CLAUDE.md",
+      "summary": "Documentation: 13 sections, 186 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CONTRIBUTING.md",
+      "type": "document",
+      "name": "CONTRIBUTING.md",
+      "filePath": "CONTRIBUTING.md",
+      "summary": "Contributor guide with 16 sections covering development workflow and conventions.",
+      "tags": [
+        "documentation",
+        "development",
+        "contributor-guide"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:DECISIONS.md",
+      "type": "document",
+      "name": "DECISIONS.md",
+      "filePath": "DECISIONS.md",
+      "summary": "Documentation: 13 sections, 110 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:MIGRATION.md",
+      "type": "document",
+      "name": "MIGRATION.md",
+      "filePath": "MIGRATION.md",
+      "summary": "Documentation: 10 sections, 119 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:PROBLEM_STATEMENT.md",
+      "type": "document",
+      "name": "PROBLEM_STATEMENT.md",
+      "filePath": "PROBLEM_STATEMENT.md",
+      "summary": "Documentation: 39 sections, 374 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Project README with 16 sections (480 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:RESEARCH.md",
+      "type": "document",
+      "name": "RESEARCH.md",
+      "filePath": "RESEARCH.md",
+      "summary": "Documentation: 48 sections, 478 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:SPRINT-STATUS.md",
+      "type": "document",
+      "name": "SPRINT-STATUS.md",
+      "filePath": "SPRINT-STATUS.md",
+      "summary": "Documentation: 13 sections, 141 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:THIRD_PARTY_LICENSES.md",
+      "type": "document",
+      "name": "THIRD_PARTY_LICENSES.md",
+      "filePath": "THIRD_PARTY_LICENSES.md",
+      "summary": "Documentation: 3 sections, 149 lines.",
+      "tags": [
+        "documentation",
+        "legal"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:TODOS.md",
+      "type": "document",
+      "name": "TODOS.md",
+      "filePath": "TODOS.md",
+      "summary": "Documentation: 13 sections, 296 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "Package manifest declaring dependencies, scripts, and metadata (76 lines).",
+      "tags": [
+        "configuration",
+        "npm",
+        "manifest"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:registry.json",
+      "type": "config",
+      "name": "registry.json",
+      "filePath": "registry.json",
+      "summary": "registry.json configuration file (480 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:tsconfig.base.json",
+      "type": "config",
+      "name": "tsconfig.base.json",
+      "filePath": "tsconfig.base.json",
+      "summary": "TypeScript compiler configuration (17 lines).",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "tsconfig.json",
+      "summary": "TypeScript compiler configuration (10 lines).",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:vercel.json",
+      "type": "config",
+      "name": "vercel.json",
+      "filePath": "vercel.json",
+      "summary": "Vercel deployment configuration (39 lines).",
+      "tags": [
+        "configuration",
+        "deployment",
+        "vercel"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

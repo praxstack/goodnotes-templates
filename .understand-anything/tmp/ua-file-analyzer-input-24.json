@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-goal-setting/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-goal-setting/goal-setting.html",
+      "language": "html",
+      "sizeLines": 291,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-goal-setting/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-goal-setting/README.md": [],
+    "packages/packs-goal-setting/goal-setting.html": [],
+    "packages/packs-goal-setting/manifest.json": []
+  }
+}

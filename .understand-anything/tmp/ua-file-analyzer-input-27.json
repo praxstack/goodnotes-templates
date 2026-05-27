@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-meal-planning/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-meal-planning/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/packs-meal-planning/meal-planning.html",
+      "language": "html",
+      "sizeLines": 306,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-meal-planning/README.md": [],
+    "packages/packs-meal-planning/manifest.json": [],
+    "packages/packs-meal-planning/meal-planning.html": []
+  }
+}

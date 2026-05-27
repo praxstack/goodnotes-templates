@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-habit-tracker/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-habit-tracker/habit-tracker.html",
+      "language": "html",
+      "sizeLines": 916,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-habit-tracker/manifest.json",
+      "language": "json",
+      "sizeLines": 16,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-habit-tracker/README.md": [],
+    "packages/packs-habit-tracker/habit-tracker.html": [],
+    "packages/packs-habit-tracker/manifest.json": []
+  }
+}

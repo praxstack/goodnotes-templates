@@ -1,0 +1,829 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/core/src/pdf-postprocess.ts",
+      "type": "file",
+      "name": "pdf-postprocess.ts",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "summary": "Typescript module exposing 6 functions and 5 exports (301 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/pdf-postprocess.ts:cssToPageRect",
+      "type": "function",
+      "name": "cssToPageRect",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "lineRange": [
+        23,
+        32
+      ],
+      "summary": "Function `cssToPageRect` (10 lines) in pdf-postprocess.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/pdf-postprocess.ts:addMetadata",
+      "type": "function",
+      "name": "addMetadata",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "lineRange": [
+        37,
+        53
+      ],
+      "summary": "Function `addMetadata` (17 lines) in pdf-postprocess.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/pdf-postprocess.ts:addHyperlinks",
+      "type": "function",
+      "name": "addHyperlinks",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "lineRange": [
+        63,
+        152
+      ],
+      "summary": "Function `addHyperlinks` (90 lines) in pdf-postprocess.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/pdf-postprocess.ts:addBookmarks",
+      "type": "function",
+      "name": "addBookmarks",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "lineRange": [
+        169,
+        257
+      ],
+      "summary": "Function `addBookmarks` (89 lines) in pdf-postprocess.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/pdf-postprocess.ts:postProcessPDF",
+      "type": "function",
+      "name": "postProcessPDF",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "lineRange": [
+        262,
+        283
+      ],
+      "summary": "Function `postProcessPDF` (22 lines) in pdf-postprocess.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/pdf-postprocess.ts:mergePDFs",
+      "type": "function",
+      "name": "mergePDFs",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "lineRange": [
+        289,
+        301
+      ],
+      "summary": "Function `mergePDFs` (13 lines) in pdf-postprocess.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/png-renderer.ts",
+      "type": "file",
+      "name": "png-renderer.ts",
+      "filePath": "packages/core/src/png-renderer.ts",
+      "summary": "Typescript module exposing 3 functions and 3 exports (76 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/png-renderer.ts:renderStickerPNG",
+      "type": "function",
+      "name": "renderStickerPNG",
+      "filePath": "packages/core/src/png-renderer.ts",
+      "lineRange": [
+        15,
+        32
+      ],
+      "summary": "Function `renderStickerPNG` (18 lines) in png-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/png-renderer.ts:renderStickerToFile",
+      "type": "function",
+      "name": "renderStickerToFile",
+      "filePath": "packages/core/src/png-renderer.ts",
+      "lineRange": [
+        37,
+        50
+      ],
+      "summary": "Function `renderStickerToFile` (14 lines) in png-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/png-renderer.ts:batchRenderStickers",
+      "type": "function",
+      "name": "batchRenderStickers",
+      "filePath": "packages/core/src/png-renderer.ts",
+      "lineRange": [
+        55,
+        76
+      ],
+      "summary": "Function `batchRenderStickers` (22 lines) in png-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/svg-renderer.ts",
+      "type": "file",
+      "name": "svg-renderer.ts",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "summary": "Typescript module exposing 24 functions and 2 exports (495 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateStickerSVG",
+      "type": "function",
+      "name": "generateStickerSVG",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        88,
+        117
+      ],
+      "summary": "Function `generateStickerSVG` (30 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateCheckbox",
+      "type": "function",
+      "name": "generateCheckbox",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        181,
+        202
+      ],
+      "summary": "Function `generateCheckbox` (22 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateProgressBar",
+      "type": "function",
+      "name": "generateProgressBar",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        204,
+        216
+      ],
+      "summary": "Function `generateProgressBar` (13 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateStickyNote",
+      "type": "function",
+      "name": "generateStickyNote",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        218,
+        232
+      ],
+      "summary": "Function `generateStickyNote` (15 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "test",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateWashiTape",
+      "type": "function",
+      "name": "generateWashiTape",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        234,
+        265
+      ],
+      "summary": "Function `generateWashiTape` (32 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateDivider",
+      "type": "function",
+      "name": "generateDivider",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        276,
+        288
+      ],
+      "summary": "Function `generateDivider` (13 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateFrame",
+      "type": "function",
+      "name": "generateFrame",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        290,
+        302
+      ],
+      "summary": "Function `generateFrame` (13 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateWeatherIcon",
+      "type": "function",
+      "name": "generateWeatherIcon",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        304,
+        334
+      ],
+      "summary": "Function `generateWeatherIcon` (31 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateStarRating",
+      "type": "function",
+      "name": "generateStarRating",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        336,
+        360
+      ],
+      "summary": "Function `generateStarRating` (25 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "test",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateArrow",
+      "type": "function",
+      "name": "generateArrow",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        362,
+        373
+      ],
+      "summary": "Function `generateArrow` (12 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateCBTThoughtCheck",
+      "type": "function",
+      "name": "generateCBTThoughtCheck",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        377,
+        416
+      ],
+      "summary": "Function `generateCBTThoughtCheck` (40 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateCBTReframe",
+      "type": "function",
+      "name": "generateCBTReframe",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        418,
+        451
+      ],
+      "summary": "Function `generateCBTReframe` (34 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generateSelfCompassionCard",
+      "type": "function",
+      "name": "generateSelfCompassionCard",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        453,
+        476
+      ],
+      "summary": "Function `generateSelfCompassionCard` (24 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/svg-renderer.ts:generatePermissionCard",
+      "type": "function",
+      "name": "generatePermissionCard",
+      "filePath": "packages/core/src/svg-renderer.ts",
+      "lineRange": [
+        478,
+        495
+      ],
+      "summary": "Function `generatePermissionCard` (18 lines) in svg-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/types/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/core/src/types/index.ts",
+      "summary": "Barrel/entry-point file re-exporting public symbols of its directory (0 exports, 0 fns, 0 classes).",
+      "tags": [
+        "entry-point",
+        "type-definition",
+        "core-engine"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/pdf-postprocess-coverage.test.ts",
+      "type": "file",
+      "name": "pdf-postprocess-coverage.test.ts",
+      "filePath": "tests/unit/pdf-postprocess-coverage.test.ts",
+      "summary": "Test file containing 1 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/pdf-postprocess-property.test.ts",
+      "type": "file",
+      "name": "pdf-postprocess-property.test.ts",
+      "filePath": "tests/unit/pdf-postprocess-property.test.ts",
+      "summary": "Test file containing 2 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/unit/pdf-postprocess-property.test.ts:cssToPageRect",
+      "type": "function",
+      "name": "cssToPageRect",
+      "filePath": "tests/unit/pdf-postprocess-property.test.ts",
+      "lineRange": [
+        21,
+        33
+      ],
+      "summary": "Function `cssToPageRect` (13 lines) in pdf-postprocess-property.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:tests/unit/pdf-postprocess-property.test.ts:pdfToCssRect",
+      "type": "function",
+      "name": "pdfToCssRect",
+      "filePath": "tests/unit/pdf-postprocess-property.test.ts",
+      "lineRange": [
+        35,
+        48
+      ],
+      "summary": "Function `pdfToCssRect` (14 lines) in pdf-postprocess-property.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/pdf-postprocess.test.ts",
+      "type": "file",
+      "name": "pdf-postprocess.test.ts",
+      "filePath": "tests/unit/pdf-postprocess.test.ts",
+      "summary": "Test file containing 1 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/svg-renderer.test.ts",
+      "type": "file",
+      "name": "svg-renderer.test.ts",
+      "filePath": "tests/unit/svg-renderer.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:cssToPageRect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:addMetadata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:addMetadata",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:addHyperlinks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:addHyperlinks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:addBookmarks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:addBookmarks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:postProcessPDF",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:postProcessPDF",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:mergePDFs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "function:packages/core/src/pdf-postprocess.ts:mergePDFs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/pdf-postprocess.ts",
+      "target": "file:packages/core/src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "function:packages/core/src/png-renderer.ts:renderStickerPNG",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "function:packages/core/src/png-renderer.ts:renderStickerPNG",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "function:packages/core/src/png-renderer.ts:renderStickerToFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "function:packages/core/src/png-renderer.ts:renderStickerToFile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "function:packages/core/src/png-renderer.ts:batchRenderStickers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "function:packages/core/src/png-renderer.ts:batchRenderStickers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "file:packages/core/src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/png-renderer.ts",
+      "target": "file:packages/core/src/svg-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateStickerSVG",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateStickerSVG",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateCheckbox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateProgressBar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateStickyNote",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateWashiTape",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateDivider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateWeatherIcon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateStarRating",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateArrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateCBTThoughtCheck",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateCBTReframe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generateSelfCompassionCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "function:packages/core/src/svg-renderer.ts:generatePermissionCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/svg-renderer.ts",
+      "target": "file:packages/core/src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/pdf-postprocess-coverage.test.ts",
+      "target": "file:packages/core/src/pdf-postprocess.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/pdf-postprocess-property.test.ts",
+      "target": "function:tests/unit/pdf-postprocess-property.test.ts:cssToPageRect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/pdf-postprocess-property.test.ts",
+      "target": "function:tests/unit/pdf-postprocess-property.test.ts:pdfToCssRect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/pdf-postprocess-property.test.ts",
+      "target": "file:packages/core/src/pdf-postprocess.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/pdf-postprocess.test.ts",
+      "target": "file:packages/core/src/pdf-postprocess.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/svg-renderer.test.ts",
+      "target": "file:packages/core/src/svg-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

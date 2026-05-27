@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": ".github/workflows/audit.yml",
+      "language": "yaml",
+      "sizeLines": 46,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "sizeLines": 78,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/generate.yml",
+      "language": "yaml",
+      "sizeLines": 130,
+      "fileCategory": "infra"
+    }
+  ],
+  "batchImportData": {
+    ".github/workflows/audit.yml": [],
+    ".github/workflows/ci.yml": [],
+    ".github/workflows/generate.yml": []
+  }
+}

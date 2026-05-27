@@ -1,0 +1,1273 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/cli/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/cli/src/index.ts",
+      "summary": "Barrel/entry-point file re-exporting public symbols of its directory (0 exports, 0 fns, 0 classes).",
+      "tags": [
+        "entry-point",
+        "cli",
+        "source"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/cli/src/preview-server.ts",
+      "type": "file",
+      "name": "preview-server.ts",
+      "filePath": "packages/cli/src/preview-server.ts",
+      "summary": "Typescript module exposing 2 functions and 1 export (220 lines).",
+      "tags": [
+        "cli",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/cli/src/preview-server.ts:startPreviewServer",
+      "type": "function",
+      "name": "startPreviewServer",
+      "filePath": "packages/cli/src/preview-server.ts",
+      "lineRange": [
+        22,
+        126
+      ],
+      "summary": "Function `startPreviewServer` (105 lines) in preview-server.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/cli/src/preview-server.ts:generateGalleryHTML",
+      "type": "function",
+      "name": "generateGalleryHTML",
+      "filePath": "packages/cli/src/preview-server.ts",
+      "lineRange": [
+        146,
+        220
+      ],
+      "summary": "Function `generateGalleryHTML` (75 lines) in preview-server.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/cli/src/scaffold.ts",
+      "type": "file",
+      "name": "scaffold.ts",
+      "filePath": "packages/cli/src/scaffold.ts",
+      "summary": "Typescript module exposing 5 functions and 3 exports (210 lines).",
+      "tags": [
+        "cli",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/cli/src/scaffold.ts:isValidPackId",
+      "type": "function",
+      "name": "isValidPackId",
+      "filePath": "packages/cli/src/scaffold.ts",
+      "lineRange": [
+        50,
+        55
+      ],
+      "summary": "Function `isValidPackId` (6 lines) in scaffold.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/cli/src/scaffold.ts:buildInitTemplate",
+      "type": "function",
+      "name": "buildInitTemplate",
+      "filePath": "packages/cli/src/scaffold.ts",
+      "lineRange": [
+        77,
+        136
+      ],
+      "summary": "Function `buildInitTemplate` (60 lines) in scaffold.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/cli/src/scaffold.ts:buildRemixCommands",
+      "type": "function",
+      "name": "buildRemixCommands",
+      "filePath": "packages/cli/src/scaffold.ts",
+      "lineRange": [
+        150,
+        198
+      ],
+      "summary": "Function `buildRemixCommands` (49 lines) in scaffold.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/core/src/dimensions.ts",
+      "type": "file",
+      "name": "dimensions.ts",
+      "filePath": "packages/core/src/dimensions.ts",
+      "summary": "Typescript module exposing 5 functions and 9 exports (156 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/dimensions.ts:getPageDimensions",
+      "type": "function",
+      "name": "getPageDimensions",
+      "filePath": "packages/core/src/dimensions.ts",
+      "lineRange": [
+        91,
+        104
+      ],
+      "summary": "Function `getPageDimensions` (14 lines) in dimensions.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/dimensions.ts:pointsToPixels",
+      "type": "function",
+      "name": "pointsToPixels",
+      "filePath": "packages/core/src/dimensions.ts",
+      "lineRange": [
+        109,
+        111
+      ],
+      "summary": "Function `pointsToPixels` (3 lines) in dimensions.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/dimensions.ts:pixelsToPoints",
+      "type": "function",
+      "name": "pixelsToPoints",
+      "filePath": "packages/core/src/dimensions.ts",
+      "lineRange": [
+        116,
+        118
+      ],
+      "summary": "Function `pixelsToPoints` (3 lines) in dimensions.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/dimensions.ts:getContentArea",
+      "type": "function",
+      "name": "getContentArea",
+      "filePath": "packages/core/src/dimensions.ts",
+      "lineRange": [
+        123,
+        133
+      ],
+      "summary": "Function `getContentArea` (11 lines) in dimensions.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/dimensions.ts:calculateGridPositions",
+      "type": "function",
+      "name": "calculateGridPositions",
+      "filePath": "packages/core/src/dimensions.ts",
+      "lineRange": [
+        138,
+        156
+      ],
+      "summary": "Function `calculateGridPositions` (19 lines) in dimensions.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "file",
+      "name": "puppeteer-renderer.ts",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "summary": "Typescript module exposing 12 functions and 9 exports (448 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:getRestartThreshold",
+      "type": "function",
+      "name": "getRestartThreshold",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        59,
+        69
+      ],
+      "summary": "Function `getRestartThreshold` (11 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "helper",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:maybeRestartBrowser",
+      "type": "function",
+      "name": "maybeRestartBrowser",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        76,
+        91
+      ],
+      "summary": "Function `maybeRestartBrowser` (16 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:_resetRenderCountForTest",
+      "type": "function",
+      "name": "_resetRenderCountForTest",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        94,
+        96
+      ],
+      "summary": "Function `_resetRenderCountForTest` (3 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:_renderCountForTest",
+      "type": "function",
+      "name": "_renderCountForTest",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        99,
+        101
+      ],
+      "summary": "Function `_renderCountForTest` (3 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:getChromiumLaunchArgs",
+      "type": "function",
+      "name": "getChromiumLaunchArgs",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        113,
+        124
+      ],
+      "summary": "Function `getChromiumLaunchArgs` (12 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "helper",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:getBrowser",
+      "type": "function",
+      "name": "getBrowser",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        131,
+        147
+      ],
+      "summary": "Function `getBrowser` (17 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "helper",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:closeBrowser",
+      "type": "function",
+      "name": "closeBrowser",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        156,
+        162
+      ],
+      "summary": "Function `closeBrowser` (7 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:resolveColorModeCSS",
+      "type": "function",
+      "name": "resolveColorModeCSS",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        170,
+        186
+      ],
+      "summary": "Function `resolveColorModeCSS` (17 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:resolveRenderScale",
+      "type": "function",
+      "name": "resolveRenderScale",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        231,
+        244
+      ],
+      "summary": "Function `resolveRenderScale` (14 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:renderHTMLToPDF",
+      "type": "function",
+      "name": "renderHTMLToPDF",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        282,
+        383
+      ],
+      "summary": "Function `renderHTMLToPDF` (102 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:renderHTMLToPDFFile",
+      "type": "function",
+      "name": "renderHTMLToPDFFile",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        388,
+        401
+      ],
+      "summary": "Function `renderHTMLToPDFFile` (14 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/puppeteer-renderer.ts:batchRenderHTML",
+      "type": "function",
+      "name": "batchRenderHTML",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        421,
+        448
+      ],
+      "summary": "Function `batchRenderHTML` (28 lines) in puppeteer-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/render-all-pack-themes.ts",
+      "type": "file",
+      "name": "render-all-pack-themes.ts",
+      "filePath": "scripts/render-all-pack-themes.ts",
+      "summary": "Typescript module exposing 4 functions and 0 exports (209 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/render-all-pack-themes.ts:loadManifests",
+      "type": "function",
+      "name": "loadManifests",
+      "filePath": "scripts/render-all-pack-themes.ts",
+      "lineRange": [
+        69,
+        83
+      ],
+      "summary": "Function `loadManifests` (15 lines) in render-all-pack-themes.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/render-all-pack-themes.ts:loadThemeIds",
+      "type": "function",
+      "name": "loadThemeIds",
+      "filePath": "scripts/render-all-pack-themes.ts",
+      "lineRange": [
+        85,
+        100
+      ],
+      "summary": "Function `loadThemeIds` (16 lines) in render-all-pack-themes.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/render-all-pack-themes.ts:applyTheme",
+      "type": "function",
+      "name": "applyTheme",
+      "filePath": "scripts/render-all-pack-themes.ts",
+      "lineRange": [
+        107,
+        117
+      ],
+      "summary": "Function `applyTheme` (11 lines) in render-all-pack-themes.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/render-all-pack-themes.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/render-all-pack-themes.ts",
+      "lineRange": [
+        119,
+        207
+      ],
+      "summary": "Function `main` (89 lines) in render-all-pack-themes.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/render-all-packs.ts",
+      "type": "file",
+      "name": "render-all-packs.ts",
+      "filePath": "scripts/render-all-packs.ts",
+      "summary": "Typescript module exposing 2 functions and 0 exports (132 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/render-all-packs.ts:loadManifests",
+      "type": "function",
+      "name": "loadManifests",
+      "filePath": "scripts/render-all-packs.ts",
+      "lineRange": [
+        50,
+        64
+      ],
+      "summary": "Function `loadManifests` (15 lines) in render-all-packs.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/render-all-packs.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/render-all-packs.ts",
+      "lineRange": [
+        66,
+        130
+      ],
+      "summary": "Function `main` (65 lines) in render-all-packs.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/smoke-theme-injection.ts",
+      "type": "file",
+      "name": "smoke-theme-injection.ts",
+      "filePath": "scripts/smoke-theme-injection.ts",
+      "summary": "Typescript module exposing 3 functions and 0 exports (118 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/smoke-theme-injection.ts:applyTheme",
+      "type": "function",
+      "name": "applyTheme",
+      "filePath": "scripts/smoke-theme-injection.ts",
+      "lineRange": [
+        49,
+        62
+      ],
+      "summary": "Function `applyTheme` (14 lines) in smoke-theme-injection.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/smoke-theme-injection.ts:renderOne",
+      "type": "function",
+      "name": "renderOne",
+      "filePath": "scripts/smoke-theme-injection.ts",
+      "lineRange": [
+        64,
+        95
+      ],
+      "summary": "Function `renderOne` (32 lines) in smoke-theme-injection.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/smoke-theme-injection.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/smoke-theme-injection.ts",
+      "lineRange": [
+        97,
+        116
+      ],
+      "summary": "Function `main` (20 lines) in smoke-theme-injection.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/cli-scaffold.test.ts",
+      "type": "file",
+      "name": "cli-scaffold.test.ts",
+      "filePath": "tests/unit/cli-scaffold.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/dimensions.test.ts",
+      "type": "file",
+      "name": "dimensions.test.ts",
+      "filePath": "tests/unit/dimensions.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/preview-server.test.ts",
+      "type": "file",
+      "name": "preview-server.test.ts",
+      "filePath": "tests/unit/preview-server.test.ts",
+      "summary": "Test file containing 2 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/unit/preview-server.test.ts:spawnServer",
+      "type": "function",
+      "name": "spawnServer",
+      "filePath": "tests/unit/preview-server.test.ts",
+      "lineRange": [
+        31,
+        52
+      ],
+      "summary": "Function `spawnServer` (22 lines) in preview-server.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/puppeteer-renderer-mock.test.ts",
+      "type": "file",
+      "name": "puppeteer-renderer-mock.test.ts",
+      "filePath": "tests/unit/puppeteer-renderer-mock.test.ts",
+      "summary": "Test file containing 5 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:tests/unit/puppeteer-renderer-mock.test.ts:makePage",
+      "type": "function",
+      "name": "makePage",
+      "filePath": "tests/unit/puppeteer-renderer-mock.test.ts",
+      "lineRange": [
+        96,
+        135
+      ],
+      "summary": "Function `makePage` (40 lines) in puppeteer-renderer-mock.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/puppeteer-renderer-pure.test.ts",
+      "type": "file",
+      "name": "puppeteer-renderer-pure.test.ts",
+      "filePath": "tests/unit/puppeteer-renderer-pure.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/puppeteer-renderer-restart.test.ts",
+      "type": "file",
+      "name": "puppeteer-renderer-restart.test.ts",
+      "filePath": "tests/unit/puppeteer-renderer-restart.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/render-scale.test.ts",
+      "type": "file",
+      "name": "render-scale.test.ts",
+      "filePath": "tests/unit/render-scale.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/cli/src/index.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/cli/src/index.ts",
+      "target": "file:packages/core/src/utils/locale.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/cli/src/index.ts",
+      "target": "file:packages/cli/src/scaffold.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/cli/src/index.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/cli/src/index.ts",
+      "target": "file:packages/cli/src/preview-server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/cli/src/index.ts",
+      "target": "file:packages/core/src/generator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/cli/src/index.ts",
+      "target": "file:packages/core/src/audit.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/cli/src/preview-server.ts",
+      "target": "function:packages/cli/src/preview-server.ts:startPreviewServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/cli/src/preview-server.ts",
+      "target": "function:packages/cli/src/preview-server.ts:startPreviewServer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/cli/src/preview-server.ts",
+      "target": "function:packages/cli/src/preview-server.ts:generateGalleryHTML",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/cli/src/scaffold.ts",
+      "target": "function:packages/cli/src/scaffold.ts:isValidPackId",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/cli/src/scaffold.ts",
+      "target": "function:packages/cli/src/scaffold.ts:isValidPackId",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/cli/src/scaffold.ts",
+      "target": "function:packages/cli/src/scaffold.ts:buildInitTemplate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/cli/src/scaffold.ts",
+      "target": "function:packages/cli/src/scaffold.ts:buildInitTemplate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/cli/src/scaffold.ts",
+      "target": "function:packages/cli/src/scaffold.ts:buildRemixCommands",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/cli/src/scaffold.ts",
+      "target": "function:packages/cli/src/scaffold.ts:buildRemixCommands",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:getPageDimensions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:getPageDimensions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:pointsToPixels",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:pointsToPixels",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:pixelsToPoints",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:pixelsToPoints",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:getContentArea",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:getContentArea",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:calculateGridPositions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "function:packages/core/src/dimensions.ts:calculateGridPositions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/dimensions.ts",
+      "target": "file:packages/core/src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:getRestartThreshold",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:maybeRestartBrowser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:maybeRestartBrowser",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:_resetRenderCountForTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:_resetRenderCountForTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:_renderCountForTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:_renderCountForTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:getChromiumLaunchArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:getBrowser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:closeBrowser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:closeBrowser",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:resolveColorModeCSS",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:resolveColorModeCSS",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:resolveRenderScale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:resolveRenderScale",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:renderHTMLToPDF",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:renderHTMLToPDF",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:renderHTMLToPDFFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:renderHTMLToPDFFile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:batchRenderHTML",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "function:packages/core/src/puppeteer-renderer.ts:batchRenderHTML",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/puppeteer-renderer.ts",
+      "target": "file:packages/core/src/types/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/render-all-pack-themes.ts",
+      "target": "function:scripts/render-all-pack-themes.ts:loadManifests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/render-all-pack-themes.ts",
+      "target": "function:scripts/render-all-pack-themes.ts:loadThemeIds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/render-all-pack-themes.ts",
+      "target": "function:scripts/render-all-pack-themes.ts:applyTheme",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/render-all-pack-themes.ts",
+      "target": "function:scripts/render-all-pack-themes.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/render-all-pack-themes.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/render-all-pack-themes.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/render-all-packs.ts",
+      "target": "function:scripts/render-all-packs.ts:loadManifests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/render-all-packs.ts",
+      "target": "function:scripts/render-all-packs.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/render-all-packs.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/render-all-packs.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-theme-injection.ts",
+      "target": "function:scripts/smoke-theme-injection.ts:applyTheme",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/smoke-theme-injection.ts",
+      "target": "function:scripts/smoke-theme-injection.ts:renderOne",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/smoke-theme-injection.ts",
+      "target": "function:scripts/smoke-theme-injection.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/smoke-theme-injection.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-theme-injection.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/cli-scaffold.test.ts",
+      "target": "file:packages/cli/src/scaffold.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/dimensions.test.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/preview-server.test.ts",
+      "target": "function:tests/unit/preview-server.test.ts:spawnServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/preview-server.test.ts",
+      "target": "file:packages/cli/src/preview-server.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/puppeteer-renderer-mock.test.ts",
+      "target": "function:tests/unit/puppeteer-renderer-mock.test.ts:makePage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/puppeteer-renderer-mock.test.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/puppeteer-renderer-pure.test.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/puppeteer-renderer-restart.test.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/render-scale.test.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

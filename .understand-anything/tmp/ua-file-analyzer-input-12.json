@@ -1,0 +1,70 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "audit/CODEBASE_AUDIT_REPORT.json",
+      "language": "json",
+      "sizeLines": 139,
+      "fileCategory": "config"
+    },
+    {
+      "path": "audit/CODEBASE_AUDIT_REPORT.md",
+      "language": "markdown",
+      "sizeLines": 269,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/GAPS.md",
+      "language": "markdown",
+      "sizeLines": 62,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/IMPLEMENTATION_ROADMAP.csv",
+      "language": "csv",
+      "sizeLines": 28,
+      "fileCategory": "data"
+    },
+    {
+      "path": "audit/IMPLEMENTATION_ROADMAP.md",
+      "language": "markdown",
+      "sizeLines": 88,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/POST_SPRINT_STATUS.md",
+      "language": "markdown",
+      "sizeLines": 138,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/README.md",
+      "language": "markdown",
+      "sizeLines": 122,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/SLIDE_OUTLINE.md",
+      "language": "markdown",
+      "sizeLines": 76,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/TEST_STRATEGY.md",
+      "language": "markdown",
+      "sizeLines": 104,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "audit/CODEBASE_AUDIT_REPORT.json": [],
+    "audit/CODEBASE_AUDIT_REPORT.md": [],
+    "audit/GAPS.md": [],
+    "audit/IMPLEMENTATION_ROADMAP.csv": [],
+    "audit/IMPLEMENTATION_ROADMAP.md": [],
+    "audit/POST_SPRINT_STATUS.md": [],
+    "audit/README.md": [],
+    "audit/SLIDE_OUTLINE.md": [],
+    "audit/TEST_STRATEGY.md": []
+  }
+}

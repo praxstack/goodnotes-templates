@@ -1,0 +1,424 @@
+{
+  "nodes": [
+    {
+      "id": "document:audit/iteration-5/SESSION-LOG.md",
+      "type": "document",
+      "name": "SESSION-LOG.md",
+      "filePath": "audit/iteration-5/SESSION-LOG.md",
+      "summary": "Documentation: 16 sections, 169 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-5/STATUS.md",
+      "type": "document",
+      "name": "STATUS.md",
+      "filePath": "audit/iteration-5/STATUS.md",
+      "summary": "Documentation: 12 sections, 239 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-6/STATUS.md",
+      "type": "document",
+      "name": "STATUS.md",
+      "filePath": "audit/iteration-6/STATUS.md",
+      "summary": "Documentation: 17 sections, 264 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/gstack-archive/ceo-plans/2026-04-30-shadcn-for-goodnotes.md",
+      "type": "document",
+      "name": "2026-04-30-shadcn-for-goodnotes.md",
+      "filePath": "docs/gstack-archive/ceo-plans/2026-04-30-shadcn-for-goodnotes.md",
+      "summary": "Documentation: 35 sections, 437 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/gstack-archive/ceo-plans/archive/2026-04-09-full-breadth-engine.md",
+      "type": "document",
+      "name": "2026-04-09-full-breadth-engine.md",
+      "filePath": "docs/gstack-archive/ceo-plans/archive/2026-04-09-full-breadth-engine.md",
+      "summary": "Documentation: 6 sections, 35 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:docs/gstack-archive/main-reviews.jsonl",
+      "type": "file",
+      "name": "main-reviews.jsonl",
+      "filePath": "docs/gstack-archive/main-reviews.jsonl",
+      "summary": "Jsonl source file (9 lines).",
+      "tags": [
+        "source",
+        "module",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:docs/gstack-archive/timeline.jsonl",
+      "type": "file",
+      "name": "timeline.jsonl",
+      "filePath": "docs/gstack-archive/timeline.jsonl",
+      "summary": "Jsonl source file (5 lines).",
+      "tags": [
+        "source",
+        "module",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/superpowers/specs/2026-04-10-self-contained-templates-design.md",
+      "type": "document",
+      "name": "2026-04-10-self-contained-templates-design.md",
+      "filePath": "docs/superpowers/specs/2026-04-10-self-contained-templates-design.md",
+      "summary": "Documentation: 35 sections, 445 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:eslint.config.js",
+      "type": "file",
+      "name": "eslint.config.js",
+      "filePath": "eslint.config.js",
+      "summary": "Configuration module exposing settings and tunables (0 exports).",
+      "tags": [
+        "config",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:examples/prax-journal/prax_adhd_planner.html",
+      "type": "file",
+      "name": "prax_adhd_planner.html",
+      "filePath": "examples/prax-journal/prax_adhd_planner.html",
+      "summary": "HTML template (prax_adhd_planner.html, 1271 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:output/.gitkeep",
+      "type": "file",
+      "name": ".gitkeep",
+      "filePath": "output/.gitkeep",
+      "summary": "Unknown source file (0 lines).",
+      "tags": [
+        "source",
+        "module",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/cli/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/cli/package.json",
+      "summary": "Package manifest declaring dependencies, scripts, and metadata (27 lines).",
+      "tags": [
+        "configuration",
+        "npm",
+        "manifest"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/cli/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "packages/cli/tsconfig.json",
+      "summary": "TypeScript compiler configuration (12 lines).",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/base.css",
+      "type": "file",
+      "name": "base.css",
+      "filePath": "packages/core/assets/base.css",
+      "summary": "Stylesheet (base.css, 229 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/core/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "packages/core/package.json",
+      "summary": "Package manifest declaring dependencies, scripts, and metadata (97 lines).",
+      "tags": [
+        "configuration",
+        "npm",
+        "manifest"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/core/src/packs.ts",
+      "type": "file",
+      "name": "packs.ts",
+      "filePath": "packages/core/src/packs.ts",
+      "summary": "Typescript module exposing 5 functions and 4 exports (493 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/packs.ts:getTemplate",
+      "type": "function",
+      "name": "getTemplate",
+      "filePath": "packages/core/src/packs.ts",
+      "lineRange": [
+        477,
+        479
+      ],
+      "summary": "Function `getTemplate` (3 lines) in packs.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/packs.ts:getTemplatesByCategory",
+      "type": "function",
+      "name": "getTemplatesByCategory",
+      "filePath": "packages/core/src/packs.ts",
+      "lineRange": [
+        484,
+        486
+      ],
+      "summary": "Function `getTemplatesByCategory` (3 lines) in packs.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/packs.ts:getTemplateIds",
+      "type": "function",
+      "name": "getTemplateIds",
+      "filePath": "packages/core/src/packs.ts",
+      "lineRange": [
+        491,
+        493
+      ],
+      "summary": "Function `getTemplateIds` (3 lines) in packs.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/core/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "packages/core/tsconfig.json",
+      "summary": "TypeScript compiler configuration (11 lines).",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/craving-surf/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/craving-surf/README.md",
+      "summary": "Project README with 3 sections (17 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/friend-letter/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/friend-letter/README.md",
+      "summary": "Project README with 4 sections (26 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/grateful-for/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/grateful-for/README.md",
+      "summary": "Project README with 3 sections (17 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/if-then-plan/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/if-then-plan/README.md",
+      "summary": "Project README with 3 sections (18 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/mood-dot/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/mood-dot/README.md",
+      "summary": "Project README with 7 sections (72 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/named-patterns/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/named-patterns/README.md",
+      "summary": "Project README with 3 sections (17 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/phq2-lite/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/phq2-lite/README.md",
+      "summary": "Project README with 3 sections (17 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/README.md",
+      "summary": "Project README with 10 sections (100 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/core/src/packs.ts",
+      "target": "function:packages/core/src/packs.ts:getTemplate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/packs.ts",
+      "target": "function:packages/core/src/packs.ts:getTemplate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/packs.ts",
+      "target": "function:packages/core/src/packs.ts:getTemplatesByCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/packs.ts",
+      "target": "function:packages/core/src/packs.ts:getTemplatesByCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/packs.ts",
+      "target": "function:packages/core/src/packs.ts:getTemplateIds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/packs.ts",
+      "target": "function:packages/core/src/packs.ts:getTemplateIds",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

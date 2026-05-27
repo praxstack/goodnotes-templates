@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-budget-tracker/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-budget-tracker/budget-tracker.html",
+      "language": "html",
+      "sizeLines": 424,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-budget-tracker/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-budget-tracker/README.md": [],
+    "packages/packs-budget-tracker/budget-tracker.html": [],
+    "packages/packs-budget-tracker/manifest.json": []
+  }
+}

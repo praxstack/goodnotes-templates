@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-recipe-card/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-recipe-card/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/packs-recipe-card/recipe-card.html",
+      "language": "html",
+      "sizeLines": 509,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-recipe-card/README.md": [],
+    "packages/packs-recipe-card/manifest.json": [],
+    "packages/packs-recipe-card/recipe-card.html": []
+  }
+}

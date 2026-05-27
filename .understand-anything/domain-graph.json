@@ -1,0 +1,1153 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "pretext-templates",
+    "languages": [
+      "astro",
+      "css",
+      "csv",
+      "html",
+      "javascript",
+      "json",
+      "jsonl",
+      "markdown",
+      "mdx",
+      "mmd",
+      "shell",
+      "typescript",
+      "unknown",
+      "yaml"
+    ],
+    "frameworks": [
+      "Astro",
+      "GitHub Actions",
+      "Playwright",
+      "Puppeteer",
+      "TypeScript",
+      "Vercel",
+      "Vitest"
+    ],
+    "description": "Programmatically generate high-quality digital planning templates, stickers, and page assets optimized for GoodNotes and similar digital note-taking apps. Monorepo root \u2014 see packages/*. Note: this project has over 100 source files; consider scoping analysis to a subdirectory for faster results.",
+    "analyzedAt": "2026-05-27T03:53:48.044363Z",
+    "gitCommitHash": "d170d3b098033dd66c62ce61da990f38bde316dd"
+  },
+  "nodes": [
+    {
+      "id": "domain:template-authoring",
+      "type": "domain",
+      "name": "Template Authoring",
+      "summary": "Authors and maintains the catalog of self-contained template packs (planners, journals, trackers, tactile series). Each pack ships its own manifest, theme, README, and HTML/CSS source, following the unified pack contract enforced by packages/core.",
+      "tags": [
+        "authoring",
+        "pack-system",
+        "content"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": [
+          "Pack",
+          "Manifest",
+          "Theme",
+          "Template",
+          "Variant"
+        ],
+        "businessRules": [
+          "Every pack must include a valid manifest.json",
+          "Each pack is self-contained: HTML, CSS, theme, and metadata co-located",
+          "Pack IDs must be globally unique across the registry",
+          "Tactile-series packs share a common cohesive design language"
+        ],
+        "crossDomainInteractions": [
+          "Feeds the Rendering & Generation domain with pack source HTML/CSS",
+          "Surfaces metadata to the Distribution & Showcase domain (gallery)"
+        ]
+      }
+    },
+    {
+      "id": "domain:rendering-generation",
+      "type": "domain",
+      "name": "Rendering & Generation",
+      "summary": "Programmatic rendering pipeline that turns pack source HTML/CSS into deliverables: PDFs, PNG previews, sticker assets, and standalone HTML. Built on a Puppeteer/Chromium rendering engine plus per-renderer specializations (PDF post-processing, PDF splice, PNG sprite renderer, sticker renderer, prax-journal renderer).",
+      "tags": [
+        "rendering",
+        "pdf",
+        "png",
+        "puppeteer",
+        "pipeline"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": [
+          "Renderer",
+          "PDFDocument",
+          "PNGImage",
+          "Sticker",
+          "Spec",
+          "Variant"
+        ],
+        "businessRules": [
+          "All renderers consume the same Pack contract from packages/core",
+          "PDF post-processing applies dimension validation + audit checks",
+          "Stickers render as transparent PNGs with consistent margins",
+          "Standalone HTML inlines fonts and CSS to be portable"
+        ],
+        "crossDomainInteractions": [
+          "Consumes pack source from Template Authoring",
+          "Produces output consumed by Distribution & Showcase (gallery PDFs/PNGs)",
+          "Triggered by build scripts in scripts/ and the CLI in packages/cli"
+        ]
+      }
+    },
+    {
+      "id": "domain:distribution-showcase",
+      "type": "domain",
+      "name": "Distribution & Showcase",
+      "summary": "Astro-based gallery web app and registry that publish the catalog to end-users. The gallery generates blurhashes, theme palettes, OG cards, MDX content, and per-pack pages, deployed to Vercel.",
+      "tags": [
+        "gallery",
+        "astro",
+        "distribution",
+        "vercel"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": [
+          "GalleryPage",
+          "PackEntry",
+          "Blurhash",
+          "OGCard",
+          "Specimen",
+          "Theme"
+        ],
+        "businessRules": [
+          "Pack IDs in the gallery must match those in the registry",
+          "Every pack page must include a generated blurhash placeholder",
+          "Vercel deploy must run validate-pack-ids before staging",
+          "Theme palettes are precomputed and shipped as JSON"
+        ],
+        "crossDomainInteractions": [
+          "Reads pack metadata from Template Authoring",
+          "Reads rendered PDFs/PNGs from Rendering & Generation",
+          "Surfaces audit signals from Quality & Audit on the contributor pages"
+        ]
+      }
+    },
+    {
+      "id": "domain:quality-audit",
+      "type": "domain",
+      "name": "Quality & Audit",
+      "summary": "Multi-iteration audit, testing, and CI/CD enforcement. Tracks 6 audit iterations (architecture, supply-chain, privacy, performance, threat-model, UI/UX accessibility), runs unit/visual/E2E tests via Vitest + Playwright, and gates every commit through GitHub Actions.",
+      "tags": [
+        "audit",
+        "testing",
+        "ci-cd",
+        "quality-gate"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": [
+          "AuditIteration",
+          "Finding",
+          "Roadmap",
+          "TestSuite",
+          "Workflow",
+          "Verification"
+        ],
+        "businessRules": [
+          "Every commit triggers the CI workflow before merge",
+          "Visual regression baselines must match generated output within tolerance",
+          "Unsealed audit findings block release bundling",
+          "Iteration verification must produce a phase-validation.md"
+        ],
+        "crossDomainInteractions": [
+          "Audits all three other domains",
+          "Consumes outputs from Rendering & Generation for visual regression"
+        ]
+      }
+    },
+    {
+      "id": "flow:author-new-pack",
+      "type": "flow",
+      "name": "Author a New Template Pack",
+      "summary": "Scaffold and develop a new self-contained template pack from CLI scaffold through to a renderable manifest+HTML+CSS bundle.",
+      "tags": [
+        "authoring",
+        "scaffold"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "CLI: pretext scaffold",
+        "entryType": "cli"
+      }
+    },
+    {
+      "id": "step:author-new-pack:scaffold-pack",
+      "type": "step",
+      "name": "Scaffold pack skeleton",
+      "summary": "CLI command creates a new packages/packs-<name>/ directory with manifest, README, theme, and a starter HTML/CSS template.",
+      "tags": [
+        "authoring",
+        "scaffold",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/cli/src/scaffold.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:author-new-pack:edit-manifest",
+      "type": "step",
+      "name": "Edit manifest.json",
+      "summary": "Author fills in pack id, title, description, tags, theme references, and variant list.",
+      "tags": [
+        "authoring",
+        "scaffold",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:author-new-pack:design-html",
+      "type": "step",
+      "name": "Design HTML/CSS template",
+      "summary": "Author writes the page HTML and CSS, optionally with dark and light variants.",
+      "tags": [
+        "authoring",
+        "scaffold",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:author-new-pack:add-readme",
+      "type": "step",
+      "name": "Document pack",
+      "summary": "Author writes README explaining intent, usage, and design rationale.",
+      "tags": [
+        "authoring",
+        "scaffold",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:author-new-pack:validate-id",
+      "type": "step",
+      "name": "Validate pack ID",
+      "summary": "Pre-deploy validator ensures the pack ID is unique and consistent across the registry and gallery MDX.",
+      "tags": [
+        "authoring",
+        "scaffold",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:author-new-pack:register-pack",
+      "type": "step",
+      "name": "Register pack in core",
+      "summary": "Pack is added to the core registry so renderers and the CLI can resolve it by id.",
+      "tags": [
+        "authoring",
+        "scaffold",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "flow:render-pack-to-pdf",
+      "type": "flow",
+      "name": "Render Pack to PDF/PNG",
+      "summary": "Take a pack from packages/packs-* through Puppeteer rendering, PDF post-processing, and audit checks to produce final deliverables.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": "CLI: pretext render <pack>",
+        "entryType": "cli"
+      }
+    },
+    {
+      "id": "step:render-pack-to-pdf:cli-entry",
+      "type": "step",
+      "name": "CLI dispatch",
+      "summary": "CLI parses arguments and routes to the render command.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/cli/src/index.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-pack-to-pdf:resolve-pack",
+      "type": "step",
+      "name": "Resolve pack from registry",
+      "summary": "Resolve the pack identifier to a concrete pack root, manifest, and template entry.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/registry-resolve.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-pack-to-pdf:compute-dimensions",
+      "type": "step",
+      "name": "Compute target dimensions",
+      "summary": "Compute page dimensions from the pack's manifest (size, margins, orientation).",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/dimensions.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-pack-to-pdf:render-html",
+      "type": "step",
+      "name": "Render HTML via Puppeteer",
+      "summary": "Spin up headless Chromium, load the pack HTML+CSS, and capture the rendered PDF and PNG outputs.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/puppeteer-renderer.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-pack-to-pdf:postprocess-pdf",
+      "type": "step",
+      "name": "Post-process PDF",
+      "summary": "Apply linearisation, metadata, and dimension fixes to the raw PDF.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/pdf-postprocess.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-pack-to-pdf:splice-pdf",
+      "type": "step",
+      "name": "Splice PDF pages",
+      "summary": "Merge or split PDF pages per the pack's variant configuration.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/pdf-splice.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-pack-to-pdf:audit-output",
+      "type": "step",
+      "name": "Audit rendered output",
+      "summary": "Run dimension and content audits on the PDF/PNG to catch regressions.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/audit.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-pack-to-pdf:build-standalone",
+      "type": "step",
+      "name": "Build standalone HTML",
+      "summary": "Produce a portable, font-and-CSS-inlined standalone HTML for the pack.",
+      "tags": [
+        "rendering",
+        "pdf",
+        "puppeteer",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/standalone-builder.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "flow:render-stickers",
+      "type": "flow",
+      "name": "Render Sticker Sheets",
+      "summary": "Generate transparent PNG stickers for journal packs (mood dots, friend letters, wins jar, thought flips, wave 1/2 stickers) using the dedicated sticker rendering pipeline.",
+      "tags": [
+        "stickers",
+        "png",
+        "rendering"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "scripts/build-stickers.ts",
+        "entryType": "cli"
+      }
+    },
+    {
+      "id": "step:render-stickers:enumerate-targets",
+      "type": "step",
+      "name": "Enumerate sticker targets",
+      "summary": "Walk the journal packs and enumerate sticker definitions to build.",
+      "tags": [
+        "stickers",
+        "png",
+        "rendering",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "scripts/build-stickers.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-stickers:render-sticker",
+      "type": "step",
+      "name": "Render each sticker",
+      "summary": "Render each sticker as a transparent PNG via the sticker renderer.",
+      "tags": [
+        "stickers",
+        "png",
+        "rendering",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-stickers:optimize-png",
+      "type": "step",
+      "name": "Optimise PNG",
+      "summary": "Apply PNG optimization and metadata stripping.",
+      "tags": [
+        "stickers",
+        "png",
+        "rendering",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "packages/core/src/png-renderer.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:render-stickers:rebuild-index",
+      "type": "step",
+      "name": "Rebuild sticker index",
+      "summary": "Update the sticker index manifest used by downstream consumers.",
+      "tags": [
+        "stickers",
+        "png",
+        "rendering",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "scripts/rebuild-all-stickers-index.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "flow:gallery-build-deploy",
+      "type": "flow",
+      "name": "Build & Deploy Gallery",
+      "summary": "Build the Astro gallery site: enrich pack MDX, encode blurhashes, build OG cards, generate specimens, copy themed PDFs, validate pack IDs, then deploy to Vercel.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "vercel"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": "apps/gallery/scripts/* + Astro build",
+        "entryType": "cli"
+      }
+    },
+    {
+      "id": "step:gallery-build-deploy:enrich-mdx",
+      "type": "step",
+      "name": "Enrich pack MDX",
+      "summary": "Augment pack MDX content with metadata fetched from manifests and registry.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:build-palette",
+      "type": "step",
+      "name": "Build theme palette",
+      "summary": "Compute per-theme color palettes for previews.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:encode-blurhash",
+      "type": "step",
+      "name": "Encode blurhash",
+      "summary": "Generate blurhash placeholders for every pack preview image.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:build-og",
+      "type": "step",
+      "name": "Build OG cards",
+      "summary": "Render Open-Graph share cards for every pack page.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:generate-specimens",
+      "type": "step",
+      "name": "Generate specimens",
+      "summary": "Produce specimen previews showcasing typography, themes, and components.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:copy-pdfs",
+      "type": "step",
+      "name": "Copy pack PDFs",
+      "summary": "Copy rendered PDFs from packs/* into the gallery's public assets.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:copy-themed-pdfs",
+      "type": "step",
+      "name": "Copy themed PDFs",
+      "summary": "Copy variant-themed PDF deliverables into the gallery.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:validate-ids",
+      "type": "step",
+      "name": "Validate pack IDs",
+      "summary": "Pre-deploy gate ensuring no orphaned MDX entries or duplicate IDs.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:stage-vercel",
+      "type": "step",
+      "name": "Stage Vercel config",
+      "summary": "Materialise the Vercel deployment config (vercel.json) into the build output.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "step:gallery-build-deploy:astro-build",
+      "type": "step",
+      "name": "Astro build & deploy",
+      "summary": "Run Astro build to produce static output, then deploy to Vercel.",
+      "tags": [
+        "gallery",
+        "astro",
+        "deploy",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "apps/gallery/astro.config.mjs",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "flow:audit-and-test",
+      "type": "flow",
+      "name": "Audit, Test & CI/CD",
+      "summary": "Continuous integration loop: every commit runs lint, unit tests, visual regression, and E2E tests; release branches additionally run the multi-iteration audit pipeline that verifies architecture, privacy, performance, supply chain, and accessibility.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "github-actions"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": ".github/workflows/ci.yml",
+        "entryType": "event"
+      }
+    },
+    {
+      "id": "step:audit-and-test:ci-trigger",
+      "type": "step",
+      "name": "CI trigger",
+      "summary": "GitHub Actions workflow runs on every push/PR to validate the full repo.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": ".github/workflows/ci.yml",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:audit-and-test:unit-tests",
+      "type": "step",
+      "name": "Run unit tests",
+      "summary": "Execute Vitest unit suite over packages/core, CLI, and pack helpers.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "vitest.config.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:audit-and-test:visual-regression",
+      "type": "step",
+      "name": "Visual regression",
+      "summary": "Run visual diff against rendered PDFs/PNGs via the visual-vitest project.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "vitest.visual.config.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:audit-and-test:e2e-gallery",
+      "type": "step",
+      "name": "E2E gallery tests",
+      "summary": "Playwright drives the gallery app to verify navigation, rendering, and search.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "playwright.config.ts",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:audit-and-test:audit-pipeline",
+      "type": "step",
+      "name": "Audit pipeline",
+      "summary": "Multi-iteration audit workflow runs architecture, privacy, performance, threat-model, and UI/UX checks.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": ".github/workflows/audit.yml",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:audit-and-test:phase-validation",
+      "type": "step",
+      "name": "Validate audit phase",
+      "summary": "Each iteration must produce a phase-validation document recording verification results.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "audit/iteration-4/phase-validation.md",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:audit-and-test:local-audit-script",
+      "type": "step",
+      "name": "Local audit script",
+      "summary": "Developers can run the same audit suite locally via scripts/audit.sh before pushing.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": "scripts/audit.sh",
+      "lineRange": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "step:audit-and-test:release-generate",
+      "type": "step",
+      "name": "Release generation",
+      "summary": "On release branches, regenerate every pack's PDFs/PNGs and bundle the release.",
+      "tags": [
+        "ci-cd",
+        "testing",
+        "audit",
+        "step"
+      ],
+      "complexity": "simple",
+      "filePath": ".github/workflows/generate.yml",
+      "lineRange": [
+        1,
+        1
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "domain:template-authoring",
+      "target": "flow:author-new-pack",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:author-new-pack",
+      "target": "step:author-new-pack:scaffold-pack",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:author-new-pack",
+      "target": "step:author-new-pack:edit-manifest",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:author-new-pack",
+      "target": "step:author-new-pack:design-html",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:author-new-pack",
+      "target": "step:author-new-pack:add-readme",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:author-new-pack",
+      "target": "step:author-new-pack:validate-id",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:author-new-pack",
+      "target": "step:author-new-pack:register-pack",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:rendering-generation",
+      "target": "flow:render-pack-to-pdf",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:cli-entry",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.1
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:resolve-pack",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:compute-dimensions",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:render-html",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:postprocess-pdf",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:splice-pdf",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:audit-output",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:render-pack-to-pdf",
+      "target": "step:render-pack-to-pdf:build-standalone",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "domain:rendering-generation",
+      "target": "flow:render-stickers",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:render-stickers",
+      "target": "step:render-stickers:enumerate-targets",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:render-stickers",
+      "target": "step:render-stickers:render-sticker",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:render-stickers",
+      "target": "step:render-stickers:optimize-png",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:render-stickers",
+      "target": "step:render-stickers:rebuild-index",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "domain:distribution-showcase",
+      "target": "flow:gallery-build-deploy",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:enrich-mdx",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.1
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:build-palette",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:encode-blurhash",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:build-og",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:generate-specimens",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:copy-pdfs",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:copy-themed-pdfs",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:validate-ids",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:stage-vercel",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "flow:gallery-build-deploy",
+      "target": "step:gallery-build-deploy:astro-build",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:quality-audit",
+      "target": "flow:audit-and-test",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:ci-trigger",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.1
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:unit-tests",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:visual-regression",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:e2e-gallery",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:audit-pipeline",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:phase-validation",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:local-audit-script",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:audit-and-test",
+      "target": "step:audit-and-test:release-generate",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "domain:template-authoring",
+      "target": "domain:rendering-generation",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Authored packs feed the rendering pipeline as input."
+    },
+    {
+      "source": "domain:rendering-generation",
+      "target": "domain:distribution-showcase",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Rendered PDFs and PNGs are copied into the gallery for distribution."
+    },
+    {
+      "source": "domain:template-authoring",
+      "target": "domain:distribution-showcase",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Pack metadata (manifests, MDX) populates the gallery catalog."
+    },
+    {
+      "source": "domain:quality-audit",
+      "target": "domain:rendering-generation",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Visual regression and audit pipelines validate rendered output."
+    },
+    {
+      "source": "domain:quality-audit",
+      "target": "domain:distribution-showcase",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "CI gates Vercel deploys via validate-pack-ids and audit checks."
+    }
+  ],
+  "layers": [],
+  "tour": []
+}

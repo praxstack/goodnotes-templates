@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-prax-journal/CHANGELOG.md",
+      "type": "document",
+      "name": "CHANGELOG.md",
+      "filePath": "packages/packs-prax-journal/CHANGELOG.md",
+      "summary": "Changelog tracking releases and notable changes (7 sections, 78 lines).",
+      "tags": [
+        "documentation",
+        "release-notes",
+        "history"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/DESIGN.md",
+      "type": "document",
+      "name": "DESIGN.md",
+      "filePath": "packages/packs-prax-journal/DESIGN.md",
+      "summary": "Documentation: 35 sections, 410 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/README.md",
+      "summary": "Project README with 9 sections (295 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/SPEC.md",
+      "type": "document",
+      "name": "SPEC.md",
+      "filePath": "packages/packs-prax-journal/SPEC.md",
+      "summary": "Documentation: 11 sections, 128 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/design-system.html",
+      "type": "file",
+      "name": "design-system.html",
+      "filePath": "packages/packs-prax-journal/design-system.html",
+      "summary": "HTML template (design-system.html, 1352 lines).",
+      "tags": [
+        "html",
+        "template",
+        "design-system",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/packs-prax-journal/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-prax-journal/manifest.json",
+      "summary": "manifest.json configuration file (18 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/profile.README.md",
+      "type": "document",
+      "name": "profile.README.md",
+      "filePath": "packages/packs-prax-journal/profile.README.md",
+      "summary": "Documentation: 8 sections, 131 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:packages/packs-prax-journal/profile.example.json",
+      "type": "config",
+      "name": "profile.example.json",
+      "filePath": "packages/packs-prax-journal/profile.example.json",
+      "summary": "profile.example.json configuration file (55 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

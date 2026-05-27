@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/packs-prax-journal/versions/v1/daily.dark.css",
+      "type": "file",
+      "name": "daily.dark.css",
+      "filePath": "packages/packs-prax-journal/versions/v1/daily.dark.css",
+      "summary": "Stylesheet (daily.dark.css, 21 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v1/daily.html",
+      "type": "file",
+      "name": "daily.html",
+      "filePath": "packages/packs-prax-journal/versions/v1/daily.html",
+      "summary": "HTML template (daily.html, 617 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v1/monthly.dark.css",
+      "type": "file",
+      "name": "monthly.dark.css",
+      "filePath": "packages/packs-prax-journal/versions/v1/monthly.dark.css",
+      "summary": "Stylesheet (monthly.dark.css, 21 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v1/monthly.html",
+      "type": "file",
+      "name": "monthly.html",
+      "filePath": "packages/packs-prax-journal/versions/v1/monthly.html",
+      "summary": "HTML template (monthly.html, 188 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v1/weekly.dark.css",
+      "type": "file",
+      "name": "weekly.dark.css",
+      "filePath": "packages/packs-prax-journal/versions/v1/weekly.dark.css",
+      "summary": "Stylesheet (weekly.dark.css, 21 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v1/weekly.html",
+      "type": "file",
+      "name": "weekly.html",
+      "filePath": "packages/packs-prax-journal/versions/v1/weekly.html",
+      "summary": "HTML template (weekly.html, 401 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

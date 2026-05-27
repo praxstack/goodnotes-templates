@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-eisenhower-matrix/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-eisenhower-matrix/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-eisenhower-matrix/eisenhower-matrix.html",
+      "type": "file",
+      "name": "eisenhower-matrix.html",
+      "filePath": "packages/packs-eisenhower-matrix/eisenhower-matrix.html",
+      "summary": "HTML template (eisenhower-matrix.html, 479 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/packs-eisenhower-matrix/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-eisenhower-matrix/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,689 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 12,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "audit/iteration-1/GAPS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 16,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "Iteration 1 — Gaps (per-iteration subset)",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "audit/iteration-1/architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 62,
+      "nonEmptyLines": 44,
+      "sections": [
+        {
+          "heading": "Phase 3 — Architecture Review",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Pattern classification",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Current architecture (Mermaid)",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Strengths (observed, with evidence)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Weaknesses (observed, with evidence)",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Rubric (1–5, with evidence)",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "Target architecture (delta, not a rewrite)",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "Migration delta",
+          "level": 2,
+          "line": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "audit/iteration-1/claims-ledger.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 31,
+      "nonEmptyLines": 29,
+      "sections": [
+        {
+          "heading": "Claims Ledger — doc claims vs code reality (for verification in Phases 5–8)",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "audit/iteration-1/docs-review.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 38,
+      "nonEmptyLines": 31,
+      "sections": [
+        {
+          "heading": "Phase 1 — Documentation & Spec Review",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Documentation inventory",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Quality rubric (0–5)",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Most important documentation gaps (only listing ones that cause real reader harm)",
+          "level": 2,
+          "line": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "audit/iteration-1/findings.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1100,
+      "nonEmptyLines": 1100,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "iteration",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "generated_at",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "package",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "findings",
+          "level": 1,
+          "line": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "audit/iteration-1/findings.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 253,
+      "nonEmptyLines": 170,
+      "sections": [
+        {
+          "heading": "Iteration 1 — Findings (human-readable)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "FIND-0001 — Preview HTTP server binds to all interfaces by default",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "FIND-0002 — Bespoke HTML escape in preview gallery misses `'`",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "FIND-0003 — Chromium launched with `--no-sandbox` unconditionally",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "FIND-0004 — Puppeteer waits on arbitrary outbound requests (`networkidle0`), no URL allow-list",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "FIND-0005 — `basic-ftp` transitive HIGH-CVSS",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "FIND-0006 — vitest 2.1.x pulls moderate vite/esbuild advisories",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "FIND-0007 — 8 of 12 prod deps are unused",
+          "level": 2,
+          "line": 112
+        },
+        {
+          "heading": "FIND-0008 — CI workflow does not gate PRs",
+          "level": 2,
+          "line": 121
+        },
+        {
+          "heading": "FIND-0009 — GitHub Actions pinned by tag not SHA",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "FIND-0010 — Release artifacts unsigned",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "FIND-0011 — `tsc --noEmit` fails: DOM lib missing + `import.meta` in CommonJS",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "FIND-0012 — Bespoke HTML regex parser in `daily-year-v2.ts` is fragile",
+          "level": 2,
+          "line": 163
+        },
+        {
+          "heading": "FIND-0013 — README / CONTRIBUTING / CLAUDE.md reference deleted files",
+          "level": 2,
+          "line": 172
+        },
+        {
+          "heading": "FIND-0014 — \"No external APIs at runtime\" claim is false (Google Fonts)",
+          "level": 2,
+          "line": 180
+        },
+        {
+          "heading": "FIND-0015 — Color-mode CSS discovery logic duplicated",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "FIND-0016 — Zero tests on T1 modules",
+          "level": 2,
+          "line": 198
+        },
+        {
+          "heading": "FIND-0017 — `batchRenderHTML` swallows per-template errors",
+          "level": 2,
+          "line": 207
+        },
+        {
+          "heading": "FIND-0018 — Dark-mode parity 11/32 templates, contrast unmeasured",
+          "level": 2,
+          "line": 216
+        },
+        {
+          "heading": "FIND-0019 — `package.json` repository.url stub + README clone URL 404",
+          "level": 2,
+          "line": 225
+        },
+        {
+          "heading": "FIND-0020 — Missing THIRD_PARTY_LICENSES for LGPL-3.0 libvips binary",
+          "level": 2,
+          "line": 233
+        },
+        {
+          "heading": "FIND-0021 — Preview server 404 path has no Cache-Control; valid responses use `no-cache`",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 249
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 23
+      }
+    },
+    {
+      "path": "audit/iteration-1/performance-and-observability.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 60,
+      "nonEmptyLines": 42,
+      "sections": [
+        {
+          "heading": "Phase 7 — Performance & Observability",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What can be assessed statically",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Algorithmic complexity",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "Performance smells found",
+          "level": 3,
+          "line": 16
+        },
+        {
+          "heading": "What cannot be assessed without profiling",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "Observability",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Logging",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "Metrics / tracing",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "Alerting",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Error visibility",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "audit/iteration-1/privacy-review.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 26,
+      "nonEmptyLines": 16,
+      "sections": [
+        {
+          "heading": "Phase 7.5 — Privacy & Compliance",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Scope determination",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Result: `not_applicable`",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Residual privacy-adjacent notes (not findings)",
+          "level": 2,
+          "line": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "audit/iteration-1/supply-chain.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 135,
+      "nonEmptyLines": 91,
+      "sections": [
+        {
+          "heading": "Phase 2 — Dependency, Supply Chain & Infrastructure Audit",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "2.1 — SBOM",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "2.2 — Dependency vulnerabilities",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Per-CVE detail",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "2.3 — Container image scanning",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "2.4 — Infrastructure-as-Code scanning",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "2.5 — Secret scanning (git history + HEAD)",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "2.6 — Supply-chain integrity (SLSA posture)",
+          "level": 2,
+          "line": 51
+        },
+        {
+          "heading": "2.7 — License audit",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "License breakdown (prod only)",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "The LGPL finding",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "Unlicensed or `MIT*` packages",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "No GPL/AGPL/SSPL in proprietary-conflict categories",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "2.8 — Unused dependencies (depcheck)",
+          "level": 2,
+          "line": 103
+        },
+        {
+          "heading": "2.9 — Static analysis (semgrep)",
+          "level": 2,
+          "line": 125
+        },
+        {
+          "heading": "Exit gate",
+          "level": 2,
+          "line": 131
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "audit/iteration-1/tests-and-quality-gates.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 93,
+      "nonEmptyLines": 70,
+      "sections": [
+        {
+          "heading": "Phase 6 — Tests & Quality Gates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Test execution",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Coverage %",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Test-maturity signals (present/absent)",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "CI quality gates (see FIND-0008)",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Proposed additions (targeted, not volume)",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Coverage-floor proposal (per-tier, not global)",
+          "level": 2,
+          "line": 76
+        },
+        {
+          "heading": "Exit gate",
+          "level": 2,
+          "line": 89
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "audit/iteration-1/threat-model.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 54,
+      "nonEmptyLines": 41,
+      "sections": [
+        {
+          "heading": "Phase 4 — Threat Model (STRIDE)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Scoping",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Trust boundaries (from Phase 0 §4)",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Threat catalogue",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Priority-ranked threats",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "What this feeds Phase 5 & Phase 6",
+          "level": 2,
+          "line": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "audit/iteration-1/ui-ux-a11y.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 69,
+      "nonEmptyLines": 47,
+      "sections": [
+        {
+          "heading": "Phase 8 — UI/UX & Accessibility",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Scope",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Tool runs",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "The preview gallery (`preview-server.ts` §71-139)",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "What's there",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Gaps against WCAG 2.2 AA",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "The generated PDF surface",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "Applicable WCAG criteria (static document view)",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "Core Web Vitals (LCP / INP / CLS)",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "Claim reconciliation",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 67
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    }
+  ]
+}

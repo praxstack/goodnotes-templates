@@ -1,0 +1,63 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/packs-prax-journal/versions/v5/brain-dump.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 442,
+      "nonEmptyLines": 410,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/midday.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 427,
+      "nonEmptyLines": 395,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/monthly.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 360,
+      "nonEmptyLines": 335,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/quarterly.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 322,
+      "nonEmptyLines": 299,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/reflect.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 405,
+      "nonEmptyLines": 373,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/today.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 523,
+      "nonEmptyLines": 494,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/weekly.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 397,
+      "nonEmptyLines": 373,
+      "metrics": {}
+    }
+  ]
+}

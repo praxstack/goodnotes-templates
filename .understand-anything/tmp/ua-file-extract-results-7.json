@@ -1,0 +1,1617 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/pdf-postprocess.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 301,
+      "nonEmptyLines": 261,
+      "functions": [
+        {
+          "name": "cssToPageRect",
+          "startLine": 23,
+          "endLine": 32,
+          "params": [
+            "cssX",
+            "cssY",
+            "cssWidth",
+            "cssHeight",
+            "pageHeight"
+          ]
+        },
+        {
+          "name": "addMetadata",
+          "startLine": 37,
+          "endLine": 53,
+          "params": [
+            "pdfBuffer",
+            "metadata"
+          ]
+        },
+        {
+          "name": "addHyperlinks",
+          "startLine": 63,
+          "endLine": 152,
+          "params": [
+            "pdfBuffer",
+            "links"
+          ]
+        },
+        {
+          "name": "addBookmarks",
+          "startLine": 169,
+          "endLine": 257,
+          "params": [
+            "pdfBuffer",
+            "bookmarks",
+            "options"
+          ]
+        },
+        {
+          "name": "postProcessPDF",
+          "startLine": 262,
+          "endLine": 283,
+          "params": [
+            "pdfBuffer",
+            "options"
+          ]
+        },
+        {
+          "name": "mergePDFs",
+          "startLine": 289,
+          "endLine": 301,
+          "params": [
+            "buffers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "addMetadata",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "addHyperlinks",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "addBookmarks",
+          "line": 169,
+          "isDefault": false
+        },
+        {
+          "name": "postProcessPDF",
+          "line": 262,
+          "isDefault": false
+        },
+        {
+          "name": "mergePDFs",
+          "line": 289,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addMetadata",
+          "callee": "PDFDocument.load",
+          "lineNumber": 41
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setTitle",
+          "lineNumber": 43
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setAuthor",
+          "lineNumber": 44
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setSubject",
+          "lineNumber": 45
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setKeywords",
+          "lineNumber": 46
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setCreator",
+          "lineNumber": 47
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setProducer",
+          "lineNumber": 48
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setCreationDate",
+          "lineNumber": 49
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.setModificationDate",
+          "lineNumber": 50
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "Buffer.from",
+          "lineNumber": 52
+        },
+        {
+          "caller": "addMetadata",
+          "callee": "doc.save",
+          "lineNumber": 52
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "PDFDocument.load",
+          "lineNumber": 67
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "doc.getPages",
+          "lineNumber": 68
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "console.warn",
+          "lineNumber": 72
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "console.warn",
+          "lineNumber": 76
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "Number.isFinite",
+          "lineNumber": 86
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "Number.isFinite",
+          "lineNumber": 87
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "Number.isFinite",
+          "lineNumber": 88
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "Number.isFinite",
+          "lineNumber": 89
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "console.warn",
+          "lineNumber": 93
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "link.rect.join",
+          "lineNumber": 94
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "sourcePage.getHeight",
+          "lineNumber": 101
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "cssToPageRect",
+          "lineNumber": 104
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "doc.context.obj",
+          "lineNumber": 120
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "PDFArray.withContext",
+          "lineNumber": 123
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "action.get",
+          "lineNumber": 127
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "PDFName.of",
+          "lineNumber": 127
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "destArray.push",
+          "lineNumber": 128
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "destArray.push",
+          "lineNumber": 129
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "PDFName.of",
+          "lineNumber": 129
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "doc.context.obj",
+          "lineNumber": 132
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "sourcePage.node.get",
+          "lineNumber": 141
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "PDFName.of",
+          "lineNumber": 141
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "annots.push",
+          "lineNumber": 143
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "doc.context.register",
+          "lineNumber": 143
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "PDFArray.withContext",
+          "lineNumber": 145
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "newAnnots.push",
+          "lineNumber": 146
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "doc.context.register",
+          "lineNumber": 146
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "sourcePage.node.set",
+          "lineNumber": 147
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "PDFName.of",
+          "lineNumber": 147
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "Buffer.from",
+          "lineNumber": 151
+        },
+        {
+          "caller": "addHyperlinks",
+          "callee": "doc.save",
+          "lineNumber": 151
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "PDFDocument.load",
+          "lineNumber": 175
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "doc.getPages",
+          "lineNumber": 176
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "doc.context.nextRef",
+          "lineNumber": 181
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "doc.context.nextRef",
+          "lineNumber": 188
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "Math.max",
+          "lineNumber": 189
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "Math.min",
+          "lineNumber": 189
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "console.warn",
+          "lineNumber": 195
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFArray.withContext",
+          "lineNumber": 199
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "dest.push",
+          "lineNumber": 200
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "dest.push",
+          "lineNumber": 201
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFName.of",
+          "lineNumber": 201
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "doc.context.obj",
+          "lineNumber": 203
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFString.of",
+          "lineNumber": 204
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "outlineItems.push",
+          "lineNumber": 210
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "bookmark.children.map",
+          "lineNumber": 213
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "createOutlineItem",
+          "lineNumber": 214
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "dict.set",
+          "lineNumber": 217
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFName.of",
+          "lineNumber": 217
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "dict.set",
+          "lineNumber": 218
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFName.of",
+          "lineNumber": 218
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "dict.set",
+          "lineNumber": 219
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFName.of",
+          "lineNumber": 219
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFNumber.of",
+          "lineNumber": 219
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "children[i].dict.set",
+          "lineNumber": 223
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFName.of",
+          "lineNumber": 223
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "children[i].dict.set",
+          "lineNumber": 224
+        },
+        {
+          "caller": "createOutlineItem",
+          "callee": "PDFName.of",
+          "lineNumber": 224
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "bookmarks.map",
+          "lineNumber": 231
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "createOutlineItem",
+          "lineNumber": 231
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "topLevel[i].dict.set",
+          "lineNumber": 235
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "PDFName.of",
+          "lineNumber": 235
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "topLevel[i].dict.set",
+          "lineNumber": 236
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "PDFName.of",
+          "lineNumber": 236
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "doc.context.obj",
+          "lineNumber": 240
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "PDFNumber.of",
+          "lineNumber": 244
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "doc.context.assign",
+          "lineNumber": 248
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "doc.context.assign",
+          "lineNumber": 250
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "doc.catalog.set",
+          "lineNumber": 254
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "PDFName.of",
+          "lineNumber": 254
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "Buffer.from",
+          "lineNumber": 256
+        },
+        {
+          "caller": "addBookmarks",
+          "callee": "doc.save",
+          "lineNumber": 256
+        },
+        {
+          "caller": "postProcessPDF",
+          "callee": "addMetadata",
+          "lineNumber": 273
+        },
+        {
+          "caller": "postProcessPDF",
+          "callee": "addHyperlinks",
+          "lineNumber": 276
+        },
+        {
+          "caller": "postProcessPDF",
+          "callee": "addBookmarks",
+          "lineNumber": 279
+        },
+        {
+          "caller": "mergePDFs",
+          "callee": "PDFDocument.create",
+          "lineNumber": 290
+        },
+        {
+          "caller": "mergePDFs",
+          "callee": "PDFDocument.load",
+          "lineNumber": 293
+        },
+        {
+          "caller": "mergePDFs",
+          "callee": "mergedDoc.copyPages",
+          "lineNumber": 294
+        },
+        {
+          "caller": "mergePDFs",
+          "callee": "sourceDoc.getPageIndices",
+          "lineNumber": 294
+        },
+        {
+          "caller": "mergePDFs",
+          "callee": "mergedDoc.addPage",
+          "lineNumber": 296
+        },
+        {
+          "caller": "mergePDFs",
+          "callee": "Buffer.from",
+          "lineNumber": 300
+        },
+        {
+          "caller": "mergePDFs",
+          "callee": "mergedDoc.save",
+          "lineNumber": 300
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/png-renderer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 65,
+      "functions": [
+        {
+          "name": "renderStickerPNG",
+          "startLine": 15,
+          "endLine": 32,
+          "params": [
+            "type",
+            "options"
+          ]
+        },
+        {
+          "name": "renderStickerToFile",
+          "startLine": 37,
+          "endLine": 50,
+          "params": [
+            "type",
+            "outputPath",
+            "options"
+          ]
+        },
+        {
+          "name": "batchRenderStickers",
+          "startLine": 55,
+          "endLine": 76,
+          "params": [
+            "type",
+            "outputDir",
+            "variants",
+            "palette"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "renderStickerPNG",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "renderStickerToFile",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "batchRenderStickers",
+          "line": 55,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderStickerPNG",
+          "callee": "generateStickerSVG",
+          "lineNumber": 20
+        },
+        {
+          "caller": "renderStickerPNG",
+          "callee": "Math.round",
+          "lineNumber": 25
+        },
+        {
+          "caller": "renderStickerPNG",
+          "callee": "Math.round",
+          "lineNumber": 26
+        },
+        {
+          "caller": "renderStickerPNG",
+          "callee": "sharp(Buffer.from(svg))\n    .resize(width, height)\n    .png({ compressionLevel: 6 })\n    .toBuffer",
+          "lineNumber": 28
+        },
+        {
+          "caller": "renderStickerPNG",
+          "callee": "sharp(Buffer.from(svg))\n    .resize(width, height)\n    .png",
+          "lineNumber": 28
+        },
+        {
+          "caller": "renderStickerPNG",
+          "callee": "sharp(Buffer.from(svg))\n    .resize",
+          "lineNumber": 28
+        },
+        {
+          "caller": "renderStickerPNG",
+          "callee": "sharp",
+          "lineNumber": 28
+        },
+        {
+          "caller": "renderStickerPNG",
+          "callee": "Buffer.from",
+          "lineNumber": 28
+        },
+        {
+          "caller": "renderStickerToFile",
+          "callee": "renderStickerPNG",
+          "lineNumber": 42
+        },
+        {
+          "caller": "renderStickerToFile",
+          "callee": "import",
+          "lineNumber": 43
+        },
+        {
+          "caller": "renderStickerToFile",
+          "callee": "import",
+          "lineNumber": 44
+        },
+        {
+          "caller": "renderStickerToFile",
+          "callee": "fs.mkdir",
+          "lineNumber": 46
+        },
+        {
+          "caller": "renderStickerToFile",
+          "callee": "path.dirname",
+          "lineNumber": 46
+        },
+        {
+          "caller": "renderStickerToFile",
+          "callee": "fs.writeFile",
+          "lineNumber": 47
+        },
+        {
+          "caller": "batchRenderStickers",
+          "callee": "import",
+          "lineNumber": 61
+        },
+        {
+          "caller": "batchRenderStickers",
+          "callee": "path.join",
+          "lineNumber": 66
+        },
+        {
+          "caller": "batchRenderStickers",
+          "callee": "renderStickerToFile",
+          "lineNumber": 67
+        },
+        {
+          "caller": "batchRenderStickers",
+          "callee": "results.push",
+          "lineNumber": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/svg-renderer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 495,
+      "nonEmptyLines": 440,
+      "functions": [
+        {
+          "name": "isCBTType",
+          "startLine": 71,
+          "endLine": 74,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "resolvePalette",
+          "startLine": 77,
+          "endLine": 80,
+          "params": [
+            "type",
+            "override"
+          ]
+        },
+        {
+          "name": "generateStickerSVG",
+          "startLine": 88,
+          "endLine": 117,
+          "params": [
+            "type",
+            "options"
+          ]
+        },
+        {
+          "name": "svgWrap",
+          "startLine": 121,
+          "endLine": 123,
+          "params": [
+            "w",
+            "h",
+            "content"
+          ]
+        },
+        {
+          "name": "escXml",
+          "startLine": 134,
+          "endLine": 138,
+          "params": [
+            "s"
+          ]
+        },
+        {
+          "name": "generateDateTab",
+          "startLine": 140,
+          "endLine": 146,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "text"
+          ]
+        },
+        {
+          "name": "generateMonthTab",
+          "startLine": 148,
+          "endLine": 154,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "text"
+          ]
+        },
+        {
+          "name": "generateDayTab",
+          "startLine": 156,
+          "endLine": 162,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "text"
+          ]
+        },
+        {
+          "name": "generateNumberCircle",
+          "startLine": 164,
+          "endLine": 170,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "text"
+          ]
+        },
+        {
+          "name": "generatePriorityMarker",
+          "startLine": 172,
+          "endLine": 179,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "text"
+          ]
+        },
+        {
+          "name": "generateCheckbox",
+          "startLine": 181,
+          "endLine": 202,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateProgressBar",
+          "startLine": 204,
+          "endLine": 216,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateStickyNote",
+          "startLine": 218,
+          "endLine": 232,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateWashiTape",
+          "startLine": 234,
+          "endLine": 265,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateBanner",
+          "startLine": 267,
+          "endLine": 274,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "text"
+          ]
+        },
+        {
+          "name": "generateDivider",
+          "startLine": 276,
+          "endLine": 288,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateFrame",
+          "startLine": 290,
+          "endLine": 302,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateWeatherIcon",
+          "startLine": 304,
+          "endLine": 334,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateStarRating",
+          "startLine": 336,
+          "endLine": 360,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateArrow",
+          "startLine": 362,
+          "endLine": 373,
+          "params": [
+            "w",
+            "h",
+            "p",
+            "variant"
+          ]
+        },
+        {
+          "name": "generateCBTThoughtCheck",
+          "startLine": 377,
+          "endLine": 416,
+          "params": [
+            "w",
+            "h",
+            "p"
+          ]
+        },
+        {
+          "name": "generateCBTReframe",
+          "startLine": 418,
+          "endLine": 451,
+          "params": [
+            "w",
+            "h",
+            "p"
+          ]
+        },
+        {
+          "name": "generateSelfCompassionCard",
+          "startLine": 453,
+          "endLine": 476,
+          "params": [
+            "w",
+            "h",
+            "p"
+          ]
+        },
+        {
+          "name": "generatePermissionCard",
+          "startLine": 478,
+          "endLine": 495,
+          "params": [
+            "w",
+            "h",
+            "p"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "STICKER_SIZES",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "generateStickerSVG",
+          "line": 88,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolvePalette",
+          "callee": "isCBTType",
+          "lineNumber": 78
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "resolvePalette",
+          "lineNumber": 94
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateDateTab",
+          "lineNumber": 97
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateMonthTab",
+          "lineNumber": 98
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateDayTab",
+          "lineNumber": 99
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateNumberCircle",
+          "lineNumber": 100
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generatePriorityMarker",
+          "lineNumber": 101
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateCheckbox",
+          "lineNumber": 102
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateProgressBar",
+          "lineNumber": 103
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateStickyNote",
+          "lineNumber": 104
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateWashiTape",
+          "lineNumber": 105
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateBanner",
+          "lineNumber": 106
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateDivider",
+          "lineNumber": 107
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateFrame",
+          "lineNumber": 108
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateWeatherIcon",
+          "lineNumber": 109
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateStarRating",
+          "lineNumber": 110
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateArrow",
+          "lineNumber": 111
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateCBTThoughtCheck",
+          "lineNumber": 112
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateCBTReframe",
+          "lineNumber": 113
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generateSelfCompassionCard",
+          "lineNumber": 114
+        },
+        {
+          "caller": "generateStickerSVG",
+          "callee": "generatePermissionCard",
+          "lineNumber": 115
+        },
+        {
+          "caller": "escXml",
+          "callee": "s.replace",
+          "lineNumber": 135
+        },
+        {
+          "caller": "generateDateTab",
+          "callee": "svgWrap",
+          "lineNumber": 142
+        },
+        {
+          "caller": "generateDateTab",
+          "callee": "escXml",
+          "lineNumber": 144
+        },
+        {
+          "caller": "generateMonthTab",
+          "callee": "svgWrap",
+          "lineNumber": 150
+        },
+        {
+          "caller": "generateMonthTab",
+          "callee": "escXml",
+          "lineNumber": 152
+        },
+        {
+          "caller": "generateDayTab",
+          "callee": "svgWrap",
+          "lineNumber": 158
+        },
+        {
+          "caller": "generateDayTab",
+          "callee": "escXml",
+          "lineNumber": 160
+        },
+        {
+          "caller": "generateNumberCircle",
+          "callee": "svgWrap",
+          "lineNumber": 166
+        },
+        {
+          "caller": "generateNumberCircle",
+          "callee": "escXml",
+          "lineNumber": 168
+        },
+        {
+          "caller": "generatePriorityMarker",
+          "callee": "svgWrap",
+          "lineNumber": 175
+        },
+        {
+          "caller": "generatePriorityMarker",
+          "callee": "escXml",
+          "lineNumber": 177
+        },
+        {
+          "caller": "generateCheckbox",
+          "callee": "svgWrap",
+          "lineNumber": 201
+        },
+        {
+          "caller": "generateProgressBar",
+          "callee": "svgWrap",
+          "lineNumber": 211
+        },
+        {
+          "caller": "generateStickyNote",
+          "callee": "svgWrap",
+          "lineNumber": 223
+        },
+        {
+          "caller": "generateStickyNote",
+          "callee": "Array.from({ length: 6 }, (_, i) => {\n      const y = 60 + i * 48;\n      return y < h - fold - 30 ? `<line x1=\"35\" y1=\"${y}\" x2=\"${w - 35}\" y2=\"${y}\" stroke=\"${p.text}\" stroke-opacity=\"0.1\" stroke-width=\"1\" />` : '';\n    }).join",
+          "lineNumber": 227
+        },
+        {
+          "caller": "generateStickyNote",
+          "callee": "Array.from",
+          "lineNumber": 227
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from({ length: Math.ceil(w / 20) }, (_, i) =>\n      `<rect x=\"${i * 20}\" y=\"0\" width=\"10\" height=\"${h}\" fill=\"${p.primary}\" opacity=\"0.5\" />`\n    ).join",
+          "lineNumber": 237
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from",
+          "lineNumber": 237
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Math.ceil",
+          "lineNumber": 237
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from({ length: Math.ceil(w / 30) }, (_, i) =>\n      Array.from({ length: Math.ceil(h / 30) }, (_, j) =>\n        `<circle cx=\"${i * 30 + 15}\" cy=\"${j * 30 + 15}\" r=\"5\" fill=\"${p.accent}\" opacity=\"0.4\" />`\n      ).join('')\n    ).join",
+          "lineNumber": 241
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from",
+          "lineNumber": 241
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Math.ceil",
+          "lineNumber": 241
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from({ length: Math.ceil(h / 30) }, (_, j) =>\n        `<circle cx=\"${i * 30 + 15}\" cy=\"${j * 30 + 15}\" r=\"5\" fill=\"${p.accent}\" opacity=\"0.4\" />`\n      ).join",
+          "lineNumber": 242
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from",
+          "lineNumber": 242
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Math.ceil",
+          "lineNumber": 242
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from({ length: Math.ceil(w / 25) }, (_, i) =>\n      `<line x1=\"${i * 25}\" y1=\"0\" x2=\"${i * 25}\" y2=\"${h}\" stroke=\"${p.accent}\" stroke-width=\"0.5\" opacity=\"0.3\" />`\n    ).join",
+          "lineNumber": 247
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from",
+          "lineNumber": 247
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Math.ceil",
+          "lineNumber": 247
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from({ length: Math.ceil(h / 25) }, (_, i) =>\n      `<line x1=\"0\" y1=\"${i * 25}\" x2=\"${w}\" y2=\"${i * 25}\" stroke=\"${p.accent}\" stroke-width=\"0.5\" opacity=\"0.3\" />`\n    ).join",
+          "lineNumber": 249
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from",
+          "lineNumber": 249
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Math.ceil",
+          "lineNumber": 249
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from({ length: Math.ceil(w / 40) }, (_, i) =>\n      `<polyline points=\"${i * 40},${h} ${i * 40 + 20},0 ${i * 40 + 40},${h}\" fill=\"none\" stroke=\"${p.primary}\" stroke-width=\"2\" opacity=\"0.3\" />`\n    ).join",
+          "lineNumber": 253
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Array.from",
+          "lineNumber": 253
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "Math.ceil",
+          "lineNumber": 253
+        },
+        {
+          "caller": "generateWashiTape",
+          "callee": "svgWrap",
+          "lineNumber": 261
+        },
+        {
+          "caller": "generateBanner",
+          "callee": "svgWrap",
+          "lineNumber": 270
+        },
+        {
+          "caller": "generateBanner",
+          "callee": "escXml",
+          "lineNumber": 272
+        },
+        {
+          "caller": "generateDivider",
+          "callee": "svgWrap",
+          "lineNumber": 287
+        },
+        {
+          "caller": "generateFrame",
+          "callee": "svgWrap",
+          "lineNumber": 301
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Array.from({ length: 8 }, (_, i) => {\n       const angle = (i * 45 * Math.PI) / 180;\n       const x1 = cx + 35 * Math.cos(angle), y1 = cy + 35 * Math.sin(angle);\n       const x2 = cx + 45 * Math.cos(angle), y2 = cy + 45 * Math.sin(angle);\n       return `<line x1=\"${x1}\" y1=\"${y1}\" x2=\"${x2}\" y2=\"${y2}\" stroke=\"${p.primary}\" stroke-width=\"4\" stroke-linecap=\"round\" />`;\n     }).join",
+          "lineNumber": 309
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Array.from",
+          "lineNumber": 309
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Math.cos",
+          "lineNumber": 311
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Math.sin",
+          "lineNumber": 311
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Math.cos",
+          "lineNumber": 312
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Math.sin",
+          "lineNumber": 312
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Array.from({ length: 3 }, (_, i) =>\n       `<line x1=\"${cx - 20 + i * 20}\" y1=\"${cy + 20}\" x2=\"${cx - 25 + i * 20}\" y2=\"${cy + 40}\" stroke=\"${p.accent}\" stroke-width=\"3\" stroke-linecap=\"round\" />`\n     ).join",
+          "lineNumber": 321
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Array.from",
+          "lineNumber": 321
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Array.from({ length: 3 }, (_, i) =>\n       `<circle cx=\"${cx - 20 + i * 20}\" cy=\"${cy + 30}\" r=\"4\" fill=\"${p.accent}\" />`\n     ).join",
+          "lineNumber": 326
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "Array.from",
+          "lineNumber": 326
+        },
+        {
+          "caller": "generateWeatherIcon",
+          "callee": "svgWrap",
+          "lineNumber": 333
+        },
+        {
+          "caller": "starPath",
+          "callee": "points.push",
+          "lineNumber": 347
+        },
+        {
+          "caller": "starPath",
+          "callee": "Math.cos",
+          "lineNumber": 347
+        },
+        {
+          "caller": "starPath",
+          "callee": "Math.sin",
+          "lineNumber": 347
+        },
+        {
+          "caller": "starPath",
+          "callee": "points.join",
+          "lineNumber": 349
+        },
+        {
+          "caller": "generateStarRating",
+          "callee": "Array.from({ length: starCount }, (_, i) => {\n    const cx = gap + starSize / 2 + i * (starSize + gap);\n    const cy = h / 2;\n    const fill = i < filledCount ? p.primary : p.secondary;\n    return `<polygon points=\"${starPath(cx, cy)}\" fill=\"${fill}\" />`;\n  }).join",
+          "lineNumber": 352
+        },
+        {
+          "caller": "generateStarRating",
+          "callee": "Array.from",
+          "lineNumber": 352
+        },
+        {
+          "caller": "generateStarRating",
+          "callee": "starPath",
+          "lineNumber": 356
+        },
+        {
+          "caller": "generateStarRating",
+          "callee": "svgWrap",
+          "lineNumber": 359
+        },
+        {
+          "caller": "generateArrow",
+          "callee": "svgWrap",
+          "lineNumber": 367
+        },
+        {
+          "caller": "generateCBTThoughtCheck",
+          "callee": "prompts.map((pr, i) => {\n    const y = rowStartY + i * rowHeight;\n    const textY = y + 32;\n    const lineY = y + 48;\n    return `\n      <text x=\"${pad + 10}\" y=\"${textY}\" font-family=\"${bodyFont}, sans-serif\" font-weight=\"${bodyWeight}\" font-size=\"28\" fill=\"${p.text}\" opacity=\"0.85\">${pr.label}</text>\n      <line x1=\"${lineInset}\" y1=\"${lineY}\" x2=\"${lineEnd}\" y2=\"${lineY}\" stroke=\"${p.muted}\" stroke-width=\"2\" stroke-dasharray=\"6,5\" opacity=\"0.5\" />\n    `;\n  }).join",
+          "lineNumber": 394
+        },
+        {
+          "caller": "generateCBTThoughtCheck",
+          "callee": "prompts.map",
+          "lineNumber": 394
+        },
+        {
+          "caller": "generateCBTThoughtCheck",
+          "callee": "svgWrap",
+          "lineNumber": 404
+        },
+        {
+          "caller": "generateCBTReframe",
+          "callee": "Math.max",
+          "lineNumber": 419
+        },
+        {
+          "caller": "generateCBTReframe",
+          "callee": "svgWrap",
+          "lineNumber": 437
+        },
+        {
+          "caller": "generateSelfCompassionCard",
+          "callee": "svgWrap",
+          "lineNumber": 464
+        },
+        {
+          "caller": "generatePermissionCard",
+          "callee": "svgWrap",
+          "lineNumber": 483
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 24,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/types/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 327,
+      "nonEmptyLines": 294,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/pdf-postprocess-coverage.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 234,
+      "nonEmptyLines": 217,
+      "functions": [
+        {
+          "name": "makePdf",
+          "startLine": 22,
+          "endLine": 28,
+          "params": [
+            "pageCount"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makePdf",
+          "callee": "PDFDocument.create",
+          "lineNumber": 23
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.addPage",
+          "lineNumber": 25
+        },
+        {
+          "caller": "makePdf",
+          "callee": "Buffer.from",
+          "lineNumber": 27
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.save",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/pdf-postprocess-property.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 120,
+      "nonEmptyLines": 111,
+      "functions": [
+        {
+          "name": "cssToPageRect",
+          "startLine": 21,
+          "endLine": 33,
+          "params": [
+            "cssX",
+            "cssY",
+            "cssWidth",
+            "cssHeight",
+            "pageHeight"
+          ]
+        },
+        {
+          "name": "pdfToCssRect",
+          "startLine": 35,
+          "endLine": 48,
+          "params": [
+            "x1",
+            "y1",
+            "x2",
+            "y2",
+            "pageHeight"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makePdf",
+          "callee": "PDFDocument.create",
+          "lineNumber": 98
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.addPage",
+          "lineNumber": 99
+        },
+        {
+          "caller": "makePdf",
+          "callee": "Buffer.from",
+          "lineNumber": 100
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.save",
+          "lineNumber": 100
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/pdf-postprocess.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 110,
+      "nonEmptyLines": 100,
+      "functions": [
+        {
+          "name": "makePdf",
+          "startLine": 11,
+          "endLine": 17,
+          "params": [
+            "pageCount"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makePdf",
+          "callee": "PDFDocument.create",
+          "lineNumber": 12
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.addPage",
+          "lineNumber": 14
+        },
+        {
+          "caller": "makePdf",
+          "callee": "Buffer.from",
+          "lineNumber": 16
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.save",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/svg-renderer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 36,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

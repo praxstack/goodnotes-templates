@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-travel-planner/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-travel-planner/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-travel-planner/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-travel-planner/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-travel-planner/travel-planner.html",
+      "type": "file",
+      "name": "travel-planner.html",
+      "filePath": "packages/packs-travel-planner/travel-planner.html",
+      "summary": "HTML template (travel-planner.html, 735 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

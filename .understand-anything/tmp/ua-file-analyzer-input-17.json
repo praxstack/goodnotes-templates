@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v2.html",
+      "language": "html",
+      "sizeLines": 2294,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v3.html",
+      "language": "html",
+      "sizeLines": 1831,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes.html",
+      "language": "html",
+      "sizeLines": 1352,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v2.html": [],
+    "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes-v3.html": [],
+    "docs/gstack-archive/designs/pretext-gallery-homepage-20260430/wireframes.html": []
+  }
+}

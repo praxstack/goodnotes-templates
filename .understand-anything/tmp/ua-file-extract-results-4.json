@@ -1,0 +1,99 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 10,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/gallery/src/components/BlurhashImage.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 68,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/components/ThemeSwap.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 264,
+      "nonEmptyLines": 246,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/config/site.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 19,
+      "exports": [
+        {
+          "name": "SITE",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/gallery/src/layouts/Layout.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 154,
+      "nonEmptyLines": 146,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/pages/browse.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 172,
+      "nonEmptyLines": 167,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/pages/contribute.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 208,
+      "nonEmptyLines": 193,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/pages/index.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 311,
+      "nonEmptyLines": 303,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/pages/packs/[id].astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 355,
+      "nonEmptyLines": 340,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/pages/remix.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 212,
+      "nonEmptyLines": 201,
+      "metrics": {}
+    },
+    {
+      "path": "apps/gallery/src/pages/search.astro",
+      "language": "astro",
+      "fileCategory": "code",
+      "totalLines": 285,
+      "nonEmptyLines": 267,
+      "metrics": {}
+    }
+  ]
+}

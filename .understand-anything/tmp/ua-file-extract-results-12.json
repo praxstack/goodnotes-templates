@@ -1,0 +1,663 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 9,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "audit/CODEBASE_AUDIT_REPORT.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 139,
+      "nonEmptyLines": 139,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "generated_at",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "repo",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "audit_config",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "health",
+          "level": 1,
+          "line": 20
+        },
+        {
+          "heading": "counts",
+          "level": 1,
+          "line": 25
+        },
+        {
+          "heading": "tool_outputs",
+          "level": 1,
+          "line": 59
+        },
+        {
+          "heading": "tech_stack_analysis",
+          "level": 1,
+          "line": 70
+        },
+        {
+          "heading": "findings_sources",
+          "level": 1,
+          "line": 91
+        },
+        {
+          "heading": "top_risks",
+          "level": 1,
+          "line": 104
+        },
+        {
+          "heading": "gaps_file",
+          "level": 1,
+          "line": 111
+        },
+        {
+          "heading": "privacy",
+          "level": 1,
+          "line": 41
+        },
+        {
+          "heading": "deliverables",
+          "level": 1,
+          "line": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "audit/CODEBASE_AUDIT_REPORT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 269,
+      "nonEmptyLines": 186,
+      "sections": [
+        {
+          "heading": "Codebase Audit Report — goodnotes-templates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Executive summary",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Health grade: **C+**",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "Finding counts",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "Top 5 risks (after prioritization across all 27 findings)",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "Estimated effort-to-green (t-shirt sum)",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "2. Methodology",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "Tools run (all outputs under `_runtime/tool-outputs/` unless noted)",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Gaps — what was not measured",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "Iteration discipline",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "3. Topology & risk map",
+          "level": 2,
+          "line": 88
+        },
+        {
+          "heading": "4. Architecture assessment",
+          "level": 2,
+          "line": 106
+        },
+        {
+          "heading": "5. Threat model summary",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "6. Findings by dimension",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "Security (14 findings)",
+          "level": 3,
+          "line": 133
+        },
+        {
+          "heading": "Correctness (9 findings)",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "Maintainability (3 findings)",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "Operability (1 finding)",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "Testability (1 finding)",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "UX/A11y (1 finding)",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "7. Privacy & compliance",
+          "level": 2,
+          "line": 197
+        },
+        {
+          "heading": "8. Test strategy summary",
+          "level": 2,
+          "line": 205
+        },
+        {
+          "heading": "9. Roadmap summary",
+          "level": 2,
+          "line": 216
+        },
+        {
+          "heading": "10. Gaps & what we could not verify",
+          "level": 2,
+          "line": 233
+        },
+        {
+          "heading": "11. Appendices",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "Raw tool outputs (reviewer can verify every metric)",
+          "level": 3,
+          "line": 243
+        },
+        {
+          "heading": "SBOM path",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "Monorepo",
+          "level": 3,
+          "line": 260
+        },
+        {
+          "heading": "Repo metadata",
+          "level": 3,
+          "line": 264
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    },
+    {
+      "path": "audit/GAPS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 62,
+      "nonEmptyLines": 40,
+      "sections": [
+        {
+          "heading": "GAPS — merged across iterations",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "G-001 — Agent determinism (model + temperature)",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "G-002 — `madge` not installed at probe time",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "G-003 — SBOM (CycloneDX) not generated",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "G-004 — `.github/workflows/generate.yml` contradiction vs Phase 0",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "G-005 — Coverage % not measured",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "G-006 — Accessibility tooling not run",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "G-007 — In-context reachability of `basic-ftp` CVE not tool-verified",
+          "level": 2,
+          "line": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "audit/IMPLEMENTATION_ROADMAP.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 28,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": "audit/IMPLEMENTATION_ROADMAP.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 88,
+      "nonEmptyLines": 71,
+      "sections": [
+        {
+          "heading": "Implementation Roadmap — goodnotes-templates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Prioritization",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Sprint plan (t-shirt budget, not days)",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Sprint 1 — Unblock the build & close critical vulns (budget: XS+S+S = ~2 days equivalent)",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "Sprint 2 — Supply chain + hygiene batch (budget: XS×4 + S×2 ≈ ~3 days)",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Sprint 3 — Offline + a11y + code quality (budget: M×2 + S×2 ≈ ~5 days)",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "Sprint 4 — Polish + back-burner (budget: mostly XS)",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "Risk matrix (blast-radius × fix cost)",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "Machine-readable form",
+          "level": 2,
+          "line": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "audit/POST_SPRINT_STATUS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 138,
+      "nonEmptyLines": 99,
+      "sections": [
+        {
+          "heading": "Post-implementation status — CODEX-AUDIT v1.1 findings",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Verification (HEAD)",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Closed findings (23 of 27)",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Deferred findings (4 of 27) — backlog",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "FIND-0012 — Replace bespoke HTML parser with cheerio (M)",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "FIND-0014 — Self-host Google Fonts (M)",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "FIND-0018 — Dark-mode parity + WCAG contrast (M)",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "FIND-0012-companion: color-mode resolver caller update",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Backlog hygiene",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "2026-05-08 · Post-v1.0.0 audit re-evaluation",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "FIND-0012 — cheerio swap — **CLOSED (file deleted)**",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "FIND-0012-companion — color-mode resolver caller update — **CLOSED (scripts deleted)**",
+          "level": 3,
+          "line": 102
+        },
+        {
+          "heading": "FIND-0014 — Self-host Google Fonts — **RE-DEFERRED with updated rationale**",
+          "level": 3,
+          "line": 106
+        },
+        {
+          "heading": "FIND-0018 — Dark-mode parity — **OBSOLETED — deliverable already shipped via theme system**",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "Final deferral status after 2026-05-08 re-audit",
+          "level": 2,
+          "line": 129
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "audit/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 122,
+      "nonEmptyLines": 100,
+      "sections": [
+        {
+          "heading": "audit/ — CODEX-AUDIT v1.1 artifacts",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "How to read it, fastest first",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "How to verify anything",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "How to re-run the tool surface",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Directory layout",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "Why the iterations exist",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "What's intentionally not here",
+          "level": 2,
+          "line": 107
+        },
+        {
+          "heading": "Contact / follow-up",
+          "level": 2,
+          "line": 118
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "audit/SLIDE_OUTLINE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 76,
+      "nonEmptyLines": 56,
+      "sections": [
+        {
+          "heading": "Stakeholder Slide Outline — goodnotes-templates audit",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Slide 1 — What we audited",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Slide 2 — Headline grade",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "Slide 3 — What the tools found (cite filenames)",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "Slide 4 — 27 findings, by dimension",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "Slide 5 — Top 3 to ship first (Sprint 1, ~2 days)",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "Slide 6 — The medium-term batch (Sprints 2–3, ~8 days)",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Slide 7 — What the audit explicitly did NOT find",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "Slide 8 — What we did NOT measure (and why)",
+          "level": 3,
+          "line": 69
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "audit/TEST_STRATEGY.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 104,
+      "nonEmptyLines": 76,
+      "sections": [
+        {
+          "heading": "Test Strategy — goodnotes-templates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Coverage floors (per-tier, not global)",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "2. Proposed new tests (8 files, ~30 tests, mostly XS)",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "`tests/unit/preview-server.test.ts` — new (covers T1)",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "`tests/unit/puppeteer-renderer.test.ts` — new (covers T1)",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "`tests/unit/pdf-postprocess.test.ts` — new (covers T1)",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "`tests/unit/svg-renderer.test.ts` — new (covers T2)",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "`tests/unit/parseSinglePageTemplate.test.ts` — new (covers T2)",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "`tests/integration/render-offline.test.ts` — new (optional)",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "`tests/unit/contrast.test.ts` — new (covers UX/A11y)",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "3. Test maturity signals — status",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "4. CI gate recommendations (FIND-0008)",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "5. Coverage tooling",
+          "level": 2,
+          "line": 100
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    }
+  ]
+}

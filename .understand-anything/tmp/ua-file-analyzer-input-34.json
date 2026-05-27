@@ -1,0 +1,63 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-prax-journal/versions/v2/monthly.dark.css",
+      "language": "css",
+      "sizeLines": 21,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v2/monthly.html",
+      "language": "html",
+      "sizeLines": 497,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v2/reflect.dark.css",
+      "language": "css",
+      "sizeLines": 21,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v2/reflect.html",
+      "language": "html",
+      "sizeLines": 443,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v2/today.dark.css",
+      "language": "css",
+      "sizeLines": 21,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v2/today.html",
+      "language": "html",
+      "sizeLines": 649,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v2/weekly.dark.css",
+      "language": "css",
+      "sizeLines": 21,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v2/weekly.html",
+      "language": "html",
+      "sizeLines": 425,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-prax-journal/versions/v2/monthly.dark.css": [],
+    "packages/packs-prax-journal/versions/v2/monthly.html": [],
+    "packages/packs-prax-journal/versions/v2/reflect.dark.css": [],
+    "packages/packs-prax-journal/versions/v2/reflect.html": [],
+    "packages/packs-prax-journal/versions/v2/today.dark.css": [],
+    "packages/packs-prax-journal/versions/v2/today.html": [],
+    "packages/packs-prax-journal/versions/v2/weekly.dark.css": [],
+    "packages/packs-prax-journal/versions/v2/weekly.html": []
+  }
+}

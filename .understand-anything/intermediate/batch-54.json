@@ -1,0 +1,786 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-prax-journal/stickers/shame-baggage/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/shame-baggage/README.md",
+      "summary": "Project README with 3 sections (17 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/thought-flip/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/thought-flip/README.md",
+      "summary": "Project README with 4 sections (24 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/three-good-things/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/three-good-things/README.md",
+      "summary": "Project README with 3 sections (17 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/win-today/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/win-today/README.md",
+      "summary": "Project README with 3 sections (17 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:packages/packs-prax-journal/stickers/wins-jar/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prax-journal/stickers/wins-jar/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:playwright.config.ts",
+      "type": "file",
+      "name": "playwright.config.ts",
+      "filePath": "playwright.config.ts",
+      "summary": "Configuration module exposing settings and tunables (0 exports).",
+      "tags": [
+        "config",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/daily_planner_refined/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/daily_planner_refined/code.html",
+      "summary": "HTML template (code.html, 369 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/daily_planner/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/daily_planner/code.html",
+      "summary": "HTML template (code.html, 368 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/daily_reflections_refined/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/daily_reflections_refined/code.html",
+      "summary": "HTML template (code.html, 330 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/daily_reflections/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/daily_reflections/code.html",
+      "summary": "HTML template (code.html, 330 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/habit_tracker_refined/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/habit_tracker_refined/code.html",
+      "summary": "HTML template (code.html, 500 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/habit_tracker/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/habit_tracker/code.html",
+      "summary": "HTML template (code.html, 500 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:references/stitch_cute_skeuomorphic_todo_journal/tactile_planner_system/DESIGN.md",
+      "type": "document",
+      "name": "DESIGN.md",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/tactile_planner_system/DESIGN.md",
+      "summary": "Documentation: 12 sections, 167 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/tasks_notes_refined/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/tasks_notes_refined/code.html",
+      "summary": "HTML template (code.html, 375 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:references/stitch_cute_skeuomorphic_todo_journal/tasks_notes/code.html",
+      "type": "file",
+      "name": "code.html",
+      "filePath": "references/stitch_cute_skeuomorphic_todo_journal/tasks_notes/code.html",
+      "summary": "HTML template (code.html, 375 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/audit.sh",
+      "type": "file",
+      "name": "audit.sh",
+      "filePath": "scripts/audit.sh",
+      "summary": "Shell source file (116 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/build-stickers.ts",
+      "type": "file",
+      "name": "build-stickers.ts",
+      "filePath": "scripts/build-stickers.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (52 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-stickers.ts:runOne",
+      "type": "function",
+      "name": "runOne",
+      "filePath": "scripts/build-stickers.ts",
+      "lineRange": [
+        33,
+        44
+      ],
+      "summary": "Function `runOne` (12 lines) in build-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/bundle-release.ts",
+      "type": "file",
+      "name": "bundle-release.ts",
+      "filePath": "scripts/bundle-release.ts",
+      "summary": "Typescript module exposing 9 functions and 0 exports (483 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/bundle-release.ts:parseArgs",
+      "type": "function",
+      "name": "parseArgs",
+      "filePath": "scripts/bundle-release.ts",
+      "lineRange": [
+        73,
+        100
+      ],
+      "summary": "Function `parseArgs` (28 lines) in bundle-release.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/bundle-release.ts:pngDims",
+      "type": "function",
+      "name": "pngDims",
+      "filePath": "scripts/bundle-release.ts",
+      "lineRange": [
+        119,
+        129
+      ],
+      "summary": "Function `pngDims` (11 lines) in bundle-release.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/bundle-release.ts:copyTree",
+      "type": "function",
+      "name": "copyTree",
+      "filePath": "scripts/bundle-release.ts",
+      "lineRange": [
+        137,
+        152
+      ],
+      "summary": "Function `copyTree` (16 lines) in bundle-release.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/bundle-release.ts:dirSize",
+      "type": "function",
+      "name": "dirSize",
+      "filePath": "scripts/bundle-release.ts",
+      "lineRange": [
+        161,
+        174
+      ],
+      "summary": "Function `dirSize` (14 lines) in bundle-release.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/bundle-release.ts:bundleReadme",
+      "type": "function",
+      "name": "bundleReadme",
+      "filePath": "scripts/bundle-release.ts",
+      "lineRange": [
+        178,
+        229
+      ],
+      "summary": "Function `bundleReadme` (52 lines) in bundle-release.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/bundle-release.ts:stickerPackReadme",
+      "type": "function",
+      "name": "stickerPackReadme",
+      "filePath": "scripts/bundle-release.ts",
+      "lineRange": [
+        231,
+        273
+      ],
+      "summary": "Function `stickerPackReadme` (43 lines) in bundle-release.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/bundle-release.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/bundle-release.ts",
+      "lineRange": [
+        277,
+        481
+      ],
+      "summary": "Function `main` (205 lines) in bundle-release.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/download-fonts.ts",
+      "type": "file",
+      "name": "download-fonts.ts",
+      "filePath": "scripts/download-fonts.ts",
+      "summary": "Typescript module exposing 6 functions and 0 exports (171 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/download-fonts.ts:parseFontFaces",
+      "type": "function",
+      "name": "parseFontFaces",
+      "filePath": "scripts/download-fonts.ts",
+      "lineRange": [
+        82,
+        98
+      ],
+      "summary": "Function `parseFontFaces` (17 lines) in download-fonts.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/download-fonts.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/download-fonts.ts",
+      "lineRange": [
+        104,
+        166
+      ],
+      "summary": "Function `main` (63 lines) in download-fonts.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/migrate-packs-w5.ts",
+      "type": "file",
+      "name": "migrate-packs-w5.ts",
+      "filePath": "scripts/migrate-packs-w5.ts",
+      "summary": "Typescript module exposing 9 functions and 0 exports (446 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/migrate-packs-w5.ts:plan",
+      "type": "function",
+      "name": "plan",
+      "filePath": "scripts/migrate-packs-w5.ts",
+      "lineRange": [
+        325,
+        337
+      ],
+      "summary": "Function `plan` (13 lines) in migrate-packs-w5.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/migrate-packs-w5.ts:manifestJson",
+      "type": "function",
+      "name": "manifestJson",
+      "filePath": "scripts/migrate-packs-w5.ts",
+      "lineRange": [
+        339,
+        358
+      ],
+      "summary": "Function `manifestJson` (20 lines) in migrate-packs-w5.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/migrate-packs-w5.ts:mdxStub",
+      "type": "function",
+      "name": "mdxStub",
+      "filePath": "scripts/migrate-packs-w5.ts",
+      "lineRange": [
+        360,
+        390
+      ],
+      "summary": "Function `mdxStub` (31 lines) in migrate-packs-w5.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/migrate-packs-w5.ts:apply",
+      "type": "function",
+      "name": "apply",
+      "filePath": "scripts/migrate-packs-w5.ts",
+      "lineRange": [
+        392,
+        415
+      ],
+      "summary": "Function `apply` (24 lines) in migrate-packs-w5.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/migrate-packs-w5.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/migrate-packs-w5.ts",
+      "lineRange": [
+        417,
+        431
+      ],
+      "summary": "Function `main` (15 lines) in migrate-packs-w5.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/probe-ink-density.ts",
+      "type": "file",
+      "name": "probe-ink-density.ts",
+      "filePath": "scripts/probe-ink-density.ts",
+      "summary": "Typescript source file (40 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/probe-sharp-fraunces.ts",
+      "type": "file",
+      "name": "probe-sharp-fraunces.ts",
+      "filePath": "scripts/probe-sharp-fraunces.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (84 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/rebuild-all-stickers-index.ts",
+      "type": "file",
+      "name": "rebuild-all-stickers-index.ts",
+      "filePath": "scripts/rebuild-all-stickers-index.ts",
+      "summary": "Typescript module exposing 4 functions and 0 exports (230 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/rebuild-all-stickers-index.ts:pngDims",
+      "type": "function",
+      "name": "pngDims",
+      "filePath": "scripts/rebuild-all-stickers-index.ts",
+      "lineRange": [
+        75,
+        90
+      ],
+      "summary": "Function `pngDims` (16 lines) in rebuild-all-stickers-index.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/rebuild-all-stickers-index.ts:writeReadme",
+      "type": "function",
+      "name": "writeReadme",
+      "filePath": "scripts/rebuild-all-stickers-index.ts",
+      "lineRange": [
+        98,
+        160
+      ],
+      "summary": "Function `writeReadme` (63 lines) in rebuild-all-stickers-index.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/rebuild-all-stickers-index.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/rebuild-all-stickers-index.ts",
+      "lineRange": [
+        164,
+        228
+      ],
+      "summary": "Function `main` (65 lines) in rebuild-all-stickers-index.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/render-tactile-preview.ts",
+      "type": "file",
+      "name": "render-tactile-preview.ts",
+      "filePath": "scripts/render-tactile-preview.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (64 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/render-tactile-preview.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/render-tactile-preview.ts",
+      "lineRange": [
+        27,
+        59
+      ],
+      "summary": "Function `main` (33 lines) in render-tactile-preview.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/smoke-prod-headers.sh",
+      "type": "file",
+      "name": "smoke-prod-headers.sh",
+      "filePath": "scripts/smoke-prod-headers.sh",
+      "summary": "Shell source file (99 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:scripts/build-stickers.ts",
+      "target": "function:scripts/build-stickers.ts:runOne",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/bundle-release.ts",
+      "target": "function:scripts/bundle-release.ts:parseArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/bundle-release.ts",
+      "target": "function:scripts/bundle-release.ts:pngDims",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/bundle-release.ts",
+      "target": "function:scripts/bundle-release.ts:copyTree",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/bundle-release.ts",
+      "target": "function:scripts/bundle-release.ts:dirSize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/bundle-release.ts",
+      "target": "function:scripts/bundle-release.ts:bundleReadme",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/bundle-release.ts",
+      "target": "function:scripts/bundle-release.ts:stickerPackReadme",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/bundle-release.ts",
+      "target": "function:scripts/bundle-release.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/download-fonts.ts",
+      "target": "function:scripts/download-fonts.ts:parseFontFaces",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/download-fonts.ts",
+      "target": "function:scripts/download-fonts.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/migrate-packs-w5.ts",
+      "target": "function:scripts/migrate-packs-w5.ts:plan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/migrate-packs-w5.ts",
+      "target": "function:scripts/migrate-packs-w5.ts:manifestJson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/migrate-packs-w5.ts",
+      "target": "function:scripts/migrate-packs-w5.ts:mdxStub",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/migrate-packs-w5.ts",
+      "target": "function:scripts/migrate-packs-w5.ts:apply",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/migrate-packs-w5.ts",
+      "target": "function:scripts/migrate-packs-w5.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/rebuild-all-stickers-index.ts",
+      "target": "function:scripts/rebuild-all-stickers-index.ts:pngDims",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/rebuild-all-stickers-index.ts",
+      "target": "function:scripts/rebuild-all-stickers-index.ts:writeReadme",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/rebuild-all-stickers-index.ts",
+      "target": "function:scripts/rebuild-all-stickers-index.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/render-tactile-preview.ts",
+      "target": "function:scripts/render-tactile-preview.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    }
+  ]
+}

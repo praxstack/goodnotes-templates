@@ -1,0 +1,1571 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/core/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "packages/core/src/index.ts",
+      "summary": "Barrel/entry-point file re-exporting public symbols of its directory (46 exports, 0 fns, 0 classes).",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "core-engine"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/core/src/pdf-splice.ts",
+      "type": "file",
+      "name": "pdf-splice.ts",
+      "filePath": "packages/core/src/pdf-splice.ts",
+      "summary": "Typescript module exposing 2 functions and 2 exports (206 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/pdf-splice.ts:bookmarkTitle",
+      "type": "function",
+      "name": "bookmarkTitle",
+      "filePath": "packages/core/src/pdf-splice.ts",
+      "lineRange": [
+        79,
+        96
+      ],
+      "summary": "Function `bookmarkTitle` (18 lines) in pdf-splice.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/pdf-splice.ts:splicePdfBuffers",
+      "type": "function",
+      "name": "splicePdfBuffers",
+      "filePath": "packages/core/src/pdf-splice.ts",
+      "lineRange": [
+        123,
+        206
+      ],
+      "summary": "Function `splicePdfBuffers` (84 lines) in pdf-splice.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "file",
+      "name": "prax-journal-renderer.ts",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "summary": "Typescript module exposing 10 functions and 12 exports (453 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:extractRxFields",
+      "type": "function",
+      "name": "extractRxFields",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        183,
+        206
+      ],
+      "summary": "Function `extractRxFields` (24 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:deriveDateFields",
+      "type": "function",
+      "name": "deriveDateFields",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        223,
+        255
+      ],
+      "summary": "Function `deriveDateFields` (33 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:isoWeekNumber",
+      "type": "function",
+      "name": "isoWeekNumber",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        272,
+        281
+      ],
+      "summary": "Function `isoWeekNumber` (10 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "helper",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:deriveWeeklyFields",
+      "type": "function",
+      "name": "deriveWeeklyFields",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        294,
+        313
+      ],
+      "summary": "Function `deriveWeeklyFields` (20 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:deriveMonthlyFields",
+      "type": "function",
+      "name": "deriveMonthlyFields",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        326,
+        344
+      ],
+      "summary": "Function `deriveMonthlyFields` (19 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:substituteProfile",
+      "type": "function",
+      "name": "substituteProfile",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        364,
+        382
+      ],
+      "summary": "Function `substituteProfile` (19 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:resolvePageSpecFiles",
+      "type": "function",
+      "name": "resolvePageSpecFiles",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        393,
+        405
+      ],
+      "summary": "Function `resolvePageSpecFiles` (13 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/prax-journal-renderer.ts:renderPageSpec",
+      "type": "function",
+      "name": "renderPageSpec",
+      "filePath": "packages/core/src/prax-journal-renderer.ts",
+      "lineRange": [
+        429,
+        453
+      ],
+      "summary": "Function `renderPageSpec` (25 lines) in prax-journal-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/splice.ts",
+      "type": "file",
+      "name": "splice.ts",
+      "filePath": "packages/core/src/splice.ts",
+      "summary": "Typescript module exposing 6 functions and 1 export (137 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/splice.ts:parseUTC",
+      "type": "function",
+      "name": "parseUTC",
+      "filePath": "packages/core/src/splice.ts",
+      "lineRange": [
+        58,
+        67
+      ],
+      "summary": "Function `parseUTC` (10 lines) in splice.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/splice.ts:buildPageSequence",
+      "type": "function",
+      "name": "buildPageSequence",
+      "filePath": "packages/core/src/splice.ts",
+      "lineRange": [
+        107,
+        137
+      ],
+      "summary": "Function `buildPageSequence` (31 lines) in splice.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/core/src/types/profile.ts",
+      "type": "file",
+      "name": "profile.ts",
+      "filePath": "packages/core/src/types/profile.ts",
+      "summary": "Typescript module exposing 1 function and 4 exports (288 lines).",
+      "tags": [
+        "type-definition",
+        "core-engine",
+        "source"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/types/profile.ts:parseProfile",
+      "type": "function",
+      "name": "parseProfile",
+      "filePath": "packages/core/src/types/profile.ts",
+      "lineRange": [
+        250,
+        288
+      ],
+      "summary": "Function `parseProfile` (39 lines) in profile.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:packages/core/src/types/profile.ts:ProfileParseError",
+      "type": "class",
+      "name": "ProfileParseError",
+      "filePath": "packages/core/src/types/profile.ts",
+      "lineRange": [
+        227,
+        235
+      ],
+      "summary": "Class `ProfileParseError` with 1 method (9 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/utils/locale.ts",
+      "type": "file",
+      "name": "locale.ts",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "summary": "Typescript module exposing 10 functions and 11 exports (213 lines).",
+      "tags": [
+        "utility",
+        "core-engine",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:getMonthNames",
+      "type": "function",
+      "name": "getMonthNames",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        25,
+        31
+      ],
+      "summary": "Function `getMonthNames` (7 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:getDayNames",
+      "type": "function",
+      "name": "getDayNames",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        37,
+        58
+      ],
+      "summary": "Function `getDayNames` (22 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:formatDate",
+      "type": "function",
+      "name": "formatDate",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        63,
+        96
+      ],
+      "summary": "Function `formatDate` (34 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:getDaysInMonth",
+      "type": "function",
+      "name": "getDaysInMonth",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        102,
+        104
+      ],
+      "summary": "Function `getDaysInMonth` (3 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:getFirstDayOfMonth",
+      "type": "function",
+      "name": "getFirstDayOfMonth",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        110,
+        112
+      ],
+      "summary": "Function `getFirstDayOfMonth` (3 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:isLeapYear",
+      "type": "function",
+      "name": "isLeapYear",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        117,
+        119
+      ],
+      "summary": "Function `isLeapYear` (3 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:getISOWeekNumber",
+      "type": "function",
+      "name": "getISOWeekNumber",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        124,
+        130
+      ],
+      "summary": "Function `getISOWeekNumber` (7 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:getMonthGrid",
+      "type": "function",
+      "name": "getMonthGrid",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        137,
+        168
+      ],
+      "summary": "Function `getMonthGrid` (32 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:getWeeksInYear",
+      "type": "function",
+      "name": "getWeeksInYear",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        173,
+        204
+      ],
+      "summary": "Function `getWeeksInYear` (32 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/utils/locale.ts:validateYear",
+      "type": "function",
+      "name": "validateYear",
+      "filePath": "packages/core/src/utils/locale.ts",
+      "lineRange": [
+        209,
+        213
+      ],
+      "summary": "Function `validateYear` (5 lines) in locale.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/build-standalone-html.ts",
+      "type": "file",
+      "name": "build-standalone-html.ts",
+      "filePath": "scripts/build-standalone-html.ts",
+      "summary": "Typescript module exposing 3 functions and 0 exports (136 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/build-standalone-html.ts:parseArgs",
+      "type": "function",
+      "name": "parseArgs",
+      "filePath": "scripts/build-standalone-html.ts",
+      "lineRange": [
+        54,
+        70
+      ],
+      "summary": "Function `parseArgs` (17 lines) in build-standalone-html.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-standalone-html.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/build-standalone-html.ts",
+      "lineRange": [
+        84,
+        131
+      ],
+      "summary": "Function `main` (48 lines) in build-standalone-html.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/generate-journal.ts",
+      "type": "file",
+      "name": "generate-journal.ts",
+      "filePath": "scripts/generate-journal.ts",
+      "summary": "Typescript module exposing 4 functions and 0 exports (158 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generate-journal.ts:parseArgs",
+      "type": "function",
+      "name": "parseArgs",
+      "filePath": "scripts/generate-journal.ts",
+      "lineRange": [
+        47,
+        65
+      ],
+      "summary": "Function `parseArgs` (19 lines) in generate-journal.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generate-journal.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/generate-journal.ts",
+      "lineRange": [
+        83,
+        153
+      ],
+      "summary": "Function `main` (71 lines) in generate-journal.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/safari-probe.ts",
+      "type": "file",
+      "name": "safari-probe.ts",
+      "filePath": "scripts/safari-probe.ts",
+      "summary": "Typescript module exposing 5 functions and 0 exports (416 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/safari-probe.ts:buildHtmlProbe",
+      "type": "function",
+      "name": "buildHtmlProbe",
+      "filePath": "scripts/safari-probe.ts",
+      "lineRange": [
+        149,
+        185
+      ],
+      "summary": "Function `buildHtmlProbe` (37 lines) in safari-probe.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/safari-probe.ts:buildPdfProbe",
+      "type": "function",
+      "name": "buildPdfProbe",
+      "filePath": "scripts/safari-probe.ts",
+      "lineRange": [
+        199,
+        252
+      ],
+      "summary": "Function `buildPdfProbe` (54 lines) in safari-probe.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/safari-probe.ts:writeGuide",
+      "type": "function",
+      "name": "writeGuide",
+      "filePath": "scripts/safari-probe.ts",
+      "lineRange": [
+        256,
+        366
+      ],
+      "summary": "Function `writeGuide` (111 lines) in safari-probe.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/safari-probe.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/safari-probe.ts",
+      "lineRange": [
+        370,
+        406
+      ],
+      "summary": "Function `main` (37 lines) in safari-probe.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/smoke-c7b1.ts",
+      "type": "file",
+      "name": "smoke-c7b1.ts",
+      "filePath": "scripts/smoke-c7b1.ts",
+      "summary": "Typescript module exposing 2 functions and 0 exports (76 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/smoke-c7b1.ts:loadLocalProfile",
+      "type": "function",
+      "name": "loadLocalProfile",
+      "filePath": "scripts/smoke-c7b1.ts",
+      "lineRange": [
+        24,
+        36
+      ],
+      "summary": "Function `loadLocalProfile` (13 lines) in smoke-c7b1.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/smoke-c7b1.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/smoke-c7b1.ts",
+      "lineRange": [
+        38,
+        71
+      ],
+      "summary": "Function `main` (34 lines) in smoke-c7b1.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/smoke-c7b2.ts",
+      "type": "file",
+      "name": "smoke-c7b2.ts",
+      "filePath": "scripts/smoke-c7b2.ts",
+      "summary": "Typescript module exposing 3 functions and 0 exports (103 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/smoke-c7b2.ts:loadLocalProfile",
+      "type": "function",
+      "name": "loadLocalProfile",
+      "filePath": "scripts/smoke-c7b2.ts",
+      "lineRange": [
+        24,
+        33
+      ],
+      "summary": "Function `loadLocalProfile` (10 lines) in smoke-c7b2.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/smoke-c7b2.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/smoke-c7b2.ts",
+      "lineRange": [
+        45,
+        98
+      ],
+      "summary": "Function `main` (54 lines) in smoke-c7b2.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/locale.test.ts",
+      "type": "file",
+      "name": "locale.test.ts",
+      "filePath": "tests/unit/locale.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/pdf-splice.test.ts",
+      "type": "file",
+      "name": "pdf-splice.test.ts",
+      "filePath": "tests/unit/pdf-splice.test.ts",
+      "summary": "Test file containing 1 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/prax-journal-renderer.test.ts",
+      "type": "file",
+      "name": "prax-journal-renderer.test.ts",
+      "filePath": "tests/unit/prax-journal-renderer.test.ts",
+      "summary": "Test file containing 1 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:tests/unit/prax-journal-renderer.test.ts:makeProfile",
+      "type": "function",
+      "name": "makeProfile",
+      "filePath": "tests/unit/prax-journal-renderer.test.ts",
+      "lineRange": [
+        42,
+        51
+      ],
+      "summary": "Function `makeProfile` (10 lines) in prax-journal-renderer.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/profile.test.ts",
+      "type": "file",
+      "name": "profile.test.ts",
+      "filePath": "tests/unit/profile.test.ts",
+      "summary": "Test file containing 2 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/splice.test.ts",
+      "type": "file",
+      "name": "splice.test.ts",
+      "filePath": "tests/unit/splice.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/pdf-splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/pdf-postprocess.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/svg-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/index.ts",
+      "target": "file:packages/core/src/utils/locale.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/pdf-splice.ts",
+      "target": "function:packages/core/src/pdf-splice.ts:bookmarkTitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-splice.ts",
+      "target": "function:packages/core/src/pdf-splice.ts:bookmarkTitle",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/pdf-splice.ts",
+      "target": "function:packages/core/src/pdf-splice.ts:splicePdfBuffers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/pdf-splice.ts",
+      "target": "function:packages/core/src/pdf-splice.ts:splicePdfBuffers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/pdf-splice.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:extractRxFields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:deriveDateFields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:deriveDateFields",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:isoWeekNumber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:deriveWeeklyFields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:deriveWeeklyFields",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:deriveMonthlyFields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:deriveMonthlyFields",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:substituteProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:substituteProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:resolvePageSpecFiles",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:resolvePageSpecFiles",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:renderPageSpec",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "function:packages/core/src/prax-journal-renderer.ts:renderPageSpec",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "file:packages/core/src/utils/locale.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/prax-journal-renderer.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/core/src/splice.ts",
+      "target": "function:packages/core/src/splice.ts:parseUTC",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/splice.ts",
+      "target": "function:packages/core/src/splice.ts:buildPageSequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/splice.ts",
+      "target": "function:packages/core/src/splice.ts:buildPageSequence",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/types/profile.ts",
+      "target": "function:packages/core/src/types/profile.ts:parseProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/types/profile.ts",
+      "target": "function:packages/core/src/types/profile.ts:parseProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/types/profile.ts",
+      "target": "class:packages/core/src/types/profile.ts:ProfileParseError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/types/profile.ts",
+      "target": "class:packages/core/src/types/profile.ts:ProfileParseError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getMonthNames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getMonthNames",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getDayNames",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getDayNames",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:formatDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:formatDate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getDaysInMonth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getDaysInMonth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getFirstDayOfMonth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getFirstDayOfMonth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:isLeapYear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:isLeapYear",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getISOWeekNumber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getISOWeekNumber",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getMonthGrid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getMonthGrid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getWeeksInYear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:getWeeksInYear",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:validateYear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/utils/locale.ts",
+      "target": "function:packages/core/src/utils/locale.ts:validateYear",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/build-standalone-html.ts",
+      "target": "function:scripts/build-standalone-html.ts:parseArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-standalone-html.ts",
+      "target": "function:scripts/build-standalone-html.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-standalone-html.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-standalone-html.ts",
+      "target": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-standalone-html.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-standalone-html.ts",
+      "target": "file:packages/core/src/standalone-builder.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/generate-journal.ts",
+      "target": "function:scripts/generate-journal.ts:parseArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/generate-journal.ts",
+      "target": "function:scripts/generate-journal.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/generate-journal.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/generate-journal.ts",
+      "target": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/generate-journal.ts",
+      "target": "file:packages/core/src/pdf-splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/generate-journal.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/generate-journal.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "function:scripts/safari-probe.ts:buildHtmlProbe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "function:scripts/safari-probe.ts:buildPdfProbe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "function:scripts/safari-probe.ts:writeGuide",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "function:scripts/safari-probe.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "file:packages/core/src/pdf-splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "file:packages/core/src/dimensions.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/safari-probe.ts",
+      "target": "file:packages/core/src/standalone-builder.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b1.ts",
+      "target": "function:scripts/smoke-c7b1.ts:loadLocalProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/smoke-c7b1.ts",
+      "target": "function:scripts/smoke-c7b1.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/smoke-c7b1.ts",
+      "target": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b1.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b1.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b2.ts",
+      "target": "function:scripts/smoke-c7b2.ts:loadLocalProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/smoke-c7b2.ts",
+      "target": "function:scripts/smoke-c7b2.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/smoke-c7b2.ts",
+      "target": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b2.ts",
+      "target": "file:packages/core/src/pdf-splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b2.ts",
+      "target": "file:packages/core/src/puppeteer-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b2.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/smoke-c7b2.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/locale.test.ts",
+      "target": "file:packages/core/src/utils/locale.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/pdf-splice.test.ts",
+      "target": "file:packages/core/src/pdf-splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/pdf-splice.test.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/prax-journal-renderer.test.ts",
+      "target": "function:tests/unit/prax-journal-renderer.test.ts:makeProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/prax-journal-renderer.test.ts",
+      "target": "file:packages/core/src/prax-journal-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/prax-journal-renderer.test.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/prax-journal-renderer.test.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/profile.test.ts",
+      "target": "file:packages/core/src/types/profile.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/splice.test.ts",
+      "target": "file:packages/core/src/splice.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

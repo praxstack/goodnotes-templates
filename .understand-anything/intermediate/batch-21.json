@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-eat-the-frog/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-eat-the-frog/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-eat-the-frog/eat-the-frog.html",
+      "type": "file",
+      "name": "eat-the-frog.html",
+      "filePath": "packages/packs-eat-the-frog/eat-the-frog.html",
+      "summary": "HTML template (eat-the-frog.html, 445 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/packs-eat-the-frog/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-eat-the-frog/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

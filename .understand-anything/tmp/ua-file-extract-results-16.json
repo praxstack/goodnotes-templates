@@ -1,0 +1,765 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/gstack-archive/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 59,
+      "nonEmptyLines": 47,
+      "sections": [
+        {
+          "heading": "gstack archive",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Contents",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "How this was authored",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Mock-vs-shipped gap reference",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Keep or purge?",
+          "level": 2,
+          "line": 55
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-design-20260409-194856.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 273,
+      "nonEmptyLines": 227,
+      "sections": [
+        {
+          "heading": "Design: goodnotes-templates — Full Breadth Engine",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Problem Statement",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "What Makes This Cool",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Constraints",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Premises",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Approaches Considered",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "Approach A: Quality-First Vertical Slice",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "Approach B: Full Breadth Engine (Boil the Lake) ✅",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Approach C: Sticker-Led Launch",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "Recommended Approach",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "Architecture",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "Rendering Pipeline",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "Template Types (22+ at launch)",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "Sticker Sets (200+ individual PNGs at launch)",
+          "level": 2,
+          "line": 174
+        },
+        {
+          "heading": "8 Built-in Themes",
+          "level": 2,
+          "line": 194
+        },
+        {
+          "heading": "Build Order (Implementation Phases)",
+          "level": 2,
+          "line": 207
+        },
+        {
+          "heading": "Phase 1: Engine Core (~2 hours CC)",
+          "level": 3,
+          "line": 209
+        },
+        {
+          "heading": "Phase 2: Templates (~3 hours CC)",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "Phase 3: Stickers (~1 hour CC)",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "Phase 4: Polish (~2 hours CC)",
+          "level": 3,
+          "line": 229
+        },
+        {
+          "heading": "Open Questions",
+          "level": 2,
+          "line": 238
+        },
+        {
+          "heading": "Success Criteria",
+          "level": 2,
+          "line": 248
+        },
+        {
+          "heading": "Next Steps",
+          "level": 2,
+          "line": 258
+        },
+        {
+          "heading": "What I noticed about how you think",
+          "level": 2,
+          "line": 268
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 24
+      }
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-design-20260430-163246.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 521,
+      "nonEmptyLines": 437,
+      "sections": [
+        {
+          "heading": "Design: goodnotes-templates — shadcn for GoodNotes",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Problem Statement",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "What Makes This Cool",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "Constraints",
+          "level": 2,
+          "line": 58
+        },
+        {
+          "heading": "Premises (all approved by user on 2026-04-30)",
+          "level": 2,
+          "line": 79
+        },
+        {
+          "heading": "Cross-Model Perspective",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "Landscape Evidence (from Phase 2.75 search)",
+          "level": 2,
+          "line": 112
+        },
+        {
+          "heading": "The gap is real.",
+          "level": 3,
+          "line": 117
+        },
+        {
+          "heading": "Prior art to steal.",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "Eureka moments logged.",
+          "level": 3,
+          "line": 140
+        },
+        {
+          "heading": "Approaches Considered",
+          "level": 2,
+          "line": 153
+        },
+        {
+          "heading": "Approach A — Minimal CLI Registry (4 weeks)",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "Approach B — Shadcn-exact Mirror (6 weeks) ✓ SELECTED",
+          "level": 3,
+          "line": 161
+        },
+        {
+          "heading": "Approach C — Hybrid Registry + Creator-First (5 weeks)",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "Recommended Approach — Shadcn-exact Mirror",
+          "level": 2,
+          "line": 174
+        },
+        {
+          "heading": "The deliverable",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "Install-time UX (addresses the Puppeteer 200MB honesty gap)",
+          "level": 3,
+          "line": 225
+        },
+        {
+          "heading": "Why this is the shape",
+          "level": 3,
+          "line": 275
+        },
+        {
+          "heading": "6-week timeline",
+          "level": 3,
+          "line": 295
+        },
+        {
+          "heading": "The `registry.json` schema (first cut)",
+          "level": 3,
+          "line": 306
+        },
+        {
+          "heading": "Distribution Plan",
+          "level": 3,
+          "line": 341
+        },
+        {
+          "heading": "Open Questions",
+          "level": 2,
+          "line": 361
+        },
+        {
+          "heading": "Success Criteria",
+          "level": 2,
+          "line": 385
+        },
+        {
+          "heading": "Distribution Plan (formalized per Phase 3 premise P7)",
+          "level": 2,
+          "line": 410
+        },
+        {
+          "heading": "Dependencies",
+          "level": 2,
+          "line": 436
+        },
+        {
+          "heading": "The Assignment",
+          "level": 2,
+          "line": 451
+        },
+        {
+          "heading": "Reviewer Concerns (unresolved · to carry into /plan-eng-review)",
+          "level": 2,
+          "line": 474
+        },
+        {
+          "heading": "What I noticed about how you think",
+          "level": 2,
+          "line": 499
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 28
+      }
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-design-review-20260430-2058.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 287,
+      "nonEmptyLines": 231,
+      "sections": [
+        {
+          "heading": "pretext-templates — `/plan-design-review` v1",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Artefacts produced",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Section 0 · Initial ratings",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "7-Pass Review (against v2)",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "PASS 1 · Information Architecture — `8/10`",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "PASS 2 · Interaction State Coverage — `8/10`",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "PASS 3 · User Journey & Emotional Arc — `8/10`",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "PASS 4 · AI Slop Risk — `8/10`",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "PASS 5 · Design System Alignment — `9/10`",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "PASS 6 · Responsive & Accessibility — `7/10`",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "PASS 7 · Unresolved Design Decisions → resolved (14 decisions added to plan)",
+          "level": 3,
+          "line": 150
+        },
+        {
+          "heading": "Section 6 · NOT in scope",
+          "level": 2,
+          "line": 171
+        },
+        {
+          "heading": "Section 7 · What already exists (reuse, don't reinvent)",
+          "level": 2,
+          "line": 188
+        },
+        {
+          "heading": "Section 8 · TODOs (candidates for GitHub issues)",
+          "level": 2,
+          "line": 203
+        },
+        {
+          "heading": "Section 9 · Approved mockups",
+          "level": 2,
+          "line": 228
+        },
+        {
+          "heading": "Section 10 · Completion summary",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT",
+          "level": 2,
+          "line": 274
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-devex-review-20260430-2110.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 285,
+      "nonEmptyLines": 232,
+      "sections": [
+        {
+          "heading": "pretext-templates — `/plan-devex-review` v1",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "Persona Cards",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Developer Empathy Narrative (Persona B today, HEAD 88e291b)",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "Competitive Benchmark",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Magical Moment",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "8 Review Passes",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "PASS 1 · Getting Started — **9/10** ↑ from 3/10",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "PASS 2 · API/CLI/SDK Design — **8/10** ↑ from 5/10",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "PASS 3 · Error Messages & Debugging — **9/10** ↑ from 4/10",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "PASS 4 · Documentation & Learning — **9/10** ↑ from 5/10",
+          "level": 3,
+          "line": 115
+        },
+        {
+          "heading": "PASS 5 · Upgrade & Migration — **8/10** ↑ from 4/10",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "PASS 6 · Dev Environment — **8/10** ↑ from 5/10",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "PASS 7 · Community & Ecosystem — **7/10** ↑ from 4/10",
+          "level": 3,
+          "line": 139
+        },
+        {
+          "heading": "PASS 8 · DX Measurement — **7/10** ↑ from 0/10",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "DX SCORECARD",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "DX Implementation Checklist",
+          "level": 2,
+          "line": 193
+        },
+        {
+          "heading": "NOT in scope",
+          "level": 2,
+          "line": 217
+        },
+        {
+          "heading": "What already exists (reuse, don't reinvent)",
+          "level": 2,
+          "line": 229
+        },
+        {
+          "heading": "TODOs (18 items added to plan)",
+          "level": 2,
+          "line": 242
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT",
+          "level": 2,
+          "line": 267
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 20
+      }
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-eng-review-20260430-1935.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 299,
+      "nonEmptyLines": 230,
+      "sections": [
+        {
+          "heading": "pretext-templates — `/plan-eng-review` v1",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "Sprint timeline (updated by D4)",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Section 0 · Scope Challenge (locked before findings)",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Section 1 · Architecture (5 findings)",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "Section 2 · Code Quality (4 findings · locked silently)",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "Section 3 · Tests + Coverage",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Section 4 · Performance (4 findings · locked silently)",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "Section 5 · Outside Voice (2 reviewers)",
+          "level": 2,
+          "line": 126
+        },
+        {
+          "heading": "Cross-model tensions (surfaced to user)",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "User decisions on outside voice (D4-D7)",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "Section 6 · NOT in scope",
+          "level": 2,
+          "line": 167
+        },
+        {
+          "heading": "Section 7 · What already exists (repo reality anchor)",
+          "level": 2,
+          "line": 184
+        },
+        {
+          "heading": "Section 8 · TODOS (each a candidate for GitHub issue)",
+          "level": 2,
+          "line": 204
+        },
+        {
+          "heading": "Section 9 · Failure modes registry (from Rev 2)",
+          "level": 2,
+          "line": 234
+        },
+        {
+          "heading": "Section 10 · Parallelization strategy (worktrees)",
+          "level": 2,
+          "line": 247
+        },
+        {
+          "heading": "Section 11 · Completion summary",
+          "level": 2,
+          "line": 265
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT",
+          "level": 2,
+          "line": 281
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-eng-review-test-plan-20260430-1735.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 65,
+      "nonEmptyLines": 56,
+      "sections": [
+        {
+          "heading": "Test Plan — pretext-templates 11-week sprint",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Affected Pages/Routes",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Key Interactions to Verify",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Edge Cases",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Critical Paths",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Required E2E Coverage (Playwright)",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "Required Unit Tests (vitest)",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Integration / Docker",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "Evaluation / LLM",
+          "level": 2,
+          "line": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-test-plan-20260409-203137.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 36,
+      "nonEmptyLines": 32,
+      "sections": [
+        {
+          "heading": "Test Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Affected Pages/Routes",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Key Interactions to Verify",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Edge Cases",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Critical Paths",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    }
+  ]
+}

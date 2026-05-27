@@ -1,0 +1,2077 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 15,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/CUSTOMISATION.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 151,
+      "nonEmptyLines": 119,
+      "sections": [
+        {
+          "heading": "Customisation · tiered spec",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tier 1 · Profile (CLI-only, ships today)",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Tier 2 · Themes (gallery, ships v1.1.0)",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Tier 3 · In-browser editor (future · shapes v1.x+)",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "Why not just one big theme-picker slider?",
+          "level": 2,
+          "line": 113
+        },
+        {
+          "heading": "Operational notes",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "References",
+          "level": 2,
+          "line": 145
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "docs/HLD-self-contained-templates.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 233,
+      "nonEmptyLines": 204,
+      "sections": [
+        {
+          "heading": "High-Level Design (HLD): Self-Contained Template Architecture",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Executive Summary",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "2. System Architecture",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "2.1 Current Architecture (BEFORE)",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "2.2 New Architecture (AFTER)",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "3. Component Boundaries",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "3.1 Template (HTML file)",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "3.2 Color Mode Snippet (.dark.css)",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "3.3 Puppeteer Renderer",
+          "level": 3,
+          "line": 116
+        },
+        {
+          "heading": "3.4 SVG Sticker Renderer",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "3.5 PNG Renderer",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "3.6 PDF Post-Processor",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "4. Data Flow",
+          "level": 2,
+          "line": 145
+        },
+        {
+          "heading": "4.1 Single Page Render",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "4.2 Multi-Page Planner (e.g., 4-week, full year)",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "4.3 Sticker Render",
+          "level": 3,
+          "line": 198
+        },
+        {
+          "heading": "5. Files Impact Summary",
+          "level": 2,
+          "line": 210
+        },
+        {
+          "heading": "6. Risk Assessment",
+          "level": 2,
+          "line": 218
+        },
+        {
+          "heading": "7. Non-Goals / NOT in Scope",
+          "level": 2,
+          "line": 227
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "docs/LLD-self-contained-templates.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 571,
+      "nonEmptyLines": 450,
+      "sections": [
+        {
+          "heading": "Low-Level Design (LLD): Self-Contained Template Architecture",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Implementation Phases",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "2. Phase 1: Renderer Surgery (`src/core/puppeteer-renderer.ts`)",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "2.1 Lines to DELETE",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "2.2 New PuppeteerRenderOptions Interface",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "2.3 New renderHTMLToPDF Logic",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "2.4 renderHTMLToPDFFile — Remove theme from signature",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "2.5 batchRenderHTML — Remove theme parameter",
+          "level": 3,
+          "line": 142
+        },
+        {
+          "heading": "3. Phase 2: SVG Sticker Self-Containment (`src/core/svg-renderer.ts`)",
+          "level": 2,
+          "line": 164
+        },
+        {
+          "heading": "3.1 Current Pattern (uses theme.colors)",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "3.2 New Pattern (baked-in palettes)",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "3.3 Function Signature Changes",
+          "level": 3,
+          "line": 211
+        },
+        {
+          "heading": "4. Phase 3: PNG Renderer (`src/core/png-renderer.ts`)",
+          "level": 2,
+          "line": 240
+        },
+        {
+          "heading": "4.1 Changes",
+          "level": 3,
+          "line": 242
+        },
+        {
+          "heading": "5. Phase 4: Type Cleanup (`src/types/index.ts`)",
+          "level": 2,
+          "line": 267
+        },
+        {
+          "heading": "5.1 Types to DELETE",
+          "level": 3,
+          "line": 269
+        },
+        {
+          "heading": "5.2 Types to KEEP (unchanged)",
+          "level": 3,
+          "line": 279
+        },
+        {
+          "heading": "5.3 New Type to ADD",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "6. Phase 5: Create Dark CSS Files",
+          "level": 2,
+          "line": 305
+        },
+        {
+          "heading": "6.1 V2 + Gentle Dark Palette (7 files)",
+          "level": 3,
+          "line": 307
+        },
+        {
+          "heading": "6.2 V3 Dark Palette (4 files)",
+          "level": 3,
+          "line": 346
+        },
+        {
+          "heading": "7. Phase 6: Update Generators",
+          "level": 2,
+          "line": 380
+        },
+        {
+          "heading": "7.1 `scripts/generate-4week.ts`",
+          "level": 3,
+          "line": 382
+        },
+        {
+          "heading": "7.2 `scripts/generate-v3-year.ts`",
+          "level": 3,
+          "line": 414
+        },
+        {
+          "heading": "7.3 `scripts/generate-v2-year.ts`",
+          "level": 3,
+          "line": 418
+        },
+        {
+          "heading": "7.4 `src/templates/planners/daily-year-v2.ts`",
+          "level": 3,
+          "line": 422
+        },
+        {
+          "heading": "7.5 `src/templates/planners/daily-year.ts`",
+          "level": 3,
+          "line": 444
+        },
+        {
+          "heading": "8. Phase 7: Delete Dead Code",
+          "level": 2,
+          "line": 450
+        },
+        {
+          "heading": "8.1 Files to DELETE",
+          "level": 3,
+          "line": 452
+        },
+        {
+          "heading": "8.2 Verification After Delete",
+          "level": 3,
+          "line": 473
+        },
+        {
+          "heading": "9. Phase 8: CLI + Registry",
+          "level": 2,
+          "line": 488
+        },
+        {
+          "heading": "9.1 `src/cli/index.ts`",
+          "level": 3,
+          "line": 490
+        },
+        {
+          "heading": "9.2 `src/templates/registry.ts`",
+          "level": 3,
+          "line": 505
+        },
+        {
+          "heading": "10. Phase 9: Documentation",
+          "level": 2,
+          "line": 512
+        },
+        {
+          "heading": "10.1 `README.md`",
+          "level": 3,
+          "line": 514
+        },
+        {
+          "heading": "10.2 `CLAUDE.md`",
+          "level": 3,
+          "line": 531
+        },
+        {
+          "heading": "11. Phase 10: Verification Checklist",
+          "level": 2,
+          "line": 537
+        },
+        {
+          "heading": "12. Dependency Graph (execution order)",
+          "level": 2,
+          "line": 551
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 38
+      }
+    },
+    {
+      "path": "docs/NORTH-STAR.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 167,
+      "nonEmptyLines": 122,
+      "sections": [
+        {
+          "heading": "NORTH-STAR · pretext-templates 12-month ideal",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "One-paragraph pitch (the whole cathedral)",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "The five capabilities (in priority order)",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "1 · Every pack is a generator",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "2 · Gallery is a feedback loop",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "3 · Design-system lint CLI gates contribution",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "4 · Tier 3 static editor lights up",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "5 · Prax Journal as the ceiling demonstration",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "What is explicitly NOT in the North Star",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "Signal → gate map (how we know to pull each lever)",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "Anti-goals that would invalidate the North Star",
+          "level": 2,
+          "line": 140
+        },
+        {
+          "heading": "Update protocol",
+          "level": 2,
+          "line": 151
+        },
+        {
+          "heading": "Shipped log (update as capabilities land)",
+          "level": 2,
+          "line": 164
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "docs/design-review-v5-2026-04-27.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 337,
+      "nonEmptyLines": 227,
+      "sections": [
+        {
+          "heading": "Prax Journal v5 — Design Code Review",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0 · TL;DR",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "1 · Accessibility (CRITICAL)",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "1.1 Contrast — **4 token FAILs for body-size text**",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "1.2 Writable-line heights — *this is the journal's equivalent of \"touch target size\"*",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "1.3 Aria landmarks",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "1.4 Heading hierarchy",
+          "level": 3,
+          "line": 72
+        },
+        {
+          "heading": "2 · Typography — HIGH priority cleanup",
+          "level": 2,
+          "line": 78
+        },
+        {
+          "heading": "2.1 Font-size sprawl",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "2.2 Line-height discipline",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "2.3 Weight discipline",
+          "level": 3,
+          "line": 126
+        },
+        {
+          "heading": "3 · Color & Tokens — cleanup",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "3.1 Raw hex in templates",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "3.2 Color contract adherence",
+          "level": 3,
+          "line": 142
+        },
+        {
+          "heading": "3.3 Dark mode",
+          "level": 3,
+          "line": 146
+        },
+        {
+          "heading": "4 · Layout & A4 fit",
+          "level": 2,
+          "line": 152
+        },
+        {
+          "heading": "4.1 Page-level geometry",
+          "level": 3,
+          "line": 154
+        },
+        {
+          "heading": "4.2 Rhythm",
+          "level": 3,
+          "line": 158
+        },
+        {
+          "heading": "4.3 Card gutters",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "4.4 Bleed-risk elements",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "5 · Information Architecture & UX",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "5.1 Hierarchy",
+          "level": 3,
+          "line": 177
+        },
+        {
+          "heading": "5.2 Permission banner",
+          "level": 3,
+          "line": 187
+        },
+        {
+          "heading": "5.3 Kicker / title ratio",
+          "level": 3,
+          "line": 191
+        },
+        {
+          "heading": "5.4 Writing affordances — spatial ordering",
+          "level": 3,
+          "line": 200
+        },
+        {
+          "heading": "5.5 The [psychologist] matrix on Midday",
+          "level": 3,
+          "line": 204
+        },
+        {
+          "heading": "6 · Aesthetic & Visual Design",
+          "level": 2,
+          "line": 210
+        },
+        {
+          "heading": "6.1 What works",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "6.2 What's missing — design ambition ceiling",
+          "level": 3,
+          "line": 221
+        },
+        {
+          "heading": "6.3 Color allocation",
+          "level": 3,
+          "line": 230
+        },
+        {
+          "heading": "6.4 Iconography",
+          "level": 3,
+          "line": 237
+        },
+        {
+          "heading": "6.5 Squircle + shadow pattern",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "6.6 White-space balance",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "7 · Remaining 11 inline `style=\"\"` on Reflect — must fix",
+          "level": 2,
+          "line": 251
+        },
+        {
+          "heading": "8 · Print fidelity (the real delivery target)",
+          "level": 2,
+          "line": 273
+        },
+        {
+          "heading": "9 · Ranked fix list (suggested execution order)",
+          "level": 2,
+          "line": 284
+        },
+        {
+          "heading": "10 · Decisions needed from Prax",
+          "level": 2,
+          "line": 318
+        },
+        {
+          "heading": "11 · Gates after proposed changes",
+          "level": 2,
+          "line": 328
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 38
+      }
+    },
+    {
+      "path": "docs/llm-council-context-window-debug.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 111,
+      "nonEmptyLines": 76,
+      "sections": [
+        {
+          "heading": "LLM Council Plus Review — \"Why does Cline's 1M-token context refill in 1–2 iterations after `/compact`?\"",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Stage 0 — Restating the question",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Stage 1 — Independent Deliberation",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Member A — Performance Engineer lens",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "Member B — Prompt-Ops / Context Engineering lens",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "Member C — Product UX lens",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Stage 2 — Anonymized Peer Review",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Stage 3 — Chairman Synthesis",
+          "level": 2,
+          "line": 88
+        },
+        {
+          "heading": "Diagnosis (in one paragraph)",
+          "level": 3,
+          "line": 90
+        },
+        {
+          "heading": "Action plan (ranked by impact-per-effort)",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "Expected outcome",
+          "level": 3,
+          "line": 102
+        },
+        {
+          "heading": "What we explicitly did **not** recommend",
+          "level": 3,
+          "line": 105
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "docs/plan-ceo-review-sticker-expansion-v1.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 385,
+      "nonEmptyLines": 285,
+      "sections": [
+        {
+          "heading": "CEO Plan — Prax Journal Sticker Pack Expansion (v1)",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "Executive summary (read this first)",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Step 0A — Premise Challenge",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "The four questions I'm obligated to ask before any expansion",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "Step 0B — Existing Code Leverage",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Step 0C — Dream State (12-month vision)",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "Step 0C-bis — Implementation Alternatives (MANDATORY)",
+          "level": 2,
+          "line": 127
+        },
+        {
+          "heading": "Approach A — Big-bang 60 stickers shipped in one wave",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "Approach B — Wave-1 (20 stickers) now + Wave-2 (30–40) after 1 month of usage data  ✅ **RECOMMENDED**",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "Approach C — AI-curated dynamic pack (no static expansion)",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "Step 0C-ter — Wave 1 roster (20 stickers, RECOMMENDED for first ship)",
+          "level": 2,
+          "line": 161
+        },
+        {
+          "heading": "1. ADHD / executive function (4)",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "2. Smoking cessation (4 — because this is active right now)",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "3. Medication experience (3)",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "4. OCD / ERP (2)",
+          "level": 3,
+          "line": 191
+        },
+        {
+          "heading": "5. Anxiety (2)",
+          "level": 3,
+          "line": 197
+        },
+        {
+          "heading": "6. Depression / behavioural activation (1)",
+          "level": 3,
+          "line": 203
+        },
+        {
+          "heading": "7. Sleep (2)",
+          "level": 3,
+          "line": 208
+        },
+        {
+          "heading": "8. Self-compassion + savouring (2)",
+          "level": 3,
+          "line": 214
+        },
+        {
+          "heading": "Step 0D — Wave 2 candidates (40 more, cherry-pick after 30 days of Wave-1 data)",
+          "level": 2,
+          "line": 224
+        },
+        {
+          "heading": "2a · CBT beyond thought-flip (6)",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "2b · DBT — distress tolerance & emotion regulation (5)",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "2c · DBT — interpersonal effectiveness (3)",
+          "level": 3,
+          "line": 243
+        },
+        {
+          "heading": "2d · ACT — defusion + values (5)",
+          "level": 3,
+          "line": 248
+        },
+        {
+          "heading": "2e · ERP / OCD deep (2)",
+          "level": 3,
+          "line": 255
+        },
+        {
+          "heading": "2f · ADHD deep (6)",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "2g · Smoking cessation deep (4)",
+          "level": 3,
+          "line": 267
+        },
+        {
+          "heading": "2h · Med experience deep (3)",
+          "level": 3,
+          "line": 273
+        },
+        {
+          "heading": "2i · Positive psych + savouring deep (4)",
+          "level": 3,
+          "line": 278
+        },
+        {
+          "heading": "2j · Somatic / body (4)",
+          "level": 3,
+          "line": 284
+        },
+        {
+          "heading": "2k · Relational (3)",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "2l · Screeners (4) — one-tap structured screens",
+          "level": 3,
+          "line": 295
+        },
+        {
+          "heading": "Step 0D-bis — Cherry-pick scoring rubric",
+          "level": 2,
+          "line": 305
+        },
+        {
+          "heading": "Step 0E — Mode recommendation",
+          "level": 2,
+          "line": 318
+        },
+        {
+          "heading": "Step 0F — What's NOT in scope for this plan",
+          "level": 2,
+          "line": 328
+        },
+        {
+          "heading": "Step 0G — Review summary",
+          "level": 2,
+          "line": 338
+        },
+        {
+          "heading": "Cherry-pick decisions the user needs to make",
+          "level": 2,
+          "line": 351
+        },
+        {
+          "heading": "Next concrete step (once Wave 1 is approved)",
+          "level": 2,
+          "line": 372
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 39
+      }
+    },
+    {
+      "path": "docs/plan-ceo-review-v2-10x-expansion.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 398,
+      "nonEmptyLines": 292,
+      "sections": [
+        {
+          "heading": "CEO Plan v2 — Weekly · Monthly · Sticker Library — 10x SCOPE EXPANSION",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0 · System state (pre-review audit)",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "0A · Premise challenge (second-order)",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Q1 — Is the journal a book or a system?",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "Q2 — Are 12 stickers enough, or are they a sampler plate?",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "Q3 — Is \"digital-first\" a constraint or a capability?",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "Q4 — Does the journal know Prax, or does Prax have to tell it every day?",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "Q5 — Does the journal survive without Cline?",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "0B · Dream state mapping (12-month ideal, expanded)",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "0C-bis · Implementation alternatives (v2 — mandatory)",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "APPROACH X · **v1 shipped as-is** (baseline — what v1 already decided)",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "APPROACH Y · **Cathedral** (10x vision, full 10-commit ladder)",
+          "level": 3,
+          "line": 126
+        },
+        {
+          "heading": "APPROACH Z · **Post-artifact system-only** (skip v1, go straight to system)",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "0D · Scope Expansion — Five 10x proposals (all opt-in)",
+          "level": 2,
+          "line": 143
+        },
+        {
+          "heading": "E1 · **The Memory Loop** — Quarterly retrospective page",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "E2 · **The Curator** — Practice-of-the-week micro-surface on Today",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "E3 · **The Profile** — Single `journal.profile.json` parameterizes every page",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "E4 · **The Generator** — `npm run journal -- --from 2026-05-01 --to 2026-07-01`",
+          "level": 3,
+          "line": 210
+        },
+        {
+          "heading": "E5 · **The Longitudinal Layer** — `scripts/extract-entries.ts` → CSV for therapists",
+          "level": 3,
+          "line": 225
+        },
+        {
+          "heading": "0E · Temporal interrogation (hour-by-hour, CC+gstack scale)",
+          "level": 2,
+          "line": 240
+        },
+        {
+          "heading": "Final scope (v2 locked)",
+          "level": 2,
+          "line": 256
+        },
+        {
+          "heading": "Ladder: v5.2 → v5.3 → v5.4",
+          "level": 3,
+          "line": 258
+        },
+        {
+          "heading": "Files added (v5.3 only; v5.2 covered by v1)",
+          "level": 3,
+          "line": 275
+        },
+        {
+          "heading": "Explicit NOT in scope (v2)",
+          "level": 3,
+          "line": 285
+        },
+        {
+          "heading": "Sequenced commit plan (10 commits · two-stage release)",
+          "level": 2,
+          "line": 296
+        },
+        {
+          "heading": "v5.2 (v1 scope · already eng-cleared)",
+          "level": 3,
+          "line": 298
+        },
+        {
+          "heading": "v5.3 (10x additions)",
+          "level": 3,
+          "line": 305
+        },
+        {
+          "heading": "v5.4 (follow-up PR, after v5.3 ships)",
+          "level": 3,
+          "line": 312
+        },
+        {
+          "heading": "Decision matrix (v1 vs v2)",
+          "level": 2,
+          "line": 319
+        },
+        {
+          "heading": "User decision surface (cherry-pick per expansion)",
+          "level": 2,
+          "line": 336
+        },
+        {
+          "heading": "Risk register (v2 additions only)",
+          "level": 2,
+          "line": 356
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT",
+          "level": 2,
+          "line": 369
+        },
+        {
+          "heading": "Next steps (CEO → Eng → Design → Ship)",
+          "level": 2,
+          "line": 388
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 33
+      }
+    },
+    {
+      "path": "docs/plan-ceo-review-v3-refined.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 224,
+      "nonEmptyLines": 179,
+      "sections": [
+        {
+          "heading": "CEO Plan v3 — Refined through Dialogue (Iteration-1 loop)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Three locked decisions (from dialogue 2026-04-28)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "D1 · Option (a) flow — user writes in GoodNotes, AI reads at month-end",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "D2 · Fluid stickers with data spec",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "D3 · Repo restructure to `packs/` — prerequisite to Iteration-1",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "Migration plan (one focused pass, preserves git history)",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Iteration-1 scope (after restructure lands)",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "Commit plan (Iteration-1, after restructure)",
+          "level": 2,
+          "line": 176
+        },
+        {
+          "heading": "Explicit NOT in scope for Iteration-1",
+          "level": 2,
+          "line": 188
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT",
+          "level": 2,
+          "line": 201
+        },
+        {
+          "heading": "Next steps",
+          "level": 2,
+          "line": 216
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "docs/plan-ceo-review-v4-five-decisions-locked.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 183,
+      "nonEmptyLines": 126,
+      "sections": [
+        {
+          "heading": "CEO Plan v4 — Five Decisions Locked (post-dialog)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "The five decisions (locked)",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Q1 · Monthly page → **C (hybrid)**",
+          "level": 3,
+          "line": 16
+        },
+        {
+          "heading": "Q2 · Quarterly page → **C (hybrid, same as Monthly)**",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "Q3 · Practice-of-the-week → **D (skip for v5.3)**",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "Q4 · profile.json → **B (data-only reference, no templating)**",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "Q5 · Generator CLI → **A (full generator CLI, documented everywhere)**",
+          "level": 3,
+          "line": 81
+        },
+        {
+          "heading": "Revised Phase 2 commit ladder (supersedes v3's 5-commit plan)",
+          "level": 2,
+          "line": 108
+        },
+        {
+          "heading": "What v4 keeps from v3",
+          "level": 2,
+          "line": 127
+        },
+        {
+          "heading": "What v4 drops from v3",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "What v4 adds vs v3",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "Explicit NOT in scope for v5.3",
+          "level": 2,
+          "line": 145
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT (required runs before implementation)",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "Next action",
+          "level": 2,
+          "line": 171
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "docs/plan-ceo-review-v5-10x-100x-expansion.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 795,
+      "nonEmptyLines": 609,
+      "sections": [
+        {
+          "heading": "CEO Plan v5 — Post-v1.0.0 10x/100x Expansion",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0 · Pre-review system audit",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Git state",
+          "level": 3,
+          "line": 16
+        },
+        {
+          "heading": "What shipped (100% correction layer)",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "What is explicitly deferred / open",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Recently touched (last 14 days · top signal)",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "TODO markers — all are in historical planning docs, zero in active code. Clean.",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "0A · Premise challenge — second-order reopening",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "Q1 — Is the repo a template library or a **personalisation engine**?",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Q2 — Is the gallery a showcase or a **conversion funnel**?",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "Q3 — Is the project's moat the **code** or the **opinionated taste**?",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "Q4 — Does the project survive without Prax + Cline?",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "0B · Existing code leverage (what already partly solves this)",
+          "level": 2,
+          "line": 103
+        },
+        {
+          "heading": "0C · Dream state mapping",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "Framing the delta",
+          "level": 3,
+          "line": 144
+        },
+        {
+          "heading": "0C-bis · Implementation alternatives (mandatory)",
+          "level": 2,
+          "line": 152
+        },
+        {
+          "heading": "APPROACH A · v1.1.0 shipped as-is (baseline · do nothing)",
+          "level": 3,
+          "line": 154
+        },
+        {
+          "heading": "APPROACH B · Selective expansion (parameterise 5 flagship packs + ship feedback loop)",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "APPROACH C · Cathedral — full 100x (platonic ideal over 6 months)",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "RECOMMENDATION: **Approach B** (selective 10x)",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "Completeness scoring",
+          "level": 3,
+          "line": 190
+        },
+        {
+          "heading": "0D · Mode-specific — Expansion opt-in candidates (SCOPE EXPANSION posture)",
+          "level": 2,
+          "line": 198
+        },
+        {
+          "heading": "0E · Temporal interrogation — decisions that implementation will hit",
+          "level": 2,
+          "line": 223
+        },
+        {
+          "heading": "HOUR 1 (foundations · E9 + E10 + E11)",
+          "level": 3,
+          "line": 227
+        },
+        {
+          "heading": "HOUR 2 (E1 · generator dispatch)",
+          "level": 3,
+          "line": 233
+        },
+        {
+          "heading": "HOUR 3 (E2 · Cloudflare Worker)",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "HOUR 4 (E3 · audit CLI)",
+          "level": 3,
+          "line": 273
+        },
+        {
+          "heading": "HOUR 5 (E4 · sticker practice-of-week)",
+          "level": 3,
+          "line": 287
+        },
+        {
+          "heading": "HOUR 6+ (polish · docs · tests · observability)",
+          "level": 3,
+          "line": 293
+        },
+        {
+          "heading": "0F · Mode selection — locked: **SCOPE EXPANSION 10x (Approach B)**",
+          "level": 2,
+          "line": 303
+        },
+        {
+          "heading": "Phase plan — compounded commit ladder",
+          "level": 2,
+          "line": 309
+        },
+        {
+          "heading": "Phase 0 · Close iter-5 debt (pre-req, no new scope)",
+          "level": 3,
+          "line": 311
+        },
+        {
+          "heading": "Phase 1 · Parameterised generators (E1)",
+          "level": 3,
+          "line": 322
+        },
+        {
+          "heading": "Phase 2 · Download event + feedback loop (E2)",
+          "level": 3,
+          "line": 338
+        },
+        {
+          "heading": "Phase 3 · Design-system lint CLI (E3)",
+          "level": 3,
+          "line": 354
+        },
+        {
+          "heading": "Phase 4 · Sticker practice-of-week v0 (E4)",
+          "level": 3,
+          "line": 370
+        },
+        {
+          "heading": "Review sections (1-11)",
+          "level": 2,
+          "line": 383
+        },
+        {
+          "heading": "§1 · Architecture",
+          "level": 3,
+          "line": 385
+        },
+        {
+          "heading": "§2 · Error & rescue map",
+          "level": 3,
+          "line": 448
+        },
+        {
+          "heading": "§3 · Security & threat model",
+          "level": 3,
+          "line": 470
+        },
+        {
+          "heading": "§4 · Data flow & interaction edge cases",
+          "level": 3,
+          "line": 498
+        },
+        {
+          "heading": "§5 · Code quality",
+          "level": 3,
+          "line": 542
+        },
+        {
+          "heading": "§6 · Test review",
+          "level": 3,
+          "line": 549
+        },
+        {
+          "heading": "§7 · Performance",
+          "level": 3,
+          "line": 569
+        },
+        {
+          "heading": "§8 · Observability",
+          "level": 3,
+          "line": 577
+        },
+        {
+          "heading": "§9 · Deployment & rollout",
+          "level": 3,
+          "line": 590
+        },
+        {
+          "heading": "§10 · Long-term trajectory",
+          "level": 3,
+          "line": 607
+        },
+        {
+          "heading": "§11 · Design & UX (UI scope flagged)",
+          "level": 3,
+          "line": 616
+        },
+        {
+          "heading": "Outputs",
+          "level": 2,
+          "line": 655
+        },
+        {
+          "heading": "NOT in scope (explicit)",
+          "level": 3,
+          "line": 657
+        },
+        {
+          "heading": "What already exists",
+          "level": 3,
+          "line": 665
+        },
+        {
+          "heading": "Dream state delta",
+          "level": 3,
+          "line": 676
+        },
+        {
+          "heading": "Failure modes registry",
+          "level": 3,
+          "line": 680
+        },
+        {
+          "heading": "TODOS.md updates",
+          "level": 3,
+          "line": 698
+        },
+        {
+          "heading": "Scope expansion decisions",
+          "level": 3,
+          "line": 714
+        },
+        {
+          "heading": "Diagrams",
+          "level": 3,
+          "line": 720
+        },
+        {
+          "heading": "Stale diagram audit",
+          "level": 3,
+          "line": 729
+        },
+        {
+          "heading": "Completion summary",
+          "level": 3,
+          "line": 736
+        },
+        {
+          "heading": "Unresolved decisions",
+          "level": 3,
+          "line": 773
+        },
+        {
+          "heading": "Next steps — chained from this review",
+          "level": 2,
+          "line": 779
+        },
+        {
+          "heading": "Session log (autonomous run)",
+          "level": 2,
+          "line": 788
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 61
+      }
+    },
+    {
+      "path": "docs/plan-design-review-v4-five-decisions.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 183,
+      "nonEmptyLines": 139,
+      "sections": [
+        {
+          "heading": "Design Review v4 — v5.3 Layouts + Sticker Grammar",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1 · Monthly blank page layout (C2)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Block map",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "Key grammar",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "Scoring",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "2 · Quarterly blank page layout (C3) — G5 resolution",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Block map",
+          "level": 3,
+          "line": 56
+        },
+        {
+          "heading": "Why narrative, not dashboard",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "Scoring",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "3 · Sticker grammar (C5) — 12-sticker rubric",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Canonical grammar (every sticker must hit)",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "Per-sticker accent + size (final)",
+          "level": 3,
+          "line": 115
+        },
+        {
+          "heading": "Scoring",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "Consolidated findings",
+          "level": 2,
+          "line": 146
+        },
+        {
+          "heading": "Plan Status Footer",
+          "level": 2,
+          "line": 158
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "docs/plan-eng-review-v4-five-decisions.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 129,
+      "nonEmptyLines": 82,
+      "sections": [
+        {
+          "heading": "Engineering Review v4 — v5.3 Revised Scope",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "§1 Architecture",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "§2 Error & Rescue Map",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "§3 Security",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "§4 Edge Cases",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "§5 Code Quality",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "§6 Tests",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "§7 Performance",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "§8 Observability",
+          "level": 2,
+          "line": 51
+        },
+        {
+          "heading": "§9 Deployment",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "§10 Long-term",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "§11 Design",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Findings",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "Revised Commit Plan",
+          "level": 2,
+          "line": 82
+        },
+        {
+          "heading": "Risk Register (updated)",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "Plan Status Footer",
+          "level": 2,
+          "line": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "docs/plan-eng-review-weekly-monthly-stickers.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 340,
+      "nonEmptyLines": 239,
+      "sections": [
+        {
+          "heading": "Eng Review — Weekly · Monthly · Sticker Library",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0 · Pre-review audit",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1 · Architecture review",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "System context",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "Architectural concerns + resolution",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "2 · Error & rescue map",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "3 · Security & threat model",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "4 · Data flow + interaction edge cases",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Data flow: render-stickers.ts",
+          "level": 3,
+          "line": 103
+        },
+        {
+          "heading": "5 · Code quality review",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "Sticker SVG authoring standards (proposed for new § 13)",
+          "level": 3,
+          "line": 150
+        },
+        {
+          "heading": "DRY concerns",
+          "level": 3,
+          "line": 160
+        },
+        {
+          "heading": "Over/under-engineering check",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "6 · Test review",
+          "level": 2,
+          "line": 171
+        },
+        {
+          "heading": "7 · Performance review",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "8 · Observability & debuggability",
+          "level": 2,
+          "line": 201
+        },
+        {
+          "heading": "9 · Deployment & rollout",
+          "level": 2,
+          "line": 222
+        },
+        {
+          "heading": "10 · Long-term trajectory",
+          "level": 2,
+          "line": 237
+        },
+        {
+          "heading": "11 · Design & UX review",
+          "level": 2,
+          "line": 250
+        },
+        {
+          "heading": "12 · Findings summary",
+          "level": 2,
+          "line": 279
+        },
+        {
+          "heading": "Critical gaps: **0**",
+          "level": 3,
+          "line": 281
+        },
+        {
+          "heading": "Warnings: **2**",
+          "level": 3,
+          "line": 283
+        },
+        {
+          "heading": "Nice-to-haves: **1**",
+          "level": 3,
+          "line": 291
+        },
+        {
+          "heading": "13 · Sequenced commit plan — engineering adjustments",
+          "level": 2,
+          "line": 298
+        },
+        {
+          "heading": "14 · Gates after all 5 commits",
+          "level": 2,
+          "line": 313
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT",
+          "level": 2,
+          "line": 326
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    },
+    {
+      "path": "docs/plan-weekly-monthly-stickers.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 219,
+      "nonEmptyLines": 167,
+      "sections": [
+        {
+          "heading": "CEO Plan — Weekly · Monthly · Sticker Library",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0 · System state (pre-review audit)",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "0A · Premise challenge",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "P1 — \"Weekly + Monthly\" might be too big",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "P2 — \"Number of stickers\" might be the wrong frame",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "P3 — Weekly/monthly might be stickers-first, not spreads-first",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "0B · Dream state mapping (12-month ideal)",
+          "level": 2,
+          "line": 51
+        },
+        {
+          "heading": "0C-bis · Implementation alternatives (MANDATORY)",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "APPROACH A · **Stickers first, zoom-out second** (MINIMAL VIABLE · ~90 LOC + N sticker files)",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "APPROACH B · **Full 3-tier ceremony** (IDEAL ARCHITECTURE · ~500 LOC)",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "APPROACH C · **Sticker library + one \"Step Back\" page** (MIDDLE PATH · ~250 LOC)",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "RECOMMENDATION — Approach **C** (middle path)",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "Decision matrix",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Scope proposed (if Approach C chosen)",
+          "level": 2,
+          "line": 124
+        },
+        {
+          "heading": "Decisions locked",
+          "level": 2,
+          "line": 147
+        },
+        {
+          "heading": "Final scope (locked)",
+          "level": 2,
+          "line": 155
+        },
+        {
+          "heading": "New templates (2 pages)",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "New stickers (12 · all digital, all transparent-bg SVG + PNG)",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "New scripts",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Updated docs + tests",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "Explicit NOT in scope",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "Sequenced commit plan",
+          "level": 2,
+          "line": 197
+        },
+        {
+          "heading": "GSTACK REVIEW REPORT",
+          "level": 2,
+          "line": 207
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 23
+      }
+    }
+  ]
+}

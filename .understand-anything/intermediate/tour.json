@@ -1,0 +1,129 @@
+[
+  {
+    "order": 1,
+    "title": "Project Overview & North Star",
+    "description": "Start with the README and DECISIONS to understand what goodnotes-templates is and the principles guiding it. The North-Star doc explains the intent behind self-contained pack templates.",
+    "nodeIds": [
+      "document:README.md",
+      "document:DECISIONS.md",
+      "document:docs/NORTH-STAR.md",
+      "document:CHANGELOG.md"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "Monorepo Layout & Workspace Configuration",
+    "description": "Inspect the monorepo's package.json, pnpm-workspace, base TypeScript config, and Vercel/Vitest tooling to see how the workspace is wired together.",
+    "nodeIds": [
+      "config:package.json",
+      "config:tsconfig.base.json",
+      "config:tsconfig.json",
+      "config:vercel.json"
+    ]
+  },
+  {
+    "order": 3,
+    "title": "Core Engine \u2014 How Templates Render",
+    "description": "Dive into packages/core to see the rendering primitives, layout helpers, and the template/pack contract that every pack consumes.",
+    "nodeIds": [
+      "file:packages/core/src/index.ts",
+      "file:packages/core/src/pdf-splice.ts",
+      "file:packages/core/src/prax-journal-renderer.ts",
+      "file:packages/core/src/splice.ts",
+      "file:packages/core/src/types/profile.ts",
+      "file:packages/core/src/utils/locale.ts",
+      "file:packages/core/src/dimensions.ts",
+      "file:packages/core/src/puppeteer-renderer.ts",
+      "file:packages/core/src/audit.ts",
+      "file:packages/core/src/errors.ts",
+      "file:packages/core/src/registry-resolve.ts",
+      "file:packages/core/src/standalone-builder.ts"
+    ]
+  },
+  {
+    "order": 4,
+    "title": "CLI \u2014 Operator Entry Point",
+    "description": "packages/cli is the command-line surface. Walk its TypeScript sources to understand how commands wire up to the core engine.",
+    "nodeIds": [
+      "file:packages/cli/src/index.ts",
+      "file:packages/cli/src/preview-server.ts",
+      "file:packages/cli/src/scaffold.ts"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "Build Scripts \u2014 Rendering Pipelines",
+    "description": "scripts/ holds the orchestration that renders pages, builds stickers, generates the registry, and bundles releases. Read these to see the full build pipeline end-to-end.",
+    "nodeIds": [
+      "file:scripts/build-standalone-html.ts",
+      "function:scripts/build-standalone-html.ts:parseArgs",
+      "function:scripts/build-standalone-html.ts:main",
+      "file:scripts/generate-journal.ts",
+      "function:scripts/generate-journal.ts:parseArgs",
+      "function:scripts/generate-journal.ts:main",
+      "file:scripts/safari-probe.ts",
+      "function:scripts/safari-probe.ts:buildHtmlProbe",
+      "function:scripts/safari-probe.ts:buildPdfProbe",
+      "function:scripts/safari-probe.ts:writeGuide",
+      "function:scripts/safari-probe.ts:main",
+      "file:scripts/smoke-c7b1.ts",
+      "function:scripts/smoke-c7b1.ts:loadLocalProfile",
+      "function:scripts/smoke-c7b1.ts:main"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "Gallery App \u2014 The Showcase Surface",
+    "description": "apps/gallery is the Astro-based public surface that renders previews of every template and pack. Trace the entry, layout, and pack-detail pages.",
+    "nodeIds": [
+      "file:apps/gallery/src/components/BlurhashImage.astro",
+      "file:apps/gallery/src/components/ThemeSwap.astro",
+      "file:apps/gallery/src/config/site.ts",
+      "file:apps/gallery/src/layouts/Layout.astro",
+      "file:apps/gallery/src/pages/browse.astro",
+      "file:apps/gallery/src/pages/contribute.astro",
+      "file:apps/gallery/src/pages/index.astro",
+      "file:apps/gallery/src/pages/packs/[id].astro",
+      "file:apps/gallery/src/pages/remix.astro",
+      "file:apps/gallery/src/pages/search.astro",
+      "config:apps/gallery/package.json",
+      "file:apps/gallery/astro.config.mjs",
+      "file:apps/gallery/scripts/build-og-cards.ts",
+      "function:apps/gallery/scripts/build-og-cards.ts:xmlEscape",
+      "function:apps/gallery/scripts/build-og-cards.ts:svgCard"
+    ]
+  },
+  {
+    "order": 7,
+    "title": "Tests \u2014 Unit, E2E & Visual Regression",
+    "description": "Three test surfaces: tests/unit for logic, tests/e2e via Playwright for the gallery, and tests/visual for layout regression. Vitest runs unit + visual; Playwright runs e2e.",
+    "nodeIds": [
+      "file:tests/unit/locale.test.ts",
+      "file:tests/unit/pdf-splice.test.ts",
+      "file:tests/unit/prax-journal-renderer.test.ts",
+      "function:tests/unit/prax-journal-renderer.test.ts:makeProfile",
+      "file:tests/unit/profile.test.ts",
+      "file:tests/unit/splice.test.ts",
+      "file:tests/unit/cli-scaffold.test.ts",
+      "file:tests/unit/dimensions.test.ts",
+      "file:tests/unit/preview-server.test.ts",
+      "function:tests/unit/preview-server.test.ts:spawnServer",
+      "file:tests/unit/puppeteer-renderer-mock.test.ts",
+      "function:tests/unit/puppeteer-renderer-mock.test.ts:makePage"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "CI/CD & Audit Reports",
+    "description": "GitHub Actions workflows in .github/workflows automate audit/CI/generate. The audit/ tree records six iterations of findings, gap analyses, and verification results that shaped the current state.",
+    "nodeIds": [
+      "pipeline:.github/workflows/ci.yml",
+      "pipeline:.github/workflows/audit.yml",
+      "pipeline:.github/workflows/generate.yml",
+      "document:audit/CODEBASE_AUDIT_REPORT.md",
+      "document:audit/IMPLEMENTATION_ROADMAP.md",
+      "document:audit/iteration-4/CODEBASE_AUDIT_REPORT.md",
+      "document:audit/iteration-6/STATUS.md"
+    ]
+  }
+]

@@ -1,0 +1,1528 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 19,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".npmrc",
+      "language": "unknown",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "metrics": {}
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 332,
+      "nonEmptyLines": 235,
+      "sections": [
+        {
+          "heading": "AGENTS.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "The Four Principles",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "1. Think Before Coding",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "Example — vague request, multiple reads",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "Example — hidden assumptions",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "2. Simplicity First",
+          "level": 2,
+          "line": 94
+        },
+        {
+          "heading": "Example — over-abstraction",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "Example — speculative features",
+          "level": 3,
+          "line": 125
+        },
+        {
+          "heading": "3. Surgical Changes",
+          "level": 2,
+          "line": 147
+        },
+        {
+          "heading": "Example — drive-by refactoring (bad)",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "Example — style drift (bad)",
+          "level": 3,
+          "line": 210
+        },
+        {
+          "heading": "4. Goal-Driven Execution",
+          "level": 2,
+          "line": 223
+        },
+        {
+          "heading": "Example — test-first verification",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "Anti-Pattern Summary",
+          "level": 2,
+          "line": 276
+        },
+        {
+          "heading": "Key Insight",
+          "level": 2,
+          "line": 285
+        },
+        {
+          "heading": "How to Know It's Working",
+          "level": 2,
+          "line": 308
+        },
+        {
+          "heading": "Project-specific extras",
+          "level": 2,
+          "line": 319
+        },
+        {
+          "heading": "Attribution",
+          "level": 2,
+          "line": 326
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": "CHANGELOG.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 295,
+      "nonEmptyLines": 269,
+      "sections": [
+        {
+          "heading": "Changelog",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "[Unreleased]",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Added",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "Why this was the next thing",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "[1.0.0] — 2026-05-08",
+          "level": 2,
+          "line": 51
+        },
+        {
+          "heading": "Added",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "Changed",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "[1.0.0-rc.1] — rebrand sprint snapshot",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "Security",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "Added",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "Changed",
+          "level": 3,
+          "line": 253
+        },
+        {
+          "heading": "Deferred (follow-up work; see `audit/POST_SPRINT_STATUS.md`)",
+          "level": 3,
+          "line": 282
+        },
+        {
+          "heading": "[0.1.0] — 2026-04-09",
+          "level": 2,
+          "line": 290
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "CHECKPOINT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 43,
+      "nonEmptyLines": 38,
+      "sections": [
+        {
+          "heading": "Checkpoint — Session 1",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What's Working",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "What's Next — Full Year Journal Generator",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Implementation Plan",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Files to Reference",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "Also Still Needed (24 template types from design doc)",
+          "level": 3,
+          "line": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 186,
+      "nonEmptyLines": 152,
+      "sections": [
+        {
+          "heading": "CLAUDE.md — working notes for this repo",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global guidelines first",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Repo shape (post-restructure)",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "The five locked decisions (v5.3 scope)",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "gstack `browse` — the one-page cheat sheet",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Command map (abbreviated · full list: `browse` alone)",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "The 5-command A4 verification recipe (use this for every new template)",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "Known confusions (if it ever actually breaks)",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Install verification (if in doubt)",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "Render + verify pipeline (current canonical flow)",
+          "level": 2,
+          "line": 105
+        },
+        {
+          "heading": "Current HEAD and commit log (post-v5.3 · Praxis Ledger release pipeline live)",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "The release pipeline (canonical flow · as of e96c88f)",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "Next (all deferred — core C7b.* pipeline is shipped)",
+          "level": 2,
+          "line": 178
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 316,
+      "nonEmptyLines": 250,
+      "sections": [
+        {
+          "heading": "Contributing",
+          "level": 1,
+          "line": 100
+        },
+        {
+          "heading": "The four principles, in one line each",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Quick start",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "What you can contribute",
+          "level": 2,
+          "line": 154
+        },
+        {
+          "heading": "1 · A new HTML template",
+          "level": 3,
+          "line": 156
+        },
+        {
+          "heading": "2 · A new color theme",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "3 · A new sticker type",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "4 · Bug fixes",
+          "level": 3,
+          "line": 206
+        },
+        {
+          "heading": "5 · Documentation",
+          "level": 3,
+          "line": 214
+        },
+        {
+          "heading": "Engineering invariants (do not break these)",
+          "level": 2,
+          "line": 226
+        },
+        {
+          "heading": "Testing",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "Commit messages",
+          "level": 2,
+          "line": 260
+        },
+        {
+          "heading": "Pull-request process",
+          "level": 2,
+          "line": 277
+        },
+        {
+          "heading": "Code style",
+          "level": 2,
+          "line": 294
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 305
+        },
+        {
+          "heading": "Future",
+          "level": 2,
+          "line": 314
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "DECISIONS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 110,
+      "nonEmptyLines": 82,
+      "sections": [
+        {
+          "heading": "DECISIONS · pretext-templates sprint log",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Sprint decisions (W1 → W14-extras)",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Repo + architecture",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "Gallery",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "Theme swap (W7 + W8)",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "Search (W8)",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "OG cards (W10)",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Tests",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "Ship + docs (W13)",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "Resolver + CLI rollup (W11 · W12 · W16-prep)",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "Active blockers",
+          "level": 2,
+          "line": 88
+        },
+        {
+          "heading": "Unblocked items in the queue",
+          "level": 2,
+          "line": 97
+        },
+        {
+          "heading": "How to read this file",
+          "level": 2,
+          "line": 106
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "MIGRATION.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 119,
+      "nonEmptyLines": 89,
+      "sections": [
+        {
+          "heading": "MIGRATION · goodnotes-templates → pretext-templates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What changed",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "What did NOT change",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "If you are a pack user (rendering existing packs)",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "If you are a pack author (building your own pack)",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "If you are a consumer of `registry.json`",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "If you scripted against the old repo",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "Why rebrand?",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "Timeline",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "Questions",
+          "level": 2,
+          "line": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "PROBLEM_STATEMENT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 374,
+      "nonEmptyLines": 297,
+      "sections": [
+        {
+          "heading": "📋 GoodNotes Templates — Problem Statement & Requirements",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1. Problem Statement",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "The Gap in the Market",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "Core Problem Statement",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "2. Target Users",
+          "level": 2,
+          "line": 51
+        },
+        {
+          "heading": "Primary Users",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Secondary Users",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "3. What We Are Providing",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "3.1 Pre-Built Assets (Ready to Download & Import)",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "Template PDFs",
+          "level": 4,
+          "line": 80
+        },
+        {
+          "heading": "Simple Page PDFs",
+          "level": 4,
+          "line": 104
+        },
+        {
+          "heading": "Sticker PNGs (Transparent Background, 300 DPI)",
+          "level": 4,
+          "line": 113
+        },
+        {
+          "heading": "3.2 Generation Engine (For Customizers & Developers)",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "3.3 Developer Resources",
+          "level": 3,
+          "line": 141
+        },
+        {
+          "heading": "4. Functional Requirements",
+          "level": 2,
+          "line": 150
+        },
+        {
+          "heading": "FR-01: Template Generation",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "FR-02: Hyperlinked Navigation",
+          "level": 3,
+          "line": 160
+        },
+        {
+          "heading": "FR-03: Sticker Generation",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "FR-04: Theming System",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "FR-05: CLI Interface",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "FR-06: Output Organization",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "5. Non-Functional Requirements",
+          "level": 2,
+          "line": 210
+        },
+        {
+          "heading": "NFR-01: Quality & Compatibility",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "NFR-02: Performance",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "NFR-03: File Size",
+          "level": 3,
+          "line": 225
+        },
+        {
+          "heading": "NFR-04: Usability",
+          "level": 3,
+          "line": 231
+        },
+        {
+          "heading": "NFR-05: Maintainability",
+          "level": 3,
+          "line": 237
+        },
+        {
+          "heading": "NFR-06: Accessibility",
+          "level": 3,
+          "line": 244
+        },
+        {
+          "heading": "NFR-07: Licensing & Legal",
+          "level": 3,
+          "line": 249
+        },
+        {
+          "heading": "6. Out of Scope",
+          "level": 2,
+          "line": 257
+        },
+        {
+          "heading": "7. Success Metrics",
+          "level": 2,
+          "line": 276
+        },
+        {
+          "heading": "8. Technical Constraints",
+          "level": 2,
+          "line": 295
+        },
+        {
+          "heading": "Must Use",
+          "level": 3,
+          "line": 297
+        },
+        {
+          "heading": "Technology Stack (Chosen based on RESEARCH.md §8 evaluation)",
+          "level": 3,
+          "line": 306
+        },
+        {
+          "heading": "Infrastructure",
+          "level": 3,
+          "line": 316
+        },
+        {
+          "heading": "9. Risk Analysis",
+          "level": 2,
+          "line": 324
+        },
+        {
+          "heading": "10. Open Questions",
+          "level": 2,
+          "line": 338
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 360
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 39
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 480,
+      "nonEmptyLines": 410,
+      "sections": [
+        {
+          "heading": "goodnotes-templates",
+          "level": 1,
+          "line": 114
+        },
+        {
+          "heading": "Why this exists",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "Repo at a glance",
+          "level": 2,
+          "line": 143
+        },
+        {
+          "heading": "Pipeline · daily → weekly → monthly → release",
+          "level": 2,
+          "line": 169
+        },
+        {
+          "heading": "Quick start",
+          "level": 2,
+          "line": 244
+        },
+        {
+          "heading": "Customisation · three tiers",
+          "level": 2,
+          "line": 271
+        },
+        {
+          "heading": "Feature matrix",
+          "level": 2,
+          "line": 295
+        },
+        {
+          "heading": "Engineering invariants",
+          "level": 2,
+          "line": 311
+        },
+        {
+          "heading": "The Praxis Ledger · monthly release",
+          "level": 2,
+          "line": 323
+        },
+        {
+          "heading": "Verified compatibility",
+          "level": 2,
+          "line": 393
+        },
+        {
+          "heading": "Testing & gates",
+          "level": 2,
+          "line": 410
+        },
+        {
+          "heading": "Scripts you will actually use",
+          "level": 2,
+          "line": 423
+        },
+        {
+          "heading": "Documentation ladder",
+          "level": 2,
+          "line": 439
+        },
+        {
+          "heading": "Credits",
+          "level": 2,
+          "line": 457
+        },
+        {
+          "heading": "Future",
+          "level": 2,
+          "line": 464
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 476
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "RESEARCH.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 478,
+      "nonEmptyLines": 390,
+      "sections": [
+        {
+          "heading": "🔬 GoodNotes Templates — Deep Dive Research & Market Analysis",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Table of Contents",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1. GoodNotes Marketplace Analysis",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Template Categories (by market presence)",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "Marketplace Submission Guidelines (from GoodNotes support)",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "What Makes Premium Templates Command Higher Prices",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "2. Etsy & Creative Market Ecosystem",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Price Tiers (Etsy)",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "Best-Selling Features (correlation with high review counts)",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "Emerging Trends (2025-2026)",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "3. iPad Display Specifications",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "Current iPad Lineup (2024-2026)",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Recommended Template Dimensions",
+          "level": 3,
+          "line": 113
+        },
+        {
+          "heading": "DPI Recommendations",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "4. PDF Technical Requirements",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "GoodNotes Compatibility Checklist",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "Hyperlink Implementation",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "Font Embedding Best Practices",
+          "level": 3,
+          "line": 160
+        },
+        {
+          "heading": "Color Space Management",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "5. Sticker Market Analysis",
+          "level": 2,
+          "line": 181
+        },
+        {
+          "heading": "Sticker Category Breakdown (from Etsy top 36 listings)",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "Sticker Format Requirements",
+          "level": 3,
+          "line": 199
+        },
+        {
+          "heading": "Programmatically Generatable Sticker Types",
+          "level": 3,
+          "line": 210
+        },
+        {
+          "heading": "6. Typography & Font Research",
+          "level": 2,
+          "line": 231
+        },
+        {
+          "heading": "Top 15 Recommended Google Fonts for Digital Planners",
+          "level": 3,
+          "line": 233
+        },
+        {
+          "heading": "Sans-Serif (Body text, labels, dates)",
+          "level": 4,
+          "line": 235
+        },
+        {
+          "heading": "Serif (Headers, titles, quotes)",
+          "level": 4,
+          "line": 246
+        },
+        {
+          "heading": "Handwriting/Script (Accents, decorative)",
+          "level": 4,
+          "line": 255
+        },
+        {
+          "heading": "Font Pairing Recommendations",
+          "level": 3,
+          "line": 265
+        },
+        {
+          "heading": "7. Color Palette Research",
+          "level": 2,
+          "line": 278
+        },
+        {
+          "heading": "8 Curated Color Palettes",
+          "level": 3,
+          "line": 280
+        },
+        {
+          "heading": "1. Rose Quartz (Pastel Pink)",
+          "level": 4,
+          "line": 282
+        },
+        {
+          "heading": "2. Sage Garden (Botanical/Cottagecore)",
+          "level": 4,
+          "line": 292
+        },
+        {
+          "heading": "3. Lavender Dreams (Purple Pastel)",
+          "level": 4,
+          "line": 302
+        },
+        {
+          "heading": "4. Ocean Breeze (Blue Calm)",
+          "level": 4,
+          "line": 312
+        },
+        {
+          "heading": "5. Warm Neutral (Minimalist)",
+          "level": 4,
+          "line": 322
+        },
+        {
+          "heading": "6. Midnight (Dark Mode)",
+          "level": 4,
+          "line": 332
+        },
+        {
+          "heading": "7. Sunset Coral (Warm Aesthetic)",
+          "level": 4,
+          "line": 343
+        },
+        {
+          "heading": "8. Corporate Blue (Professional)",
+          "level": 4,
+          "line": 353
+        },
+        {
+          "heading": "8. Technology Stack Evaluation",
+          "level": 2,
+          "line": 365
+        },
+        {
+          "heading": "PDF Generation: Library Comparison",
+          "level": 3,
+          "line": 367
+        },
+        {
+          "heading": "Our Architecture Decision",
+          "level": 3,
+          "line": 382
+        },
+        {
+          "heading": "Why This Architecture?",
+          "level": 3,
+          "line": 417
+        },
+        {
+          "heading": "Key Library Versions",
+          "level": 3,
+          "line": 425
+        },
+        {
+          "heading": "9. Competitive Differentiation Strategy",
+          "level": 2,
+          "line": 440
+        },
+        {
+          "heading": "How We Compete with $15-$30 Etsy Templates (for free)",
+          "level": 3,
+          "line": 442
+        },
+        {
+          "heading": "Our Unique Advantages",
+          "level": 3,
+          "line": 455
+        },
+        {
+          "heading": "Appendix: Sources",
+          "level": 2,
+          "line": 468
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 48
+      }
+    },
+    {
+      "path": "SPRINT-STATUS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 141,
+      "nonEmptyLines": 110,
+      "sections": [
+        {
+          "heading": "Sprint Status — pretext-templates rebrand",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1 · What is DONE (verified live)",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "Sprint weeks shipped (commits)",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "Live-verified gates (just ran)",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "Documentation artefacts on disk",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "2 · Original task (context-window refill) — CLOSED",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "3 · What is DEFERRED (with rationale)",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "4 · Pre-existing audit deferrals (NOT part of rebrand sprint)",
+          "level": 2,
+          "line": 85
+        },
+        {
+          "heading": "5 · GAPS — actual work items, not deferrals",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "5a · Pre-existing gaps (pre-rebrand, not introduced by this sprint)",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "5b · Sprint-plan items never started",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "5c · Things the autonomous protocol promised but did NOT complete",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "6 · Bottom-line score",
+          "level": 2,
+          "line": 128
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 149,
+      "nonEmptyLines": 139,
+      "sections": [
+        {
+          "heading": "Third-Party Licenses",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Important — LGPL notice for `libvips` (via `sharp`)",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Full list (production dependencies)",
+          "level": 2,
+          "line": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "TODOS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 296,
+      "nonEmptyLines": 187,
+      "sections": [
+        {
+          "heading": "TODOS · pretext-templates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Active TODOs (gated, ordered by likely unlock date)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "T-001 · Tier 3 static editor (pdf-lib overlay)",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "T-002 · i18n on generators",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "T-003 · Sticker library expansion (60 → 100+)",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "T-004 · Community contribution funnel",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "T-005 · Printed companion guide PDF",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "T-006 · Crisis card pocket PDF",
+          "level": 3,
+          "line": 161
+        },
+        {
+          "heading": "T-007 · Therapist-share PHI-redacted export",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "T-008 · Safari iPad browser-PDF probe",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "T-009 · Per-user sticker preferences (beyond localStorage)",
+          "level": 3,
+          "line": 243
+        },
+        {
+          "heading": "Carried from prior plans (for audit trail, not active)",
+          "level": 2,
+          "line": 270
+        },
+        {
+          "heading": "Tombstoned (considered · rejected · do not revive without fresh argument)",
+          "level": 2,
+          "line": 283
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 76,
+      "nonEmptyLines": 76,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "workspaces",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "keywords",
+          "level": 1,
+          "line": 34
+        },
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 49
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 50
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 51
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 55
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 58
+        },
+        {
+          "heading": "overrides",
+          "level": 1,
+          "line": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "registry.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 480,
+      "nonEmptyLines": 480,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "generated_at",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "source_commit",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "packs",
+          "level": 1,
+          "line": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "tsconfig.base.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 17,
+      "nonEmptyLines": 17,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "sections": [
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "references",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "vercel.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 39,
+      "nonEmptyLines": 39,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "headers",
+          "level": 1,
+          "line": 3
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    }
+  ]
+}

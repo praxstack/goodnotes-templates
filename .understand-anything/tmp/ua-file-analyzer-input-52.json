@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "apps/gallery/src/content/packs/monthly-planner.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/mood-tracker.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/morning-pages.mdx",
+      "language": "mdx",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/prax-journal.mdx",
+      "language": "mdx",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/project-planning.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/prompted-journal.mdx",
+      "language": "mdx",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/reading-log.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/recipe-card.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/reflection-journal.mdx",
+      "language": "mdx",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/simple-pages.mdx",
+      "language": "mdx",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-daily-planner.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-habits.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-reflections.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-tasks.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/travel-planner.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/weekly-planner.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/yearly-overview.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/data/blurhash-manifest.json",
+      "language": "json",
+      "sizeLines": 8,
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/gallery/src/data/theme-palette.json",
+      "language": "json",
+      "sizeLines": 182,
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/gallery/src/styles/global.css",
+      "language": "css",
+      "sizeLines": 200,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "audit/_runtime/capabilities.json",
+      "language": "json",
+      "sizeLines": 70,
+      "fileCategory": "config"
+    },
+    {
+      "path": "audit/_runtime/dependency-graph.mmd",
+      "language": "mmd",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "audit/_runtime/topology.md",
+      "language": "markdown",
+      "sizeLines": 179,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-2/findings.json",
+      "language": "json",
+      "sizeLines": 321,
+      "fileCategory": "config"
+    },
+    {
+      "path": "audit/iteration-3/verification-results.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "apps/gallery/src/content/packs/monthly-planner.mdx": [],
+    "apps/gallery/src/content/packs/mood-tracker.mdx": [],
+    "apps/gallery/src/content/packs/morning-pages.mdx": [],
+    "apps/gallery/src/content/packs/prax-journal.mdx": [],
+    "apps/gallery/src/content/packs/project-planning.mdx": [],
+    "apps/gallery/src/content/packs/prompted-journal.mdx": [],
+    "apps/gallery/src/content/packs/reading-log.mdx": [],
+    "apps/gallery/src/content/packs/recipe-card.mdx": [],
+    "apps/gallery/src/content/packs/reflection-journal.mdx": [],
+    "apps/gallery/src/content/packs/simple-pages.mdx": [],
+    "apps/gallery/src/content/packs/tactile-daily-planner.mdx": [],
+    "apps/gallery/src/content/packs/tactile-habits.mdx": [],
+    "apps/gallery/src/content/packs/tactile-reflections.mdx": [],
+    "apps/gallery/src/content/packs/tactile-tasks.mdx": [],
+    "apps/gallery/src/content/packs/travel-planner.mdx": [],
+    "apps/gallery/src/content/packs/weekly-planner.mdx": [],
+    "apps/gallery/src/content/packs/yearly-overview.mdx": [],
+    "apps/gallery/src/data/blurhash-manifest.json": [],
+    "apps/gallery/src/data/theme-palette.json": [],
+    "apps/gallery/src/styles/global.css": [],
+    "audit/_runtime/capabilities.json": [],
+    "audit/_runtime/dependency-graph.mmd": [],
+    "audit/_runtime/topology.md": [],
+    "audit/iteration-2/findings.json": [],
+    "audit/iteration-3/verification-results.md": []
+  }
+}

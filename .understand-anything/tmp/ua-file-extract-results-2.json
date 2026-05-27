@@ -1,0 +1,2295 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 15,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/cli/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 486,
+      "nonEmptyLines": 435,
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/cli/src/preview-server.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 220,
+      "nonEmptyLines": 198,
+      "functions": [
+        {
+          "name": "startPreviewServer",
+          "startLine": 22,
+          "endLine": 126,
+          "params": [
+            "outputDir",
+            "port"
+          ]
+        },
+        {
+          "name": "generateGalleryHTML",
+          "startLine": 146,
+          "endLine": 220,
+          "params": [
+            "outputDir"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "startPreviewServer",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "startPreviewServer",
+          "callee": "path.resolve",
+          "lineNumber": 23
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "http.createServer",
+          "lineNumber": 29
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "generateGalleryHTML",
+          "lineNumber": 33
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 34
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 35
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "decodeURIComponent(url.pathname).replace",
+          "lineNumber": 42
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "decodeURIComponent",
+          "lineNumber": 42
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 44
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 45
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "decoded.indexOf",
+          "lineNumber": 51
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "decoded.indexOf",
+          "lineNumber": 51
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 52
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 53
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "path.resolve",
+          "lineNumber": 57
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "import",
+          "lineNumber": 64
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "fs.lstat",
+          "lineNumber": 66
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "lstat.isSymbolicLink",
+          "lineNumber": 67
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 68
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 69
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "fs.realpath",
+          "lineNumber": 72
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 75
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 76
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "realPath.startsWith",
+          "lineNumber": 80
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 81
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 82
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "fs.stat",
+          "lineNumber": 87
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "stat.isFile",
+          "lineNumber": 88
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "path.extname(realPath).toLowerCase",
+          "lineNumber": 90
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "path.extname",
+          "lineNumber": 90
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "stat.mtimeMs.toString",
+          "lineNumber": 94
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "stat.size.toString",
+          "lineNumber": 94
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 96
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 97
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "fs.readFile",
+          "lineNumber": 101
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 102
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 108
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.writeHead",
+          "lineNumber": 110
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "res.end",
+          "lineNumber": 111
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "server.listen",
+          "lineNumber": 116
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "console.log",
+          "lineNumber": 117
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "console.log",
+          "lineNumber": 118
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "console.log",
+          "lineNumber": 120
+        },
+        {
+          "caller": "startPreviewServer",
+          "callee": "resolve",
+          "lineNumber": 122
+        },
+        {
+          "caller": "scan",
+          "callee": "fs.readdir",
+          "lineNumber": 151
+        },
+        {
+          "caller": "scan",
+          "callee": "entry.isDirectory",
+          "lineNumber": 153
+        },
+        {
+          "caller": "scan",
+          "callee": "scan",
+          "lineNumber": 154
+        },
+        {
+          "caller": "scan",
+          "callee": "path.join",
+          "lineNumber": 154
+        },
+        {
+          "caller": "scan",
+          "callee": "entry.isFile",
+          "lineNumber": 155
+        },
+        {
+          "caller": "scan",
+          "callee": "path.extname(entry.name).toLowerCase",
+          "lineNumber": 156
+        },
+        {
+          "caller": "scan",
+          "callee": "path.extname",
+          "lineNumber": 156
+        },
+        {
+          "caller": "scan",
+          "callee": "['.pdf', '.png', '.svg'].includes",
+          "lineNumber": 157
+        },
+        {
+          "caller": "scan",
+          "callee": "prefix.split",
+          "lineNumber": 158
+        },
+        {
+          "caller": "scan",
+          "callee": "categories[category].push",
+          "lineNumber": 160
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "scan",
+          "lineNumber": 167
+        },
+        {
+          "caller": "esc",
+          "callee": "s.replace",
+          "lineNumber": 173
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "Object.entries(categories).sort().map(([cat, files]) => {\n    const items = files.sort().map(f => {\n      const ext = path.extname(f).toLowerCase();\n      const name = esc(path.basename(f));\n      const href = encodeURI(`/${f}`);\n      if (ext === '.png' || ext === '.svg') {\n        return `<div class=\"card\"><img src=\"${href}\" alt=\"${name}\" loading=\"lazy\" /><span>${name}</span></div>`;\n      }\n      return `<div class=\"card pdf\"><a href=\"${href}\" target=\"_blank\">📄 ${name}</a></div>`;\n    }).join('\\n');\n\n    return `<section><h2>${esc(cat)} (${files.length})</h2><div class=\"grid\">${items}</div></section>`;\n  }).join",
+          "lineNumber": 177
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "Object.entries(categories).sort().map",
+          "lineNumber": 177
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "Object.entries(categories).sort",
+          "lineNumber": 177
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "Object.entries",
+          "lineNumber": 177
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "files.sort().map(f => {\n      const ext = path.extname(f).toLowerCase();\n      const name = esc(path.basename(f));\n      const href = encodeURI(`/${f}`);\n      if (ext === '.png' || ext === '.svg') {\n        return `<div class=\"card\"><img src=\"${href}\" alt=\"${name}\" loading=\"lazy\" /><span>${name}</span></div>`;\n      }\n      return `<div class=\"card pdf\"><a href=\"${href}\" target=\"_blank\">📄 ${name}</a></div>`;\n    }).join",
+          "lineNumber": 178
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "files.sort().map",
+          "lineNumber": 178
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "files.sort",
+          "lineNumber": 178
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "path.extname(f).toLowerCase",
+          "lineNumber": 179
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "path.extname",
+          "lineNumber": 179
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "esc",
+          "lineNumber": 180
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "path.basename",
+          "lineNumber": 180
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "encodeURI",
+          "lineNumber": 181
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "esc",
+          "lineNumber": 188
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "Object.values(categories).flat",
+          "lineNumber": 217
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "Object.values",
+          "lineNumber": 217
+        },
+        {
+          "caller": "generateGalleryHTML",
+          "callee": "Object.keys",
+          "lineNumber": 217
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/cli/src/scaffold.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 210,
+      "nonEmptyLines": 178,
+      "functions": [
+        {
+          "name": "isValidPackId",
+          "startLine": 50,
+          "endLine": 55,
+          "params": [
+            "id"
+          ]
+        },
+        {
+          "name": "assertValidPackId",
+          "startLine": 57,
+          "endLine": 64,
+          "params": [
+            "id",
+            "label"
+          ]
+        },
+        {
+          "name": "buildInitTemplate",
+          "startLine": 77,
+          "endLine": 136,
+          "params": [
+            "id",
+            "opts"
+          ]
+        },
+        {
+          "name": "buildRemixCommands",
+          "startLine": 150,
+          "endLine": 198,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "escapeHtml",
+          "startLine": 204,
+          "endLine": 210,
+          "params": [
+            "s"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isValidPackId",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "buildInitTemplate",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "buildRemixCommands",
+          "line": 150,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isValidPackId",
+          "callee": "PACK_ID_RE.test",
+          "lineNumber": 54
+        },
+        {
+          "caller": "assertValidPackId",
+          "callee": "isValidPackId",
+          "lineNumber": 58
+        },
+        {
+          "caller": "buildInitTemplate",
+          "callee": "assertValidPackId",
+          "lineNumber": 78
+        },
+        {
+          "caller": "buildInitTemplate",
+          "callee": "(opts.title ?? '').trim",
+          "lineNumber": 79
+        },
+        {
+          "caller": "buildInitTemplate",
+          "callee": "escapeHtml",
+          "lineNumber": 98
+        },
+        {
+          "caller": "buildInitTemplate",
+          "callee": "escapeHtml",
+          "lineNumber": 105
+        },
+        {
+          "caller": "buildInitTemplate",
+          "callee": "JSON.stringify",
+          "lineNumber": 132
+        },
+        {
+          "caller": "buildRemixCommands",
+          "callee": "assertValidPackId",
+          "lineNumber": 151
+        },
+        {
+          "caller": "buildRemixCommands",
+          "callee": "assertValidPackId",
+          "lineNumber": 152
+        },
+        {
+          "caller": "buildRemixCommands",
+          "callee": "[\n      '# 1. Clone the monorepo (skip if you already have a checkout)',\n      'git clone https://github.com/praxstack/pretext-templates.git',\n      'cd pretext-templates',\n    ].join",
+          "lineNumber": 168
+        },
+        {
+          "caller": "buildRemixCommands",
+          "callee": "[\n      `# 2. Duplicate packages/packs-${src}/ → packages/packs-${dst}/`,\n      `cp -R packages/packs-${src} packages/packs-${dst}`,\n      `mv packages/packs-${dst}/${src}.html packages/packs-${dst}/${dst}.html 2>/dev/null || true`,\n    ].join",
+          "lineNumber": 175
+        },
+        {
+          "caller": "buildRemixCommands",
+          "callee": "[\n      `# 3. Rewrite ids inside the copy (macOS BSD sed; drop the '' on Linux)`,\n      `find packages/packs-${dst} -type f \\\\( -name '*.json' -o -name '*.html' -o -name '*.md' \\\\) \\\\\\n` +\n        `  -exec sed -i '' 's/${src}/${dst}/g' {} +`,\n    ].join",
+          "lineNumber": 182
+        },
+        {
+          "caller": "buildRemixCommands",
+          "callee": "[\n      '# 4. Commit your new pack',\n      `git checkout -b remix/${dst}`,\n      'git add packages/packs-' + dst,\n      `git commit -m \"feat(packs): fork ${src} → ${dst}\"`,\n    ].join",
+          "lineNumber": 189
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "s\n    .replace(/&/g, '&amp;')\n    .replace(/</g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace",
+          "lineNumber": 205
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "s\n    .replace(/&/g, '&amp;')\n    .replace(/</g, '&lt;')\n    .replace",
+          "lineNumber": 205
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "s\n    .replace(/&/g, '&amp;')\n    .replace",
+          "lineNumber": 205
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "s\n    .replace",
+          "lineNumber": 205
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/dimensions.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 156,
+      "nonEmptyLines": 139,
+      "functions": [
+        {
+          "name": "getPageDimensions",
+          "startLine": 91,
+          "endLine": 104,
+          "params": [
+            "size",
+            "orientation"
+          ]
+        },
+        {
+          "name": "pointsToPixels",
+          "startLine": 109,
+          "endLine": 111,
+          "params": [
+            "points",
+            "dpi"
+          ]
+        },
+        {
+          "name": "pixelsToPoints",
+          "startLine": 116,
+          "endLine": 118,
+          "params": [
+            "pixels",
+            "dpi"
+          ]
+        },
+        {
+          "name": "getContentArea",
+          "startLine": 123,
+          "endLine": 133,
+          "params": [
+            "dims",
+            "margins"
+          ]
+        },
+        {
+          "name": "calculateGridPositions",
+          "startLine": 138,
+          "endLine": 156,
+          "params": [
+            "contentWidth",
+            "contentHeight",
+            "spacing",
+            "offsetX",
+            "offsetY"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PAGE_SIZES",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_MARGINS",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "IPAD_DISPLAYS",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "DPI_PRESETS",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "getPageDimensions",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "pointsToPixels",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "pixelsToPoints",
+          "line": 116,
+          "isDefault": false
+        },
+        {
+          "name": "getContentArea",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "calculateGridPositions",
+          "line": 138,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pointsToPixels",
+          "callee": "Math.round",
+          "lineNumber": 110
+        },
+        {
+          "caller": "calculateGridPositions",
+          "callee": "horizontalLines.push",
+          "lineNumber": 149
+        },
+        {
+          "caller": "calculateGridPositions",
+          "callee": "verticalLines.push",
+          "lineNumber": 152
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/puppeteer-renderer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 448,
+      "nonEmptyLines": 409,
+      "functions": [
+        {
+          "name": "getRestartThreshold",
+          "startLine": 59,
+          "endLine": 69,
+          "params": []
+        },
+        {
+          "name": "maybeRestartBrowser",
+          "startLine": 76,
+          "endLine": 91,
+          "params": []
+        },
+        {
+          "name": "_resetRenderCountForTest",
+          "startLine": 94,
+          "endLine": 96,
+          "params": []
+        },
+        {
+          "name": "_renderCountForTest",
+          "startLine": 99,
+          "endLine": 101,
+          "params": []
+        },
+        {
+          "name": "getChromiumLaunchArgs",
+          "startLine": 113,
+          "endLine": 124,
+          "params": []
+        },
+        {
+          "name": "getBrowser",
+          "startLine": 131,
+          "endLine": 147,
+          "params": []
+        },
+        {
+          "name": "closeBrowser",
+          "startLine": 156,
+          "endLine": 162,
+          "params": []
+        },
+        {
+          "name": "resolveColorModeCSS",
+          "startLine": 170,
+          "endLine": 186,
+          "params": [
+            "htmlPath",
+            "colorMode"
+          ]
+        },
+        {
+          "name": "resolveRenderScale",
+          "startLine": 231,
+          "endLine": 244,
+          "params": [
+            "explicit"
+          ]
+        },
+        {
+          "name": "renderHTMLToPDF",
+          "startLine": 282,
+          "endLine": 383,
+          "params": [
+            "options"
+          ]
+        },
+        {
+          "name": "renderHTMLToPDFFile",
+          "startLine": 388,
+          "endLine": 401,
+          "params": [
+            "options",
+            "outputPath"
+          ]
+        },
+        {
+          "name": "batchRenderHTML",
+          "startLine": 421,
+          "endLine": 448,
+          "params": [
+            "templates",
+            "dimensions",
+            "colorMode",
+            "onProgress"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "maybeRestartBrowser",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "_resetRenderCountForTest",
+          "line": 94,
+          "isDefault": false
+        },
+        {
+          "name": "_renderCountForTest",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "closeBrowser",
+          "line": 156,
+          "isDefault": false
+        },
+        {
+          "name": "resolveColorModeCSS",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "resolveRenderScale",
+          "line": 231,
+          "isDefault": false
+        },
+        {
+          "name": "renderHTMLToPDF",
+          "line": 282,
+          "isDefault": false
+        },
+        {
+          "name": "renderHTMLToPDFFile",
+          "line": 388,
+          "isDefault": false
+        },
+        {
+          "name": "batchRenderHTML",
+          "line": 421,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getRestartThreshold",
+          "callee": "Number.parseInt",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getRestartThreshold",
+          "callee": "Number.isFinite",
+          "lineNumber": 63
+        },
+        {
+          "caller": "getRestartThreshold",
+          "callee": "console.warn",
+          "lineNumber": 64
+        },
+        {
+          "caller": "maybeRestartBrowser",
+          "callee": "getRestartThreshold",
+          "lineNumber": 77
+        },
+        {
+          "caller": "maybeRestartBrowser",
+          "callee": "console.log",
+          "lineNumber": 84
+        },
+        {
+          "caller": "maybeRestartBrowser",
+          "callee": "closeBrowser",
+          "lineNumber": 88
+        },
+        {
+          "caller": "getChromiumLaunchArgs",
+          "callee": "args.unshift",
+          "lineNumber": 121
+        },
+        {
+          "caller": "getBrowser",
+          "callee": "puppeteer\n    .launch({ headless: true, args: getChromiumLaunchArgs() })\n    .then",
+          "lineNumber": 140
+        },
+        {
+          "caller": "getBrowser",
+          "callee": "puppeteer\n    .launch",
+          "lineNumber": 140
+        },
+        {
+          "caller": "getBrowser",
+          "callee": "getChromiumLaunchArgs",
+          "lineNumber": 141
+        },
+        {
+          "caller": "closeBrowser",
+          "callee": "browserInstance.close",
+          "lineNumber": 158
+        },
+        {
+          "caller": "resolveColorModeCSS",
+          "callee": "path.join",
+          "lineNumber": 175
+        },
+        {
+          "caller": "resolveColorModeCSS",
+          "callee": "path.dirname",
+          "lineNumber": 175
+        },
+        {
+          "caller": "resolveColorModeCSS",
+          "callee": "htmlPath.replace",
+          "lineNumber": 176
+        },
+        {
+          "caller": "resolveColorModeCSS",
+          "callee": "fs.readFile",
+          "lineNumber": 180
+        },
+        {
+          "caller": "resolveRenderScale",
+          "callee": "Number",
+          "lineNumber": 235
+        },
+        {
+          "caller": "resolveRenderScale",
+          "callee": "Number.isFinite",
+          "lineNumber": 239
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "fs.readFile",
+          "lineNumber": 289
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "resolveColorModeCSS",
+          "lineNumber": 294
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "html.includes",
+          "lineNumber": 295
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "html.replace",
+          "lineNumber": 296
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "console.warn",
+          "lineNumber": 298
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "maybeRestartBrowser",
+          "lineNumber": 307
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "getBrowser",
+          "lineNumber": 309
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "browser.newPage",
+          "lineNumber": 310
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "page.setRequestInterception",
+          "lineNumber": 318
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "page.on",
+          "lineNumber": 319
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "req.url",
+          "lineNumber": 320
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "DEFAULT_REQUEST_ALLOWLIST.test",
+          "lineNumber": 321
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "req.continue",
+          "lineNumber": 322
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "req.abort",
+          "lineNumber": 324
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "page.setContent",
+          "lineNumber": 331
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "page.evaluate",
+          "lineNumber": 338
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "resolveRenderScale",
+          "lineNumber": 347
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "page.pdf",
+          "lineNumber": 353
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "page.pdf",
+          "lineNumber": 363
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "Buffer.from",
+          "lineNumber": 379
+        },
+        {
+          "caller": "renderHTMLToPDF",
+          "callee": "page.close",
+          "lineNumber": 381
+        },
+        {
+          "caller": "renderHTMLToPDFFile",
+          "callee": "renderHTMLToPDF",
+          "lineNumber": 392
+        },
+        {
+          "caller": "renderHTMLToPDFFile",
+          "callee": "fs.mkdir",
+          "lineNumber": 394
+        },
+        {
+          "caller": "renderHTMLToPDFFile",
+          "callee": "path.dirname",
+          "lineNumber": 394
+        },
+        {
+          "caller": "renderHTMLToPDFFile",
+          "callee": "fs.writeFile",
+          "lineNumber": 395
+        },
+        {
+          "caller": "renderHTMLToPDFFile",
+          "callee": "Math.max",
+          "lineNumber": 398
+        },
+        {
+          "caller": "renderHTMLToPDFFile",
+          "callee": "Math.round",
+          "lineNumber": 398
+        },
+        {
+          "caller": "batchRenderHTML",
+          "callee": "onProgress",
+          "lineNumber": 432
+        },
+        {
+          "caller": "batchRenderHTML",
+          "callee": "renderHTMLToPDFFile",
+          "lineNumber": 435
+        },
+        {
+          "caller": "batchRenderHTML",
+          "callee": "results.push",
+          "lineNumber": 439
+        },
+        {
+          "caller": "batchRenderHTML",
+          "callee": "String",
+          "lineNumber": 441
+        },
+        {
+          "caller": "batchRenderHTML",
+          "callee": "console.error",
+          "lineNumber": 442
+        },
+        {
+          "caller": "batchRenderHTML",
+          "callee": "failures.push",
+          "lineNumber": 443
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 12,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/render-all-pack-themes.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 209,
+      "nonEmptyLines": 190,
+      "functions": [
+        {
+          "name": "loadManifests",
+          "startLine": 69,
+          "endLine": 83,
+          "params": []
+        },
+        {
+          "name": "loadThemeIds",
+          "startLine": 85,
+          "endLine": 100,
+          "params": []
+        },
+        {
+          "name": "applyTheme",
+          "startLine": 107,
+          "endLine": 117,
+          "params": [
+            "packHtml",
+            "themeCss",
+            "themeId"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 119,
+          "endLine": 207,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadManifests",
+          "callee": "(await readdir(PACKAGES)).filter",
+          "lineNumber": 70
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "readdir",
+          "lineNumber": 70
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "n.startsWith",
+          "lineNumber": 70
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "dirs.sort",
+          "lineNumber": 72
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "path.join",
+          "lineNumber": 73
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "readFile",
+          "lineNumber": 75
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "JSON.parse",
+          "lineNumber": 76
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "out.push",
+          "lineNumber": 77
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "readdir",
+          "lineNumber": 86
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "files\n    .filter((f) => f.endsWith('.css'))\n    .map",
+          "lineNumber": 89
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "files\n    .filter",
+          "lineNumber": 89
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "f.endsWith",
+          "lineNumber": 90
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "f.replace",
+          "lineNumber": 91
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "ids.sort",
+          "lineNumber": 92
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "a.replace",
+          "lineNumber": 93
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "b.replace",
+          "lineNumber": 94
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "aFamily.localeCompare",
+          "lineNumber": 95
+        },
+        {
+          "caller": "loadThemeIds",
+          "callee": "a.endsWith",
+          "lineNumber": 97
+        },
+        {
+          "caller": "applyTheme",
+          "callee": "packHtml.includes",
+          "lineNumber": 112
+        },
+        {
+          "caller": "applyTheme",
+          "callee": "packHtml.replace",
+          "lineNumber": 113
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 120
+        },
+        {
+          "caller": "main",
+          "callee": "loadManifests",
+          "lineNumber": 121
+        },
+        {
+          "caller": "main",
+          "callee": "loadThemeIds",
+          "lineNumber": 122
+        },
+        {
+          "caller": "main",
+          "callee": "mkdir",
+          "lineNumber": 124
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 127
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 128
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 130
+        },
+        {
+          "caller": "main",
+          "callee": "getPageDimensions",
+          "lineNumber": 132
+        },
+        {
+          "caller": "main",
+          "callee": "readFile",
+          "lineNumber": 138
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 138
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 143
+        },
+        {
+          "caller": "main",
+          "callee": "existsSync",
+          "lineNumber": 144
+        },
+        {
+          "caller": "main",
+          "callee": "results.push",
+          "lineNumber": 147
+        },
+        {
+          "caller": "main",
+          "callee": "readFile",
+          "lineNumber": 152
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 153
+        },
+        {
+          "caller": "main",
+          "callee": "mkdir",
+          "lineNumber": 154
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 158
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 159
+        },
+        {
+          "caller": "main",
+          "callee": "applyTheme",
+          "lineNumber": 161
+        },
+        {
+          "caller": "main",
+          "callee": "renderHTMLToPDF",
+          "lineNumber": 164
+        },
+        {
+          "caller": "main",
+          "callee": "writeFile",
+          "lineNumber": 169
+        },
+        {
+          "caller": "main",
+          "callee": "stat",
+          "lineNumber": 170
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 171
+        },
+        {
+          "caller": "main",
+          "callee": "results.push",
+          "lineNumber": 172
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 174
+        },
+        {
+          "caller": "main",
+          "callee": "String(done).padStart",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "m.id.padEnd",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "themeId.padEnd",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "(s.size / 1024).toFixed(0).padStart",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "(s.size / 1024).toFixed",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 179
+        },
+        {
+          "caller": "main",
+          "callee": "results.push",
+          "lineNumber": 180
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 181
+        },
+        {
+          "caller": "main",
+          "callee": "String(done).padStart",
+          "lineNumber": 182
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 182
+        },
+        {
+          "caller": "main",
+          "callee": "m.id.padEnd",
+          "lineNumber": 182
+        },
+        {
+          "caller": "main",
+          "callee": "themeId.padEnd",
+          "lineNumber": 182
+        },
+        {
+          "caller": "main",
+          "callee": "closeBrowser",
+          "lineNumber": 188
+        },
+        {
+          "caller": "main",
+          "callee": "results.filter",
+          "lineNumber": 190
+        },
+        {
+          "caller": "main",
+          "callee": "results.filter",
+          "lineNumber": 191
+        },
+        {
+          "caller": "main",
+          "callee": "ok.reduce",
+          "lineNumber": 192
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 193
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 195
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 196
+        },
+        {
+          "caller": "main",
+          "callee": "(totalBytes / 1024 / 1024).toFixed",
+          "lineNumber": 197
+        },
+        {
+          "caller": "main",
+          "callee": "(ms / 1000).toFixed",
+          "lineNumber": 197
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 200
+        },
+        {
+          "caller": "main",
+          "callee": "errs.slice",
+          "lineNumber": 201
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 202
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 204
+        },
+        {
+          "caller": "main",
+          "callee": "process.exit",
+          "lineNumber": 205
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/render-all-packs.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 132,
+      "nonEmptyLines": 119,
+      "functions": [
+        {
+          "name": "loadManifests",
+          "startLine": 50,
+          "endLine": 64,
+          "params": []
+        },
+        {
+          "name": "main",
+          "startLine": 66,
+          "endLine": 130,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadManifests",
+          "callee": "(await readdir(PACKAGES)).filter",
+          "lineNumber": 51
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "readdir",
+          "lineNumber": 51
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "n.startsWith",
+          "lineNumber": 51
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "dirs.sort",
+          "lineNumber": 53
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "path.join",
+          "lineNumber": 54
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "readFile",
+          "lineNumber": 56
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "JSON.parse",
+          "lineNumber": 57
+        },
+        {
+          "caller": "loadManifests",
+          "callee": "out.push",
+          "lineNumber": 58
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 67
+        },
+        {
+          "caller": "main",
+          "callee": "loadManifests",
+          "lineNumber": 68
+        },
+        {
+          "caller": "main",
+          "callee": "mkdir",
+          "lineNumber": 69
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 71
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 72
+        },
+        {
+          "caller": "main",
+          "callee": "getPageDimensions",
+          "lineNumber": 76
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 80
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 81
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 82
+        },
+        {
+          "caller": "main",
+          "callee": "renderHTMLToPDFFile",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "stat",
+          "lineNumber": 88
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 89
+        },
+        {
+          "caller": "main",
+          "callee": "results.push",
+          "lineNumber": 90
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 97
+        },
+        {
+          "caller": "main",
+          "callee": "String(i + 1).padStart",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "m.id.padEnd",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "(s.size / 1024).toFixed(0).padStart",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "(s.size / 1024).toFixed",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 101
+        },
+        {
+          "caller": "main",
+          "callee": "results.push",
+          "lineNumber": 102
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 103
+        },
+        {
+          "caller": "main",
+          "callee": "String(i + 1).padStart",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "m.id.padEnd",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "closeBrowser",
+          "lineNumber": 109
+        },
+        {
+          "caller": "main",
+          "callee": "results.filter",
+          "lineNumber": 111
+        },
+        {
+          "caller": "main",
+          "callee": "results.filter",
+          "lineNumber": 112
+        },
+        {
+          "caller": "main",
+          "callee": "ok.reduce",
+          "lineNumber": 113
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 117
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 119
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 120
+        },
+        {
+          "caller": "main",
+          "callee": "(totalBytes / 1024).toFixed",
+          "lineNumber": 121
+        },
+        {
+          "caller": "main",
+          "callee": "(ms / 1000).toFixed",
+          "lineNumber": 121
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 124
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "process.exit",
+          "lineNumber": 128
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/smoke-theme-injection.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 118,
+      "nonEmptyLines": 105,
+      "functions": [
+        {
+          "name": "applyTheme",
+          "startLine": 49,
+          "endLine": 62,
+          "params": [
+            "packHtmlPath",
+            "themeCssPath"
+          ]
+        },
+        {
+          "name": "renderOne",
+          "startLine": 64,
+          "endLine": 95,
+          "params": [
+            "label",
+            "packHtmlPath",
+            "themeCssPath",
+            "outPath"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 97,
+          "endLine": 116,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "applyTheme",
+          "callee": "Promise.all",
+          "lineNumber": 53
+        },
+        {
+          "caller": "applyTheme",
+          "callee": "readFile",
+          "lineNumber": 54
+        },
+        {
+          "caller": "applyTheme",
+          "callee": "readFile",
+          "lineNumber": 55
+        },
+        {
+          "caller": "applyTheme",
+          "callee": "html.includes",
+          "lineNumber": 57
+        },
+        {
+          "caller": "applyTheme",
+          "callee": "html.replace",
+          "lineNumber": 58
+        },
+        {
+          "caller": "applyTheme",
+          "callee": "path.basename",
+          "lineNumber": 60
+        },
+        {
+          "caller": "renderOne",
+          "callee": "getPageDimensions",
+          "lineNumber": 70
+        },
+        {
+          "caller": "renderOne",
+          "callee": "Date.now",
+          "lineNumber": 71
+        },
+        {
+          "caller": "renderOne",
+          "callee": "applyTheme",
+          "lineNumber": 75
+        },
+        {
+          "caller": "renderOne",
+          "callee": "renderHTMLToPDFFile",
+          "lineNumber": 82
+        },
+        {
+          "caller": "renderOne",
+          "callee": "stat",
+          "lineNumber": 90
+        },
+        {
+          "caller": "renderOne",
+          "callee": "Date.now",
+          "lineNumber": 91
+        },
+        {
+          "caller": "renderOne",
+          "callee": "console.log",
+          "lineNumber": 92
+        },
+        {
+          "caller": "renderOne",
+          "callee": "label.padEnd",
+          "lineNumber": 93
+        },
+        {
+          "caller": "renderOne",
+          "callee": "(s.size / 1024).toFixed(0).padStart",
+          "lineNumber": 93
+        },
+        {
+          "caller": "renderOne",
+          "callee": "(s.size / 1024).toFixed",
+          "lineNumber": 93
+        },
+        {
+          "caller": "renderOne",
+          "callee": "path.relative",
+          "lineNumber": 93
+        },
+        {
+          "caller": "main",
+          "callee": "mkdir",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 100
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 101
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 102
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "renderOne",
+          "lineNumber": 106
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 106
+        },
+        {
+          "caller": "main",
+          "callee": "renderOne",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "renderOne",
+          "lineNumber": 108
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 108
+        },
+        {
+          "caller": "main",
+          "callee": "closeBrowser",
+          "lineNumber": 110
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 112
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 113
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 114
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/cli-scaffold.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 128,
+      "nonEmptyLines": 113,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/dimensions.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 33,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/preview-server.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 192,
+      "nonEmptyLines": 167,
+      "functions": [
+        {
+          "name": "spawnServer",
+          "startLine": 31,
+          "endLine": 52,
+          "params": [
+            "outputDir"
+          ]
+        },
+        {
+          "name": "get",
+          "startLine": 54,
+          "endLine": 58,
+          "params": [
+            "url",
+            "headers"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "spawnServer",
+          "callee": "Math.floor",
+          "lineNumber": 34
+        },
+        {
+          "caller": "spawnServer",
+          "callee": "Math.random",
+          "lineNumber": 34
+        },
+        {
+          "caller": "spawnServer",
+          "callee": "startPreviewServer",
+          "lineNumber": 36
+        },
+        {
+          "caller": "spawnServer",
+          "callee": "server.close",
+          "lineNumber": 42
+        },
+        {
+          "caller": "spawnServer",
+          "callee": "resolve",
+          "lineNumber": 42
+        },
+        {
+          "caller": "spawnServer",
+          "callee": "server.unref",
+          "lineNumber": 43
+        },
+        {
+          "caller": "get",
+          "callee": "fetch",
+          "lineNumber": 55
+        },
+        {
+          "caller": "get",
+          "callee": "res.text",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/puppeteer-renderer-mock.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 580,
+      "nonEmptyLines": 529,
+      "functions": [
+        {
+          "name": "makePage",
+          "startLine": 96,
+          "endLine": 135,
+          "params": []
+        },
+        {
+          "name": "makeBrowser",
+          "startLine": 137,
+          "endLine": 145,
+          "params": []
+        },
+        {
+          "name": "ensureFixturesDir",
+          "startLine": 190,
+          "endLine": 193,
+          "params": []
+        },
+        {
+          "name": "writeFixture",
+          "startLine": 195,
+          "endLine": 200,
+          "params": [
+            "name",
+            "contents"
+          ]
+        },
+        {
+          "name": "writeTheme",
+          "startLine": 202,
+          "endLine": 207,
+          "params": [
+            "htmlPath",
+            "mode",
+            "css"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makePage",
+          "callee": "vi.fn().mockResolvedValue",
+          "lineNumber": 99
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn",
+          "lineNumber": 99
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn",
+          "lineNumber": 100
+        },
+        {
+          "caller": "makePage",
+          "callee": "handlers.set",
+          "lineNumber": 101
+        },
+        {
+          "caller": "makePage",
+          "callee": "state.lastRequestDecisions.push",
+          "lineNumber": 108
+        },
+        {
+          "caller": "makePage",
+          "callee": "state.lastRequestDecisions.push",
+          "lineNumber": 118
+        },
+        {
+          "caller": "makePage",
+          "callee": "cb",
+          "lineNumber": 120
+        },
+        {
+          "caller": "makePage",
+          "callee": "cb",
+          "lineNumber": 121
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn",
+          "lineNumber": 124
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn().mockResolvedValue",
+          "lineNumber": 127
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn",
+          "lineNumber": 127
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn",
+          "lineNumber": 128
+        },
+        {
+          "caller": "makePage",
+          "callee": "state.pdfBytesFactory",
+          "lineNumber": 131
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn().mockResolvedValue",
+          "lineNumber": 133
+        },
+        {
+          "caller": "makePage",
+          "callee": "vi.fn",
+          "lineNumber": 133
+        },
+        {
+          "caller": "makeBrowser",
+          "callee": "vi.fn",
+          "lineNumber": 140
+        },
+        {
+          "caller": "makeBrowser",
+          "callee": "makePage",
+          "lineNumber": 140
+        },
+        {
+          "caller": "makeBrowser",
+          "callee": "vi.fn",
+          "lineNumber": 141
+        },
+        {
+          "caller": "ensureFixturesDir",
+          "callee": "fsReal.mkdtemp",
+          "lineNumber": 192
+        },
+        {
+          "caller": "ensureFixturesDir",
+          "callee": "path.join",
+          "lineNumber": 192
+        },
+        {
+          "caller": "ensureFixturesDir",
+          "callee": "os.tmpdir",
+          "lineNumber": 192
+        },
+        {
+          "caller": "writeFixture",
+          "callee": "ensureFixturesDir",
+          "lineNumber": 196
+        },
+        {
+          "caller": "writeFixture",
+          "callee": "path.join",
+          "lineNumber": 197
+        },
+        {
+          "caller": "writeFixture",
+          "callee": "fsReal.writeFile",
+          "lineNumber": 198
+        },
+        {
+          "caller": "writeTheme",
+          "callee": "htmlPath.replace",
+          "lineNumber": 205
+        },
+        {
+          "caller": "writeTheme",
+          "callee": "fsReal.writeFile",
+          "lineNumber": 206
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/puppeteer-renderer-pure.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 152,
+      "nonEmptyLines": 124,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/puppeteer-renderer-restart.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 140,
+      "nonEmptyLines": 122,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/render-scale.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 111,
+      "nonEmptyLines": 92,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

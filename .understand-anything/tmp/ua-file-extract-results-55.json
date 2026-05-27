@@ -1,0 +1,405 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "shared/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 7,
+      "nonEmptyLines": 5,
+      "sections": [
+        {
+          "heading": "shared/",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "tests/e2e/gallery-smoke.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 316,
+      "nonEmptyLines": 273,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/contrast.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 133,
+      "nonEmptyLines": 118,
+      "functions": [
+        {
+          "name": "parseCssVariables",
+          "startLine": 27,
+          "endLine": 37,
+          "params": [
+            "css"
+          ]
+        },
+        {
+          "name": "hexToRgb",
+          "startLine": 39,
+          "endLine": 56,
+          "params": [
+            "hex"
+          ]
+        },
+        {
+          "name": "resolveColor",
+          "startLine": 58,
+          "endLine": 74,
+          "params": [
+            "value",
+            "vars"
+          ]
+        },
+        {
+          "name": "relLuminance",
+          "startLine": 77,
+          "endLine": 83,
+          "params": [
+            "[r, g, b]"
+          ]
+        },
+        {
+          "name": "contrastRatio",
+          "startLine": 85,
+          "endLine": 90,
+          "params": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseCssVariables",
+          "callee": "css.replace",
+          "lineNumber": 30
+        },
+        {
+          "caller": "parseCssVariables",
+          "callee": "re.exec",
+          "lineNumber": 33
+        },
+        {
+          "caller": "parseCssVariables",
+          "callee": "m[2].trim",
+          "lineNumber": 34
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "hex.replace(/^#/, '').trim",
+          "lineNumber": 40
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "hex.replace",
+          "lineNumber": 40
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 43
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 44
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 45
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 49
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "h.slice",
+          "lineNumber": 49
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 49
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "h.slice",
+          "lineNumber": 49
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 49
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "h.slice",
+          "lineNumber": 49
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 53
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "h.slice",
+          "lineNumber": 53
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 53
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "h.slice",
+          "lineNumber": 53
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 53
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "h.slice",
+          "lineNumber": 53
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "value.trim",
+          "lineNumber": 59
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "v.startsWith",
+          "lineNumber": 60
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "hexToRgb",
+          "lineNumber": 60
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "v.match",
+          "lineNumber": 62
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "resolveColor",
+          "lineNumber": 65
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "resolveColor",
+          "lineNumber": 66
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "v.match",
+          "lineNumber": 69
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "Number",
+          "lineNumber": 71
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "Number",
+          "lineNumber": 71
+        },
+        {
+          "caller": "resolveColor",
+          "callee": "Number",
+          "lineNumber": 71
+        },
+        {
+          "caller": "chan",
+          "callee": "Math.pow",
+          "lineNumber": 80
+        },
+        {
+          "caller": "relLuminance",
+          "callee": "chan",
+          "lineNumber": 82
+        },
+        {
+          "caller": "relLuminance",
+          "callee": "chan",
+          "lineNumber": 82
+        },
+        {
+          "caller": "relLuminance",
+          "callee": "chan",
+          "lineNumber": 82
+        },
+        {
+          "caller": "contrastRatio",
+          "callee": "relLuminance",
+          "lineNumber": 86
+        },
+        {
+          "caller": "contrastRatio",
+          "callee": "relLuminance",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/vercel-config.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 191,
+      "nonEmptyLines": 174,
+      "functions": [
+        {
+          "name": "loadConfig",
+          "startLine": 43,
+          "endLine": 46,
+          "params": []
+        },
+        {
+          "name": "findHeader",
+          "startLine": 48,
+          "endLine": 53,
+          "params": [
+            "rules",
+            "source",
+            "key"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadConfig",
+          "callee": "readFileSync",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loadConfig",
+          "callee": "JSON.parse",
+          "lineNumber": 45
+        },
+        {
+          "caller": "findHeader",
+          "callee": "(rules ?? []).find",
+          "lineNumber": 49
+        },
+        {
+          "caller": "findHeader",
+          "callee": "rule.headers.find",
+          "lineNumber": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/visual/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 49,
+      "nonEmptyLines": 36,
+      "sections": [
+        {
+          "heading": "Visual-regression baselines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Run the suite",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Regenerate baselines (intentionally)",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "What's covered",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "Determinism notes",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Why `sharp` for diffing?",
+          "level": 2,
+          "line": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 60,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "vitest.visual.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 25,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

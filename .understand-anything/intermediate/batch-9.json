@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "id": "pipeline:.github/workflows/audit.yml",
+      "type": "pipeline",
+      "name": "audit.yml",
+      "filePath": ".github/workflows/audit.yml",
+      "summary": "GitHub Actions workflow (audit.yml) defining CI/CD jobs (46 lines).",
+      "tags": [
+        "infrastructure",
+        "ci-cd",
+        "github-actions",
+        "deployment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/ci.yml",
+      "type": "pipeline",
+      "name": "ci.yml",
+      "filePath": ".github/workflows/ci.yml",
+      "summary": "GitHub Actions workflow (ci.yml) defining CI/CD jobs (78 lines).",
+      "tags": [
+        "infrastructure",
+        "ci-cd",
+        "github-actions",
+        "deployment"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/generate.yml",
+      "type": "pipeline",
+      "name": "generate.yml",
+      "filePath": ".github/workflows/generate.yml",
+      "summary": "GitHub Actions workflow (generate.yml) defining CI/CD jobs (130 lines).",
+      "tags": [
+        "infrastructure",
+        "ci-cd",
+        "github-actions",
+        "deployment"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

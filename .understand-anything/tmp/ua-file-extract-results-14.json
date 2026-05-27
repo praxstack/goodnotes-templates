@@ -1,0 +1,1041 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 12,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "audit/iteration-4/CODEBASE_AUDIT_REPORT.json.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 222,
+      "nonEmptyLines": 220,
+      "sections": [
+        {
+          "heading": "Machine-readable findings · iteration-4",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "audit/iteration-4/CODEBASE_AUDIT_REPORT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 350,
+      "nonEmptyLines": 256,
+      "sections": [
+        {
+          "heading": "Codebase Audit Report — goodnotes-templates (iteration-4)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Executive Dashboard",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Inventory",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Issue Summary (iteration-4)",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Top 5 risks (post-prioritization)",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Effort to close (iteration-4 findings only)",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "Health grade · **B** (was C+ at iter-1)",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "2. Methodology",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "Phases executed (9-phase protocol)",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "Tools run live",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "What was NOT measured (see also `audit/GAPS.md` for iter-1-3 gaps)",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "3. Topology Snapshot",
+          "level": 2,
+          "line": 121
+        },
+        {
+          "heading": "Trust boundaries (unchanged from iter-1)",
+          "level": 3,
+          "line": 139
+        },
+        {
+          "heading": "Hottest paths (T1 modules — function-level review this iteration)",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "4. Architecture Assessment (delta from iter-1)",
+          "level": 2,
+          "line": 158
+        },
+        {
+          "heading": "Tech-stack assessment",
+          "level": 3,
+          "line": 182
+        },
+        {
+          "heading": "5. Findings Summary (by dimension)",
+          "level": 2,
+          "line": 200
+        },
+        {
+          "heading": "🔒 Security (3 findings this iteration)",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "🧪 Quality & gates (3 findings)",
+          "level": 3,
+          "line": 210
+        },
+        {
+          "heading": "⚙️ Correctness / edge cases (1 finding)",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "📚 Docs & operability (1 finding)",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "Deferred from iter-1–3 (still open)",
+          "level": 3,
+          "line": 232
+        },
+        {
+          "heading": "6. Threat model · delta from iter-1",
+          "level": 2,
+          "line": 243
+        },
+        {
+          "heading": "7. Test Strategy (delta)",
+          "level": 2,
+          "line": 254
+        },
+        {
+          "heading": "8. Implementation Roadmap (summary)",
+          "level": 2,
+          "line": 264
+        },
+        {
+          "heading": "Sprint 1 — ~1 day — P0 + the cheap P1s",
+          "level": 3,
+          "line": 268
+        },
+        {
+          "heading": "Sprint 2 — ~2 days — P1 quality gates + gallery hardening",
+          "level": 3,
+          "line": 276
+        },
+        {
+          "heading": "Sprint 3 — ~1 day — housekeeping",
+          "level": 3,
+          "line": 284
+        },
+        {
+          "heading": "9. Future Enhancements (unchanged from iter-1 direction, updated)",
+          "level": 2,
+          "line": 294
+        },
+        {
+          "heading": "10. Enterprise readiness checklist",
+          "level": 2,
+          "line": 305
+        },
+        {
+          "heading": "11. Phase validation",
+          "level": 2,
+          "line": 332
+        },
+        {
+          "heading": "12. Appendix",
+          "level": 2,
+          "line": 338
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 32
+      }
+    },
+    {
+      "path": "audit/iteration-4/IMPLEMENTATION_ROADMAP.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "metrics": {}
+    },
+    {
+      "path": "audit/iteration-4/IMPLEMENTATION_ROADMAP.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 239,
+      "nonEmptyLines": 200,
+      "sections": [
+        {
+          "heading": "Implementation Roadmap — iteration-4",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Priority scoring (used by the rows below)",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Sprint 1 — 1 day — P0 + cheap P1",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "TICKET-I4-001 · Remove PII from git + fix .gitignore (P0)",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "TICKET-I4-002 · npm audit fix --force (P1)",
+          "level": 3,
+          "line": 72
+        },
+        {
+          "heading": "TICKET-I4-003 · Fix ESLint glob for post-W5 paths (P1)",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "Sprint 2 — ~2 days — quality gates + gallery hardening",
+          "level": 2,
+          "line": 112
+        },
+        {
+          "heading": "TICKET-I4-004 · Restore branch-coverage gate (P1)",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "TICKET-I4-005 · Gallery security headers via vercel.json (P2)",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "TICKET-I4-006 · Env-var validation parity (P3)",
+          "level": 3,
+          "line": 142
+        },
+        {
+          "heading": "Sprint 3 — ~1 day — housekeeping",
+          "level": 2,
+          "line": 164
+        },
+        {
+          "heading": "TICKET-I4-007 · Refresh audit status doc (P3)",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "TICKET-I4-008 · Document dev-vs-public gallery duplication (P4)",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "Revisit deferred iter-1 items (discussion, not a ticket)",
+          "level": 3,
+          "line": 182
+        },
+        {
+          "heading": "Gantt — 3 sprints",
+          "level": 2,
+          "line": 192
+        },
+        {
+          "heading": "Resource requirements",
+          "level": 2,
+          "line": 204
+        },
+        {
+          "heading": "Budget estimate",
+          "level": 2,
+          "line": 210
+        },
+        {
+          "heading": "Success metrics",
+          "level": 2,
+          "line": 216
+        },
+        {
+          "heading": "Future-beyond-iter-4 (for the next CEO/eng review, not this sprint)",
+          "level": 2,
+          "line": 231
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "audit/iteration-4/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 50,
+      "nonEmptyLines": 40,
+      "sections": [
+        {
+          "heading": "Iteration-4 audit · index",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What's in this folder",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "TL;DR",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Health grade · **B**",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "Quick links",
+          "level": 2,
+          "line": 46
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "audit/iteration-4/SLIDE_OUTLINE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 210,
+      "nonEmptyLines": 153,
+      "sections": [
+        {
+          "heading": "Slide Deck Outline · Iteration-4 Audit Read-Out",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Slide 1 · Executive summary",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Slide 2 · What changed since iter-1",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Slide 3 · The one critical",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "Slide 4 · The four mediums (all tooling drift)",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Slide 5 · Risk matrix",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "Slide 6 · Security posture",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "Slide 7 · Quality metrics",
+          "level": 2,
+          "line": 126
+        },
+        {
+          "heading": "Slide 8 · Roadmap",
+          "level": 2,
+          "line": 144
+        },
+        {
+          "heading": "Slide 9 · Resource & budget",
+          "level": 2,
+          "line": 166
+        },
+        {
+          "heading": "Slide 10 · What \"done\" looks like · Next steps · Q&A",
+          "level": 2,
+          "line": 184
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "audit/iteration-4/STATUS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 238,
+      "nonEmptyLines": 182,
+      "sections": [
+        {
+          "heading": "Iter-4 Sprint Status — post-remediation",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Sprint 1 — P0 + cheap P1 (1 pd appetite)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "T-001 — scope expanded beyond the roadmap",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "T-002 — `overrides`, not `--force`",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "T-003 — ESLint glob + 2 bonus bug fixes",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "Sprint 2 — quality gates + gallery hardening",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "T-004 — hybrid Path A + Path B",
+          "level": 3,
+          "line": 103
+        },
+        {
+          "heading": "T-005 — vercel.json with CSP + 3 other security headers",
+          "level": 3,
+          "line": 128
+        },
+        {
+          "heading": "T-006 — env-var validation for `PRAX_BROWSER_RESTART_EVERY`",
+          "level": 3,
+          "line": 144
+        },
+        {
+          "heading": "Sprint 3 — housekeeping",
+          "level": 2,
+          "line": 160
+        },
+        {
+          "heading": "T-007 — this document",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "T-008 — preview-server.ts function comment",
+          "level": 3,
+          "line": 173
+        },
+        {
+          "heading": "Deferred-decisions doc",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "Post-iter-4 health snapshot",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "Validation commands",
+          "level": 2,
+          "line": 205
+        },
+        {
+          "heading": "Remaining debt (intentionally not closed)",
+          "level": 2,
+          "line": 230
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "audit/iteration-4/TEST_STRATEGY.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 185,
+      "nonEmptyLines": 147,
+      "sections": [
+        {
+          "heading": "Test Strategy — iteration-4",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Where we are",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Coverage per module (current)",
+          "level": 3,
+          "line": 14
+        },
+        {
+          "heading": "2. The coverage-threshold problem (FIND-I4-004)",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "3. Target pyramid",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "4. Proposed new tests (priority order)",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "Tier 1 — unblock the branch-coverage gate (~1 pd · FIND-I4-004)",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "Tier 2 — regression tests for iter-4 fixes",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "Tier 3 — structural gaps (not iter-4 blockers; backlog)",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "5. Missing test types (inventory)",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "6. CI/CD quality gates",
+          "level": 2,
+          "line": 115
+        },
+        {
+          "heading": "Today",
+          "level": 3,
+          "line": 117
+        },
+        {
+          "heading": "Missing gates",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "7. Test-strategy principles (from iter-1, still valid)",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "8. Roadmap (test-layer · 4 weeks, but ~1 pd of actual work)",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "9. Coverage targets (post iter-4 Sprint 2)",
+          "level": 2,
+          "line": 163
+        },
+        {
+          "heading": "10. What \"done\" looks like",
+          "level": 2,
+          "line": 175
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "audit/iteration-4/architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 229,
+      "nonEmptyLines": 206,
+      "sections": [
+        {
+          "heading": "Architecture — iteration-4 snapshot",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Monorepo topology (new)",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "2. Dependency graph (trimmed to direct deps)",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "3. Request flow · pack rendering",
+          "level": 2,
+          "line": 106
+        },
+        {
+          "heading": "4. Trust boundary map (updated)",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "5. Rubric score (iter-4)",
+          "level": 2,
+          "line": 170
+        },
+        {
+          "heading": "6. What's missing (structural gaps, not findings)",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "7. Target architecture · incremental deltas",
+          "level": 2,
+          "line": 205
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "audit/iteration-4/deferred-decisions.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 81,
+      "nonEmptyLines": 59,
+      "sections": [
+        {
+          "heading": "Deferred Decisions — iter-1 items revisited in iter-4",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Recommendation summary",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Detailed reasoning",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "FIND-0014 — Google Fonts CDN for 26 non-v5 packs → SCHEDULE",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "FIND-0012 — STAY DEFERRED",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "FIND-0018 — axe-core / pa11y gate in CI → STAY DEFERRED (for now)",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "FIND-0028 — STAY DEFERRED",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "Cross-reference",
+          "level": 2,
+          "line": 77
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "audit/iteration-4/findings.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 628,
+      "nonEmptyLines": 487,
+      "sections": [
+        {
+          "heading": "Iteration-4 findings · full detail",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "FIND-I4-001 — PII committed to git (**CRITICAL**)",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "Why this is critical",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "Root cause",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "Prevent recurrence",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "FIND-I4-002 — npm audit regression: 1 high + 5 moderate (Medium)",
+          "level": 2,
+          "line": 153
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "FIND-I4-003 — ESLint globbing matches zero files (Medium)",
+          "level": 2,
+          "line": 219
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 229
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 263
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "FIND-I4-004 — Coverage threshold failing (Medium)",
+          "level": 2,
+          "line": 299
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 309
+        },
+        {
+          "heading": "Why this is a gate problem",
+          "level": 3,
+          "line": 337
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 345
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 380
+        },
+        {
+          "heading": "FIND-I4-005 — Gallery missing CSP + security headers (Low)",
+          "level": 2,
+          "line": 388
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 398
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 423
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 449
+        },
+        {
+          "heading": "FIND-I4-006 — Env-var silent-fallback inconsistency (Low)",
+          "level": 2,
+          "line": 457
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 467
+        },
+        {
+          "heading": "Why it's worth a note",
+          "level": 3,
+          "line": 486
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 495
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 507
+        },
+        {
+          "heading": "FIND-I4-007 — `POST_SPRINT_STATUS.md` is stale (Low)",
+          "level": 2,
+          "line": 513
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 523
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 530
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 541
+        },
+        {
+          "heading": "FIND-I4-008 — preview-server.ts gallery HTML duplicated in dev tooling (Informational)",
+          "level": 2,
+          "line": 548
+        },
+        {
+          "heading": "Evidence",
+          "level": 3,
+          "line": 558
+        },
+        {
+          "heading": "Why it's intentional (for now)",
+          "level": 3,
+          "line": 565
+        },
+        {
+          "heading": "Recommendation",
+          "level": 3,
+          "line": 575
+        },
+        {
+          "heading": "Acceptance criteria",
+          "level": 3,
+          "line": 589
+        },
+        {
+          "heading": "Cross-cutting observations",
+          "level": 2,
+          "line": 596
+        },
+        {
+          "heading": "The W5 migration checklist that wasn't",
+          "level": 3,
+          "line": 598
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 41
+      }
+    },
+    {
+      "path": "audit/iteration-4/phase-validation.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 236,
+      "nonEmptyLines": 174,
+      "sections": [
+        {
+          "heading": "Phase validation · iteration-4",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Phase 1 · Discovery & cataloging",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Phase 2 · Documentation deep-dive",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "Phase 3 · Architectural review",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "Phase 4 · Intensive code review",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Phase 5 · QA & testing audit",
+          "level": 2,
+          "line": 127
+        },
+        {
+          "heading": "Phase 6 · Security deep-dive",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "Phase 7 · UI/UX & accessibility audit",
+          "level": 2,
+          "line": 173
+        },
+        {
+          "heading": "Phase 8 · Consolidation & prioritization",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "Phase 9 · Roadmap",
+          "level": 2,
+          "line": 195
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 210
+        },
+        {
+          "heading": "Why the 4 partials?",
+          "level": 3,
+          "line": 224
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    }
+  ]
+}

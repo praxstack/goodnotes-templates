@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-tactile-reflections/README.md",
+      "language": "markdown",
+      "sizeLines": 21,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-tactile-reflections/manifest.json",
+      "language": "json",
+      "sizeLines": 20,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/packs-tactile-reflections/tactile-reflections.html",
+      "language": "html",
+      "sizeLines": 488,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-tactile-reflections/README.md": [],
+    "packages/packs-tactile-reflections/manifest.json": [],
+    "packages/packs-tactile-reflections/tactile-reflections.html": []
+  }
+}

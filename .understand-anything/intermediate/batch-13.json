@@ -1,0 +1,160 @@
+{
+  "nodes": [
+    {
+      "id": "document:audit/iteration-1/GAPS.md",
+      "type": "document",
+      "name": "GAPS.md",
+      "filePath": "audit/iteration-1/GAPS.md",
+      "summary": "Documentation: 1 sections, 16 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-1/architecture.md",
+      "type": "document",
+      "name": "architecture.md",
+      "filePath": "audit/iteration-1/architecture.md",
+      "summary": "Documentation: 8 sections, 62 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-1/claims-ledger.md",
+      "type": "document",
+      "name": "claims-ledger.md",
+      "filePath": "audit/iteration-1/claims-ledger.md",
+      "summary": "Documentation: 1 sections, 31 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-1/docs-review.md",
+      "type": "document",
+      "name": "docs-review.md",
+      "filePath": "audit/iteration-1/docs-review.md",
+      "summary": "Documentation: 4 sections, 38 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:audit/iteration-1/findings.json",
+      "type": "config",
+      "name": "findings.json",
+      "filePath": "audit/iteration-1/findings.json",
+      "summary": "findings.json configuration file (1100 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:audit/iteration-1/findings.md",
+      "type": "document",
+      "name": "findings.md",
+      "filePath": "audit/iteration-1/findings.md",
+      "summary": "Documentation: 23 sections, 253 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-1/performance-and-observability.md",
+      "type": "document",
+      "name": "performance-and-observability.md",
+      "filePath": "audit/iteration-1/performance-and-observability.md",
+      "summary": "Documentation: 11 sections, 60 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-1/privacy-review.md",
+      "type": "document",
+      "name": "privacy-review.md",
+      "filePath": "audit/iteration-1/privacy-review.md",
+      "summary": "Documentation: 4 sections, 26 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-1/supply-chain.md",
+      "type": "document",
+      "name": "supply-chain.md",
+      "filePath": "audit/iteration-1/supply-chain.md",
+      "summary": "Documentation: 16 sections, 135 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-1/tests-and-quality-gates.md",
+      "type": "document",
+      "name": "tests-and-quality-gates.md",
+      "filePath": "audit/iteration-1/tests-and-quality-gates.md",
+      "summary": "Documentation: 8 sections, 93 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-1/threat-model.md",
+      "type": "document",
+      "name": "threat-model.md",
+      "filePath": "audit/iteration-1/threat-model.md",
+      "summary": "Documentation: 6 sections, 54 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-1/ui-ux-a11y.md",
+      "type": "document",
+      "name": "ui-ux-a11y.md",
+      "filePath": "audit/iteration-1/ui-ux-a11y.md",
+      "summary": "Documentation: 11 sections, 69 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

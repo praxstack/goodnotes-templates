@@ -1,0 +1,200 @@
+{
+  "nodes": [
+    {
+      "id": "document:docs/CUSTOMISATION.md",
+      "type": "document",
+      "name": "CUSTOMISATION.md",
+      "filePath": "docs/CUSTOMISATION.md",
+      "summary": "Documentation: 7 sections, 151 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/HLD-self-contained-templates.md",
+      "type": "document",
+      "name": "HLD-self-contained-templates.md",
+      "filePath": "docs/HLD-self-contained-templates.md",
+      "summary": "Documentation: 19 sections, 233 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/LLD-self-contained-templates.md",
+      "type": "document",
+      "name": "LLD-self-contained-templates.md",
+      "filePath": "docs/LLD-self-contained-templates.md",
+      "summary": "Documentation: 38 sections, 571 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/NORTH-STAR.md",
+      "type": "document",
+      "name": "NORTH-STAR.md",
+      "filePath": "docs/NORTH-STAR.md",
+      "summary": "Documentation: 13 sections, 167 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/design-review-v5-2026-04-27.md",
+      "type": "document",
+      "name": "design-review-v5-2026-04-27.md",
+      "filePath": "docs/design-review-v5-2026-04-27.md",
+      "summary": "Documentation: 38 sections, 337 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/llm-council-context-window-debug.md",
+      "type": "document",
+      "name": "llm-council-context-window-debug.md",
+      "filePath": "docs/llm-council-context-window-debug.md",
+      "summary": "Documentation: 12 sections, 111 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/plan-ceo-review-sticker-expansion-v1.md",
+      "type": "document",
+      "name": "plan-ceo-review-sticker-expansion-v1.md",
+      "filePath": "docs/plan-ceo-review-sticker-expansion-v1.md",
+      "summary": "Documentation: 39 sections, 385 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/plan-ceo-review-v2-10x-expansion.md",
+      "type": "document",
+      "name": "plan-ceo-review-v2-10x-expansion.md",
+      "filePath": "docs/plan-ceo-review-v2-10x-expansion.md",
+      "summary": "Documentation: 33 sections, 398 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/plan-ceo-review-v3-refined.md",
+      "type": "document",
+      "name": "plan-ceo-review-v3-refined.md",
+      "filePath": "docs/plan-ceo-review-v3-refined.md",
+      "summary": "Documentation: 11 sections, 224 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/plan-ceo-review-v4-five-decisions-locked.md",
+      "type": "document",
+      "name": "plan-ceo-review-v4-five-decisions-locked.md",
+      "filePath": "docs/plan-ceo-review-v4-five-decisions-locked.md",
+      "summary": "Documentation: 14 sections, 183 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/plan-ceo-review-v5-10x-100x-expansion.md",
+      "type": "document",
+      "name": "plan-ceo-review-v5-10x-100x-expansion.md",
+      "filePath": "docs/plan-ceo-review-v5-10x-100x-expansion.md",
+      "summary": "Documentation: 61 sections, 795 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/plan-design-review-v4-five-decisions.md",
+      "type": "document",
+      "name": "plan-design-review-v4-five-decisions.md",
+      "filePath": "docs/plan-design-review-v4-five-decisions.md",
+      "summary": "Documentation: 15 sections, 183 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/plan-eng-review-v4-five-decisions.md",
+      "type": "document",
+      "name": "plan-eng-review-v4-five-decisions.md",
+      "filePath": "docs/plan-eng-review-v4-five-decisions.md",
+      "summary": "Documentation: 17 sections, 129 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/plan-eng-review-weekly-monthly-stickers.md",
+      "type": "document",
+      "name": "plan-eng-review-weekly-monthly-stickers.md",
+      "filePath": "docs/plan-eng-review-weekly-monthly-stickers.md",
+      "summary": "Documentation: 26 sections, 340 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/plan-weekly-monthly-stickers.md",
+      "type": "document",
+      "name": "plan-weekly-monthly-stickers.md",
+      "filePath": "docs/plan-weekly-monthly-stickers.md",
+      "summary": "Documentation: 23 sections, 219 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

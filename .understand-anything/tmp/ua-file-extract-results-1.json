@@ -1,0 +1,3127 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 16,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 86,
+      "exports": [
+        {
+          "name": "buildPageSequence",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "PageSpec",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "splicePdfBuffers",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "bookmarkTitle",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "SpecRender",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "addBookmarks",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "addHyperlinks",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "renderHTMLToPDF",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "closeBrowser",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "renderPageSpec",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "resolvePageSpecFiles",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "substituteProfile",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "deriveDateFields",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "isLeapYear",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "V5_PACK_DIR",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "DAILY_HTML_FILES",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "REVIEW_HTML_FILE",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "RX_SLOT_COUNT",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "PROFILE_PLACEHOLDERS",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "ProfilePlaceholder",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "RenderPageSpecOptions",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "getPageDimensions",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "pointsToPixels",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "pixelsToPoints",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "getContentArea",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "PAGE_SIZES",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "generateStickerSVG",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "STICKER_SIZES",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "StickerType",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "parseProfile",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "Profile",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "getMonthNames",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "getDayNames",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "getDaysInMonth",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "getMonthGrid",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "getISOWeekNumber",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "validateYear",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "SUPPORTED_LOCALES",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "PageDimensions",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "PaperSize",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "Orientation",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "Margins",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "PDFMetadata",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "PDFBookmark",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "PDFHyperlink",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "StickerPalette",
+          "line": 87,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 46,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/pdf-splice.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 206,
+      "nonEmptyLines": 192,
+      "functions": [
+        {
+          "name": "bookmarkTitle",
+          "startLine": 79,
+          "endLine": 96,
+          "params": [
+            "page"
+          ]
+        },
+        {
+          "name": "splicePdfBuffers",
+          "startLine": 123,
+          "endLine": 206,
+          "params": [
+            "renders"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "bookmarkTitle",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "splicePdfBuffers",
+          "line": 123,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "bookmarkTitle",
+          "callee": "page.date.split('-').map",
+          "lineNumber": 85
+        },
+        {
+          "caller": "bookmarkTitle",
+          "callee": "page.date.split",
+          "lineNumber": 85
+        },
+        {
+          "caller": "bookmarkTitle",
+          "callee": "Number",
+          "lineNumber": 85
+        },
+        {
+          "caller": "bookmarkTitle",
+          "callee": "new Date(Date.UTC(y, m - 1, d)).toLocaleDateString",
+          "lineNumber": 86
+        },
+        {
+          "caller": "bookmarkTitle",
+          "callee": "Date.UTC",
+          "lineNumber": 86
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFDocument.create",
+          "lineNumber": 130
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "JSON.stringify",
+          "lineNumber": 141
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "bookmarks.push",
+          "lineNumber": 146
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "bookmarkTitle",
+          "lineNumber": 147
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFDocument.load",
+          "lineNumber": 152
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "src.getPageCount",
+          "lineNumber": 153
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "JSON.stringify",
+          "lineNumber": 156
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.copyPages",
+          "lineNumber": 159
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "src.getPageIndices",
+          "lineNumber": 159
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.addPage",
+          "lineNumber": 160
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.getPages",
+          "lineNumber": 171
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.context.nextRef",
+          "lineNumber": 172
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "bookmarks.map",
+          "lineNumber": 173
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.context.nextRef",
+          "lineNumber": 174
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFArray.withContext",
+          "lineNumber": 176
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "dest.push",
+          "lineNumber": 177
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "dest.push",
+          "lineNumber": 178
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFName.of",
+          "lineNumber": 178
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.context.obj",
+          "lineNumber": 179
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFString.of",
+          "lineNumber": 180
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "items[i].dict.set",
+          "lineNumber": 190
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFName.of",
+          "lineNumber": 190
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "items[i].dict.set",
+          "lineNumber": 191
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFName.of",
+          "lineNumber": 191
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.context.obj",
+          "lineNumber": 194
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFNumber.of",
+          "lineNumber": 198
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.context.assign",
+          "lineNumber": 201
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.context.assign",
+          "lineNumber": 202
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.catalog.set",
+          "lineNumber": 203
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "PDFName.of",
+          "lineNumber": 203
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "Buffer.from",
+          "lineNumber": 205
+        },
+        {
+          "caller": "splicePdfBuffers",
+          "callee": "merged.save",
+          "lineNumber": 205
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/prax-journal-renderer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 453,
+      "nonEmptyLines": 425,
+      "functions": [
+        {
+          "name": "buildRxSlotPlaceholders",
+          "startLine": 114,
+          "endLine": 121,
+          "params": []
+        },
+        {
+          "name": "extractRxFields",
+          "startLine": 183,
+          "endLine": 206,
+          "params": [
+            "profile"
+          ]
+        },
+        {
+          "name": "deriveDateFields",
+          "startLine": 223,
+          "endLine": 255,
+          "params": [
+            "isoDate"
+          ]
+        },
+        {
+          "name": "quarterFromMonth",
+          "startLine": 261,
+          "endLine": 263,
+          "params": [
+            "month"
+          ]
+        },
+        {
+          "name": "isoWeekNumber",
+          "startLine": 272,
+          "endLine": 281,
+          "params": [
+            "isoDate"
+          ]
+        },
+        {
+          "name": "deriveWeeklyFields",
+          "startLine": 294,
+          "endLine": 313,
+          "params": [
+            "isoDate"
+          ]
+        },
+        {
+          "name": "deriveMonthlyFields",
+          "startLine": 326,
+          "endLine": 344,
+          "params": [
+            "isoDate"
+          ]
+        },
+        {
+          "name": "substituteProfile",
+          "startLine": 364,
+          "endLine": 382,
+          "params": [
+            "html",
+            "profile",
+            "page"
+          ]
+        },
+        {
+          "name": "resolvePageSpecFiles",
+          "startLine": 393,
+          "endLine": 405,
+          "params": [
+            "page",
+            "versionDir"
+          ]
+        },
+        {
+          "name": "renderPageSpec",
+          "startLine": 429,
+          "endLine": 453,
+          "params": [
+            "page",
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isLeapYear",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "V5_PACK_DIR",
+          "line": 75,
+          "isDefault": false
+        },
+        {
+          "name": "DAILY_HTML_FILES",
+          "line": 81,
+          "isDefault": false
+        },
+        {
+          "name": "REVIEW_HTML_FILE",
+          "line": 93,
+          "isDefault": false
+        },
+        {
+          "name": "RX_SLOT_COUNT",
+          "line": 107,
+          "isDefault": false
+        },
+        {
+          "name": "PROFILE_PLACEHOLDERS",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "deriveDateFields",
+          "line": 223,
+          "isDefault": false
+        },
+        {
+          "name": "deriveWeeklyFields",
+          "line": 294,
+          "isDefault": false
+        },
+        {
+          "name": "deriveMonthlyFields",
+          "line": 326,
+          "isDefault": false
+        },
+        {
+          "name": "substituteProfile",
+          "line": 364,
+          "isDefault": false
+        },
+        {
+          "name": "resolvePageSpecFiles",
+          "line": 393,
+          "isDefault": false
+        },
+        {
+          "name": "renderPageSpec",
+          "line": 429,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "extractRxFields",
+          "callee": "profile.therapists.find",
+          "lineNumber": 187
+        },
+        {
+          "caller": "extractRxFields",
+          "callee": "String",
+          "lineNumber": 192
+        },
+        {
+          "caller": "extractRxFields",
+          "callee": "profile.medications.slice",
+          "lineNumber": 198
+        },
+        {
+          "caller": "extractRxFields",
+          "callee": "meds.forEach",
+          "lineNumber": 199
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "isoDate.split",
+          "lineNumber": 226
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "Number",
+          "lineNumber": 227
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "Number",
+          "lineNumber": 228
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "Number",
+          "lineNumber": 229
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "Date.UTC",
+          "lineNumber": 230
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "Date.UTC",
+          "lineNumber": 233
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "Math.floor",
+          "lineNumber": 234
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "isLeapYear",
+          "lineNumber": 235
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "dateFmt.format",
+          "lineNumber": 250
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "weekdayFmt.format",
+          "lineNumber": 251
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "String",
+          "lineNumber": 252
+        },
+        {
+          "caller": "deriveDateFields",
+          "callee": "String",
+          "lineNumber": 253
+        },
+        {
+          "caller": "quarterFromMonth",
+          "callee": "Math.floor",
+          "lineNumber": 262
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "isoDate.split",
+          "lineNumber": 273
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "Date.UTC",
+          "lineNumber": 274
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "Number",
+          "lineNumber": 274
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "Number",
+          "lineNumber": 274
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "Number",
+          "lineNumber": 274
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "d.getUTCDay",
+          "lineNumber": 277
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "d.setUTCDate",
+          "lineNumber": 278
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "d.getUTCDate",
+          "lineNumber": 278
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "Date.UTC",
+          "lineNumber": 279
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "d.getUTCFullYear",
+          "lineNumber": 279
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "Math.ceil",
+          "lineNumber": 280
+        },
+        {
+          "caller": "isoWeekNumber",
+          "callee": "d.getTime",
+          "lineNumber": 280
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "isoDate.split",
+          "lineNumber": 297
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "Number",
+          "lineNumber": 298
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "Number",
+          "lineNumber": 299
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "Number",
+          "lineNumber": 300
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "Date.UTC",
+          "lineNumber": 301
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "dateFmt.format",
+          "lineNumber": 308
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "String",
+          "lineNumber": 309
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "isoWeekNumber",
+          "lineNumber": 309
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "quarterFromMonth",
+          "lineNumber": 310
+        },
+        {
+          "caller": "deriveWeeklyFields",
+          "callee": "String",
+          "lineNumber": 311
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "isoDate.split",
+          "lineNumber": 329
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "Number",
+          "lineNumber": 330
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "Number",
+          "lineNumber": 331
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "Number",
+          "lineNumber": 332
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "Date.UTC",
+          "lineNumber": 333
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "monthFmt.format",
+          "lineNumber": 339
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "String(month).padStart",
+          "lineNumber": 340
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "String",
+          "lineNumber": 340
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "quarterFromMonth",
+          "lineNumber": 341
+        },
+        {
+          "caller": "deriveMonthlyFields",
+          "callee": "String",
+          "lineNumber": 342
+        },
+        {
+          "caller": "substituteProfile",
+          "callee": "extractRxFields",
+          "lineNumber": 370
+        },
+        {
+          "caller": "substituteProfile",
+          "callee": "deriveDateFields",
+          "lineNumber": 371
+        },
+        {
+          "caller": "substituteProfile",
+          "callee": "deriveWeeklyFields",
+          "lineNumber": 372
+        },
+        {
+          "caller": "substituteProfile",
+          "callee": "deriveMonthlyFields",
+          "lineNumber": 373
+        },
+        {
+          "caller": "substituteProfile",
+          "callee": "Object.keys",
+          "lineNumber": 376
+        },
+        {
+          "caller": "substituteProfile",
+          "callee": "keys.join",
+          "lineNumber": 377
+        },
+        {
+          "caller": "substituteProfile",
+          "callee": "html.replace",
+          "lineNumber": 378
+        },
+        {
+          "caller": "resolvePageSpecFiles",
+          "callee": "DAILY_HTML_FILES.map",
+          "lineNumber": 399
+        },
+        {
+          "caller": "resolvePageSpecFiles",
+          "callee": "path.join",
+          "lineNumber": 399
+        },
+        {
+          "caller": "resolvePageSpecFiles",
+          "callee": "path.join",
+          "lineNumber": 403
+        },
+        {
+          "caller": "renderPageSpec",
+          "callee": "resolvePageSpecFiles",
+          "lineNumber": 433
+        },
+        {
+          "caller": "renderPageSpec",
+          "callee": "getPageDimensions",
+          "lineNumber": 437
+        },
+        {
+          "caller": "renderPageSpec",
+          "callee": "fs.readFile",
+          "lineNumber": 441
+        },
+        {
+          "caller": "renderPageSpec",
+          "callee": "substituteProfile",
+          "lineNumber": 442
+        },
+        {
+          "caller": "renderPageSpec",
+          "callee": "buffers.push",
+          "lineNumber": 443
+        },
+        {
+          "caller": "renderPageSpec",
+          "callee": "renderHTMLToPDF",
+          "lineNumber": 444
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 12,
+        "functionCount": 10,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/splice.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 137,
+      "nonEmptyLines": 121,
+      "functions": [
+        {
+          "name": "parseUTC",
+          "startLine": 58,
+          "endLine": 67,
+          "params": [
+            "isoDate"
+          ]
+        },
+        {
+          "name": "formatUTC",
+          "startLine": 70,
+          "endLine": 75,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "addOneDay",
+          "startLine": 78,
+          "endLine": 82,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "isMonthEnd",
+          "startLine": 85,
+          "endLine": 88,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "isQuarterEnd",
+          "startLine": 96,
+          "endLine": 100,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "buildPageSequence",
+          "startLine": 107,
+          "endLine": 137,
+          "params": [
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "buildPageSequence",
+          "line": 107,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseUTC",
+          "callee": "isoDate.split",
+          "lineNumber": 59
+        },
+        {
+          "caller": "parseUTC",
+          "callee": "Number",
+          "lineNumber": 60
+        },
+        {
+          "caller": "parseUTC",
+          "callee": "Number",
+          "lineNumber": 61
+        },
+        {
+          "caller": "parseUTC",
+          "callee": "Number",
+          "lineNumber": 62
+        },
+        {
+          "caller": "parseUTC",
+          "callee": "Number.isInteger",
+          "lineNumber": 63
+        },
+        {
+          "caller": "parseUTC",
+          "callee": "Number.isInteger",
+          "lineNumber": 63
+        },
+        {
+          "caller": "parseUTC",
+          "callee": "Number.isInteger",
+          "lineNumber": 63
+        },
+        {
+          "caller": "parseUTC",
+          "callee": "Date.UTC",
+          "lineNumber": 66
+        },
+        {
+          "caller": "formatUTC",
+          "callee": "d.getUTCFullYear",
+          "lineNumber": 71
+        },
+        {
+          "caller": "formatUTC",
+          "callee": "String(d.getUTCMonth() + 1).padStart",
+          "lineNumber": 72
+        },
+        {
+          "caller": "formatUTC",
+          "callee": "String",
+          "lineNumber": 72
+        },
+        {
+          "caller": "formatUTC",
+          "callee": "d.getUTCMonth",
+          "lineNumber": 72
+        },
+        {
+          "caller": "formatUTC",
+          "callee": "String(d.getUTCDate()).padStart",
+          "lineNumber": 73
+        },
+        {
+          "caller": "formatUTC",
+          "callee": "String",
+          "lineNumber": 73
+        },
+        {
+          "caller": "formatUTC",
+          "callee": "d.getUTCDate",
+          "lineNumber": 73
+        },
+        {
+          "caller": "addOneDay",
+          "callee": "d.getTime",
+          "lineNumber": 79
+        },
+        {
+          "caller": "addOneDay",
+          "callee": "next.setUTCDate",
+          "lineNumber": 80
+        },
+        {
+          "caller": "addOneDay",
+          "callee": "next.getUTCDate",
+          "lineNumber": 80
+        },
+        {
+          "caller": "isMonthEnd",
+          "callee": "addOneDay(d).getUTCMonth",
+          "lineNumber": 87
+        },
+        {
+          "caller": "isMonthEnd",
+          "callee": "addOneDay",
+          "lineNumber": 87
+        },
+        {
+          "caller": "isMonthEnd",
+          "callee": "d.getUTCMonth",
+          "lineNumber": 87
+        },
+        {
+          "caller": "isQuarterEnd",
+          "callee": "d.getUTCMonth",
+          "lineNumber": 97
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "parseUTC",
+          "lineNumber": 108
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "parseUTC",
+          "lineNumber": 109
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "end.getTime",
+          "lineNumber": 112
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "start.getTime",
+          "lineNumber": 112
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "cursor.getTime",
+          "lineNumber": 116
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "end.getTime",
+          "lineNumber": 116
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "addOneDay",
+          "lineNumber": 116
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "formatUTC",
+          "lineNumber": 117
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "out.push",
+          "lineNumber": 118
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "cursor.getUTCDay",
+          "lineNumber": 121
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "out.push",
+          "lineNumber": 122
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "isMonthEnd",
+          "lineNumber": 125
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "out.push",
+          "lineNumber": 126
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "isQuarterEnd",
+          "lineNumber": 130
+        },
+        {
+          "caller": "buildPageSequence",
+          "callee": "out.push",
+          "lineNumber": 131
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/types/profile.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 288,
+      "nonEmptyLines": 267,
+      "functions": [
+        {
+          "name": "parseProfile",
+          "startLine": 250,
+          "endLine": 288,
+          "params": [
+            "value"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ProfileParseError",
+          "startLine": 227,
+          "endLine": 235,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "issues"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PROFILE_SCHEMA_VERSION",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "ProfileSchema",
+          "line": 193,
+          "isDefault": false
+        },
+        {
+          "name": "ProfileParseError",
+          "line": 227,
+          "isDefault": false
+        },
+        {
+          "name": "parseProfile",
+          "line": 250,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 231
+        },
+        {
+          "caller": "parseProfile",
+          "callee": "Number.isInteger",
+          "lineNumber": 256
+        },
+        {
+          "caller": "parseProfile",
+          "callee": "ProfileSchema.safeParse",
+          "lineNumber": 271
+        },
+        {
+          "caller": "parseProfile",
+          "callee": "result.error.issues.map",
+          "lineNumber": 274
+        },
+        {
+          "caller": "parseProfile",
+          "callee": "i.path.join",
+          "lineNumber": 275
+        },
+        {
+          "caller": "parseProfile",
+          "callee": "issues\n    .slice(0, 5)\n    .map((i) => `  • ${i.path}: ${i.message}`)\n    .join",
+          "lineNumber": 278
+        },
+        {
+          "caller": "parseProfile",
+          "callee": "issues\n    .slice(0, 5)\n    .map",
+          "lineNumber": 278
+        },
+        {
+          "caller": "parseProfile",
+          "callee": "issues\n    .slice",
+          "lineNumber": 278
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/core/src/utils/locale.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 213,
+      "nonEmptyLines": 183,
+      "functions": [
+        {
+          "name": "getMonthNames",
+          "startLine": 25,
+          "endLine": 31,
+          "params": [
+            "locale",
+            "format"
+          ]
+        },
+        {
+          "name": "getDayNames",
+          "startLine": 37,
+          "endLine": 58,
+          "params": [
+            "locale",
+            "format",
+            "weekStart"
+          ]
+        },
+        {
+          "name": "formatDate",
+          "startLine": 63,
+          "endLine": 96,
+          "params": [
+            "date",
+            "locale",
+            "format"
+          ]
+        },
+        {
+          "name": "getDaysInMonth",
+          "startLine": 102,
+          "endLine": 104,
+          "params": [
+            "year",
+            "month"
+          ]
+        },
+        {
+          "name": "getFirstDayOfMonth",
+          "startLine": 110,
+          "endLine": 112,
+          "params": [
+            "year",
+            "month"
+          ]
+        },
+        {
+          "name": "isLeapYear",
+          "startLine": 117,
+          "endLine": 119,
+          "params": [
+            "year"
+          ]
+        },
+        {
+          "name": "getISOWeekNumber",
+          "startLine": 124,
+          "endLine": 130,
+          "params": [
+            "date"
+          ]
+        },
+        {
+          "name": "getMonthGrid",
+          "startLine": 137,
+          "endLine": 168,
+          "params": [
+            "year",
+            "month",
+            "weekStart"
+          ]
+        },
+        {
+          "name": "getWeeksInYear",
+          "startLine": 173,
+          "endLine": 204,
+          "params": [
+            "year",
+            "weekStart"
+          ]
+        },
+        {
+          "name": "validateYear",
+          "startLine": 209,
+          "endLine": 213,
+          "params": [
+            "year"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SUPPORTED_LOCALES",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "getMonthNames",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "getDayNames",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "formatDate",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "getDaysInMonth",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "getFirstDayOfMonth",
+          "line": 110,
+          "isDefault": false
+        },
+        {
+          "name": "isLeapYear",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "getISOWeekNumber",
+          "line": 124,
+          "isDefault": false
+        },
+        {
+          "name": "getMonthGrid",
+          "line": 137,
+          "isDefault": false
+        },
+        {
+          "name": "getWeeksInYear",
+          "line": 173,
+          "isDefault": false
+        },
+        {
+          "name": "validateYear",
+          "line": 209,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getMonthNames",
+          "callee": "Array.from",
+          "lineNumber": 27
+        },
+        {
+          "caller": "getMonthNames",
+          "callee": "new Intl.DateTimeFormat(intlLocale, { month: format }).format",
+          "lineNumber": 29
+        },
+        {
+          "caller": "getDayNames",
+          "callee": "Array.from",
+          "lineNumber": 45
+        },
+        {
+          "caller": "getDayNames",
+          "callee": "date.setDate",
+          "lineNumber": 47
+        },
+        {
+          "caller": "getDayNames",
+          "callee": "mondayBase.getDate",
+          "lineNumber": 47
+        },
+        {
+          "caller": "getDayNames",
+          "callee": "new Intl.DateTimeFormat(intlLocale, { weekday: format }).format",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getDayNames",
+          "callee": "days.pop",
+          "lineNumber": 53
+        },
+        {
+          "caller": "getDayNames",
+          "callee": "days.unshift",
+          "lineNumber": 54
+        },
+        {
+          "caller": "formatDate",
+          "callee": "new Intl.DateTimeFormat(intlLocale, options).format",
+          "lineNumber": 95
+        },
+        {
+          "caller": "getDaysInMonth",
+          "callee": "new Date(year, month, 0).getDate",
+          "lineNumber": 103
+        },
+        {
+          "caller": "getFirstDayOfMonth",
+          "callee": "new Date(year, month - 1, 1).getDay",
+          "lineNumber": 111
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "Date.UTC",
+          "lineNumber": 125
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "date.getFullYear",
+          "lineNumber": 125
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "date.getMonth",
+          "lineNumber": 125
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "date.getDate",
+          "lineNumber": 125
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "d.getUTCDay",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "d.setUTCDate",
+          "lineNumber": 127
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "d.getUTCDate",
+          "lineNumber": 127
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "Date.UTC",
+          "lineNumber": 128
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "d.getUTCFullYear",
+          "lineNumber": 128
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "Math.ceil",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "d.getTime",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getISOWeekNumber",
+          "callee": "yearStart.getTime",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getMonthGrid",
+          "callee": "getDaysInMonth",
+          "lineNumber": 142
+        },
+        {
+          "caller": "getMonthGrid",
+          "callee": "getFirstDayOfMonth",
+          "lineNumber": 143
+        },
+        {
+          "caller": "getMonthGrid",
+          "callee": "new Array(firstDay).fill",
+          "lineNumber": 151
+        },
+        {
+          "caller": "getMonthGrid",
+          "callee": "week.push",
+          "lineNumber": 154
+        },
+        {
+          "caller": "getMonthGrid",
+          "callee": "grid.push",
+          "lineNumber": 156
+        },
+        {
+          "caller": "getMonthGrid",
+          "callee": "week.push",
+          "lineNumber": 163
+        },
+        {
+          "caller": "getMonthGrid",
+          "callee": "grid.push",
+          "lineNumber": 164
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "jan1.getDay",
+          "lineNumber": 176
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "firstWeekStart.setDate",
+          "lineNumber": 184
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "jan1.getDate",
+          "lineNumber": 184
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "current.getFullYear",
+          "lineNumber": 189
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "end.setDate",
+          "lineNumber": 192
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "end.getDate",
+          "lineNumber": 192
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "weeks.push",
+          "lineNumber": 194
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "current.setDate",
+          "lineNumber": 196
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "current.getDate",
+          "lineNumber": 196
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "current.getFullYear",
+          "lineNumber": 199
+        },
+        {
+          "caller": "getWeeksInYear",
+          "callee": "current.getMonth",
+          "lineNumber": 199
+        },
+        {
+          "caller": "validateYear",
+          "callee": "Number.isInteger",
+          "lineNumber": 210
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 11,
+        "functionCount": 10,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-standalone-html.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 136,
+      "nonEmptyLines": 122,
+      "functions": [
+        {
+          "name": "parseArgs",
+          "startLine": 54,
+          "endLine": 70,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "loadProfile",
+          "startLine": 72,
+          "endLine": 80,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 84,
+          "endLine": 131,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "argv.indexOf",
+          "lineNumber": 56
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 64
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 65
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 67
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 68
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "fs.readFile",
+          "lineNumber": 74
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "path.resolve",
+          "lineNumber": 74
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "parseProfile",
+          "lineNumber": 75
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "JSON.parse",
+          "lineNumber": 75
+        },
+        {
+          "caller": "main",
+          "callee": "parseArgs",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "process.argv.slice",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "path.resolve",
+          "lineNumber": 86
+        },
+        {
+          "caller": "main",
+          "callee": "fs.mkdir",
+          "lineNumber": 87
+        },
+        {
+          "caller": "main",
+          "callee": "path.dirname",
+          "lineNumber": 87
+        },
+        {
+          "caller": "main",
+          "callee": "buildPageSequence",
+          "lineNumber": 89
+        },
+        {
+          "caller": "main",
+          "callee": "loadProfile",
+          "lineNumber": 94
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 95
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 96
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 97
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "resolvePageSpecFiles",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "fs.readFile",
+          "lineNumber": 106
+        },
+        {
+          "caller": "main",
+          "callee": "substituteProfile",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "pages.push",
+          "lineNumber": 108
+        },
+        {
+          "caller": "main",
+          "callee": "path.basename",
+          "lineNumber": 110
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 115
+        },
+        {
+          "caller": "main",
+          "callee": "String(i + 1).padStart",
+          "lineNumber": 115
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 115
+        },
+        {
+          "caller": "main",
+          "callee": "buildStandaloneHtml",
+          "lineNumber": 120
+        },
+        {
+          "caller": "main",
+          "callee": "path.basename",
+          "lineNumber": 121
+        },
+        {
+          "caller": "main",
+          "callee": "fs.writeFile",
+          "lineNumber": 125
+        },
+        {
+          "caller": "main",
+          "callee": "(Buffer.byteLength(doc) / 1024 / 1024).toFixed",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "Buffer.byteLength",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 127
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 128
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 130
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/generate-journal.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 158,
+      "nonEmptyLines": 141,
+      "functions": [
+        {
+          "name": "parseArgs",
+          "startLine": 47,
+          "endLine": 65,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "loadProfile",
+          "startLine": 68,
+          "endLine": 76,
+          "params": [
+            "profilePath"
+          ]
+        },
+        {
+          "name": "fmtSec",
+          "startLine": 79,
+          "endLine": 81,
+          "params": [
+            "ms"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 83,
+          "endLine": 153,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "argv.indexOf",
+          "lineNumber": 49
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 59
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "get",
+          "lineNumber": 60
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "fs.readFile",
+          "lineNumber": 70
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "path.resolve",
+          "lineNumber": 70
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "parseProfile",
+          "lineNumber": 71
+        },
+        {
+          "caller": "loadProfile",
+          "callee": "JSON.parse",
+          "lineNumber": 71
+        },
+        {
+          "caller": "fmtSec",
+          "callee": "(ms / 1000).toFixed",
+          "lineNumber": 80
+        },
+        {
+          "caller": "main",
+          "callee": "parseArgs",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "process.argv.slice",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "path.resolve",
+          "lineNumber": 87
+        },
+        {
+          "caller": "main",
+          "callee": "fs.mkdir",
+          "lineNumber": 88
+        },
+        {
+          "caller": "main",
+          "callee": "path.dirname",
+          "lineNumber": 88
+        },
+        {
+          "caller": "main",
+          "callee": "buildPageSequence",
+          "lineNumber": 91
+        },
+        {
+          "caller": "main",
+          "callee": "specs.reduce",
+          "lineNumber": 100
+        },
+        {
+          "caller": "main",
+          "callee": "Object.entries(counts)\n    .map(([k, n]) => `${n}×${k}`)\n    .join",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "Object.entries(counts)\n    .map",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "Object.entries",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "loadProfile",
+          "lineNumber": 108
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 109
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 112
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 113
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 114
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 120
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 124
+        },
+        {
+          "caller": "main",
+          "callee": "renderPageSpec",
+          "lineNumber": 125
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 128
+        },
+        {
+          "caller": "main",
+          "callee": "String(i + 1).padStart",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "bookmarkTitle(page).padEnd",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "bookmarkTitle",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "String(dt).padStart",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "renders.push",
+          "lineNumber": 131
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 133
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 136
+        },
+        {
+          "caller": "main",
+          "callee": "splicePdfBuffers",
+          "lineNumber": 137
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 138
+        },
+        {
+          "caller": "main",
+          "callee": "fs.writeFile",
+          "lineNumber": 141
+        },
+        {
+          "caller": "main",
+          "callee": "renders.reduce",
+          "lineNumber": 142
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 147
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 148
+        },
+        {
+          "caller": "main",
+          "callee": "fmtSec",
+          "lineNumber": 148
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 149
+        },
+        {
+          "caller": "main",
+          "callee": "fmtSec",
+          "lineNumber": 149
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 150
+        },
+        {
+          "caller": "main",
+          "callee": "(finalPdf.byteLength / 1024).toFixed",
+          "lineNumber": 150
+        },
+        {
+          "caller": "main",
+          "callee": "closeBrowser",
+          "lineNumber": 152
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/safari-probe.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 416,
+      "nonEmptyLines": 358,
+      "functions": [
+        {
+          "name": "parseArgs",
+          "startLine": 70,
+          "endLine": 72,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "buildHtmlProbe",
+          "startLine": 149,
+          "endLine": 185,
+          "params": [
+            "from",
+            "to",
+            "filename"
+          ]
+        },
+        {
+          "name": "buildPdfProbe",
+          "startLine": 199,
+          "endLine": 252,
+          "params": [
+            "from",
+            "to",
+            "filename",
+            "scale"
+          ]
+        },
+        {
+          "name": "writeGuide",
+          "startLine": 256,
+          "endLine": 366,
+          "params": [
+            "htmlArt",
+            "pdfAt1",
+            "pdf05",
+            "from",
+            "to"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 370,
+          "endLine": 406,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseArgs",
+          "callee": "argv.includes",
+          "lineNumber": 71
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "buildPageSequence",
+          "lineNumber": 154
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "resolvePageSpecFiles",
+          "lineNumber": 158
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "fs.readFile",
+          "lineNumber": 159
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "pages.push",
+          "lineNumber": 160
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "substituteProfile",
+          "lineNumber": 161
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "path.basename",
+          "lineNumber": 162
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "buildStandaloneHtml",
+          "lineNumber": 168
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "doc.replace",
+          "lineNumber": 174
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "path.join",
+          "lineNumber": 176
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "fs.writeFile",
+          "lineNumber": 177
+        },
+        {
+          "caller": "buildHtmlProbe",
+          "callee": "Buffer.byteLength",
+          "lineNumber": 180
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "buildPageSequence",
+          "lineNumber": 205
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "getPageDimensions",
+          "lineNumber": 207
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "resolvePageSpecFiles",
+          "lineNumber": 212
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "fs.readFile",
+          "lineNumber": 215
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "substituteProfile",
+          "lineNumber": 216
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "buffers.push",
+          "lineNumber": 217
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "renderHTMLToPDF",
+          "lineNumber": 218
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "renders.push",
+          "lineNumber": 234
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "console.log",
+          "lineNumber": 238
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "splicePdfBuffers",
+          "lineNumber": 242
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "path.join",
+          "lineNumber": 243
+        },
+        {
+          "caller": "buildPdfProbe",
+          "callee": "fs.writeFile",
+          "lineNumber": 244
+        },
+        {
+          "caller": "rel",
+          "callee": "path.relative",
+          "lineNumber": 263
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "(((pdfAt1.sizeMb - pdf05.sizeMb) / pdfAt1.sizeMb) * 100).toFixed",
+          "lineNumber": 264
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "new Date().toISOString",
+          "lineNumber": 269
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "rel",
+          "lineNumber": 282
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "htmlArt.sizeMb.toFixed",
+          "lineNumber": 282
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "rel",
+          "lineNumber": 283
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "pdfAt1.sizeMb.toFixed",
+          "lineNumber": 283
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "rel",
+          "lineNumber": 284
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "pdf05.sizeMb.toFixed",
+          "lineNumber": 284
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "pdfAt1.sizeMb.toFixed",
+          "lineNumber": 287
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "pdf05.sizeMb.toFixed",
+          "lineNumber": 287
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "path.join",
+          "lineNumber": 363
+        },
+        {
+          "caller": "writeGuide",
+          "callee": "fs.writeFile",
+          "lineNumber": 364
+        },
+        {
+          "caller": "main",
+          "callee": "parseArgs",
+          "lineNumber": 371
+        },
+        {
+          "caller": "main",
+          "callee": "process.argv.slice",
+          "lineNumber": 371
+        },
+        {
+          "caller": "main",
+          "callee": "fs.mkdir",
+          "lineNumber": 380
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 381
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 382
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 384
+        },
+        {
+          "caller": "main",
+          "callee": "buildHtmlProbe",
+          "lineNumber": 385
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 386
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 386
+        },
+        {
+          "caller": "main",
+          "callee": "htmlArt.sizeMb.toFixed",
+          "lineNumber": 386
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 388
+        },
+        {
+          "caller": "main",
+          "callee": "buildPdfProbe",
+          "lineNumber": 389
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 390
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 390
+        },
+        {
+          "caller": "main",
+          "callee": "pdfAt1.sizeMb.toFixed",
+          "lineNumber": 390
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 392
+        },
+        {
+          "caller": "main",
+          "callee": "buildPdfProbe",
+          "lineNumber": 393
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 394
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 394
+        },
+        {
+          "caller": "main",
+          "callee": "pdf05.sizeMb.toFixed",
+          "lineNumber": 394
+        },
+        {
+          "caller": "main",
+          "callee": "closeBrowser",
+          "lineNumber": 396
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 398
+        },
+        {
+          "caller": "main",
+          "callee": "writeGuide",
+          "lineNumber": 399
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 400
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 400
+        },
+        {
+          "caller": "main",
+          "callee": "(((pdfAt1.sizeMb - pdf05.sizeMb) / pdfAt1.sizeMb) * 100).toFixed",
+          "lineNumber": 402
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 403
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 404
+        },
+        {
+          "caller": "main",
+          "callee": "pdfAt1.sizeMb.toFixed",
+          "lineNumber": 404
+        },
+        {
+          "caller": "main",
+          "callee": "pdf05.sizeMb.toFixed",
+          "lineNumber": 404
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 405
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 0,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/smoke-c7b1.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 66,
+      "functions": [
+        {
+          "name": "loadLocalProfile",
+          "startLine": 24,
+          "endLine": 36,
+          "params": []
+        },
+        {
+          "name": "main",
+          "startLine": 38,
+          "endLine": 71,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadLocalProfile",
+          "callee": "path.resolve",
+          "lineNumber": 25
+        },
+        {
+          "caller": "loadLocalProfile",
+          "callee": "fs.readFile",
+          "lineNumber": 29
+        },
+        {
+          "caller": "loadLocalProfile",
+          "callee": "JSON.parse",
+          "lineNumber": 30
+        },
+        {
+          "caller": "loadLocalProfile",
+          "callee": "parseProfile",
+          "lineNumber": 31
+        },
+        {
+          "caller": "main",
+          "callee": "path.resolve",
+          "lineNumber": 39
+        },
+        {
+          "caller": "main",
+          "callee": "fs.mkdir",
+          "lineNumber": 40
+        },
+        {
+          "caller": "main",
+          "callee": "loadLocalProfile",
+          "lineNumber": 42
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 43
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 49
+        },
+        {
+          "caller": "main",
+          "callee": "renderPageSpec",
+          "lineNumber": 50
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 54
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 57
+        },
+        {
+          "caller": "main",
+          "callee": "DAILY_HTML_FILES[i].replace",
+          "lineNumber": 63
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 64
+        },
+        {
+          "caller": "main",
+          "callee": "String(i + 1).padStart",
+          "lineNumber": 64
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 64
+        },
+        {
+          "caller": "main",
+          "callee": "fs.writeFile",
+          "lineNumber": 65
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 66
+        },
+        {
+          "caller": "main",
+          "callee": "(buffers[i].length / 1024).toFixed",
+          "lineNumber": 66
+        },
+        {
+          "caller": "main",
+          "callee": "closeBrowser",
+          "lineNumber": 69
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/smoke-c7b2.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 103,
+      "nonEmptyLines": 87,
+      "functions": [
+        {
+          "name": "loadLocalProfile",
+          "startLine": 24,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "countBookmarks",
+          "startLine": 36,
+          "endLine": 43,
+          "params": [
+            "buf"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 45,
+          "endLine": 98,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadLocalProfile",
+          "callee": "path.resolve",
+          "lineNumber": 25
+        },
+        {
+          "caller": "loadLocalProfile",
+          "callee": "fs.readFile",
+          "lineNumber": 27
+        },
+        {
+          "caller": "loadLocalProfile",
+          "callee": "parseProfile",
+          "lineNumber": 28
+        },
+        {
+          "caller": "loadLocalProfile",
+          "callee": "JSON.parse",
+          "lineNumber": 28
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "PDFDocument.load",
+          "lineNumber": 37
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "doc.catalog.lookup",
+          "lineNumber": 38
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "PDFName.of",
+          "lineNumber": 38
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "outlines.get",
+          "lineNumber": 41
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "PDFName.of",
+          "lineNumber": 41
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "Math.abs",
+          "lineNumber": 42
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "Number",
+          "lineNumber": 42
+        },
+        {
+          "caller": "countBookmarks",
+          "callee": "count.toString",
+          "lineNumber": 42
+        },
+        {
+          "caller": "main",
+          "callee": "path.resolve",
+          "lineNumber": 46
+        },
+        {
+          "caller": "main",
+          "callee": "fs.mkdir",
+          "lineNumber": 47
+        },
+        {
+          "caller": "main",
+          "callee": "loadLocalProfile",
+          "lineNumber": 49
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 50
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 62
+        },
+        {
+          "caller": "main",
+          "callee": "renderPageSpec",
+          "lineNumber": 65
+        },
+        {
+          "caller": "main",
+          "callee": "renders.push",
+          "lineNumber": 66
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 68
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 70
+        },
+        {
+          "caller": "main",
+          "callee": "splicePdfBuffers",
+          "lineNumber": 71
+        },
+        {
+          "caller": "main",
+          "callee": "Date.now",
+          "lineNumber": 72
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 74
+        },
+        {
+          "caller": "main",
+          "callee": "fs.writeFile",
+          "lineNumber": 75
+        },
+        {
+          "caller": "main",
+          "callee": "PDFDocument.load",
+          "lineNumber": 77
+        },
+        {
+          "caller": "main",
+          "callee": "countBookmarks",
+          "lineNumber": 78
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 83
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "doc.getPageCount",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 86
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 87
+        },
+        {
+          "caller": "main",
+          "callee": "(splicedBuffer.byteLength / 1024).toFixed",
+          "lineNumber": 87
+        },
+        {
+          "caller": "main",
+          "callee": "doc.getPageCount",
+          "lineNumber": 89
+        },
+        {
+          "caller": "main",
+          "callee": "doc.getPageCount",
+          "lineNumber": 90
+        },
+        {
+          "caller": "main",
+          "callee": "closeBrowser",
+          "lineNumber": 96
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 97
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/locale.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 151,
+      "nonEmptyLines": 129,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/pdf-splice.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 243,
+      "nonEmptyLines": 218,
+      "functions": [
+        {
+          "name": "makePdf",
+          "startLine": 30,
+          "endLine": 34,
+          "params": [
+            "pages"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makePdf",
+          "callee": "PDFDocument.create",
+          "lineNumber": 31
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.addPage",
+          "lineNumber": 32
+        },
+        {
+          "caller": "makePdf",
+          "callee": "Buffer.from",
+          "lineNumber": 33
+        },
+        {
+          "caller": "makePdf",
+          "callee": "doc.save",
+          "lineNumber": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/prax-journal-renderer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 460,
+      "nonEmptyLines": 410,
+      "functions": [
+        {
+          "name": "makeProfile",
+          "startLine": 42,
+          "endLine": 51,
+          "params": [
+            "therapists"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/profile.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 737,
+      "nonEmptyLines": 669,
+      "functions": [
+        {
+          "name": "makeProfile",
+          "startLine": 29,
+          "endLine": 35,
+          "params": [
+            "overrides"
+          ]
+        },
+        {
+          "name": "isTextFile",
+          "startLine": 309,
+          "endLine": 313,
+          "params": [
+            "p"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isTextFile",
+          "callee": "/\\.(md|mdx|ts|tsx|js|jsx|mjs|cjs|json|html|css|svg|txt|yml|yaml)$/u.test",
+          "lineNumber": 312
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/splice.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 200,
+      "nonEmptyLines": 173,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

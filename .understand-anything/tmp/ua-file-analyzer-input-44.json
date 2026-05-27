@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-tactile-daily-planner/README.md",
+      "language": "markdown",
+      "sizeLines": 32,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-tactile-daily-planner/manifest.json",
+      "language": "json",
+      "sizeLines": 19,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/packs-tactile-daily-planner/tactile-daily-planner.html",
+      "language": "html",
+      "sizeLines": 751,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-tactile-daily-planner/README.md": [],
+    "packages/packs-tactile-daily-planner/manifest.json": [],
+    "packages/packs-tactile-daily-planner/tactile-daily-planner.html": []
+  }
+}

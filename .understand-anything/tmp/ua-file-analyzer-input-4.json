@@ -1,0 +1,103 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "apps/gallery/src/components/BlurhashImage.astro",
+      "language": "astro",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/components/ThemeSwap.astro",
+      "language": "astro",
+      "sizeLines": 264,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/config/site.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/layouts/Layout.astro",
+      "language": "astro",
+      "sizeLines": 154,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/pages/browse.astro",
+      "language": "astro",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/pages/contribute.astro",
+      "language": "astro",
+      "sizeLines": 208,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/pages/index.astro",
+      "language": "astro",
+      "sizeLines": 311,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/pages/packs/[id].astro",
+      "language": "astro",
+      "sizeLines": 355,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/pages/remix.astro",
+      "language": "astro",
+      "sizeLines": 212,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/pages/search.astro",
+      "language": "astro",
+      "sizeLines": 285,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "apps/gallery/src/components/BlurhashImage.astro": [],
+    "apps/gallery/src/components/ThemeSwap.astro": [
+      "apps/gallery/src/data/theme-palette.json"
+    ],
+    "apps/gallery/src/config/site.ts": [],
+    "apps/gallery/src/layouts/Layout.astro": [
+      "apps/gallery/src/styles/global.css",
+      "apps/gallery/src/config/site.ts"
+    ],
+    "apps/gallery/src/pages/browse.astro": [
+      "apps/gallery/src/layouts/Layout.astro"
+    ],
+    "apps/gallery/src/pages/contribute.astro": [
+      "apps/gallery/src/layouts/Layout.astro",
+      "apps/gallery/src/config/site.ts"
+    ],
+    "apps/gallery/src/pages/index.astro": [
+      "apps/gallery/src/layouts/Layout.astro",
+      "apps/gallery/src/components/BlurhashImage.astro",
+      "apps/gallery/src/components/ThemeSwap.astro",
+      "apps/gallery/src/data/blurhash-manifest.json"
+    ],
+    "apps/gallery/src/pages/packs/[id].astro": [
+      "apps/gallery/src/layouts/Layout.astro",
+      "apps/gallery/src/components/BlurhashImage.astro",
+      "apps/gallery/src/data/blurhash-manifest.json",
+      "apps/gallery/src/data/theme-palette.json",
+      "apps/gallery/src/config/site.ts"
+    ],
+    "apps/gallery/src/pages/remix.astro": [
+      "apps/gallery/src/layouts/Layout.astro",
+      "apps/gallery/src/config/site.ts"
+    ],
+    "apps/gallery/src/pages/search.astro": [
+      "apps/gallery/src/layouts/Layout.astro"
+    ]
+  }
+}

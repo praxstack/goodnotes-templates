@@ -1,0 +1,127 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/packs-simple-pages/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 45,
+      "nonEmptyLines": 34,
+      "sections": [
+        {
+          "heading": "Simple Pages",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Design notes",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "packages/packs-simple-pages/manifest.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 22,
+      "nonEmptyLines": 22,
+      "sections": [
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "category",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "entry",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "id",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "tags",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "packages/packs-simple-pages/simple-pages.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 309,
+      "nonEmptyLines": 286,
+      "metrics": {}
+    }
+  ]
+}

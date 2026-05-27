@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-eisenhower-matrix/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-eisenhower-matrix/eisenhower-matrix.html",
+      "language": "html",
+      "sizeLines": 479,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-eisenhower-matrix/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-eisenhower-matrix/README.md": [],
+    "packages/packs-eisenhower-matrix/eisenhower-matrix.html": [],
+    "packages/packs-eisenhower-matrix/manifest.json": []
+  }
+}

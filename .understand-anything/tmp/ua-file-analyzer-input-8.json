@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "tests/visual/helpers/diff.ts",
+      "language": "typescript",
+      "sizeLines": 156,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/visual/helpers/render.ts",
+      "language": "typescript",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "tests/visual/v5-snapshots.test.ts",
+      "language": "typescript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "tests/visual/helpers/diff.ts": [],
+    "tests/visual/helpers/render.ts": [],
+    "tests/visual/v5-snapshots.test.ts": [
+      "tests/visual/helpers/render.ts",
+      "tests/visual/helpers/diff.ts"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-gratitude-journal/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-gratitude-journal/README.md",
+      "summary": "Project README with 4 sections (28 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-gratitude-journal/gratitude-journal.html",
+      "type": "file",
+      "name": "gratitude-journal.html",
+      "filePath": "packages/packs-gratitude-journal/gratitude-journal.html",
+      "summary": "HTML template (gratitude-journal.html, 639 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/packs-gratitude-journal/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-gratitude-journal/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,169 @@
+{
+  "nodes": [
+    {
+      "id": "document:shared/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "shared/README.md",
+      "summary": "Project README with 1 sections (7 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/e2e/gallery-smoke.spec.ts",
+      "type": "file",
+      "name": "gallery-smoke.spec.ts",
+      "filePath": "tests/e2e/gallery-smoke.spec.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/contrast.test.ts",
+      "type": "file",
+      "name": "contrast.test.ts",
+      "filePath": "tests/unit/contrast.test.ts",
+      "summary": "Test file containing 5 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/unit/contrast.test.ts:parseCssVariables",
+      "type": "function",
+      "name": "parseCssVariables",
+      "filePath": "tests/unit/contrast.test.ts",
+      "lineRange": [
+        27,
+        37
+      ],
+      "summary": "Function `parseCssVariables` (11 lines) in contrast.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:tests/unit/contrast.test.ts:hexToRgb",
+      "type": "function",
+      "name": "hexToRgb",
+      "filePath": "tests/unit/contrast.test.ts",
+      "lineRange": [
+        39,
+        56
+      ],
+      "summary": "Function `hexToRgb` (18 lines) in contrast.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:tests/unit/contrast.test.ts:resolveColor",
+      "type": "function",
+      "name": "resolveColor",
+      "filePath": "tests/unit/contrast.test.ts",
+      "lineRange": [
+        58,
+        74
+      ],
+      "summary": "Function `resolveColor` (17 lines) in contrast.test.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/unit/vercel-config.test.ts",
+      "type": "file",
+      "name": "vercel-config.test.ts",
+      "filePath": "tests/unit/vercel-config.test.ts",
+      "summary": "Test file containing 2 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "config",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:tests/visual/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "tests/visual/README.md",
+      "summary": "Project README with 6 sections (49 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "vitest.config.ts",
+      "summary": "Configuration module exposing settings and tunables (0 exports).",
+      "tags": [
+        "config",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:vitest.visual.config.ts",
+      "type": "file",
+      "name": "vitest.visual.config.ts",
+      "filePath": "vitest.visual.config.ts",
+      "summary": "Configuration module exposing settings and tunables (0 exports).",
+      "tags": [
+        "config",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:tests/unit/contrast.test.ts",
+      "target": "function:tests/unit/contrast.test.ts:parseCssVariables",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/contrast.test.ts",
+      "target": "function:tests/unit/contrast.test.ts:hexToRgb",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/unit/contrast.test.ts",
+      "target": "function:tests/unit/contrast.test.ts:resolveColor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    }
+  ]
+}

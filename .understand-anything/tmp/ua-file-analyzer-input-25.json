@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-gratitude-journal/README.md",
+      "language": "markdown",
+      "sizeLines": 28,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-gratitude-journal/gratitude-journal.html",
+      "language": "html",
+      "sizeLines": 639,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-gratitude-journal/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-gratitude-journal/README.md": [],
+    "packages/packs-gratitude-journal/gratitude-journal.html": [],
+    "packages/packs-gratitude-journal/manifest.json": []
+  }
+}

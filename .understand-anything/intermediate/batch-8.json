@@ -1,0 +1,214 @@
+{
+  "nodes": [
+    {
+      "id": "file:tests/visual/helpers/diff.ts",
+      "type": "file",
+      "name": "diff.ts",
+      "filePath": "tests/visual/helpers/diff.ts",
+      "summary": "Typescript module exposing 2 functions and 2 exports (156 lines).",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/visual/helpers/diff.ts:diffPng",
+      "type": "function",
+      "name": "diffPng",
+      "filePath": "tests/visual/helpers/diff.ts",
+      "lineRange": [
+        44,
+        119
+      ],
+      "summary": "Function `diffPng` (76 lines) in diff.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/visual/helpers/diff.ts:compareToBaseline",
+      "type": "function",
+      "name": "compareToBaseline",
+      "filePath": "tests/visual/helpers/diff.ts",
+      "lineRange": [
+        128,
+        156
+      ],
+      "summary": "Function `compareToBaseline` (29 lines) in diff.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/visual/helpers/render.ts",
+      "type": "file",
+      "name": "render.ts",
+      "filePath": "tests/visual/helpers/render.ts",
+      "summary": "Typescript module exposing 3 functions and 3 exports (126 lines).",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:tests/visual/helpers/render.ts:getBrowser",
+      "type": "function",
+      "name": "getBrowser",
+      "filePath": "tests/visual/helpers/render.ts",
+      "lineRange": [
+        14,
+        32
+      ],
+      "summary": "Function `getBrowser` (19 lines) in render.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:tests/visual/helpers/render.ts:closeBrowser",
+      "type": "function",
+      "name": "closeBrowser",
+      "filePath": "tests/visual/helpers/render.ts",
+      "lineRange": [
+        34,
+        40
+      ],
+      "summary": "Function `closeBrowser` (7 lines) in render.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:tests/visual/helpers/render.ts:renderToPng",
+      "type": "function",
+      "name": "renderToPng",
+      "filePath": "tests/visual/helpers/render.ts",
+      "lineRange": [
+        61,
+        126
+      ],
+      "summary": "Function `renderToPng` (66 lines) in render.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/visual/v5-snapshots.test.ts",
+      "type": "file",
+      "name": "v5-snapshots.test.ts",
+      "filePath": "tests/visual/v5-snapshots.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:tests/visual/helpers/diff.ts",
+      "target": "function:tests/visual/helpers/diff.ts:diffPng",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/visual/helpers/diff.ts",
+      "target": "function:tests/visual/helpers/diff.ts:diffPng",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:tests/visual/helpers/diff.ts",
+      "target": "function:tests/visual/helpers/diff.ts:compareToBaseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/visual/helpers/diff.ts",
+      "target": "function:tests/visual/helpers/diff.ts:compareToBaseline",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:tests/visual/helpers/render.ts",
+      "target": "function:tests/visual/helpers/render.ts:getBrowser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/visual/helpers/render.ts",
+      "target": "function:tests/visual/helpers/render.ts:getBrowser",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:tests/visual/helpers/render.ts",
+      "target": "function:tests/visual/helpers/render.ts:closeBrowser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/visual/helpers/render.ts",
+      "target": "function:tests/visual/helpers/render.ts:closeBrowser",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:tests/visual/helpers/render.ts",
+      "target": "function:tests/visual/helpers/render.ts:renderToPng",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:tests/visual/helpers/render.ts",
+      "target": "function:tests/visual/helpers/render.ts:renderToPng",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:tests/visual/v5-snapshots.test.ts",
+      "target": "file:tests/visual/helpers/render.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/visual/v5-snapshots.test.ts",
+      "target": "file:tests/visual/helpers/diff.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

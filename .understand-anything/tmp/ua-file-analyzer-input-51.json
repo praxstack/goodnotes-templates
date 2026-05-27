@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": ".clineignore",
+      "language": "unknown",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".devcontainer/devcontainer.json",
+      "language": "json",
+      "sizeLines": 41,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/CODEOWNERS",
+      "language": "unknown",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "language": "yaml",
+      "sizeLines": 24,
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/gallery/astro.config.mjs",
+      "language": "javascript",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/build-og-cards.ts",
+      "language": "typescript",
+      "sizeLines": 199,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/build-theme-palette.ts",
+      "language": "typescript",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/copy-pack-pdfs.ts",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/copy-pack-themed-pdfs.ts",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/encode-blurhash.ts",
+      "language": "typescript",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/enrich-pack-mdx.ts",
+      "language": "typescript",
+      "sizeLines": 192,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/generate-specimens.ts",
+      "language": "typescript",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/stage-vercel-config.ts",
+      "language": "typescript",
+      "sizeLines": 80,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/scripts/validate-pack-ids.ts",
+      "language": "typescript",
+      "sizeLines": 69,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content.config.ts",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/budget-tracker.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/cornell-notes.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/eat-the-frog.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/eisenhower-matrix.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/fitness-log.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/goal-setting.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/gratitude-journal.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/habit-tracker.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/meal-planning.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/gallery/src/content/packs/meeting-notes.mdx",
+      "language": "mdx",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    ".clineignore": [],
+    ".devcontainer/devcontainer.json": [],
+    ".github/CODEOWNERS": [],
+    ".github/dependabot.yml": [],
+    "apps/gallery/astro.config.mjs": [],
+    "apps/gallery/scripts/build-og-cards.ts": [],
+    "apps/gallery/scripts/build-theme-palette.ts": [],
+    "apps/gallery/scripts/copy-pack-pdfs.ts": [],
+    "apps/gallery/scripts/copy-pack-themed-pdfs.ts": [],
+    "apps/gallery/scripts/encode-blurhash.ts": [],
+    "apps/gallery/scripts/enrich-pack-mdx.ts": [],
+    "apps/gallery/scripts/generate-specimens.ts": [],
+    "apps/gallery/scripts/stage-vercel-config.ts": [],
+    "apps/gallery/scripts/validate-pack-ids.ts": [],
+    "apps/gallery/src/content.config.ts": [],
+    "apps/gallery/src/content/packs/budget-tracker.mdx": [],
+    "apps/gallery/src/content/packs/cornell-notes.mdx": [],
+    "apps/gallery/src/content/packs/eat-the-frog.mdx": [],
+    "apps/gallery/src/content/packs/eisenhower-matrix.mdx": [],
+    "apps/gallery/src/content/packs/fitness-log.mdx": [],
+    "apps/gallery/src/content/packs/goal-setting.mdx": [],
+    "apps/gallery/src/content/packs/gratitude-journal.mdx": [],
+    "apps/gallery/src/content/packs/habit-tracker.mdx": [],
+    "apps/gallery/src/content/packs/meal-planning.mdx": [],
+    "apps/gallery/src/content/packs/meeting-notes.mdx": []
+  }
+}

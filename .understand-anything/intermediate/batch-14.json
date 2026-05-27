@@ -1,0 +1,161 @@
+{
+  "nodes": [
+    {
+      "id": "document:audit/iteration-4/CODEBASE_AUDIT_REPORT.json.md",
+      "type": "document",
+      "name": "CODEBASE_AUDIT_REPORT.json.md",
+      "filePath": "audit/iteration-4/CODEBASE_AUDIT_REPORT.json.md",
+      "summary": "Documentation: 1 sections, 222 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:audit/iteration-4/CODEBASE_AUDIT_REPORT.md",
+      "type": "document",
+      "name": "CODEBASE_AUDIT_REPORT.md",
+      "filePath": "audit/iteration-4/CODEBASE_AUDIT_REPORT.md",
+      "summary": "Documentation: 32 sections, 350 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "schema:audit/iteration-4/IMPLEMENTATION_ROADMAP.csv",
+      "type": "schema",
+      "name": "IMPLEMENTATION_ROADMAP.csv",
+      "filePath": "audit/iteration-4/IMPLEMENTATION_ROADMAP.csv",
+      "summary": "CSV data file (10 rows).",
+      "tags": [
+        "data",
+        "dataset",
+        "tabular"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-4/IMPLEMENTATION_ROADMAP.md",
+      "type": "document",
+      "name": "IMPLEMENTATION_ROADMAP.md",
+      "filePath": "audit/iteration-4/IMPLEMENTATION_ROADMAP.md",
+      "summary": "Documentation: 19 sections, 239 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-4/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "audit/iteration-4/README.md",
+      "summary": "Project README with 5 sections (50 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:audit/iteration-4/SLIDE_OUTLINE.md",
+      "type": "document",
+      "name": "SLIDE_OUTLINE.md",
+      "filePath": "audit/iteration-4/SLIDE_OUTLINE.md",
+      "summary": "Documentation: 11 sections, 210 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-4/STATUS.md",
+      "type": "document",
+      "name": "STATUS.md",
+      "filePath": "audit/iteration-4/STATUS.md",
+      "summary": "Documentation: 16 sections, 238 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-4/TEST_STRATEGY.md",
+      "type": "document",
+      "name": "TEST_STRATEGY.md",
+      "filePath": "audit/iteration-4/TEST_STRATEGY.md",
+      "summary": "Documentation: 17 sections, 185 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-4/architecture.md",
+      "type": "document",
+      "name": "architecture.md",
+      "filePath": "audit/iteration-4/architecture.md",
+      "summary": "Documentation: 8 sections, 229 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:audit/iteration-4/deferred-decisions.md",
+      "type": "document",
+      "name": "deferred-decisions.md",
+      "filePath": "audit/iteration-4/deferred-decisions.md",
+      "summary": "Documentation: 8 sections, 81 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:audit/iteration-4/findings.md",
+      "type": "document",
+      "name": "findings.md",
+      "filePath": "audit/iteration-4/findings.md",
+      "summary": "Documentation: 41 sections, 628 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:audit/iteration-4/phase-validation.md",
+      "type": "document",
+      "name": "phase-validation.md",
+      "filePath": "audit/iteration-4/phase-validation.md",
+      "summary": "Documentation: 12 sections, 236 lines.",
+      "tags": [
+        "documentation",
+        "audit",
+        "review"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

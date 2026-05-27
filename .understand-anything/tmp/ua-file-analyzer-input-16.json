@@ -1,0 +1,63 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "docs/gstack-archive/README.md",
+      "language": "markdown",
+      "sizeLines": 59,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-design-20260409-194856.md",
+      "language": "markdown",
+      "sizeLines": 273,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-design-20260430-163246.md",
+      "language": "markdown",
+      "sizeLines": 521,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-design-review-20260430-2058.md",
+      "language": "markdown",
+      "sizeLines": 287,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-devex-review-20260430-2110.md",
+      "language": "markdown",
+      "sizeLines": 285,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-eng-review-20260430-1935.md",
+      "language": "markdown",
+      "sizeLines": 299,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-eng-review-test-plan-20260430-1735.md",
+      "language": "markdown",
+      "sizeLines": 65,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/gstack-archive/praxlannister-main-test-plan-20260409-203137.md",
+      "language": "markdown",
+      "sizeLines": 36,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "docs/gstack-archive/README.md": [],
+    "docs/gstack-archive/praxlannister-main-design-20260409-194856.md": [],
+    "docs/gstack-archive/praxlannister-main-design-20260430-163246.md": [],
+    "docs/gstack-archive/praxlannister-main-design-review-20260430-2058.md": [],
+    "docs/gstack-archive/praxlannister-main-devex-review-20260430-2110.md": [],
+    "docs/gstack-archive/praxlannister-main-eng-review-20260430-1935.md": [],
+    "docs/gstack-archive/praxlannister-main-eng-review-test-plan-20260430-1735.md": [],
+    "docs/gstack-archive/praxlannister-main-test-plan-20260409-203137.md": []
+  }
+}

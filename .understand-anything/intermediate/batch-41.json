@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-recipe-card/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-recipe-card/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-recipe-card/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-recipe-card/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-recipe-card/recipe-card.html",
+      "type": "file",
+      "name": "recipe-card.html",
+      "filePath": "packages/packs-recipe-card/recipe-card.html",
+      "summary": "HTML template (recipe-card.html, 509 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-tactile-habits/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-tactile-habits/README.md",
+      "summary": "Project README with 2 sections (21 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-tactile-habits/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-tactile-habits/manifest.json",
+      "summary": "manifest.json configuration file (20 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-tactile-habits/tactile-habits.html",
+      "type": "file",
+      "name": "tactile-habits.html",
+      "filePath": "packages/packs-tactile-habits/tactile-habits.html",
+      "summary": "HTML template (tactile-habits.html, 576 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

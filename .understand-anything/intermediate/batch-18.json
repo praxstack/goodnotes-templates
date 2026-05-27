@@ -1,0 +1,187 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/core/assets/themes/bold-tech-dark.css",
+      "type": "file",
+      "name": "bold-tech-dark.css",
+      "filePath": "packages/core/assets/themes/bold-tech-dark.css",
+      "summary": "Stylesheet (bold-tech-dark.css, 23 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/bold-tech.css",
+      "type": "file",
+      "name": "bold-tech.css",
+      "filePath": "packages/core/assets/themes/bold-tech.css",
+      "summary": "Stylesheet (bold-tech.css, 28 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/bubblegum-dark.css",
+      "type": "file",
+      "name": "bubblegum-dark.css",
+      "filePath": "packages/core/assets/themes/bubblegum-dark.css",
+      "summary": "Stylesheet (bubblegum-dark.css, 23 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/bubblegum.css",
+      "type": "file",
+      "name": "bubblegum.css",
+      "filePath": "packages/core/assets/themes/bubblegum.css",
+      "summary": "Stylesheet (bubblegum.css, 28 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/caffeine-dark.css",
+      "type": "file",
+      "name": "caffeine-dark.css",
+      "filePath": "packages/core/assets/themes/caffeine-dark.css",
+      "summary": "Stylesheet (caffeine-dark.css, 23 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/caffeine.css",
+      "type": "file",
+      "name": "caffeine.css",
+      "filePath": "packages/core/assets/themes/caffeine.css",
+      "summary": "Stylesheet (caffeine.css, 25 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/candyland-dark.css",
+      "type": "file",
+      "name": "candyland-dark.css",
+      "filePath": "packages/core/assets/themes/candyland-dark.css",
+      "summary": "Stylesheet (candyland-dark.css, 23 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/candyland.css",
+      "type": "file",
+      "name": "candyland.css",
+      "filePath": "packages/core/assets/themes/candyland.css",
+      "summary": "Stylesheet (candyland.css, 27 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/claude-dark.css",
+      "type": "file",
+      "name": "claude-dark.css",
+      "filePath": "packages/core/assets/themes/claude-dark.css",
+      "summary": "Stylesheet (claude-dark.css, 23 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/claude.css",
+      "type": "file",
+      "name": "claude.css",
+      "filePath": "packages/core/assets/themes/claude.css",
+      "summary": "Stylesheet (claude.css, 25 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/cyberpunk-dark.css",
+      "type": "file",
+      "name": "cyberpunk-dark.css",
+      "filePath": "packages/core/assets/themes/cyberpunk-dark.css",
+      "summary": "Stylesheet (cyberpunk-dark.css, 23 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/cyberpunk.css",
+      "type": "file",
+      "name": "cyberpunk.css",
+      "filePath": "packages/core/assets/themes/cyberpunk.css",
+      "summary": "Stylesheet (cyberpunk.css, 27 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/doom64-dark.css",
+      "type": "file",
+      "name": "doom64-dark.css",
+      "filePath": "packages/core/assets/themes/doom64-dark.css",
+      "summary": "Stylesheet (doom64-dark.css, 23 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/assets/themes/doom64.css",
+      "type": "file",
+      "name": "doom64.css",
+      "filePath": "packages/core/assets/themes/doom64.css",
+      "summary": "Stylesheet (doom64.css, 27 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

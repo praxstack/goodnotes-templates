@@ -1,0 +1,572 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/packs-prax-journal/CHANGELOG.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 78,
+      "nonEmptyLines": 62,
+      "sections": [
+        {
+          "heading": "Prax Journal — Changelog",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "v5 — Warm Analog Editorial + Midday + Rx (2026-04 · current)",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "v4 — Warm Analog Editorial lands (2026-04)",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "v3 — Refined v2 with dark variants (2026-04)",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "v2 — Four-page structure (2026-03)",
+          "level": 2,
+          "line": 61
+        },
+        {
+          "heading": "v1 — \"adhd-gentle\" (2026-03)",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "Upcoming (v5.2 · Iteration-1)",
+          "level": 2,
+          "line": 73
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/DESIGN.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 410,
+      "nonEmptyLines": 304,
+      "sections": [
+        {
+          "heading": "Prax Journal — Design System",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0 · North Star",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "1 · Page Geometry",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "2 · Spacing Scale",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "3 · Color Palette — Warm Analog",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "3.1 Paper + Ink (neutral)",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "3.2 Sage — the \"good\" accent (Frog, Done, Self-Care wins, Tomorrow)",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "3.3 Clay — the **horror metric** (Cigs, Craving log)",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "3.4 Amber — CBT thought-check",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "3.5 Lavender — self-care / moved-to-tomorrow (anti-shame)",
+          "level": 3,
+          "line": 94
+        },
+        {
+          "heading": "3.6 Contrast & Accessibility",
+          "level": 3,
+          "line": 103
+        },
+        {
+          "heading": "4 · Typography Stack",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "4.1 Fraunces opsz + SOFT — how to pick",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "4.2 Type Scale",
+          "level": 3,
+          "line": 139
+        },
+        {
+          "heading": "4.3 Iron rules",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "5 · Core Primitives",
+          "level": 2,
+          "line": 162
+        },
+        {
+          "heading": "5.1 `.page` — every template uses this",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "5.2 `.masthead` — the cross-page identity",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "5.3 `.permission` — the Neff banner",
+          "level": 3,
+          "line": 188
+        },
+        {
+          "heading": "5.4 Color-tagged cards (Frog / Thought-Flip / Self-Care / Craving / Cigs / Tomorrow)",
+          "level": 3,
+          "line": 198
+        },
+        {
+          "heading": "5.5 Dotted / underlined writable lines",
+          "level": 3,
+          "line": 223
+        },
+        {
+          "heading": "5.6 Checkboxes + radios",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "5.7 Icons",
+          "level": 3,
+          "line": 248
+        },
+        {
+          "heading": "5.8 Shadows",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "5.9 Page overflow & debug affordance",
+          "level": 3,
+          "line": 275
+        },
+        {
+          "heading": "6 · Component Library (v4 blocks, reusable)",
+          "level": 2,
+          "line": 292
+        },
+        {
+          "heading": "7 · Voice & Copy",
+          "level": 2,
+          "line": 321
+        },
+        {
+          "heading": "8 · Motion, Ornament, Restraint",
+          "level": 2,
+          "line": 339
+        },
+        {
+          "heading": "9 · Patterns for New Pages",
+          "level": 2,
+          "line": 350
+        },
+        {
+          "heading": "10 · File Naming Convention",
+          "level": 2,
+          "line": 367
+        },
+        {
+          "heading": "v4 — Generic (3-page)",
+          "level": 3,
+          "line": 369
+        },
+        {
+          "heading": "v5 — Prax-personal (4-page, therapist-integrated)",
+          "level": 3,
+          "line": 376
+        },
+        {
+          "heading": "Future (same contract)",
+          "level": 3,
+          "line": 384
+        },
+        {
+          "heading": "11 · Design System Reference Page",
+          "level": 2,
+          "line": 395
+        },
+        {
+          "heading": "12 · Source of Truth",
+          "level": 2,
+          "line": 406
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 35
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 295,
+      "nonEmptyLines": 242,
+      "sections": [
+        {
+          "heading": "Prax Journal · **The Praxis Ledger**",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "The daily spread (v5 · current)",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "Pack contents",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "Sticker pack (60 skeuomorphic stickers)",
+          "level": 2,
+          "line": 139
+        },
+        {
+          "heading": "Monthly release bundle",
+          "level": 2,
+          "line": 220
+        },
+        {
+          "heading": "Placeholders (safe, whitelisted)",
+          "level": 2,
+          "line": 255
+        },
+        {
+          "heading": "Month-end loop",
+          "level": 2,
+          "line": 269
+        },
+        {
+          "heading": "Legacy one-shot generator (PDF only)",
+          "level": 2,
+          "line": 281
+        },
+        {
+          "heading": "Future",
+          "level": 2,
+          "line": 291
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/SPEC.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 128,
+      "nonEmptyLines": 100,
+      "sections": [
+        {
+          "heading": "Prax Journal — SPEC.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0 · Customisation tiers (repo-wide contract)",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "1 · Problem statement",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "2 · Goals",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "3 · Non-goals",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "4 · System overview",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "5 · Domain model (Iter-1 minimum)",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "`profile.json` — single source of truth",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "6 · Implementation contract (Iter-1 deliverables)",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "7 · Validation & tests",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "8 · Definition of Done (Iter-1)",
+          "level": 2,
+          "line": 116
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/design-system.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 1352,
+      "nonEmptyLines": 1261,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/manifest.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 18,
+      "nonEmptyLines": 18,
+      "sections": [
+        {
+          "heading": "author",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "category",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "entry",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "id",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "repository",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "tags",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/profile.README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 131,
+      "nonEmptyLines": 105,
+      "sections": [
+        {
+          "heading": "Prax Journal — `profile.json` workflow",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What this file is",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "PII rule (critical)",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Bootstrap (one-time setup)",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "Schema at a glance",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Validation rules the generator enforces",
+          "level": 2,
+          "line": 103
+        },
+        {
+          "heading": "When to bump `schema_version`",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "Related reading",
+          "level": 2,
+          "line": 126
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "packages/packs-prax-journal/profile.example.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 55,
+      "nonEmptyLines": 55,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "user",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "therapists",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "medications",
+          "level": 1,
+          "line": 27
+        },
+        {
+          "heading": "named_patterns",
+          "level": 1,
+          "line": 36
+        },
+        {
+          "heading": "baselines",
+          "level": 1,
+          "line": 42
+        },
+        {
+          "heading": "allergies",
+          "level": 1,
+          "line": 46
+        },
+        {
+          "heading": "emergency_contact",
+          "level": 1,
+          "line": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    }
+  ]
+}

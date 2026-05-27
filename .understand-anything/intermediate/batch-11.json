@@ -1,0 +1,56 @@
+{
+  "nodes": [
+    {
+      "id": "document:apps/gallery/DESIGN.md",
+      "type": "document",
+      "name": "DESIGN.md",
+      "filePath": "apps/gallery/DESIGN.md",
+      "summary": "Documentation: 11 sections, 134 lines.",
+      "tags": [
+        "documentation",
+        "notes"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:apps/gallery/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "apps/gallery/README.md",
+      "summary": "Project README with 6 sections (79 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:apps/gallery/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "apps/gallery/package.json",
+      "summary": "Package manifest declaring dependencies, scripts, and metadata (29 lines).",
+      "tags": [
+        "configuration",
+        "npm",
+        "manifest"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:apps/gallery/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "apps/gallery/tsconfig.json",
+      "summary": "TypeScript compiler configuration (5 lines).",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

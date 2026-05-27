@@ -1,0 +1,96 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/packs-prax-journal/versions/v5/brain-dump.html",
+      "type": "file",
+      "name": "brain-dump.html",
+      "filePath": "packages/packs-prax-journal/versions/v5/brain-dump.html",
+      "summary": "HTML template (brain-dump.html, 442 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v5/midday.html",
+      "type": "file",
+      "name": "midday.html",
+      "filePath": "packages/packs-prax-journal/versions/v5/midday.html",
+      "summary": "HTML template (midday.html, 427 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v5/monthly.html",
+      "type": "file",
+      "name": "monthly.html",
+      "filePath": "packages/packs-prax-journal/versions/v5/monthly.html",
+      "summary": "HTML template (monthly.html, 360 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v5/quarterly.html",
+      "type": "file",
+      "name": "quarterly.html",
+      "filePath": "packages/packs-prax-journal/versions/v5/quarterly.html",
+      "summary": "HTML template (quarterly.html, 322 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v5/reflect.html",
+      "type": "file",
+      "name": "reflect.html",
+      "filePath": "packages/packs-prax-journal/versions/v5/reflect.html",
+      "summary": "HTML template (reflect.html, 405 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v5/today.html",
+      "type": "file",
+      "name": "today.html",
+      "filePath": "packages/packs-prax-journal/versions/v5/today.html",
+      "summary": "HTML template (today.html, 523 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v5/weekly.html",
+      "type": "file",
+      "name": "weekly.html",
+      "filePath": "packages/packs-prax-journal/versions/v5/weekly.html",
+      "summary": "HTML template (weekly.html, 397 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

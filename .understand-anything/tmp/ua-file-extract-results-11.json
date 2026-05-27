@@ -1,0 +1,216 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/gallery/DESIGN.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 134,
+      "nonEmptyLines": 93,
+      "sections": [
+        {
+          "heading": "`apps/gallery` — DESIGN.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Palette — Warm Analog Editorial",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Typography",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Spacing & rhythm",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Breakpoints (design-review responsive spec)",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "Interaction states (inherits design-review PASS 2 matrix)",
+          "level": 2,
+          "line": 76
+        },
+        {
+          "heading": "Accessibility (WCAG 2.2 AA)",
+          "level": 2,
+          "line": 88
+        },
+        {
+          "heading": "Motion tokens",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "Imagery",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "Out of scope (per design-review § 6)",
+          "level": 2,
+          "line": 125
+        },
+        {
+          "heading": "Changelog",
+          "level": 2,
+          "line": 131
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "apps/gallery/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 79,
+      "nonEmptyLines": 63,
+      "sections": [
+        {
+          "heading": "`@pretext-templates/gallery`",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Layout",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Commands",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "Current state (through W6)",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "Deferred",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "References",
+          "level": 2,
+          "line": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "apps/gallery/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 29,
+      "nonEmptyLines": 29,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "license",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "apps/gallery/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

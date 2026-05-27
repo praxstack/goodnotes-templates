@@ -1,0 +1,119 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 14,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/assets/themes/bold-tech-dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/bold-tech.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 28,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/bubblegum-dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/bubblegum.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 28,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/caffeine-dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/caffeine.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 25,
+      "nonEmptyLines": 25,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/candyland-dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/candyland.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 27,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/claude-dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/claude.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 25,
+      "nonEmptyLines": 25,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/cyberpunk-dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/cyberpunk.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 27,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/doom64-dark.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/assets/themes/doom64.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 27,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    }
+  ]
+}

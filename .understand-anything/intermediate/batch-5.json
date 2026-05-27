@@ -1,0 +1,1187 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/core/src/sticker-renderer.ts",
+      "type": "file",
+      "name": "sticker-renderer.ts",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "summary": "Typescript module exposing 25 functions and 27 exports (1204 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:fontsCssInner",
+      "type": "function",
+      "name": "fontsCssInner",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        107,
+        121
+      ],
+      "summary": "Function `fontsCssInner` (15 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:fontsDefs",
+      "type": "function",
+      "name": "fontsDefs",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        129,
+        135
+      ],
+      "summary": "Function `fontsDefs` (7 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:fontsCssInnerSize",
+      "type": "function",
+      "name": "fontsCssInnerSize",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        141,
+        143
+      ],
+      "summary": "Function `fontsCssInnerSize` (3 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:skeuoDefs",
+      "type": "function",
+      "name": "skeuoDefs",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        225,
+        292
+      ],
+      "summary": "Function `skeuoDefs` (68 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:washiTape",
+      "type": "function",
+      "name": "washiTape",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        296,
+        342
+      ],
+      "summary": "Function `washiTape` (47 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:pushpin",
+      "type": "function",
+      "name": "pushpin",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        345,
+        374
+      ],
+      "summary": "Function `pushpin` (30 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:rubberStamp",
+      "type": "function",
+      "name": "rubberStamp",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        377,
+        403
+      ],
+      "summary": "Function `rubberStamp` (27 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:cornerFold",
+      "type": "function",
+      "name": "cornerFold",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        406,
+        421
+      ],
+      "summary": "Function `cornerFold` (16 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:stitchedBorder",
+      "type": "function",
+      "name": "stitchedBorder",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        424,
+        436
+      ],
+      "summary": "Function `stitchedBorder` (13 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:pressedLeaf",
+      "type": "function",
+      "name": "pressedLeaf",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        439,
+        460
+      ],
+      "summary": "Function `pressedLeaf` (22 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:ribbonTab",
+      "type": "function",
+      "name": "ribbonTab",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        478,
+        504
+      ],
+      "summary": "Function `ribbonTab` (27 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:waxSeal",
+      "type": "function",
+      "name": "waxSeal",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        510,
+        551
+      ],
+      "summary": "Function `waxSeal` (42 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:ledgerRule",
+      "type": "function",
+      "name": "ledgerRule",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        557,
+        569
+      ],
+      "summary": "Function `ledgerRule` (13 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:threadStitch",
+      "type": "function",
+      "name": "threadStitch",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        576,
+        591
+      ],
+      "summary": "Function `threadStitch` (16 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:dateStamp",
+      "type": "function",
+      "name": "dateStamp",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        597,
+        612
+      ],
+      "summary": "Function `dateStamp` (16 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:botanicalSprig",
+      "type": "function",
+      "name": "botanicalSprig",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        618,
+        644
+      ],
+      "summary": "Function `botanicalSprig` (27 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:washiTapeUnderlay",
+      "type": "function",
+      "name": "washiTapeUnderlay",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        651,
+        676
+      ],
+      "summary": "Function `washiTapeUnderlay` (26 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:thumbprint",
+      "type": "function",
+      "name": "thumbprint",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        682,
+        701
+      ],
+      "summary": "Function `thumbprint` (20 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:archCorners",
+      "type": "function",
+      "name": "archCorners",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        732,
+        747
+      ],
+      "summary": "Function `archCorners` (16 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:archetype",
+      "type": "function",
+      "name": "archetype",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        759,
+        815
+      ],
+      "summary": "Function `archetype` (57 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:stickerShell",
+      "type": "function",
+      "name": "stickerShell",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        893,
+        1138
+      ],
+      "summary": "Function `stickerShell` (246 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:kickerLine",
+      "type": "function",
+      "name": "kickerLine",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        1145,
+        1157
+      ],
+      "summary": "Function `kickerLine` (13 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:solidLine",
+      "type": "function",
+      "name": "solidLine",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        1160,
+        1162
+      ],
+      "summary": "Function `solidLine` (3 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:dottedLine",
+      "type": "function",
+      "name": "dottedLine",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        1165,
+        1167
+      ],
+      "summary": "Function `dottedLine` (3 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/sticker-renderer.ts:rasterize",
+      "type": "function",
+      "name": "rasterize",
+      "filePath": "packages/core/src/sticker-renderer.ts",
+      "lineRange": [
+        1187,
+        1204
+      ],
+      "summary": "Function `rasterize` (18 lines) in sticker-renderer.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/build-friend-letter.ts",
+      "type": "file",
+      "name": "build-friend-letter.ts",
+      "filePath": "scripts/build-friend-letter.ts",
+      "summary": "Typescript source file (108 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/build-mood-dot.ts",
+      "type": "file",
+      "name": "build-mood-dot.ts",
+      "filePath": "scripts/build-mood-dot.ts",
+      "summary": "Typescript source file (126 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/build-stickers-remaining.ts",
+      "type": "file",
+      "name": "build-stickers-remaining.ts",
+      "filePath": "scripts/build-stickers-remaining.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (343 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/build-thought-flip.ts",
+      "type": "file",
+      "name": "build-thought-flip.ts",
+      "filePath": "scripts/build-thought-flip.ts",
+      "summary": "Typescript source file (99 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/build-wave1-stickers.ts",
+      "type": "file",
+      "name": "build-wave1-stickers.ts",
+      "filePath": "scripts/build-wave1-stickers.ts",
+      "summary": "Typescript module exposing 6 functions and 0 exports (777 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/build-wave1-stickers.ts:dotScale",
+      "type": "function",
+      "name": "dotScale",
+      "filePath": "scripts/build-wave1-stickers.ts",
+      "lineRange": [
+        79,
+        94
+      ],
+      "summary": "Function `dotScale` (16 lines) in build-wave1-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-wave1-stickers.ts:qRow",
+      "type": "function",
+      "name": "qRow",
+      "filePath": "scripts/build-wave1-stickers.ts",
+      "lineRange": [
+        97,
+        109
+      ],
+      "summary": "Function `qRow` (13 lines) in build-wave1-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-wave1-stickers.ts:_labeledLine",
+      "type": "function",
+      "name": "_labeledLine",
+      "filePath": "scripts/build-wave1-stickers.ts",
+      "lineRange": [
+        118,
+        128
+      ],
+      "summary": "Function `_labeledLine` (11 lines) in build-wave1-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-wave1-stickers.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/build-wave1-stickers.ts",
+      "lineRange": [
+        752,
+        772
+      ],
+      "summary": "Function `main` (21 lines) in build-wave1-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/build-wave2-stickers.ts",
+      "type": "file",
+      "name": "build-wave2-stickers.ts",
+      "filePath": "scripts/build-wave2-stickers.ts",
+      "summary": "Typescript module exposing 5 functions and 0 exports (875 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/build-wave2-stickers.ts:dotScale",
+      "type": "function",
+      "name": "dotScale",
+      "filePath": "scripts/build-wave2-stickers.ts",
+      "lineRange": [
+        63,
+        78
+      ],
+      "summary": "Function `dotScale` (16 lines) in build-wave2-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-wave2-stickers.ts:checkBox",
+      "type": "function",
+      "name": "checkBox",
+      "filePath": "scripts/build-wave2-stickers.ts",
+      "lineRange": [
+        81,
+        90
+      ],
+      "summary": "Function `checkBox` (10 lines) in build-wave2-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-wave2-stickers.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/build-wave2-stickers.ts",
+      "lineRange": [
+        850,
+        870
+      ],
+      "summary": "Function `main` (21 lines) in build-wave2-stickers.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/build-wins-jar.ts",
+      "type": "file",
+      "name": "build-wins-jar.ts",
+      "filePath": "scripts/build-wins-jar.ts",
+      "summary": "Typescript source file (108 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/inline-v5-fonts.ts",
+      "type": "file",
+      "name": "inline-v5-fonts.ts",
+      "filePath": "scripts/inline-v5-fonts.ts",
+      "summary": "Typescript module exposing 4 functions and 0 exports (212 lines).",
+      "tags": [
+        "build-script",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/inline-v5-fonts.ts:buildFontStyleBlock",
+      "type": "function",
+      "name": "buildFontStyleBlock",
+      "filePath": "scripts/inline-v5-fonts.ts",
+      "lineRange": [
+        63,
+        86
+      ],
+      "summary": "Function `buildFontStyleBlock` (24 lines) in inline-v5-fonts.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/inline-v5-fonts.ts:processFile",
+      "type": "function",
+      "name": "processFile",
+      "filePath": "scripts/inline-v5-fonts.ts",
+      "lineRange": [
+        114,
+        152
+      ],
+      "summary": "Function `processFile` (39 lines) in inline-v5-fonts.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/inline-v5-fonts.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/inline-v5-fonts.ts",
+      "lineRange": [
+        154,
+        210
+      ],
+      "summary": "Function `main` (57 lines) in inline-v5-fonts.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:fontsCssInner",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:fontsCssInner",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:fontsDefs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:fontsDefs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:fontsCssInnerSize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:fontsCssInnerSize",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:skeuoDefs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:skeuoDefs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:washiTape",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:washiTape",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:pushpin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:pushpin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:rubberStamp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:rubberStamp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:cornerFold",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:cornerFold",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:stitchedBorder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:stitchedBorder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:pressedLeaf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:pressedLeaf",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:ribbonTab",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:ribbonTab",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:waxSeal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:waxSeal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:ledgerRule",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:ledgerRule",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:threadStitch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:threadStitch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:dateStamp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:dateStamp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:botanicalSprig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:botanicalSprig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:washiTapeUnderlay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:washiTapeUnderlay",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:thumbprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:thumbprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:archCorners",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:archetype",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:archetype",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:stickerShell",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:stickerShell",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:kickerLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:kickerLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:solidLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:solidLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:dottedLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:dottedLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:rasterize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/sticker-renderer.ts",
+      "target": "function:packages/core/src/sticker-renderer.ts:rasterize",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/build-friend-letter.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-mood-dot.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-stickers-remaining.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-thought-flip.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-wave1-stickers.ts",
+      "target": "function:scripts/build-wave1-stickers.ts:dotScale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-wave1-stickers.ts",
+      "target": "function:scripts/build-wave1-stickers.ts:qRow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-wave1-stickers.ts",
+      "target": "function:scripts/build-wave1-stickers.ts:_labeledLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-wave1-stickers.ts",
+      "target": "function:scripts/build-wave1-stickers.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-wave1-stickers.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-wave2-stickers.ts",
+      "target": "function:scripts/build-wave2-stickers.ts:dotScale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-wave2-stickers.ts",
+      "target": "function:scripts/build-wave2-stickers.ts:checkBox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-wave2-stickers.ts",
+      "target": "function:scripts/build-wave2-stickers.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/build-wave2-stickers.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-wins-jar.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/inline-v5-fonts.ts",
+      "target": "function:scripts/inline-v5-fonts.ts:buildFontStyleBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/inline-v5-fonts.ts",
+      "target": "function:scripts/inline-v5-fonts.ts:processFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/inline-v5-fonts.ts",
+      "target": "function:scripts/inline-v5-fonts.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/inline-v5-fonts.ts",
+      "target": "file:packages/core/src/sticker-renderer.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

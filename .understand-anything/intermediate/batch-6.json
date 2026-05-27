@@ -1,0 +1,617 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/core/src/generator-helpers.ts",
+      "type": "file",
+      "name": "generator-helpers.ts",
+      "filePath": "packages/core/src/generator-helpers.ts",
+      "summary": "Typescript module exposing 5 functions and 5 exports (88 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/generator-helpers.ts:escapeHtml",
+      "type": "function",
+      "name": "escapeHtml",
+      "filePath": "packages/core/src/generator-helpers.ts",
+      "lineRange": [
+        19,
+        24
+      ],
+      "summary": "Function `escapeHtml` (6 lines) in generator-helpers.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/generator-helpers.ts:monthName",
+      "type": "function",
+      "name": "monthName",
+      "filePath": "packages/core/src/generator-helpers.ts",
+      "lineRange": [
+        36,
+        48
+      ],
+      "summary": "Function `monthName` (13 lines) in generator-helpers.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/generator-helpers.ts:shortDayDate",
+      "type": "function",
+      "name": "shortDayDate",
+      "filePath": "packages/core/src/generator-helpers.ts",
+      "lineRange": [
+        55,
+        60
+      ],
+      "summary": "Function `shortDayDate` (6 lines) in generator-helpers.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/generator-helpers.ts:replaceOnce",
+      "type": "function",
+      "name": "replaceOnce",
+      "filePath": "packages/core/src/generator-helpers.ts",
+      "lineRange": [
+        71,
+        77
+      ],
+      "summary": "Function `replaceOnce` (7 lines) in generator-helpers.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/core/src/generator-helpers.ts:isoDate",
+      "type": "function",
+      "name": "isoDate",
+      "filePath": "packages/core/src/generator-helpers.ts",
+      "lineRange": [
+        82,
+        88
+      ],
+      "summary": "Function `isoDate` (7 lines) in generator-helpers.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/core/src/generator.ts",
+      "type": "file",
+      "name": "generator.ts",
+      "filePath": "packages/core/src/generator.ts",
+      "summary": "Typescript module exposing 2 functions and 4 exports (205 lines).",
+      "tags": [
+        "core-engine",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/generator.ts:validateGeneratorInput",
+      "type": "function",
+      "name": "validateGeneratorInput",
+      "filePath": "packages/core/src/generator.ts",
+      "lineRange": [
+        105,
+        180
+      ],
+      "summary": "Function `validateGeneratorInput` (76 lines) in generator.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/core/src/generator.ts:isGeneratorPack",
+      "type": "function",
+      "name": "isGeneratorPack",
+      "filePath": "packages/core/src/generator.ts",
+      "lineRange": [
+        203,
+        205
+      ],
+      "summary": "Function `isGeneratorPack` (3 lines) in generator.ts.",
+      "tags": [
+        "function",
+        "exported",
+        "helper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:packages/core/src/generator.ts:InvalidGeneratorInputError",
+      "type": "class",
+      "name": "InvalidGeneratorInputError",
+      "filePath": "packages/core/src/generator.ts",
+      "lineRange": [
+        88,
+        93
+      ],
+      "summary": "Class `InvalidGeneratorInputError` with 1 method (6 lines).",
+      "tags": [
+        "class",
+        "exported",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-habit-tracker/generate.ts",
+      "type": "file",
+      "name": "generate.ts",
+      "filePath": "packages/packs-habit-tracker/generate.ts",
+      "summary": "Typescript module exposing 4 functions and 0 exports (147 lines).",
+      "tags": [
+        "pack",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/packs-habit-tracker/generate.ts:monthName",
+      "type": "function",
+      "name": "monthName",
+      "filePath": "packages/packs-habit-tracker/generate.ts",
+      "lineRange": [
+        40,
+        54
+      ],
+      "summary": "Function `monthName` (15 lines) in generate.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/packs-habit-tracker/generate.ts:fillDateFields",
+      "type": "function",
+      "name": "fillDateFields",
+      "filePath": "packages/packs-habit-tracker/generate.ts",
+      "lineRange": [
+        69,
+        84
+      ],
+      "summary": "Function `fillDateFields` (16 lines) in generate.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/packs-habit-tracker/generate.ts:fillHabitLabels",
+      "type": "function",
+      "name": "fillHabitLabels",
+      "filePath": "packages/packs-habit-tracker/generate.ts",
+      "lineRange": [
+        91,
+        109
+      ],
+      "summary": "Function `fillHabitLabels` (19 lines) in generate.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/packs-habit-tracker/generate.ts:generate",
+      "type": "function",
+      "name": "generate",
+      "filePath": "packages/packs-habit-tracker/generate.ts",
+      "lineRange": [
+        111,
+        145
+      ],
+      "summary": "Function `generate` (35 lines) in generate.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/packs-monthly-planner/generate.ts",
+      "type": "file",
+      "name": "generate.ts",
+      "filePath": "packages/packs-monthly-planner/generate.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (67 lines).",
+      "tags": [
+        "pack",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/packs-monthly-planner/generate.ts:generate",
+      "type": "function",
+      "name": "generate",
+      "filePath": "packages/packs-monthly-planner/generate.ts",
+      "lineRange": [
+        23,
+        65
+      ],
+      "summary": "Function `generate` (43 lines) in generate.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/packs-weekly-planner/generate.ts",
+      "type": "file",
+      "name": "generate.ts",
+      "filePath": "packages/packs-weekly-planner/generate.ts",
+      "summary": "Typescript module exposing 2 functions and 0 exports (117 lines).",
+      "tags": [
+        "pack",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:packages/packs-weekly-planner/generate.ts:generate",
+      "type": "function",
+      "name": "generate",
+      "filePath": "packages/packs-weekly-planner/generate.ts",
+      "lineRange": [
+        50,
+        115
+      ],
+      "summary": "Function `generate` (66 lines) in generate.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:packages/packs-yearly-overview/generate.ts",
+      "type": "file",
+      "name": "generate.ts",
+      "filePath": "packages/packs-yearly-overview/generate.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (54 lines).",
+      "tags": [
+        "pack",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:packages/packs-yearly-overview/generate.ts:generate",
+      "type": "function",
+      "name": "generate",
+      "filePath": "packages/packs-yearly-overview/generate.ts",
+      "lineRange": [
+        22,
+        52
+      ],
+      "summary": "Function `generate` (31 lines) in generate.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/unit/generator-framework.test.ts",
+      "type": "file",
+      "name": "generator-framework.test.ts",
+      "filePath": "tests/unit/generator-framework.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/unit/generators-phase1.test.ts",
+      "type": "file",
+      "name": "generators-phase1.test.ts",
+      "filePath": "tests/unit/generators-phase1.test.ts",
+      "summary": "Test file containing 0 test functions and 0 test fixtures.",
+      "tags": [
+        "test",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:escapeHtml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:escapeHtml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:monthName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:monthName",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:shortDayDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:shortDayDate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:replaceOnce",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:replaceOnce",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:isoDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator-helpers.ts",
+      "target": "function:packages/core/src/generator-helpers.ts:isoDate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/generator.ts",
+      "target": "function:packages/core/src/generator.ts:validateGeneratorInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator.ts",
+      "target": "function:packages/core/src/generator.ts:validateGeneratorInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/generator.ts",
+      "target": "function:packages/core/src/generator.ts:isGeneratorPack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator.ts",
+      "target": "function:packages/core/src/generator.ts:isGeneratorPack",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/core/src/generator.ts",
+      "target": "class:packages/core/src/generator.ts:InvalidGeneratorInputError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/core/src/generator.ts",
+      "target": "class:packages/core/src/generator.ts:InvalidGeneratorInputError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:packages/packs-habit-tracker/generate.ts",
+      "target": "function:packages/packs-habit-tracker/generate.ts:monthName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/packs-habit-tracker/generate.ts",
+      "target": "function:packages/packs-habit-tracker/generate.ts:fillDateFields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/packs-habit-tracker/generate.ts",
+      "target": "function:packages/packs-habit-tracker/generate.ts:fillHabitLabels",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/packs-habit-tracker/generate.ts",
+      "target": "function:packages/packs-habit-tracker/generate.ts:generate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/packs-habit-tracker/generate.ts",
+      "target": "file:packages/core/src/generator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/packs-monthly-planner/generate.ts",
+      "target": "function:packages/packs-monthly-planner/generate.ts:generate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/packs-monthly-planner/generate.ts",
+      "target": "file:packages/core/src/generator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/packs-monthly-planner/generate.ts",
+      "target": "file:packages/core/src/generator-helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/packs-weekly-planner/generate.ts",
+      "target": "function:packages/packs-weekly-planner/generate.ts:generate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/packs-weekly-planner/generate.ts",
+      "target": "file:packages/core/src/generator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/packs-weekly-planner/generate.ts",
+      "target": "file:packages/core/src/generator-helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:packages/packs-yearly-overview/generate.ts",
+      "target": "function:packages/packs-yearly-overview/generate.ts:generate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:packages/packs-yearly-overview/generate.ts",
+      "target": "file:packages/core/src/generator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/generator-framework.test.ts",
+      "target": "file:packages/core/src/generator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/generator-framework.test.ts",
+      "target": "file:packages/packs-habit-tracker/generate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/generators-phase1.test.ts",
+      "target": "file:packages/core/src/generator.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/generators-phase1.test.ts",
+      "target": "file:packages/core/src/generator-helpers.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/generators-phase1.test.ts",
+      "target": "file:packages/packs-yearly-overview/generate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/generators-phase1.test.ts",
+      "target": "file:packages/packs-monthly-planner/generate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/unit/generators-phase1.test.ts",
+      "target": "file:packages/packs-weekly-planner/generate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

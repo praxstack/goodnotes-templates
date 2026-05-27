@@ -1,0 +1,1041 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/gallery/src/content/packs/monthly-planner.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/mood-tracker.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/morning-pages.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "How to use",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/prax-journal.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 23,
+      "sections": [
+        {
+          "heading": "Why this pack",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "What's inside",
+          "level": 2,
+          "line": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/project-planning.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/prompted-journal.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "How to use",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/reading-log.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/recipe-card.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/reflection-journal.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "How to use",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/simple-pages.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 33,
+      "sections": [
+        {
+          "heading": "Pages",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-daily-planner.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-habits.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-reflections.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/tactile-tasks.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/travel-planner.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/weekly-planner.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/content/packs/yearly-overview.mdx",
+      "language": "mdx",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "At a glance",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Render locally",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Compatibility",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Tags",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/data/blurhash-manifest.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 8,
+      "nonEmptyLines": 8,
+      "sections": [
+        {
+          "heading": "prax-journal",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "apps/gallery/src/data/theme-palette.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 182,
+      "nonEmptyLines": 182,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "generated_from",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "tokens",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "themes",
+          "level": 1,
+          "line": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/gallery/src/styles/global.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 200,
+      "nonEmptyLines": 177,
+      "metrics": {}
+    },
+    {
+      "path": "audit/_runtime/capabilities.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 70,
+      "nonEmptyLines": 70,
+      "sections": [
+        {
+          "heading": "probed_at",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "platform",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "shell",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "network_access",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "agent_config",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "tools",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "detected_stacks",
+          "level": 1,
+          "line": 56
+        },
+        {
+          "heading": "monorepo",
+          "level": 1,
+          "line": 57
+        },
+        {
+          "heading": "repo",
+          "level": 1,
+          "line": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "audit/_runtime/dependency-graph.mmd",
+      "language": "mmd",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 18,
+      "metrics": {}
+    },
+    {
+      "path": "audit/_runtime/topology.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 179,
+      "nonEmptyLines": 133,
+      "sections": [
+        {
+          "heading": "Topology & Risk Tiering — goodnotes-templates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Inventory",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "2. Monorepo detection",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "3. Entry points",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "4. Trust boundaries",
+          "level": 2,
+          "line": 58
+        },
+        {
+          "heading": "5. Dependency graph",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "6. Runtime dependency surface",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "7. Module → risk tier table",
+          "level": 2,
+          "line": 120
+        },
+        {
+          "heading": "8. Top-5 \"what matters most if broken\"",
+          "level": 2,
+          "line": 144
+        },
+        {
+          "heading": "9. Exit-gate answers",
+          "level": 2,
+          "line": 154
+        },
+        {
+          "heading": "10. Proposed Phase-1…Phase-10 plan (for checkpoint)",
+          "level": 2,
+          "line": 163
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "audit/iteration-2/findings.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 321,
+      "nonEmptyLines": 321,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "iteration",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "generated_at",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "package",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "note",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "findings",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "audit/iteration-3/verification-results.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 228,
+      "nonEmptyLines": 152,
+      "sections": [
+        {
+          "heading": "CODEX-AUDIT v1.1 — Iteration 3 Adversarial Verification",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "FIND-0001 — Preview server binds 0.0.0.0 (Medium) — **confirmed**",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "FIND-0002 — Bespoke HTML escape misses single-quote (Medium) — **confirmed (severity slightly overstated)**",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "FIND-0003 — Chromium --no-sandbox unconditional (Medium) — **confirmed**",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "FIND-0004 — networkidle0 + no URL allow-list (Low) — **confirmed**",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "FIND-0005 — basic-ftp HIGH CVE (High) — **confirmed (severity overstated for in-context exploitability)**",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "FIND-0006 — vitest 2.x moderate CVEs (Medium) — **confirmed**",
+          "level": 2,
+          "line": 79
+        },
+        {
+          "heading": "FIND-0007 — 8 unused prod deps (Medium) — **confirmed**",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "FIND-0008 — CI does not gate merges (High) — **confirmed**",
+          "level": 2,
+          "line": 91
+        },
+        {
+          "heading": "FIND-0009 — GH Actions pinned by tag (Medium) — **confirmed**",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "FIND-0010 — Release artifacts unsigned (Low) — **confirmed**",
+          "level": 2,
+          "line": 106
+        },
+        {
+          "heading": "FIND-0011 — tsc --noEmit fails (High) — **confirmed**",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "FIND-0012 — Bespoke HTML parser fragile (Medium) — **confirmed**",
+          "level": 2,
+          "line": 119
+        },
+        {
+          "heading": "FIND-0013 — Doc drift to deleted files (Medium) — **confirmed**",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "FIND-0014 — Google Fonts claim mismatch (Medium) — **confirmed**",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "FIND-0015 — Color-mode resolver duplicated (Low) — **confirmed**",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "FIND-0016 — Zero tests on T1 modules (Medium) — **confirmed**",
+          "level": 2,
+          "line": 139
+        },
+        {
+          "heading": "FIND-0017 — batchRenderHTML silent failures (Low) — **confirmed**",
+          "level": 2,
+          "line": 143
+        },
+        {
+          "heading": "FIND-0018 — Dark-mode parity 11/32 (Medium) — **confirmed**",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "FIND-0019 — package.json repository.url stub (Low) — **confirmed**",
+          "level": 2,
+          "line": 161
+        },
+        {
+          "heading": "FIND-0020 — Missing THIRD_PARTY_LICENSES for libvips LGPL (Low) — **confirmed**",
+          "level": 2,
+          "line": 169
+        },
+        {
+          "heading": "FIND-0021 — preview server no Cache-Control / ETag (Low) — **confirmed**",
+          "level": 2,
+          "line": 173
+        },
+        {
+          "heading": "FIND-0022 — Symlink path-traversal POC (High) — **confirmed (reproduced)**",
+          "level": 2,
+          "line": 177
+        },
+        {
+          "heading": "FIND-0023 — NUL/backslash unfiltered (Low) — **partially refuted, severity downgrade**",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "FIND-0024 — addHyperlinks no rect validation (Low) — **confirmed**",
+          "level": 2,
+          "line": 199
+        },
+        {
+          "heading": "FIND-0025 — Puppeteer browser singleton race (Low) — **confirmed (latent)**",
+          "level": 2,
+          "line": 203
+        },
+        {
+          "heading": "FIND-0026 — addBookmarks silent pageIndex clamp (Low) — **confirmed**",
+          "level": 2,
+          "line": 209
+        },
+        {
+          "heading": "FIND-0027 — SVG text interpolation unescaped (dormant) (Low) — **confirmed**",
+          "level": 2,
+          "line": 213
+        },
+        {
+          "heading": "Aggregate notes",
+          "level": 2,
+          "line": 221
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    }
+  ]
+}

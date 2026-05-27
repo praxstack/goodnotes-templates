@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-yearly-overview/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-yearly-overview/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-yearly-overview/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-yearly-overview/manifest.json",
+      "summary": "manifest.json configuration file (16 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-yearly-overview/yearly-overview.html",
+      "type": "file",
+      "name": "yearly-overview.html",
+      "filePath": "packages/packs-yearly-overview/yearly-overview.html",
+      "summary": "HTML template (yearly-overview.html, 412 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

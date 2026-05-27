@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-eat-the-frog/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-eat-the-frog/eat-the-frog.html",
+      "language": "html",
+      "sizeLines": 445,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-eat-the-frog/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-eat-the-frog/README.md": [],
+    "packages/packs-eat-the-frog/eat-the-frog.html": [],
+    "packages/packs-eat-the-frog/manifest.json": []
+  }
+}

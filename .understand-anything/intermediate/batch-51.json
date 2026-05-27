@@ -1,0 +1,786 @@
+{
+  "nodes": [
+    {
+      "id": "file:.clineignore",
+      "type": "file",
+      "name": ".clineignore",
+      "filePath": ".clineignore",
+      "summary": "Unknown source file (62 lines).",
+      "tags": [
+        "source",
+        "module",
+        "javascript"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:.devcontainer/devcontainer.json",
+      "type": "service",
+      "name": "devcontainer.json",
+      "filePath": ".devcontainer/devcontainer.json",
+      "summary": "Dev container definition for reproducible development environments.",
+      "tags": [
+        "infrastructure",
+        "containerization",
+        "dev-environment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.github/CODEOWNERS",
+      "type": "file",
+      "name": "CODEOWNERS",
+      "filePath": ".github/CODEOWNERS",
+      "summary": "Unknown source file (20 lines).",
+      "tags": [
+        "source",
+        "module",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/dependabot.yml",
+      "type": "config",
+      "name": "dependabot.yml",
+      "filePath": ".github/dependabot.yml",
+      "summary": "dependabot.yml configuration file (24 lines).",
+      "tags": [
+        "configuration",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/astro.config.mjs",
+      "type": "file",
+      "name": "astro.config.mjs",
+      "filePath": "apps/gallery/astro.config.mjs",
+      "summary": "Configuration module exposing settings and tunables (0 exports).",
+      "tags": [
+        "config",
+        "gallery",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/scripts/build-og-cards.ts",
+      "type": "file",
+      "name": "build-og-cards.ts",
+      "filePath": "apps/gallery/scripts/build-og-cards.ts",
+      "summary": "Typescript module exposing 7 functions and 0 exports (199 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-og-cards.ts:xmlEscape",
+      "type": "function",
+      "name": "xmlEscape",
+      "filePath": "apps/gallery/scripts/build-og-cards.ts",
+      "lineRange": [
+        70,
+        79
+      ],
+      "summary": "Function `xmlEscape` (10 lines) in build-og-cards.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-og-cards.ts:svgCard",
+      "type": "function",
+      "name": "svgCard",
+      "filePath": "apps/gallery/scripts/build-og-cards.ts",
+      "lineRange": [
+        81,
+        112
+      ],
+      "summary": "Function `svgCard` (32 lines) in build-og-cards.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-og-cards.ts:svgDefault",
+      "type": "function",
+      "name": "svgDefault",
+      "filePath": "apps/gallery/scripts/build-og-cards.ts",
+      "lineRange": [
+        114,
+        126
+      ],
+      "summary": "Function `svgDefault` (13 lines) in build-og-cards.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-og-cards.ts:loadManifests",
+      "type": "function",
+      "name": "loadManifests",
+      "filePath": "apps/gallery/scripts/build-og-cards.ts",
+      "lineRange": [
+        134,
+        145
+      ],
+      "summary": "Function `loadManifests` (12 lines) in build-og-cards.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-og-cards.ts:renderCard",
+      "type": "function",
+      "name": "renderCard",
+      "filePath": "apps/gallery/scripts/build-og-cards.ts",
+      "lineRange": [
+        147,
+        157
+      ],
+      "summary": "Function `renderCard` (11 lines) in build-og-cards.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-og-cards.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/build-og-cards.ts",
+      "lineRange": [
+        159,
+        197
+      ],
+      "summary": "Function `main` (39 lines) in build-og-cards.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/scripts/build-theme-palette.ts",
+      "type": "file",
+      "name": "build-theme-palette.ts",
+      "filePath": "apps/gallery/scripts/build-theme-palette.ts",
+      "summary": "Typescript module exposing 3 functions and 0 exports (147 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-theme-palette.ts:parseVars",
+      "type": "function",
+      "name": "parseVars",
+      "filePath": "apps/gallery/scripts/build-theme-palette.ts",
+      "lineRange": [
+        53,
+        72
+      ],
+      "summary": "Function `parseVars` (20 lines) in build-theme-palette.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-theme-palette.ts:prettyName",
+      "type": "function",
+      "name": "prettyName",
+      "filePath": "apps/gallery/scripts/build-theme-palette.ts",
+      "lineRange": [
+        74,
+        86
+      ],
+      "summary": "Function `prettyName` (13 lines) in build-theme-palette.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/gallery/scripts/build-theme-palette.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/build-theme-palette.ts",
+      "lineRange": [
+        88,
+        145
+      ],
+      "summary": "Function `main` (58 lines) in build-theme-palette.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/scripts/copy-pack-pdfs.ts",
+      "type": "file",
+      "name": "copy-pack-pdfs.ts",
+      "filePath": "apps/gallery/scripts/copy-pack-pdfs.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (90 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/copy-pack-pdfs.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/copy-pack-pdfs.ts",
+      "lineRange": [
+        48,
+        88
+      ],
+      "summary": "Function `main` (41 lines) in copy-pack-pdfs.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/scripts/copy-pack-themed-pdfs.ts",
+      "type": "file",
+      "name": "copy-pack-themed-pdfs.ts",
+      "filePath": "apps/gallery/scripts/copy-pack-themed-pdfs.ts",
+      "summary": "Typescript module exposing 1 function and 0 exports (87 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/copy-pack-themed-pdfs.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/copy-pack-themed-pdfs.ts",
+      "lineRange": [
+        32,
+        85
+      ],
+      "summary": "Function `main` (54 lines) in copy-pack-themed-pdfs.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/scripts/encode-blurhash.ts",
+      "type": "file",
+      "name": "encode-blurhash.ts",
+      "filePath": "apps/gallery/scripts/encode-blurhash.ts",
+      "summary": "Typescript module exposing 2 functions and 0 exports (117 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/encode-blurhash.ts:encodeFile",
+      "type": "function",
+      "name": "encodeFile",
+      "filePath": "apps/gallery/scripts/encode-blurhash.ts",
+      "lineRange": [
+        41,
+        78
+      ],
+      "summary": "Function `encodeFile` (38 lines) in encode-blurhash.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/encode-blurhash.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/encode-blurhash.ts",
+      "lineRange": [
+        80,
+        115
+      ],
+      "summary": "Function `main` (36 lines) in encode-blurhash.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/scripts/enrich-pack-mdx.ts",
+      "type": "file",
+      "name": "enrich-pack-mdx.ts",
+      "filePath": "apps/gallery/scripts/enrich-pack-mdx.ts",
+      "summary": "Typescript module exposing 4 functions and 0 exports (192 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/enrich-pack-mdx.ts:readmeLede",
+      "type": "function",
+      "name": "readmeLede",
+      "filePath": "apps/gallery/scripts/enrich-pack-mdx.ts",
+      "lineRange": [
+        51,
+        71
+      ],
+      "summary": "Function `readmeLede` (21 lines) in enrich-pack-mdx.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/gallery/scripts/enrich-pack-mdx.ts:mdxBody",
+      "type": "function",
+      "name": "mdxBody",
+      "filePath": "apps/gallery/scripts/enrich-pack-mdx.ts",
+      "lineRange": [
+        81,
+        116
+      ],
+      "summary": "Function `mdxBody` (36 lines) in enrich-pack-mdx.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/enrich-pack-mdx.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/enrich-pack-mdx.ts",
+      "lineRange": [
+        123,
+        190
+      ],
+      "summary": "Function `main` (68 lines) in enrich-pack-mdx.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/scripts/generate-specimens.ts",
+      "type": "file",
+      "name": "generate-specimens.ts",
+      "filePath": "apps/gallery/scripts/generate-specimens.ts",
+      "summary": "Typescript module exposing 3 functions and 0 exports (74 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/generate-specimens.ts:renderOne",
+      "type": "function",
+      "name": "renderOne",
+      "filePath": "apps/gallery/scripts/generate-specimens.ts",
+      "lineRange": [
+        45,
+        65
+      ],
+      "summary": "Function `renderOne` (21 lines) in generate-specimens.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/scripts/stage-vercel-config.ts",
+      "type": "file",
+      "name": "stage-vercel-config.ts",
+      "filePath": "apps/gallery/scripts/stage-vercel-config.ts",
+      "summary": "Configuration module exposing settings and tunables (0 exports).",
+      "tags": [
+        "config",
+        "gallery",
+        "source"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/stage-vercel-config.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/stage-vercel-config.ts",
+      "lineRange": [
+        58,
+        78
+      ],
+      "summary": "Function `main` (21 lines) in stage-vercel-config.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/scripts/validate-pack-ids.ts",
+      "type": "file",
+      "name": "validate-pack-ids.ts",
+      "filePath": "apps/gallery/scripts/validate-pack-ids.ts",
+      "summary": "Typescript module exposing 2 functions and 0 exports (69 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/gallery/scripts/validate-pack-ids.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "apps/gallery/scripts/validate-pack-ids.ts",
+      "lineRange": [
+        26,
+        67
+      ],
+      "summary": "Function `main` (42 lines) in validate-pack-ids.ts.",
+      "tags": [
+        "function",
+        "source",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/gallery/src/content.config.ts",
+      "type": "file",
+      "name": "content.config.ts",
+      "filePath": "apps/gallery/src/content.config.ts",
+      "summary": "Configuration module exposing settings and tunables (1 exports).",
+      "tags": [
+        "config",
+        "gallery",
+        "source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/budget-tracker.mdx",
+      "type": "file",
+      "name": "budget-tracker.mdx",
+      "filePath": "apps/gallery/src/content/packs/budget-tracker.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/cornell-notes.mdx",
+      "type": "file",
+      "name": "cornell-notes.mdx",
+      "filePath": "apps/gallery/src/content/packs/cornell-notes.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/eat-the-frog.mdx",
+      "type": "file",
+      "name": "eat-the-frog.mdx",
+      "filePath": "apps/gallery/src/content/packs/eat-the-frog.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/eisenhower-matrix.mdx",
+      "type": "file",
+      "name": "eisenhower-matrix.mdx",
+      "filePath": "apps/gallery/src/content/packs/eisenhower-matrix.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/fitness-log.mdx",
+      "type": "file",
+      "name": "fitness-log.mdx",
+      "filePath": "apps/gallery/src/content/packs/fitness-log.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/goal-setting.mdx",
+      "type": "file",
+      "name": "goal-setting.mdx",
+      "filePath": "apps/gallery/src/content/packs/goal-setting.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/gratitude-journal.mdx",
+      "type": "file",
+      "name": "gratitude-journal.mdx",
+      "filePath": "apps/gallery/src/content/packs/gratitude-journal.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/habit-tracker.mdx",
+      "type": "file",
+      "name": "habit-tracker.mdx",
+      "filePath": "apps/gallery/src/content/packs/habit-tracker.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/meal-planning.mdx",
+      "type": "file",
+      "name": "meal-planning.mdx",
+      "filePath": "apps/gallery/src/content/packs/meal-planning.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/gallery/src/content/packs/meeting-notes.mdx",
+      "type": "file",
+      "name": "meeting-notes.mdx",
+      "filePath": "apps/gallery/src/content/packs/meeting-notes.mdx",
+      "summary": "Mdx source file (36 lines).",
+      "tags": [
+        "gallery",
+        "source",
+        "module"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:apps/gallery/scripts/build-og-cards.ts",
+      "target": "function:apps/gallery/scripts/build-og-cards.ts:xmlEscape",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-og-cards.ts",
+      "target": "function:apps/gallery/scripts/build-og-cards.ts:svgCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-og-cards.ts",
+      "target": "function:apps/gallery/scripts/build-og-cards.ts:svgDefault",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-og-cards.ts",
+      "target": "function:apps/gallery/scripts/build-og-cards.ts:loadManifests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-og-cards.ts",
+      "target": "function:apps/gallery/scripts/build-og-cards.ts:renderCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-og-cards.ts",
+      "target": "function:apps/gallery/scripts/build-og-cards.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-theme-palette.ts",
+      "target": "function:apps/gallery/scripts/build-theme-palette.ts:parseVars",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-theme-palette.ts",
+      "target": "function:apps/gallery/scripts/build-theme-palette.ts:prettyName",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/build-theme-palette.ts",
+      "target": "function:apps/gallery/scripts/build-theme-palette.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/copy-pack-pdfs.ts",
+      "target": "function:apps/gallery/scripts/copy-pack-pdfs.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/copy-pack-themed-pdfs.ts",
+      "target": "function:apps/gallery/scripts/copy-pack-themed-pdfs.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/encode-blurhash.ts",
+      "target": "function:apps/gallery/scripts/encode-blurhash.ts:encodeFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/encode-blurhash.ts",
+      "target": "function:apps/gallery/scripts/encode-blurhash.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/enrich-pack-mdx.ts",
+      "target": "function:apps/gallery/scripts/enrich-pack-mdx.ts:readmeLede",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/enrich-pack-mdx.ts",
+      "target": "function:apps/gallery/scripts/enrich-pack-mdx.ts:mdxBody",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/enrich-pack-mdx.ts",
+      "target": "function:apps/gallery/scripts/enrich-pack-mdx.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/generate-specimens.ts",
+      "target": "function:apps/gallery/scripts/generate-specimens.ts:renderOne",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/stage-vercel-config.ts",
+      "target": "function:apps/gallery/scripts/stage-vercel-config.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/gallery/scripts/validate-pack-ids.ts",
+      "target": "function:apps/gallery/scripts/validate-pack-ids.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    }
+  ]
+}

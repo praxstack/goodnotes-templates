@@ -1,0 +1,31 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/packs-prax-journal/versions/v4/brain-dump.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 401,
+      "nonEmptyLines": 369,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v4/reflect.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 1251,
+      "nonEmptyLines": 1157,
+      "metrics": {}
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v4/today.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 1189,
+      "nonEmptyLines": 1082,
+      "metrics": {}
+    }
+  ]
+}

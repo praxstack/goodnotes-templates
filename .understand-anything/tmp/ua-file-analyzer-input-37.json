@@ -1,0 +1,56 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-prax-journal/versions/v5/brain-dump.html",
+      "language": "html",
+      "sizeLines": 442,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/midday.html",
+      "language": "html",
+      "sizeLines": 427,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/monthly.html",
+      "language": "html",
+      "sizeLines": 360,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/quarterly.html",
+      "language": "html",
+      "sizeLines": 322,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/reflect.html",
+      "language": "html",
+      "sizeLines": 405,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/today.html",
+      "language": "html",
+      "sizeLines": 523,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-prax-journal/versions/v5/weekly.html",
+      "language": "html",
+      "sizeLines": 397,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-prax-journal/versions/v5/brain-dump.html": [],
+    "packages/packs-prax-journal/versions/v5/midday.html": [],
+    "packages/packs-prax-journal/versions/v5/monthly.html": [],
+    "packages/packs-prax-journal/versions/v5/quarterly.html": [],
+    "packages/packs-prax-journal/versions/v5/reflect.html": [],
+    "packages/packs-prax-journal/versions/v5/today.html": [],
+    "packages/packs-prax-journal/versions/v5/weekly.html": []
+  }
+}

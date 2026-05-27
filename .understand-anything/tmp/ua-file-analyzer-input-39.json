@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-prompted-journal/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-prompted-journal/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/packs-prompted-journal/prompted-journal.html",
+      "language": "html",
+      "sizeLines": 486,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-prompted-journal/README.md": [],
+    "packages/packs-prompted-journal/manifest.json": [],
+    "packages/packs-prompted-journal/prompted-journal.html": []
+  }
+}

@@ -1,0 +1,1387 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 9,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/sticker-renderer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1204,
+      "nonEmptyLines": 1119,
+      "functions": [
+        {
+          "name": "fontsCssInner",
+          "startLine": 107,
+          "endLine": 121,
+          "params": []
+        },
+        {
+          "name": "fontsDefs",
+          "startLine": 129,
+          "endLine": 135,
+          "params": []
+        },
+        {
+          "name": "fontsCssInnerSize",
+          "startLine": 141,
+          "endLine": 143,
+          "params": []
+        },
+        {
+          "name": "skeuoDefs",
+          "startLine": 225,
+          "endLine": 292,
+          "params": []
+        },
+        {
+          "name": "washiTape",
+          "startLine": 296,
+          "endLine": 342,
+          "params": [
+            "W",
+            "H",
+            "opts"
+          ]
+        },
+        {
+          "name": "pushpin",
+          "startLine": 345,
+          "endLine": 374,
+          "params": [
+            "cx",
+            "cy",
+            "color"
+          ]
+        },
+        {
+          "name": "rubberStamp",
+          "startLine": 377,
+          "endLine": 403,
+          "params": [
+            "opts"
+          ]
+        },
+        {
+          "name": "cornerFold",
+          "startLine": 406,
+          "endLine": 421,
+          "params": [
+            "W",
+            "size"
+          ]
+        },
+        {
+          "name": "stitchedBorder",
+          "startLine": 424,
+          "endLine": 436,
+          "params": [
+            "W",
+            "H",
+            "RX",
+            "accent"
+          ]
+        },
+        {
+          "name": "pressedLeaf",
+          "startLine": 439,
+          "endLine": 460,
+          "params": [
+            "cx",
+            "cy",
+            "scale",
+            "rotate",
+            "accent"
+          ]
+        },
+        {
+          "name": "ribbonTab",
+          "startLine": 478,
+          "endLine": 504,
+          "params": [
+            "x",
+            "y",
+            "length",
+            "color",
+            "label"
+          ]
+        },
+        {
+          "name": "waxSeal",
+          "startLine": 510,
+          "endLine": 551,
+          "params": [
+            "cx",
+            "cy",
+            "monogram",
+            "color",
+            "radius"
+          ]
+        },
+        {
+          "name": "ledgerRule",
+          "startLine": 557,
+          "endLine": 569,
+          "params": [
+            "x1",
+            "x2",
+            "y",
+            "accent"
+          ]
+        },
+        {
+          "name": "threadStitch",
+          "startLine": 576,
+          "endLine": 591,
+          "params": [
+            "x1",
+            "x2",
+            "y",
+            "color"
+          ]
+        },
+        {
+          "name": "dateStamp",
+          "startLine": 597,
+          "endLine": 612,
+          "params": [
+            "x",
+            "y",
+            "text",
+            "color"
+          ]
+        },
+        {
+          "name": "botanicalSprig",
+          "startLine": 618,
+          "endLine": 644,
+          "params": [
+            "cx",
+            "cy",
+            "scale",
+            "rotate",
+            "accent"
+          ]
+        },
+        {
+          "name": "washiTapeUnderlay",
+          "startLine": 651,
+          "endLine": 676,
+          "params": [
+            "W",
+            "H",
+            "opts"
+          ]
+        },
+        {
+          "name": "thumbprint",
+          "startLine": 682,
+          "endLine": 701,
+          "params": [
+            "cx",
+            "cy",
+            "scale",
+            "accent"
+          ]
+        },
+        {
+          "name": "archCorners",
+          "startLine": 732,
+          "endLine": 747,
+          "params": [
+            "size"
+          ]
+        },
+        {
+          "name": "archetype",
+          "startLine": 759,
+          "endLine": 815,
+          "params": [
+            "kind",
+            "size",
+            "accent",
+            "opts"
+          ]
+        },
+        {
+          "name": "stickerShell",
+          "startLine": 893,
+          "endLine": 1138,
+          "params": [
+            "opts"
+          ]
+        },
+        {
+          "name": "kickerLine",
+          "startLine": 1145,
+          "endLine": 1157,
+          "params": [
+            "text",
+            "x",
+            "y",
+            "accent",
+            "size"
+          ]
+        },
+        {
+          "name": "solidLine",
+          "startLine": 1160,
+          "endLine": 1162,
+          "params": [
+            "x1",
+            "y",
+            "x2",
+            "w"
+          ]
+        },
+        {
+          "name": "dottedLine",
+          "startLine": 1165,
+          "endLine": 1167,
+          "params": [
+            "x1",
+            "y",
+            "x2",
+            "w"
+          ]
+        },
+        {
+          "name": "rasterize",
+          "startLine": 1187,
+          "endLine": 1204,
+          "params": [
+            "svg",
+            "outPath",
+            "scale"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SIZE_CLASSES",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "PALETTE",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "FONT_FILES",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "fontsCssInner",
+          "line": 107,
+          "isDefault": false
+        },
+        {
+          "name": "fontsDefs",
+          "line": 129,
+          "isDefault": false
+        },
+        {
+          "name": "fontsCssInnerSize",
+          "line": 141,
+          "isDefault": false
+        },
+        {
+          "name": "skeuoDefs",
+          "line": 225,
+          "isDefault": false
+        },
+        {
+          "name": "washiTape",
+          "line": 296,
+          "isDefault": false
+        },
+        {
+          "name": "pushpin",
+          "line": 345,
+          "isDefault": false
+        },
+        {
+          "name": "rubberStamp",
+          "line": 377,
+          "isDefault": false
+        },
+        {
+          "name": "cornerFold",
+          "line": 406,
+          "isDefault": false
+        },
+        {
+          "name": "stitchedBorder",
+          "line": 424,
+          "isDefault": false
+        },
+        {
+          "name": "pressedLeaf",
+          "line": 439,
+          "isDefault": false
+        },
+        {
+          "name": "ribbonTab",
+          "line": 478,
+          "isDefault": false
+        },
+        {
+          "name": "waxSeal",
+          "line": 510,
+          "isDefault": false
+        },
+        {
+          "name": "ledgerRule",
+          "line": 557,
+          "isDefault": false
+        },
+        {
+          "name": "threadStitch",
+          "line": 576,
+          "isDefault": false
+        },
+        {
+          "name": "dateStamp",
+          "line": 597,
+          "isDefault": false
+        },
+        {
+          "name": "botanicalSprig",
+          "line": 618,
+          "isDefault": false
+        },
+        {
+          "name": "washiTapeUnderlay",
+          "line": 651,
+          "isDefault": false
+        },
+        {
+          "name": "thumbprint",
+          "line": 682,
+          "isDefault": false
+        },
+        {
+          "name": "archetype",
+          "line": 759,
+          "isDefault": false
+        },
+        {
+          "name": "stickerShell",
+          "line": 893,
+          "isDefault": false
+        },
+        {
+          "name": "kickerLine",
+          "line": 1145,
+          "isDefault": false
+        },
+        {
+          "name": "solidLine",
+          "line": 1160,
+          "isDefault": false
+        },
+        {
+          "name": "dottedLine",
+          "line": 1165,
+          "isDefault": false
+        },
+        {
+          "name": "rasterize",
+          "line": 1187,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fontsCssInner",
+          "callee": "FONT_FILES.map(({ family, weight, woff2 }) => {\n    const p = path.join(FONTS_DIR, woff2);\n    const b64 = readFileSync(p).toString('base64');\n    return `      @font-face {\n        font-family: '${family}';\n        src: url(data:font/woff2;base64,${b64}) format('woff2');\n        font-weight: ${weight};\n        font-style: normal;\n        font-display: block;\n      }`;\n  }).join",
+          "lineNumber": 109
+        },
+        {
+          "caller": "fontsCssInner",
+          "callee": "FONT_FILES.map",
+          "lineNumber": 109
+        },
+        {
+          "caller": "fontsCssInner",
+          "callee": "path.join",
+          "lineNumber": 110
+        },
+        {
+          "caller": "fontsCssInner",
+          "callee": "readFileSync(p).toString",
+          "lineNumber": 111
+        },
+        {
+          "caller": "fontsCssInner",
+          "callee": "readFileSync",
+          "lineNumber": 111
+        },
+        {
+          "caller": "fontsDefs",
+          "callee": "fontsCssInner",
+          "lineNumber": 132
+        },
+        {
+          "caller": "fontsCssInnerSize",
+          "callee": "fontsCssInner",
+          "lineNumber": 142
+        },
+        {
+          "caller": "rubberStamp",
+          "callee": "Math.max",
+          "lineNumber": 383
+        },
+        {
+          "caller": "stitchedBorder",
+          "callee": "Math.max",
+          "lineNumber": 433
+        },
+        {
+          "caller": "stitchedBorder",
+          "callee": "Math.max",
+          "lineNumber": 433
+        },
+        {
+          "caller": "waxSeal",
+          "callee": "[\n    `M ${cx - radius * 0.95},${cy - radius * 0.35}`,\n    `C ${cx - radius * 1.15},${cy - radius * 0.15} ${cx - radius * 1.1},${cy + radius * 0.15} ${cx - radius * 0.9},${cy + radius * 0.4}`,\n    `C ${cx - radius * 0.7},${cy + radius * 0.95} ${cx - radius * 0.3},${cy + radius * 1.08} ${cx},${cy + radius * 1.0}`,\n    `C ${cx + radius * 0.35},${cy + radius * 1.1} ${cx + radius * 0.85},${cy + radius * 0.9} ${cx + radius * 1.02},${cy + radius * 0.4}`,\n    `C ${cx + radius * 1.18},${cy + radius * 0.05} ${cx + radius * 1.1},${cy - radius * 0.4} ${cx + radius * 0.85},${cy - radius * 0.6}`,\n    `C ${cx + radius * 0.55},${cy - radius * 0.95} ${cx + radius * 0.1},${cy - radius * 1.1} ${cx - radius * 0.35},${cy - radius * 0.95}`,\n    `C ${cx - radius * 0.75},${cy - radius * 0.85} ${cx - radius * 1.0},${cy - radius * 0.6} ${cx - radius * 0.95},${cy - radius * 0.35}`,\n    'Z',\n  ].join",
+          "lineNumber": 519
+        },
+        {
+          "caller": "threadStitch",
+          "callee": "dashes.push",
+          "lineNumber": 588
+        },
+        {
+          "caller": "threadStitch",
+          "callee": "dashes.join",
+          "lineNumber": 590
+        },
+        {
+          "caller": "archetype",
+          "callee": "archCorners",
+          "lineNumber": 765
+        },
+        {
+          "caller": "archetype",
+          "callee": "Math.min",
+          "lineNumber": 775
+        },
+        {
+          "caller": "archetype",
+          "callee": "Math.min",
+          "lineNumber": 812
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "fontsCssInner",
+          "lineNumber": 908
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "skeuoDefs",
+          "lineNumber": 983
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "stitchedBorder",
+          "lineNumber": 1032
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "pressedLeaf",
+          "lineNumber": 1033
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "botanicalSprig",
+          "lineNumber": 1040
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "thumbprint",
+          "lineNumber": 1047
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "(opts.skeuo as DeluxeSkeuoAccents)?.ledgerRules?.map(r =>\n      ledgerRule(r.x1, r.x2, r.y, r.accent ?? 'clay'),\n    ).join",
+          "lineNumber": 1053
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "(opts.skeuo as DeluxeSkeuoAccents)?.ledgerRules?.map",
+          "lineNumber": 1053
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "ledgerRule",
+          "lineNumber": 1054
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "washiTapeUnderlay",
+          "lineNumber": 1056
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "washiTape",
+          "lineNumber": 1059
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "pushpin",
+          "lineNumber": 1060
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "threadStitch",
+          "lineNumber": 1065
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "ribbonTab",
+          "lineNumber": 1071
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "waxSeal",
+          "lineNumber": 1078
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "dateStamp",
+          "lineNumber": 1085
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "rubberStamp",
+          "lineNumber": 1091
+        },
+        {
+          "caller": "stickerShell",
+          "callee": "cornerFold",
+          "lineNumber": 1092
+        },
+        {
+          "caller": "rasterize",
+          "callee": "sharp(Buffer.from(svg), { density: 72 * scale })\n    .png({ compressionLevel: 9 })\n    .toBuffer",
+          "lineNumber": 1192
+        },
+        {
+          "caller": "rasterize",
+          "callee": "sharp(Buffer.from(svg), { density: 72 * scale })\n    .png",
+          "lineNumber": 1192
+        },
+        {
+          "caller": "rasterize",
+          "callee": "sharp",
+          "lineNumber": 1192
+        },
+        {
+          "caller": "rasterize",
+          "callee": "Buffer.from",
+          "lineNumber": 1192
+        },
+        {
+          "caller": "rasterize",
+          "callee": "sharp(buf.data).toFile",
+          "lineNumber": 1196
+        },
+        {
+          "caller": "rasterize",
+          "callee": "sharp",
+          "lineNumber": 1196
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 27,
+        "functionCount": 25,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-friend-letter.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 96,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-mood-dot.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 126,
+      "nonEmptyLines": 111,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-stickers-remaining.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 343,
+      "nonEmptyLines": 330,
+      "functions": [
+        {
+          "name": "ship",
+          "startLine": 45,
+          "endLine": 51,
+          "params": [
+            "name",
+            "svg"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ship",
+          "callee": "existsSync",
+          "lineNumber": 47
+        },
+        {
+          "caller": "ship",
+          "callee": "mkdirSync",
+          "lineNumber": 47
+        },
+        {
+          "caller": "ship",
+          "callee": "writeFileSync",
+          "lineNumber": 48
+        },
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 48
+        },
+        {
+          "caller": "ship",
+          "callee": "rasterize",
+          "lineNumber": 49
+        },
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 49
+        },
+        {
+          "caller": "ship",
+          "callee": "console.log",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ship",
+          "callee": "Math.round",
+          "lineNumber": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-thought-flip.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 99,
+      "nonEmptyLines": 88,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-wave1-stickers.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 777,
+      "nonEmptyLines": 744,
+      "functions": [
+        {
+          "name": "ship",
+          "startLine": 56,
+          "endLine": 62,
+          "params": [
+            "name",
+            "svg"
+          ]
+        },
+        {
+          "name": "tickRow",
+          "startLine": 68,
+          "endLine": 76,
+          "params": [
+            "x0",
+            "y",
+            "n",
+            "accent",
+            "boxW"
+          ]
+        },
+        {
+          "name": "dotScale",
+          "startLine": 79,
+          "endLine": 94,
+          "params": [
+            "x0",
+            "x1",
+            "y",
+            "n",
+            "accent",
+            "radius",
+            "labelStart"
+          ]
+        },
+        {
+          "name": "qRow",
+          "startLine": 97,
+          "endLine": 109,
+          "params": [
+            "qNum",
+            "text",
+            "y",
+            "W",
+            "accent"
+          ]
+        },
+        {
+          "name": "_labeledLine",
+          "startLine": 118,
+          "endLine": 128,
+          "params": [
+            "label",
+            "y",
+            "W",
+            "accent",
+            "dotted",
+            "pad"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 752,
+          "endLine": 772,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ship",
+          "callee": "existsSync",
+          "lineNumber": 58
+        },
+        {
+          "caller": "ship",
+          "callee": "mkdirSync",
+          "lineNumber": 58
+        },
+        {
+          "caller": "ship",
+          "callee": "writeFileSync",
+          "lineNumber": 59
+        },
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 59
+        },
+        {
+          "caller": "ship",
+          "callee": "rasterize",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ship",
+          "callee": "console.log",
+          "lineNumber": 61
+        },
+        {
+          "caller": "ship",
+          "callee": "Math.round",
+          "lineNumber": 61
+        },
+        {
+          "caller": "tickRow",
+          "callee": "Array.from({ length: n }, (_, i) => {\n    const bx = x0 + i * gap;\n    return `  <rect x=\"${bx}\" y=\"${y}\" width=\"${boxW}\" height=\"${boxW}\" rx=\"3\" ry=\"3\"\n            fill=\"rgba(249,245,236,0.55)\"\n            stroke=\"${PALETTE[accent].edge}\" stroke-width=\"1.1\"/>`;\n  }).join",
+          "lineNumber": 70
+        },
+        {
+          "caller": "tickRow",
+          "callee": "Array.from",
+          "lineNumber": 70
+        },
+        {
+          "caller": "dotScale",
+          "callee": "Array.from({ length: n }, (_, i) => {\n    const cx = x0 + i * gap;\n    return `  <circle cx=\"${cx}\" cy=\"${y}\" r=\"${radius}\"\n            fill=\"rgba(249,245,236,0.65)\"\n            stroke=\"${PALETTE[accent].edge}\" stroke-width=\"1\"/>\n  <text x=\"${cx}\" y=\"${y + 4}\" text-anchor=\"middle\"\n        font-family=\"'JetBrains Mono', Menlo, monospace\"\n        font-size=\"10\" font-weight=\"500\"\n        fill=\"${PALETTE[accent].ink}\" fill-opacity=\"0.7\">${i + labelStart}</text>`;\n  }).join",
+          "lineNumber": 84
+        },
+        {
+          "caller": "dotScale",
+          "callee": "Array.from",
+          "lineNumber": 84
+        },
+        {
+          "caller": "qRow",
+          "callee": "kickerLine",
+          "lineNumber": 102
+        },
+        {
+          "caller": "qRow",
+          "callee": "dotScale",
+          "lineNumber": 108
+        },
+        {
+          "caller": "_labeledLine",
+          "callee": "dottedLine",
+          "lineNumber": 124
+        },
+        {
+          "caller": "_labeledLine",
+          "callee": "solidLine",
+          "lineNumber": 125
+        },
+        {
+          "caller": "_labeledLine",
+          "callee": "kickerLine",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 753
+        },
+        {
+          "caller": "main",
+          "callee": "stickerShell",
+          "lineNumber": 756
+        },
+        {
+          "caller": "main",
+          "callee": "s.body",
+          "lineNumber": 766
+        },
+        {
+          "caller": "main",
+          "callee": "archetype",
+          "lineNumber": 767
+        },
+        {
+          "caller": "main",
+          "callee": "ship",
+          "lineNumber": 769
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 771
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-wave2-stickers.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 875,
+      "nonEmptyLines": 858,
+      "functions": [
+        {
+          "name": "ship",
+          "startLine": 54,
+          "endLine": 60,
+          "params": [
+            "name",
+            "svg"
+          ]
+        },
+        {
+          "name": "dotScale",
+          "startLine": 63,
+          "endLine": 78,
+          "params": [
+            "x0",
+            "x1",
+            "y",
+            "n",
+            "accent",
+            "radius",
+            "labelStart"
+          ]
+        },
+        {
+          "name": "checkBox",
+          "startLine": 81,
+          "endLine": 90,
+          "params": [
+            "x",
+            "y",
+            "label",
+            "accent"
+          ]
+        },
+        {
+          "name": "_writingLines",
+          "startLine": 99,
+          "endLine": 106,
+          "params": [
+            "x0",
+            "x1",
+            "yStart",
+            "n",
+            "gap"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 850,
+          "endLine": 870,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 55
+        },
+        {
+          "caller": "ship",
+          "callee": "existsSync",
+          "lineNumber": 56
+        },
+        {
+          "caller": "ship",
+          "callee": "mkdirSync",
+          "lineNumber": 56
+        },
+        {
+          "caller": "ship",
+          "callee": "writeFileSync",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ship",
+          "callee": "rasterize",
+          "lineNumber": 58
+        },
+        {
+          "caller": "ship",
+          "callee": "path.join",
+          "lineNumber": 58
+        },
+        {
+          "caller": "ship",
+          "callee": "console.log",
+          "lineNumber": 59
+        },
+        {
+          "caller": "ship",
+          "callee": "Math.round",
+          "lineNumber": 59
+        },
+        {
+          "caller": "dotScale",
+          "callee": "Array.from({ length: n }, (_, i) => {\n    const cx = x0 + i * gap;\n    return `  <circle cx=\"${cx}\" cy=\"${y}\" r=\"${radius}\"\n            fill=\"rgba(249,245,236,0.65)\"\n            stroke=\"${PALETTE[accent].edge}\" stroke-width=\"1\"/>\n  <text x=\"${cx}\" y=\"${y + 4}\" text-anchor=\"middle\"\n        font-family=\"'JetBrains Mono', Menlo, monospace\"\n        font-size=\"10\" font-weight=\"500\"\n        fill=\"${PALETTE[accent].ink}\" fill-opacity=\"0.7\">${i + labelStart}</text>`;\n  }).join",
+          "lineNumber": 68
+        },
+        {
+          "caller": "dotScale",
+          "callee": "Array.from",
+          "lineNumber": 68
+        },
+        {
+          "caller": "_writingLines",
+          "callee": "Array.from({ length: n }, (_, i) => {\n    const y = yStart + i * gap;\n    return i === 0\n      ? solidLine(x0, y, x1, 1.4)\n      : dottedLine(x0, y, x1, 0.9);\n  }).join",
+          "lineNumber": 100
+        },
+        {
+          "caller": "_writingLines",
+          "callee": "Array.from",
+          "lineNumber": 100
+        },
+        {
+          "caller": "_writingLines",
+          "callee": "solidLine",
+          "lineNumber": 103
+        },
+        {
+          "caller": "_writingLines",
+          "callee": "dottedLine",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 851
+        },
+        {
+          "caller": "main",
+          "callee": "stickerShell",
+          "lineNumber": 854
+        },
+        {
+          "caller": "main",
+          "callee": "s.body",
+          "lineNumber": 864
+        },
+        {
+          "caller": "main",
+          "callee": "archetype",
+          "lineNumber": 865
+        },
+        {
+          "caller": "main",
+          "callee": "ship",
+          "lineNumber": 867
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 869
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/build-wins-jar.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 96,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/inline-v5-fonts.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 212,
+      "nonEmptyLines": 188,
+      "functions": [
+        {
+          "name": "buildFontStyleBlock",
+          "startLine": 63,
+          "endLine": 86,
+          "params": []
+        },
+        {
+          "name": "legacyStyleBlockRe",
+          "startLine": 99,
+          "endLine": 103,
+          "params": [
+            "markerAttr"
+          ]
+        },
+        {
+          "name": "processFile",
+          "startLine": 114,
+          "endLine": 152,
+          "params": [
+            "filePath",
+            "styleBlock"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 154,
+          "endLine": 210,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "buildFontStyleBlock",
+          "callee": "FONT_FILES.map(({ family, weight, woff2 }) => {\n    const p = path.join(FONTS_DIR, woff2);\n    const b64 = fs.readFileSync(p).toString('base64');\n    return [\n      `    @font-face {`,\n      `      font-family: '${family}';`,\n      `      src: url(data:font/woff2;base64,${b64}) format('woff2');`,\n      `      font-weight: ${weight};`,\n      `      font-style: normal;`,\n      `      font-display: block;`,\n      `    }`,\n    ].join('\\n');\n  }).join",
+          "lineNumber": 64
+        },
+        {
+          "caller": "buildFontStyleBlock",
+          "callee": "FONT_FILES.map",
+          "lineNumber": 64
+        },
+        {
+          "caller": "buildFontStyleBlock",
+          "callee": "path.join",
+          "lineNumber": 65
+        },
+        {
+          "caller": "buildFontStyleBlock",
+          "callee": "fs.readFileSync(p).toString",
+          "lineNumber": 66
+        },
+        {
+          "caller": "buildFontStyleBlock",
+          "callee": "fs.readFileSync",
+          "lineNumber": 66
+        },
+        {
+          "caller": "buildFontStyleBlock",
+          "callee": "[\n      `    @font-face {`,\n      `      font-family: '${family}';`,\n      `      src: url(data:font/woff2;base64,${b64}) format('woff2');`,\n      `      font-weight: ${weight};`,\n      `      font-style: normal;`,\n      `      font-display: block;`,\n      `    }`,\n    ].join",
+          "lineNumber": 67
+        },
+        {
+          "caller": "buildFontStyleBlock",
+          "callee": "[\n    `<style ${MARKER_ATTR_CURRENT}>`,\n    `  /* Auto-inlined by scripts/inline-v5-fonts.ts · ${FONT_FILES.length} @font-face rules`,\n    `   * Keeps FIND-0010 self-contained guarantee: open the HTML → fonts just work.`,\n    `   * Regenerate: npx tsx scripts/inline-v5-fonts.ts */`,\n    rules,\n    `</style>`,\n  ].join",
+          "lineNumber": 78
+        },
+        {
+          "caller": "legacyStyleBlockRe",
+          "callee": "markerAttr.replace",
+          "lineNumber": 101
+        },
+        {
+          "caller": "processFile",
+          "callee": "fs.readFileSync",
+          "lineNumber": 115
+        },
+        {
+          "caller": "processFile",
+          "callee": "raw.includes",
+          "lineNumber": 119
+        },
+        {
+          "caller": "processFile",
+          "callee": "raw.includes",
+          "lineNumber": 125
+        },
+        {
+          "caller": "processFile",
+          "callee": "raw.replace",
+          "lineNumber": 126
+        },
+        {
+          "caller": "processFile",
+          "callee": "legacyStyleBlockRe",
+          "lineNumber": 126
+        },
+        {
+          "caller": "processFile",
+          "callee": "fs.writeFileSync",
+          "lineNumber": 127
+        },
+        {
+          "caller": "processFile",
+          "callee": "GOOGLE_FONTS_RE.test",
+          "lineNumber": 139
+        },
+        {
+          "caller": "processFile",
+          "callee": "raw.replace",
+          "lineNumber": 140
+        },
+        {
+          "caller": "processFile",
+          "callee": "fs.writeFileSync",
+          "lineNumber": 141
+        },
+        {
+          "caller": "main",
+          "callee": "buildFontStyleBlock",
+          "lineNumber": 155
+        },
+        {
+          "caller": "main",
+          "callee": "(styleBlock.length / 1024).toFixed",
+          "lineNumber": 156
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 157
+        },
+        {
+          "caller": "main",
+          "callee": "console.warn",
+          "lineNumber": 160
+        },
+        {
+          "caller": "main",
+          "callee": "(STYLE_BLOCK_WARN_BYTES / 1024).toFixed",
+          "lineNumber": 161
+        },
+        {
+          "caller": "main",
+          "callee": "console.warn",
+          "lineNumber": 163
+        },
+        {
+          "caller": "main",
+          "callee": "fs\n    .readdirSync(V5_DIR)\n    .filter((f) => f.endsWith('.html'))\n    .sort()\n    .map",
+          "lineNumber": 168
+        },
+        {
+          "caller": "main",
+          "callee": "fs\n    .readdirSync(V5_DIR)\n    .filter((f) => f.endsWith('.html'))\n    .sort",
+          "lineNumber": 168
+        },
+        {
+          "caller": "main",
+          "callee": "fs\n    .readdirSync(V5_DIR)\n    .filter",
+          "lineNumber": 168
+        },
+        {
+          "caller": "main",
+          "callee": "fs\n    .readdirSync",
+          "lineNumber": 168
+        },
+        {
+          "caller": "main",
+          "callee": "f.endsWith",
+          "lineNumber": 170
+        },
+        {
+          "caller": "main",
+          "callee": "path.join",
+          "lineNumber": 172
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "process.exit",
+          "lineNumber": 176
+        },
+        {
+          "caller": "main",
+          "callee": "files.map",
+          "lineNumber": 179
+        },
+        {
+          "caller": "main",
+          "callee": "processFile",
+          "lineNumber": 179
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 183
+        },
+        {
+          "caller": "main",
+          "callee": "(r.bytesBefore / 1024).toFixed",
+          "lineNumber": 185
+        },
+        {
+          "caller": "main",
+          "callee": "(r.bytesAfter / 1024).toFixed",
+          "lineNumber": 186
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 188
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 190
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 193
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 200
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 201
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 202
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 203
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 204
+        },
+        {
+          "caller": "main",
+          "callee": "process.exit",
+          "lineNumber": 205
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 208
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 209
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    }
+  ]
+}

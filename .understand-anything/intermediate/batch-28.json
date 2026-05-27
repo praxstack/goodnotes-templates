@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-meeting-notes/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-meeting-notes/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-meeting-notes/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-meeting-notes/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-meeting-notes/meeting-notes.html",
+      "type": "file",
+      "name": "meeting-notes.html",
+      "filePath": "packages/packs-meeting-notes/meeting-notes.html",
+      "summary": "HTML template (meeting-notes.html, 758 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

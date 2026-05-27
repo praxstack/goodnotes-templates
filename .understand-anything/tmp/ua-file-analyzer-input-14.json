@@ -1,0 +1,91 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "audit/iteration-4/CODEBASE_AUDIT_REPORT.json.md",
+      "language": "markdown",
+      "sizeLines": 222,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/CODEBASE_AUDIT_REPORT.md",
+      "language": "markdown",
+      "sizeLines": 350,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/IMPLEMENTATION_ROADMAP.csv",
+      "language": "csv",
+      "sizeLines": 10,
+      "fileCategory": "data"
+    },
+    {
+      "path": "audit/iteration-4/IMPLEMENTATION_ROADMAP.md",
+      "language": "markdown",
+      "sizeLines": 239,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/README.md",
+      "language": "markdown",
+      "sizeLines": 50,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/SLIDE_OUTLINE.md",
+      "language": "markdown",
+      "sizeLines": 210,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/STATUS.md",
+      "language": "markdown",
+      "sizeLines": 238,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/TEST_STRATEGY.md",
+      "language": "markdown",
+      "sizeLines": 185,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/architecture.md",
+      "language": "markdown",
+      "sizeLines": 229,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/deferred-decisions.md",
+      "language": "markdown",
+      "sizeLines": 81,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/findings.md",
+      "language": "markdown",
+      "sizeLines": 628,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-4/phase-validation.md",
+      "language": "markdown",
+      "sizeLines": 236,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "audit/iteration-4/CODEBASE_AUDIT_REPORT.json.md": [],
+    "audit/iteration-4/CODEBASE_AUDIT_REPORT.md": [],
+    "audit/iteration-4/IMPLEMENTATION_ROADMAP.csv": [],
+    "audit/iteration-4/IMPLEMENTATION_ROADMAP.md": [],
+    "audit/iteration-4/README.md": [],
+    "audit/iteration-4/SLIDE_OUTLINE.md": [],
+    "audit/iteration-4/STATUS.md": [],
+    "audit/iteration-4/TEST_STRATEGY.md": [],
+    "audit/iteration-4/architecture.md": [],
+    "audit/iteration-4/deferred-decisions.md": [],
+    "audit/iteration-4/findings.md": [],
+    "audit/iteration-4/phase-validation.md": []
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-goal-setting/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-goal-setting/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-goal-setting/goal-setting.html",
+      "type": "file",
+      "name": "goal-setting.html",
+      "filePath": "packages/packs-goal-setting/goal-setting.html",
+      "summary": "HTML template (goal-setting.html, 291 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:packages/packs-goal-setting/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-goal-setting/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

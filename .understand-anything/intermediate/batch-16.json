@@ -1,0 +1,109 @@
+{
+  "nodes": [
+    {
+      "id": "document:docs/gstack-archive/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "docs/gstack-archive/README.md",
+      "summary": "Project README with 5 sections (59 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/gstack-archive/praxlannister-main-design-20260409-194856.md",
+      "type": "document",
+      "name": "praxlannister-main-design-20260409-194856.md",
+      "filePath": "docs/gstack-archive/praxlannister-main-design-20260409-194856.md",
+      "summary": "Documentation: 24 sections, 273 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/gstack-archive/praxlannister-main-design-20260430-163246.md",
+      "type": "document",
+      "name": "praxlannister-main-design-20260430-163246.md",
+      "filePath": "docs/gstack-archive/praxlannister-main-design-20260430-163246.md",
+      "summary": "Documentation: 28 sections, 521 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/gstack-archive/praxlannister-main-design-review-20260430-2058.md",
+      "type": "document",
+      "name": "praxlannister-main-design-review-20260430-2058.md",
+      "filePath": "docs/gstack-archive/praxlannister-main-design-review-20260430-2058.md",
+      "summary": "Documentation: 18 sections, 287 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/gstack-archive/praxlannister-main-devex-review-20260430-2110.md",
+      "type": "document",
+      "name": "praxlannister-main-devex-review-20260430-2110.md",
+      "filePath": "docs/gstack-archive/praxlannister-main-devex-review-20260430-2110.md",
+      "summary": "Documentation: 20 sections, 285 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/gstack-archive/praxlannister-main-eng-review-20260430-1935.md",
+      "type": "document",
+      "name": "praxlannister-main-eng-review-20260430-1935.md",
+      "filePath": "docs/gstack-archive/praxlannister-main-eng-review-20260430-1935.md",
+      "summary": "Documentation: 17 sections, 299 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/gstack-archive/praxlannister-main-eng-review-test-plan-20260430-1735.md",
+      "type": "document",
+      "name": "praxlannister-main-eng-review-test-plan-20260430-1735.md",
+      "filePath": "docs/gstack-archive/praxlannister-main-eng-review-test-plan-20260430-1735.md",
+      "summary": "Documentation: 9 sections, 65 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/gstack-archive/praxlannister-main-test-plan-20260409-203137.md",
+      "type": "document",
+      "name": "praxlannister-main-test-plan-20260409-203137.md",
+      "filePath": "docs/gstack-archive/praxlannister-main-test-plan-20260409-203137.md",
+      "summary": "Documentation: 5 sections, 36 lines.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "architecture"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

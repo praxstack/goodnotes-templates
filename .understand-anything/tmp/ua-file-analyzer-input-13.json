@@ -1,0 +1,91 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "audit/iteration-1/GAPS.md",
+      "language": "markdown",
+      "sizeLines": 16,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/architecture.md",
+      "language": "markdown",
+      "sizeLines": 62,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/claims-ledger.md",
+      "language": "markdown",
+      "sizeLines": 31,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/docs-review.md",
+      "language": "markdown",
+      "sizeLines": 38,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/findings.json",
+      "language": "json",
+      "sizeLines": 1100,
+      "fileCategory": "config"
+    },
+    {
+      "path": "audit/iteration-1/findings.md",
+      "language": "markdown",
+      "sizeLines": 253,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/performance-and-observability.md",
+      "language": "markdown",
+      "sizeLines": 60,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/privacy-review.md",
+      "language": "markdown",
+      "sizeLines": 26,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/supply-chain.md",
+      "language": "markdown",
+      "sizeLines": 135,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/tests-and-quality-gates.md",
+      "language": "markdown",
+      "sizeLines": 93,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/threat-model.md",
+      "language": "markdown",
+      "sizeLines": 54,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "audit/iteration-1/ui-ux-a11y.md",
+      "language": "markdown",
+      "sizeLines": 69,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "audit/iteration-1/GAPS.md": [],
+    "audit/iteration-1/architecture.md": [],
+    "audit/iteration-1/claims-ledger.md": [],
+    "audit/iteration-1/docs-review.md": [],
+    "audit/iteration-1/findings.json": [],
+    "audit/iteration-1/findings.md": [],
+    "audit/iteration-1/performance-and-observability.md": [],
+    "audit/iteration-1/privacy-review.md": [],
+    "audit/iteration-1/supply-chain.md": [],
+    "audit/iteration-1/tests-and-quality-gates.md": [],
+    "audit/iteration-1/threat-model.md": [],
+    "audit/iteration-1/ui-ux-a11y.md": []
+  }
+}

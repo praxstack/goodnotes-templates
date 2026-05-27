@@ -1,0 +1,112 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "docs/CUSTOMISATION.md",
+      "language": "markdown",
+      "sizeLines": 151,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/HLD-self-contained-templates.md",
+      "language": "markdown",
+      "sizeLines": 233,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/LLD-self-contained-templates.md",
+      "language": "markdown",
+      "sizeLines": 571,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/NORTH-STAR.md",
+      "language": "markdown",
+      "sizeLines": 167,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design-review-v5-2026-04-27.md",
+      "language": "markdown",
+      "sizeLines": 337,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/llm-council-context-window-debug.md",
+      "language": "markdown",
+      "sizeLines": 111,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-ceo-review-sticker-expansion-v1.md",
+      "language": "markdown",
+      "sizeLines": 385,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-ceo-review-v2-10x-expansion.md",
+      "language": "markdown",
+      "sizeLines": 398,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-ceo-review-v3-refined.md",
+      "language": "markdown",
+      "sizeLines": 224,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-ceo-review-v4-five-decisions-locked.md",
+      "language": "markdown",
+      "sizeLines": 183,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-ceo-review-v5-10x-100x-expansion.md",
+      "language": "markdown",
+      "sizeLines": 795,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-design-review-v4-five-decisions.md",
+      "language": "markdown",
+      "sizeLines": 183,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-eng-review-v4-five-decisions.md",
+      "language": "markdown",
+      "sizeLines": 129,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-eng-review-weekly-monthly-stickers.md",
+      "language": "markdown",
+      "sizeLines": 340,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan-weekly-monthly-stickers.md",
+      "language": "markdown",
+      "sizeLines": 219,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "docs/CUSTOMISATION.md": [],
+    "docs/HLD-self-contained-templates.md": [],
+    "docs/LLD-self-contained-templates.md": [],
+    "docs/NORTH-STAR.md": [],
+    "docs/design-review-v5-2026-04-27.md": [],
+    "docs/llm-council-context-window-debug.md": [],
+    "docs/plan-ceo-review-sticker-expansion-v1.md": [],
+    "docs/plan-ceo-review-v2-10x-expansion.md": [],
+    "docs/plan-ceo-review-v3-refined.md": [],
+    "docs/plan-ceo-review-v4-five-decisions-locked.md": [],
+    "docs/plan-ceo-review-v5-10x-100x-expansion.md": [],
+    "docs/plan-design-review-v4-five-decisions.md": [],
+    "docs/plan-eng-review-v4-five-decisions.md": [],
+    "docs/plan-eng-review-weekly-monthly-stickers.md": [],
+    "docs/plan-weekly-monthly-stickers.md": []
+  }
+}

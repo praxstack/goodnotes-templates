@@ -1,0 +1,56 @@
+# .understandignore — patterns for files/dirs to exclude from analysis
+# Syntax: same as .gitignore (globs, # comments, ! negation, trailing / for dirs)
+# Lines below are suggestions — uncomment to activate.
+# Use ! prefix to force-include something excluded by defaults.
+#
+# Built-in defaults (always excluded unless negated):
+#   node_modules/, .git/, dist/, build/, obj/, *.lock, *.min.js, etc.
+#
+# --- From .gitignore (uncomment to exclude) ---
+
+# *.tgz
+# output/templates/
+# output/stickers/
+# output/pages/
+# output/previews/
+# output/manifest.json
+# !output/.gitkeep
+# .DS_Store
+# Thumbs.db
+# *.swp
+# *.swo
+# .env
+# .env.local
+# packs/journals/prax-journal/profile.json
+# packs/journals/prax-journal/profile.*.json
+# !packs/journals/prax-journal/profile.example.json
+# packages/packs-prax-journal/profile.json
+# packages/packs-prax-journal/profile.*.json
+# !packages/packs-prax-journal/profile.example.json
+# !packages/packs-prax-journal/profile.README.md
+# packs/journals/prax-journal/stickers/*/*.png
+# npm-debug.log*
+# assets/fonts/*.ttf
+# assets/fonts/*.otf
+# output/
+# .superpowers/
+# .gstack/
+# packages/*/tsconfig.tsbuildinfo
+# packages/*/dist/
+# apps/*/dist/
+# test-results/
+# playwright-report/
+# /tests/e2e/.auth/
+
+# --- Detected directories (uncomment to exclude) ---
+
+# tests/
+# docs/
+# examples/
+# scripts/
+
+# --- Test file patterns (uncomment to exclude) ---
+
+# *.test.*
+# *.spec.*
+# *.snap

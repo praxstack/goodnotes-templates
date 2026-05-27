@@ -1,0 +1,109 @@
+{
+  "nodes": [
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/monthly.dark.css",
+      "type": "file",
+      "name": "monthly.dark.css",
+      "filePath": "packages/packs-prax-journal/versions/v2/monthly.dark.css",
+      "summary": "Stylesheet (monthly.dark.css, 21 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/monthly.html",
+      "type": "file",
+      "name": "monthly.html",
+      "filePath": "packages/packs-prax-journal/versions/v2/monthly.html",
+      "summary": "HTML template (monthly.html, 497 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/reflect.dark.css",
+      "type": "file",
+      "name": "reflect.dark.css",
+      "filePath": "packages/packs-prax-journal/versions/v2/reflect.dark.css",
+      "summary": "Stylesheet (reflect.dark.css, 21 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/reflect.html",
+      "type": "file",
+      "name": "reflect.html",
+      "filePath": "packages/packs-prax-journal/versions/v2/reflect.html",
+      "summary": "HTML template (reflect.html, 443 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/today.dark.css",
+      "type": "file",
+      "name": "today.dark.css",
+      "filePath": "packages/packs-prax-journal/versions/v2/today.dark.css",
+      "summary": "Stylesheet (today.dark.css, 21 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/today.html",
+      "type": "file",
+      "name": "today.html",
+      "filePath": "packages/packs-prax-journal/versions/v2/today.html",
+      "summary": "HTML template (today.html, 649 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/weekly.dark.css",
+      "type": "file",
+      "name": "weekly.dark.css",
+      "filePath": "packages/packs-prax-journal/versions/v2/weekly.dark.css",
+      "summary": "Stylesheet (weekly.dark.css, 21 lines).",
+      "tags": [
+        "stylesheet",
+        "css",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prax-journal/versions/v2/weekly.html",
+      "type": "file",
+      "name": "weekly.html",
+      "filePath": "packages/packs-prax-journal/versions/v2/weekly.html",
+      "summary": "HTML template (weekly.html, 425 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

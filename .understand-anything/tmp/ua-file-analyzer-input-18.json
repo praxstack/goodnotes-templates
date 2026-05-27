@@ -1,0 +1,105 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/core/assets/themes/bold-tech-dark.css",
+      "language": "css",
+      "sizeLines": 23,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/bold-tech.css",
+      "language": "css",
+      "sizeLines": 28,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/bubblegum-dark.css",
+      "language": "css",
+      "sizeLines": 23,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/bubblegum.css",
+      "language": "css",
+      "sizeLines": 28,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/caffeine-dark.css",
+      "language": "css",
+      "sizeLines": 23,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/caffeine.css",
+      "language": "css",
+      "sizeLines": 25,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/candyland-dark.css",
+      "language": "css",
+      "sizeLines": 23,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/candyland.css",
+      "language": "css",
+      "sizeLines": 27,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/claude-dark.css",
+      "language": "css",
+      "sizeLines": 23,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/claude.css",
+      "language": "css",
+      "sizeLines": 25,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/cyberpunk-dark.css",
+      "language": "css",
+      "sizeLines": 23,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/cyberpunk.css",
+      "language": "css",
+      "sizeLines": 27,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/doom64-dark.css",
+      "language": "css",
+      "sizeLines": 23,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/core/assets/themes/doom64.css",
+      "language": "css",
+      "sizeLines": 27,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "packages/core/assets/themes/bold-tech-dark.css": [],
+    "packages/core/assets/themes/bold-tech.css": [],
+    "packages/core/assets/themes/bubblegum-dark.css": [],
+    "packages/core/assets/themes/bubblegum.css": [],
+    "packages/core/assets/themes/caffeine-dark.css": [],
+    "packages/core/assets/themes/caffeine.css": [],
+    "packages/core/assets/themes/candyland-dark.css": [],
+    "packages/core/assets/themes/candyland.css": [],
+    "packages/core/assets/themes/claude-dark.css": [],
+    "packages/core/assets/themes/claude.css": [],
+    "packages/core/assets/themes/cyberpunk-dark.css": [],
+    "packages/core/assets/themes/cyberpunk.css": [],
+    "packages/core/assets/themes/doom64-dark.css": [],
+    "packages/core/assets/themes/doom64.css": []
+  }
+}

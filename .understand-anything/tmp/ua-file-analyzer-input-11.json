@@ -1,0 +1,35 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "apps/gallery/DESIGN.md",
+      "language": "markdown",
+      "sizeLines": 134,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "apps/gallery/README.md",
+      "language": "markdown",
+      "sizeLines": 79,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "apps/gallery/package.json",
+      "language": "json",
+      "sizeLines": 29,
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/gallery/tsconfig.json",
+      "language": "json",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "apps/gallery/DESIGN.md": [],
+    "apps/gallery/README.md": [],
+    "apps/gallery/package.json": [],
+    "apps/gallery/tsconfig.json": []
+  }
+}

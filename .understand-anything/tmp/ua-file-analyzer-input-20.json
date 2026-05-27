@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-cornell-notes/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-cornell-notes/cornell-notes.html",
+      "language": "html",
+      "sizeLines": 523,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-cornell-notes/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-cornell-notes/README.md": [],
+    "packages/packs-cornell-notes/cornell-notes.html": [],
+    "packages/packs-cornell-notes/manifest.json": []
+  }
+}

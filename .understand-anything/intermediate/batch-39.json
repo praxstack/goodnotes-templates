@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "id": "document:packages/packs-prompted-journal/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "packages/packs-prompted-journal/README.md",
+      "summary": "Project README with 4 sections (25 lines) \u2014 primary entry-point documentation.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:packages/packs-prompted-journal/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "packages/packs-prompted-journal/manifest.json",
+      "summary": "manifest.json configuration file (17 lines).",
+      "tags": [
+        "configuration",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:packages/packs-prompted-journal/prompted-journal.html",
+      "type": "file",
+      "name": "prompted-journal.html",
+      "filePath": "packages/packs-prompted-journal/prompted-journal.html",
+      "summary": "HTML template (prompted-journal.html, 486 lines).",
+      "tags": [
+        "html",
+        "template",
+        "frontend"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/praxlannister/Documents/workspace/goodnotes-templates",
+  "batchFiles": [
+    {
+      "path": "packages/packs-fitness-log/README.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "packages/packs-fitness-log/fitness-log.html",
+      "language": "html",
+      "sizeLines": 411,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "packages/packs-fitness-log/manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "packages/packs-fitness-log/README.md": [],
+    "packages/packs-fitness-log/fitness-log.html": [],
+    "packages/packs-fitness-log/manifest.json": []
+  }
+}

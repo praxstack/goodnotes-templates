@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "baseBranch": "HEAD~3",
+  "generatedAt": "2026-05-27T03:53:48.124Z",
+  "changedFiles": [
+    "audit/iteration-6/STATUS.md",
+    "packages/cli/src/index.ts",
+    "packages/core/package.json",
+    "packages/core/src/audit.ts",
+    "tests/unit/audit.test.ts",
+    "tests/unit/pdf-postprocess-coverage.test.ts"
+  ],
+  "changedNodeIds": [
+    "config:packages/core/package.json",
+    "document:audit/iteration-6/STATUS.md",
+    "file:packages/cli/src/index.ts",
+    "file:packages/core/src/audit.ts",
+    "file:tests/unit/audit.test.ts",
+    "file:tests/unit/pdf-postprocess-coverage.test.ts",
+    "function:packages/core/src/audit.ts:auditPack",
+    "function:packages/core/src/audit.ts:checkEntryExists",
+    "function:packages/core/src/audit.ts:checkManifestValid",
+    "function:packages/core/src/audit.ts:checkTokensUsed",
+    "function:packages/core/src/audit.ts:formatAuditPretty",
+    "function:tests/unit/audit.test.ts:withPackDir"
+  ],
+  "affectedNodeIds": [
+    "config:packages/cli/tsconfig.json",
+    "config:packages/core/tsconfig.json",
+    "config:tsconfig.base.json",
+    "config:tsconfig.json",
+    "document:README.md",
+    "file:packages/cli/src/preview-server.ts",
+    "file:packages/cli/src/scaffold.ts",
+    "file:packages/core/src/dimensions.ts",
+    "file:packages/core/src/errors.ts",
+    "file:packages/core/src/generator.ts",
+    "file:packages/core/src/pdf-postprocess.ts",
+    "file:packages/core/src/puppeteer-renderer.ts",
+    "file:packages/core/src/types/registry.ts",
+    "file:packages/core/src/utils/locale.ts",
+    "pipeline:.github/workflows/audit.yml",
+    "pipeline:.github/workflows/ci.yml"
+  ]
+}

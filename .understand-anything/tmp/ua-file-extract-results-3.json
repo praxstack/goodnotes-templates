@@ -1,0 +1,1443 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/audit.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 311,
+      "nonEmptyLines": 282,
+      "functions": [
+        {
+          "name": "checkManifestValid",
+          "startLine": 65,
+          "endLine": 112,
+          "params": [
+            "packDir"
+          ]
+        },
+        {
+          "name": "checkEntryExists",
+          "startLine": 121,
+          "endLine": 153,
+          "params": [
+            "packDir"
+          ]
+        },
+        {
+          "name": "checkTokensUsed",
+          "startLine": 167,
+          "endLine": 207,
+          "params": [
+            "packDir"
+          ]
+        },
+        {
+          "name": "auditPack",
+          "startLine": 237,
+          "endLine": 273,
+          "params": [
+            "packId",
+            "packDir"
+          ]
+        },
+        {
+          "name": "formatAuditPretty",
+          "startLine": 280,
+          "endLine": 311,
+          "params": [
+            "result"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "checkManifestValid",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "checkEntryExists",
+          "line": 121,
+          "isDefault": false
+        },
+        {
+          "name": "checkTokensUsed",
+          "line": 167,
+          "isDefault": false
+        },
+        {
+          "name": "AUDIT_RULES",
+          "line": 218,
+          "isDefault": false
+        },
+        {
+          "name": "auditPack",
+          "line": 237,
+          "isDefault": false
+        },
+        {
+          "name": "formatAuditPretty",
+          "line": 280,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "checkManifestValid",
+          "callee": "path.join",
+          "lineNumber": 66
+        },
+        {
+          "caller": "checkManifestValid",
+          "callee": "fs.readFile",
+          "lineNumber": 69
+        },
+        {
+          "caller": "checkManifestValid",
+          "callee": "JSON.parse",
+          "lineNumber": 81
+        },
+        {
+          "caller": "checkManifestValid",
+          "callee": "parseManifest",
+          "lineNumber": 92
+        },
+        {
+          "caller": "checkManifestValid",
+          "callee": "err.details.issues.map",
+          "lineNumber": 98
+        },
+        {
+          "caller": "checkManifestValid",
+          "callee": "issue.path.join",
+          "lineNumber": 101
+        },
+        {
+          "caller": "checkEntryExists",
+          "callee": "path.join",
+          "lineNumber": 122
+        },
+        {
+          "caller": "checkEntryExists",
+          "callee": "fs.readFile",
+          "lineNumber": 125
+        },
+        {
+          "caller": "checkEntryExists",
+          "callee": "JSON.parse",
+          "lineNumber": 126
+        },
+        {
+          "caller": "checkEntryExists",
+          "callee": "path.join",
+          "lineNumber": 141
+        },
+        {
+          "caller": "checkEntryExists",
+          "callee": "fs.access",
+          "lineNumber": 143
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "path.join",
+          "lineNumber": 177
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "fs.readFile",
+          "lineNumber": 180
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "JSON.parse",
+          "lineNumber": 181
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "path.join",
+          "lineNumber": 187
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "fs.readFile",
+          "lineNumber": 190
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "SHARED_TOKENS.filter",
+          "lineNumber": 195
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "html.includes",
+          "lineNumber": 195
+        },
+        {
+          "caller": "checkTokensUsed",
+          "callee": "missing.join",
+          "lineNumber": 202
+        },
+        {
+          "caller": "auditPack",
+          "callee": "fs.access",
+          "lineNumber": 240
+        },
+        {
+          "caller": "auditPack",
+          "callee": "Object.values",
+          "lineNumber": 256
+        },
+        {
+          "caller": "auditPack",
+          "callee": "rule",
+          "lineNumber": 258
+        },
+        {
+          "caller": "auditPack",
+          "callee": "findings.push",
+          "lineNumber": 259
+        },
+        {
+          "caller": "auditPack",
+          "callee": "findings.some",
+          "lineNumber": 262
+        },
+        {
+          "caller": "auditPack",
+          "callee": "findings.some",
+          "lineNumber": 263
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 282
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 283
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 284
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 285
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 286
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 287
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 290
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 291
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.join",
+          "lineNumber": 292
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "byRule.has",
+          "lineNumber": 297
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "byRule.set",
+          "lineNumber": 297
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "byRule.get(f.rule)!.push",
+          "lineNumber": 298
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "byRule.get",
+          "lineNumber": 298
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 305
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.push",
+          "lineNumber": 309
+        },
+        {
+          "caller": "formatAuditPretty",
+          "callee": "lines.join",
+          "lineNumber": 310
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/errors.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 327,
+      "nonEmptyLines": 305,
+      "functions": [
+        {
+          "name": "composeMessage",
+          "startLine": 41,
+          "endLine": 47,
+          "params": [
+            "tiers"
+          ]
+        },
+        {
+          "name": "isPretextError",
+          "startLine": 325,
+          "endLine": 327,
+          "params": [
+            "err"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "RegistryFetchError",
+          "startLine": 89,
+          "endLine": 109,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        },
+        {
+          "name": "PackNotFoundError",
+          "startLine": 125,
+          "endLine": 149,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        },
+        {
+          "name": "RendererCrashError",
+          "startLine": 169,
+          "endLine": 191,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        },
+        {
+          "name": "StandaloneCompileError",
+          "startLine": 210,
+          "endLine": 244,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        },
+        {
+          "name": "RegistryParseError",
+          "startLine": 262,
+          "endLine": 294,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RegistryFetchError",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "PackNotFoundError",
+          "line": 125,
+          "isDefault": false
+        },
+        {
+          "name": "RendererCrashError",
+          "line": 169,
+          "isDefault": false
+        },
+        {
+          "name": "StandaloneCompileError",
+          "line": 210,
+          "isDefault": false
+        },
+        {
+          "name": "RegistryParseError",
+          "line": 262,
+          "isDefault": false
+        },
+        {
+          "name": "isPretextError",
+          "line": 325,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 64
+        },
+        {
+          "caller": "constructor",
+          "callee": "Error.captureStackTrace",
+          "lineNumber": 68
+        },
+        {
+          "caller": "constructor",
+          "callee": "composeMessage",
+          "lineNumber": 102
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 107
+        },
+        {
+          "caller": "constructor",
+          "callee": "suggestions.map((s) => `'${s}'`).join",
+          "lineNumber": 140
+        },
+        {
+          "caller": "constructor",
+          "callee": "suggestions.map",
+          "lineNumber": 140
+        },
+        {
+          "caller": "constructor",
+          "callee": "composeMessage",
+          "lineNumber": 142
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 147
+        },
+        {
+          "caller": "constructor",
+          "callee": "composeMessage",
+          "lineNumber": 184
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 189
+        },
+        {
+          "caller": "constructor",
+          "callee": "composeMessage",
+          "lineNumber": 231
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 242
+        },
+        {
+          "caller": "constructor",
+          "callee": "issues.slice(0, 3).map",
+          "lineNumber": 282
+        },
+        {
+          "caller": "constructor",
+          "callee": "issues.slice",
+          "lineNumber": 282
+        },
+        {
+          "caller": "constructor",
+          "callee": "i.path.join",
+          "lineNumber": 283
+        },
+        {
+          "caller": "constructor",
+          "callee": "composeMessage",
+          "lineNumber": 287
+        },
+        {
+          "caller": "constructor",
+          "callee": "firstThree.join",
+          "lineNumber": 290
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 292
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 2,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "packages/core/src/registry-resolve.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 147,
+      "nonEmptyLines": 139,
+      "functions": [
+        {
+          "name": "nearestIds",
+          "startLine": 39,
+          "endLine": 52,
+          "params": [
+            "target",
+            "all",
+            "n"
+          ]
+        },
+        {
+          "name": "resolvePackVersion",
+          "startLine": 64,
+          "endLine": 115,
+          "params": [
+            "registry",
+            "id",
+            "range"
+          ]
+        },
+        {
+          "name": "listPackIds",
+          "startLine": 145,
+          "endLine": 147,
+          "params": [
+            "registry"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "PackVersionNotFoundError",
+          "startLine": 123,
+          "endLine": 139,
+          "methods": [
+            "constructor"
+          ],
+          "properties": [
+            "code"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "resolvePackVersion",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "PackVersionNotFoundError",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "listPackIds",
+          "line": 145,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "nearestIds",
+          "callee": "target.toLowerCase",
+          "lineNumber": 40
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "all\n    .filter((id) => id !== target)\n    .map((id) => {\n      const l = id.toLowerCase();\n      let score = 0;\n      if (l.includes(lower) || lower.includes(l)) score += 3;\n      if (l[0] === lower[0]) score += 1;\n      return { id, score };\n    })\n    .sort",
+          "lineNumber": 41
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "all\n    .filter((id) => id !== target)\n    .map",
+          "lineNumber": 41
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "all\n    .filter",
+          "lineNumber": 41
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "id.toLowerCase",
+          "lineNumber": 44
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "l.includes",
+          "lineNumber": 46
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "lower.includes",
+          "lineNumber": 46
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "scored.slice(0, n).map",
+          "lineNumber": 51
+        },
+        {
+          "caller": "nearestIds",
+          "callee": "scored.slice",
+          "lineNumber": 51
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "validRange",
+          "lineNumber": 69
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "[...new Set(registry.packs.map((p) => p.id))].sort",
+          "lineNumber": 78
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "registry.packs.map",
+          "lineNumber": 78
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "registry.packs.filter",
+          "lineNumber": 79
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "nearestIds",
+          "lineNumber": 83
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "candidates.map((p) => p.version).filter",
+          "lineNumber": 91
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "candidates.map",
+          "lineNumber": 91
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "valid",
+          "lineNumber": 91
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "maxSatisfying",
+          "lineNumber": 92
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "versions.sort",
+          "lineNumber": 101
+        },
+        {
+          "caller": "resolvePackVersion",
+          "callee": "candidates.find",
+          "lineNumber": 107
+        },
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 133
+        },
+        {
+          "caller": "constructor",
+          "callee": "availableVersions.join",
+          "lineNumber": 135
+        },
+        {
+          "caller": "listPackIds",
+          "callee": "[...new Set(registry.packs.map((p) => p.id))].sort",
+          "lineNumber": 146
+        },
+        {
+          "caller": "listPackIds",
+          "callee": "registry.packs.map",
+          "lineNumber": 146
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/core/src/standalone-builder.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 268,
+      "nonEmptyLines": 251,
+      "functions": [
+        {
+          "name": "extractStyles",
+          "startLine": 89,
+          "endLine": 95,
+          "params": [
+            "html"
+          ]
+        },
+        {
+          "name": "extractBody",
+          "startLine": 102,
+          "endLine": 114,
+          "params": [
+            "html",
+            "page"
+          ]
+        },
+        {
+          "name": "bodyClass",
+          "startLine": 121,
+          "endLine": 126,
+          "params": [
+            "html"
+          ]
+        },
+        {
+          "name": "escapeAttr",
+          "startLine": 213,
+          "endLine": 219,
+          "params": [
+            "s"
+          ]
+        },
+        {
+          "name": "buildStandaloneHtml",
+          "startLine": 227,
+          "endLine": 268,
+          "params": [
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "buildStandaloneHtml",
+          "line": 227,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "extractStyles",
+          "callee": "re.exec",
+          "lineNumber": 93
+        },
+        {
+          "caller": "extractStyles",
+          "callee": "out.push",
+          "lineNumber": 93
+        },
+        {
+          "caller": "extractBody",
+          "callee": "/<body\\b[^>]*>([\\s\\S]*?)<\\/body>/iu.exec",
+          "lineNumber": 106
+        },
+        {
+          "caller": "bodyClass",
+          "callee": "/<body\\b([^>]*)>/iu.exec",
+          "lineNumber": 122
+        },
+        {
+          "caller": "bodyClass",
+          "callee": "/class\\s*=\\s*\"([^\"]*)\"/iu.exec",
+          "lineNumber": 124
+        },
+        {
+          "caller": "escapeAttr",
+          "callee": "s\n    .replace(/&/gu, '&amp;')\n    .replace(/\"/gu, '&quot;')\n    .replace(/</gu, '&lt;')\n    .replace",
+          "lineNumber": 214
+        },
+        {
+          "caller": "escapeAttr",
+          "callee": "s\n    .replace(/&/gu, '&amp;')\n    .replace(/\"/gu, '&quot;')\n    .replace",
+          "lineNumber": 214
+        },
+        {
+          "caller": "escapeAttr",
+          "callee": "s\n    .replace(/&/gu, '&amp;')\n    .replace",
+          "lineNumber": 214
+        },
+        {
+          "caller": "escapeAttr",
+          "callee": "s\n    .replace",
+          "lineNumber": 214
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "extractStyles",
+          "lineNumber": 239
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "uniqueStyles.add",
+          "lineNumber": 239
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "extractBody",
+          "lineNumber": 240
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "bodyClass",
+          "lineNumber": 241
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "escapeAttr",
+          "lineNumber": 242
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "sections.push",
+          "lineNumber": 243
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "escapeAttr",
+          "lineNumber": 244
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "Array.from(uniqueStyles).join",
+          "lineNumber": 251
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "Array.from",
+          "lineNumber": 251
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "sections.join",
+          "lineNumber": 252
+        },
+        {
+          "caller": "buildStandaloneHtml",
+          "callee": "escapeAttr",
+          "lineNumber": 253
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/types/registry.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 240,
+      "nonEmptyLines": 223,
+      "functions": [
+        {
+          "name": "parseManifest",
+          "startLine": 220,
+          "endLine": 227,
+          "params": [
+            "source",
+            "input"
+          ]
+        },
+        {
+          "name": "parseRegistry",
+          "startLine": 233,
+          "endLine": 240,
+          "params": [
+            "source",
+            "input"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MANIFEST_SCHEMA_VERSION",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "REGISTRY_SCHEMA_VERSION",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "PACK_CATEGORIES",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "PackManifestSchema",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "RegistrySchema",
+          "line": 180,
+          "isDefault": false
+        },
+        {
+          "name": "parseManifest",
+          "line": 220,
+          "isDefault": false
+        },
+        {
+          "name": "parseRegistry",
+          "line": 233,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseManifest",
+          "callee": "PackManifestSchema.safeParse",
+          "lineNumber": 221
+        },
+        {
+          "caller": "parseRegistry",
+          "callee": "RegistrySchema.safeParse",
+          "lineNumber": 234
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 7,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/generate-registry.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 246,
+      "nonEmptyLines": 223,
+      "functions": [
+        {
+          "name": "parseArgs",
+          "startLine": 67,
+          "endLine": 76,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "findManifests",
+          "startLine": 85,
+          "endLine": 109,
+          "params": []
+        },
+        {
+          "name": "currentGitSha",
+          "startLine": 117,
+          "endLine": 129,
+          "params": []
+        },
+        {
+          "name": "main",
+          "startLine": 133,
+          "endLine": 235,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseArgs",
+          "callee": "argv.indexOf",
+          "lineNumber": 68
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "path.resolve",
+          "lineNumber": 71
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "path.join",
+          "lineNumber": 72
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "argv.includes",
+          "lineNumber": 73
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "argv.includes",
+          "lineNumber": 74
+        },
+        {
+          "caller": "findManifests",
+          "callee": "fs.readdir",
+          "lineNumber": 88
+        },
+        {
+          "caller": "findManifests",
+          "callee": "entries\n    .filter((name) => name.startsWith('packs-'))\n    .sort",
+          "lineNumber": 94
+        },
+        {
+          "caller": "findManifests",
+          "callee": "entries\n    .filter",
+          "lineNumber": 94
+        },
+        {
+          "caller": "findManifests",
+          "callee": "name.startsWith",
+          "lineNumber": 95
+        },
+        {
+          "caller": "findManifests",
+          "callee": "a.localeCompare",
+          "lineNumber": 96
+        },
+        {
+          "caller": "findManifests",
+          "callee": "path.join",
+          "lineNumber": 100
+        },
+        {
+          "caller": "findManifests",
+          "callee": "fs.stat",
+          "lineNumber": 102
+        },
+        {
+          "caller": "findManifests",
+          "callee": "stat.isFile",
+          "lineNumber": 103
+        },
+        {
+          "caller": "findManifests",
+          "callee": "found.push",
+          "lineNumber": 103
+        },
+        {
+          "caller": "currentGitSha",
+          "callee": "execFileSync('git', ['rev-parse', 'HEAD'], {\n      cwd: REPO_ROOT,\n      encoding: 'utf-8',\n      stdio: ['ignore', 'pipe', 'ignore'],\n    }).trim",
+          "lineNumber": 121
+        },
+        {
+          "caller": "currentGitSha",
+          "callee": "execFileSync",
+          "lineNumber": 121
+        },
+        {
+          "caller": "main",
+          "callee": "parseArgs",
+          "lineNumber": 134
+        },
+        {
+          "caller": "main",
+          "callee": "process.argv.slice",
+          "lineNumber": 134
+        },
+        {
+          "caller": "main",
+          "callee": "findManifests",
+          "lineNumber": 135
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 137
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 137
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 138
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 146
+        },
+        {
+          "caller": "main",
+          "callee": "fs.readFile",
+          "lineNumber": 148
+        },
+        {
+          "caller": "main",
+          "callee": "JSON.parse",
+          "lineNumber": 149
+        },
+        {
+          "caller": "main",
+          "callee": "parseManifest",
+          "lineNumber": 150
+        },
+        {
+          "caller": "main",
+          "callee": "path.basename",
+          "lineNumber": 156
+        },
+        {
+          "caller": "main",
+          "callee": "path.dirname",
+          "lineNumber": 156
+        },
+        {
+          "caller": "main",
+          "callee": "packs.push",
+          "lineNumber": 166
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 167
+        },
+        {
+          "caller": "main",
+          "callee": "failures.push",
+          "lineNumber": 169
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "(err as Error).message.split",
+          "lineNumber": 175
+        },
+        {
+          "caller": "main",
+          "callee": "seen.has",
+          "lineNumber": 185
+        },
+        {
+          "caller": "main",
+          "callee": "seen.add",
+          "lineNumber": 191
+        },
+        {
+          "caller": "main",
+          "callee": "new Date().toISOString",
+          "lineNumber": 202
+        },
+        {
+          "caller": "main",
+          "callee": "currentGitSha",
+          "lineNumber": 203
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 208
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 209
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 211
+        },
+        {
+          "caller": "main",
+          "callee": "isPretextError",
+          "lineNumber": 213
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 216
+        },
+        {
+          "caller": "main",
+          "callee": "fs.mkdir",
+          "lineNumber": 223
+        },
+        {
+          "caller": "main",
+          "callee": "path.dirname",
+          "lineNumber": 223
+        },
+        {
+          "caller": "main",
+          "callee": "fs.writeFile",
+          "lineNumber": 224
+        },
+        {
+          "caller": "main",
+          "callee": "JSON.stringify",
+          "lineNumber": 224
+        },
+        {
+          "caller": "main",
+          "callee": "(\n    Buffer.byteLength(JSON.stringify(registry)) / 1024\n  ).toFixed",
+          "lineNumber": 225
+        },
+        {
+          "caller": "main",
+          "callee": "Buffer.byteLength",
+          "lineNumber": 226
+        },
+        {
+          "caller": "main",
+          "callee": "JSON.stringify",
+          "lineNumber": 226
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 228
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 229
+        },
+        {
+          "caller": "main",
+          "callee": "path.relative",
+          "lineNumber": 229
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 230
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 231
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 233
+        },
+        {
+          "caller": "main",
+          "callee": "registry.source_commit.slice",
+          "lineNumber": 233
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/audit.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 318,
+      "nonEmptyLines": 296,
+      "functions": [
+        {
+          "name": "withPackDir",
+          "startLine": 31,
+          "endLine": 46,
+          "params": [
+            "files",
+            "fn"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "withPackDir",
+          "callee": "fs.mkdtemp",
+          "lineNumber": 35
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "path.join",
+          "lineNumber": 35
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "os.tmpdir",
+          "lineNumber": 35
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "Object.entries",
+          "lineNumber": 37
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "path.join",
+          "lineNumber": 38
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "fs.mkdir",
+          "lineNumber": 39
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "path.dirname",
+          "lineNumber": 39
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "fs.writeFile",
+          "lineNumber": 40
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "fn",
+          "lineNumber": 42
+        },
+        {
+          "caller": "withPackDir",
+          "callee": "fs.rm",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/errors.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 214,
+      "nonEmptyLines": 191,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/registry-resolve.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 132,
+      "nonEmptyLines": 118,
+      "functions": [
+        {
+          "name": "pack",
+          "startLine": 23,
+          "endLine": 32,
+          "params": [
+            "id",
+            "version"
+          ]
+        },
+        {
+          "name": "registry",
+          "startLine": 34,
+          "endLine": 38,
+          "params": [
+            "packs"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pack",
+          "callee": "id.replace",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/registry.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 234,
+      "nonEmptyLines": 209,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/standalone-builder.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 148,
+      "nonEmptyLines": 135,
+      "functions": [
+        {
+          "name": "makePage",
+          "startLine": 22,
+          "endLine": 34,
+          "params": [
+            "overrides"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

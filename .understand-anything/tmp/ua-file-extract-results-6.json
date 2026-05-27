@@ -1,0 +1,774 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/generator-helpers.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 82,
+      "functions": [
+        {
+          "name": "escapeHtml",
+          "startLine": 19,
+          "endLine": 24,
+          "params": [
+            "s"
+          ]
+        },
+        {
+          "name": "monthName",
+          "startLine": 36,
+          "endLine": 48,
+          "params": [
+            "month",
+            "locale"
+          ]
+        },
+        {
+          "name": "shortDayDate",
+          "startLine": 55,
+          "endLine": 60,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "replaceOnce",
+          "startLine": 71,
+          "endLine": 77,
+          "params": [
+            "html",
+            "pattern",
+            "replacement"
+          ]
+        },
+        {
+          "name": "isoDate",
+          "startLine": 82,
+          "endLine": 88,
+          "params": [
+            "d"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "escapeHtml",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "monthName",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "shortDayDate",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "replaceOnce",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "isoDate",
+          "line": 82,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "escapeHtml",
+          "callee": "s\n    .replace(/&/g, '&amp;')\n    .replace(/</g, '&lt;')\n    .replace",
+          "lineNumber": 20
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "s\n    .replace(/&/g, '&amp;')\n    .replace",
+          "lineNumber": 20
+        },
+        {
+          "caller": "escapeHtml",
+          "callee": "s\n    .replace",
+          "lineNumber": 20
+        },
+        {
+          "caller": "monthName",
+          "callee": "locale.startsWith",
+          "lineNumber": 38
+        },
+        {
+          "caller": "monthName",
+          "callee": "new Intl.DateTimeFormat(locale, { month: 'long' }).format",
+          "lineNumber": 42
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "Number.isNaN",
+          "lineNumber": 56
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "d.getTime",
+          "lineNumber": 56
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "String(d.getDate()).padStart",
+          "lineNumber": 57
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "String",
+          "lineNumber": 57
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "d.getDate",
+          "lineNumber": 57
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "String(d.getMonth() + 1).padStart",
+          "lineNumber": 58
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "String",
+          "lineNumber": 58
+        },
+        {
+          "caller": "shortDayDate",
+          "callee": "d.getMonth",
+          "lineNumber": 58
+        },
+        {
+          "caller": "replaceOnce",
+          "callee": "html.replace",
+          "lineNumber": 76
+        },
+        {
+          "caller": "isoDate",
+          "callee": "Number.isNaN",
+          "lineNumber": 83
+        },
+        {
+          "caller": "isoDate",
+          "callee": "d.getTime",
+          "lineNumber": 83
+        },
+        {
+          "caller": "isoDate",
+          "callee": "d.getFullYear",
+          "lineNumber": 84
+        },
+        {
+          "caller": "isoDate",
+          "callee": "String(d.getMonth() + 1).padStart",
+          "lineNumber": 85
+        },
+        {
+          "caller": "isoDate",
+          "callee": "String",
+          "lineNumber": 85
+        },
+        {
+          "caller": "isoDate",
+          "callee": "d.getMonth",
+          "lineNumber": 85
+        },
+        {
+          "caller": "isoDate",
+          "callee": "String(d.getDate()).padStart",
+          "lineNumber": 86
+        },
+        {
+          "caller": "isoDate",
+          "callee": "String",
+          "lineNumber": 86
+        },
+        {
+          "caller": "isoDate",
+          "callee": "d.getDate",
+          "lineNumber": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/generator.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 205,
+      "nonEmptyLines": 194,
+      "functions": [
+        {
+          "name": "validateGeneratorInput",
+          "startLine": 105,
+          "endLine": 180,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "isGeneratorPack",
+          "startLine": 203,
+          "endLine": 205,
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "InvalidGeneratorInputError",
+          "startLine": 88,
+          "endLine": 93,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "InvalidGeneratorInputError",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "validateGeneratorInput",
+          "line": 105,
+          "isDefault": false
+        },
+        {
+          "name": "GENERATOR_PACKS",
+          "line": 192,
+          "isDefault": false
+        },
+        {
+          "name": "isGeneratorPack",
+          "line": 203,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 90
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Date.parse",
+          "lineNumber": 107
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Number.isNaN",
+          "lineNumber": 108
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Date.parse",
+          "lineNumber": 115
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Number.isNaN",
+          "lineNumber": 116
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Date.parse",
+          "lineNumber": 123
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Date.parse",
+          "lineNumber": 123
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Number.isInteger",
+          "lineNumber": 130
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Number.isInteger",
+          "lineNumber": 137
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Number.isInteger",
+          "lineNumber": 144
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "Array.isArray",
+          "lineNumber": 151
+        },
+        {
+          "caller": "validateGeneratorInput",
+          "callee": "String",
+          "lineNumber": 176
+        },
+        {
+          "caller": "isGeneratorPack",
+          "callee": "(GENERATOR_PACKS as readonly string[]).includes",
+          "lineNumber": 204
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "packages/packs-habit-tracker/generate.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 147,
+      "nonEmptyLines": 135,
+      "functions": [
+        {
+          "name": "monthName",
+          "startLine": 40,
+          "endLine": 54,
+          "params": [
+            "month",
+            "locale"
+          ]
+        },
+        {
+          "name": "fillDateFields",
+          "startLine": 69,
+          "endLine": 84,
+          "params": [
+            "html",
+            "month",
+            "year",
+            "locale"
+          ]
+        },
+        {
+          "name": "fillHabitLabels",
+          "startLine": 91,
+          "endLine": 109,
+          "params": [
+            "html",
+            "habits"
+          ]
+        },
+        {
+          "name": "generate",
+          "startLine": 111,
+          "endLine": 145,
+          "params": [
+            "input"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "monthName",
+          "callee": "locale.startsWith",
+          "lineNumber": 43
+        },
+        {
+          "caller": "monthName",
+          "callee": "new Intl.DateTimeFormat(locale, { month: 'long' }).format",
+          "lineNumber": 48
+        },
+        {
+          "caller": "fillDateFields",
+          "callee": "out.replace",
+          "lineNumber": 72
+        },
+        {
+          "caller": "fillDateFields",
+          "callee": "monthName",
+          "lineNumber": 74
+        },
+        {
+          "caller": "fillDateFields",
+          "callee": "out.replace",
+          "lineNumber": 78
+        },
+        {
+          "caller": "fillHabitLabels",
+          "callee": "html.replace",
+          "lineNumber": 94
+        },
+        {
+          "caller": "fillHabitLabels",
+          "callee": "label\n          .replace(/&/g, '&amp;')\n          .replace(/</g, '&lt;')\n          .replace",
+          "lineNumber": 100
+        },
+        {
+          "caller": "fillHabitLabels",
+          "callee": "label\n          .replace(/&/g, '&amp;')\n          .replace",
+          "lineNumber": 100
+        },
+        {
+          "caller": "fillHabitLabels",
+          "callee": "label\n          .replace",
+          "lineNumber": 100
+        },
+        {
+          "caller": "generate",
+          "callee": "fs.readFile",
+          "lineNumber": 119
+        },
+        {
+          "caller": "generate",
+          "callee": "fillDateFields",
+          "lineNumber": 120
+        },
+        {
+          "caller": "generate",
+          "callee": "fillHabitLabels",
+          "lineNumber": 121
+        },
+        {
+          "caller": "generate",
+          "callee": "parts.push",
+          "lineNumber": 125
+        },
+        {
+          "caller": "generate",
+          "callee": "String",
+          "lineNumber": 125
+        },
+        {
+          "caller": "generate",
+          "callee": "parts.push",
+          "lineNumber": 126
+        },
+        {
+          "caller": "generate",
+          "callee": "String(month).padStart",
+          "lineNumber": 126
+        },
+        {
+          "caller": "generate",
+          "callee": "String",
+          "lineNumber": 126
+        },
+        {
+          "caller": "generate",
+          "callee": "parts.join",
+          "lineNumber": 127
+        },
+        {
+          "caller": "generate",
+          "callee": "[\n    'Habit Tracker',\n    month !== undefined ? monthName(month, locale) : null,\n    year !== undefined ? String(year) : null,\n  ].filter(Boolean).join",
+          "lineNumber": 129
+        },
+        {
+          "caller": "generate",
+          "callee": "[\n    'Habit Tracker',\n    month !== undefined ? monthName(month, locale) : null,\n    year !== undefined ? String(year) : null,\n  ].filter",
+          "lineNumber": 129
+        },
+        {
+          "caller": "generate",
+          "callee": "monthName",
+          "lineNumber": 131
+        },
+        {
+          "caller": "generate",
+          "callee": "String",
+          "lineNumber": 132
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/packs-monthly-planner/generate.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "generate",
+          "startLine": 23,
+          "endLine": 65,
+          "params": [
+            "input"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "generate",
+          "callee": "fs.readFile",
+          "lineNumber": 24
+        },
+        {
+          "caller": "generate",
+          "callee": "html.replace",
+          "lineNumber": 34
+        },
+        {
+          "caller": "generate",
+          "callee": "monthName",
+          "lineNumber": 36
+        },
+        {
+          "caller": "generate",
+          "callee": "html.replace",
+          "lineNumber": 41
+        },
+        {
+          "caller": "generate",
+          "callee": "parts.push",
+          "lineNumber": 48
+        },
+        {
+          "caller": "generate",
+          "callee": "String",
+          "lineNumber": 48
+        },
+        {
+          "caller": "generate",
+          "callee": "parts.push",
+          "lineNumber": 49
+        },
+        {
+          "caller": "generate",
+          "callee": "String(input.month).padStart",
+          "lineNumber": 49
+        },
+        {
+          "caller": "generate",
+          "callee": "String",
+          "lineNumber": 49
+        },
+        {
+          "caller": "generate",
+          "callee": "titleParts.push",
+          "lineNumber": 52
+        },
+        {
+          "caller": "generate",
+          "callee": "monthName",
+          "lineNumber": 52
+        },
+        {
+          "caller": "generate",
+          "callee": "titleParts.push",
+          "lineNumber": 53
+        },
+        {
+          "caller": "generate",
+          "callee": "String",
+          "lineNumber": 53
+        },
+        {
+          "caller": "generate",
+          "callee": "parts.join",
+          "lineNumber": 57
+        },
+        {
+          "caller": "generate",
+          "callee": "titleParts.join",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/packs-weekly-planner/generate.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 117,
+      "nonEmptyLines": 104,
+      "functions": [
+        {
+          "name": "snapToWeekStart",
+          "startLine": 37,
+          "endLine": 45,
+          "params": [
+            "d",
+            "weekStart"
+          ]
+        },
+        {
+          "name": "generate",
+          "startLine": 50,
+          "endLine": 115,
+          "params": [
+            "input"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "snapToWeekStart",
+          "callee": "out.getDay",
+          "lineNumber": 39
+        },
+        {
+          "caller": "snapToWeekStart",
+          "callee": "out.setDate",
+          "lineNumber": 43
+        },
+        {
+          "caller": "snapToWeekStart",
+          "callee": "out.getDate",
+          "lineNumber": 43
+        },
+        {
+          "caller": "generate",
+          "callee": "fs.readFile",
+          "lineNumber": 51
+        },
+        {
+          "caller": "generate",
+          "callee": "Number.isNaN",
+          "lineNumber": 57
+        },
+        {
+          "caller": "generate",
+          "callee": "anchor.getTime",
+          "lineNumber": 57
+        },
+        {
+          "caller": "generate",
+          "callee": "snapToWeekStart",
+          "lineNumber": 58
+        },
+        {
+          "caller": "generate",
+          "callee": "html.replace",
+          "lineNumber": 62
+        },
+        {
+          "caller": "generate",
+          "callee": "isoDate",
+          "lineNumber": 64
+        },
+        {
+          "caller": "generate",
+          "callee": "day.setDate",
+          "lineNumber": 83
+        },
+        {
+          "caller": "generate",
+          "callee": "start.getDate",
+          "lineNumber": 83
+        },
+        {
+          "caller": "generate",
+          "callee": "html.replace",
+          "lineNumber": 89
+        },
+        {
+          "caller": "generate",
+          "callee": "shortDayDate",
+          "lineNumber": 91
+        },
+        {
+          "caller": "generate",
+          "callee": "input.from.slice",
+          "lineNumber": 98
+        },
+        {
+          "caller": "generate",
+          "callee": "input.from.slice",
+          "lineNumber": 102
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/packs-yearly-overview/generate.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 54,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "generate",
+          "startLine": 22,
+          "endLine": 52,
+          "params": [
+            "input"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "generate",
+          "callee": "fs.readFile",
+          "lineNumber": 23
+        },
+        {
+          "caller": "generate",
+          "callee": "html.replace",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/generator-framework.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 246,
+      "nonEmptyLines": 221,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "tests/unit/generators-phase1.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 198,
+      "nonEmptyLines": 181,
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}
