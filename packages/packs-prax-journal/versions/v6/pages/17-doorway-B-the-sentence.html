@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Doorway B · The Sentence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 · PAGE 17 · WORKBOOK archetype
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 18mm;
+  --paper: #E9E7ED;
+  --rule-color:  rgba(126, 155, 133, 0.4);
+  --rule-stroke: 0.5px;
+  --bleed: rgba(168, 155, 191, 0.22);
+  --ink: #1f2126; --ink-warm: #2a2226; --ink-soft: #3a3a40; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
+  --sage: #7e9b85; --sage-ink: #4E6249;
+  --clay: #c08866; --clay-ink: #8A3E2E; --clay-tint: rgba(192,136,102,0.10); --clay-edge: rgba(192,136,102,0.32);
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  --shadow-page: 0 1px 2px rgba(31,33,38,0.04), 0 16px 48px rgba(31,33,38,0.10), 0 2px 8px rgba(31,33,38,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans); font-size: 8.5pt;
+  color: var(--ink-soft); line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative; overflow: hidden;
+  box-shadow: var(--shadow-page);
+  display: flex; flex-direction: column;
+}
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+.wb-header { flex-shrink: 0; }
+.wb-header .kicker {
+  font-family: var(--font-mono); font-size: 7.5pt; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: lowercase;
+  color: var(--ink-quiet); opacity: 0.55;
+  margin-bottom: 4mm;
+}
+.wb-header .title {
+  font-family: var(--font-serif); font-style: normal; font-weight: 400;
+  font-size: 20pt; line-height: 1.18; letter-spacing: -0.012em;
+  color: var(--ink-warm);
+  font-variation-settings: "opsz" 72, "SOFT" 50;
+  max-width: 150mm;
+}
+
+.wb-body {
+  flex: 1;
+  margin-top: 14mm;
+  display: flex; flex-direction: column;
+  gap: 16mm;
+}
+.wb-prompt { position: relative; }
+.wb-prompt .num {
+  position: absolute; left: -15mm; top: 0.5mm;
+  font-family: var(--font-mono); font-size: 11pt;
+  color: var(--ink-quiet); opacity: 0.6;
+  font-weight: 500; letter-spacing: 0.02em;
+}
+.wb-prompt .ask {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13pt; line-height: 1.4; color: var(--ink);
+  font-variation-settings: "opsz" 36, "SOFT" 60;
+  margin-bottom: 4.5mm; max-width: 150mm;
+}
+.wb-prompt .lines { display: flex; flex-direction: column; }
+.wb-prompt .ln {
+  border-bottom: 0.5px solid var(--ink-whisper);
+  height: 8mm;
+}
+/* Special: the SENTENCE prompt has a single thicker line */
+.wb-prompt .ln-emph {
+  border-bottom: 1px solid var(--sage);
+  height: 13mm;
+}
+
+.wb-marker {
+  margin: 4mm 0 0;
+  text-align: center;
+  font-family: var(--font-mono); font-size: 7pt;
+  color: var(--ink-quiet); opacity: 0.4;
+  letter-spacing: 0.2em;
+}
+
+.wb-permission {
+  margin-top: 6mm;
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 11pt; line-height: 1.45;
+  color: var(--sage-ink); opacity: 0.85;
+  font-variation-settings: "opsz" 24, "SOFT" 60;
+  max-width: 150mm;
+  flex-shrink: 0;
+}
+
+.nav-chrome {
+  position: absolute; bottom: 7mm; right: 7mm;
+  display: flex; gap: 2mm;
+  font-family: var(--font-mono); font-size: 6pt;
+  letter-spacing: 0.12em; text-transform: lowercase;
+  z-index: 10;
+}
+.nav-chrome a {
+  color: var(--ink-quiet); text-decoration: none;
+  padding: 1mm 2.2mm;
+  border: 0.5px solid var(--ink-whisper);
+  background: rgba(249,245,236,0.65);
+  border-radius: 0.8mm;
+}
+.nav-chrome a:hover { color: var(--ink); border-color: var(--ink-soft); }
+.crisis-chip {
+  position: absolute; bottom: 7mm; left: 7mm;
+  font-family: var(--font-mono); font-size: 5.8pt;
+  letter-spacing: 0.16em; text-transform: lowercase;
+  color: var(--clay-ink); text-decoration: none;
+  padding: 1mm 2.2mm;
+  border: 0.5px solid var(--clay-edge);
+  background: rgba(249,245,236,0.7);
+  border-radius: 0.8mm; z-index: 10;
+}
+.crisis-chip:hover { background: var(--clay-tint); }
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<a id="page-17" class="page-anchor"></a>
+<main class="page" data-template="v6-doorway-B-workbook" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  {{HEADER_CONTENT}}
+  <header class="wb-header">
+    <div class="kicker">§ doorway B · the sentence</div>
+    <h1 class="title">In 2028, when someone you respect describes you<br>to someone else — what one sentence do you want them to say?</h1>
+  </header>
+
+  <section class="wb-body">
+    <div class="wb-prompt">
+      <span class="num">1.</span>
+      <p class="ask">Not your title. Not your company. Not your salary. The sentence about what you are like as a person.</p>
+      <div class="lines"><div class="ln-emph"></div></div>
+    </div>
+
+    <div class="wb-prompt">
+      <span class="num">2.</span>
+      <p class="ask">Who is the person saying it, in your head?</p>
+      <div class="lines"><div class="ln"></div><div class="ln"></div></div>
+    </div>
+
+    <div class="wb-marker">↓</div>
+
+    <div class="wb-prompt">
+      <span class="num">3.</span>
+      <p class="ask">If that sentence won't come, write the sentence you're afraid they'd actually say.</p>
+      <div class="lines"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+    </div>
+
+    <div class="wb-prompt">
+      <span class="num">4.</span>
+      <p class="ask">What's the gap between those two sentences, in plain language?</p>
+      <div class="lines"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+    </div>
+  </section>
+
+  {{FOOTER_CONTENT}}
+  <p class="wb-permission">if neither sentence comes, that's also data. close the page.</p>
+
+  <nav class="nav-chrome" aria-label="page navigation">
+    <a href="#page-22">[home]</a>
+    <a href="#page-18">[next]</a>
+  </nav>
+  <a href="#page-23" class="crisis-chip">[crisis]</a>
+</main>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Empty chair seat — front view -->
+  <g stroke="#d6a45e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <rect x="80" y="80" width="96" height="56"/>
+    <line x1="64" y1="136" x2="192" y2="136"/>
+    <line x1="88" y1="136" x2="80" y2="200"/>
+    <line x1="168" y1="136" x2="176" y2="200"/>
+  </g>
+</svg>

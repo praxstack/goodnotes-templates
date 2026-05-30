@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prax Journal v6 · 12L · Weekly Pattern Review · 7-day strip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 · PAGE 12L · SPREAD-MAP · 7-day strip
+   Left half of the weekly spread. Seven vertical columns, one per day.
+   Each column = 5 chip rows (mood / energy / sleep / note / stamp).
+   No running header. The spread itself is the unit.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 18mm;
+  --paper: #E8EEE6;
+  --bleed: rgba(126, 155, 133, 0.30);
+  --ink: #1f2126; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
+  --sage: #7e9b85; --sage-ink: #4E6249;
+  --sage-rule: rgba(126,155,133,0.4);
+  --sage-hair: rgba(126,155,133,0.25);
+  --clay: #c08866; --clay-ink: #8A3E2E; --clay-edge: rgba(192,136,102,0.32);
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; color: var(--ink-soft); line-height: 1.45; -webkit-font-smoothing: antialiased; }
+.page {
+  width: var(--page-w); height: var(--page-h); background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(42,40,36,0.04), 0 8px 32px rgba(42,40,36,0.08);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+}
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── micro-marks (no running header on a SPREAD-MAP) ─── */
+.spread-mark-tl {
+  position: absolute;
+  top: 8mm; left: var(--margin);
+  font-family: var(--font-mono); font-size: 7pt;
+  letter-spacing: 0.04em; color: var(--ink);
+  opacity: 0.5;
+}
+.spread-mark-br {
+  position: absolute;
+  bottom: 14mm; right: var(--margin);
+  font-family: var(--font-mono); font-size: 7pt;
+  letter-spacing: 0.04em; color: var(--ink);
+  opacity: 0.4;
+}
+
+/* ─── nav-chip cluster (bottom-right) ─── */
+.nav-cluster {
+  position: absolute; bottom: 8mm; right: 8mm;
+  display: flex; gap: 2mm; z-index: 10;
+}
+.nav-chip {
+  font-family: var(--font-mono); font-size: 6pt;
+  letter-spacing: 0.06em; color: var(--ink);
+  text-decoration: none; opacity: 0.4;
+  padding: 1.4mm 2.6mm;
+  border: 0.4px solid var(--ink-whisper);
+  border-radius: 1mm;
+  background: rgba(249,245,236,0.7);
+  transition: opacity 0.15s ease;
+}
+.nav-chip:hover { opacity: 0.85; }
+.nav-chip.crisis { color: var(--clay-ink); border-color: var(--clay-edge); }
+
+
+/* ─── Month/day wayfinding strip (wave 15, top of body) ─── */
+.month-strip {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  color: rgba(31, 33, 38, 0.4);
+  letter-spacing: 0.04em;
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  padding: 8mm 18mm 4mm;
+  border-bottom: 0.5px solid rgba(126, 155, 133, 0.4);
+  margin: 0 -18mm 0 -18mm;
+}
+.month-strip__months,
+.month-strip__days {
+  display: block;
+  text-align: center;
+}
+.month-strip__sep {
+  display: none;
+}
+
+/* ─── 7-day grid ─── */
+.strip {
+  margin-top: 12mm;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: relative;
+}
+.strip::before,
+.strip::after { content: ""; }
+.day {
+  padding: 0 2.4mm;
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+  position: relative;
+}
+.day + .day { border-left: 0.4px solid var(--sage-rule); }
+.day-head {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 11pt; font-weight: 400;
+  color: var(--ink); line-height: 1;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  text-align: center;
+  padding-bottom: 2.5mm;
+  border-bottom: 0.4px solid var(--sage-rule);
+  letter-spacing: 0.005em;
+}
+
+/* ─── chip rows down each column ─── */
+.row {
+  display: flex; flex-direction: column;
+  gap: 1.2mm;
+}
+.row-lbl {
+  font-family: var(--font-mono); font-size: 5.5pt;
+  text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--ink-whisper);
+  text-align: center;
+}
+
+/* mood chip — dotted ghost rect 16×10mm */
+.mood-rect {
+  width: 100%;
+  max-width: 18mm;
+  height: 10mm;
+  border: 0.5px dashed var(--ink-whisper);
+  border-radius: 1.2mm;
+  background: rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 5.5pt;
+  text-transform: lowercase; letter-spacing: 0.14em;
+  color: var(--ink-whisper);
+  margin: 0 auto;
+}
+
+/* energy — 1-5 dots row */
+.dots {
+  display: flex; justify-content: center; gap: 1.2mm;
+  padding: 0.5mm 0;
+}
+.dot {
+  width: 2mm; height: 2mm;
+  border: 0.5px solid var(--sage);
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* sleep — mono 7pt placeholder "h" */
+.sleep-line {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 1mm;
+  border-bottom: 0.4px solid var(--sage-hair);
+  padding-bottom: 0.6mm;
+}
+.sleep-num {
+  flex: 1;
+  height: 4mm;
+}
+.sleep-h {
+  font-family: var(--font-mono); font-size: 7pt;
+  color: var(--ink-whisper);
+  letter-spacing: 0.04em;
+}
+
+/* note — single sage hairline baseline */
+.note-line {
+  border-bottom: 0.4px solid var(--sage-hair);
+  height: 6mm;
+}
+
+/* sticker drop — dotted square */
+.stamp-zone {
+  width: 100%;
+  max-width: 14mm;
+  aspect-ratio: 1 / 1;
+  border: 0.5px dashed var(--ink-whisper);
+  border-radius: 1.2mm;
+  background: rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 5pt;
+  text-transform: lowercase; letter-spacing: 0.14em;
+  color: var(--ink-whisper);
+  margin: 0 auto;
+}
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<main class="page" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  <a id="page-12" name="page-12" class="anchor" style="display:block;height:0;visibility:hidden;"></a>
+  {{HEADER_CONTENT}}
+
+  <div class="month-strip" aria-label="month and day wayfinding">
+    <span class="month-strip__months">JAN  FEB  MAR  APR  MAY  JUN  JUL  AUG  SEP  OCT  NOV  DEC</span>
+    <span class="month-strip__sep">·</span>
+    <span class="month-strip__days">1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31</span>
+  </div>
+
+  <span class="spread-mark-tl">&larr; week of ____ &middot; ____ &middot; ____</span>
+
+  <section class="strip" aria-label="seven-day strip">
+
+    <div class="day" aria-label="Monday column">
+      <div class="day-head">Mon</div>
+      <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
+      <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
+      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
+      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+    </div>
+
+    <div class="day" aria-label="Tuesday column">
+      <div class="day-head">Tue</div>
+      <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
+      <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
+      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
+      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+    </div>
+
+    <div class="day" aria-label="Wednesday column">
+      <div class="day-head">Wed</div>
+      <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
+      <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
+      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
+      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+    </div>
+
+    <div class="day" aria-label="Thursday column">
+      <div class="day-head">Thu</div>
+      <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
+      <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
+      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
+      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+    </div>
+
+    <div class="day" aria-label="Friday column">
+      <div class="day-head">Fri</div>
+      <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
+      <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
+      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
+      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+    </div>
+
+    <div class="day" aria-label="Saturday column">
+      <div class="day-head">Sat</div>
+      <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
+      <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
+      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
+      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+    </div>
+
+    <div class="day" aria-label="Sunday column">
+      <div class="day-head">Sun</div>
+      <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
+      <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
+      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
+      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+    </div>
+
+  </section>
+
+  <span class="spread-mark-br">&rarr; continues right</span>
+
+  <div class="nav-cluster">
+    <a class="nav-chip" href="#page-22">[home]</a>
+    <a class="nav-chip" href="#page-21">[stickers]</a>
+    <a class="nav-chip crisis" href="#page-23">[crisis]</a>
+  </div>
+  {{FOOTER_CONTENT}}
+</main>
+</body>
+</html>

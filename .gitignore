@@ -79,3 +79,9 @@ apps/*/dist/
 test-results/
 playwright-report/
 /tests/e2e/.auth/
+
+# Therapy session PII — never commit (added 2026-05-30 autonomous-orchestrion-v6 §6.3)
+piiPrax/
+.playwright-mcp/
+# Per-page split PDFs are regenerable build artifacts
+packages/packs-prax-journal/versions/v6/output/per-page/

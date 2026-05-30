@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Crescent moon with small Z -->
+  <g stroke="#7e9b85" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M180 64 a72 72 0 1 0 0 128 a56 56 0 1 1 0 -128 Z"/>
+    <polyline points="60,48 92,48 60,80 92,80"/>
+  </g>
+</svg>

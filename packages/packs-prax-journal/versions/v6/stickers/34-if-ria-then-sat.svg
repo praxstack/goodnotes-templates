@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Single flower with ground line and small seated figure -->
+  <g stroke="#d6a45e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="64" cy="84" rx="14" ry="22"/>
+    <ellipse cx="108" cy="112" rx="14" ry="22" transform="rotate(72 108 112)"/>
+    <ellipse cx="92" cy="160" rx="14" ry="22" transform="rotate(144 92 160)"/>
+    <ellipse cx="36" cy="160" rx="14" ry="22" transform="rotate(216 36 160)"/>
+    <ellipse cx="20" cy="112" rx="14" ry="22" transform="rotate(288 20 112)"/>
+    <line x1="32" y1="208" x2="224" y2="208"/>
+    <circle cx="180" cy="148" r="14"/>
+    <line x1="180" y1="162" x2="180" y2="200"/>
+    <line x1="180" y1="180" x2="160" y2="208"/>
+    <line x1="180" y1="180" x2="200" y2="208"/>
+  </g>
+  <g fill="#d6a45e" stroke="none">
+    <circle cx="64" cy="128" r="10"/>
+  </g>
+</svg>

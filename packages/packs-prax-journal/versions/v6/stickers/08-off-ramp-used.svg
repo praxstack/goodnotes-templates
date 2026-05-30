@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Closed laptop — top + base bar -->
+  <g stroke="#d6a45e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <rect x="56" y="72" width="144" height="88" rx="6"/>
+    <line x1="40" y1="184" x2="216" y2="184"/>
+    <line x1="40" y1="184" x2="40" y2="192"/>
+    <line x1="216" y1="184" x2="216" y2="192"/>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Open hand cupping — curved palm with held heart -->
+  <g stroke="#a89bbf" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M48 128 Q128 232 208 128"/>
+    <path d="M128 96 q-12 -16 -24 -8 q-12 8 0 24 q12 16 24 24 q12 -8 24 -24 q12 -16 0 -24 q-12 -8 -24 8 Z"/>
+  </g>
+</svg>

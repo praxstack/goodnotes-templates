@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prax Journal v6 — Page 07 — The Tiny Task</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 — PAGE 07 · THE TINY TASK  (shelf · amber-edge)
+   For overwhelm days. Brain dump → top 3 → tiny task → first physical action.
+   (BJ Fogg Tiny-Habits informs the 10% Easier prompt — internal only.)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 22mm;
+
+  --paper:           #F2F0EC;
+  --rule-color:  rgba(126, 155, 133, 0.4);
+  --rule-stroke: 0.5px;
+  --bleed: rgba(192, 136, 102, 0.22);
+  --ink:             #1f2126;
+  --ink-soft:        #4A453D;
+  --ink-quiet:       #6E6658;
+  --ink-whisper:     #B5AD9F;
+
+  --sage:            #7e9b85;
+  --clay:            #c08866;
+  --amber:           #d6a45e;
+  --lavender:        #a89bbf;
+
+  --accent:          var(--amber);
+
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(42, 40, 36, 0.04), 0 8px 32px rgba(42, 40, 36, 0.08);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--margin) - 4mm);
+  border: 2px dashed rgba(126, 155, 133, 0.4);
+  border-radius: 2mm;
+  pointer-events: none;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── nav ─── */
+.nav {
+  position: absolute;
+  top: 11mm;
+  left: var(--margin);
+  right: var(--margin);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.nav-l { display: flex; align-items: center; gap: 4mm; }
+.shelf-badge {
+  display: inline-block;
+  padding: 1mm 2.5mm;
+  background: rgba(126, 155, 133, 0.12);
+  color: var(--sage);
+  border-radius: 1mm;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+}
+.nav a { color: var(--ink-quiet); text-decoration: none; }
+
+/* ─── header ─── */
+.header {
+  margin-top: 8mm;
+  margin-bottom: 6mm;
+  flex-shrink: 0;
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-quiet);
+  margin-bottom: 3mm;
+}
+h1 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26pt;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+
+/* ─── sections ─── */
+section.row {
+  border-bottom: 0.5px solid var(--amber);
+  padding: 3.5mm 0;
+}
+section.row:last-of-type { border-bottom: none; }
+
+.row-label {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--amber);
+  margin-bottom: 1.5mm;
+}
+.prompt {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10pt;
+  line-height: 1.4;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  margin-bottom: 2.5mm;
+}
+.baseline {
+  height: 7mm;
+  border-bottom: 0.5px solid var(--ink-quiet);
+}
+.baseline + .baseline { margin-top: 3.5mm; }
+
+/* top 3 with sage gradient numbers */
+.top-three {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.top-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 4mm;
+  padding: 2mm 0;
+}
+.top-line .num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14pt;
+  color: var(--sage);
+  width: 7mm;
+  text-align: right;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  line-height: 1;
+}
+.top-line:nth-child(2) .num { opacity: 0.7; }
+.top-line:nth-child(3) .num { opacity: 0.45; }
+.top-line .ln {
+  flex: 1;
+  height: 7mm;
+  border-bottom: 0.6px solid var(--ink-quiet);
+}
+
+/* tiny task — boxed, amber tint, prominent */
+.tiny-task {
+  margin-top: 1mm;
+  padding: 4mm 5mm 3.5mm;
+  background: rgba(214, 164, 94, 0.10);
+  border: 0.8px solid var(--amber);
+  border-radius: 1.5mm;
+}
+.tiny-task .row-label {
+  color: var(--amber);
+  margin-bottom: 1.5mm;
+}
+.tiny-task .prompt {
+  font-size: 11.5pt;
+  margin-bottom: 3mm;
+  color: var(--ink);
+}
+.tiny-task .wide-line {
+  height: 9mm;
+  border-bottom: 0.8px solid var(--ink);
+}
+
+/* ─── permission strip ─── */
+.permission {
+  margin-top: 4mm;
+  padding: 2.5mm 4mm;
+  background: rgba(214, 164, 94, 0.10);
+  border-left: 2px solid var(--amber);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 9.5pt;
+  color: var(--ink);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+
+/* ─── footer ─── */
+.footer {
+  margin-top: auto;
+  padding-top: 4mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.stickers {
+  display: flex;
+  gap: 6mm;
+  align-items: flex-end;
+}
+.sticker-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1mm;
+}
+.sticker-slot .ring {
+  width: 10mm;
+  height: 10mm;
+  border: 0.6px dashed var(--ink-whisper);
+  border-radius: 50%;
+}
+.sticker-slot .lbl {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-whisper);
+}
+.crisis {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+  text-decoration: none;
+}
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+
+<main class="page" id="page-07" data-template="prax-journal-v6-adhd-focus-booster" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Page navigation">
+    <span class="nav-l">
+      <span class="shelf-badge">SHELF · OPT-IN</span>
+      <a href="#page-22">[home]</a>
+    </span>
+    <a href="#page-08" class="nav-r">[shelf]</a>
+  </nav>
+
+  {{HEADER_CONTENT}}
+  <header class="header">
+    <div class="kicker">§ shelf · the tiny task</div>
+    <h1>What's the very first physical movement.</h1>
+  </header>
+
+  <section class="row">
+    <div class="row-label">Brain dump</div>
+    <p class="prompt">everything in your head, in any order.</p>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Top 3</div>
+    <div class="top-three">
+      <div class="top-line"><span class="num">1.</span><span class="ln"></span></div>
+      <div class="top-line"><span class="num">2.</span><span class="ln"></span></div>
+      <div class="top-line"><span class="num">3.</span><span class="ln"></span></div>
+    </div>
+  </section>
+
+  <section class="tiny-task" aria-label="The tiny task">
+    <div class="row-label">The tiny task</div>
+    <p class="prompt">the smallest version of the most important one &mdash;</p>
+    <div class="wide-line"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">First physical action</div>
+    <p class="prompt">what's the very first physical movement? (open laptop &middot; click email &middot; write &ldquo;Dear&nbsp;___&rdquo;)</p>
+    <div class="baseline"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Distraction notes</div>
+    <p class="prompt">what's pulling at you?</p>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">10% easier</div>
+    <p class="prompt">what would make this 10% easier?</p>
+    <div class="baseline"></div>
+  </section>
+
+  {{FOOTER_CONTENT}}
+  <aside class="permission">the tiny task counts. the rest is bonus.</aside>
+
+  <footer class="footer">
+    <div class="stickers">
+      <div class="sticker-slot"><div class="ring"></div><span class="lbl">frog-eaten</span></div>
+      <div class="sticker-slot"><div class="ring"></div><span class="lbl">pseudo-action-caught</span></div>
+    </div>
+    <a href="#page-23" class="crisis">[crisis]</a>
+  </footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Single flower — five petals + center -->
+  <g stroke="#a89bbf" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="128" cy="56" rx="22" ry="36"/>
+    <ellipse cx="206" cy="104" rx="22" ry="36" transform="rotate(72 206 104)"/>
+    <ellipse cx="176" cy="196" rx="22" ry="36" transform="rotate(144 176 196)"/>
+    <ellipse cx="80" cy="196" rx="22" ry="36" transform="rotate(216 80 196)"/>
+    <ellipse cx="50" cy="104" rx="22" ry="36" transform="rotate(288 50 104)"/>
+  </g>
+  <g fill="#a89bbf" stroke="none">
+    <circle cx="128" cy="128" r="14"/>
+  </g>
+</svg>

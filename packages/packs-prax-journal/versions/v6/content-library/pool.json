@@ -1,0 +1,1065 @@
+{
+  "version": 1,
+  "generated_for": "v6 wave 14",
+  "tone_rubric_version": "wave-7-therapist-briefing",
+  "categories": {
+    "adhd-cope": [
+      {
+        "id": "adhd-001",
+        "text": "if you can’t start, lower the cost of starting. open the doc. leave the cursor blinking. that counts.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-002",
+        "text": "two-minute rule: if it takes less than 2 minutes, do it now. don’t add it to the list.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-003",
+        "text": "when the brain says ‘i’ll do it later,’ replace ‘later’ with a specific time. or it doesn’t exist.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-004",
+        "text": "body doubling works. sit near someone working. it doesn’t matter what they’re doing.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-005",
+        "text": "transitions are the hardest part of any task. budget time for the gap between two things.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-006",
+        "text": "if the room is too loud, the task is twice as hard. close one tab. close one door. close one window.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-007",
+        "text": "write the next action, not the project. ‘open laptop’ is doable. ‘finish the report’ is not.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-008",
+        "text": "set a timer for 5 minutes. you can stop after. you usually won’t, but you can.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-009",
+        "text": "the dishes don’t get done by thinking about the dishes. start the water.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-010",
+        "text": "put your phone in another room. the friction of walking is enough.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-011",
+        "text": "one tab. one document. one task. close everything else.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-012",
+        "text": "if you forgot what you were doing, that’s information. write down what you remember.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-013",
+        "text": "the brain is not bad at planning. it’s bad at predicting how it will feel later. plan for tired-you.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-014",
+        "text": "lay clothes out the night before. that’s not childish. that’s saving you a decision.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-015",
+        "text": "waiting is the killer. while the kettle boils, do one thing. one.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-016",
+        "text": "medication helps the door open. it doesn’t walk through it for you.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-017",
+        "text": "mid-afternoon crash is biology, not failure. eat something. lie down for ten.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-018",
+        "text": "if the task has more than three steps, break it. write the steps. cross them off as you go.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-019",
+        "text": "caffeine works until it doesn’t. notice when you’ve passed the peak.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-020",
+        "text": "hyperfocus burns fuel fast. set an alarm. drink water. stand up.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-021",
+        "text": "if you’ve been meaning to do it for a week, it’s not the task. it’s the activation cost. lower it.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-022",
+        "text": "don’t open the email app. open the one email you need. type the reply. close.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-023",
+        "text": "paper lists work better than apps when the brain is loud.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-024",
+        "text": "a half-done task is not a failed task. it’s a task with a bookmark.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-025",
+        "text": "external structure is not a crutch. it’s the right tool for a brain that runs different software.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-026",
+        "text": "the deadline is not the start time. the start time is days before. mark it on the calendar.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-027",
+        "text": "the brain rewards novelty. add novelty to the boring task — different room, different drink, different chair.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-028",
+        "text": "if you can’t focus, walk. ten minutes. the brain reorders itself when the body moves.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-029",
+        "text": "write the task on a sticky note. put it on the laptop. that’s the system.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-030",
+        "text": "the urge to start every task is the wrong target. the urge to finish one task is rarer. protect it.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-031",
+        "text": "a meeting that could be an email is real. but a task that could be five minutes is also real. start the five.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-032",
+        "text": "don’t multitask between two cognitive tasks. you’re switching, not doing both.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-033",
+        "text": "the working-memory list is full. write things down even if it feels excessive.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-034",
+        "text": "if you’ve been in the same chair for three hours and the task isn’t moving, the chair is the problem. move.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-035",
+        "text": "notice what time of day you actually focus. protect that window.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-036",
+        "text": "the laundry, the dishes, the email — none of it is moral. it’s just stuff that needs doing.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-037",
+        "text": "start the task badly. you can fix it once it exists. you can’t fix what you haven’t started.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-038",
+        "text": "if the prompt is too vague, write a smaller one. ‘draft email to landlord’ is a task. ‘deal with apartment’ is not.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-039",
+        "text": "you don’t have to feel motivated. you have to put your hands on the keyboard.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-040",
+        "text": "the adhd tax — late fees, replacement charges, missed deadlines — is the cost of a brain not built for paperwork.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-041",
+        "text": "when stuck, narrate out loud what you’re doing. it splits the task into smaller voiced steps.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-042",
+        "text": "the snowball method works because finishing the small thing tells the brain it can finish things.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-043",
+        "text": "if you’re avoiding a task, ask: what’s the smallest version of this i could do in 60 seconds.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-044",
+        "text": "the right tool isn’t the perfect tool. it’s the one you’ll actually open.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-045",
+        "text": "don’t set up the system today. use the system tomorrow. setup is procrastination in disguise.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-046",
+        "text": "you’re allowed to have one boring system that works, even if it’s not pretty.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-047",
+        "text": "a forgotten thing is not proof you don’t care. it’s proof a ball dropped that other brains catch automatically.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-048",
+        "text": "if it’s in your head, it’s not on the list. write it on the list.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-049",
+        "text": "the energy crash after a good day is real. plan for it. the next day is allowed to be small.",
+        "max_chars": 180
+      },
+      {
+        "id": "adhd-050",
+        "text": "starting late doesn’t mean starting badly. it means starting later than you planned. those aren’t the same.",
+        "max_chars": 180
+      }
+    ],
+    "anxiety-ground": [
+      {
+        "id": "anxiety-001",
+        "text": "feel the chair under you. feel where your back ends and the chair begins.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-002",
+        "text": "name the room you’re in. name what’s behind you. name what’s in front of you. that’s enough.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-003",
+        "text": "your hands. press them together. notice the warmth. that warmth is yours.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-004",
+        "text": "five things you can see. four you can touch. three you can hear. two you can smell. one you can taste.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-005",
+        "text": "press both feet flat on the floor. notice you’re held.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-006",
+        "text": "the breath is here. you don’t have to make it deeper. you just have to find it.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-007",
+        "text": "cold water on the wrists. cold water on the back of the neck. the body resets faster than the mind.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-008",
+        "text": "count backward from twenty. slowly. by the time you get to zero, the room is still here.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-009",
+        "text": "find one object in the room. describe it to yourself in detail — color, edge, weight.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-010",
+        "text": "your jaw is probably tight. let it loosen. let the tongue rest against the roof of the mouth.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-011",
+        "text": "put one hand on the chest and one on the belly. see which one moves first.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-012",
+        "text": "inhale for four. hold for four. exhale for six. the longer exhale tells the body it’s safe.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-013",
+        "text": "notice the texture under your fingers. fabric, wood, glass, paper. notice it without naming.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-014",
+        "text": "the panic is a wave. waves crest. they don’t stay at the top forever.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-015",
+        "text": "the floor is here. the wall is here. the ceiling is here. the room has not moved.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-016",
+        "text": "press your palms against a wall. notice your weight push back into the body.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-017",
+        "text": "you don’t have to fix the thought. you have to let the body know it’s not under attack.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-018",
+        "text": "your shoulders are probably up near your ears. let them drop. that one move is enough.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-019",
+        "text": "ice cubes in the hands. hold for thirty seconds. the cold gives the brain something else to work on.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-020",
+        "text": "find the longest exhale you can make. don’t force the inhale. just let air leave.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-021",
+        "text": "you’re allowed to lie on the floor. the floor is solid. it has been solid the whole time.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-022",
+        "text": "notice which parts of the body you can feel right now. notice which are quiet. that’s a map.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-023",
+        "text": "the heart racing is doing its job. it’s not broken. it’s just loud.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-024",
+        "text": "wrap your arms around yourself. press into the shoulders. that’s a hold. it counts.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-025",
+        "text": "the thought that something is wrong is not the same as something being wrong.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-026",
+        "text": "if you can hear your breath, you’re breathing. if you’re breathing, you have time.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-027",
+        "text": "one foot. then the other. notice the weight shift. you can walk if you need to.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-028",
+        "text": "name three colors you can see. just colors. nothing more.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-029",
+        "text": "the body is older than the panic. the body has been here longer than this thought.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-030",
+        "text": "push against something solid — a doorframe, a counter, a wall. let the body remember it’s strong.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-031",
+        "text": "drink water. cold if possible. swallow. notice the swallow.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-032",
+        "text": "you don’t have to slow your breath. you have to notice it’s still happening.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-033",
+        "text": "look out the window. find one thing far away. let the eyes rest on distance.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-034",
+        "text": "count your fingers. ten. count them again. that’s a thing the body can do that the mind can’t argue with.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-035",
+        "text": "lower the lights. quiet rooms hold panicking nervous systems better than bright ones.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-036",
+        "text": "you can take up the whole couch. spread the limbs. let the body be big.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-037",
+        "text": "press the tongue against the roof of the mouth. hold. release. simple, cheap, works.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-038",
+        "text": "there is no test here. you don’t have to do this right.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-039",
+        "text": "notice the sound farthest from you. then the sound closest. you have hearing. it is working.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-040",
+        "text": "wash your hands slowly. warm water. notice the temperature. notice the soap.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-041",
+        "text": "if standing is hard, sit. if sitting is hard, lie down. the body knows which to choose.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-042",
+        "text": "find one thing in the room that hasn’t changed since yesterday. that’s an anchor.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-043",
+        "text": "the panic wants to leave. you don’t have to chase it out. let it find the door.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-044",
+        "text": "hum. just a low hum. the vagus nerve responds to vibration in the throat.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-045",
+        "text": "if you can name what you’re feeling, the feeling has already lost some of its weight.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-046",
+        "text": "cold air on the face. step outside if you can. the temperature change is information for the body.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-047",
+        "text": "one slow blink. then another. the body uses these to mark time.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-048",
+        "text": "you don’t have to remember the technique. you have to notice you’re already breathing.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-049",
+        "text": "anchor your eyes on one corner of the room. don’t track. just rest there.",
+        "max_chars": 180
+      },
+      {
+        "id": "anxiety-050",
+        "text": "the ground holds you whether you trust it or not. that’s the deal.",
+        "max_chars": 180
+      }
+    ],
+    "cbt-microlesson": [
+      {
+        "id": "cbt-001",
+        "text": "the thought that says ‘always’ is rarely a fact. it’s a feeling pretending to be a fact.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-002",
+        "text": "if you wouldn’t say it to a friend, the thought is using the wrong voice.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-003",
+        "text": "predicting the future feels like a fact. it isn’t.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-004",
+        "text": "the worst-case scenario your brain just wrote is one possible scenario, not the only one.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-005",
+        "text": "‘i feel stupid’ is a feeling. ‘i am stupid’ is a story the feeling told.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-006",
+        "text": "one bad day is one bad day. it isn’t proof of a pattern.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-007",
+        "text": "when the brain says ‘everyone thinks this,’ check who ‘everyone’ actually is.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-008",
+        "text": "mind reading is a skill no one has. that thing you assume they think — you don’t actually know.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-009",
+        "text": "‘should’ is a word that lives in someone else’s voice. notice whose.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-010",
+        "text": "if the only options the brain offers are perfect or failed, the brain is leaving out a lot.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-011",
+        "text": "taking blame for something that happened to you is a strategy your brain learned. it isn’t accuracy.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-012",
+        "text": "one piece of evidence isn’t a verdict. it’s one piece of evidence.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-013",
+        "text": "the thought ‘i’ll never get over this’ is a feeling about now, not a forecast.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-014",
+        "text": "labeling yourself with one word — ‘lazy,’ ‘broken,’ ‘failure’ — collapses everything you are into one syllable.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-015",
+        "text": "the sentence ‘i ruined it’ often means ‘something hard happened.’ those are different sentences.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-016",
+        "text": "the brain is not a journalist. it’s an editorialist with a deadline.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-017",
+        "text": "catastrophe-thinking solves no future catastrophe. it just costs the present moment.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-018",
+        "text": "notice when you say ‘i’m bad at this’ after one attempt. once isn’t a sample size.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-019",
+        "text": "the feeling that something terrible is about to happen is a feeling. it has been wrong before.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-020",
+        "text": "when the thought arrives in the second person — ‘you idiot’ — that’s a voice. it isn’t yours.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-021",
+        "text": "taking credit for the bad and not the good is a pattern, not the truth.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-022",
+        "text": "‘they didn’t text back because they hate me’ has a hundred other endings.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-023",
+        "text": "if the thought rhymes or sounds catchy, treat it like a slogan. slogans aren’t analysis.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-024",
+        "text": "the brain can be very confident and very wrong at the same time.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-025",
+        "text": "discomfort is not danger. they share a hallway but they aren’t the same room.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-026",
+        "text": "the thought ‘i can’t handle this’ is what the brain says before it handles things.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-027",
+        "text": "one missed deadline isn’t proof you can’t do deadlines. it’s proof one deadline got missed.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-028",
+        "text": "‘i feel like a failure, therefore i am a failure.’ the comma does not connect those.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-029",
+        "text": "the past predicts patterns, not destinies.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-030",
+        "text": "if every option in your head is bad, ask: is there an option not in my head yet.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-031",
+        "text": "‘i feel guilty’ is sometimes information. sometimes it’s static. you can ask which.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-032",
+        "text": "when the thought speeds up, the truth is usually still going at normal speed.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-033",
+        "text": "you don’t have to argue with the thought. you have to notice it’s a thought.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-034",
+        "text": "the urge to apologize for being upset is the same pattern that made you upset. notice it. don’t follow it.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-035",
+        "text": "‘no one cares’ is what the brain says when one person didn’t.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-036",
+        "text": "if the thought begins with ‘always’ or ‘never,’ add ‘right now’ and see if it still holds.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-037",
+        "text": "the conclusion ‘i’m a burden’ is usually older than the situation that triggered it.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-038",
+        "text": "comparing your inside to someone else’s outside is comparing a kitchen to a magazine cover.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-039",
+        "text": "the brain offers thoughts. you don’t have to accept every delivery.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-040",
+        "text": "saying ‘i’m overreacting’ is sometimes the thing that stops you from listening to a real signal.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-041",
+        "text": "the thought ‘this will last forever’ has been saying that for years. it has been wrong every time.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-042",
+        "text": "you can feel something is true and have it not be true.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-043",
+        "text": "when the brain offers two options — both bad — there are usually three.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-044",
+        "text": "the harshest voice in your head is rarely the most informed one.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-045",
+        "text": "‘they’re better than me’ is a sentence with no measurement attached.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-046",
+        "text": "the worst thing you said to yourself today, you wouldn’t say to anyone else. notice the asymmetry.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-047",
+        "text": "one small thing going wrong is not a long chain of dominoes. that’s the brain rendering a movie.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-048",
+        "text": "‘i ruined the day’ is a much smaller event than the day. usually a day has hours that weren’t ruined.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-049",
+        "text": "if you’re trying to figure out who’s at fault, you might be in the wrong question.",
+        "max_chars": 180
+      },
+      {
+        "id": "cbt-050",
+        "text": "the thought ‘i should be over this by now’ has no clock attached. there is no clock for this.",
+        "max_chars": 180
+      }
+    ],
+    "therapeutic-quote": [
+      {
+        "id": "quote-001",
+        "text": "you are the sky. everything else is just the weather.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-002",
+        "text": "nothing ever goes away until it has taught us what we need to know.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-003",
+        "text": "start where you are.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-004",
+        "text": "feel the feelings and drop the story.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-005",
+        "text": "things falling apart is a kind of testing and a kind of healing.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-006",
+        "text": "fear is a natural reaction to moving closer to the truth.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-007",
+        "text": "compassion is a relationship between equals.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-008",
+        "text": "the present moment is the only moment available to us.",
+        "attribution": "thich nhat hanh",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-009",
+        "text": "no mud, no lotus.",
+        "attribution": "thich nhat hanh",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-010",
+        "text": "letting go gives us freedom.",
+        "attribution": "thich nhat hanh",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-011",
+        "text": "feelings come and go like clouds in a windy sky.",
+        "attribution": "thich nhat hanh",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-012",
+        "text": "to be beautiful means to be yourself.",
+        "attribution": "thich nhat hanh",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-013",
+        "text": "smile, breathe, and go slowly.",
+        "attribution": "thich nhat hanh",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-014",
+        "text": "what we don’t need in the midst of struggle is shame for being human.",
+        "attribution": "brené brown",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-015",
+        "text": "shame derives its power from being unspeakable.",
+        "attribution": "brené brown",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-016",
+        "text": "feelings are not facts.",
+        "attribution": "tara brach",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-017",
+        "text": "imperfection is a natural part of existing.",
+        "attribution": "tara brach",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-018",
+        "text": "you do not have to be good.",
+        "attribution": "mary oliver",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-019",
+        "text": "attention is the beginning of devotion.",
+        "attribution": "mary oliver",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-020",
+        "text": "pay attention. be astonished. tell about it.",
+        "attribution": "mary oliver",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-021",
+        "text": "let everything happen to you. no feeling is final.",
+        "attribution": "rainer maria rilke",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-022",
+        "text": "be patient toward all that is unsolved in your heart.",
+        "attribution": "rainer maria rilke",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-023",
+        "text": "the cure for pain is in the pain.",
+        "attribution": "rumi",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-024",
+        "text": "the wound is the place where the light enters you.",
+        "attribution": "rumi",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-025",
+        "text": "this being human is a guest house.",
+        "attribution": "rumi",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-026",
+        "text": "i can be changed by what happens to me. but i refuse to be reduced by it.",
+        "attribution": "maya angelou",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-027",
+        "text": "there is no greater agony than bearing an untold story inside you.",
+        "attribution": "maya angelou",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-028",
+        "text": "we may encounter many defeats but we must not be defeated.",
+        "attribution": "maya angelou",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-029",
+        "text": "when i accept myself just as i am, then i can change.",
+        "attribution": "carl rogers",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-030",
+        "text": "what i am is good enough if i would only be it openly.",
+        "attribution": "carl rogers",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-031",
+        "text": "the privilege of a lifetime is to become who you truly are.",
+        "attribution": "carl jung",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-032",
+        "text": "there is no coming to consciousness without pain.",
+        "attribution": "carl jung",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-033",
+        "text": "we cannot change anything until we accept it.",
+        "attribution": "carl jung",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-034",
+        "text": "between stimulus and response there is a space.",
+        "attribution": "viktor frankl",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-035",
+        "text": "when we cannot change a situation, we are challenged to change ourselves.",
+        "attribution": "viktor frankl",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-036",
+        "text": "almost everything will work again if you unplug it for a few minutes.",
+        "attribution": "anne lamott",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-037",
+        "text": "expectations are resentments under construction.",
+        "attribution": "anne lamott",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-038",
+        "text": "you own everything that happened to you.",
+        "attribution": "anne lamott",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-039",
+        "text": "the antidote to exhaustion is not rest, but wholeheartedness.",
+        "attribution": "david whyte",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-040",
+        "text": "anything that does not bring you alive is too small for you.",
+        "attribution": "david whyte",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-041",
+        "text": "caring for myself is not self-indulgence, it is self-preservation.",
+        "attribution": "audre lorde",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-042",
+        "text": "we’re all just walking each other home.",
+        "attribution": "ram dass",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-043",
+        "text": "when i let go of what i am, i become what i might be.",
+        "attribution": "lao tzu",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-044",
+        "text": "your pain is the breaking of the shell that encloses your understanding.",
+        "attribution": "kahlil gibran",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-045",
+        "text": "the risk to remain tight in a bud became more painful than the risk to blossom.",
+        "attribution": "anaïs nin",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-046",
+        "text": "the most basic way to connect with another person is to listen.",
+        "attribution": "rachel naomi remen",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-047",
+        "text": "the most important thing we ever give each other is our attention.",
+        "attribution": "rachel naomi remen",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-048",
+        "text": "i wish i could show you the astonishing light of your own being.",
+        "attribution": "hafiz",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-049",
+        "text": "the path out of hell is through misery.",
+        "attribution": "marsha linehan",
+        "max_chars": 180
+      },
+      {
+        "id": "quote-050",
+        "text": "radical acceptance is not approval. it is acknowledgment of what is.",
+        "attribution": "marsha linehan",
+        "max_chars": 180
+      }
+    ]
+  }
+}

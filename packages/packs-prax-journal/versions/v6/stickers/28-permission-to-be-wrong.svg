@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- X with curved arrow turning back to retry -->
+  <g stroke="#7e9b85" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <line x1="56" y1="56" x2="120" y2="120"/>
+    <line x1="120" y1="56" x2="56" y2="120"/>
+    <path d="M120 88 Q200 96 200 168 Q200 200 152 200"/>
+    <polyline points="168,184 152,200 168,216"/>
+  </g>
+</svg>

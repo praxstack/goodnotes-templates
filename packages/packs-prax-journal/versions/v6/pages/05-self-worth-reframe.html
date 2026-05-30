@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prax Journal v6 · 05 · Self-Worth Reframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 · PAGE 05 · SELF-WORTH REFRAME  (DIALOGUE-PAGE archetype)
+   Alternating Q/A turns with zigzag indents. Conversational rhythm.
+   This is the "loser" page — anchor to crisis with a stronger affordance.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 22mm;
+  --paper: #F2F0EC;
+  --rule-color:  rgba(126, 155, 133, 0.4);
+  --rule-stroke: 0.5px;
+  --bleed: rgba(192, 136, 102, 0.22);
+  --ink: #1f2126;
+  --ink-soft: #4A453D;
+  --ink-quiet: #6E6658;
+  --ink-whisper: #B5AD9F;
+  --sage: #7e9b85;
+  --sage-ink: #4E6249;
+  --clay: #c08866;
+  --amber: #d6a45e;
+  --lavender: #a89bbf;
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #E4DFD2; }
+body {
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(42,40,36,0.04), 0 8px 32px rgba(42,40,36,0.08);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+@media print {
+  html, body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ── Page anchor ── */
+.anchor { display: block; height: 0; visibility: hidden; }
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5mm;
+  flex-shrink: 0;
+  margin-bottom: 10mm;
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.10em;
+  color: var(--ink);
+  opacity: 0.55;
+}
+h1.title {
+  font-family: var(--font-serif);
+  font-size: 22pt;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144;
+}
+
+/* ── Dialogue body: zigzag turns ── */
+.dialogue {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7mm;
+}
+.turn {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5mm;
+}
+.q {
+  font-family: var(--font-serif);
+  font-size: 14pt;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  opacity: 0.7;
+  font-variation-settings: "opsz" 72;
+  /* right-indented: pulled in 8mm from the right margin */
+  text-align: right;
+  padding-right: 8mm;
+  padding-left: 28mm;
+}
+.a {
+  /* answer baselines, left-indented 8mm — zigzag with the question */
+  margin-left: 8mm;
+  margin-right: 18mm;
+  display: flex;
+  flex-direction: column;
+}
+.a-line {
+  height: 8mm;
+  border-bottom: 0.25px solid rgba(126, 155, 133, 0.55);
+}
+
+/* ── Footer: permission strip + double crisis chip ── */
+.footer {
+  margin-top: auto;
+  padding-top: 6mm;
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+.permission {
+  font-family: var(--font-serif);
+  font-size: 11pt;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+  text-align: center;
+  font-variation-settings: "opsz" 14";
+  letter-spacing: 0.005em;
+  line-height: 1.3;
+  opacity: 0.85;
+}
+
+/* ── Goodnotes nav-chip cluster bottom-right (crisis emphasized) ── */
+.nav-cluster {
+  position: absolute;
+  bottom: 8mm;
+  right: 8mm;
+  display: flex;
+  gap: 1mm;
+  align-items: center;
+}
+.nav-chip {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.4;
+  padding: 1.5mm 3mm;
+  transition: opacity 0.15s ease;
+}
+.nav-chip:hover { opacity: 0.75; }
+.nav-crisis {
+  /* double-emphasis crisis chip — clay color, opacity 0.7 */
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--clay);
+  opacity: 0.7;
+  text-decoration: none;
+  padding: 1.5mm 3.5mm;
+  border: 0.5px solid var(--clay);
+  border-radius: 1mm;
+  background: rgba(192, 136, 102, 0.06);
+}
+.nav-crisis:hover { opacity: 1; }
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<main class="page" data-template="prax-journal-v6-self-worth-reframe" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  <a id="page-05" name="page-05" class="anchor"></a>
+
+  {{HEADER_CONTENT}}
+  <header class="header">
+    <span class="kicker">§ shelf · self-worth reframe</span>
+    <h1 class="title">talk it down.</h1>
+  </header>
+
+  <section class="dialogue" aria-label="Dialogue with the thought">
+
+    <div class="turn">
+      <p class="q">what's the actual evidence for this thought?</p>
+      <div class="a" aria-label="Answer">
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+      </div>
+    </div>
+
+    <div class="turn">
+      <p class="q">what would you say to a friend telling you the same thing?</p>
+      <div class="a" aria-label="Answer">
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+      </div>
+    </div>
+
+    <div class="turn">
+      <p class="q">what's the kindest version of this that's still honest?</p>
+      <div class="a" aria-label="Answer">
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+      </div>
+    </div>
+
+    <div class="turn">
+      <p class="q">what's one small thing that's true even if the rest is true?</p>
+      <div class="a" aria-label="Answer">
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+        <div class="a-line"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    {{FOOTER_CONTENT}}
+    <p class="permission">talking it down isn't winning. it's just talking.</p>
+  </footer>
+
+  <nav class="nav-cluster" aria-label="Page navigation">
+    <a href="#page-22" class="nav-chip">[home]</a>
+    <a href="#page-21" class="nav-chip">[stickers]</a>
+    <a href="#page-23" class="nav-crisis">[crisis ↗]</a>
+  </nav>
+</main>
+</body>
+</html>

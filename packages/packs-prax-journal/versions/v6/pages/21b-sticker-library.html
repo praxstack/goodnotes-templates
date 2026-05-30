@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prax Journal v6 — Sticker Library · part 2 of 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 — STICKER LIBRARY (41)
+   Forty-one stickers across ten packs. One reference page (extends 2× A4).
+   Direction-B card grammar, full v5 sticker count.
+   Linehan diary-stamp × Pennebaker symbolic punctuation × Brach RAIN.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --margin: 22mm;
+
+  --paper:           #F0F0EF;
+  --ink:             #1f2126;
+  --ink-soft:        #4A453D;
+  --ink-quiet:       #6E6658;
+  --ink-whisper:     #B5AD9F;
+
+  --sage:            #7e9b85;
+  --sage-edge:       #5e7a65;
+  --sage-tint:       #e8efe9;
+
+  --clay:            #c08866;
+  --clay-edge:       #a06a4a;
+  --clay-tint:       #f5e8de;
+  --clay-urgent-tint:#efddd0;
+
+  --amber:           #d6a45e;
+  --amber-edge:      #b6843e;
+  --amber-tint:      #f7ecdc;
+
+  --lavender:        #a89bbf;
+  --lavender-edge:   #887b9f;
+  --lavender-tint:   #ece8f3;
+
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  padding: 10mm 0 20mm;
+}
+
+.page {
+  width: var(--page-w);
+  background: var(--paper);
+  margin: 0 auto;
+  padding: var(--margin);
+  position: relative;
+  box-shadow: 0 1px 2px rgba(42, 40, 36, 0.04), 0 8px 32px rgba(42, 40, 36, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+@page { size: A4 portrait; margin: 0; }
+.card { page-break-inside: avoid; break-inside: avoid; }
+@media print {
+  body { background: white; padding: 0; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── Header ─── */
+.hd {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 4mm;
+  border-bottom: 0.5px solid var(--ink-whisper);
+}
+.hd-l .kicker {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--ink-quiet);
+  display: block;
+  margin-bottom: 2mm;
+}
+.hd-l .title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 38pt;
+  color: var(--ink);
+  letter-spacing: -0.012em;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  line-height: 0.95;
+  font-weight: 400;
+}
+.hd-r .meta {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-quiet);
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* ─── Lead ─── */
+.lead { display: none;
+  margin-top: 6mm;
+  max-width: 145mm;
+}
+.lead-prose {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 11pt;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  line-height: 1.45;
+}
+.lead-cats {
+  margin-top: 2.5mm;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 8.5pt;
+  color: var(--ink-quiet);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  line-height: 1.5;
+}
+
+/* ─── 4 × 11 sticker grid ─── */
+.grid {
+  margin-top: 6mm;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4mm;
+}
+
+.card {
+  position: relative;
+  border-radius: 1.8mm;
+  padding: 3mm 3mm 3mm;
+  display: flex;
+  flex-direction: column;
+  min-height: 22mm;
+  background: rgba(255,255,255,0.18);
+  border: 0.6px solid var(--ink-whisper);
+  overflow: hidden;
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5mm;
+}
+.card-glyph svg {
+  display: block;
+  width: 7mm;
+  height: 7mm;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+.card-num {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.18em;
+  color: var(--ink-whisper);
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.card-body { display: flex; flex-direction: column; gap: 0.8mm; flex: 1; }
+
+.card-name {
+  font-family: var(--font-mono);
+  font-size: 6.4pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.card-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 7.4pt;
+  color: var(--ink-soft);
+  line-height: 1.36;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+}
+.card-sub em { font-style: italic; }
+
+/* ─── Pack tints (background + outline + glyph color) ─── */
+.card.pack-restlessness { background: var(--clay-tint);          border-color: var(--clay);     }
+.card.pack-restlessness .card-glyph { color: var(--clay-edge); }
+
+.card.pack-break        { background: var(--amber-tint);         border-color: var(--amber);    }
+.card.pack-break        .card-glyph { color: var(--amber-edge); }
+
+.card.pack-wins         { background: var(--sage-tint);          border-color: var(--sage);     }
+.card.pack-wins         .card-glyph { color: var(--sage-edge); }
+
+.card.pack-mood         { background: var(--lavender-tint);      border-color: var(--lavender); }
+.card.pack-mood         .card-glyph { color: var(--lavender-edge); }
+
+.card.pack-cbt          { background: var(--clay-tint);          border-color: var(--clay);     }
+.card.pack-cbt          .card-glyph { color: var(--clay-edge); }
+
+.card.pack-dbt          { background: var(--clay-tint);          border-color: var(--clay);     }
+.card.pack-dbt          .card-glyph { color: var(--clay-edge); }
+
+.card.pack-pattern      { background: var(--lavender-tint);      border-color: var(--lavender); }
+.card.pack-pattern      .card-glyph { color: var(--lavender-edge); }
+
+.card.pack-permission   { background: var(--sage-tint);          border-color: var(--sage);     }
+.card.pack-permission   .card-glyph { color: var(--sage-edge); }
+
+.card.pack-ifthen       { background: var(--amber-tint);         border-color: var(--amber); border-style: dashed; }
+.card.pack-ifthen       .card-glyph { color: var(--amber-edge); }
+
+.card.pack-crisis       { background: var(--clay-urgent-tint);   border-color: var(--clay-edge); border-width: 0.9px; }
+.card.pack-crisis       .card-glyph { color: var(--clay-edge); }
+
+/* ─── Legend ─── */
+.legend {
+  margin-top: 10mm;
+  padding-top: 5mm;
+  border-top: 0.5px solid var(--ink-whisper);
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3mm;
+  margin-bottom: 1.5mm;
+}
+.legend-chip {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 1.2mm 2.5mm;
+  border-radius: 0.8mm;
+  border: 0.5px solid var(--ink-whisper);
+  color: var(--ink-soft);
+}
+.legend-chip.pack-restlessness { background: var(--clay-tint);     border-color: var(--clay);     }
+.legend-chip.pack-break        { background: var(--amber-tint);    border-color: var(--amber);    }
+.legend-chip.pack-wins         { background: var(--sage-tint);     border-color: var(--sage);     }
+.legend-chip.pack-mood         { background: var(--lavender-tint); border-color: var(--lavender); }
+.legend-chip.pack-cbt          { background: var(--clay-tint);     border-color: var(--clay);     }
+.legend-chip.pack-dbt          { background: var(--clay-tint);     border-color: var(--clay);     }
+.legend-chip.pack-pattern      { background: var(--lavender-tint); border-color: var(--lavender); }
+.legend-chip.pack-permission   { background: var(--sage-tint);     border-color: var(--sage);     }
+.legend-chip.pack-ifthen       { background: var(--amber-tint);    border-color: var(--amber);    border-style: dashed; }
+.legend-chip.pack-crisis       { background: var(--clay-urgent-tint); border-color: var(--clay-edge); }
+
+.legend-note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 8.5pt;
+  color: var(--ink-quiet);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  line-height: 1.5;
+}
+.legend-foot {
+  margin-top: 5mm;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-whisper);
+}
+
+.nav-chrome {
+  position: fixed; top: 7mm; left: 7mm;
+  font-family: var(--font-mono); font-size: 6.5pt;
+  letter-spacing: 0.12em; text-transform: lowercase;
+  z-index: 100;
+}
+.nav-chrome a {
+  color: var(--ink-quiet); text-decoration: none;
+  padding: 1.2mm 2.5mm;
+  border: 0.5px solid var(--ink-whisper);
+  background: rgba(249,245,236,0.85);
+  border-radius: 1mm;
+}
+.nav-chrome a:hover { color: var(--ink); border-color: var(--ink-soft); }
+.split-view-hint {
+  margin-top: 8mm; padding: 4mm 6mm;
+  background: var(--lavender-tint, rgba(168,155,191,0.12));
+  border-left: 3px solid var(--lavender, #a89bbf);
+  font-family: var(--font-serif); font-style: italic; font-size: 7pt;
+  color: var(--lavender-edge, #887b9f); line-height: 1.5;
+  font-variation-settings: "opsz" 14, "SOFT" 60;
+}
+
+</style>
+</head>
+<body>
+<a id="page-21b" class="page-anchor"></a>
+<nav class="nav-chrome" aria-label="page navigation">
+  <a href="#page-22">[home]</a>
+</nav>
+<main class="page" data-template="prax-journal-v6-sticker-library-41-part2">
+
+  <p style="margin-bottom: 4mm; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', monospace; font-size: 6pt; letter-spacing: 0.18em; text-transform: lowercase; color: #6E6658;"><a href="#page-21" style="color: inherit; text-decoration: none; border-bottom: 0.5px dotted currentColor; padding-bottom: 0.5mm;">← part 1 / packs 1–5</a></p>
+
+  <header class="hd">
+    <div class="hd-l">
+      <span class="kicker">v6 · reference · stamps · part 2 of 2</span>
+      <h1 class="title">sticker library.</h1>
+    </div>
+    <div class="hd-r">
+      <div class="meta">forty-one · part 2 · packs 6–10 (23 stamps)</div>
+      <div class="meta">cut · peel · stamp on demand</div>
+    </div>
+  </header>
+
+  <section class="lead">
+    <p class="lead-prose"><em>forty-one stickers across ten packs. you don't earn them. you stamp them when the moment is true. blank entries also count.</em></p>
+    <p class="lead-cats"><em>packs: restlessness · break-discipline · wins-jar · mood-constellation · cbt-thought-flip · dbt-urge-surf · pattern-names · permission · if-then · crisis-toolkit</em></p>
+  </section>
+
+  <section class="grid grid-41" aria-label="Stamp categories · part 2 of 2 · packs 6–10">
+
+    <!-- ───── Pack 6 · DBT Urge-Surf (clay) ───── -->
+    <article class="card pack-dbt" data-stk="19">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M2 12 q3 -5 6 0 t6 0 t6 0 t6 0"/><path d="M2 18 q3 -5 6 0 t6 0 t6 0 t6 0"/><circle cx="27" cy="24" r="2" fill="currentColor"/><line x1="4" y1="26" x2="22" y2="26" stroke-dasharray="2,2"/></svg></div>
+        <div class="card-num">19</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">SURFED-TO-SHORE</h3>
+        <p class="card-sub"><em>"went the distance" — urge surfed all the way across. distance complete.</em></p>
+      </div>
+    </article>
+
+    <!-- ───── Pack 7 · Pattern Names (lavender) ───── -->
+    <article class="card pack-pattern" data-stk="20">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><circle cx="16" cy="16" r="6"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/></svg></div>
+        <div class="card-num">20</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">RESTLESSNESS-OWNED</h3>
+        <p class="card-sub"><em>"it's mine to feel" — the restlessness is yours, not an emergency to fix.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-pattern" data-stk="21">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M11 12 q0 -6 5 -6 t5 6 q0 4 -3 5 t-2 4"/><circle cx="16" cy="24" r="1.4" fill="currentColor"/></svg></div>
+        <div class="card-num">21</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IDENTITY-QUESTION-HELD</h3>
+        <p class="card-sub"><em>"didn't answer yet" — the question landed. held, not answered.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-pattern" data-stk="22">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M16 16 m-1.2 0 a1.2 1.2 0 1 1 2.4 0 a3 3 0 1 1 -6 0 a5 5 0 1 1 10 0 a7 7 0 1 1 -14 0 a9 9 0 1 1 18 0"/></svg></div>
+        <div class="card-num">22</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">RIA-THREAD-FOLLOWED</h3>
+        <p class="card-sub"><em>"felt without spiraling" — the thread came up. you felt it without following it down.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-pattern" data-stk="23">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M16 26 L7 15 a4.5 4.5 0 1 1 9 -2 a4.5 4.5 0 1 1 9 2 Z"/></svg></div>
+        <div class="card-num">23</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">SELF-COMPASSION-OFFERED</h3>
+        <p class="card-sub"><em>"I gave myself a hand" — the same hand you'd offer anyone else.</em></p>
+      </div>
+    </article>
+
+    <!-- ───── Pack 8 · Permission Series (sage) ───── -->
+    <article class="card pack-permission" data-stk="24">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M22 6 a10 10 0 1 0 4 18 a7 7 0 1 1 -4 -18 Z"/></svg></div>
+        <div class="card-num">24</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">PERMISSION-TO-BE-TIRED</h3>
+        <p class="card-sub"><em>"no reason needed" — tired with no reason. no reason needed.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-permission" data-stk="25">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><rect x="6" y="6" width="20" height="20" stroke-dasharray="2.5,2.5"/></svg></div>
+        <div class="card-num">25</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">PERMISSION-TO-SKIP</h3>
+        <p class="card-sub"><em>"blank is enough" — blank page accepted as a complete entry.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-permission" data-stk="26">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><line x1="4" y1="16" x2="22" y2="16" stroke-dasharray="3,2"/><polyline points="18,12 22,16 18,20"/></svg></div>
+        <div class="card-num">26</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">PERMISSION-TO-BE-SLOW</h3>
+        <p class="card-sub"><em>"this is the pace" — slow today is the pace. that's the practice.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-permission" data-stk="27">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><polyline points="9,6 6,6 6,26 9,26"/><polyline points="23,6 26,6 26,26 23,26"/><path d="M13 13 q0 -3 3 -3 t3 3 q0 2 -2 3 t-1 2"/><circle cx="16" cy="22" r="1.2" fill="currentColor"/></svg></div>
+        <div class="card-num">27</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">PERMISSION-TO-NOT-KNOW</h3>
+        <p class="card-sub"><em>"the question is enough" — you didn't force a wrong answer.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-permission" data-stk="28">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><line x1="6" y1="9" x2="13" y2="16"/><line x1="13" y1="9" x2="6" y2="16"/><polyline points="17,15 21,19 27,11"/></svg></div>
+        <div class="card-num">28</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">PERMISSION-TO-BE-WRONG</h3>
+        <p class="card-sub"><em>"and try again" — got it wrong, tried again. that's the loop.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-permission" data-stk="29">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><circle cx="11" cy="16" r="4.5"/><circle cx="21" cy="16" r="4.5"/><line x1="13.5" y1="16" x2="18.5" y2="16"/></svg></div>
+        <div class="card-num">29</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">PERMISSION-TO-NEED-HELP</h3>
+        <p class="card-sub"><em>"asked for it" — you asked. the asking was the practice.</em></p>
+      </div>
+    </article>
+
+    <!-- ───── Pack 9 · If-Then Cards (amber, dashed) ───── -->
+    <article class="card pack-ifthen" data-stk="30">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M3 13 q1.5 -3 3 0 t3 0"/><polyline points="11,16 15,12 15,20 11,16"/><ellipse cx="22" cy="13" rx="2.2" ry="3.5"/><ellipse cx="26" cy="20" rx="2.2" ry="3.5"/></svg></div>
+        <div class="card-num">30</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-RESTLESS &middot; THEN-WALKED</h3>
+        <p class="card-sub"><em>restless body → 2 minutes of walking. logged.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-ifthen" data-stk="31">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><rect x="4" y="6" width="9" height="20" rx="1.2"/><line x1="6" y1="9" x2="11" y2="9"/><line x1="15" y1="16" x2="19" y2="16"/><polyline points="17,13 19,16 17,19"/><line x1="21" y1="12" x2="29" y2="12"/><line x1="21" y1="17" x2="27" y2="17"/><line x1="21" y1="22" x2="28" y2="22"/></svg></div>
+        <div class="card-num">31</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-PHONE &middot; THEN-WHY</h3>
+        <p class="card-sub"><em>phone reach → one word for the why. logged.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-ifthen" data-stk="32">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M9 14 m-1 0 a1 1 0 1 1 2 0 a2.5 2.5 0 1 1 -5 0 a4 4 0 1 1 8 0"/><line x1="14" y1="16" x2="18" y2="16"/><polyline points="16,14 18,16 16,18"/><circle cx="23" cy="11" r="2"/><line x1="23" y1="13" x2="23" y2="22"/><line x1="20" y1="17" x2="26" y2="17"/></svg></div>
+        <div class="card-num">32</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-SPIRALING &middot; THEN-SCAN</h3>
+        <p class="card-sub"><em>spiral starting → 30-second body scan. logged.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-ifthen" data-stk="33">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M4 13 q0 -4 3.5 -4 t3.5 4 q0 2.5 -2 3.5 t-1.5 2.5"/><circle cx="7.5" cy="22" r="1.2" fill="currentColor"/><line x1="13" y1="16" x2="17" y2="16"/><polyline points="15,14 17,16 15,18"/><path d="M21 10 q4 0 4 6 q0 6 -4 6"/></svg></div>
+        <div class="card-num">33</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-IDENTITY-Q &middot; THEN-HELD</h3>
+        <p class="card-sub"><em>identity question → held it without answering. logged.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-ifthen" data-stk="34">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><circle cx="6" cy="14" r="1.6"/><circle cx="9.5" cy="11" r="1.6"/><circle cx="13" cy="14" r="1.6"/><circle cx="9.5" cy="17.5" r="1.6"/><circle cx="9.5" cy="14" r="1" fill="currentColor"/><line x1="15" y1="16" x2="19" y2="16"/><polyline points="17,14 19,16 17,18"/><polyline points="22,12 28,12 28,22 22,22"/></svg></div>
+        <div class="card-num">34</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-RIA &middot; THEN-SAT-WITH-IT</h3>
+        <p class="card-sub"><em>ria-thread → felt it without spiraling. logged.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-ifthen" data-stk="35">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M3 11 L8 11 L3 17 L8 17"/><path d="M5 19 L9 19 L5 23 L9 23"/><line x1="13" y1="16" x2="17" y2="16"/><polyline points="15,14 17,16 15,18"/><line x1="19" y1="20" x2="29" y2="20"/><line x1="19" y1="20" x2="19" y2="16"/><line x1="29" y1="20" x2="29" y2="18"/></svg></div>
+        <div class="card-num">35</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-TIRED &middot; THEN-LAY-DOWN</h3>
+        <p class="card-sub"><em>tired → lay down for ten minutes. logged.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-ifthen" data-stk="36">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><circle cx="5" cy="13" r="1.6" fill="currentColor"/><circle cx="9" cy="13" r="1.6" fill="currentColor"/><circle cx="5" cy="18" r="1.6" fill="currentColor"/><circle cx="9" cy="18" r="1.6" fill="currentColor"/><line x1="13" y1="16" x2="29" y2="16"/><polyline points="25,12 29,16 25,20"/></svg></div>
+        <div class="card-num">36</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-HEAVY &middot; THEN-REACHED-OUT</h3>
+        <p class="card-sub"><em>heavy → one text to one person. logged.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-ifthen" data-stk="37">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><line x1="3" y1="13" x2="11" y2="13"/><line x1="3" y1="17" x2="11" y2="17"/><line x1="13" y1="16" x2="17" y2="16"/><polyline points="15,14 17,16 15,18"/><rect x="20" y="7" width="9" height="18"/><line x1="24.5" y1="7" x2="24.5" y2="25"/><line x1="20" y1="16" x2="29" y2="16"/></svg></div>
+        <div class="card-num">37</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">IF-NUMB &middot; THEN-WINDOW</h3>
+        <p class="card-sub"><em>numb → walked to the window, looked out. logged.</em></p>
+      </div>
+    </article>
+
+    <!-- ───── Pack 10 · Crisis Toolkit (clay-urgent) ───── -->
+    <article class="card pack-crisis" data-stk="38">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><path d="M6 8 q0 -2 2 -2 l4 0 q2 0 2 2 l0 4 q0 2 -2 2 q1 5 4 8 q2 -2 2 -2 l4 0 q2 0 2 2 l0 4 q0 2 -2 2 q-13 0 -16 -16 Z"/></svg></div>
+        <div class="card-num">38</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">REACHED-THE-LINE</h3>
+        <p class="card-sub"><em>"called/texted" — you contacted a crisis line. the line was reached for.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-crisis" data-stk="39">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><rect x="5" y="9" width="14" height="14"/><polyline points="8,16 12,20 17,12"/><text x="22" y="20" font-family="JetBrains Mono" font-size="6.5" fill="currentColor" stroke="none">Q9</text></svg></div>
+        <div class="card-num">39</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">PHQ9-Q9-ACKNOWLEDGED</h3>
+        <p class="card-sub"><em>"I noted it" — the thought arrived. you logged it without spinning.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-crisis" data-stk="40">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><line x1="9" y1="5" x2="23" y2="5"/><line x1="9" y1="27" x2="23" y2="27"/><path d="M9 5 L16 16 L23 5"/><path d="M9 27 L16 16 L23 27"/></svg></div>
+        <div class="card-num">40</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">STAYED-THROUGH</h3>
+        <p class="card-sub"><em>"the hour passed" — you stayed through the hour. the hour passed.</em></p>
+      </div>
+    </article>
+
+    <article class="card pack-crisis" data-stk="41">
+      <div class="card-head">
+        <div class="card-glyph"><svg viewBox="0 0 32 32"><ellipse cx="11" cy="15" rx="3.5" ry="6"/><ellipse cx="22" cy="19" rx="3.5" ry="6"/><circle cx="11" cy="9" r="1.4" fill="currentColor"/><circle cx="13" cy="11" r="1" fill="currentColor"/><circle cx="22" cy="13" r="1.4" fill="currentColor"/><circle cx="20" cy="15" r="1" fill="currentColor"/></svg></div>
+        <div class="card-num">41</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-name">BODY-CAME-BACK</h3>
+        <p class="card-sub"><em>"felt my feet" — you found your feet again. body returned.</em></p>
+      </div>
+    </article>
+
+  </section>
+
+</main>
+</body>
+</html>

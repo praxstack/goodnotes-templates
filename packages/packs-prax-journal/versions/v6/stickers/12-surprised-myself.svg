@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Burst of radiating lines -->
+  <g stroke="#7e9b85" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <line x1="128" y1="40" x2="128" y2="80"/>
+    <line x1="128" y1="176" x2="128" y2="216"/>
+    <line x1="40" y1="128" x2="80" y2="128"/>
+    <line x1="176" y1="128" x2="216" y2="128"/>
+    <line x1="64" y1="64" x2="92" y2="92"/>
+    <line x1="164" y1="164" x2="192" y2="192"/>
+    <line x1="192" y1="64" x2="164" y2="92"/>
+    <line x1="64" y1="192" x2="92" y2="164"/>
+  </g>
+  <g fill="#7e9b85" stroke="none">
+    <circle cx="128" cy="128" r="10"/>
+  </g>
+</svg>

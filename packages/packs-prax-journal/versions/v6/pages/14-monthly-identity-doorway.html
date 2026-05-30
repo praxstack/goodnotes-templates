@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>v6 · Monthly Identity Doorway · 1 of 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 22mm;
+  --paper: #F1EFED;
+  --rule-color:  rgba(126, 155, 133, 0.4);
+  --rule-stroke: 0.5px;
+  --bleed: rgba(214, 164, 94, 0.22);
+  --ink: #1f2126; --ink-soft: #3a3a40; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
+  --sage: #7e9b85; --sage-ink: #4E6249; --sage-tint: rgba(126,155,133,0.10); --sage-edge: rgba(126,155,133,0.28);
+  --clay: #c08866; --clay-ink: #8A3E2E; --clay-tint: rgba(192,136,102,0.08); --clay-edge: rgba(192,136,102,0.28);
+  --amber: #d6a45e; --amber-ink: #8F5D28;
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  --shadow-page: 0 1px 2px rgba(31,33,38,0.04), 0 16px 48px rgba(31,33,38,0.10), 0 2px 8px rgba(31,33,38,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans); font-size: 8.5pt;
+  color: var(--ink-soft); line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative; overflow: hidden;
+  box-shadow: var(--shadow-page);
+  display: flex; flex-direction: column;
+}
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+.nav-chrome {
+  position: absolute; top: 7mm; left: 7mm; right: 7mm;
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 6.5pt;
+  letter-spacing: 0.12em; text-transform: lowercase;
+  z-index: 10;
+}
+.nav-chrome a {
+  color: var(--ink-quiet); text-decoration: none;
+  padding: 1.2mm 2.5mm;
+  border: 0.5px solid var(--ink-whisper);
+  background: rgba(249,245,236,0.65);
+  border-radius: 1mm;
+}
+.nav-chrome a:hover { color: var(--ink); border-color: var(--ink-soft); }
+.crisis-chip {
+  position: absolute; bottom: 7mm; right: 7mm;
+  font-family: var(--font-mono); font-size: 5.8pt;
+  letter-spacing: 0.16em; text-transform: lowercase;
+  color: var(--clay-ink); text-decoration: none;
+  padding: 1mm 2.5mm;
+  border: 0.5px solid var(--clay-edge);
+  background: rgba(249,245,236,0.7);
+  border-radius: 1mm; z-index: 10;
+}
+.crisis-chip:hover { background: var(--clay-tint); }
+
+.masthead {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding-bottom: 3mm; border-bottom: 0.6px solid var(--ink); flex-shrink: 0;
+}
+.masthead .kicker {
+  font-family: var(--font-mono); font-size: 6pt; text-transform: uppercase;
+  letter-spacing: 0.2em; color: var(--ink-quiet); margin-bottom: 3mm;
+}
+.masthead h1 {
+  font-family: var(--font-serif); font-size: 40pt; font-weight: 400;
+  line-height: 0.95; letter-spacing: -0.022em; color: var(--ink);
+  font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 60;
+}
+.masthead .meta {
+  font-family: var(--font-mono); font-size: 6pt; color: var(--ink-quiet);
+  letter-spacing: 0.14em; text-transform: uppercase; text-align: right;
+  align-self: flex-end;
+}
+.rotation-note {
+  margin-top: 4mm;
+  font-family: var(--font-mono); font-size: 6pt;
+  letter-spacing: 0.16em; text-transform: lowercase;
+  color: var(--ink-quiet); opacity: 0.75;
+}
+.question-zone {
+  margin-top: 9mm; max-width: 145mm;
+}
+.question-zone p {
+  font-family: var(--font-serif); font-style: italic; color: var(--ink);
+  font-variation-settings: "opsz" 36, "SOFT" 60;
+}
+.question-zone .q {
+  font-size: 14pt; line-height: 1.4; margin-bottom: 4mm;
+}
+.question-zone .qsub {
+  font-size: 11pt; color: var(--ink-quiet); line-height: 1.45;
+}
+.subprompts {
+  margin-top: 9mm;
+  display: flex; flex-direction: column; gap: 8mm;
+  flex-shrink: 0;
+}
+.subprompt {
+  display: flex; align-items: baseline; gap: 4mm;
+  border-bottom: 0.5px solid var(--ink-whisper);
+  padding-bottom: 1mm;
+}
+.subprompt .label {
+  font-family: var(--font-serif); font-style: italic; font-size: 9pt;
+  color: var(--ink-soft); white-space: nowrap; min-width: 50mm;
+  font-variation-settings: "opsz" 24, "SOFT" 60;
+}
+.subprompt .line { flex: 1; min-height: 6mm; }
+
+.freewrite {
+  flex: 1; margin-top: 10mm; min-height: 60mm;
+  position: relative;
+}
+.freewrite::before {
+  content: "or whatever else surfaces";
+  position: absolute; top: 0; left: 0;
+  font-family: var(--font-mono); font-size: 5.5pt;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-quiet); opacity: 0.6;
+}
+.freewrite-rules {
+  margin-top: 7mm;
+  display: flex; flex-direction: column; gap: 0;
+}
+.freewrite-rules .ln {
+  border-bottom: 0.5px solid var(--ink-whisper);
+  height: 9mm;
+}
+.permission-strip {
+  margin-top: 6mm;
+  background: var(--sage-tint); border: 0.6px solid var(--sage-edge);
+  border-left: 3px solid var(--sage);
+  padding: 4mm 6mm;
+  font-family: var(--font-serif); font-style: italic; font-size: 9pt;
+  color: var(--sage-ink); line-height: 1.45;
+  font-variation-settings: "opsz" 24, "SOFT" 60;
+  flex-shrink: 0;
+}
+.footer {
+  margin-top: 4mm; padding-top: 2.5mm;
+  border-top: 0.4px solid var(--ink-whisper);
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-shrink: 0;
+  font-family: var(--font-mono); font-size: 5pt;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-quiet); opacity: 0.55;
+}
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<a id="page-14" class="page-anchor"></a>
+<main class="page" data-template="v6-monthly-doorway-A-light" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  <nav class="nav-chrome" aria-label="page navigation">
+    <a href="#page-22">[home]</a>
+    <a href="#page-15">[homework]</a>
+  </nav>
+
+  {{HEADER_CONTENT}}
+  <header class="masthead">
+    <div>
+      <div class="kicker">§ monthly · identity doorway · 1 of 4 (tuesday morning)</div>
+      <h1>Two years<br>from now.</h1>
+    </div>
+    <div class="meta">doorway A<br>light · 1 page</div>
+  </header>
+
+  <div class="rotation-note">rotates with B (page 14b), C (14c), D (14d) over 4 months &mdash; duplicate when ready</div>
+
+  <section class="question-zone">
+    <p class="q">When you wake up on a regular Tuesday morning two years from now and you're proud of yourself &mdash; what does that morning look like?</p>
+    <p class="qsub">(Not the achievement. The morning.)</p>
+  </section>
+
+  <section class="subprompts">
+    <div class="subprompt">
+      <span class="label">what time is it</span>
+      <span class="line"></span>
+    </div>
+    <div class="subprompt">
+      <span class="label">who's there</span>
+      <span class="line"></span>
+    </div>
+    <div class="subprompt">
+      <span class="label">first hour</span>
+      <span class="line"></span>
+    </div>
+    <div class="subprompt">
+      <span class="label">body feeling</span>
+      <span class="line"></span>
+    </div>
+  </section>
+
+  <section class="freewrite">
+    <div class="freewrite-rules">
+      <div class="ln"></div><div class="ln"></div><div class="ln"></div>
+      <div class="ln"></div><div class="ln"></div><div class="ln"></div>
+      <div class="ln"></div>
+    </div>
+  </section>
+
+  {{FOOTER_CONTENT}}
+  <aside class="permission-strip">
+    one of these is enough. or none. blank is a complete entry.
+  </aside>
+
+  <footer class="footer">
+    <span>full version on page 16 (homework). this is the lighter monthly surface.</span>
+    <span>monthly doorway</span>
+  </footer>
+
+  <a href="#page-23" class="crisis-chip">[crisis]</a>
+</main>
+</body>
+</html>

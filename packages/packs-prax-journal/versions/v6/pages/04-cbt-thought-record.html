@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prax Journal v6 — Page 04 — Thought Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 — PAGE 04 · CBT THOUGHT RECORD  (shelf · clay-edge)
+   For spiral days. Beck/Burns thought record, defanged.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 22mm;
+
+  --paper:           #F2F0EC;
+  --rule-color:  rgba(126, 155, 133, 0.4);
+  --rule-stroke: 0.5px;
+  --bleed: rgba(192, 136, 102, 0.22);
+  --ink:             #1f2126;
+  --ink-soft:        #4A453D;
+  --ink-quiet:       #6E6658;
+  --ink-whisper:     #B5AD9F;
+
+  --sage:            #7e9b85;
+  --clay:            #c08866;
+  --amber:           #d6a45e;
+  --lavender:        #a89bbf;
+
+  --accent:          var(--clay);
+
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Instrument Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #E4DFD2;
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(42, 40, 36, 0.04), 0 8px 32px rgba(42, 40, 36, 0.08);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+/* shelf-frame: 2px dashed sage at 0.4 opacity inside the 22mm margin */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--margin) - 4mm);
+  border: 2px dashed rgba(126, 155, 133, 0.4);
+  border-radius: 2mm;
+  pointer-events: none;
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── nav chrome ─── */
+.nav {
+  position: absolute;
+  top: 11mm;
+  left: var(--margin);
+  right: var(--margin);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.nav-l { display: flex; align-items: center; gap: 4mm; }
+.shelf-badge {
+  display: inline-block;
+  padding: 1mm 2.5mm;
+  background: rgba(126, 155, 133, 0.12);
+  color: var(--sage);
+  border-radius: 1mm;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+}
+.nav a {
+  color: var(--ink-quiet);
+  text-decoration: none;
+}
+
+/* ─── header ─── */
+.header {
+  margin-top: 8mm;
+  margin-bottom: 6mm;
+  flex-shrink: 0;
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-quiet);
+  margin-bottom: 3mm;
+}
+h1 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28pt;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+
+/* ─── sections ─── */
+section.row {
+  border-bottom: 0.5px solid var(--accent);
+  padding: 3.5mm 0;
+}
+section.row:last-of-type { border-bottom: none; }
+
+.row-label {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 1.5mm;
+}
+.prompt {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10pt;
+  line-height: 1.4;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  margin-bottom: 2.5mm;
+}
+.baseline {
+  height: 8mm;
+  border-bottom: 0.6px solid var(--ink-quiet);
+  margin-bottom: 0;
+}
+.baseline + .baseline { margin-top: 4mm; }
+
+.row-emotion .top-row {
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+  margin-top: 1mm;
+}
+.chip-row {
+  display: flex;
+  gap: 1.5mm;
+  align-items: center;
+}
+.chip-row .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6mm;
+  height: 5.5mm;
+  padding: 0 1.5mm;
+  border: 0.6px solid var(--sage);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  color: var(--sage);
+  background: rgba(126, 155, 133, 0.05);
+}
+.chip-row.distortion .chip {
+  font-family: var(--font-sans);
+  font-size: 7pt;
+  padding: 0 2.5mm;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  height: 6mm;
+}
+.chip-note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 7.5pt;
+  color: var(--ink-quiet);
+  margin-top: 1.5mm;
+}
+
+.balanced-line {
+  height: 9mm;
+  border-bottom: 0.8px solid var(--ink);
+  width: 100%;
+  margin-top: 2mm;
+}
+
+/* ─── permission strip ─── */
+.permission {
+  margin-top: 4mm;
+  padding: 2.5mm 4mm;
+  background: rgba(126, 155, 133, 0.08);
+  border-left: 2px solid var(--sage);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--ink);
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  letter-spacing: 0.005em;
+}
+
+/* ─── footer (sticker affordances + crisis) ─── */
+.footer {
+  margin-top: auto;
+  padding-top: 4mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.stickers {
+  display: flex;
+  gap: 5mm;
+  align-items: flex-end;
+}
+.sticker-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1mm;
+}
+.sticker-slot .ring {
+  width: 10mm;
+  height: 10mm;
+  border: 0.6px dashed var(--ink-whisper);
+  border-radius: 50%;
+}
+.sticker-slot .lbl {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-whisper);
+}
+.crisis {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+  text-decoration: none;
+}
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+
+<main class="page" id="page-04" data-template="prax-journal-v6-cbt-thought-record" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Page navigation">
+    <span class="nav-l">
+      <span class="shelf-badge">SHELF · OPT-IN</span>
+      <a href="#page-22">[home]</a>
+    </span>
+    <a href="#page-21" class="nav-r">[stickers]</a>
+  </nav>
+
+  {{HEADER_CONTENT}}
+  <header class="header">
+    <div class="kicker">§ shelf · cbt thought record</div>
+    <h1>What did the thought say.</h1>
+  </header>
+
+  <section class="row">
+    <div class="row-label">Situation</div>
+    <p class="prompt">what happened? (one sentence, just the facts)</p>
+    <div class="baseline"></div>
+  </section>
+
+  <section class="row row-emotion">
+    <div class="row-label">Emotion</div>
+    <p class="prompt">what feeling came up? how loud (1&ndash;10)?</p>
+    <div class="top-row">
+      <div class="baseline" style="flex:1;"></div>
+      <div class="chip-row" aria-label="Loudness 1–10">
+        <span class="chip">1</span><span class="chip">2</span><span class="chip">3</span><span class="chip">4</span><span class="chip">5</span><span class="chip">6</span><span class="chip">7</span><span class="chip">8</span><span class="chip">9</span><span class="chip">10</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Thought · verbatim</div>
+    <p class="prompt">what did the thought say &mdash; verbatim. no editing.</p>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Pattern (optional)</div>
+    <div class="chip-row distortion" aria-label="Optional pattern tags">
+      <span class="chip">catastrophizing</span>
+      <span class="chip">all-or-nothing</span>
+      <span class="chip">mind-reading</span>
+      <span class="chip">fortune-telling</span>
+      <span class="chip">filter</span>
+      <span class="chip">should</span>
+      <span class="chip">personalization</span>
+    </div>
+    <p class="chip-note">circle one if it fits. skip if nothing fits.</p>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Evidence For</div>
+    <p class="prompt">what makes the thought feel true?</p>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Evidence Against</div>
+    <p class="prompt">what makes the thought maybe-not-quite-true?</p>
+    <div class="baseline"></div>
+    <div class="baseline"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Balanced</div>
+    <p class="prompt">a sentence that holds both &mdash;</p>
+    <div class="balanced-line"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-label">Next action</div>
+    <p class="prompt">one tiny step from here &mdash;</p>
+    <div class="baseline"></div>
+  </section>
+
+  {{FOOTER_CONTENT}}
+  <aside class="permission">if you only filled the thought, that's still data.</aside>
+
+  <footer class="footer">
+    <div class="stickers">
+      <div class="sticker-slot"><div class="ring"></div><span class="lbl">judgment-noted</span></div>
+      <div class="sticker-slot"><div class="ring"></div><span class="lbl">catastrophe-caught</span></div>
+      <div class="sticker-slot"><div class="ring"></div><span class="lbl">pattern-named</span></div>
+      <div class="sticker-slot"><div class="ring"></div><span class="lbl">body-felt</span></div>
+    </div>
+    <a href="#page-23" class="crisis">[crisis]</a>
+  </footer>
+
+</main>
+
+</body>
+</html>

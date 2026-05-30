@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Question mark inside oval -->
+  <g stroke="#a89bbf" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="128" cy="128" rx="72" ry="88"/>
+    <path d="M104 96 Q104 64 128 64 Q152 64 152 88 Q152 108 132 120 Q124 124 124 144"/>
+  </g>
+  <g fill="#a89bbf" stroke="none">
+    <circle cx="124" cy="172" r="7"/>
+  </g>
+</svg>

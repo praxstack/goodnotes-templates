@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Phone → question mark -->
+  <g stroke="#d6a45e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <rect x="32" y="64" width="64" height="128" rx="8"/>
+    <line x1="52" y1="76" x2="76" y2="76"/>
+    <line x1="116" y1="128" x2="156" y2="128"/>
+    <polyline points="144,116 156,128 144,140"/>
+    <path d="M180 100 Q180 76 200 76 Q220 76 220 96 Q220 112 204 120 Q196 124 196 140"/>
+  </g>
+  <g fill="#d6a45e" stroke="none">
+    <circle cx="64" cy="180" r="5"/>
+    <circle cx="196" cy="160" r="6"/>
+  </g>
+</svg>

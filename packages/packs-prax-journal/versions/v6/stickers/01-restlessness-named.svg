@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Bee in the hat — trapezoid hat with squiggle -->
+  <g stroke="#c08866" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M56 152 L200 152 L168 72 L88 72 Z"/>
+    <path d="M100 116 q14 -22 28 0 t28 0"/>
+  </g>
+</svg>

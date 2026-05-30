@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v6 · 23 · Crisis Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 18mm;
+  --paper: #F0F0EF;
+  --ink: #1f2126;
+  --ink-quiet: #6E6658;
+  --ink-whisper: #B5AD9F;
+  --clay: #c08866;
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  --shadow-page: 0 16px 48px rgba(31,33,38,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #E4DFD2; }
+body {
+  font-family: var(--font-mono);
+  font-size: 10pt;
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-page);
+}
+@media print {
+  html, body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ── Goodnotes nav-chip cluster (top-right, mono only) ── */
+.nav-cluster {
+  position: absolute;
+  top: 7mm;
+  right: 7mm;
+  display: flex;
+  gap: 2mm;
+  z-index: 10;
+}
+.nav-chip {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.55;
+  padding: 1.2mm 2.4mm;
+  border: 0.4px solid var(--ink-whisper);
+  border-radius: 0.8mm;
+  background: rgba(249,245,236,0.75);
+}
+.nav-chip:hover { opacity: 0.9; }
+
+/* ── Header ── */
+.masthead {
+  flex-shrink: 0;
+  margin-top: 4mm;
+  margin-bottom: 11mm;
+}
+.masthead .kicker {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  opacity: 0.85;
+  margin-bottom: 5mm;
+}
+.masthead h1 {
+  font-family: var(--font-serif);
+  font-style: normal; /* UPRIGHT — not italic */
+  font-size: 22pt;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: #1f2126;
+  font-variation-settings: "opsz" 72, "SOFT" 0;
+}
+
+/* ── Section: phone numbers ── */
+.section { flex-shrink: 0; }
+.section + .section { margin-top: 9mm; }
+
+.section-heading {
+  font-family: var(--font-mono);
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 6mm;
+  opacity: 1;
+}
+
+.phone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.phone-row {
+  display: grid;
+  grid-template-columns: 70mm 1fr;
+  align-items: baseline;
+  padding: 2mm 0;
+  font-family: var(--font-mono);
+  font-size: 11pt;
+  line-height: 1.4;
+  color: var(--ink);
+  opacity: 0.95;
+}
+.phone-row .label {
+  letter-spacing: 0.02em;
+}
+.phone-row .number {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+.phone-row.intl {
+  margin-top: 3mm;
+  font-size: 9pt;
+  opacity: 0.7;
+  display: block;
+}
+
+/* ── hairline rule between sections ── */
+.rule {
+  flex-shrink: 0;
+  margin: 10mm 0;
+  height: 0;
+  border-top: 0.4px solid rgba(31,33,38,0.30);
+}
+
+/* ── Grounding box (clay outlined) ── */
+.ground-box {
+  flex-shrink: 0;
+  border: 1px solid var(--clay);
+  border-radius: 3mm;
+  background: rgba(192,136,102,0.04);
+  padding: 7mm 8mm 8mm;
+}
+.ground-box .lbl {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  opacity: 0.7;
+  margin-bottom: 5mm;
+}
+.ground-box .ground-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.ground-box .ground-list .step {
+  font-family: var(--font-mono);
+  font-size: 10pt;
+  line-height: 1.5;
+  color: var(--ink);
+  padding: 1mm 0;
+  letter-spacing: 0.005em;
+}
+
+/* ── Safety message block ── */
+.safety {
+  flex-shrink: 0;
+  margin-top: 11mm;
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+}
+.safety .line {
+  font-family: var(--font-mono);
+  font-size: 9.5pt;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0.85;
+  letter-spacing: 0.005em;
+}
+
+</style>
+</head>
+<body>
+<a id="page-23" class="page-anchor"></a>
+<main class="page" data-template="v6-crisis-card" role="document">
+
+  <nav class="nav-cluster" aria-label="page navigation">
+    <a href="#page-1" class="nav-chip">[home]</a>
+    <a href="#page-4" class="nav-chip">[shelf]</a>
+  </nav>
+
+  <header class="masthead">
+    <div class="kicker">&sect; crisis card &middot; always available</div>
+    <h1>If you&rsquo;re in crisis.</h1>
+  </header>
+
+  <section class="section" aria-label="phone numbers">
+    <h2 class="section-heading">phone numbers.</h2>
+    <div class="phone-list">
+      <div class="phone-row"><span class="label">india &middot; iCALL</span><span class="number">+91 9152987821</span></div>
+      <div class="phone-row"><span class="label">india &middot; Vandrevala</span><span class="number">1860 2662 345</span></div>
+      <div class="phone-row"><span class="label">india &middot; AASRA</span><span class="number">+91 22 2754 6669</span></div>
+      <div class="phone-row"><span class="label">india &middot; NIMHANS</span><span class="number">080 4611 0007</span></div>
+      <div class="phone-row intl">(international: 988 / 116 123 / 13 11 14)</div>
+    </div>
+  </section>
+
+  <hr class="rule" aria-hidden="true">
+
+  <aside class="ground-box" aria-label="grounding exercise">
+    <div class="lbl">&sect; if you can&rsquo;t dial yet &mdash; try this:</div>
+    <div class="ground-list">
+      <div class="step">5 things you can see.</div>
+      <div class="step">4 things you can touch.</div>
+      <div class="step">3 things you can hear.</div>
+      <div class="step">2 things you can smell.</div>
+      <div class="step">1 slow breath.</div>
+    </div>
+  </aside>
+
+  <section class="safety" aria-label="safety message">
+    <p class="line">you don&rsquo;t have to be sure to call.</p>
+    <p class="line">you don&rsquo;t have to know what to say.</p>
+    <p class="line">the person picking up has heard it before.</p>
+    <p class="line">they would rather hear from you.</p>
+  </section>
+
+</main>
+</body>
+</html>

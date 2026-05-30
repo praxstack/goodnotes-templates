@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prax Journal v6 · 12R · Weekly Pattern Review · synthesis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 · PAGE 12R · SPREAD-MAP · synthesis
+   Right half of the weekly spread. 6 synthesis sections in 2×3 grid.
+   No running header. No graph required.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 22mm;
+  --paper: #E8EEE6;
+  --bleed: rgba(126, 155, 133, 0.30);
+  --ink: #1f2126; --ink-soft: #4A453D; --ink-quiet: #6E6658; --ink-whisper: #B5AD9F;
+  --sage: #7e9b85; --sage-ink: #4E6249;
+  --sage-rule: rgba(126,155,133,0.4);
+  --sage-hair: rgba(126,155,133,0.3);
+  --clay: #c08866; --clay-ink: #8A3E2E; --clay-edge: rgba(192,136,102,0.32);
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; color: var(--ink-soft); line-height: 1.45; -webkit-font-smoothing: antialiased; }
+.page {
+  width: var(--page-w); height: var(--page-h); background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(42,40,36,0.04), 0 8px 32px rgba(42,40,36,0.08);
+  page-break-after: always;
+  display: flex; flex-direction: column;
+}
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ─── micro-mark (no running header) ─── */
+.spread-mark-tl {
+  position: absolute;
+  top: 8mm; left: var(--margin);
+  font-family: var(--font-mono); font-size: 7pt;
+  letter-spacing: 0.04em; color: var(--ink);
+  opacity: 0.5;
+}
+
+/* ─── nav-chip cluster ─── */
+.nav-cluster {
+  position: absolute; bottom: 8mm; right: 8mm;
+  display: flex; gap: 2mm; z-index: 10;
+}
+.nav-chip {
+  font-family: var(--font-mono); font-size: 6pt;
+  letter-spacing: 0.06em; color: var(--ink);
+  text-decoration: none; opacity: 0.4;
+  padding: 1.4mm 2.6mm;
+  border: 0.4px solid var(--ink-whisper);
+  border-radius: 1mm;
+  background: rgba(249,245,236,0.7);
+  transition: opacity 0.15s ease;
+}
+.nav-chip:hover { opacity: 0.85; }
+.nav-chip.crisis { color: var(--clay-ink); border-color: var(--clay-edge); }
+
+/* ─── 2×3 synthesis grid ─── */
+.synthesis {
+  margin-top: 14mm;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 8mm 10mm;
+  padding-bottom: 14mm;
+}
+.cell {
+  display: flex; flex-direction: column;
+  gap: 3mm;
+}
+.cell-label {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13pt; font-weight: 400;
+  color: var(--ink); line-height: 1.1;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  letter-spacing: -0.005em;
+}
+.cell-baselines {
+  display: flex; flex-direction: column;
+  gap: 5.5mm;
+  margin-top: 1mm;
+}
+.cell-baseline {
+  height: 0;
+  border-bottom: 0.5px dotted var(--ink-whisper);
+}
+
+/* ─── permission strip (tight, italic) ─── */
+.permission-strip {
+  position: absolute;
+  left: var(--margin); right: var(--margin);
+  bottom: 18mm;
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 11pt; color: var(--sage-ink);
+  text-align: center;
+  font-variation-settings: "opsz" 14, "SOFT" 100;
+  line-height: 1.3;
+}
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<main class="page" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  <a id="page-12r" name="page-12r" class="anchor" style="display:block;height:0;visibility:hidden;"></a>
+  {{HEADER_CONTENT}}
+
+  <span class="spread-mark-tl">&rarr; patterns</span>
+
+  <section class="synthesis" aria-label="weekly synthesis">
+
+    <div class="cell">
+      <p class="cell-label">what showed up most.</p>
+      <div class="cell-baselines">
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <p class="cell-label">what i avoided.</p>
+      <div class="cell-baselines">
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <p class="cell-label">what helped.</p>
+      <div class="cell-baselines">
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <p class="cell-label">what didn&rsquo;t.</p>
+      <div class="cell-baselines">
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <p class="cell-label">what i want to keep.</p>
+      <div class="cell-baselines">
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <p class="cell-label">what i want to drop.</p>
+      <div class="cell-baselines">
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+        <div class="cell-baseline"></div>
+      </div>
+    </div>
+
+  </section>
+
+  {{FOOTER_CONTENT}}
+  <p class="permission-strip">no graph required. patterns count without metrics.</p>
+
+  <div class="nav-cluster">
+    <a class="nav-chip" href="#page-22">[home]</a>
+    <a class="nav-chip" href="#page-21">[stickers]</a>
+    <a class="nav-chip crisis" href="#page-23">[crisis]</a>
+  </div>
+</main>
+</body>
+</html>

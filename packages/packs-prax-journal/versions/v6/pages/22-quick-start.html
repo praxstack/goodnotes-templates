@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v6 · 22 · What this is</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 22mm;
+  --paper: #F0F0EF;
+  --bleed: rgba(31, 33, 38, 0.10);
+  --ink: #1f2126;
+  --ink-soft: #4a4a52;
+  --ink-quiet: #6E6658;
+  --ink-whisper: #B5AD9F;
+  --sage: #7e9b85;
+  --clay: #c08866;
+  --amber: #d6a45e;
+  --lavender: #a89bbf;
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  --shadow-page: 0 16px 48px rgba(31,33,38,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #E4DFD2; }
+body {
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-page);
+}
+@media print {
+  html, body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ── Header ── */
+.masthead {
+  flex-shrink: 0;
+  margin-bottom: 14mm;
+}
+.masthead h1 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22pt;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72, "SOFT" 60;
+}
+
+/* ── TOC body ── */
+.toc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.toc-row {
+  display: grid;
+  grid-template-columns: 30mm 1fr 22mm 56mm;
+  align-items: baseline;
+  column-gap: 6mm;
+  padding: 5.5mm 0;
+  border-bottom: 0.3px dotted rgba(31,33,38,0.18);
+}
+.toc-row:last-child { border-bottom: none; }
+
+/* tier pill — col 1 */
+.pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding: 1.2mm 2.8mm;
+  border-radius: 1.2mm;
+  text-align: center;
+  white-space: nowrap;
+}
+.pill.spine    { background: rgba(126,155,133,0.18);  color: #7e9b85; }
+.pill.shelf    { background: rgba(192,136,102,0.18);  color: #c08866; }
+.pill.weekly   { background: rgba(214,164,94,0.18);   color: #d6a45e; }
+.pill.monthly  { background: rgba(168,155,191,0.18);  color: #a89bbf; }
+.pill.homework { background: rgba(31,33,38,0.10);     color: var(--ink); }
+.pill.reference{ background: rgba(31,33,38,0.06);     color: var(--ink); }
+
+/* section heading — col 2 */
+.toc-heading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13pt;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  font-variation-settings: "opsz" 36, "SOFT" 60;
+  text-decoration: none;
+  letter-spacing: 0.002em;
+}
+.toc-heading:hover { color: var(--clay); }
+
+/* page range — col 3 */
+.toc-pages {
+  font-family: var(--font-mono);
+  font-size: 9pt;
+  color: var(--ink);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* description — col 4 */
+.toc-desc {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 10pt;
+  line-height: 1.35;
+  color: var(--ink);
+  opacity: 0.7;
+  font-variation-settings: "opsz" 18, "SOFT" 60;
+}
+
+/* ── Footer permission strip ── */
+.permission {
+  flex-shrink: 0;
+  margin-top: 12mm;
+  padding-top: 6mm;
+  border-top: 0.4px solid var(--ink-whisper);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: var(--ink-quiet);
+  text-align: center;
+  font-variation-settings: "opsz" 24, "SOFT" 60;
+}
+
+/* ── Goodnotes nav-chip cluster (bottom-right) ── */
+.nav-cluster {
+  position: absolute;
+  bottom: 8mm;
+  right: 8mm;
+  display: flex;
+  gap: 2mm;
+  z-index: 10;
+}
+.nav-chip {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.4;
+  padding: 1.4mm 2.6mm;
+  border: 0.4px solid var(--ink-whisper);
+  border-radius: 1mm;
+  background: rgba(249,245,236,0.7);
+  transition: opacity 0.15s ease;
+}
+.nav-chip:hover { opacity: 0.85; }
+.nav-chip.crisis { color: #c08866; border-color: rgba(192,136,102,0.32); }
+
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<a id="page-22" class="page-anchor"></a>
+<main class="page" data-template="v6-quick-start" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <h1>What this is.</h1>
+  </header>
+
+  <section class="toc" aria-label="table of contents">
+
+    <a class="toc-row" href="#page-1">
+      <span class="pill spine">spine</span>
+      <span class="toc-heading">every-day spine</span>
+      <span class="toc-pages">pp 1&ndash;3</span>
+      <span class="toc-desc">the morning anchor + brain dump + evening close</span>
+    </a>
+
+    <a class="toc-row" href="#page-4">
+      <span class="pill shelf">shelf</span>
+      <span class="toc-heading">shelf &mdash; opt-in pages</span>
+      <span class="toc-pages">pp 4&ndash;11</span>
+      <span class="toc-desc">pull what fits today; skip what doesn&rsquo;t</span>
+    </a>
+
+    <a class="toc-row" href="#page-12">
+      <span class="pill weekly">weekly</span>
+      <span class="toc-heading">weekly review</span>
+      <span class="toc-pages">pp 12&ndash;13</span>
+      <span class="toc-desc">spread/map of the week, no forms</span>
+    </a>
+
+    <a class="toc-row" href="#page-13">
+      <span class="pill monthly">monthly</span>
+      <span class="toc-heading">monthly close</span>
+      <span class="toc-pages">pp 13&ndash;14</span>
+      <span class="toc-desc">letter to yourself + light identity check</span>
+    </a>
+
+    <a class="toc-row" href="#page-15">
+      <span class="pill homework">homework</span>
+      <span class="toc-heading">shreya&rsquo;s homework packet</span>
+      <span class="toc-pages">pp 15&ndash;20</span>
+      <span class="toc-desc">pick one. the other can wait.</span>
+    </a>
+
+    <a class="toc-row" href="#page-21">
+      <span class="pill reference">reference</span>
+      <span class="toc-heading">reference</span>
+      <span class="toc-pages">pp 21&ndash;24</span>
+      <span class="toc-desc">stickers, this page, crisis card, stock-up</span>
+    </a>
+
+  </section>
+
+  <aside class="permission">
+    the kit doesn&rsquo;t ask for completion. flip past anything.
+  </aside>
+
+  <nav class="nav-cluster" aria-label="page navigation">
+    <a href="#page-1" class="nav-chip">[home]</a>
+    <a href="#page-4" class="nav-chip">[shelf]</a>
+    <a href="#page-23" class="nav-chip crisis">[crisis]</a>
+  </nav>
+</main>
+</body>
+</html>

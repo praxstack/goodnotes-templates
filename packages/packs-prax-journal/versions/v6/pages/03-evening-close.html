@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prax Journal v6 · 03 · Evening Close</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,144,400;1,72,400;1,144,400;1,144,500&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 22mm;
+  --paper: #F6EFE2;
+  --rule-color:  rgba(126, 155, 133, 0.4);
+  --rule-stroke: 0.5px;
+  --bleed: rgba(126, 155, 133, 0.22);
+  --ink: #1f2126;
+  --ink-soft: #4a4a52;
+  --ink-quiet: #76747a;
+  --ink-whisper: #b3afa6;
+  --sage: #7e9b85;
+  --sage-ink: #4a6651;
+  --sage-tint: rgba(126, 155, 133, 0.10);
+  --sage-edge: rgba(126, 155, 133, 0.32);
+  --clay: #c08866;
+  --amber: #d6a45e;
+  --lavender: #a89bbf;
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #E4DFD2; }
+body {
+  font-family: var(--font-sans);
+  font-size: 8.5pt;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto;
+  padding: var(--margin);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(31,33,38,0.10);
+}
+@media print {
+  html, body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+
+/* ── Goodnotes nav chrome ── */
+.nav-chip {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.4;
+  padding: 2mm 4mm;
+  position: absolute;
+  top: 8mm;
+  transition: opacity 0.15s ease;
+}
+.nav-chip:hover { opacity: 0.7; }
+.nav-home { left: 8mm; }
+.nav-shelf { right: 8mm; }
+.nav-crisis-bottom {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.35;
+  position: absolute;
+  bottom: 8mm;
+  right: 8mm;
+  padding: 1.5mm 3mm;
+}
+.nav-crisis-bottom:hover { opacity: 0.7; }
+
+
+/* ── Date micro-mark (top-right, mirrored from page 02 OPEN-PAPER) ── */
+.micro-mark {
+  position: absolute;
+  top: 12mm; right: 12mm;
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  opacity: 0.4;
+  line-height: 1;
+  z-index: 5;
+}
+
+.anchor { display: block; height: 0; visibility: hidden; }
+
+/* ── Header ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 8mm;
+  padding-bottom: 4mm;
+  border-bottom: 0.4px solid var(--ink-whisper);
+}
+.header-l { flex: 1; }
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-quiet);
+  margin-bottom: 4mm;
+}
+h1 {
+  font-family: var(--font-serif);
+  font-size: 30pt;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144;
+}
+.date-line {
+  width: 32mm;
+  height: 6mm;
+  border-bottom: 0.6px solid var(--ink-whisper);
+  margin-bottom: 1mm;
+}
+
+/* ── Soft prompts ── */
+.soft-prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 7mm;
+  margin-bottom: 8mm;
+}
+.soft-prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5mm;
+}
+.soft-prompt-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 12pt;
+  font-weight: 400;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+.soft-prompt-lines {
+  height: 14mm;
+  background-image: radial-gradient(circle, rgba(31,33,38,0.22) 0.28mm, transparent 0.28mm);
+  background-size: 2.5mm 7mm;
+  background-position: 0 6mm;
+}
+
+/* ── Open prose zone ── */
+.prose-zone {
+  flex: 1;
+  min-height: 60mm;
+  margin-bottom: 6mm;
+  background-image: radial-gradient(circle, rgba(31,33,38,0.22) 0.28mm, transparent 0.28mm);
+  background-size: 2.5mm 7mm;
+  background-position: 0 6mm;
+}
+
+/* ── Kind sentence line ── */
+.kind-sentence {
+  margin-bottom: 5mm;
+}
+.kind-sentence-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 11pt;
+  font-weight: 400;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72;
+  letter-spacing: -0.005em;
+  margin-bottom: 2mm;
+}
+.kind-sentence-baseline {
+  width: 80mm;
+  height: 6mm;
+  border-bottom: 0.5px solid var(--ink-whisper);
+}
+
+/* ── Permission strip ── */
+.permission {
+  background: var(--sage-tint);
+  border-left: 1.5px solid var(--sage);
+  padding: 2.5mm 4mm;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 7pt;
+  color: var(--sage-ink);
+  font-variation-settings: "opsz" 14";
+  letter-spacing: 0.005em;
+  line-height: 1.45;
+}
+.bind-edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6mm;
+  background: var(--bleed);
+  pointer-events: none;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<main class="page" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  <a id="page-03" name="page-03" class="anchor"></a>
+
+  <!-- Goodnotes nav chrome -->
+  <a href="#page-22" class="nav-chip nav-home">[home]</a>
+  <a href="#page-04" class="nav-chip nav-shelf">[shelf]</a>
+
+  <!-- Date micro-mark, top-right -->
+  <span class="micro-mark">__ · ___ · ____</span>
+
+  <!-- Header -->
+  {{HEADER_CONTENT}}
+  <header class="header">
+    <div class="header-l">
+      <div class="kicker">§ daily · evening close</div>
+      <h1>Today is closed.</h1>
+    </div>
+    <div class="date-line" aria-label="Date"></div>
+  </header>
+
+  <!-- Three soft prompts, each with 2 dotted-baseline lines -->
+  <section class="soft-prompts" aria-label="Evening prompts">
+    <div class="soft-prompt">
+      <div class="soft-prompt-text">what felt heavy?</div>
+      <div class="soft-prompt-lines"></div>
+    </div>
+    <div class="soft-prompt">
+      <div class="soft-prompt-text">what did I survive?</div>
+      <div class="soft-prompt-lines"></div>
+    </div>
+    <div class="soft-prompt">
+      <div class="soft-prompt-text">what counts even if it feels small?</div>
+      <div class="soft-prompt-lines"></div>
+    </div>
+  </section>
+
+  <!-- Open prose zone (~30%) -->
+  <section class="prose-zone" aria-label="Open prose"></section>
+
+  <!-- Kind sentence to self -->
+  <section class="kind-sentence" aria-label="Kind sentence">
+    <div class="kind-sentence-text">one kind sentence to myself —</div>
+    <div class="kind-sentence-baseline"></div>
+  </section>
+
+  <!-- Permission strip -->
+  {{FOOTER_CONTENT}}
+  <aside class="permission">
+    if you opened this page tonight, today is closed. tomorrow gets to be different.
+  </aside>
+
+  <!-- Crisis link bottom-right -->
+  <a href="#page-23" class="nav-crisis-bottom">[crisis]</a>
+</main>
+</body>
+</html>

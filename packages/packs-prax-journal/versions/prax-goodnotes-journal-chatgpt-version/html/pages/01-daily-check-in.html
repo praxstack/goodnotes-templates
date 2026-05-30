@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily Check-In</title><style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; background:#ddd7ca; color:#1F2126; }
+body { font-family: "Avenir Next", "Inter", "Noto Sans Devanagari", system-ui, sans-serif; }
+.a4 { width:210mm; height:297mm; margin:0 auto 10mm; background:#F9F5EC; position:relative; overflow:hidden; page-break-after:always; padding:14mm 14mm 12mm; box-shadow:0 2mm 8mm rgba(0,0,0,.18); }
+.a4:last-child { page-break-after:auto; }
+@media print { body { background:white; } .a4 { margin:0; box-shadow:none; } .screen-note { display:none; } }
+.bg-grid { position:absolute; inset:0; background-image: linear-gradient(rgba(215,208,191,.26) 1px, transparent 1px), linear-gradient(90deg, rgba(215,208,191,.18) 1px, transparent 1px); background-size:7mm 7mm; pointer-events:none; }
+.bg-wash { position:absolute; inset:0; background: radial-gradient(90mm 80mm at 10% 10%, rgba(143,166,142,.18), transparent 60%), radial-gradient(90mm 80mm at 96% 8%, rgba(212,165,116,.12), transparent 60%), radial-gradient(120mm 80mm at 60% 100%, rgba(168,160,196,.13), transparent 64%); pointer-events:none; }
+.page-inner { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; gap:5mm; }
+.mast { display:flex; justify-content:space-between; align-items:flex-start; gap:6mm; border-bottom:.6mm solid #1F2126; padding-bottom:4mm; }
+.kicker { font-family:"Courier New", monospace; font-size:7.5pt; letter-spacing:.14em; text-transform:uppercase; color:#6E6658; }
+h1 { margin:1mm 0 0; font-family:Georgia, 'Noto Serif', serif; font-style:italic; font-weight:400; font-size:25pt; line-height:1.02; letter-spacing:-.02em; }
+.subtitle { font-size:8.8pt; color:#4A453D; max-width:92mm; margin-top:2mm; line-height:1.35; }
+.datebox { min-width:48mm; border: .45mm solid #1F2126; border-radius:3mm; padding:3mm; background:rgba(255,255,255,.26); }
+.datebox .line { height:8mm; border-bottom:.35mm solid #D7D0BF; margin-top:1mm; }
+.badge { display:inline-block; padding:1.5mm 3mm; border-radius:99mm; border:.35mm solid #D7D0BF; background:#F3EEE3; font-size:7.5pt; color:#6E6658; margin-right:2mm; }
+.row { display:flex; gap:4mm; }
+.col { flex:1; min-width:0; }
+.card { border:.45mm solid #D7D0BF; border-radius:4mm; padding:4mm; background:rgba(255,255,255,.22); }
+.card.sage { background:#E4EBE0; border-color:#CAD7C5; } .card.clay { background:#F0D8C8; border-color:#E0BBA6; } .card.amber { background:#F4E4C7; border-color:#E7C98E; } .card.lav { background:#E8E4F2; border-color:#CEC7E0; }
+.card h2 { margin:0 0 2mm; font-size:10.5pt; letter-spacing:.02em; text-transform:uppercase; color:#1F2126; }
+.prompt { color:#6E6658; font-size:8.6pt; line-height:1.35; margin:0 0 2mm; }
+.small { font-size:7.8pt; color:#6E6658; line-height:1.35; }
+.linefield { height:8mm; border-bottom:.35mm solid #D7D0BF; }
+.lines { background-image: linear-gradient(to bottom, transparent calc(100% - .35mm), #D7D0BF calc(100% - .35mm)); background-size:100% 8mm; }
+.writing { min-height:35mm; } .writing.tall { min-height:90mm; } .writing.med { min-height:58mm; } .writing.short { min-height:24mm; }
+.checkrow { display:flex; gap:2mm; flex-wrap:wrap; }
+.check { display:flex; align-items:center; gap:1.5mm; min-width:30mm; font-size:8.2pt; color:#4A453D; margin-bottom:2mm; }
+.box { width:4.2mm; height:4.2mm; border:.45mm solid #1F2126; border-radius:.8mm; flex:0 0 auto; background:rgba(255,255,255,.35); }
+.scale { display:flex; gap:1.3mm; align-items:center; margin-top:2mm; }
+.dot { width:5.7mm; height:5.7mm; border:.35mm solid #1F2126; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:6pt; color:#6E6658; background:rgba(255,255,255,.3); }
+.split { display:grid; grid-template-columns:1fr 1fr; gap:4mm; }
+.three { display:grid; grid-template-columns:1fr 1fr 1fr; gap:4mm; }
+.four { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:3mm; }
+.footer { margin-top:auto; display:flex; justify-content:space-between; align-items:center; padding-top:2mm; border-top:.35mm solid #D7D0BF; font-size:7.2pt; color:#6E6658; }
+.corner { position:absolute; right:8mm; bottom:7mm; font-family:Georgia, serif; font-style:italic; font-size:7.4pt; color:#6E6658; }
+.ribbon { position:absolute; top:0; right:0; width:34mm; height:34mm; background:linear-gradient(135deg, transparent 50%, rgba(192,136,102,.45) 50%); }
+.bigquote { font-family:Georgia, serif; font-style:italic; font-size:18pt; line-height:1.18; color:#1F2126; }
+.table { display:grid; border:.4mm solid #D7D0BF; border-radius:3mm; overflow:hidden; }
+.cell { border-right:.3mm solid #D7D0BF; border-bottom:.3mm solid #D7D0BF; padding:2.5mm; min-height:10mm; font-size:8.2pt; }
+.cell.head { background:#F3EEE3; font-weight:700; color:#1F2126; }
+.cell:nth-child(4n) { border-right:0; }
+.note-pill { border:.35mm dashed #6E6658; border-radius:3mm; padding:2.5mm; font-size:8pt; color:#6E6658; background:rgba(249,245,236,.65); }
+</style></head><body>
+<div class="screen-note" style="padding:10px 14px;font:14px system-ui;background:#1f2126;color:#f9f5ec">A4 preview page. Print/export with paper size A4, margins none/background graphics on.</div>
+<section class="a4 "><div class="bg-wash"></div><div class="bg-grid"></div><div class="ribbon"></div><div class="page-inner">
+<header class="mast"><div><div class="kicker">Daily Survival Journal</div><h1>Daily Check-In</h1><div class="subtitle">A tiny state snapshot. Fill only what helps. Blank space is allowed.</div></div><div class="datebox"><div class="kicker">Date</div><div class="line"></div><div class="kicker" style="margin-top:3mm">Day / Time</div><div class="line"></div></div></header>
+
+<div class="three">
+<section class="card sage"><h2>Mood</h2><p class="prompt">Circle or write.</p><div class="small">Circle one</div><div class="scale"><span class="dot">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot">5</span><span class="dot">6</span><span class="dot">7</span><span class="dot">8</span><span class="dot">9</span><span class="dot">10</span></div></section>
+<section class="card amber"><h2>Energy</h2><p class="prompt">How much fuel is actually here?</p><div class="small">Circle one</div><div class="scale"><span class="dot">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot">5</span><span class="dot">6</span><span class="dot">7</span><span class="dot">8</span><span class="dot">9</span><span class="dot">10</span></div></section>
+<section class="card lav"><h2>Focus</h2><p class="prompt">Not moral. Just weather.</p><div class="small">Circle one</div><div class="scale"><span class="dot">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot">5</span><span class="dot">6</span><span class="dot">7</span><span class="dot">8</span><span class="dot">9</span><span class="dot">10</span></div></section>
+</div>
+<div class="split">
+<section class="card "><h2>Body + breath</h2><p class="prompt">Breath weight in kg; chest/jaw/shoulders/hands/legs.</p><div class="linefield"></div><div class="linefield"></div><div class="linefield"></div><div class="linefield"></div></section>
+<section class="card "><h2>Meds + basics</h2><div class="checkrow"><label class="check"><span class="box"></span>meds</label><label class="check"><span class="box"></span>water</label><label class="check"><span class="box"></span>food</label><label class="check"><span class="box"></span>brush</label><label class="check"><span class="box"></span>bath</label><label class="check"><span class="box"></span>movement</label></div><div class="linefield"></div><div class="linefield"></div></section>
+</div>
+<section class="card clay"><h2>One sentence right now</h2><p class="prompt">What is present for me?</p><div class="lines writing short"></div></section>
+<section class="card sage"><h2>One tiny next step</h2><p class="prompt">So small it almost feels silly.</p><div class="split"><div><div class="linefield"></div><div class="linefield"></div><div class="linefield"></div></div><div><div class="checkrow"><label class="check"><span class="box"></span>2 min</label><label class="check"><span class="box"></span>5 min</label><label class="check"><span class="box"></span>10 min</label><label class="check"><span class="box"></span>ask help</label><label class="check"><span class="box"></span>rest first</label></div></div></div></section>
+
+<footer class="footer"><span>Prax GoodNotes Journal v9</span><span>01</span></footer></div><div class="corner">one line counts</div></section></body></html>
