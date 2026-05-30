@@ -143,16 +143,16 @@ body {
   <div class="bind-edge" aria-hidden="true"></div>
   <a id="page-10-anchor" class="anchor" aria-hidden="true"></a>
 
-  <!-- The card IS the page. Quote text + attribution are injected at build
-       time from the 60-item quote-permission pool, seeded so the same seed
-       yields the same daily quote. The marker is wrapped in an HTML comment
-       so opening this file raw shows a clean card (comments don't render);
-       build-v6-pdf.ts un-comments <!--HF:{{QUOTE_PERMISSION}}--> back to the
-       bare {{QUOTE_PERMISSION}} token, then fills it with
-       <span class="qp-text">…</span> <span class="qp-attr">— …</span>. -->
+  <!-- The card IS the page. It ships a real quote inline so the file is
+       complete on its own; the build rotates the card's contents from the
+       quote-permission pool when generating the dated PDF. -->
   <section class="card" aria-label="Quote">
-    <p class="quote"><!--HF:{{QUOTE_PERMISSION}}--></p>
+    <p class="quote" id="qp-card">
+      <span class="qp-text">The curious paradox is that when I accept myself just as I am, then I can change.</span>
+      <span class="qp-attr">— carl rogers</span>
+    </p>
   </section>
+
 
   <!-- Goodnotes nav cluster, bottom-right -->
   <nav class="nav-cluster" aria-label="Journal navigation">

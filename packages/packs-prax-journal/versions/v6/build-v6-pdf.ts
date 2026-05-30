@@ -240,28 +240,31 @@ function injectRotatingContent(
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Inject the single featured quote into page 10 if it carries the
- * `{{QUOTE_PERMISSION}}` marker. Mirrors injectRotatingContent: it pulls one
- * item from the `quote-permission` bucket using the SAME seeded rng, so the
- * daily featured quote is deterministic for a given seed.
+ * Rotate the featured quote on page 10. The page ships a real quote inline
+ * (so the file is complete on its own); when present, this swaps the card's
+ * contents for one drawn from the `quote-permission` bucket using the SAME
+ * seeded rng, so the daily featured quote is deterministic for a given seed.
  *
- * Renders:
+ * Targets the inner HTML of <p class="quote" id="qp-card">…</p> and rewrites:
  *   <span class="qp-text">…</span> <span class="qp-attr">— …</span>
  *
  * Attribution handling: a null/empty attribution drops the attr span entirely;
  * an em-dash sentinel ("—", used for disputed/anonymous quotes) renders the
- * lone dash. If the bucket is missing the marker is left intact (no rng draw).
+ * lone dash. If the card or bucket is absent the html is returned unchanged
+ * (and no rng draw happens, preserving determinism for the rest of the build).
  */
+const QP_CARD_RE = /(<p class="quote" id="qp-card">)[\s\S]*?(<\/p>)/;
+
 function injectQuotePermission(
   html: string,
   rng: () => number,
   byCategory: Record<string, PoolItem[]>,
 ): string {
-  if (!html.includes('{{QUOTE_PERMISSION}}')) return html;
+  if (!QP_CARD_RE.test(html)) return html;
 
   const bucket = byCategory['quote-permission'];
   if (!Array.isArray(bucket) || bucket.length === 0) {
-    console.warn('[build-v6]   ⚠ quote-permission pool missing — leaving {{QUOTE_PERMISSION}} intact');
+    // Pool missing: leave the inline default quote in place (no rng draw).
     return html;
   }
 
@@ -271,13 +274,14 @@ function injectQuotePermission(
   let attr = '';
   const a = item.attribution;
   if (a && a !== '—') {
-    attr = ` <span class="qp-attr">— ${htmlEscape(a)}</span>`;
+    attr = `<span class="qp-attr">— ${htmlEscape(a)}</span>`;
   } else if (a === '—') {
-    attr = ` <span class="qp-attr">—</span>`;
+    attr = `<span class="qp-attr">—</span>`;
   }
 
-  return html.replaceAll('{{QUOTE_PERMISSION}}', text + attr);
+  return html.replace(QP_CARD_RE, `$1\n      ${text}\n      ${attr}\n    $2`);
 }
+
 
 async function loadPool(): Promise<{ items: PoolItem[]; byCategory: Record<string, PoolItem[]> }> {
   try {
@@ -354,9 +358,8 @@ async function renderPage(
   // bare token here BEFORE injectRotatingContent's .includes/.replaceAll runs.
   html = html
     .replaceAll('<!--HF:{{HEADER_CONTENT}}-->', '{{HEADER_CONTENT}}')
-    .replaceAll('<!--HF:{{FOOTER_CONTENT}}-->', '{{FOOTER_CONTENT}}')
-    // Wave 16-D: the quote-permission card uses the same comment-wrap trick.
-    .replaceAll('<!--HF:{{QUOTE_PERMISSION}}-->', '{{QUOTE_PERMISSION}}');
+    .replaceAll('<!--HF:{{FOOTER_CONTENT}}-->', '{{FOOTER_CONTENT}}');
+
 
   // Wave 14: inject rotating content (no-op if no markers / pool missing).
   html = injectRotatingContent(html, rng, byCategory, stats, file);
