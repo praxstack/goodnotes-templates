@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Tapered water glass with waterline -->
-  <g stroke="#d6a45e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M88 72 L168 72 L160 208 L96 208 Z"/>
-    <path d="M96 124 q12 -10 20 0 t20 0 t20 0"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#d6a45e" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><path d="M88 72 L168 72 L160 208 L96 208 Z"/><path d="M96 124 q12 -10 20 0 t20 0 t20 0"/></g></svg>

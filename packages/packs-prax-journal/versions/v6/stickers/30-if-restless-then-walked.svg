@@ -1,16 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Squiggle (restless) → footprint -->
-  <g stroke="#d6a45e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M16 80 q12 -16 24 0 t24 0 t24 0"/>
-    <line x1="100" y1="80" x2="148" y2="80"/>
-    <polyline points="136,68 148,80 136,92"/>
-    <ellipse cx="200" cy="160" rx="32" ry="48"/>
-  </g>
-  <g fill="#d6a45e" stroke="none">
-    <circle cx="184" cy="108" r="6"/>
-    <circle cx="200" cy="100" r="6"/>
-    <circle cx="216" cy="108" r="6"/>
-    <circle cx="226" cy="124" r="5"/>
-    <circle cx="174" cy="124" r="5"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#d6a45e" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><path d="M16 80 q12 -16 24 0 t24 0 t24 0"/><line x1="100" x2="148" y1="80" y2="80"/><polyline points="136 68 148 80 136 92"/><ellipse cx="200" cy="160" rx="32" ry="48"/></g><g fill="#d6a45e" stroke="none"><circle cx="184" cy="108" r="6"/><circle cx="200" cy="100" r="6"/><circle cx="216" cy="108" r="6"/><circle cx="226" cy="124" r="5"/><circle cx="174" cy="124" r="5"/></g></svg>
