@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prax Journal v6 · 25 · Pomodoro Thoughts · CAPTURE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   PRAX JOURNAL v6 · PAGE 25 · POMODORO THOUGHTS · CAPTURE
+   Kawaii tomato kitchen-timer theme. A focus-sprint thought-parking page:
+   a distracting idea pops up -> jot it here -> return to the one thing.
+   Calm therapeutic register. No productivity-shame, no gamification.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --page-w: 210mm; --page-h: 297mm; --margin: 22mm;
+  --paper: #FBF4EC;
+  --bleed: rgba(192, 136, 102, 0.22);
+  --ink: #1f2126;
+  --ink-quiet: #6E6658;
+  --ink-whisper: #B5AD9F;
+  --sage-ink: #4E6249;
+  --clay: #C08866;
+  --tomato: #d98c6e;
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Charter', 'Georgia', serif;
+  --font-sans:  'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #E4DFD2; }
+body {
+  font-family: var(--font-mono);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  width: var(--page-w); height: var(--page-h);
+  background: var(--paper);
+  margin: 10mm auto; padding: var(--margin);
+  position: relative; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(42,40,36,0.04), 0 8px 32px rgba(42,40,36,0.08);
+  page-break-after: always;
+}
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 0; }
+}
+.micro-mark {
+  position: absolute; top: 12mm; right: 12mm;
+  font-family: var(--font-mono); font-size: 6.5pt; font-weight: 400;
+  letter-spacing: 0.14em; color: var(--ink); opacity: 0.4; line-height: 1; z-index: 2;
+}
+.nav-cluster {
+  position: absolute; bottom: 10mm; right: var(--margin);
+  display: flex; gap: 4mm; font-family: var(--font-mono);
+  font-size: 6.5pt; font-weight: 500; letter-spacing: 0.16em; line-height: 1; z-index: 2;
+}
+.nav-cluster a { color: var(--ink-quiet); text-decoration: none; opacity: 0.4; transition: opacity 0.15s ease; }
+.nav-cluster a:hover { opacity: 0.9; color: var(--sage-ink); }
+.bind-edge {
+  position: absolute; left: 0; top: 0; height: 100%; width: 6mm;
+  background: var(--bleed); pointer-events: none; z-index: 0;
+}
+
+/* ─── header ─── */
+.masthead { display: flex; justify-content: space-between; align-items: flex-start; gap: 8mm; position: relative; z-index: 1; }
+.kicker { font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.18em; color: var(--ink-quiet); opacity: 0.7; }
+.title { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 31pt; line-height: 1.0; color: var(--ink); margin-top: 3mm; }
+.lede { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 12.5pt; color: var(--sage-ink); margin-top: 4mm; opacity: 0.88; }
+.mascot { width: 36mm; height: auto; flex: none; }
+
+/* ─── this-sprint markers (a soft count, NOT a streak) ─── */
+.sprint-row { display: flex; align-items: baseline; gap: 5mm; margin-top: 13mm; position: relative; z-index: 1; }
+.sprint-dots { font-family: var(--font-mono); font-size: 15pt; letter-spacing: 0.55em; color: var(--clay); opacity: 0.7; }
+.sprint-label { font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.2em; color: var(--ink-quiet); opacity: 0.6; }
+
+/* ─── numbered capture list ─── */
+.capture { list-style: none; margin-top: 9mm; position: relative; z-index: 1; }
+.capture li { display: flex; align-items: flex-end; gap: 3mm; height: 15mm; border-bottom: 0.3mm solid rgba(126,155,133,0.42); }
+.capture .num { font-family: var(--font-mono); font-size: 8pt; color: var(--ink-quiet); opacity: 0.55; padding-bottom: 1.5mm; }
+.capture .dot { font-size: 8pt; color: var(--clay); padding-bottom: 1.6mm; }
+
+.whisper { font-family: var(--font-serif); font-style: italic; font-size: 10pt; color: var(--ink); opacity: 0.6; margin-top: 8mm; position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+<main class="page" id="page-25" data-template="prax-journal-v6-pomodoro-thoughts" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  <a id="page-25-anchor" class="anchor" aria-hidden="true"></a>
+  <span class="micro-mark">focus · capture</span>
+
+  <header class="masthead">
+    <div class="title-block">
+      <p class="kicker">§ focus · capture</p>
+      <h1 class="title">during the sprint.</h1>
+      <p class="lede">the thought — park it — back to focus.</p>
+    </div>
+    <svg class="mascot" viewBox="0 0 120 132" role="img" aria-label="kawaii tomato kitchen timer">
+      <g opacity="0.55">
+        <circle cx="60" cy="80" r="50" fill="none" stroke="rgba(78,98,73,0.20)" stroke-width="1.2"/>
+        <g stroke="rgba(78,98,73,0.30)" stroke-width="1.4" stroke-linecap="round">
+          <line x1="60" y1="32" x2="60" y2="39"/>
+          <line x1="108" y1="80" x2="101" y2="80"/>
+          <line x1="60" y1="128" x2="60" y2="121"/>
+          <line x1="12" y1="80" x2="19" y2="80"/>
+          <line x1="94" y1="46" x2="89" y2="51"/>
+          <line x1="94" y1="114" x2="89" y2="109"/>
+          <line x1="26" y1="114" x2="31" y2="109"/>
+          <line x1="26" y1="46" x2="31" y2="51"/>
+        </g>
+      </g>
+      <g fill="#7E9B85">
+        <ellipse cx="60" cy="34" rx="13" ry="5.5" transform="rotate(-22 60 34)"/>
+        <ellipse cx="60" cy="34" rx="13" ry="5.5" transform="rotate(22 60 34)"/>
+        <ellipse cx="60" cy="31" rx="5.5" ry="11"/>
+      </g>
+      <rect x="57" y="24" width="6" height="12" rx="3" fill="#6f8a76"/>
+      <ellipse cx="60" cy="82" rx="46" ry="43" fill="#d98c6e"/>
+      <ellipse cx="42" cy="64" rx="11" ry="8" fill="rgba(255,255,255,0.22)"/>
+      <circle cx="38" cy="90" r="5" fill="rgba(214,108,86,0.40)"/>
+      <circle cx="82" cy="90" r="5" fill="rgba(214,108,86,0.40)"/>
+      <circle cx="49" cy="80" r="3.6" fill="#3a2c25"/>
+      <circle cx="71" cy="80" r="3.6" fill="#3a2c25"/>
+      <path d="M50 90 Q60 99 70 90" fill="none" stroke="#3a2c25" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <div class="sprint-row">
+    <span class="sprint-dots">○ ○ ○ ○ ○</span>
+    <span class="sprint-label">sprints this session</span>
+  </div>
+
+  <ol class="capture">
+    <li><span class="num">01</span><span class="dot">●</span></li>
+    <li><span class="num">02</span><span class="dot">●</span></li>
+    <li><span class="num">03</span><span class="dot">●</span></li>
+    <li><span class="num">04</span><span class="dot">●</span></li>
+    <li><span class="num">05</span><span class="dot">●</span></li>
+    <li><span class="num">06</span><span class="dot">●</span></li>
+    <li><span class="num">07</span><span class="dot">●</span></li>
+    <li><span class="num">08</span><span class="dot">●</span></li>
+    <li><span class="num">09</span><span class="dot">●</span></li>
+  </ol>
+
+  <p class="whisper">the idea is safe here. it'll keep. back to the one thing.</p>
+
+  <nav class="nav-cluster" aria-label="Journal navigation">
+    <a href="#page-22">[home]</a>
+    <a href="#page-04">[shelf]</a>
+    <a href="#page-21">[stickers]</a>
+    <a href="#page-23">[crisis]</a>
+    <a href="#page-26">[next]</a>
+  </nav>
+</main>
+</body>
+</html>

@@ -1060,6 +1060,380 @@
         "attribution": "marsha linehan",
         "max_chars": 180
       }
+    ],
+    "quote-permission": [
+      {
+        "id": "qp-001",
+        "text": "you have power over your mind, not outside events. find your strength there.",
+        "attribution": "marcus aurelius",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-002",
+        "text": "the impediment to action advances action. what stands in the way becomes the way.",
+        "attribution": "marcus aurelius",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-003",
+        "text": "waste no more time arguing what a good person should be. be one.",
+        "attribution": "marcus aurelius",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-004",
+        "text": "the happiness of your life depends on the quality of your thoughts.",
+        "attribution": "marcus aurelius",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-005",
+        "text": "you could leave life right now. let that determine what you do and say.",
+        "attribution": "marcus aurelius",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-006",
+        "text": "we suffer more in imagination than in reality.",
+        "attribution": "seneca",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-007",
+        "text": "it is not that we have a short time to live, but that we waste much of it.",
+        "attribution": "seneca",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-008",
+        "text": "the whole future lies in uncertainty: live immediately.",
+        "attribution": "seneca",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-009",
+        "text": "difficulties strengthen the mind, as labor does the body.",
+        "attribution": "seneca",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-010",
+        "text": "no person is free who is not master of themselves.",
+        "attribution": "epictetus",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-011",
+        "text": "it’s not what happens to you, but how you react to it that matters.",
+        "attribution": "epictetus",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-012",
+        "text": "first say to yourself what you would be; then do what you have to do.",
+        "attribution": "epictetus",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-013",
+        "text": "make the best use of what is in your power, and take the rest as it happens.",
+        "attribution": "epictetus",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-014",
+        "text": "circumstances don’t make the person, they reveal them to themselves.",
+        "attribution": "epictetus",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-015",
+        "text": "you will never know who you are unless you push past your perceived limits.",
+        "attribution": "david goggins",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-016",
+        "text": "the most important conversations you’ll ever have are the ones with yourself.",
+        "attribution": "david goggins",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-017",
+        "text": "the only real test of intelligence is if you get what you want out of life.",
+        "attribution": "naval ravikant",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-018",
+        "text": "a calm mind, a fit body, a house full of love. these can’t be bought.",
+        "attribution": "naval ravikant",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-019",
+        "text": "happiness is a choice you make and a skill you develop.",
+        "attribution": "naval ravikant",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-020",
+        "text": "you do not rise to the level of your goals; you fall to the level of your systems.",
+        "attribution": "james clear",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-021",
+        "text": "every action you take is a vote for the type of person you wish to become.",
+        "attribution": "james clear",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-022",
+        "text": "habits are the compound interest of self-improvement.",
+        "attribution": "james clear",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-023",
+        "text": "clarity about what matters provides clarity about what does not.",
+        "attribution": "cal newport",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-024",
+        "text": "human beings are at their best when immersed deeply in something challenging.",
+        "attribution": "cal newport",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-025",
+        "text": "compare yourself to who you were yesterday, not to who someone else is today.",
+        "attribution": "jordan peterson",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-026",
+        "text": "set your house in perfect order before you criticize the world.",
+        "attribution": "jordan peterson",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-027",
+        "text": "nothing in life is as important as you think it is while you are thinking about it.",
+        "attribution": "daniel kahneman",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-028",
+        "text": "we can be blind to the obvious, and we are also blind to our blindness.",
+        "attribution": "daniel kahneman",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-029",
+        "text": "everything can be taken from a man but one thing: to choose one’s attitude.",
+        "attribution": "viktor frankl",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-030",
+        "text": "when we can no longer change a situation, we are challenged to change ourselves.",
+        "attribution": "viktor frankl",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-031",
+        "text": "between stimulus and response there is a space — in it lies our freedom to choose.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "widely attributed to viktor frankl; not found in his writings (popularized by stephen covey)."
+      },
+      {
+        "id": "qp-032",
+        "text": "you have to build a life worth living.",
+        "attribution": "marsha linehan",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-033",
+        "text": "act opposite to the emotion’s urge, all the way, and the feeling will shift.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "after marsha linehan’s dbt opposite-action skill."
+      },
+      {
+        "id": "qp-034",
+        "text": "nothing ever goes away until it has taught us what we need to know.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-035",
+        "text": "we can let the circumstances of our lives harden us, or soften us.",
+        "attribution": "pema chödrön",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-036",
+        "text": "feeling compassion for ourselves in no way releases us from responsibility.",
+        "attribution": "tara brach",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-037",
+        "text": "the boundary to what we can accept is the boundary to our freedom.",
+        "attribution": "tara brach",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-038",
+        "text": "the curious paradox is that when i accept myself as i am, then i can change.",
+        "attribution": "carl rogers",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-039",
+        "text": "what is most personal is most universal.",
+        "attribution": "carl rogers",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-040",
+        "text": "with self-compassion, we give ourselves the kindness we’d give a good friend.",
+        "attribution": "kristin neff",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-041",
+        "text": "the wound is the place where the light enters you.",
+        "attribution": "rumi",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-042",
+        "text": "you are not a drop in the ocean. you are the ocean in a drop.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "popularly attributed to rumi; disputed."
+      },
+      {
+        "id": "qp-043",
+        "text": "instructions for living a life: pay attention. be astonished. tell about it.",
+        "attribution": "mary oliver",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-044",
+        "text": "tell me, what is it you plan to do with your one wild and precious life?",
+        "attribution": "mary oliver",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-045",
+        "text": "let everything happen to you: beauty and terror. just keep going.",
+        "attribution": "rainer maria rilke",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-046",
+        "text": "be patient toward all that is unsolved in your heart.",
+        "attribution": "rainer maria rilke",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-047",
+        "text": "the antidote to exhaustion is not rest. it is wholeheartedness.",
+        "attribution": "david whyte",
+        "max_chars": 180,
+        "note": "whyte, quoting br. david steindl-rast."
+      },
+      {
+        "id": "qp-048",
+        "text": "start close in, don’t take the second step. start with the first thing.",
+        "attribution": "david whyte",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-049",
+        "text": "action isn’t the product of motivation. motivation is the product of action.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "behavioral-activation adage; widely repeated, no single source."
+      },
+      {
+        "id": "qp-050",
+        "text": "make the habit tiny, then celebrate it. the feeling is what makes it stick.",
+        "attribution": "bj fogg",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-051",
+        "text": "emotions create habits — not repetition, not frequency.",
+        "attribution": "bj fogg",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-052",
+        "text": "discipline is choosing between what you want now and what you want most.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "commonly misattributed to abraham lincoln; origin unknown."
+      },
+      {
+        "id": "qp-053",
+        "text": "you don’t have to see the whole staircase, just take the first step.",
+        "attribution": "martin luther king jr.",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-054",
+        "text": "the secret of getting ahead is getting started.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "commonly attributed to mark twain; unverified."
+      },
+      {
+        "id": "qp-055",
+        "text": "done is better than perfect.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "popularized by sheryl sandberg as a facebook engineering motto."
+      },
+      {
+        "id": "qp-056",
+        "text": "a year from now, you may wish you had started today.",
+        "attribution": "karen lamb",
+        "max_chars": 180
+      },
+      {
+        "id": "qp-057",
+        "text": "your brain isn’t broken. it runs on interest, urgency, novelty, and challenge.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "after william dodson’s interest-based nervous system model of adhd."
+      },
+      {
+        "id": "qp-058",
+        "text": "lower the bar until you can step over it. then step over it.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "adhd-community adage."
+      },
+      {
+        "id": "qp-059",
+        "text": "start before you feel ready. the readiness comes from starting.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "adhd-community adage."
+      },
+      {
+        "id": "qp-060",
+        "text": "the task you’re dreading is rarely as big as the dread around it.",
+        "attribution": "—",
+        "max_chars": 180,
+        "note": "adhd-community adage."
+      }
     ]
   }
 }

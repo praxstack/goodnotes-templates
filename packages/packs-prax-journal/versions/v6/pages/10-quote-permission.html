@@ -91,6 +91,23 @@ body {
   letter-spacing: 0.005em;
 }
 
+/* ─── Build-injected quote (quote-permission pool, rotated by seed) ─── */
+.qp-text {
+  display: block;
+}
+.qp-attr {
+  display: block;
+  margin-top: 5mm;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 7pt;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--ink);
+  opacity: 0.55;
+}
+
 /* ─── Goodnotes nav-chip cluster, bottom-right corner ─── */
 .nav-cluster {
   position: absolute;
@@ -126,14 +143,15 @@ body {
   <div class="bind-edge" aria-hidden="true"></div>
   <a id="page-10-anchor" class="anchor" aria-hidden="true"></a>
 
-  <!-- The card IS the page -->
+  <!-- The card IS the page. Quote text + attribution are injected at build
+       time from the 60-item quote-permission pool, seeded so the same seed
+       yields the same daily quote. The marker is wrapped in an HTML comment
+       so opening this file raw shows a clean card (comments don't render);
+       build-v6-pdf.ts un-comments <!--HF:{{QUOTE_PERMISSION}}--> back to the
+       bare {{QUOTE_PERMISSION}} token, then fills it with
+       <span class="qp-text">…</span> <span class="qp-attr">— …</span>. -->
   <section class="card" aria-label="Quote">
-    <p class="quote">
-      <span class="line">You are the sky.</span>
-      <span class="line">Everything else is just the weather.</span>
-    </p>
-    <p class="attribution">— pema chödrön</p>
-    <p class="permission-line">no need to react. just see it.</p>
+    <p class="quote"><!--HF:{{QUOTE_PERMISSION}}--></p>
   </section>
 
   <!-- Goodnotes nav cluster, bottom-right -->

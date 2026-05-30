@@ -10,9 +10,12 @@
 <style>
 /* ═══════════════════════════════════════════════════════════════════════
    PRAX JOURNAL v6 · PAGE 12L · SPREAD-MAP · 7-day strip
-   Left half of the weekly spread. Seven vertical columns, one per day.
-   Each column = 5 chip rows (mood / energy / sleep / note / stamp).
+   Left half of the weekly spread. Seven vertical columns, one per day,
+   in a single even 7-column grid. Each column = day-head + mood / energy /
+   sleep chips, an expanding note field, and a stamp anchored at the foot.
    No running header. The spread itself is the unit.
+   Wave 16 rebuild: removed stray grid pseudo-items (they pushed Sun to a
+   second row), columns now fill the page vertically with intentional rhythm.
    ═══════════════════════════════════════════════════════════════════════ */
 :root {
   --page-w: 210mm; --page-h: 297mm; --margin: 18mm;
@@ -46,14 +49,14 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
 /* ─── micro-marks (no running header on a SPREAD-MAP) ─── */
 .spread-mark-tl {
   position: absolute;
-  top: 8mm; left: var(--margin);
+  top: 9mm; left: var(--margin);
   font-family: var(--font-mono); font-size: 7pt;
   letter-spacing: 0.04em; color: var(--ink);
   opacity: 0.5;
 }
 .spread-mark-br {
   position: absolute;
-  bottom: 14mm; right: var(--margin);
+  bottom: 9mm; right: var(--margin);
   font-family: var(--font-mono); font-size: 7pt;
   letter-spacing: 0.04em; color: var(--ink);
   opacity: 0.4;
@@ -77,8 +80,7 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
 .nav-chip:hover { opacity: 0.85; }
 .nav-chip.crisis { color: var(--clay-ink); border-color: var(--clay-edge); }
 
-
-/* ─── Month/day wayfinding strip (wave 15, top of body) ─── */
+/* ─── Month/day wayfinding strip (sits tight under the header zone) ─── */
 .month-strip {
   font-family: var(--font-mono);
   font-size: 6.5pt;
@@ -86,36 +88,35 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
   letter-spacing: 0.04em;
   display: flex;
   flex-direction: column;
-  gap: 1mm;
-  padding: 8mm 18mm 4mm;
+  gap: 1.4mm;
+  margin: 0 -18mm;
+  padding: 3mm 18mm 4mm;
   border-bottom: 0.5px solid rgba(126, 155, 133, 0.4);
-  margin: 0 -18mm 0 -18mm;
+  flex-shrink: 0;
 }
 .month-strip__months,
 .month-strip__days {
   display: block;
   text-align: center;
 }
-.month-strip__sep {
-  display: none;
-}
+.month-strip__sep { display: none; }
 
-/* ─── 7-day grid ─── */
+/* ─── 7-day grid (single even row, fills remaining height) ─── */
 .strip {
-  margin-top: 12mm;
+  margin-top: 6mm;
   flex: 1;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   position: relative;
+  min-height: 0;
 }
-.strip::before,
-.strip::after { content: ""; }
 .day {
-  padding: 0 2.4mm;
+  padding: 0 2.2mm;
   display: flex;
   flex-direction: column;
   gap: 4mm;
   position: relative;
+  min-height: 0;
 }
 .day + .day { border-left: 0.4px solid var(--sage-rule); }
 .day-head {
@@ -127,12 +128,14 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
   padding-bottom: 2.5mm;
   border-bottom: 0.4px solid var(--sage-rule);
   letter-spacing: 0.005em;
+  flex-shrink: 0;
 }
 
 /* ─── chip rows down each column ─── */
 .row {
   display: flex; flex-direction: column;
   gap: 1.2mm;
+  flex-shrink: 0;
 }
 .row-lbl {
   font-family: var(--font-mono); font-size: 5.5pt;
@@ -141,11 +144,11 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
   text-align: center;
 }
 
-/* mood chip — dotted ghost rect 16×10mm */
+/* mood chip — dotted ghost rect */
 .mood-rect {
   width: 100%;
   max-width: 18mm;
-  height: 10mm;
+  height: 9mm;
   border: 0.5px dashed var(--ink-whisper);
   border-radius: 1.2mm;
   background: rgba(255,255,255,0.25);
@@ -168,33 +171,48 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
   background: transparent;
 }
 
-/* sleep — mono 7pt placeholder "h" */
+/* sleep — mono placeholder "h" over a hairline */
 .sleep-line {
   display: flex; align-items: baseline; justify-content: center;
   gap: 1mm;
   border-bottom: 0.4px solid var(--sage-hair);
   padding-bottom: 0.6mm;
 }
-.sleep-num {
-  flex: 1;
-  height: 4mm;
-}
+.sleep-num { flex: 1; height: 4mm; }
 .sleep-h {
   font-family: var(--font-mono); font-size: 7pt;
   color: var(--ink-whisper);
   letter-spacing: 0.04em;
 }
 
-/* note — single sage hairline baseline */
-.note-line {
-  border-bottom: 0.4px solid var(--sage-hair);
-  height: 6mm;
+/* note — expands to fill remaining column height with ruled baselines */
+.note {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex; flex-direction: column;
+  gap: 1.2mm;
+}
+.note .row-lbl { margin-bottom: 0.4mm; }
+.note-fill {
+  flex: 1;
+  min-height: 16mm;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 7.4mm,
+    var(--sage-hair) 7.4mm,
+    var(--sage-hair) calc(7.4mm + 0.4px)
+  );
 }
 
-/* sticker drop — dotted square */
+/* sticker drop — dotted square anchored at the foot of the column */
+.stamp {
+  margin-top: auto;
+  flex-shrink: 0;
+}
 .stamp-zone {
   width: 100%;
-  max-width: 14mm;
+  max-width: 13mm;
   aspect-ratio: 1 / 1;
   border: 0.5px dashed var(--ink-whisper);
   border-radius: 1.2mm;
@@ -221,7 +239,7 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
 <main class="page" role="document">
   <div class="bind-edge" aria-hidden="true"></div>
   <a id="page-12" name="page-12" class="anchor" style="display:block;height:0;visibility:hidden;"></a>
-  {{HEADER_CONTENT}}
+  <!--HF:{{HEADER_CONTENT}}-->
 
   <div class="month-strip" aria-label="month and day wayfinding">
     <span class="month-strip__months">JAN  FEB  MAR  APR  MAY  JUN  JUL  AUG  SEP  OCT  NOV  DEC</span>
@@ -238,8 +256,8 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
       <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
       <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
       <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
-      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
-      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+      <div class="note"><span class="row-lbl">note</span><div class="note-fill"></div></div>
+      <div class="stamp"><div class="stamp-zone">stamp</div></div>
     </div>
 
     <div class="day" aria-label="Tuesday column">
@@ -247,8 +265,8 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
       <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
       <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
       <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
-      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
-      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+      <div class="note"><span class="row-lbl">note</span><div class="note-fill"></div></div>
+      <div class="stamp"><div class="stamp-zone">stamp</div></div>
     </div>
 
     <div class="day" aria-label="Wednesday column">
@@ -256,8 +274,8 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
       <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
       <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
       <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
-      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
-      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+      <div class="note"><span class="row-lbl">note</span><div class="note-fill"></div></div>
+      <div class="stamp"><div class="stamp-zone">stamp</div></div>
     </div>
 
     <div class="day" aria-label="Thursday column">
@@ -265,8 +283,8 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
       <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
       <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
       <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
-      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
-      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+      <div class="note"><span class="row-lbl">note</span><div class="note-fill"></div></div>
+      <div class="stamp"><div class="stamp-zone">stamp</div></div>
     </div>
 
     <div class="day" aria-label="Friday column">
@@ -274,8 +292,8 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
       <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
       <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
       <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
-      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
-      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+      <div class="note"><span class="row-lbl">note</span><div class="note-fill"></div></div>
+      <div class="stamp"><div class="stamp-zone">stamp</div></div>
     </div>
 
     <div class="day" aria-label="Saturday column">
@@ -283,8 +301,8 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
       <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
       <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
       <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
-      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
-      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+      <div class="note"><span class="row-lbl">note</span><div class="note-fill"></div></div>
+      <div class="stamp"><div class="stamp-zone">stamp</div></div>
     </div>
 
     <div class="day" aria-label="Sunday column">
@@ -292,8 +310,8 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
       <div class="row"><span class="row-lbl">mood</span><div class="mood-rect">mood</div></div>
       <div class="row"><span class="row-lbl">energy</span><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
       <div class="row"><span class="row-lbl">sleep</span><div class="sleep-line"><span class="sleep-num"></span><span class="sleep-h">h</span></div></div>
-      <div class="row"><span class="row-lbl">note</span><div class="note-line"></div></div>
-      <div class="row"><span class="row-lbl">stamp</span><div class="stamp-zone">stamp</div></div>
+      <div class="note"><span class="row-lbl">note</span><div class="note-fill"></div></div>
+      <div class="stamp"><div class="stamp-zone">stamp</div></div>
     </div>
 
   </section>
@@ -305,7 +323,7 @@ body { background: #E4DFD2; font-family: var(--font-sans); font-size: 8.5pt; col
     <a class="nav-chip" href="#page-21">[stickers]</a>
     <a class="nav-chip crisis" href="#page-23">[crisis]</a>
   </div>
-  {{FOOTER_CONTENT}}
+  <!--HF:{{FOOTER_CONTENT}}-->
 </main>
 </body>
 </html>

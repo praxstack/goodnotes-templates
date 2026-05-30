@@ -107,7 +107,7 @@ h1 {
   display: table;
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 8mm;
+  margin-bottom: 7mm;
 }
 .inv-row {
   display: table-row;
@@ -193,6 +193,31 @@ h1 {
   pointer-events: none;
   z-index: 0;
 }
+
+/* ─── impromptu / undecided section (wave 16) ─── */
+.notsure {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+.notsure .ns-cat {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 12pt; font-weight: 400;
+  color: var(--ink); line-height: 1.1;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  letter-spacing: 0.005em;
+  display: block;
+  padding-bottom: 3.5mm;
+  border-bottom: 0.5px solid var(--sage-rule);
+}
+.notsure .ns-lines {
+  display: flex; flex-direction: column;
+  gap: 8mm;
+  margin-top: 6.5mm;
+}
+.notsure .ns-line {
+  height: 0;
+  border-bottom: 0.5px dotted var(--ink-whisper);
+}
 </style>
 </head>
 <body>
@@ -200,7 +225,7 @@ h1 {
   <div class="bind-edge" aria-hidden="true"></div>
   <a id="page-24" name="page-24" class="anchor" style="display:block;height:0;visibility:hidden;"></a>
 
-  {{HEADER_CONTENT}}
+  <!--HF:{{HEADER_CONTENT}}-->
   <header class="header">
     <div class="kicker">§ shelf · stock-up</div>
     <h1>what needs restocking.</h1>
@@ -368,7 +393,18 @@ h1 {
 
   </section>
 
-  {{FOOTER_CONTENT}}
+  <section class="notsure" aria-label="undecided things">
+    <span class="ns-cat">not sure yet &mdash;</span>
+    <div class="ns-lines">
+      <span class="ns-line"></span>
+      <span class="ns-line"></span>
+      <span class="ns-line"></span>
+      <span class="ns-line"></span>
+      <span class="ns-line"></span>
+    </div>
+  </section>
+
+  <!--HF:{{FOOTER_CONTENT}}-->
   <p class="permission">this is just a list. no streaks. no scoring.</p>
 
   <div class="nav-cluster">

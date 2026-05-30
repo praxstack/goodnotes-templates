@@ -235,6 +235,50 @@ function injectRotatingContent(
   return html;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Wave 16-D — featured quote-permission card injection (page 10)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Inject the single featured quote into page 10 if it carries the
+ * `{{QUOTE_PERMISSION}}` marker. Mirrors injectRotatingContent: it pulls one
+ * item from the `quote-permission` bucket using the SAME seeded rng, so the
+ * daily featured quote is deterministic for a given seed.
+ *
+ * Renders:
+ *   <span class="qp-text">…</span> <span class="qp-attr">— …</span>
+ *
+ * Attribution handling: a null/empty attribution drops the attr span entirely;
+ * an em-dash sentinel ("—", used for disputed/anonymous quotes) renders the
+ * lone dash. If the bucket is missing the marker is left intact (no rng draw).
+ */
+function injectQuotePermission(
+  html: string,
+  rng: () => number,
+  byCategory: Record<string, PoolItem[]>,
+): string {
+  if (!html.includes('{{QUOTE_PERMISSION}}')) return html;
+
+  const bucket = byCategory['quote-permission'];
+  if (!Array.isArray(bucket) || bucket.length === 0) {
+    console.warn('[build-v6]   ⚠ quote-permission pool missing — leaving {{QUOTE_PERMISSION}} intact');
+    return html;
+  }
+
+  const item = bucket[pickInt(rng, bucket.length)];
+  const text = `<span class="qp-text">${htmlEscape(item.text)}</span>`;
+
+  let attr = '';
+  const a = item.attribution;
+  if (a && a !== '—') {
+    attr = ` <span class="qp-attr">— ${htmlEscape(a)}</span>`;
+  } else if (a === '—') {
+    attr = ` <span class="qp-attr">—</span>`;
+  }
+
+  return html.replaceAll('{{QUOTE_PERMISSION}}', text + attr);
+}
+
 async function loadPool(): Promise<{ items: PoolItem[]; byCategory: Record<string, PoolItem[]> }> {
   try {
     const raw = await fs.readFile(POOL_PATH, 'utf-8');
@@ -304,8 +348,21 @@ async function renderPage(
 ): Promise<PageRender> {
   let html = await fs.readFile(path.join(PAGES_DIR, file), 'utf-8');
 
+  // Wave 16: un-comment raw-view marker wrappers. Pages wrap their bare
+  // tokens as <!--HF:{{...}}--> so opening the source via file:// shows a
+  // clean page (HTML comments don't render), while the build restores the
+  // bare token here BEFORE injectRotatingContent's .includes/.replaceAll runs.
+  html = html
+    .replaceAll('<!--HF:{{HEADER_CONTENT}}-->', '{{HEADER_CONTENT}}')
+    .replaceAll('<!--HF:{{FOOTER_CONTENT}}-->', '{{FOOTER_CONTENT}}')
+    // Wave 16-D: the quote-permission card uses the same comment-wrap trick.
+    .replaceAll('<!--HF:{{QUOTE_PERMISSION}}-->', '{{QUOTE_PERMISSION}}');
+
   // Wave 14: inject rotating content (no-op if no markers / pool missing).
   html = injectRotatingContent(html, rng, byCategory, stats, file);
+
+  // Wave 16-D: inject the featured quote-permission card (no-op without marker).
+  html = injectQuotePermission(html, rng, byCategory);
 
   const page = await browser.newPage();
 

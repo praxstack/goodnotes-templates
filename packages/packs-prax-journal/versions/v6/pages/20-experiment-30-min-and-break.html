@@ -50,8 +50,8 @@ body {
   letter-spacing: 0.2em; color: var(--ink-quiet); margin-bottom: 3mm;
 }
 .masthead h1 {
-  font-family: var(--font-serif); font-size: 32pt; font-weight: 400;
-  line-height: 0.96; letter-spacing: -0.022em; color: var(--ink);
+  font-family: var(--font-serif); font-size: 27pt; font-weight: 400;
+  line-height: 0.98; letter-spacing: -0.022em; color: var(--ink);
   font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 60;
 }
 .masthead .meta {
@@ -60,8 +60,9 @@ body {
   align-self: flex-end;
 }
 .zone {
-  margin-top: 6mm;
-  display: flex; flex-direction: column; gap: 3.5mm;
+  margin-top: 5mm;
+  display: flex; flex-direction: column; gap: 1.6mm;
+  flex-shrink: 0;
 }
 .zone .lbl {
   font-family: var(--font-mono); font-size: 6pt;
@@ -70,83 +71,72 @@ body {
 }
 .zone .head {
   font-family: var(--font-serif); font-style: italic;
-  font-size: 13pt; color: var(--ink); line-height: 1.35;
+  font-size: 12.5pt; color: var(--ink); line-height: 1.3;
   font-variation-settings: "opsz" 36, "SOFT" 60;
 }
-.zone .steps {
-  font-family: var(--font-serif); font-style: italic;
-  font-size: 9.5pt; color: var(--ink-soft); line-height: 1.55;
-  font-variation-settings: "opsz" 24, "SOFT" 60;
-  padding-left: 1mm;
-}
-.zone .steps span.dash { color: var(--ink-quiet); margin-right: 1.5mm; }
-.timing-row {
-  margin-top: 4mm;
-  display: flex; align-items: baseline; gap: 4mm; flex-wrap: wrap;
-  font-family: var(--font-mono); font-size: 8.5pt; color: var(--ink-soft);
-}
-.timing-row .grp { display: flex; align-items: baseline; gap: 1.5mm; }
-.timing-row .grp .lab {
-  font-size: 6pt; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--ink-quiet);
-}
-.timing-row .grp .field {
-  border-bottom: 0.6px solid var(--ink); min-width: 12mm; height: 5mm;
-  display: inline-block;
-}
-.timing-row .grp .colon { color: var(--ink-quiet); margin: 0 0.5mm; }
-.didyou-row {
-  margin-top: 4mm;
-  display: flex; flex-wrap: wrap; gap: 3mm 6mm;
-}
-.didyou-row .pill { display: flex; align-items: baseline; gap: 2mm; }
-.didyou-row .dot {
-  width: 3.5mm; height: 3.5mm; border-radius: 50%;
-  border: 1px solid var(--sage); background: var(--sage-tint);
-  flex-shrink: 0; align-self: center;
-}
-.didyou-row .name {
-  font-family: var(--font-mono); font-size: 7.5pt;
-  color: var(--sage-ink); letter-spacing: 0.04em;
-}
-.didyou-row .name .blank {
-  display: inline-block; min-width: 6mm; border-bottom: 0.5px solid var(--ink-whisper);
-}
-.divider {
-  margin: 7mm 0 0; height: 0;
-  border-top: 0.5px dashed var(--ink-whisper);
-}
-.observations {
-  font-family: var(--font-serif); font-style: italic;
-  font-size: 9.5pt; color: var(--ink-soft); line-height: 1.55;
-  font-variation-settings: "opsz" 24, "SOFT" 60;
-  padding-left: 1mm;
-}
-.observations span.dash { color: var(--ink-quiet); margin-right: 1.5mm; }
-.freewrite {
-  flex: 1; margin-top: 5mm; min-height: 35mm;
-}
-.freewrite-rules {
+/* generic experiment scaffolding (wave 16 — de-prefilled) */
+.exp-lines {
   margin-top: 2mm;
   display: flex; flex-direction: column; gap: 0;
 }
-.freewrite-rules .ln {
+.exp-lines .ln {
   border-bottom: 0.5px solid var(--ink-whisper);
-  height: 8mm;
+  height: 7.4mm;
+}
+.timer-row {
+  margin-top: 3.5mm;
+  display: flex; align-items: baseline; gap: 2.5mm;
+}
+.timer-row .timer-lbl {
+  font-family: var(--font-mono); font-size: 6pt;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-quiet);
+}
+.timer-row .timer-field {
+  border-bottom: 0.6px solid var(--ink);
+  min-width: 16mm; height: 5mm; display: inline-block;
+}
+.timer-row .timer-unit {
+  font-family: var(--font-mono); font-size: 7pt;
+  letter-spacing: 0.1em; color: var(--ink-quiet);
+}
+.divider {
+  margin: 5.5mm 0 0; height: 0;
+  border-top: 0.5px dashed var(--ink-whisper);
+}
+.freewrite {
+  flex: 1 1 auto; margin-top: 5mm; min-height: 0;
+  display: flex; flex-direction: column;
+}
+.freewrite .lbl {
+  font-family: var(--font-mono); font-size: 6pt;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--ink-quiet); margin-bottom: 2.5mm; flex-shrink: 0;
+}
+.freewrite-rules {
+  flex: 1;
+  min-height: 14mm;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 7.9mm,
+    var(--ink-whisper) 7.9mm,
+    var(--ink-whisper) calc(7.9mm + 0.5px)
+  );
 }
 .permission-strip {
   margin-top: 5mm;
   background: var(--amber-tint);
   border: 0.6px solid var(--amber-edge);
   border-left: 3px solid var(--amber);
-  padding: 3.5mm 5mm;
+  padding: 3.4mm 5mm;
   font-family: var(--font-serif); font-style: italic; font-size: 9pt;
   color: var(--amber-ink); line-height: 1.45;
   font-variation-settings: "opsz" 14, "SOFT" 60;
   flex-shrink: 0;
 }
 .footer {
-  margin-top: 4mm; padding-top: 2.5mm;
+  margin-top: 3.5mm; padding-top: 2.5mm;
   border-top: 0.4px solid var(--ink-whisper);
   display: flex; justify-content: space-between; align-items: baseline;
   flex-shrink: 0;
@@ -203,73 +193,69 @@ body {
     <a href="#page-22">[back to home]</a>
   </nav>
 
-  {{HEADER_CONTENT}}
+  <!--HF:{{HEADER_CONTENT}}-->
   <header class="masthead">
     <div>
-      <div class="kicker">§ shreya's homework · the 30-minute data point</div>
-      <h1>One block.<br>One break.<br>One observation.</h1>
+      <div class="kicker">&sect; shreya's homework &middot; the 30-minute data point</div>
+      <h1>One experiment.<br>One timer.<br>One observation.</h1>
     </div>
-    <div class="meta">experiment · 5 / 5</div>
+    <div class="meta">experiment &middot; 5 / 5</div>
   </header>
 
   <section class="zone">
-    <span class="lbl">step 1 · 30 minutes of study</span>
-    <div class="steps">
-      <span class="dash">—</span>Open one DSA problem. Easy. Arrays. Just one.<br>
-      <span class="dash">—</span>Set a 30-minute timer.<br>
-      <span class="dash">—</span>That's it.
+    <span class="lbl">step 1 &middot; name it</span>
+    <div class="head">the experiment &mdash;</div>
+    <div class="exp-lines">
+      <div class="ln"></div>
+      <div class="ln"></div>
     </div>
-    <div class="timing-row">
-      <div class="grp">
-        <span class="lab">started at</span>
-        <span class="field"></span><span class="colon">:</span><span class="field"></span>
-      </div>
-      <div class="grp">
-        <span class="lab">ended at</span>
-        <span class="field"></span><span class="colon">:</span><span class="field"></span>
-      </div>
+  </section>
+
+  <section class="zone">
+    <span class="lbl">step 2 &middot; shrink it</span>
+    <div class="head">the smallest version of it &mdash;</div>
+    <div class="exp-lines">
+      <div class="ln"></div>
     </div>
-    <div class="didyou-row" aria-label="what happened">
-      <div class="pill"><span class="dot"></span><span class="name">finished the 30</span></div>
-      <div class="pill"><span class="dot"></span><span class="name">bailed at <span class="blank"></span> min</span></div>
-      <div class="pill"><span class="dot"></span><span class="name">didn't open the problem</span></div>
+    <div class="timer-row">
+      <span class="timer-lbl">timer set for</span>
+      <span class="timer-field" aria-hidden="true"></span>
+      <span class="timer-unit">min</span>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <section class="zone" style="margin-top:6mm;">
-    <span class="lbl">step 2 · 5–10 minute analog break</span>
-    <div class="steps">
-      No phone. No YouTube. No scrolling. No tabs. No stimulation.<br>
-      Just: walk to kitchen <span class="dash">·</span> drink water <span class="dash">·</span> stand quietly <span class="dash">·</span> look outside <span class="dash">·</span> sit still for a minute.<br>
-      If you want to smoke — hold the pack. Don't smoke it. Just hold.
-    </div>
-
-    <span class="lbl" style="margin-top:4mm;">step 3 · observe</span>
-    <div class="observations">
-      <span class="dash">—</span>Did you actually do 30 min?<br>
-      <span class="dash">—</span>Did you bail halfway?<br>
-      <span class="dash">—</span>What did the break feel like?<br>
-      <span class="dash">—</span>Was the restlessness unbearable?<br>
-      <span class="dash">—</span>Did your brain immediately demand stimulation?
-    </div>
-  </section>
-
-  <section class="freewrite">
-    <div class="freewrite-rules">
-      <div class="ln"></div><div class="ln"></div><div class="ln"></div>
+  <section class="zone">
+    <span class="lbl">step 3 &middot; during</span>
+    <div class="head">what i noticed during &mdash;</div>
+    <div class="exp-lines">
+      <div class="ln"></div>
       <div class="ln"></div>
     </div>
   </section>
 
-  {{FOOTER_CONTENT}}
+  <section class="zone">
+    <span class="lbl">step 4 &middot; after</span>
+    <div class="head">what happened after &mdash;</div>
+    <div class="exp-lines">
+      <div class="ln"></div>
+      <div class="ln"></div>
+    </div>
+  </section>
+
+  <section class="freewrite">
+    <span class="lbl">anything else</span>
+    <div class="freewrite-rules"></div>
+  </section>
+
+  <!--HF:{{FOOTER_CONTENT}}-->
   <aside class="permission-strip">
-    this is one data point. not a self-improvement arc. not a streak. you bailed at 8 minutes? write 8 down. that's the data.
+    one data point. not a streak, not a self-improvement arc. stopped early? write down where you stopped. that's the data.
   </aside>
 
   <footer class="footer">
-    <span>shreya gave you this over a week ago. one attempt is enough.</span>
+    <span>shreya handed you this a while back. one attempt is enough.</span>
     <span>experiment</span>
   </footer>
 </main>

@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Prax Journal v6 · 13 · Monthly Letter · LETTER-PAGE</title>
+<title>Prax Journal v6 · 13 · Weekly Letter · Week Three · LETTER-PAGE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════════════════
-   PRAX JOURNAL v6 · PAGE 13 · MONTHLY LETTER · LETTER-PAGE ARCHETYPE
-   Wave 13 rebuild. 28mm side margins, "Dear Prax," solid (kit-to-writer),
-   prose paragraphs in italic Fraunces 13pt with 8mm line-height,
-   "— the kit." signature bottom-right. NO kicker. NO permission strip.
+   PRAX JOURNAL v6 · PAGE 13 · WEEKLY LETTER · WEEK THREE (THE WALL)
+   LETTER-PAGE archetype · MONTHLY paper tier · amber margin bleed.
+   The hardest week — when quitting feels reasonable. Honest companion-voice,
+   no false hope, no "it gets better", no shame. NO rotating markers.
    ═══════════════════════════════════════════════════════════════════════ */
 :root {
   --page-w: 210mm; --page-h: 297mm;
@@ -52,8 +52,6 @@ body {
   .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @page { size: A4 portrait; margin: 0; }
 }
-
-/* Goodnotes nav-chip cluster, top-right corner (above date) */
 .nav-cluster {
   position: absolute;
   top: 10mm; right: var(--margin-side);
@@ -71,8 +69,6 @@ body {
   transition: opacity 0.15s ease;
 }
 .nav-cluster a:hover { opacity: 0.9; color: var(--sage-ink); }
-
-/* Date stamp, top-right — italic Fraunces 11pt, ghosted opacity 0.5 */
 .date-stamp {
   position: absolute;
   top: 18mm; right: var(--margin-side);
@@ -86,11 +82,21 @@ body {
   letter-spacing: 0.04em;
   line-height: 1;
 }
-
-/* "Dear Prax," top-left of body — SOLID at 0.85 opacity (this letter is from kit to writer) */
+.week-mark {
+  position: absolute;
+  top: 28mm; left: var(--margin-side);
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+  opacity: 0.42;
+  line-height: 1;
+}
 .salutation {
   position: absolute;
-  top: 36mm; left: var(--margin-side);
+  top: 38mm; left: var(--margin-side);
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 14pt;
@@ -99,11 +105,9 @@ body {
   opacity: 0.85;
   letter-spacing: 0.005em;
 }
-
-/* Body: prose paragraphs in italic Fraunces 13pt, line-height 8mm */
 .letter-body {
   position: absolute;
-  top: 50mm;
+  top: 52mm;
   left: var(--margin-side);
   right: var(--margin-side);
   bottom: 28mm;
@@ -122,8 +126,6 @@ body {
   font-style: normal;
   color: var(--ink-soft);
 }
-
-/* Bottom-right signature line — "— the kit." italic 11pt opacity 0.6 */
 .signoff {
   position: absolute;
   bottom: 14mm; right: var(--margin-side);
@@ -137,10 +139,8 @@ body {
 }
 .bind-edge {
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 6mm;
+  left: 0; top: 0;
+  height: 100%; width: 6mm;
   background: var(--bleed);
   pointer-events: none;
   z-index: 0;
@@ -148,41 +148,36 @@ body {
 </style>
 </head>
 <body>
-<main class="page" id="page-13" data-template="prax-journal-v6-monthly-letter" role="document">
+<main class="page" id="page-13c" data-template="prax-journal-v6-weekly-letter-3" role="document">
   <div class="bind-edge" aria-hidden="true"></div>
-  <a id="page-13-anchor" class="anchor" aria-hidden="true"></a>
+  <a id="page-13c-anchor" class="anchor" aria-hidden="true"></a>
 
-  <!-- Goodnotes nav cluster, top-right -->
   <nav class="nav-cluster" aria-label="Journal navigation">
     <a href="#page-22">[home]</a>
-    <a href="#page-14">[next]</a>
+    <a href="#page-13d">[next]</a>
     <a href="#page-21">[stickers]</a>
     <a href="#page-23">[crisis]</a>
   </nav>
 
-  <!-- Date stamp, ghosted, right-aligned -->
   <div class="date-stamp" aria-label="Date">__ · ___ · ____</div>
 
-  <!-- "Dear Prax," — solid, this is from the kit to the writer -->
-  <div class="salutation">Dear Prax,</div>
+  <div class="week-mark" aria-label="Position in month">weekly letter &middot; week three of four</div>
 
-  <!-- Letter prose -->
+  <div class="salutation">Dear you,</div>
+
   <section class="letter-body">
-    <p>A month is a long time to carry something. If this one was heavy, it doesn't need a name yet. If it was uneven — some good days, some that disappeared — that's also a real month.</p>
+    <p>This is usually the week where quitting starts to sound reasonable. Not dramatic — just quietly sensible, like the obvious thing a tired person would do.</p>
 
-    <p>You probably told yourself this would be the month you finally got it together. Most months arrive carrying that hope. Most leave without making good on it. That isn't failure. That's how the year is shaped — in soft, mostly uneventful chapters that you only see clearly later.</p>
+    <p>I'm not going to tell you it gets easier from here, because I don't know that, and you'd hear the lie. The third week is often just hard. The reasons to stop are real reasons. I'm not going to pretend they aren't.</p>
 
-    <p>If there's a sentence you've been carrying — <em>I should be further along by now</em> — you can put it down here. Not forever. Just for the time it takes to read this page. The sentence will still be there when you get up. It just doesn't have to follow you across this paragraph.</p>
+    <p>So I'll only say this: you can put the decision down for tonight. <em>You don't have to quit and you don't have to recommit.</em> You can leave the whole question alone until you're less worn down than you are right now.</p>
 
-    <p>You don't have to do anything with this letter. You don't have to underline a part. You don't have to write back. You don't have to feel something specific in response.</p>
+    <p>If today all you did was not make it worse, that was a full day's work. The wall doesn't have to be climbed in one move. You're allowed to just stand near it.</p>
 
-    <p>If you want one small thing: notice what your shoulders are doing right now. You can let them down a half-inch and keep reading. Or you can close the page. Either is the right move.</p>
-
-    <p>Whatever this month was — you made it here. That's the whole report.</p>
+    <p>You're still here, reading this. That's not nothing — that's the hardest part, happening.</p>
   </section>
 
-  <!-- Bottom-right signature -->
-  <span class="signoff">— the kit.</span>
+  <span class="signoff">— the kit</span>
 </main>
 </body>
 </html>
