@@ -30,7 +30,11 @@ const __dirname = path.dirname(__filename);
 
 const V6_DIR = __dirname;
 const V6_PAGES = path.join(V6_DIR, 'pages');
-const V5_DIR = path.join(V6_DIR, '..', 'v5');
+// Use the v6-design-language restyled v5 pages (NOT the raw v5 HTML, which uses
+// a clashing newspaper/Rx aesthetic + inlined base64 fonts). Generate them with
+// `pnpm tsx build-v5-restyled.ts` before running this script.
+const V5_DIR = path.join(V6_DIR, 'pages-v5restyled');
+
 const OUT = path.join(V6_DIR, 'output');
 const V6_MASTER_PDF = path.join(OUT, 'v6-prax-journal.pdf');
 const MASTER_DIR = path.join(OUT, 'master');
