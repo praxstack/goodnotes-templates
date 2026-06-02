@@ -1,0 +1,7 @@
+# Generated build artifacts — regenerate via the build-*.ts scripts.
+# (PDFs + PNGs are large and reproducible; HTML pages are emitted by build-daily.ts.)
+output/
+pages/
+
+# Throwaway screenshot/scratch scripts
+tmp-*.mjs
