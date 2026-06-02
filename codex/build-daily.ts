@@ -1,0 +1,397 @@
+/**
+ * build-daily.ts — Prax Journal v7 · Daily Pilot (4 pages)
+ *
+ * Builds Morning · Brain Dump · Midday · Evening as A4 HTML in the locked v6
+ * design language, renders each to PDF (Playwright/Chromium), concatenates to
+ * codex/output/daily-pilot.pdf, and RENDER-VERIFIES every page in the browser
+ * (exact A4, zero vertical overflow, footer not collided). Fails loudly if any
+ * page breaks — "built" never means "claimed" (spec §7).
+ *
+ * Run:  ./node_modules/.bin/tsx codex/build-daily.ts
+ * Open: open codex/output/daily-pilot.pdf
+ */
+
+import { chromium, type Browser } from 'playwright';
+import { PDFDocument } from 'pdf-lib';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PAGES_DIR = path.join(__dirname, 'pages');
+const OUT_DIR = path.join(__dirname, 'output');
+
+const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,144,400;1,72,400;1,144,400;1,144,500&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">`;
+
+// ── Shared stylesheet (v6 design language, locked) ──────────────────────────
+const CSS = `
+:root{
+  --page-w:210mm; --page-h:297mm; --margin:22mm;
+  --paper:#F6EFE2;
+  --ink:#1f2126; --ink-soft:#4a4a52; --ink-quiet:#76747a; --ink-whisper:#b3afa6;
+  --sage:#7e9b85; --sage-ink:#4a6651; --sage-tint:rgba(126,155,133,.10); --sage-edge:rgba(126,155,133,.32);
+  --clay:#c08866; --amber:#d6a45e;
+  --bleed:rgba(192,136,102,.22);
+  --dot:rgba(31,33,38,.22);
+  --font-serif:'Fraunces','Iowan Old Style','Charter','Georgia',serif;
+  --font-sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Inter','Helvetica Neue',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono','Menlo','Consolas',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#E4DFD2}
+body{font-family:var(--font-sans);font-size:8.5pt;color:var(--ink-soft);line-height:1.5;-webkit-font-smoothing:antialiased}
+.page{width:var(--page-w);height:var(--page-h);background:var(--paper);margin:10mm auto;padding:var(--margin);
+  position:relative;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 16px 48px rgba(31,33,38,.10)}
+@media print{html,body{background:#fff}.page{margin:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4 portrait;margin:0}}
+.bind-edge{position:absolute;left:0;top:0;height:100%;width:6mm;background:var(--bleed);pointer-events:none;z-index:0}
+
+/* paper grain */
+.page::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:radial-gradient(rgba(31,33,38,.018) 0.5px, transparent 0.5px);background-size:3px 3px}
+
+/* spine label (vertical tab) */
+.spine{position:absolute;right:3.5mm;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;
+  font-family:var(--font-mono);font-size:6pt;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-whisper);white-space:nowrap;z-index:1}
+
+/* nav chrome */
+.nav-chip{font-family:var(--font-mono);font-size:7pt;letter-spacing:.04em;color:var(--ink);text-decoration:none;opacity:.4;padding:2mm 4mm;position:absolute;top:8mm;z-index:2}
+.nav-home{left:8mm}
+.nav-crisis{font-family:var(--font-mono);font-size:6pt;letter-spacing:.04em;color:var(--clay);text-decoration:none;opacity:.55;position:absolute;bottom:8mm;right:8mm;padding:1.5mm 3mm;z-index:2}
+.micro-mark{position:absolute;top:12mm;right:12mm;font-family:var(--font-mono);font-size:6.5pt;letter-spacing:.14em;color:var(--ink);opacity:.4;line-height:1;z-index:5}
+
+/* header */
+.header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6mm;padding-bottom:3.5mm;border-bottom:.4px solid var(--ink-whisper)}
+.kicker{font-family:var(--font-mono);font-size:6pt;font-weight:500;text-transform:uppercase;letter-spacing:.22em;color:var(--ink-quiet);margin-bottom:3.5mm}
+h1{font-family:var(--font-serif);font-size:30pt;font-style:italic;font-weight:400;line-height:.92;letter-spacing:-.015em;color:var(--ink);font-variation-settings:"opsz" 144}
+.daychips{font-family:var(--font-mono);font-size:6pt;letter-spacing:.1em;color:var(--ink-whisper);text-align:right;line-height:1.8}
+.daychips .date-line{display:inline-block;width:24mm;border-bottom:.6px solid var(--ink-whisper);height:4mm;vertical-align:bottom}
+.daychips .days span{margin-left:1.4mm;opacity:.85}
+
+/* generic blocks */
+.block{margin-bottom:5mm}
+.block-label{font-family:var(--font-mono);font-size:6pt;font-weight:500;text-transform:uppercase;letter-spacing:.18em;color:var(--sage-ink);margin-bottom:2mm}
+.prompt{font-family:var(--font-serif);font-style:italic;font-size:11.5pt;color:var(--ink);font-variation-settings:"opsz" 72;letter-spacing:-.005em;line-height:1.3}
+.hint{font-family:var(--font-sans);font-size:7pt;color:var(--ink-quiet);margin-top:1mm;line-height:1.4}
+
+/* dotted writing baselines */
+.lines{background-image:radial-gradient(circle, var(--dot) 0.28mm, transparent 0.28mm);background-size:2.5mm 7mm;background-position:0 6mm}
+.lines-1{height:9mm}.lines-2{height:16mm}.lines-3{height:23mm}
+.writeline{border-bottom:.5px solid var(--ink-whisper);height:6mm}
+.writeline.short{width:60mm}.writeline.med{width:90mm}
+
+/* chip rows (tap, no writing) */
+.chips{display:flex;flex-wrap:wrap;gap:2mm;margin-top:1mm}
+.chip{font-family:var(--font-sans);font-size:8pt;color:var(--ink-soft);border:.5px solid var(--sage-edge);border-radius:999px;padding:1.2mm 3.2mm;background:var(--sage-tint)}
+
+/* fixed truth anchor */
+.anchor-strip{background:var(--sage-tint);border-left:1.5px solid var(--sage);padding:2.6mm 4mm;border-radius:0 2px 2px 0}
+.anchor-strip .a-label{font-family:var(--font-mono);font-size:5.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-ink);opacity:.8;margin-bottom:1mm}
+.anchor-strip .a-text{font-family:var(--font-serif);font-style:italic;font-size:10.5pt;color:var(--sage-ink);font-variation-settings:"opsz" 40;line-height:1.3}
+
+/* today's card drop box */
+.cardbox{margin-top:3mm;border:.7px dashed var(--sage-edge);border-radius:3px;height:20mm;display:flex;align-items:flex-start;padding:2mm 3mm}
+.cardbox .cb-label{font-family:var(--font-mono);font-size:6pt;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-whisper)}
+
+/* frog block */
+.frog{border:.6px solid var(--sage-edge);border-radius:3px;padding:3.5mm 4mm;background:rgba(255,255,255,.25)}
+.frog-row{margin-bottom:2.6mm}
+.frog-row:last-child{margin-bottom:0}
+.frog-k{font-family:var(--font-mono);font-size:6pt;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-ink);margin-bottom:1mm}
+.frog-k .tiny{color:var(--ink-quiet);text-transform:none;letter-spacing:.02em;font-size:5.5pt}
+.scale{display:flex;gap:1.6mm;margin-top:1mm}
+.scale .pip{width:4mm;height:4mm;border:.5px solid var(--ink-whisper);border-radius:50%;font-family:var(--font-mono);font-size:5pt;color:var(--ink-whisper);display:flex;align-items:center;justify-content:center}
+
+/* keeda guard */
+.guard{margin-top:3mm;font-family:var(--font-serif);font-style:italic;font-size:9pt;color:var(--clay);font-variation-settings:"opsz" 40;line-height:1.35}
+.guard::before{content:'⌖ ';opacity:.7}
+
+/* open paper */
+.open-zone{flex:1;min-height:40mm;background-image:radial-gradient(circle, var(--dot) 0.28mm, transparent 0.28mm);background-size:2.5mm 7mm;background-position:0 6mm}
+.sticker-zone{border:.6px dashed var(--ink-whisper);border-radius:3px;min-height:24mm;margin-top:4mm;display:flex;align-items:flex-start;padding:2mm 3mm;opacity:.7}
+.sticker-zone .sz-label{font-family:var(--font-mono);font-size:6pt;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-whisper)}
+
+/* table (jar log) */
+.tbl{width:100%;border-collapse:collapse;margin-top:1mm}
+.tbl th{font-family:var(--font-mono);font-size:5.5pt;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-quiet);text-align:left;padding:1.5mm 2mm;border-bottom:.5px solid var(--ink-whisper)}
+.tbl td{height:8mm;border-bottom:.5px solid rgba(31,33,38,.12);padding:0 2mm}
+.tbl td.num{font-family:var(--font-mono);font-size:7pt;color:var(--ink-whisper);width:8mm}
+
+/* two-col */
+.two{display:flex;gap:5mm}
+.two>div{flex:1}
+
+/* footer permission strip */
+.permission{margin-top:auto;background:var(--sage-tint);border-left:1.5px solid var(--sage);padding:2.5mm 4mm;
+  font-family:var(--font-serif);font-style:italic;font-size:7.5pt;color:var(--sage-ink);font-variation-settings:"opsz" 14;letter-spacing:.005em;line-height:1.45;border-radius:0 2px 2px 0}
+`;
+
+function daychips(): string {
+  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(d => `<span>${d}</span>`).join('');
+  return `<div class="daychips"><div>date · <span class="date-line"></span></div><div class="days">day /${days}</div></div>`;
+}
+
+function chipRow(opts: string[]): string {
+  return `<div class="chips">${opts.map(o => `<span class="chip">${o}</span>`).join('')}</div>`;
+}
+
+function scale(max = 10): string {
+  let pips = '';
+  for (let i = 0; i <= max; i++) pips += `<span class="pip">${i}</span>`;
+  return `<div class="scale">${pips}</div>`;
+}
+
+function shell(spine: string, kicker: string, title: string, body: string): string {
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">${FONTS}<style>${CSS}</style></head>
+<body><main class="page" role="document">
+  <div class="bind-edge" aria-hidden="true"></div>
+  <div class="spine" aria-hidden="true">${spine}</div>
+  <a href="#" class="nav-chip nav-home">[home]</a>
+  <span class="micro-mark">__ · ___ · ____</span>
+  <header class="header"><div><div class="kicker">${kicker}</div><h1>${title}</h1></div>${daychips()}</header>
+  ${body}
+  <a href="#" class="nav-crisis">[crisis]</a>
+</main></body></html>`;
+}
+
+// ── MORNING (owed) ──────────────────────────────────────────────────────────
+function morning(): string {
+  const body = `
+  <section class="block">
+    <div class="block-label">body</div>
+    <div class="two">
+      <div><div class="hint">one word</div><div class="writeline short"></div></div>
+      <div><div class="hint">chest · kg (am)</div>${scale(10)}</div>
+    </div>
+    <div class="hint" style="margin-top:2mm">one slow breath ◯ — then the rest of the page</div>
+  </section>
+
+  <section class="block">
+    <div class="block-label">sleep</div>${chipRow(['slept', 'broken', 'late', 'heavy', 'okay'])}
+  </section>
+
+  <section class="block">
+    <div class="block-label">focus weather</div>${chipRow(['fog', 'scattered', 'here', 'sharp'])}
+  </section>
+
+  <section class="block">
+    <div class="anchor-strip">
+      <div class="a-label">today's truth</div>
+      <div class="a-text">blank is complete. worth is not output. the first movement is the plan.</div>
+    </div>
+    <div class="cardbox"><span class="cb-label">today's card — drop a truth / quote / pill sticker here</span></div>
+  </section>
+
+  <section class="block">
+    <div class="frog">
+      <div class="frog-row"><div class="frog-k">the frog <span class="tiny">— one concrete thing, ≤25 min</span></div><div class="writeline med"></div></div>
+      <div class="frog-row"><div class="frog-k">shrink it <span class="tiny">— the smallest version</span></div><div class="writeline med"></div></div>
+      <div class="frog-row"><div class="frog-k">first physical action <span class="tiny">— open the file · write "Dear ___"</span></div><div class="writeline med"></div></div>
+      <div class="frog-row"><div class="frog-k">if–then <span class="tiny">— I'll do it at [time] in [place]</span></div><div class="writeline med"></div></div>
+      <div class="frog-row"><div class="frog-k">predicted difficulty <span class="tiny">— scored against actual tonight</span></div>${scale(10)}</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-label">one stupidly small thing</div>
+    <div class="hint">smaller than the frog. the thing you could do even now.</div>
+    <div class="writeline med"></div>
+  </section>
+
+  <div class="guard">real thing — or a prerequisite dressed as progress? (that's the keeda. name it.)</div>
+
+  <aside class="permission">showing up is the win. one chip is enough today. so is none.</aside>`;
+  return shell('morning', '§ daily · morning', 'Today.', body);
+}
+
+// ── BRAIN DUMP (optional) ───────────────────────────────────────────────────
+function brainDump(): string {
+  const body = `
+  <section class="block"><div class="prompt">everything in your head — any order, no rules.</div></section>
+  <section class="open-zone" aria-label="Open paper"></section>
+  <div class="sticker-zone"><span class="sz-label">sticker zone — drop anything here</span></div>
+  <aside class="permission">messy is the point. and, only if it comes easily — 3 small things I don't want to erase.</aside>`;
+  return shell('brain dump', '§ daily · brain dump', 'Dump it.', body);
+}
+
+// ── MIDDAY (optional) ───────────────────────────────────────────────────────
+function midday(): string {
+  const rows = [1, 2, 3, 4].map(n => `<tr><td class="num">${n}</td><td></td><td></td><td></td></tr>`).join('');
+  const body = `
+  <section class="block">
+    <div class="block-label">jar + body log <span class="tiny" style="font-family:var(--font-sans);text-transform:none;letter-spacing:0;color:var(--ink-quiet);font-size:7pt">— check in 3× or more</span></div>
+    <table class="tbl"><thead><tr><th>#</th><th>time</th><th>jar level (overflow → empty)</th><th>chest · kg</th></tr></thead><tbody>${rows}</tbody></table>
+  </section>
+
+  <section class="block">
+    <div class="block-label">pseudo-doing check <span class="tiny" style="font-family:var(--font-sans);text-transform:none;letter-spacing:0;color:var(--ink-quiet);font-size:7pt">— prep ≠ doing</span></div>
+    <div class="two">
+      <div><div class="hint">the real task</div><div class="lines lines-2"></div></div>
+      <div><div class="hint">what I drifted into</div><div class="lines lines-2"></div></div>
+    </div>
+    <div class="hint" style="margin-top:1.5mm">am I doing the real task, or a prerequisite that feels productive? catch it while I can still switch.</div>
+  </section>
+
+  <section class="block">
+    <div class="prompt">one small thing the next hour is for.</div>
+    <div class="hint">smaller than you think. it doesn't have to fix the morning.</div>
+    <div class="lines lines-2"></div>
+  </section>
+
+  <section class="block" style="display:flex;flex-direction:column;flex:1;min-height:0">
+    <div class="block-label">anything else — or nothing</div>
+    <div class="open-zone" style="min-height:0"></div>
+  </section>
+
+  <aside class="permission">the afternoon doesn't owe the morning anything. blank is a complete entry.</aside>`;
+  return shell('midday', '§ daily · midday — a reset, not a restart', 'Midday.', body);
+}
+
+
+// ── EVENING (owed) ──────────────────────────────────────────────────────────
+function evening(): string {
+  const body = `
+  <section class="block">
+    <div class="two">
+      <div><div class="block-label">done today</div><div class="lines lines-2"></div></div>
+      <div><div class="block-label">moved to tomorrow — no shame</div><div class="lines lines-2"></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-label">frog check</div>
+    <div class="two" style="align-items:flex-end">
+      <div>${chipRow(['done', 'partial', 'not today'])}</div>
+      <div><div class="hint">actual difficulty (vs predicted)</div>${scale(10)}</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-label">practices</div>
+    <div class="two">
+      <div><div class="hint">meditation · min</div><div class="writeline short"></div></div>
+      <div><div class="hint">water · /10</div><div class="writeline short"></div></div>
+    </div>
+    <div style="margin-top:2mm"><div class="hint">movement</div>${chipRow(['gym', 'walk', 'stretch', 'outside', 'none'])}</div>
+    <div style="margin-top:2mm"><div class="hint">last night's sleep</div>${chipRow(['slept', 'broken', 'late', 'heavy', 'okay'])}</div>
+  </section>
+
+  <section class="block">
+    <div class="block-label">pattern spotter — tick what showed up</div>
+    ${chipRow(['keeda', 'ye-karke-padhunga', 'productive procrastination', 'night zone', 'overcorrection', 'clean day'])}
+  </section>
+
+  <section class="block">
+    <div class="two">
+      <div><div class="block-label">evidence I showed up</div><div class="hint">one thing the depression didn't want me to</div><div class="writeline"></div></div>
+      <div><div class="block-label">one thing that was not all bad</div><div class="hint">person / food / body / place / moment</div><div class="writeline"></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-label">one human thread</div>${chipRow(['messaged', 'replied', 'asked for help', 'saw someone', 'no energy — allowed'])}
+  </section>
+
+  <section class="block">
+    <div class="block-label">tomorrow's runway</div>
+    <div class="two">
+      <div><div class="hint">tomorrow's frog</div><div class="writeline"></div></div>
+      <div><div class="hint">main focus</div><div class="writeline"></div></div>
+    </div>
+    <div style="margin-top:2mm"><div class="hint">set it up tonight</div>${chipRow(['close tabs', 'open the file', 'phone away', 'desk ready'])}</div>
+  </section>
+
+  <section class="block">
+    <div class="prompt" style="font-size:10.5pt">one kind sentence to myself —</div>
+    <div class="writeline med"></div>
+  </section>
+
+  <aside class="permission">today is closed. tomorrow gets to be different.</aside>`;
+  return shell('evening', '§ daily · evening close', 'Today is closed.', body);
+}
+
+const PAGES: { slug: string; html: string }[] = [
+  { slug: '01-morning', html: morning() },
+  { slug: '02-brain-dump', html: brainDump() },
+  { slug: '03-midday', html: midday() },
+  { slug: '04-evening', html: evening() },
+];
+
+// ── Render + verify ─────────────────────────────────────────────────────────
+interface QA { slug: string; a4: boolean; overflowPx: number; footerCollision: boolean; verdict: 'pass' | 'fail' }
+
+async function renderAndVerify(browser: Browser, slug: string, html: string): Promise<{ pdf: Uint8Array; qa: QA }> {
+  const page = await browser.newPage();
+  await page.setViewportSize({ width: 794, height: 1123 }); // A4 @ 96dpi
+  await page.setContent(html, { waitUntil: 'networkidle' });
+  await page.evaluate(async () => { if ((document as any).fonts) await (document as any).fonts.ready; });
+
+  const metrics = await page.evaluate(() => {
+    const el = document.querySelector('.page') as HTMLElement;
+    const overflow = el.scrollHeight - el.clientHeight; // px past the A4 box
+    // footer collision: does the permission strip's top sit above the previous block's bottom?
+    const perm = document.querySelector('.permission') as HTMLElement | null;
+    let collision = false;
+    if (perm) {
+      const prev = perm.previousElementSibling as HTMLElement | null;
+      if (prev) collision = prev.getBoundingClientRect().bottom > perm.getBoundingClientRect().top + 1;
+    }
+    return { overflow, collision };
+  });
+
+  const pdf = await page.pdf({ format: 'A4', printBackground: true, margin: { top: '0', right: '0', bottom: '0', left: '0' }, preferCSSPageSize: true });
+  await page.close();
+
+  const qa: QA = {
+    slug,
+    a4: true,
+    overflowPx: metrics.overflow,
+    footerCollision: metrics.collision,
+    verdict: metrics.overflow <= 1 && !metrics.collision ? 'pass' : 'fail',
+  };
+  return { pdf, qa };
+}
+
+async function main() {
+  await fs.mkdir(PAGES_DIR, { recursive: true });
+  await fs.mkdir(OUT_DIR, { recursive: true });
+
+  // write HTML
+  for (const { slug, html } of PAGES) {
+    await fs.writeFile(path.join(PAGES_DIR, `${slug}.html`), html, 'utf-8');
+  }
+
+  const browser = await chromium.launch();
+  const merged = await PDFDocument.create();
+  const report: QA[] = [];
+  try {
+    for (const { slug, html } of PAGES) {
+      const { pdf, qa } = await renderAndVerify(browser, slug, html);
+      report.push(qa);
+      const doc = await PDFDocument.load(pdf);
+      const [p] = await merged.copyPages(doc, [0]);
+      merged.addPage(p);
+    }
+  } finally {
+    await browser.close();
+  }
+
+  merged.setTitle('Prax Journal v7 — Daily Pilot');
+  await fs.writeFile(path.join(OUT_DIR, 'daily-pilot.pdf'), await merged.save({ useObjectStreams: false }));
+
+  // report
+  console.log('\n[daily] render-QA:');
+  let allPass = true;
+  for (const q of report) {
+    const ok = q.verdict === 'pass';
+    allPass = allPass && ok;
+    console.log(`  ${ok ? '✓' : '✗'} ${q.slug.padEnd(14)} overflow=${q.overflowPx}px  footerCollision=${q.footerCollision}  → ${q.verdict}`);
+  }
+  console.log(`\n[daily] ${PAGES.length} pages → codex/output/daily-pilot.pdf`);
+  if (!allPass) {
+    console.error('[daily] FAIL — one or more pages overflowed or collided. Fix before shipping.');
+    process.exit(2);
+  }
+  console.log('[daily] all pages pass A4 / overflow / footer checks.');
+}
+
+main().catch(err => { console.error('[daily] failed:', err instanceof Error ? err.stack : err); process.exit(1); });

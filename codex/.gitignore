@@ -1,0 +1,4 @@
+# Generated build artifacts (regenerate via build-daily.ts)
+output/
+# throwaway screenshot/scratch scripts
+tmp-*.mjs
