@@ -13,9 +13,12 @@ Governing principle: **depth is allowed, debt is not.** Only 2 daily pages are *
 ./node_modules/.bin/tsx cline/build-daily.ts     # 4 daily pages → output/daily-pilot.pdf
 ./node_modules/.bin/tsx cline/build-cards.ts      # 65 SVG→PNG stickers + flip-deck PDF (~3 min)
 ./node_modules/.bin/tsx cline/build-extras.ts     # reminders card + 5 as-needed PDFs
+./node_modules/.bin/tsx cline/build-tools.ts      # Notebook B (13) + Notebook C pomodoro (2)
+./node_modules/.bin/tsx cline/build-master.ts     # assemble full journal → output/master-journal.pdf (19 pp)
 
-open cline/output/daily-pilot.pdf
+open cline/output/master-journal.pdf
 ```
+
 
 Every build **render-verifies** in headless Chromium and fails loudly on overflow,
 footer collision, or sub-7px text — "built" never means "claimed" (spec §7/§8).
@@ -27,6 +30,8 @@ footer collision, or sub-7px text — "built" never means "claimed" (spec §7/§
 | `build-daily.ts` | `output/daily-pilot.pdf` (4 pp) + `pages/*.html` | Morning · Brain Dump · Midday · Evening. Morning + Evening are *owed*; the others say *optional* in the header. |
 | `build-cards.ts` | `output/stickers/{truth,quote,pill}/*.png` (20/20/25), `contact-sheet.png`, `output/truth-deck-flip.pdf` (66 pp) | Cards authored as **SVG**, rasterised to **transparent PNG** (`omitBackground`) for GoodNotes. Flip-deck opens on the meta-pill **Z1**, one card per page, **no all-cards view** (anti-binge, spec §4.5). |
 | `build-extras.ts` | `output/extras/*.pdf` (6) | Permanent reminders card (front/back) + Letter to No One · Therapy Prep/Debrief · Urge/Phone-Reach Log · Monthly Letter · Weekly Strip — each a single-page PDF you insert into GoodNotes when needed. |
+| `build-tools.ts` | `output/tools/*.pdf` (15 single pages + `tools-reference.pdf`, `pomodoro-pad.pdf`) | **Notebook B** — quick-start · permission · crisis card · CBT thought record · self-worth reframe · tiny task · 30-min experiment · scene capture · stock-up · 4 identity doorways. **Notebook C** — pomodoro capture + catch-&-decide. |
+| `build-master.ts` | `output/master-journal.pdf` (19 pp) | Assembles daily-pilot + tools-reference + pomodoro-pad into the full journal. Run last. |
 
 ## The Truth Deck (the heart of it)
 
@@ -53,10 +58,11 @@ no medication doses anywhere (spec §5).
 
 ```
 cline/
-  build-daily.ts     build-cards.ts     build-extras.ts
-  pages/             # generated daily HTML (gitignored)
-  output/            # generated PDFs + PNG stickers (gitignored)
+  build-daily.ts   build-cards.ts   build-extras.ts   build-tools.ts   build-master.ts
+  pages/           # generated daily HTML (gitignored)
+  output/          # generated PDFs + PNG stickers (gitignored)
 ```
 
 Regenerate anything by re-running its script. Nothing in `output/` or `pages/` is
-source — the three `build-*.ts` files are.
+source — the five `build-*.ts` files are.
+
