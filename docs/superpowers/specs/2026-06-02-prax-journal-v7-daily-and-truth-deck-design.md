@@ -258,8 +258,9 @@ false promises · no lying. "Blank is a complete entry" recurs.
 ## 7. Build order (depth allowed, debt not)
 1. **The 4 Daily pages** (Morning, Brain Dump, Midday, Evening) → render-verified
    A4 PDF. *Only thing needed to start filling tomorrow.*
-2. **The 65 cards** → 3 sticker packs (PNG) + flip-deck PDF (opens on Z1, one card
-   per page, no all-view).
+2. **The 65 cards** → authored as **SVG** (vector source, crisp at any size) then
+   exported to **PNG** for the 3 GoodNotes sticker packs, plus a flip-deck PDF
+   (opens on Z1, one card per page, no all-view).
 3. **Permanent Reminders card** (front/back).
 4. **The 5 as-needed PDFs.**
 5. **Later (after ~1 week of real use):** weekly/monthly review, remaining v6 tools.
