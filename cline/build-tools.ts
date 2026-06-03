@@ -93,6 +93,17 @@ ${body}${crisis ? '<a href="#" class="crisis">[crisis]</a>' : ''}</main></body><
 }
 const chips = (o: string[]) => `<div class="chips">${o.map(x => `<span class="chip">${x}</span>`).join('')}</div>`;
 function scale(max = 10): string { let s = ''; for (let i = 0; i <= max; i++) s += `<span class="pip">${i}</span>`; return `<div class="scale">${s}</div>`; }
+// sage 25-min clock dial (matches Notebook C palette)
+function clock(size: number, opacity = 1): string {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:${opacity}">
+    <circle cx="50" cy="52" r="38" fill="#FBF4EC" stroke="#4E6249" stroke-width="3"/>
+    <circle cx="50" cy="52" r="38" fill="none" stroke="#7e9b85" stroke-width="3" stroke-dasharray="62 200" stroke-linecap="round" transform="rotate(-90 50 52)"/>
+    <line x1="50" y1="52" x2="50" y2="28" stroke="#4E6249" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="52" x2="66" y2="52" stroke="#7e9b85" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="50" cy="52" r="3.4" fill="#4E6249"/>
+    <rect x="44" y="8" width="12" height="7" rx="2" fill="#c08866"/>
+  </svg>`;
+}
 
 // ── NOTEBOOK B ──────────────────────────────────────────────────────────────
 function quickStart(): string {
@@ -197,7 +208,7 @@ function pomoCapture(): string {
   const rows = Array.from({ length: 9 }, (_, i) => `<tr><td class="num">${String(i + 1).padStart(2, '0')}</td><td></td></tr>`).join('');
   return shell('pomodoro · capture', '§ focus · capture', 'During the sprint.',
     'A stray thought arrives mid-focus. Park it here \u2014 it\u2019ll keep \u2014 and go back to the one thing.',
-    `<section class="b"><div class="lab">the thought \u2014 park it \u2014 back to focus</div>
+    `<section class="b"><div style="display:flex;align-items:center;gap:4mm;margin-bottom:2mm">${clock(28)}<div class="lab" style="margin:0">the thought \u2014 park it \u2014 back to focus</div></div>
        <table class="tbl"><thead><tr><th>#</th><th>the thought (it\u2019s safe here)</th></tr></thead><tbody>${rows}</tbody></table></section>
      <aside class="perm">the idea is safe here. it\u2019ll keep. back to the one thing.</aside>`, { bg: 'var(--kawaii)' });
 }
@@ -205,12 +216,12 @@ function pomoCatchDecide(): string {
   const rows = Array.from({ length: 8 }, () => `<tr><td></td><td></td></tr>`).join('');
   return shell('pomodoro · catch', '§ focus · catch & decide', 'Two piles, mid-sprint.',
     'Catch it now on the left. Decide what to do with it after the sprint, on the right.',
-    `<section class="b"><table class="tbl"><thead><tr><th>during the sprint \u2192 (catch)</th><th>for later \u2192 (decide after)</th></tr></thead><tbody>${rows}</tbody></table></section>
+    `<section class="b"><div style="display:flex;justify-content:flex-end;margin-bottom:1mm">${clock(26, 0.9)}</div><table class="tbl"><thead><tr><th>during the sprint \u2192 (catch)</th><th>for later \u2192 (decide after)</th></tr></thead><tbody>${rows}</tbody></table></section>
      <aside class="perm">catch it left. decide it later, right. the sprint keeps going.</aside>`, { bg: 'var(--kawaii)' });
 }
 
-interface Job { name: string; bundle: 'tools' | 'pomodoro'; html: string }
-const JOBS: Job[] = [
+export interface Job { name: string; bundle: 'tools' | 'pomodoro'; html: string }
+export const JOBS: Job[] = [
   { name: '01-quick-start', bundle: 'tools', html: quickStart() },
   { name: '02-permission', bundle: 'tools', html: permission() },
   { name: '03-crisis-card', bundle: 'tools', html: crisisCard() },
@@ -263,6 +274,7 @@ async function main() {
       const one = await PDFDocument.create();
       const [op] = await one.copyPages(src, [0]); one.addPage(op);
       await fs.writeFile(path.join(OUT, `${job.name}.pdf`), await one.save({ useObjectStreams: false }));
+      await fs.writeFile(path.join(OUT, `${job.name}.html`), job.html, 'utf-8');
       // into bundle
       const [bp] = await bundles[job.bundle].copyPages(src, [0]); bundles[job.bundle].addPage(bp);
     }

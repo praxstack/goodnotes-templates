@@ -1,8 +1,8 @@
-# Prax Journal v8 Implementation Plan
+# Prax Journal v9 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Ship the beautified 30-day Prax Journal v8 — daily bundle with a repeated permission page + linked appendix, standalone singles, HTML+PDF for every page, truth-deck PNGs (300dpi) + SVG+PNG stickers, and a clockified tomato Pomodoro set.
+**Goal:** Ship the beautified 30-day Prax Journal v9 — daily bundle with a repeated permission page + linked appendix, standalone singles, HTML+PDF for every page, truth-deck PNGs (300dpi) + SVG+PNG stickers, and a clockified tomato Pomodoro set.
 
 **Architecture:** Extend the existing Cline generators (`cline/build-*.ts`). All pages authored as HTML → Chromium A4 PDF; stickers authored as SVG → transparent PNG. v8 adds: dual HTML/SVG emission, content-aware faint watermarks + corner sprigs (bleed-layer clipped), 30-day composition, two-way GoTo links (mode A + auto-fallback to page-number index), 300dpi deck PNG export, and clock SVGs on pomodoro pages. Render-QA (A4 / overflow≤1 / footer / minFont≥7) gates every fresh render.
 
@@ -175,10 +175,10 @@ git commit -m "feat(cline): clockify sage pomodoro pages + emit HTML alongside P
 
 ---
 
-### Task 4: Extend `build-v8.ts` — content-aware watermarks + permission/appendix shell
+### Task 4: Extend `build-v9.ts` — content-aware watermarks + permission/appendix shell
 
 **Files:**
-- Modify: `cline/build-v8.ts`
+- Modify: `cline/build-v9.ts`
 
 - [ ] **Step 1: Generalize the watermark function to cover tool/extra motifs**
 
@@ -225,14 +225,14 @@ function v8Wrap(innerBodyHtml: string, spineLabel: string, wmKind: WmKind, motif
 
 - [ ] **Step 3: Run typecheck (no behaviour change yet)**
 
-Run: `./node_modules/.bin/tsx --eval "import('./cline/build-v8.ts')" 2>&1 | head -5` is not valid (top-level run). Instead just run the file after later tasks. For now:
+Run: `./node_modules/.bin/tsx --eval "import('./cline/build-v9.ts')" 2>&1 | head -5` is not valid (top-level run). Instead just run the file after later tasks. For now:
 Run: `npx tsc --noEmit -p tsconfig.json 2>&1 | grep build-v8 || echo "no v8 type errors"`
 Expected: `no v8 type errors`.
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add cline/build-v8.ts
+git add cline/build-v9.ts
 git commit -m "feat(v8): content-aware watermark set + v8 page-wrap helper"
 ```
 
@@ -243,7 +243,7 @@ git commit -m "feat(v8): content-aware watermark set + v8 page-wrap helper"
 **Files:**
 - Modify: `cline/build-tools.ts` (export the page builders)
 - Modify: `cline/build-extras.ts` (export the page builders)
-- Modify: `cline/build-v8.ts` (import them)
+- Modify: `cline/build-v9.ts` (import them)
 
 - [ ] **Step 1: Inspect the page builder names in build-extras.ts**
 
@@ -255,9 +255,9 @@ Expected: a JOBS array and per-page builder functions (note their exact names + 
 In `cline/build-tools.ts`, change `const JOBS: Job[] = [` → `export const JOBS: Job[] = [` and `interface Job` → `export interface Job`.
 In `cline/build-extras.ts`, do the same for its JOBS array + Job interface (use the exact names found in Step 1).
 
-- [ ] **Step 3: Import the JOBS into build-v8.ts**
+- [ ] **Step 3: Import the JOBS into build-v9.ts**
 
-At the top of `cline/build-v8.ts` add:
+At the top of `cline/build-v9.ts` add:
 
 ```typescript
 import { JOBS as TOOL_JOBS } from './build-tools.ts';
@@ -267,13 +267,13 @@ import { JOBS as EXTRA_JOBS } from './build-extras.ts';
 
 - [ ] **Step 4: Run to confirm imports resolve (no crash)**
 
-Run: `./node_modules/.bin/tsx cline/build-v8.ts 2>&1 | head -5`
+Run: `./node_modules/.bin/tsx cline/build-v9.ts 2>&1 | head -5`
 Expected: the v8 daily-QA banner prints (imports resolved; no module error). Background-run is fine.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add cline/build-tools.ts cline/build-extras.ts cline/build-v8.ts
+git add cline/build-tools.ts cline/build-extras.ts cline/build-v9.ts
 git commit -m "feat(v8): export + import v7 tool/extra page builders into v8"
 ```
 
@@ -282,7 +282,7 @@ git commit -m "feat(v8): export + import v7 tool/extra page builders into v8"
 ### Task 6: v8 daily bundle — permission daily + appendix + singles + HTML emission
 
 **Files:**
-- Modify: `cline/build-v8.ts` (`main()`)
+- Modify: `cline/build-v9.ts` (`main()`)
 
 - [ ] **Step 1: Map appendix pages with their watermark motifs**
 
@@ -393,19 +393,19 @@ Add a `shellPlain()` that mirrors `shell()` but without the daily badge/meta, pl
 - [ ] **Step 7: Save the daily bundle**
 
 ```typescript
-  daily.setTitle('Prax Journal v8 — Daily (beautified, 30-day, linked appendix)');
+  daily.setTitle('Prax Journal v9 — Daily (beautified, 30-day, linked appendix)');
   await fs.writeFile(path.join(V8, 'prax-journal-v8-daily.pdf'), await daily.save({ useObjectStreams: false }));
 ```
 
 - [ ] **Step 8: Run and verify all fresh pages pass QA**
 
-Run: `./node_modules/.bin/tsx cline/build-v8.ts 2>&1 | tail -20` (background; poll log)
+Run: `./node_modules/.bin/tsx cline/build-v9.ts 2>&1 | tail -20` (background; poll log)
 Expected: QA banner shows all base + permission + appendix + index pass; daily bundle written.
 
 - [ ] **Step 9: Commit**
 
 ```bash
-git add cline/build-v8.ts
+git add cline/build-v9.ts
 git commit -m "feat(v8): 30-day daily bundle — permission daily + appendix + singles + HTML"
 ```
 
@@ -414,7 +414,7 @@ git commit -m "feat(v8): 30-day daily bundle — permission daily + appendix + s
 ### Task 7: Two-way GoTo links (mode A) with auto-fallback to page numbers (mode B)
 
 **Files:**
-- Modify: `cline/build-v8.ts` (after composing `daily`, before save)
+- Modify: `cline/build-v9.ts` (after composing `daily`, before save)
 
 - [ ] **Step 1: Add link annotations using pdf-lib low-level API**
 
@@ -487,18 +487,18 @@ If `linkMode === 'B'`, the index page numbers (rendered text) are the fallback �
 
 - [ ] **Step 4: Run and confirm mode reported**
 
-Run: `./node_modules/.bin/tsx cline/build-v8.ts 2>&1 | grep -E "link mode"`
+Run: `./node_modules/.bin/tsx cline/build-v9.ts 2>&1 | grep -E "link mode"`
 Expected: `[v8] appendix link mode: A` (or `B` with a warning — both acceptable).
 
 - [ ] **Step 5: Open the bundle and tap-test (manual)**
 
-Run: `open cline/output/v8/prax-journal-v8-daily.pdf`
+Run: `open cline/output/v9/prax-journal-v8-daily.pdf`
 Expected (mode A): tapping an index row jumps to that appendix page; tapping bottom-left on an appendix page returns to index.
 
 - [ ] **Step 6: Commit**
 
 ```bash
-git add cline/build-v8.ts
+git add cline/build-v9.ts
 git commit -m "feat(v8): two-way appendix GoTo links (mode A) + auto-fallback to page-number index (B)"
 ```
 
@@ -607,7 +607,7 @@ async function main() {
     await fs.writeFile(path.join(DST, 'contact-sheet.png'), await sel!.screenshot({ omitBackground: false }));
     await sp.close();
   } finally { await browser.close(); }
-  console.log(`[deck-png] ${order.length} PNGs @300dpi + contact-sheet → cline/output/v8/truth-deck-png/`);
+  console.log(`[deck-png] ${order.length} PNGs @300dpi + contact-sheet → cline/output/v9/truth-deck-png/`);
 }
 main().catch(err => { console.error('[deck-png] failed:', err instanceof Error ? err.stack : err); process.exit(1); });
 ```
@@ -628,7 +628,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
 
 Run: `./node_modules/.bin/tsx cline/build-deck-png.ts 2>&1 | tail -3` (background; poll)
 Expected: `[deck-png] 66 PNGs @300dpi + contact-sheet`.
-Run: `find cline/output/v8/truth-deck-png -name '*.png' | wc -l`
+Run: `find cline/output/v9/truth-deck-png -name '*.png' | wc -l`
 Expected: `67` (66 pages + contact sheet).
 
 - [ ] **Step 5: Commit**
@@ -643,11 +643,11 @@ git commit -m "feat(v8): truth-deck 300dpi PNG export + contact sheet (SVG re-re
 ### Task 9: Regenerate v8 master bundle + final verification
 
 **Files:**
-- Modify: `cline/build-v8.ts` (master wrap uses the new daily bundle)
+- Modify: `cline/build-v9.ts` (master wrap uses the new daily bundle)
 
 - [ ] **Step 1: Point the master bundle at the new daily file**
 
-In the master-bundle section of `build-v8.ts`, change the first merge from `daily-30-day-bundle.pdf` to `prax-journal-v8-daily.pdf` (the new linked bundle). Keep sticker sheets + carryovers.
+In the master-bundle section of `build-v9.ts`, change the first merge from `daily-30-day-bundle.pdf` to `prax-journal-v8-daily.pdf` (the new linked bundle). Keep sticker sheets + carryovers.
 
 - [ ] **Step 2: Full rebuild in dependency order**
 
@@ -658,7 +658,7 @@ Run sequentially (each may background; poll each):
 ./node_modules/.bin/tsx cline/build-extras.ts
 ./node_modules/.bin/tsx cline/build-pomodoro-tomato.ts
 ./node_modules/.bin/tsx cline/build-deck-png.ts
-./node_modules/.bin/tsx cline/build-v8.ts
+./node_modules/.bin/tsx cline/build-v9.ts
 ```
 Expected: each prints all-pass QA; v8 master bundle written.
 
@@ -666,9 +666,9 @@ Expected: each prints all-pass QA; v8 master bundle written.
 
 Run:
 ```bash
-echo "singles:"; ls cline/output/v8/singles/*.pdf | wc -l
-echo "singles html:"; ls cline/output/v8/singles/*.html | wc -l
-echo "deck png:"; ls cline/output/v8/truth-deck-png/*.png | wc -l
+echo "singles:"; ls cline/output/v9/singles/*.pdf | wc -l
+echo "singles html:"; ls cline/output/v9/singles/*.html | wc -l
+echo "deck png:"; ls cline/output/v9/truth-deck-png/*.png | wc -l
 echo "sticker svg:"; find cline/output/stickers -name '*.svg' | wc -l
 ```
 Expected: singles pdf=22, singles html=22, deck png=67, sticker svg=65.
@@ -678,7 +678,7 @@ Expected: singles pdf=22, singles html=22, deck png=67, sticker svg=65.
 Run:
 ```bash
 git status --porcelain | grep -iE "profile\.json|piiPrax|\.env" || echo "clean"
-grep -rinE "shikhar|shreya|pallavi|joshi|amazon" cline/build-v8.ts cline/build-deck-png.ts || echo "0 real-name matches"
+grep -rinE "shikhar|shreya|pallavi|joshi|amazon" cline/build-v9.ts cline/build-deck-png.ts || echo "0 real-name matches"
 git status --porcelain | grep "cline/output" || echo "output gitignored"
 ```
 Expected: `clean`, `0 real-name matches`, `output gitignored`.
@@ -686,15 +686,15 @@ Expected: `clean`, `0 real-name matches`, `output gitignored`.
 - [ ] **Step 5: Open the final artifacts**
 
 ```bash
-open cline/output/v8/prax-journal-v8-daily.pdf
-open cline/output/v8/v8-master-bundle.pdf
-open cline/output/v8/truth-deck-png/contact-sheet.png
+open cline/output/v9/prax-journal-v8-daily.pdf
+open cline/output/v9/v9-master-bundle.pdf
+open cline/output/v9/truth-deck-png/contact-sheet.png
 ```
 
 - [ ] **Step 6: Commit + push**
 
 ```bash
-git add cline/build-v8.ts
+git add cline/build-v9.ts
 git commit -m "feat(v8): master bundle wraps linked daily; full v8 rebuild verified"
 git push
 ```

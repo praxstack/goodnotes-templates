@@ -41,6 +41,21 @@ function tomato(size: number, opacity = 1): string {
     <ellipse cx="38" cy="46" rx="9" ry="6" fill="#FFFFFF" fill-opacity="0.28"/>
   </svg>`;
 }
+// ── A cute 25-min clock dial (tomato-red hand + sweep), reusable ────────────
+function clock(size: number, opacity = 1): string {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:${opacity}">
+    <circle cx="50" cy="52" r="38" fill="#FBF3EC" stroke="#8A3E2E" stroke-width="3"/>
+    <circle cx="50" cy="52" r="38" fill="none" stroke="#C14B3A" stroke-width="3" stroke-dasharray="62 200" stroke-linecap="round" transform="rotate(-90 50 52)"/>
+    <g stroke="#8A3E2E" stroke-width="2" stroke-linecap="round">
+      <line x1="50" y1="18" x2="50" y2="24"/><line x1="84" y1="52" x2="78" y2="52"/>
+      <line x1="50" y1="86" x2="50" y2="80"/><line x1="16" y1="52" x2="22" y2="52"/>
+    </g>
+    <line x1="50" y1="52" x2="50" y2="28" stroke="#C14B3A" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="52" x2="66" y2="52" stroke="#8A3E2E" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="50" cy="52" r="3.4" fill="#8A3E2E"/>
+    <rect x="44" y="8" width="12" height="7" rx="2" fill="#5C8A4A"/>
+  </svg>`;
+}
 const TOM_DEFS = `<svg width="0" height="0" style="position:absolute"><defs>
   <radialGradient id="tomShine" cx="36%" cy="30%" r="72%">
     <stop offset="0%" stop-color="#F08A6E" stop-opacity="0.85"/>
@@ -138,7 +153,7 @@ function session(): string {
   <section class="b"><div class="lab">first physical action <span class="n">— open the file · write one line</span></div><div class="line"></div></section>
   <section class="b">
     <div class="lab">the tomatoes <span class="n">— one per 25 minutes; colour it in when the block is done</span></div>
-    ${blocks(4)}
+    <div style="display:flex;align-items:center;gap:6mm;margin-top:2mm">${clock(34)}${blocks(4)}</div>
   </section>
   <section class="b">
     <div class="lab">parking lot <span class="n">— anything that pulled at you; it'll keep</span></div>
@@ -220,6 +235,7 @@ async function main() {
       const one = await PDFDocument.create();
       const [op] = await one.copyPages(src, [0]); one.addPage(op);
       await fs.writeFile(path.join(OUT, `${job.name}.pdf`), await one.save({ useObjectStreams: false }));
+      await fs.writeFile(path.join(OUT, `${job.name}.html`), job.html, 'utf-8');
       const [bp] = await bundle.copyPages(src, [0]); bundle.addPage(bp);
     }
     bundle.setTitle('Prax Journal — Tomato Pomodoro Pad');

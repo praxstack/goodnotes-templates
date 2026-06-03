@@ -178,8 +178,8 @@ function weekly(): string {
     'A light aperture on seven days. No heavy grid.', body);
 }
 
-interface Job { name: string; pages: string[] }
-const JOBS: Job[] = [
+export interface ExtraJob { name: string; pages: string[] }
+export const JOBS: ExtraJob[] = [
   { name: 'reminders-card', pages: [remindersFront(), remindersBack()] },
   { name: 'letter-to-no-one', pages: [letter()] },
   { name: 'therapy-prep-debrief', pages: [therapy()] },
