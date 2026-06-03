@@ -32,11 +32,11 @@ const OUT = path.join(__dirname, 'output');
 const STICK = path.join(OUT, 'stickers');
 
 type Pack = 'truth' | 'quote' | 'pill';
-interface Card { id: string; pack: Pack; cluster: string; text: string; exit?: string }
+export interface Card { id: string; pack: Pack; cluster: string; text: string; exit?: string }
 
 // ── CONTENT (design doc §4.6; abstracted, behaviour-targeted) ───────────────
 // TRUTH (20): D Shame&Worth + G Compassion + reminders. Calm, read-only.
-const TRUTH: Card[] = [
+export const TRUTH: Card[] = [
   { id: 't01', pack: 'truth', cluster: 'worth', text: 'You are not your output. A day you produced nothing is still a day a worthwhile person lived through.' },
   { id: 't02', pack: 'truth', cluster: 'worth', text: 'The comparison\u2019s life is not the exam you\u2019re failing. It was never your exam \u2014 different paper, different day.' },
   { id: 't03', pack: 'truth', cluster: 'worth', text: 'The fraud feeling is a feeling, not evidence. Impostor syndrome targets the competent.' },
@@ -60,7 +60,7 @@ const TRUTH: Card[] = [
 ];
 
 // QUOTE (20): C Starting + curated borrowed wisdom. Light lift, attributed where real.
-const QUOTE: Card[] = [
+export const QUOTE: Card[] = [
   { id: 'q01', pack: 'quote', cluster: 'rogers', text: 'When I accept myself just as I am, then I can change.', exit: '\u2014 Carl Rogers' },
   { id: 'q02', pack: 'quote', cluster: 'starting', text: 'You don\u2019t have to see the whole staircase. Just take the first step.', exit: '\u2014 after M. L. King' },
   { id: 'q03', pack: 'quote', cluster: 'starting', text: 'The secret of getting ahead is getting started.', exit: '\u2014 attrib. Mark Twain' },
@@ -84,7 +84,7 @@ const QUOTE: Card[] = [
 ];
 
 // PILL (25): A Keeda + B Anti-victim + E Body-urge + F Night. Mirror + blunt; every pill has an exit.
-const PILL: Card[] = [
+export const PILL: Card[] = [
   { id: 'p01', pack: 'pill', cluster: 'keeda', text: 'Building the system is not using the system. Right now you\u2019re doing the first.', exit: 'Close the builder. Open the real thing.' },
   { id: 'p02', pack: 'pill', cluster: 'keeda', text: 'A new tool has never once made you start. The tool was never the problem.', exit: 'Use the one you have. One line, now.' },
   { id: 'p03', pack: 'pill', cluster: 'keeda', text: 'Designing the perfect plan is the most sophisticated way you avoid the scary thing.', exit: 'Name it: avoidance. Then start ugly.' },
@@ -140,7 +140,7 @@ function wrap(text: string, maxChars: number): string[] {
   return lines;
 }
 
-function cardSVG(c: Card): string {
+export function cardSVG(c: Card): string {
   const p = PALETTE[c.pack];
   const W = 512, H = 512, R = 28, M = 44;
   // body type sizes by length
@@ -186,7 +186,7 @@ function cardSVG(c: Card): string {
 }
 
 // flip-deck cover (Z1)
-function coverSVG(): string {
+export function coverSVG(): string {
   const lines = wrap(Z1, 30);
   const lineH = 34 * 1.34;
   let y = 230 - (lines.length * lineH) / 2;
@@ -221,11 +221,13 @@ async function main() {
   const browser = await chromium.launch();
   const pngById: Record<string, Buffer> = {};
   try {
-    // sticker PNGs (transparent)
+    // sticker PNGs (transparent) + SVG source
     for (const c of CARDS) {
-      const png = await svgToPng(browser, cardSVG(c), true);
+      const svg = cardSVG(c);
+      const png = await svgToPng(browser, svg, true);
       pngById[c.id] = png;
       await fs.writeFile(path.join(STICK, c.pack, `${c.pack}__${c.id}.png`), png);
+      await fs.writeFile(path.join(STICK, c.pack, `${c.pack}__${c.id}.svg`), svg, 'utf-8');
     }
 
     // contact sheet (opaque grid, all 65) — for human curation, NOT bundled into the journal
@@ -259,7 +261,7 @@ async function main() {
 
   const counts = { truth: TRUTH.length, quote: QUOTE.length, pill: PILL.length };
   console.log(`[cards] stickers: truth=${counts.truth} quote=${counts.quote} pill=${counts.pill} (total ${CARDS.length})`);
-  console.log(`[cards] → cline/output/stickers/{truth,quote,pill}/*.png + contact-sheet.png`);
+  console.log(`[cards] → cline/output/stickers/{truth,quote,pill}/*.{png,svg} + contact-sheet.png`);
   console.log(`[cards] flip-deck: ${CARDS.length + 1} pages (Z1 cover + ${CARDS.length} cards) → cline/output/truth-deck-flip.pdf`);
 }
 
@@ -276,4 +278,8 @@ async function svgToPng2(browser: Browser, svg: string, w: number, h: number): P
   return buf;
 }
 
-main().catch(err => { console.error('[cards] failed:', err instanceof Error ? err.stack : err); process.exit(1); });
+import { pathToFileURL } from 'node:url';
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(err => { console.error('[cards] failed:', err instanceof Error ? err.stack : err); process.exit(1); });
+}
+
