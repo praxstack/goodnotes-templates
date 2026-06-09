@@ -35,6 +35,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JOBS as TOOL_JOBS } from './build-tools.ts';
 import { JOBS as EXTRA_JOBS } from './build-extras.ts';
+import { QUOTE, TRUTH } from './build-cards.ts';
+
 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -122,14 +124,20 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 .anchor{background:var(--sage-tint);border-left:1.5px solid var(--sage);border-radius:0 2px 2px 0;padding:2.8mm 4mm}
 .anchor .al{font-family:var(--mono);font-size:6pt;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);opacity:.85;margin-bottom:1.2mm}
 .anchor .at{font-family:var(--serif);font-style:italic;font-size:11pt;color:var(--sage);font-variation-settings:"opsz" 40;line-height:1.32}
-.drop{margin-top:3mm;border:.7px dashed var(--sage-edge);border-radius:3px;height:19mm;display:flex;align-items:center;padding:0 4mm}
-.drop span{font-family:var(--mono);font-size:6pt;letter-spacing:.13em;text-transform:uppercase;color:var(--whisper)}
+/* card drop — sized to the actual square sticker (≈36mm), sits beside the truth */
+.drop{flex:0 0 36mm;border:.7px dashed var(--sage-edge);border-radius:4px;min-height:36mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.5mm;padding:2.5mm;background:rgba(255,255,255,.18)}
+.drop .ph{font-family:var(--serif);font-style:italic;font-size:15pt;color:var(--sage-soft);opacity:.5;line-height:1}
+.drop span{font-family:var(--mono);font-size:5.8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--whisper);line-height:1.45}
 
-/* frog — the focal block */
+/* frog — the focal block; todo-list feel: small heading · checkbox · roomy line */
 .frog{border:.6px solid var(--sage-edge);border-radius:4px;background:rgba(255,255,255,.28);padding:4mm 4.5mm}
-.fr{margin-bottom:2.8mm}.fr:last-child{margin-bottom:0}
-.fk{font-family:var(--mono);font-size:6pt;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:1mm}
-.fk .t{color:var(--quiet);text-transform:none;letter-spacing:0;font-size:6pt}
+.fr{margin-bottom:3.6mm}.fr:last-child{margin-bottom:0}
+.fk{font-family:var(--mono);font-size:5.8pt;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);opacity:.85;margin-bottom:1.4mm}
+.fk .t{color:var(--quiet);text-transform:none;letter-spacing:0;font-size:5.8pt;opacity:.9}
+.frow{display:flex;gap:2.6mm;align-items:flex-start}
+.fbox{flex:0 0 4mm;width:4mm;height:4mm;border:.7px solid var(--sage-edge);border-radius:1.5px;margin-top:.3mm}
+.fline{flex:1;border-bottom:.5px solid var(--whisper);height:8mm}
+
 
 /* keeda guard */
 .guard{margin-top:3mm;font-family:var(--serif);font-style:italic;font-size:9pt;color:var(--clay);font-variation-settings:"opsz" 40;line-height:1.35}
@@ -152,7 +160,12 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 /* permission footer */
 .perm{margin-top:auto;background:var(--clay-tint);border-left:1.5px solid var(--clay);border-radius:0 2px 2px 0;padding:2.6mm 4mm;
   font-family:var(--serif);font-style:italic;font-size:7.5pt;color:#8a5e44;font-variation-settings:"opsz" 14;line-height:1.45;position:relative;z-index:1}
+
+/* daily permission page — one big varying quote, centred */
+.bigq{font-family:var(--serif);font-style:italic;font-size:21pt;color:var(--ink);font-variation-settings:"opsz" 100;line-height:1.32;letter-spacing:-.01em}
+.attr{font-family:var(--mono);font-size:8pt;letter-spacing:.1em;color:var(--quiet);margin-top:5mm}
 `;
+
 
 // ── v9 beautification: faint page-content-aware watermarks ──────────────────
 // Each daily page type gets a thematically-matched faint motif behind the
@@ -359,18 +372,21 @@ function morning(motif: number, dayN?: number): string {
     <div><div class="lab">focus weather</div>${chips(['fog', 'scattered', 'here', 'sharp'])}</div>
   </section>
   <section class="b">
-    <div class="anchor"><div class="al">today's truth</div><div class="at">blank is complete. worth is not output. the first movement is the plan.</div></div>
-    <div class="drop"><span>today's card — drop a truth · quote · pill sticker</span></div>
+    <div style="display:flex;gap:4mm;align-items:stretch">
+      <div class="anchor" style="flex:1"><div class="al">today's truth</div><div class="at">blank is complete. worth is not output. the first movement is the plan.</div></div>
+      <div class="drop"><span class="ph">✶</span><span>today's card<br>truth · quote · pill</span></div>
+    </div>
   </section>
   <section class="b">
     <div class="frog">
-      <div class="fr"><div class="fk">the frog <span class="t">— one concrete thing, ≤25 min</span></div><div class="line m"></div></div>
-      <div class="fr"><div class="fk">shrink it <span class="t">— the smallest version</span></div><div class="line m"></div></div>
-      <div class="fr"><div class="fk">first physical action <span class="t">— open the file · write "Dear ___"</span></div><div class="line m"></div></div>
-      <div class="fr"><div class="fk">if–then <span class="t">— at [time], in [place]</span></div><div class="line m"></div></div>
+      <div class="fr"><div class="fk">the frog <span class="t">— one concrete thing, ≤25 min</span></div><div class="frow"><div class="fbox"></div><div class="fline"></div></div></div>
+      <div class="fr"><div class="fk">shrink it <span class="t">— the smallest version</span></div><div class="frow"><div class="fbox"></div><div class="fline"></div></div></div>
+      <div class="fr"><div class="fk">first physical action <span class="t">— open the file · write "Dear ___"</span></div><div class="frow"><div class="fbox"></div><div class="fline"></div></div></div>
+      <div class="fr"><div class="fk">if–then <span class="t">— at [time], in [place]</span></div><div class="frow"><div class="fbox"></div><div class="fline"></div></div></div>
       <div class="fr"><div class="fk">predicted difficulty <span class="t">— scored against actual tonight</span></div>${scale(10)}</div>
     </div>
   </section>
+
   <section class="b">
     <div class="lab">one stupidly small thing <span class="n">— smaller than the frog; doable even now</span></div>
     <div class="line m"></div>
@@ -459,9 +475,41 @@ function evening(motif: number, dayN?: number): string {
   return shell('evening', '§ daily · evening close', 'Today is closed.', true, body, 'evening', motif, dayN);
 }
 
+// ── per-day permission (issue 3) ────────────────────────────────────────────
+// 30 distinct permission slips — one per day. Sourced from the vetted Truth Deck
+// (QUOTE + TRUTH content, build-cards.ts) so tone/clinical-guardrails are already
+// approved. Day N shows pool[(N-1) % pool.length]; with 30+ entries every day in
+// the month is unique. attr is the attribution line (quotes) or '' (truths).
+const PERMISSION_POOL: { text: string; attr: string }[] = [
+  ...QUOTE.map(c => ({ text: c.text, attr: c.exit ?? '' })),
+  ...TRUTH.map(c => ({ text: c.text, attr: '' })),
+]; // 40 slips (20 quote + 20 truth); day N uses index (N-1), so all 30 days are unique
+
+
+// a permission page for a given day — big varying quote, centred, clay footer.
+function permissionPage(dayN: number, motif: number): string {
+  const slip = PERMISSION_POOL[(dayN - 1) % PERMISSION_POOL.length];
+  const attr = slip.attr ? `<div class="attr">${slip.attr}</div>` : '';
+  const body = `
+  <section class="b" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="bigq">\u201C${slip.text}\u201D</div>
+    ${attr}
+  </section>
+  <aside class="perm">one slip for today. read it when the day asks you to earn your own worth. you don\u2019t.</aside>`;
+  const inner = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">${FONTS}<style>${CSS}</style></head>
+<body><main class="page" role="document">
+  <div class="bind" aria-hidden="true"></div>
+  <div class="spine" aria-hidden="true">permission · day ${String(dayN).padStart(2, '0')}</div>
+  <header class="head"><div><div class="kicker">§ daily · permission</div><h1>Permission.</h1></div>${meta(dayN)}</header>
+  ${body}
+</main></body></html>`;
+  return v9Wrap(inner, 'permission', motif);
+}
+
 const DAYS = 30;
 const MOTIFS = 6; // corner-sprig rotation
 const PAGE_TYPES: PageType[] = ['morning', 'brain', 'midday', 'evening'];
+
 
 // ── Render + verify ─────────────────────────────────────────────────────────
 interface QA { key: string; overflowPx: number; footerCollision: boolean; minFontPx: number; verdict: 'pass' | 'fail' }
@@ -565,17 +613,19 @@ async function main() {
   const jobHtml = new Map<string, string>();
   for (const j of TOOL_JOBS) jobHtml.set(j.name, j.html);
   for (const j of EXTRA_JOBS) jobHtml.set(j.name, j.pages[0]);
-  const permissionHtml = jobHtml.get('02-permission')!;
 
   const browser = await chromium.launch();
   const report: QA[] = [];
   const cache = new Map<string, Uint8Array>();             // base daily pages
-  let permPdf!: Uint8Array;
+  const permByDay: Uint8Array[] = [];                      // 30 distinct permission slips
   const apxPdf = new Map<string, Uint8Array>();            // appendix pages
   let indexPdf!: Uint8Array;
 
+
   try {
-    // 1) render the 4 page-types × 6 motifs = 24 base pages (QA gated) + emit HTML
+    // 1) render the 4 page-types × 6 motifs = 24 base pages (QA gated) + emit HTML.
+    //    also emit one standalone single PDF per daily type (motif 0) so each
+    //    page type can be opened on its own (issue: open individual pages too).
     for (const kind of PAGE_TYPES) {
       for (let motif = 0; motif < MOTIFS; motif++) {
         const key = `${kind}__m${motif}`;
@@ -584,18 +634,26 @@ async function main() {
         report.push(qa);
         cache.set(key, pdf);
         await fs.writeFile(path.join(HTML_DIR, `${key}.html`), html, 'utf-8');
+        if (motif === 0) {
+          await fs.writeFile(path.join(SINGLES_DIR, `daily-${kind}.html`), html, 'utf-8');
+          await fs.writeFile(path.join(SINGLES_DIR, `daily-${kind}.pdf`), await onePage(pdf));
+        }
       }
     }
 
-    // 2) permission (the daily repeat) — render once, wrapped; HTML + single PDF
-    {
-      const html = v9Wrap(permissionHtml, 'permission', 1);
-      const { pdf, qa } = await renderAndVerify(browser, 'permission', html);
+    // 2) permission — 30 distinct slips, one per day (issue: vary permission per day).
+    //    QA-gate each; emit a single PDF + HTML for the first three as samples.
+    for (let day = 1; day <= DAYS; day++) {
+      const html = permissionPage(day, (day - 1) % MOTIFS);
+      const { pdf, qa } = await renderAndVerify(browser, `permission-d${String(day).padStart(2, '0')}`, html);
       report.push(qa);
-      permPdf = pdf;
-      await fs.writeFile(path.join(SINGLES_DIR, 'permission.html'), html, 'utf-8');
-      await fs.writeFile(path.join(SINGLES_DIR, 'permission.pdf'), await onePage(pdf));
+      permByDay.push(pdf);
+      if (day <= 3) {
+        await fs.writeFile(path.join(SINGLES_DIR, `permission-day-${String(day).padStart(2, '0')}.html`), html, 'utf-8');
+        await fs.writeFile(path.join(SINGLES_DIR, `permission-day-${String(day).padStart(2, '0')}.pdf`), await onePage(pdf));
+      }
     }
+
 
     // 3) appendix pages — render each once, wrapped; HTML + single PDF
     for (let i = 0; i < APPENDIX.length; i++) {
@@ -640,9 +698,10 @@ async function main() {
       const [dp] = await dayDoc.copyPages(src, [0]); dayDoc.addPage(dp);
       const [bp] = await daily.copyPages(src, [0]); daily.addPage(bp);
     }
-    const ps = await PDFDocument.load(permPdf);
+    const ps = await PDFDocument.load(permByDay[day - 1]);
     const [dpp] = await dayDoc.copyPages(ps, [0]); dayDoc.addPage(dpp);
     const [bpp] = await daily.copyPages(ps, [0]); daily.addPage(bpp);
+
     dayDoc.setTitle(`Prax Journal v9 — Day ${String(day).padStart(2, '0')}`);
     await fs.writeFile(path.join(DAILY_DIR, `day-${String(day).padStart(2, '0')}.pdf`), await dayDoc.save({ useObjectStreams: false }));
   }
