@@ -11,9 +11,9 @@
  *     (opacity ~.05) and CLIPPED in a .bleed-layer so a bleeding decoration can
  *     never inflate page scrollHeight (the lesson from build-pomodoro-tomato.ts).
  *
- *  2. 30 DAYS: the 4-page daily spread (morning · brain-dump · midday · evening),
- *     emitted as day-01.pdf … day-30.pdf (4pp each) AND one daily-30-day-bundle.pdf
- *     (120pp). Render cache keyed by (pageType × dayMotif) keeps it to 24 renders.
+ *  2. 30 DAYS: the daily spread (morning · todo · brain-dump · midday · evening),
+ *     emitted as day-01.pdf … day-30.pdf AND one prax-journal-v9-daily.pdf.
+ *     Render cache keyed by (pageType × dayMotif).
  *
  *  3. PACKS: printable sticker-sheet PDFs built from the existing 65 sticker PNGs
  *     (truth/quote/pill), then a v9-master-bundle.pdf concatenating the beautified
@@ -138,6 +138,11 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 .fbox{flex:0 0 4mm;width:4mm;height:4mm;border:.7px solid var(--sage-edge);border-radius:1.5px;margin-top:.3mm}
 .fline{flex:1;border-bottom:.5px solid var(--whisper);height:8mm}
 
+/* todo list — gentle optional capture page; cute rounded sage checkboxes */
+.todo-list{margin-top:1mm}
+.trow{display:flex;gap:3mm;align-items:flex-end;padding:1.2mm 0}
+.tbox{flex:0 0 4.6mm;width:4.6mm;height:4.6mm;border:.8px solid var(--sage-edge);border-radius:1.6px;background:var(--sage-tint);margin-bottom:1.2mm}
+.tline{flex:1;border-bottom:.5px solid var(--whisper);height:9mm}
 
 /* keeda guard */
 .guard{margin-top:3mm;font-family:var(--serif);font-style:italic;font-size:9pt;color:var(--clay);font-variation-settings:"opsz" 40;line-height:1.35}
@@ -170,10 +175,23 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 // ── v9 beautification: faint page-content-aware watermarks ──────────────────
 // Each daily page type gets a thematically-matched faint motif behind the
 // content. Sage/clay tones, opacity ~.05 so it sits under the writing surface.
-type PageType = 'morning' | 'brain' | 'midday' | 'evening';
+type PageType = 'morning' | 'todo' | 'brain' | 'midday' | 'evening';
 
 function watermark(kind: PageType): string {
   const O = '0.055';
+  if (kind === 'todo') {
+    // clipboard with three ticked rows — the "list" motif
+    return `<svg width="150" height="165" viewBox="0 0 90 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:${O}">
+      <rect x="16" y="14" width="58" height="80" rx="7" fill="none" stroke="#4E6249" stroke-width="3"/>
+      <rect x="34" y="8" width="22" height="11" rx="3.5" fill="#c08866"/>
+      <g stroke="#4E6249" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M26 36 l3.5 3.5 l6 -7"/><path d="M26 54 l3.5 3.5 l6 -7"/><path d="M26 72 l3.5 3.5 l6 -7"/>
+      </g>
+      <g stroke="#c08866" stroke-width="2.4" stroke-linecap="round">
+        <line x1="42" y1="37" x2="64" y2="37"/><line x1="42" y1="55" x2="64" y2="55"/><line x1="42" y1="73" x2="64" y2="73"/>
+      </g>
+    </svg>`;
+  }
   if (kind === 'morning') {
     // sunrise: arc + rays low on the page
     return `<svg width="150" height="150" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:${O}">
@@ -238,7 +256,7 @@ type WmKind = PageType | 'permission' | 'crisis' | 'reflect' | 'leaf' | 'clock' 
 function wm(kind: WmKind): string {
   const O = '0.055';
   switch (kind) {
-    case 'morning': case 'brain': case 'midday': case 'evening': return watermark(kind);
+    case 'morning': case 'todo': case 'brain': case 'midday': case 'evening': return watermark(kind);
     case 'permission':
       return `<svg width="170" height="150" viewBox="0 0 120 100" style="opacity:${O}" xmlns="http://www.w3.org/2000/svg"><path d="M60 26 q-20 -12 -46 -8 v54 q26 -4 46 8 q20 -12 46 -8 v-54 q-26 -4 -46 8z" fill="none" stroke="#4E6249" stroke-width="3"/><line x1="60" y1="26" x2="60" y2="80" stroke="#4E6249" stroke-width="3"/></svg>`;
     case 'crisis':
@@ -395,6 +413,33 @@ function morning(motif: number, dayN?: number): string {
   <aside class="perm">showing up is the win. one chip is enough today. so is none.</aside>`;
   return shell('morning', '§ daily · morning', 'Today.', true, body, 'morning', motif, dayN);
 }
+// the list — a gentle, optional todo page that follows "Today." (the frog stays
+// on the morning page; this is for everything that is a maybe, never owed).
+function todo(motif: number, dayN?: number): string {
+  const row = `<div class="trow"><div class="tbox"></div><div class="tline"></div></div>`;
+  const rows = (n: number) => Array.from({ length: n }, () => row).join('');
+  const body = `
+  <section class="b">
+    <div class="prompt">the rest of today — only what you have room for.</div>
+    <div class="hint">the one frog already lives on the page before this. everything here is a maybe, not a must.</div>
+  </section>
+  <section class="b">
+    <div class="lab">today, maybe <span class="n">— tick what fits, leave the rest</span></div>
+    <div class="todo-list">${rows(8)}</div>
+  </section>
+  <section class="b two">
+    <div>
+      <div class="lab">two-minute wins <span class="n">— quick, low-cost</span></div>
+      <div class="todo-list">${rows(4)}</div>
+    </div>
+    <div>
+      <div class="lab">parking lot <span class="n">— someday, not today</span></div>
+      <div class="todo-list">${rows(4)}</div>
+    </div>
+  </section>
+  <aside class="perm">a list is a menu, not a contract. one tick is plenty. none is allowed.</aside>`;
+  return shell('the list', '§ daily · the list', 'The list.', false, body, 'todo', motif, dayN);
+}
 function brainDump(motif: number, dayN?: number): string {
   const body = `
   <section class="b"><div class="prompt">everything in your head — any order, no rules.</div></section>
@@ -508,7 +553,7 @@ function permissionPage(dayN: number, motif: number): string {
 
 const DAYS = 30;
 const MOTIFS = 6; // corner-sprig rotation
-const PAGE_TYPES: PageType[] = ['morning', 'brain', 'midday', 'evening'];
+const PAGE_TYPES: PageType[] = ['morning', 'todo', 'brain', 'midday', 'evening'];
 
 
 // ── Render + verify ─────────────────────────────────────────────────────────
@@ -543,6 +588,7 @@ async function renderAndVerify(browser: Browser, key: string, html: string): Pro
 
 function bodyFor(kind: PageType, motif: number, dayN: number): string {
   if (kind === 'morning') return morning(motif, dayN);
+  if (kind === 'todo') return todo(motif, dayN);
   if (kind === 'brain') return brainDump(motif, dayN);
   if (kind === 'midday') return midday(motif, dayN);
   return evening(motif, dayN);
@@ -623,7 +669,7 @@ async function main() {
 
 
   try {
-    // 1) render the 4 page-types × 6 motifs = 24 base pages (QA gated) + emit HTML.
+    // 1) render the 5 page-types × 6 motifs = 30 base pages (QA gated) + emit HTML.
     //    also emit one standalone single PDF per daily type (motif 0) so each
     //    page type can be opened on its own (issue: open individual pages too).
     for (const kind of PAGE_TYPES) {
@@ -669,8 +715,9 @@ async function main() {
     }
 
     // 4) index page — pages computed below; daily layout is
-    //    30×(4 daily + permission)=150, then index at 151, appendix from 152
-    const indexItems = APPENDIX.filter(a => apxPdf.has(a.name)).map((a, i) => ({ name: a.name, pp: 152 + i }));
+    //    30×(N daily + permission), then the index, then the appendix
+    const apxFirstPp = DAYS * (PAGE_TYPES.length + 1) + 2; // daily pages + index; appendix begins next (1-based)
+    const indexItems = APPENDIX.filter(a => apxPdf.has(a.name)).map((a, i) => ({ name: a.name, pp: apxFirstPp + i }));
     const indexHtml = v9Wrap(indexPage(indexItems), 'leaf', 0);
     const { pdf: ipdf, qa: iqa } = await renderAndVerify(browser, 'appendix-index', indexHtml);
     report.push(iqa);
@@ -680,14 +727,14 @@ async function main() {
     await browser.close();
   }
 
-  // QA gate (base 24 + permission + appendix 20 + index)
+  // QA gate (daily base + 30 permission + appendix + index)
   console.log('\n[v9] render-QA (daily base + permission + appendix + index):');
   let allPass = true;
   for (const q of report) { const ok = q.verdict === 'pass'; allPass = allPass && ok; if (!ok) console.log(`  ✗ ${q.key.padEnd(20)} overflow=${q.overflowPx}px footer=${q.footerCollision} minFont=${q.minFontPx}px → FAIL`); }
   console.log(`  ${allPass ? `✓ all ${report.length} pages pass` : '✗ some pages failed'} (A4 / overflow / footer / legibility)`);
   if (!allPass) { console.error('[v9] FAIL — fix overflow/collision/font before shipping.'); process.exit(2); }
 
-  // 5) compose the daily bundle: [day×(4+permission)]×30 + index + appendix
+  // 5) compose the daily bundle: [day×(5 daily + permission)]×30 + index + appendix
   const daily = await PDFDocument.create();
   const apxNames = APPENDIX.filter(a => apxPdf.has(a.name));
   for (let day = 1; day <= DAYS; day++) {
