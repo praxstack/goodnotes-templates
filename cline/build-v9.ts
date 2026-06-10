@@ -57,6 +57,9 @@ const CSS = `
   --ink:#1f2126; --soft:#3f4046; --quiet:#6E6658; --whisper:#B5AD9F;
   --sage:#4E6249; --sage-soft:#7e9b85; --sage-tint:rgba(78,98,73,.08); --sage-edge:rgba(78,98,73,.28);
   --clay:#c08866; --clay-tint:rgba(192,136,102,.10); --amber:#d6a45e;
+  /* per-page accent — defaults to sage; the tone-* classes shift it subtly */
+  --accent:#4E6249; --accent-tint:rgba(78,98,73,.08); --accent-edge:rgba(78,98,73,.28);
+
   --bleed:rgba(192,136,102,.22); --hair:rgba(31,33,38,.13); --dot:rgba(31,33,38,.20);
   --serif:'Fraunces','Iowan Old Style','Charter','Georgia',serif;
   --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
@@ -93,7 +96,7 @@ body{font-family:var(--sans);font-size:8.5pt;color:var(--soft);line-height:1.5;-
 .head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:.5px solid var(--whisper);padding-bottom:4mm;margin-bottom:6mm;position:relative;z-index:1}
 .kicker{font-family:var(--mono);font-size:6pt;font-weight:500;text-transform:uppercase;letter-spacing:.24em;color:var(--quiet);margin-bottom:3.5mm}
 h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;line-height:.9;letter-spacing:-.018em;color:var(--ink);font-variation-settings:"opsz" 144}
-.owed{display:inline-block;font-family:var(--mono);font-size:6pt;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);border:.5px solid var(--sage-edge);border-radius:999px;padding:.6mm 2mm;margin-left:3mm;vertical-align:middle;opacity:.8}
+.owed{display:inline-block;font-family:var(--mono);font-size:6pt;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:.5px solid var(--accent-edge);border-radius:999px;padding:.6mm 2mm;margin-left:3mm;vertical-align:middle;opacity:.8}
 .meta{font-family:var(--mono);font-size:6pt;letter-spacing:.08em;color:var(--whisper);text-align:right;line-height:1.9}
 .meta .dl{display:inline-block;width:22mm;border-bottom:.6px solid var(--whisper);height:3.5mm}
 .meta .days span{margin-left:1.3mm;opacity:.85}
@@ -101,7 +104,7 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 
 /* blocks */
 .b{margin-bottom:5mm;position:relative;z-index:1}
-.lab{font-family:var(--mono);font-size:6pt;font-weight:500;text-transform:uppercase;letter-spacing:.18em;color:var(--sage);margin-bottom:2mm}
+.lab{font-family:var(--mono);font-size:6pt;font-weight:500;text-transform:uppercase;letter-spacing:.18em;color:var(--accent);margin-bottom:2mm}
 .lab .n{color:var(--quiet);text-transform:none;letter-spacing:.01em;font-size:6.5pt;font-family:var(--sans)}
 .prompt{font-family:var(--serif);font-style:italic;font-size:12pt;color:var(--ink);font-variation-settings:"opsz" 60;line-height:1.3}
 .hint{font-size:7pt;color:var(--quiet);margin-top:.8mm;line-height:1.4}
@@ -114,34 +117,34 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 
 /* chips */
 .chips{display:flex;flex-wrap:wrap;gap:2mm;margin-top:1mm}
-.chip{font-size:8pt;color:var(--soft);border:.5px solid var(--sage-edge);border-radius:999px;padding:1.2mm 3.4mm;background:var(--sage-tint)}
+.chip{font-size:8pt;color:var(--soft);border:.5px solid var(--accent-edge);border-radius:999px;padding:1.2mm 3.4mm;background:var(--accent-tint)}
 
 /* pip scale */
 .scale{display:flex;gap:1.5mm;margin-top:1mm}
 .pip{width:4.4mm;height:4.4mm;border:.5px solid var(--whisper);border-radius:50%;font-family:var(--mono);font-size:6pt;color:var(--whisper);display:flex;align-items:center;justify-content:center}
 
 /* truth anchor + card drop */
-.anchor{background:var(--sage-tint);border-left:1.5px solid var(--sage);border-radius:0 2px 2px 0;padding:2.8mm 4mm}
-.anchor .al{font-family:var(--mono);font-size:6pt;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);opacity:.85;margin-bottom:1.2mm}
-.anchor .at{font-family:var(--serif);font-style:italic;font-size:11pt;color:var(--sage);font-variation-settings:"opsz" 40;line-height:1.32}
+.anchor{background:var(--accent-tint);border-left:1.5px solid var(--accent);border-radius:0 2px 2px 0;padding:2.8mm 4mm}
+.anchor .al{font-family:var(--mono);font-size:6pt;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.85;margin-bottom:1.2mm}
+.anchor .at{font-family:var(--serif);font-style:italic;font-size:11pt;color:var(--accent);font-variation-settings:"opsz" 40;line-height:1.32}
 /* card drop — sized to the actual square sticker (≈36mm), sits beside the truth */
 .drop{flex:0 0 36mm;border:.7px dashed var(--sage-edge);border-radius:4px;min-height:36mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.5mm;padding:2.5mm;background:rgba(255,255,255,.18)}
 .drop .ph{font-family:var(--serif);font-style:italic;font-size:15pt;color:var(--sage-soft);opacity:.5;line-height:1}
 .drop span{font-family:var(--mono);font-size:5.8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--whisper);line-height:1.45}
 
 /* frog — the focal block; todo-list feel: small heading · checkbox · roomy line */
-.frog{border:.6px solid var(--sage-edge);border-radius:4px;background:rgba(255,255,255,.28);padding:4mm 4.5mm}
+.frog{border:.6px solid var(--accent-edge);border-radius:4px;background:rgba(255,255,255,.28);padding:4mm 4.5mm}
 .fr{margin-bottom:3.6mm}.fr:last-child{margin-bottom:0}
-.fk{font-family:var(--mono);font-size:5.8pt;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);opacity:.85;margin-bottom:1.4mm}
+.fk{font-family:var(--mono);font-size:5.8pt;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);opacity:.85;margin-bottom:1.4mm}
 .fk .t{color:var(--quiet);text-transform:none;letter-spacing:0;font-size:5.8pt;opacity:.9}
 .frow{display:flex;gap:2.6mm;align-items:flex-start}
-.fbox{flex:0 0 4mm;width:4mm;height:4mm;border:.7px solid var(--sage-edge);border-radius:1.5px;margin-top:.3mm}
+.fbox{flex:0 0 4mm;width:4mm;height:4mm;border:.7px solid var(--accent-edge);border-radius:1.5px;margin-top:.3mm}
 .fline{flex:1;border-bottom:.5px solid var(--whisper);height:8mm}
 
 /* todo list — gentle optional capture page; cute rounded sage checkboxes */
 .todo-list{margin-top:1mm}
 .trow{display:flex;gap:3mm;align-items:flex-end;padding:1.2mm 0}
-.tbox{flex:0 0 4.6mm;width:4.6mm;height:4.6mm;border:.8px solid var(--sage-edge);border-radius:1.6px;background:var(--sage-tint);margin-bottom:1.2mm}
+.tbox{flex:0 0 4.6mm;width:4.6mm;height:4.6mm;border:.8px solid var(--accent-edge);border-radius:1.6px;background:var(--accent-tint);margin-bottom:1.2mm}
 .tline{flex:1;border-bottom:.5px solid var(--whisper);height:9mm}
 
 /* keeda guard */
@@ -169,7 +172,24 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 /* daily permission page — one big varying quote, centred */
 .bigq{font-family:var(--serif);font-style:italic;font-size:21pt;color:var(--ink);font-variation-settings:"opsz" 100;line-height:1.32;letter-spacing:-.01em}
 .attr{font-family:var(--mono);font-size:8pt;letter-spacing:.1em;color:var(--quiet);margin-top:5mm}
+
+/* ── per-page colour personality (subtle, frontend-design lens) ──────────────
+   Each daily page type gets its own muted accent that only touches the
+   *signature* bits (section labels, chips, checkboxes, the truth anchor, the
+   eyebrow + header hairline). Ink, body text, and the warm clay "permission"
+   footer stay constant across every page so the voice still feels like one
+   journal. Tool/appendix pages carry no tone class → accent stays sage. */
+.tone-morning{--accent:#a96f33;--accent-tint:rgba(169,111,51,.09);--accent-edge:rgba(169,111,51,.32)}
+.tone-todo{--accent:#4E6249;--accent-tint:rgba(78,98,73,.09);--accent-edge:rgba(78,98,73,.30)}
+.tone-brain{--accent:#5b6b9e;--accent-tint:rgba(91,107,158,.09);--accent-edge:rgba(91,107,158,.32)}
+.tone-midday{--accent:#b5603f;--accent-tint:rgba(181,96,63,.09);--accent-edge:rgba(181,96,63,.32)}
+.tone-evening{--accent:#6b5a86;--accent-tint:rgba(107,90,134,.10);--accent-edge:rgba(107,90,134,.34)}
+.tone-permission{--accent:#a85d63;--accent-tint:rgba(168,93,99,.09);--accent-edge:rgba(168,93,99,.32)}
+/* the hue only colours the eyebrow + header rule on toned (daily) pages */
+.page[class*="tone-"] .kicker{color:var(--accent);opacity:.92}
+.page[class*="tone-"] .head{border-bottom-color:var(--accent-edge)}
 `;
+
 
 
 // ── v9 beautification: faint page-content-aware watermarks ──────────────────
@@ -365,11 +385,12 @@ function scale(max = 10): string { let s = ''; for (let i = 0; i <= max; i++) s 
 function shell(spine: string, kicker: string, title: string, owed: boolean, body: string, kind: PageType, motif: number, dayN?: number): string {
   const badge = owed ? '<span class="owed">owed</span>' : '<span class="owed" style="color:var(--whisper);border-color:var(--hair)">optional</span>';
   return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">${FONTS}<style>${CSS}</style></head>
-<body><main class="page" role="document">
+<body><main class="page tone-${kind}" role="document">
   <div class="bind" aria-hidden="true"></div>
   <div class="bleed-layer" aria-hidden="true"><div class="wm">${watermark(kind)}</div><div class="sprig">${sprig(motif)}</div></div>
   <div class="spine" aria-hidden="true">${spine}</div>
   <header class="head"><div><div class="kicker">${kicker}</div><h1>${title}${badge}</h1></div>${meta(dayN)}</header>
+
   ${body}
   <a href="#" class="crisis">[crisis]</a>
 </main></body></html>`;
@@ -542,9 +563,10 @@ function permissionPage(dayN: number, motif: number): string {
   </section>
   <aside class="perm">one slip for today. read it when the day asks you to earn your own worth. you don\u2019t.</aside>`;
   const inner = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">${FONTS}<style>${CSS}</style></head>
-<body><main class="page" role="document">
+<body><main class="page tone-permission" role="document">
   <div class="bind" aria-hidden="true"></div>
   <div class="spine" aria-hidden="true">permission · day ${String(dayN).padStart(2, '0')}</div>
+
   <header class="head"><div><div class="kicker">§ daily · permission</div><h1>Permission.</h1></div>${meta(dayN)}</header>
   ${body}
 </main></body></html>`;
