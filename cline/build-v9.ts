@@ -165,9 +165,11 @@ h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:33pt;lin
 /* two-col */
 .two{display:flex;gap:5mm}.two>div{flex:1;min-width:0}
 
-/* permission footer */
-.perm{margin-top:auto;background:var(--clay-tint);border-left:1.5px solid var(--clay);border-radius:0 2px 2px 0;padding:2.6mm 4mm;
-  font-family:var(--serif);font-style:italic;font-size:7.5pt;color:#8a5e44;font-variation-settings:"opsz" 14;line-height:1.45;position:relative;z-index:1}
+/* permission footer — the biggest colour block; picks up the page accent so
+   each page-type reads as its own colour (defaults to sage on untoned pages) */
+.perm{margin-top:auto;background:var(--accent-tint);border-left:1.5px solid var(--accent);border-radius:0 2px 2px 0;padding:2.6mm 4mm;
+  font-family:var(--serif);font-style:italic;font-size:7.5pt;color:var(--accent);font-variation-settings:"opsz" 14;line-height:1.45;position:relative;z-index:1}
+
 
 /* daily permission page — one big varying quote, centred */
 .bigq{font-family:var(--serif);font-style:italic;font-size:21pt;color:var(--ink);font-variation-settings:"opsz" 100;line-height:1.32;letter-spacing:-.01em}
