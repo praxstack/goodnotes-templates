@@ -1,11 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Upward sun ray fan -->
-  <g stroke="#a89bbf" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M48 200 A88 88 0 0 1 208 200"/>
-    <line x1="128" y1="200" x2="128" y2="48"/>
-    <line x1="128" y1="200" x2="48" y2="120"/>
-    <line x1="128" y1="200" x2="208" y2="120"/>
-    <line x1="128" y1="200" x2="80" y2="80"/>
-    <line x1="128" y1="200" x2="176" y2="80"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#a89bbf" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><path d="M48 200 A88 88 0 0 1 208 200"/><line x1="128" x2="128" y1="200" y2="48"/><line x1="128" x2="48" y1="200" y2="120"/><line x1="128" x2="208" y1="200" y2="120"/><line x1="128" x2="80" y1="200" y2="80"/><line x1="128" x2="176" y1="200" y2="80"/></g></svg>
