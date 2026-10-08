@@ -139,7 +139,7 @@ function violations(text: string, meta = ''): string[] {
   for (const m of text.matchAll(MED_ENTRY)) {
     if (!PLACEHOLDER_MEDICATION.test(m[1].trim())) found.add('medication-name');
   }
-  if (/\/Author\b|<dc:creator>/.test(meta)) found.add('author-metadata');
+  if (/\/Author\b|<dc:creator[\s>]/.test(meta)) found.add('author-metadata');
   return [...found].sort();
 }
 
@@ -194,6 +194,12 @@ describe('PII scanner self-test (no external tools)', () => {
     expect(violations('ask Dr. Example Notreal')).toEqual(['clinician-name']);
     expect(violations('DOCTOR PLACEHOLDER NOTREAL')).toEqual(['clinician-name']);
     expect(violations('ask Dr. Example about it')).toEqual([]);
+  });
+
+  it('flags an XMP dc:creator element that carries attributes', () => {
+    const xmp = '<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Seq><rdf:li>Someone</rdf:li></rdf:Seq></dc:creator>';
+    expect(violations('', xmp)).toEqual(['author-metadata']);
+    expect(violations('', '<dc:creator\n><rdf:Seq/></dc:creator>')).toEqual(['author-metadata']);
   });
 
   it('flags a non-placeholder medication entry without a dose', () => {
