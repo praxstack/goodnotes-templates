@@ -6,6 +6,7 @@ import { describe, it, expect } from 'vitest';
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -45,5 +46,24 @@ describe('vulnerable direct dependencies (GNT-003)', () => {
     ['puppeteer', [25, 0, 0]],
   ])('%s is locked at or above the patched version', (name, min) => {
     expect(atLeast(ver(name as string), min as number[])).toBe(true);
+  });
+});
+
+/** Review m2: with engine-strict=true, the engines floor must satisfy every installed package. */
+describe('engines.node floor', () => {
+  const semver = createRequire(import.meta.url)('semver') as {
+    minVersion(range: string): { version: string } | null;
+    satisfies(version: string, range: string): boolean;
+  };
+  const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+  const lock = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+
+  it('the lowest Node allowed by package.json satisfies every non-optional locked package', () => {
+    const floor = semver.minVersion(pkg.engines.node)?.version;
+    expect(floor).toBeDefined();
+    const excluded = Object.entries<{ engines?: { node?: string }; optional?: boolean }>(lock.packages)
+      .filter(([k, v]) => k && !v.optional && v.engines?.node && !semver.satisfies(floor!, v.engines.node))
+      .map(([k, v]) => `${k} (${v.engines!.node})`);
+    expect(excluded).toEqual([]);
   });
 });
