@@ -30,6 +30,10 @@ describe('generate.yml (GNT-002)', () => {
     }
   });
 
+  it('release notes do not promise stickers (no longer produced)', () => {
+    expect(wf).not.toMatch(/sticker/i);
+  });
+
   it('artifact path matches the renderer output dir', () => {
     expect(wf).toContain('dist/packs/');
     expect(fs.readFileSync(path.join(root, 'scripts/render-all-packs.ts'), 'utf8')).toContain('dist/packs');

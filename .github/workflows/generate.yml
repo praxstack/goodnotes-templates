@@ -105,7 +105,7 @@ jobs:
           body: |
             ## Pre-built Assets
 
-            Download `goodnotes-templates-assets.zip` for ready-to-use templates and stickers.
+            Download `goodnotes-templates-assets.zip` for ready-to-use template PDFs.
 
             **Contents:**
             - One ready-to-use PDF per template pack, rendered by `scripts/render-all-packs.ts`
