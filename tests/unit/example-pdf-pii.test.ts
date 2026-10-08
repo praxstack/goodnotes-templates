@@ -4,7 +4,7 @@
  * The checks are structural, so the test never needs the real values in the
  * repo (not even hashed: short tokens are trivially dictionary-reversible):
  *   - no medication dose pattern (mg, mcg, µg, ml, IU),
- *   - "Dr." / "Doctor" may only be followed by an allow-listed placeholder,
+ *   - "Dr." / "Doctor" (any case) may only be followed by an allow-listed placeholder,
  *   - no Author / XMP creator metadata.
  *
  * Text comes from two independent extractors and every check runs on both:
@@ -124,7 +124,7 @@ function scanPdf(raw: Buffer): { text: string; meta: string } {
 function violations(text: string, meta = ''): string[] {
   const found = new Set<string>();
   if (/\b\d+(?:[.,]\d+)?\s?(?:mg|mcg|µg|ug|ml|iu)\b/i.test(text)) found.add('dose');
-  for (const m of text.matchAll(/\b(?:Dr|Doctor)\.?[ \t]+([A-Za-z][\w'-]*)/g)) {
+  for (const m of text.matchAll(/\b(?:Dr|Doctor)\.?[ \t]+([A-Za-z][\w'-]*)/gi)) {
     if (!PLACEHOLDER_CLINICIANS.has(m[1].toLowerCase())) found.add('clinician-name');
   }
   if (/\/Author\b|<dc:creator>/.test(meta)) found.add('author-metadata');
@@ -170,6 +170,12 @@ describe('PII scanner self-test (no external tools)', () => {
     const { text, meta } = scanPdf(Buffer.from(pdf, 'latin1'));
     expect(text).toContain(FAKE);
     expect(violations(text, meta)).toEqual(['clinician-name', 'dose']);
+  });
+
+  it('matches clinician titles in any case', () => {
+    expect(violations('ask dr. Notreal')).toEqual(['clinician-name']);
+    expect(violations('ASK DOCTOR NOTREAL')).toEqual(['clinician-name']);
+    expect(violations('ask doctor example')).toEqual([]);
   });
 
   it('allows the placeholder vocabulary', () => {
