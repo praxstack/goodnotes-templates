@@ -4,8 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/**'
+      - 'packages/**'
+      - 'scripts/render-all-packs.ts'
       - 'package.json'
+      - 'package-lock.json'
   workflow_dispatch:
 
 permissions:
@@ -27,27 +29,20 @@ jobs:
 
       - run: npm ci
 
-      - name: Generate all assets (pages + stickers)
-        run: npx tsx src/cli/index.ts generate --pages --stickers --verbose
+      - name: Render all packs to PDF
+        run: npx tsx scripts/render-all-packs.ts
 
-      - name: Show manifest summary
+      - name: Show render summary
         run: |
-          echo "=== Generation Manifest ==="
-          cat output/manifest.json | node -e "
-            const m = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
-            console.log('Files:', m.totalFiles);
-            console.log('Size:', m.totalSizeMB, 'MB');
-            console.log('Duration:', m.duration);
-          "
+          echo "=== Rendered packs ==="
+          ls -l dist/packs/*.pdf
+          echo "PDF count: $(ls dist/packs/*.pdf | wc -l)"
 
       - name: Upload assets as artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: goodnotes-templates-assets
-          path: |
-            output/pages/
-            output/stickers/
-            output/manifest.json
+          path: dist/packs/
           retention-days: 90
 
   release:
@@ -65,7 +60,7 @@ jobs:
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: goodnotes-templates-assets
-          path: output/
+          path: dist/packs/
 
       - name: Generate SBOM (CycloneDX)
         # FIND-0014 companion / A+ polish — ships an SBOM + SLSA provenance
@@ -79,8 +74,8 @@ jobs:
 
       - name: Create release bundle
         run: |
-          cd output
-          zip -r ../goodnotes-templates-assets.zip pages/ stickers/ manifest.json
+          cd dist/packs
+          zip -r ../../goodnotes-templates-assets.zip .
 
       # FIND-0010: sign the release ZIP with sigstore/cosign (keyless via OIDC).
       # Verify downstream with: cosign verify-blob --certificate-identity-regexp \
@@ -113,9 +108,7 @@ jobs:
             Download `goodnotes-templates-assets.zip` for ready-to-use templates and stickers.
 
             **Contents:**
-            - 7 page types × 8 themes × 3 variants = 100+ PDF pages
-            - 15 sticker types × 8 themes = 700+ PNG stickers (300 DPI, transparent)
-            - manifest.json with file metadata
+            - One ready-to-use PDF per template pack, rendered by `scripts/render-all-packs.ts`
 
             **How to use:**
             1. Download and unzip
