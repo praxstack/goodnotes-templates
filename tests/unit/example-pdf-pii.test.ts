@@ -4,7 +4,8 @@
  * The checks are structural, so the test never needs the real values in the
  * repo (not even hashed: short tokens are trivially dictionary-reversible):
  *   - no medication dose pattern (mg, mcg, µg, ml, IU),
- *   - "Dr." / "Doctor" (any case) may only be followed by an allow-listed placeholder,
+ *   - "Dr." / "Doctor" (any case) may only be followed by an allow-listed placeholder
+ *     that ends the name (no capitalised surname after it),
  *   - a medication-log entry ("<name>: [ ] AM") must name a placeholder medication,
  *   - no Author / XMP creator metadata.
  *
@@ -129,8 +130,11 @@ function scanPdf(raw: Buffer): { text: string; meta: string } {
 function violations(text: string, meta = ''): string[] {
   const found = new Set<string>();
   if (/\b\d+(?:[.,]\d+)?\s?(?:mg|mcg|µg|ug|ml|iu)\b/i.test(text)) found.add('dose');
-  for (const m of text.matchAll(/\b(?:Dr|Doctor)\.?[ \t]+([A-Za-z][\w'-]*)/gi)) {
-    if (!PLACEHOLDER_CLINICIANS.has(m[1].toLowerCase())) found.add('clinician-name');
+  for (const m of text.matchAll(/\b(?:Dr|Doctor)\.?[ \t]+([A-Za-z][\w'-]*)(?:[ \t]+([A-Za-z][\w'-]*))?/gi)) {
+    // The placeholder must end the name: a capitalised next word is a surname.
+    if (!PLACEHOLDER_CLINICIANS.has(m[1].toLowerCase()) || /^[A-Z]/.test(m[2] ?? '')) {
+      found.add('clinician-name');
+    }
   }
   for (const m of text.matchAll(MED_ENTRY)) {
     if (!PLACEHOLDER_MEDICATION.test(m[1].trim())) found.add('medication-name');
@@ -184,6 +188,12 @@ describe('PII scanner self-test (no external tools)', () => {
     expect(violations('ask dr. Notreal')).toEqual(['clinician-name']);
     expect(violations('ASK DOCTOR NOTREAL')).toEqual(['clinician-name']);
     expect(violations('ask doctor example')).toEqual([]);
+  });
+
+  it('flags a surname after a placeholder clinician name', () => {
+    expect(violations('ask Dr. Example Notreal')).toEqual(['clinician-name']);
+    expect(violations('DOCTOR PLACEHOLDER NOTREAL')).toEqual(['clinician-name']);
+    expect(violations('ask Dr. Example about it')).toEqual([]);
   });
 
   it('flags a non-placeholder medication entry without a dose', () => {
