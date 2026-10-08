@@ -37,6 +37,19 @@ jobs:
       - name: Render all packs to PDF
         run: npx tsx scripts/render-all-packs.ts
 
+      # The prax-journal manifest entry is a single Today page. Replace that
+      # render with the complete Praxis Ledger (one bookmarked month, ~130 pp).
+      # CI has no profile.local.json (gitignored), so personal fields print blank.
+      - name: Build the complete Praxis Ledger (prax-journal)
+        run: |
+          read -r from to < <(node -e '
+            const d = new Date();
+            const iso = (t) => t.toISOString().slice(0, 10);
+            const y = d.getUTCFullYear(), m = d.getUTCMonth();
+            console.log(iso(new Date(Date.UTC(y, m, 1))), iso(new Date(Date.UTC(y, m + 1, 0))));
+          ')
+          npx tsx scripts/generate-journal.ts --from "$from" --to "$to" --out dist/packs/prax-journal.pdf
+
       - name: Show render summary
         run: |
           echo "=== Rendered packs ==="
@@ -120,6 +133,7 @@ jobs:
 
             **Contents:**
             - One ready-to-use PDF per template pack, rendered by `scripts/render-all-packs.ts`
+            - `prax-journal.pdf` is the complete Praxis Ledger for one month (bookmarked, ~130 pages), built by `scripts/generate-journal.ts`
 
             **How to use:**
             1. Download and unzip

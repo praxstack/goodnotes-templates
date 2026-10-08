@@ -48,7 +48,7 @@ describe('generate.yml release gating (codex P1)', () => {
     on: { push: { tags?: string[] } };
     jobs: { generate: Job; release: Job };
   };
-  const { release } = doc.jobs;
+  const { generate, release } = doc.jobs;
 
   it('publishes a release only from a pushed v* tag, never from a main push', () => {
     expect(doc.on.push.tags).toContain('v*');
@@ -65,6 +65,18 @@ describe('generate.yml release gating (codex P1)', () => {
     expect(publish?.with?.overwrite_files).toBe(false);
     const checkIdx = release.steps.indexOf(check as Step);
     expect(checkIdx).toBeLessThan(release.steps.indexOf(publish as Step));
+  });
+
+  it('replaces the single-page prax-journal render with the full generated journal', () => {
+    const renderIdx = generate.steps.findIndex((s) => s.run?.includes('scripts/render-all-packs.ts'));
+    const journalIdx = generate.steps.findIndex((s) =>
+      /npx tsx scripts\/generate-journal\.ts .*--out dist\/packs\/prax-journal\.pdf/.test(s.run ?? ''),
+    );
+    expect(renderIdx).toBeGreaterThan(-1);
+    expect(journalIdx).toBeGreaterThan(renderIdx);
+    const uploadIdx = generate.steps.findIndex((s) => s.uses?.startsWith('actions/upload-artifact@'));
+    expect(journalIdx).toBeLessThan(uploadIdx);
+    expect(generate.steps[journalIdx].run).not.toMatch(/--profile/);
   });
 });
 
