@@ -196,6 +196,12 @@ describe('PII scanner self-test (no external tools)', () => {
     expect(violations('ask Dr. Example about it')).toEqual([]);
   });
 
+  it('flags leading-decimal doses and both Unicode micro signs', () => {
+    expect(violations('take .5 mg')).toEqual(['dose']);
+    expect(violations('take 10 µg')).toEqual(['dose']);
+    expect(violations('take 10 μg')).toEqual(['dose']);
+  });
+
   it('flags an XMP dc:creator element that carries attributes', () => {
     const xmp = '<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Seq><rdf:li>Someone</rdf:li></rdf:Seq></dc:creator>';
     expect(violations('', xmp)).toEqual(['author-metadata']);
