@@ -1,30 +1,33 @@
 /**
  * GNT-019 — public example PDFs must not contain real health data.
  *
- * The deny-list holds SHA-256 hashes of lowercase tokens so the real values are
- * not re-published in the repo by the very test that guards them.
+ * The checks are structural, so the test never needs the real values in the
+ * repo (not even hashed: short tokens are trivially dictionary-reversible):
+ *   - no medication dose pattern (mg, mcg, µg, ml, IU),
+ *   - "Dr." / "Doctor" may only be followed by an allow-listed placeholder,
+ *   - no Author / XMP creator metadata.
+ *
+ * Text comes from two independent extractors and every check runs on both:
+ *   - a built-in stream scanner (raw, Flate, ASCII85+Flate; literal and hex
+ *     strings), which needs no external tool, and
+ *   - poppler's pdftotext, which also handles embedded-font (CID) text.
+ * pdftotext is mandatory on CI (ci.yml installs poppler-utils); locally the
+ * built-in scanner still runs when it is missing.
  */
 import { describe, it, expect } from 'vitest';
-import { createHash } from 'node:crypto';
-import { inflateSync } from 'node:zlib';
+import { deflateSync, inflateSync } from 'node:zlib';
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PDFDocument, StandardFonts } from 'pdf-lib';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-const DENY_SHA256 = new Set([
-  '3ee62bcac62bc05a3ae82db65b3d7b15dbc9d5e3533a01b463206d6a2ef1141c',
-  'ead7fd8aec5ed41adcc0898a60f5acb0d86c997707250940bd8cd0d4ff070bba',
-  '1d6ddded77ccebe66d1cf0cb98bf1d18f29415995a735150da586993103124db',
-  'fcc68692865e6b40f80d0dd1eaa86a4528bae11ec22528fc463f975427e002b5',
-  'c3f34a79c9bc27e6979ebbf0a564d559b2393d248e6c3ae87799bb2ca8d90f7e',
-  'c48b1f773456fde18ba13960988ff2623921528b63d6188eb1bc62e8a7f858cc',
-  'fc1a8fc81824ab1600eda9dd118c6550b281ed3eedb2f9254df1f39c7d57caae',
-]);
+/** The only names allowed after a clinician title in example PDFs. */
+const PLACEHOLDER_CLINICIANS = new Set(['example', 'placeholder']);
 
-function ascii85(s: string): Buffer {
+function ascii85Decode(s: string): Buffer {
   const body = s.replace(/\s+/g, '').replace(/^<~/, '').replace(/~>.*$/, '');
   const out: number[] = [];
   let group: number[] = [];
@@ -43,30 +46,97 @@ function ascii85(s: string): Buffer {
   return Buffer.from(out);
 }
 
-/** Best-effort text recovery from raw / Flate / ASCII85+Flate PDF streams. */
-function pdfText(file: string): string {
-  const raw = fs.readFileSync(file);
-  const latin = raw.toString('latin1');
-  let text = latin;
-  const re = /stream\r?\n([\s\S]*?)\r?\nendstream/g;
-  for (const m of latin.matchAll(re)) {
-    const dictStart = latin.lastIndexOf('<<', m.index);
-    const dict = latin.slice(dictStart, m.index);
-    let buf: Buffer = Buffer.from(m[1], 'latin1');
-    try {
-      if (/ASCII85Decode/.test(dict)) buf = ascii85(m[1]);
-      if (/FlateDecode/.test(dict)) buf = inflateSync(buf);
-      text += '\n' + buf.toString('latin1');
-    } catch { /* not decodable: ignore */ }
+function ascii85Encode(buf: Buffer): string {
+  let out = '';
+  for (let i = 0; i < buf.length; i += 4) {
+    const chunk = [0, 1, 2, 3].map((k) => buf[i + k] ?? 0);
+    const n = Math.min(4, buf.length - i);
+    let v = ((chunk[0] << 24) | (chunk[1] << 16) | (chunk[2] << 8) | chunk[3]) >>> 0;
+    if (v === 0 && n === 4) { out += 'z'; continue; }
+    const digits: string[] = [];
+    for (let k = 0; k < 5; k++) { digits.unshift(String.fromCharCode((v % 85) + 33)); v = Math.floor(v / 85); }
+    out += digits.slice(0, n + 1).join('');
   }
-  return text;
+  return out + '~>';
 }
 
-/** Prefer poppler's pdftotext (handles embedded-font text); fall back to raw stream scan. */
-function extractedText(file: string): { text: string; accurate: boolean } {
+/** Decode a PDF hex string body (UTF-16BE when it has a BOM, else single-byte). */
+function hexText(hex: string): string {
+  const clean = hex.replace(/\s+/g, '');
+  const buf = Buffer.from(clean.length % 2 ? clean + '0' : clean, 'hex');
+  if (buf[0] === 0xfe && buf[1] === 0xff) return buf.subarray(2).swap16().toString('utf16le');
+  return buf.toString('latin1');
+}
+
+/** Unescape a PDF literal string body. */
+function literalText(s: string): string {
+  return s.replace(/\\([nrtbf()\\]|[0-7]{1,3})/g, (_m, e: string) => {
+    if (/^[0-7]+$/.test(e)) return String.fromCharCode(parseInt(e, 8));
+    return ({ n: '\n', r: '\r', t: '\t', b: '\b', f: '\f' } as Record<string, string>)[e] ?? e;
+  });
+}
+
+const STR = String.raw`<[0-9A-Fa-f\s]*>|\((?:\\.|[^\\)])*\)`;
+
+function decodeString(tok: string): string {
+  return tok.startsWith('<') ? hexText(tok.slice(1, -1)) : literalText(tok.slice(1, -1));
+}
+
+/** Text shown by Tj / ' / " / TJ operators in a content stream, one string per line. */
+function shownText(content: string): string[] {
+  const out: string[] = [];
+  const show = new RegExp(String.raw`(${STR})\s*(?:Tj|'|")|\[((?:${STR}|[^\]<(])*)\]\s*TJ`, 'g');
+  for (const m of content.matchAll(show)) {
+    if (m[1]) out.push(decodeString(m[1]));
+    else out.push([...m[2].matchAll(new RegExp(STR, 'g'))].map((t) => decodeString(t[0])).join(''));
+  }
+  return out;
+}
+
+/**
+ * Built-in extractor, needs no external tool. `text` is the shown text of
+ * every content stream; `meta` is the raw file plus every decoded stream
+ * (object streams, XMP), used only for metadata keys.
+ */
+function scanPdf(raw: Buffer): { text: string; meta: string } {
+  const latin = raw.toString('latin1');
+  const meta: string[] = [latin];
+  const text: string[] = [];
+  // ReportLab ends ASCII85 streams with `~>endstream` (no EOL), so allow none.
+  for (const m of latin.matchAll(/stream\r?\n([\s\S]*?)\s*endstream/g)) {
+    const dict = latin.slice(latin.lastIndexOf('<<', m.index), m.index);
+    // Images and embedded font programs carry no text; scanning them is slow and noisy.
+    if (/\/Subtype\s*\/(?:Image|Type1C|CIDFontType0C|OpenType)\b|\/Length[123]\b/.test(dict)) continue;
+    let decoded: string;
+    try {
+      let buf: Buffer = Buffer.from(m[1], 'latin1');
+      if (/ASCII85Decode/.test(dict)) buf = ascii85Decode(m[1]);
+      if (/FlateDecode/.test(dict)) buf = inflateSync(buf);
+      decoded = buf.toString('latin1');
+    } catch { continue; /* not decodable: ignore */ }
+    meta.push(decoded);
+    text.push(...shownText(decoded));
+  }
+  return { text: text.join('\n'), meta: meta.join('\n') };
+}
+
+/** Categories of problems found; never the matched values. */
+function violations(text: string, meta = ''): string[] {
+  const found = new Set<string>();
+  if (/\b\d+(?:[.,]\d+)?\s?(?:mg|mcg|µg|ug|ml|iu)\b/i.test(text)) found.add('dose');
+  for (const m of text.matchAll(/\b(?:Dr|Doctor)\.?[ \t]+([A-Za-z][\w'-]*)/g)) {
+    if (!PLACEHOLDER_CLINICIANS.has(m[1].toLowerCase())) found.add('clinician-name');
+  }
+  if (/\/Author\b|<dc:creator>/.test(meta)) found.add('author-metadata');
+  return [...found].sort();
+}
+
+const pdftotextAvailable = !spawnSync('pdftotext', ['-v']).error;
+
+function pdftotext(file: string): string {
   const r = spawnSync('pdftotext', ['-q', file, '-'], { encoding: 'utf8' });
-  if (r.status === 0 && !r.error) return { text: r.stdout, accurate: true };
-  return { text: pdfText(file), accurate: false };
+  if (r.status !== 0) throw new Error(`pdftotext failed on ${path.basename(file)} (status ${r.status})`);
+  return r.stdout;
 }
 
 function examplePdfs(dir: string): string[] {
@@ -79,6 +149,35 @@ function examplePdfs(dir: string): string[] {
   return out;
 }
 
+describe('PII scanner self-test (no external tools)', () => {
+  const FAKE = 'Fakedrug 10 mg at night, ask Dr. Notreal';
+
+  it('flags dose, clinician and author in a pdf-lib PDF (hex strings, object streams)', async () => {
+    const doc = await PDFDocument.create();
+    const page = doc.addPage();
+    page.drawText(FAKE, { x: 40, y: 700, font: await doc.embedFont(StandardFonts.Helvetica), size: 12 });
+    doc.setAuthor('Someone');
+    const bytes = Buffer.from(await doc.save());
+    const { text, meta } = scanPdf(bytes);
+    expect(text).toContain(FAKE);
+    expect(violations(text, meta)).toEqual(['author-metadata', 'clinician-name', 'dose']);
+  });
+
+  it('flags text in a ReportLab-style ASCII85+Flate stream ending in "~>endstream"', () => {
+    const content = ascii85Encode(deflateSync(Buffer.from(`BT /F1 12 Tf 40 700 Td (${FAKE}) Tj ET`, 'latin1')));
+    const pdf = `%PDF-1.4\n4 0 obj\n<< /Filter [ /ASCII85Decode /FlateDecode ] /Length ${content.length} >>\nstream\n${content}endstream\nendobj\n%%EOF\n`;
+    expect(pdf).toContain('~>endstream');
+    const { text, meta } = scanPdf(Buffer.from(pdf, 'latin1'));
+    expect(text).toContain(FAKE);
+    expect(violations(text, meta)).toEqual(['clinician-name', 'dose']);
+  });
+
+  it('allows the placeholder vocabulary', () => {
+    expect(violations('Example Medication A: [ ] AM  (clinician advice placeholder: Dr. Example)')).toEqual([]);
+    expect(violations('Walk 200 steps/hour; 4+ glasses of water; 10 min break')).toEqual([]);
+  });
+});
+
 describe('example PDFs contain no real health data (GNT-019)', () => {
   const pdfs = examplePdfs(path.join(root, 'examples'));
 
@@ -86,12 +185,15 @@ describe('example PDFs contain no real health data (GNT-019)', () => {
     expect(pdfs.length).toBeGreaterThan(0);
   });
 
+  it('pdftotext is installed on CI (no silent fallback)', () => {
+    if (process.env.CI) expect(pdftotextAvailable, 'install poppler-utils').toBe(true);
+  });
+
   it.each(pdfs.map((p) => [path.relative(root, p), p]))('%s', (_rel, file) => {
-    const { text, accurate } = extractedText(file);
-    const hits = (text.toLowerCase().match(/[a-z]{4,}/g) ?? []).filter((w) =>
-      DENY_SHA256.has(createHash('sha256').update(w).digest('hex')),
-    );
-    expect(hits.length, 'denied token(s) present (values withheld)').toBe(0);
-    if (accurate) expect(/\b\d+(?:\.\d+)?\s?mg\b/i.test(text), 'dose pattern present').toBe(false);
+    const raw = fs.readFileSync(file);
+    // Values are withheld from failure output on purpose: only categories are reported.
+    const { text, meta } = scanPdf(raw);
+    expect(violations(text, meta), 'built-in scanner').toEqual([]);
+    if (pdftotextAvailable) expect(violations(pdftotext(file)), 'pdftotext').toEqual([]);
   });
 });

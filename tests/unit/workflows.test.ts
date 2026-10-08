@@ -35,3 +35,14 @@ describe('generate.yml (GNT-002)', () => {
     expect(fs.readFileSync(path.join(root, 'scripts/render-all-packs.ts'), 'utf8')).toContain('dist/packs');
   });
 });
+
+describe('ci.yml', () => {
+  const ci = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
+
+  it('installs poppler-utils before the unit tests (example PDF PII test needs pdftotext)', () => {
+    const install = ci.search(/apt-get install[^\n]*poppler-utils/);
+    const tests = ci.indexOf('npm test');
+    expect(install).toBeGreaterThan(-1);
+    expect(install).toBeLessThan(tests);
+  });
+});
