@@ -5,6 +5,7 @@
  * repo (not even hashed: short tokens are trivially dictionary-reversible):
  *   - no medication dose pattern (mg, mcg, µg, ml, IU),
  *   - "Dr." / "Doctor" (any case) may only be followed by an allow-listed placeholder,
+ *   - a medication-log entry ("<name>: [ ] AM") must name a placeholder medication,
  *   - no Author / XMP creator metadata.
  *
  * Text comes from two independent extractors and every check runs on both:
@@ -26,6 +27,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 
 /** The only names allowed after a clinician title in example PDFs. */
 const PLACEHOLDER_CLINICIANS = new Set(['example', 'placeholder']);
+
+/** A medication-log entry: "<name>: [ ] AM|PM|Taken". The name must be a placeholder. */
+const MED_ENTRY = /^[ \t]*([^:\n]+?)[ \t]*:[ \t]*\[[ \t]?\][ \t]*(?:AM|PM|Taken|Noon|Night)\b/gim;
+const PLACEHOLDER_MEDICATION = /^Example Medication [A-Z]$/;
 
 function ascii85Decode(s: string): Buffer {
   const body = s.replace(/\s+/g, '').replace(/^<~/, '').replace(/~>.*$/, '');
@@ -127,6 +132,9 @@ function violations(text: string, meta = ''): string[] {
   for (const m of text.matchAll(/\b(?:Dr|Doctor)\.?[ \t]+([A-Za-z][\w'-]*)/gi)) {
     if (!PLACEHOLDER_CLINICIANS.has(m[1].toLowerCase())) found.add('clinician-name');
   }
+  for (const m of text.matchAll(MED_ENTRY)) {
+    if (!PLACEHOLDER_MEDICATION.test(m[1].trim())) found.add('medication-name');
+  }
   if (/\/Author\b|<dc:creator>/.test(meta)) found.add('author-metadata');
   return [...found].sort();
 }
@@ -178,8 +186,14 @@ describe('PII scanner self-test (no external tools)', () => {
     expect(violations('ask doctor example')).toEqual([]);
   });
 
+  it('flags a non-placeholder medication entry without a dose', () => {
+    expect(violations('Fakedrugname: [ ] AM  [ ] PM')).toEqual(['medication-name']);
+    expect(violations('Morning\n  fakedrugname : [] taken')).toEqual(['medication-name']);
+  });
+
   it('allows the placeholder vocabulary', () => {
     expect(violations('Example Medication A: [ ] AM  (clinician advice placeholder: Dr. Example)')).toEqual([]);
+    expect(violations('Example Medication C: [ ] Taken\nTarget bedtime: __:__   [ ] Screen off')).toEqual([]);
     expect(violations('Walk 200 steps/hour; 4+ glasses of water; 10 min break')).toEqual([]);
   });
 });
