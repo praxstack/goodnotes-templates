@@ -10,6 +10,7 @@ on:
     paths:
       - 'packages/**'
       - 'scripts/render-all-packs.ts'
+      - 'scripts/generate-journal.ts'
       - 'package.json'
       - 'package-lock.json'
   workflow_dispatch:

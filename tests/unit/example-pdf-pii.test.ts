@@ -108,15 +108,26 @@ function scanPdf(raw: Buffer): { text: string; meta: string } {
   const latin = raw.toString('latin1');
   const meta: string[] = [latin];
   const text: string[] = [];
-  // ReportLab ends ASCII85 streams with `~>endstream` (no EOL), so allow none.
-  for (const m of latin.matchAll(/stream\r?\n([\s\S]*?)\s*endstream/g)) {
+  // /Length counts encoded bytes, including trailing whitespace and embedded tokens.
+  const streams = /\bstream(?:\r\n|\n|\r)/g;
+  let m: RegExpExecArray | null;
+  while ((m = streams.exec(latin))) {
     const dict = latin.slice(latin.lastIndexOf('<<', m.index), m.index);
+    const lengthRef = /\/Length\s+(\d+)(?:\s+(\d+)\s+R\b)?\b/.exec(dict);
+    const length = lengthRef?.[2] === undefined
+      ? Number(lengthRef?.[1])
+      : Number(new RegExp(String.raw`\b${lengthRef[1]}\s+${lengthRef[2]}\s+obj\s+(\d+)\s+endobj\b`).exec(latin)?.[1]);
+    const start = streams.lastIndex;
+    if (!Number.isSafeInteger(length) || length < 0 || start + length > raw.length) {
+      throw new Error('PDF stream has a missing or invalid length');
+    }
+    streams.lastIndex = start + length;
     // Images and embedded font programs carry no text; scanning them is slow and noisy.
     if (/\/Subtype\s*\/(?:Image|Type1C|CIDFontType0C|OpenType)\b|\/Length[123]\b/.test(dict)) continue;
     let decoded: string;
     try {
-      let buf: Buffer = Buffer.from(m[1], 'latin1');
-      if (/ASCII85Decode/.test(dict)) buf = ascii85Decode(m[1]);
+      let buf: Buffer = raw.subarray(start, start + length);
+      if (/ASCII85Decode/.test(dict)) buf = ascii85Decode(buf.toString('latin1'));
       if (/FlateDecode/.test(dict)) buf = inflateSync(buf);
       decoded = buf.toString('latin1');
     } catch { continue; /* not decodable: ignore */ }
@@ -182,6 +193,30 @@ describe('PII scanner self-test (no external tools)', () => {
     const { text, meta } = scanPdf(Buffer.from(pdf, 'latin1'));
     expect(text).toContain(FAKE);
     expect(violations(text, meta)).toEqual(['clinician-name', 'dose']);
+  });
+
+  it.each(['direct', 'indirect'] as const)('preserves trailing compressed bytes with a %s stream length', (kind) => {
+    const marker = 'Synthetic stream marker';
+    let content = Buffer.alloc(0);
+    // Vary a harmless comment until the compressed checksum ends in a space.
+    for (let n = 0; n < 256; n++) {
+      content = deflateSync(Buffer.from(`BT (${marker}) Tj ET\n%${'a'.repeat(n)}`, 'latin1'));
+      if (content.at(-1) === 0x20) break;
+    }
+    expect(content.at(-1)).toBe(0x20);
+    const length = kind === 'direct' ? String(content.length) : '9 0 R';
+    const pdf = Buffer.concat([
+      Buffer.from(`%PDF-1.4\n4 0 obj\n<< /Filter /FlateDecode /Length ${length} >>\nstream\n`, 'latin1'),
+      content,
+      Buffer.from(`\nendstream\nendobj\n9 0 obj\n${content.length}\nendobj\n%%EOF\n`, 'latin1'),
+    ]);
+    expect(scanPdf(pdf).text).toBe(marker);
+  });
+
+  it('does not treat an endstream token inside shown text as a stream boundary', () => {
+    const content = 'BT (Synthetic endstream marker) Tj ET';
+    const pdf = `%PDF-1.4\n4 0 obj\n<< /Length ${content.length} >>\nstream\n${content}\nendstream\nendobj\n%%EOF\n`;
+    expect(scanPdf(Buffer.from(pdf, 'latin1')).text).toBe('Synthetic endstream marker');
   });
 
   it('matches clinician titles in any case', () => {

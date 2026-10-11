@@ -37,6 +37,21 @@ describe('loadPackManifests', () => {
     }
   });
 
+  it('rejects a manifest ID that belongs to another pack directory', async () => {
+    const manifest = JSON.stringify({ id: 'b', name: 'B', entry: 'b.html', version: '1.0.0' });
+    const dir = fixture({
+      'packs-a/manifest.json': manifest,
+      'packs-b/manifest.json': manifest,
+    });
+    try {
+      const { manifests, errors } = await loadPackManifests(dir);
+      expect(manifests.map((m) => m.id)).toEqual(['b']);
+      expect(errors).toEqual([{ id: 'packs-a', error: 'manifest.json id does not match pack directory' }]);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   it('skips a packs-* directory that has no manifest.json', async () => {
     const dir = fixture({ 'packs-empty/README.md': 'x' });
     try {
