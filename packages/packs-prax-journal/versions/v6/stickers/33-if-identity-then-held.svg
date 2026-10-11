@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Question mark in cupped hands -->
-  <g stroke="#d6a45e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M104 80 Q104 56 128 56 Q152 56 152 80 Q152 96 132 108 Q124 112 124 132"/>
-    <path d="M40 132 Q128 240 216 132"/>
-  </g>
-  <g fill="#d6a45e" stroke="none">
-    <circle cx="124" cy="156" r="7"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#d6a45e" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><path d="M104 80 Q104 56 128 56 Q152 56 152 80 Q152 96 132 108 Q124 112 124 132"/><path d="M40 132 Q128 240 216 132"/></g><g fill="#d6a45e" stroke="none"><circle cx="124" cy="156" r="7"/></g></svg>

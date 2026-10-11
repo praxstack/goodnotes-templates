@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Wave with shore line and small figure -->
-  <g stroke="#c08866" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M16 96 q24 -40 48 0 t48 0 t48 0 t48 0 t32 0"/>
-    <path d="M16 144 q24 -32 48 0 t48 0 t48 0 t48 0 t32 0"/>
-    <line x1="16" y1="208" x2="240" y2="208"/>
-    <circle cx="200" cy="184" r="10"/>
-    <line x1="200" y1="194" x2="200" y2="208"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#c08866" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><path d="M16 96 q24 -40 48 0 t48 0 t48 0 t48 0 t32 0"/><path d="M16 144 q24 -32 48 0 t48 0 t48 0 t48 0 t32 0"/><line x1="16" x2="240" y1="208" y2="208"/><circle cx="200" cy="184" r="10"/><line x1="200" x2="200" y1="194" y2="208"/></g></svg>

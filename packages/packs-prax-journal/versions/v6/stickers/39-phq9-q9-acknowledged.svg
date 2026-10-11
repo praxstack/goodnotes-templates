@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Checkmark in box -->
-  <g stroke="#1f2126" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <rect x="48" y="64" width="160" height="128"/>
-    <polyline points="80,128 120,168 184,96"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#1f2126" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><rect width="160" height="128" x="48" y="64"/><polyline points="80 128 120 168 184 96"/></g></svg>

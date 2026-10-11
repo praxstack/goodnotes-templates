@@ -1,11 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Phone with reaching fingers above -->
-  <g stroke="#c08866" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <rect x="88" y="120" width="80" height="104" rx="8"/>
-    <line x1="116" y1="132" x2="140" y2="132"/>
-    <line x1="100" y1="80" x2="100" y2="120"/>
-    <line x1="120" y1="64" x2="120" y2="120"/>
-    <line x1="140" y1="64" x2="140" y2="120"/>
-    <line x1="160" y1="80" x2="160" y2="120"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#c08866" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><rect width="80" height="104" x="88" y="120" rx="8"/><line x1="116" x2="140" y1="132" y2="132"/><line x1="100" x2="100" y1="80" y2="120"/><line x1="120" x2="120" y1="64" y2="120"/><line x1="140" x2="140" y1="64" y2="120"/><line x1="160" x2="160" y1="80" y2="120"/></g></svg>

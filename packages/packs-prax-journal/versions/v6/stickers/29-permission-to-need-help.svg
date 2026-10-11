@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Open hand reaching up -->
-  <g stroke="#7e9b85" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M64 200 Q64 144 88 128 L88 88 Q88 72 100 72 Q112 72 112 88 L112 120 L120 80 Q120 64 132 64 Q144 64 144 80 L144 124 L152 88 Q152 72 164 72 Q176 72 176 88 L176 128 Q200 144 200 200 Z"/>
-    <line x1="64" y1="200" x2="200" y2="200"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#7e9b85" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><path d="M64 200 Q64 144 88 128 L88 88 Q88 72 100 72 Q112 72 112 88 L112 120 L120 80 Q120 64 132 64 Q144 64 144 80 L144 124 L152 88 Q152 72 164 72 Q176 72 176 88 L176 128 Q200 144 200 200 Z"/><line x1="64" x2="200" y1="200" y2="200"/></g></svg>

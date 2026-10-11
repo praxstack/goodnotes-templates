@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- Lightning bolt with strikethrough -->
-  <g stroke="#c08866" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <polyline points="120,32 64,128 128,128 96,224"/>
-    <line x1="40" y1="40" x2="216" y2="216"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><g fill="none" stroke="#c08866" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><polyline points="120 32 64 128 128 128 96 224"/><line x1="40" x2="216" y1="40" y2="216"/></g></svg>
