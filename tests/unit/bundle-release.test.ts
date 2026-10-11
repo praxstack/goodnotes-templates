@@ -40,7 +40,8 @@ describe('bundle-release CLI', () => {
         ['tsx', 'scripts/bundle-release.ts', '--pdf', path.join(os.tmpdir(), 'nope-does-not-exist.pdf'), '--month', month],
         { cwd: root, encoding: 'utf8' },
       );
-      expect(r.status).not.toBe(0);
+      expect(r.status).toBe(1);
+      expect(r.stderr).toContain('PDF not found');
       expect(fs.existsSync(sentinel)).toBe(true);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });

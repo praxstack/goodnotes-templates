@@ -1,14 +1,18 @@
 # goodnotes-templates (pretext-templates) - Mac setup, verified 2026-10-05
 
-Repo: praxstack/goodnotes-templates (HEAD f93ff9b). npm workspaces monorepo:
-packages/core, packages/cli, 25 packs-* packages, apps/gallery (Astro 6). Node 24.21, npm 12.2.
+Repo: praxstack/goodnotes-templates. npm workspaces monorepo:
+packages/core, packages/cli, 27 packs-* packages, apps/gallery (Astro 7). Node 24.21, npm 12.2.
+
+Inventory and install guidance reverified on 2026-10-11 at main `6bfd36c` (PR #25 merged).
+The validation results and remaining baseline notes below describe the original 2026-10-05 checkpoint (`f93ff9b`).
 
 ## 1. Install
 ```bash
 cd goodnotes-templates
-npm install --no-package-lock     # NOT `npm ci`: package-lock.json is out of sync with package.json (fails EUSAGE)
+npm ci                           # install the exact, synchronized package-lock.json
 ```
-`--no-package-lock` keeps the tracked lockfile untouched. npm 12 blocks install scripts
+PR #25 regenerated the lockfile; the previous `--no-package-lock` workaround is obsolete.
+npm 12 blocks install scripts
 (sharp, puppeteer, esbuild, fsevents): puppeteer therefore does NOT download its Chrome.
 
 ## 2. Env vars
@@ -48,7 +52,7 @@ Verified with curl: `/`, `/browse`, `/packs/<id>`, `/remix`, `/search` = 200; `/
 unknown route = 404. Dev mode: `cd apps/gallery && npx astro dev --host 127.0.0.1`.
 
 ## 6. Known failures / workarounds
-- `npm ci` fails (lock drift; CI uses it). Use step 1.
+- The original lock-drift failure is fixed by PR #25; `npm ci` succeeds (reverified 2026-10-11). Use step 1.
 - `npm run test:visual`: 11/11 fail. Without the env var: "Could not find Chrome". With it: ENOENT because tests point at
   removed `packs/journals/prax-journal` (now `packages/packs-prax-journal`) - tests/visual/v5-snapshots.test.ts:20.
 - `npm run test:e2e` (Playwright): not run; needs `npx playwright install chromium`. Spec asserts "Twenty-two packs" (tests/e2e/gallery-smoke.spec.ts:28) and

@@ -10,6 +10,10 @@ import { parse } from 'yaml';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const wf = fs.readFileSync(path.join(root, '.github/workflows/generate.yml'), 'utf8');
 
+function npmTestRunIndex(workflow: string): number {
+  return workflow.search(/^[ \t]*run:[ \t]*npm test(?:[ \t]|$)/m);
+}
+
 describe('generate.yml (GNT-002)', () => {
   it('does not call the removed src/cli entry point', () => {
     expect(wf).not.toMatch(/src\/cli\/index\.ts/);
@@ -29,6 +33,11 @@ describe('generate.yml (GNT-002)', () => {
       const base = p.replace(/\/\*\*$/, '');
       expect(fs.existsSync(path.join(root, base)), p).toBe(true);
     }
+  });
+
+  it('triggers a main push when the journal generator changes', () => {
+    const doc = parse(wf) as { on: { push: { paths: string[] } } };
+    expect(doc.on.push.paths).toContain('scripts/generate-journal.ts');
   });
 
   it('release notes do not promise stickers (no longer produced)', () => {
@@ -83,10 +92,17 @@ describe('generate.yml release gating (codex P1)', () => {
 describe('ci.yml', () => {
   const ci = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 
+  it('does not mistake a comment or step name for the npm test run command', () => {
+    const workflow = '# npm test requires poppler\n- name: npm test\n  run: npm run build\n';
+    expect(npmTestRunIndex(workflow)).toBe(-1);
+    expect(npmTestRunIndex(`${workflow}  run: npm test -- --coverage\n`)).toBe(workflow.length);
+  });
+
   it('installs poppler-utils before the unit tests (example PDF PII test needs pdftotext)', () => {
     const install = ci.search(/apt-get install[^\n]*poppler-utils/);
-    const tests = ci.indexOf('npm test');
+    const tests = npmTestRunIndex(ci);
     expect(install).toBeGreaterThan(-1);
+    expect(tests).toBeGreaterThan(-1);
     expect(install).toBeLessThan(tests);
   });
 });

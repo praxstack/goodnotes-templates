@@ -41,6 +41,10 @@ export async function loadPackManifests(
         errors.push({ id: d, error: `manifest.json missing ${missing.join(', ')}` });
         continue;
       }
+      if (d !== `packs-${m.id}`) {
+        errors.push({ id: d, error: 'manifest.json id does not match pack directory' });
+        continue;
+      }
       manifests.push(m as unknown as ManifestLite);
     } catch (err) {
       errors.push({ id: d, error: `invalid manifest.json: ${(err as Error).message}` });
