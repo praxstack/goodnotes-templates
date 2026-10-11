@@ -1,5 +1,5 @@
 # goodnotes-templates fixes (P0/P1), branch fix/audit-2026-10
-No P0 findings. Nothing pushed, no PRs, history untouched. Final state: build OK, lint 0 errors (2 pre-existing warnings), `npm test` 29 files / 411 tests pass, gallery check 0 errors, render-all-packs 27 ok, gallery build OK, `npm ci --dry-run` OK, `npm audit --audit-level=high` clean.
+Reported early checkpoint (before final PR #25 validation): no P0 findings; nothing pushed, no PRs, history untouched. Validation at that checkpoint: build OK, lint 0 errors (2 pre-existing warnings), `npm test` 29 files / 411 tests pass, gallery check 0 errors, render-all-packs 27 ok, gallery build OK, `npm ci --dry-run` OK, `npm audit --audit-level=high` clean.
 
 | ID | Status | Commit | Test evidence | Remains / owner decisions |
 |---|---|---|---|---|
