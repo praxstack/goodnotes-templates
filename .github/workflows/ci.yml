@@ -63,6 +63,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # GNT-019: tests/unit/example-pdf-pii.test.ts needs pdftotext for
+      # embedded-font text and fails on CI when it is missing.
+      - name: Install poppler-utils (pdftotext)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+
       - name: Unit tests with coverage gate
         run: npm test -- --run --coverage
 

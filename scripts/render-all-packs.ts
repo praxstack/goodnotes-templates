@@ -17,12 +17,13 @@
  *   ≈ 80 s total is fine.
  * - We use `closeBrowser()` at the end so the Node process actually exits;
  *   Puppeteer otherwise leaves its child alive.
- * - Errors don't abort the whole run — we collect them and print a summary.
- *   A single broken pack shouldn't block a release.
+ * - Errors don't abort the whole run — we collect them, print a summary and
+ *   exit 1, so CI never publishes a ZIP missing a pack. That includes a
+ *   packs-* manifest that cannot be read or parsed (scripts/pack-manifests.ts).
  * - Output size is reported so we can diff against prior releases.
  */
 
-import { mkdir, readdir, readFile, stat } from 'node:fs/promises';
+import { mkdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -30,42 +31,20 @@ import {
   renderHTMLToPDFFile,
 } from '../packages/core/src/puppeteer-renderer.js';
 import { getPageDimensions } from '../packages/core/src/dimensions.js';
+import { loadPackManifests } from './pack-manifests.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(HERE, '..');
 const PACKAGES = path.join(REPO_ROOT, 'packages');
 const OUT = path.join(REPO_ROOT, 'dist', 'packs');
 
-type ManifestLite = {
-  id: string;
-  name: string;
-  entry: string;
-  version: string;
-};
-
 type Result =
   | { id: string; kind: 'ok'; outPath: string; bytes: number; ms: number }
   | { id: string; kind: 'err'; error: string };
 
-async function loadManifests(): Promise<ManifestLite[]> {
-  const dirs = (await readdir(PACKAGES)).filter((n) => n.startsWith('packs-'));
-  const out: ManifestLite[] = [];
-  for (const d of dirs.sort()) {
-    const file = path.join(PACKAGES, d, 'manifest.json');
-    try {
-      const raw = await readFile(file, 'utf8');
-      const m = JSON.parse(raw) as ManifestLite;
-      out.push(m);
-    } catch {
-      // Skip silently — not every packs-* dir is a pack (defensive).
-    }
-  }
-  return out;
-}
-
 async function main(): Promise<void> {
   const start = Date.now();
-  const manifests = await loadManifests();
+  const { manifests, errors: manifestErrors } = await loadPackManifests(PACKAGES);
   await mkdir(OUT, { recursive: true });
 
   console.log(
@@ -73,6 +52,8 @@ async function main(): Promise<void> {
   );
 
   const results: Result[] = [];
+  // A pack whose manifest cannot be loaded is a failure, not a silent skip.
+  for (const e of manifestErrors) results.push({ id: e.id, kind: 'err', error: e.error });
   const dims = getPageDimensions('a4', 'portrait');
 
   for (let i = 0; i < manifests.length; i++) {

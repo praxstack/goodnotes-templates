@@ -54,6 +54,7 @@ import {
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { resolveBundleDir } from './bundle-paths.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, '..');
@@ -276,8 +277,20 @@ full evidence-based rationale per sticker.
 
 function main(): void {
   const args = parseArgs(process.argv.slice(2));
-  const BUNDLE_NAME = `The Praxis Ledger — ${args.month}`;
-  const BUNDLE_DIR = path.join(REPO, 'output', BUNDLE_NAME);
+  let BUNDLE_NAME: string;
+  let BUNDLE_DIR: string;
+  try {
+    ({ name: BUNDLE_NAME, dir: BUNDLE_DIR } = resolveBundleDir(REPO, args.month));
+  } catch (err) {
+    console.error(`  ✗ ${(err as Error).message}`);
+    process.exit(2);
+  }
+  // Validate inputs BEFORE any destructive step.
+  const srcPdf = path.isAbsolute(args.pdf) ? args.pdf : path.join(REPO, args.pdf);
+  if (!existsSync(srcPdf)) {
+    console.error(`  ✗ PDF not found: ${srcPdf}`);
+    process.exit(1);
+  }
   const STICKER_DIR = path.join(BUNDLE_DIR, 'sticker-pack');
   const PNG_DIR = path.join(STICKER_DIR, 'pngs');
   const SVG_DIR = path.join(STICKER_DIR, 'svgs');
@@ -301,11 +314,6 @@ function main(): void {
   }
 
   // ── PDF ──
-  const srcPdf = path.isAbsolute(args.pdf) ? args.pdf : path.join(REPO, args.pdf);
-  if (!existsSync(srcPdf)) {
-    console.error(`  ✗ PDF not found: ${srcPdf}`);
-    process.exit(1);
-  }
   const destPdf = path.join(BUNDLE_DIR, `${BUNDLE_NAME}.pdf`);
   console.log(`  · PDF  ${path.relative(REPO, srcPdf)} → ${BUNDLE_NAME}.pdf`);
   if (!args.dryRun) copyFileSync(srcPdf, destPdf);

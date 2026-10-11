@@ -3,9 +3,15 @@ name: Generate Assets
 on:
   push:
     branches: [main]
+    # A release is published only from a pushed version tag (vX.Y.Z) that
+    # matches package.json, so every release gets its own immutable tag.
+    # Path filters do not apply to tag pushes.
+    tags: ['v*']
     paths:
-      - 'src/**'
+      - 'packages/**'
+      - 'scripts/render-all-packs.ts'
       - 'package.json'
+      - 'package-lock.json'
   workflow_dispatch:
 
 permissions:
@@ -23,36 +29,43 @@ jobs:
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: '22'
-          cache: 'npm'
+          # This job builds the signed release assets: no dependency cache.
+          package-manager-cache: false
 
       - run: npm ci
 
-      - name: Generate all assets (pages + stickers)
-        run: npx tsx src/cli/index.ts generate --pages --stickers --verbose
+      - name: Render all packs to PDF
+        run: npx tsx scripts/render-all-packs.ts
 
-      - name: Show manifest summary
+      # The prax-journal manifest entry is a single Today page. Replace that
+      # render with the complete Praxis Ledger (one bookmarked month, ~130 pp).
+      # CI has no profile.local.json (gitignored), so personal fields print blank.
+      - name: Build the complete Praxis Ledger (prax-journal)
         run: |
-          echo "=== Generation Manifest ==="
-          cat output/manifest.json | node -e "
-            const m = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
-            console.log('Files:', m.totalFiles);
-            console.log('Size:', m.totalSizeMB, 'MB');
-            console.log('Duration:', m.duration);
-          "
+          read -r from to < <(node -e '
+            const d = new Date();
+            const iso = (t) => t.toISOString().slice(0, 10);
+            const y = d.getUTCFullYear(), m = d.getUTCMonth();
+            console.log(iso(new Date(Date.UTC(y, m, 1))), iso(new Date(Date.UTC(y, m + 1, 0))));
+          ')
+          npx tsx scripts/generate-journal.ts --from "$from" --to "$to" --out dist/packs/prax-journal.pdf
+
+      - name: Show render summary
+        run: |
+          echo "=== Rendered packs ==="
+          ls -l dist/packs/*.pdf
+          echo "PDF count: $(find dist/packs -maxdepth 1 -name '*.pdf' | wc -l)"
 
       - name: Upload assets as artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: goodnotes-templates-assets
-          path: |
-            output/pages/
-            output/stickers/
-            output/manifest.json
+          path: dist/packs/
           retention-days: 90
 
   release:
     needs: generate
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -62,10 +75,18 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
+      - name: Check tag matches package.json version
+        run: |
+          version="$(node -p 'require("./package.json").version')"
+          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} does not match package.json version v${version}"
+            exit 1
+          fi
+
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: goodnotes-templates-assets
-          path: output/
+          path: dist/packs/
 
       - name: Generate SBOM (CycloneDX)
         # FIND-0014 companion / A+ polish — ships an SBOM + SLSA provenance
@@ -79,8 +100,8 @@ jobs:
 
       - name: Create release bundle
         run: |
-          cd output
-          zip -r ../goodnotes-templates-assets.zip pages/ stickers/ manifest.json
+          cd dist/packs
+          zip -r ../../goodnotes-templates-assets.zip .
 
       # FIND-0010: sign the release ZIP with sigstore/cosign (keyless via OIDC).
       # Verify downstream with: cosign verify-blob --certificate-identity-regexp \
@@ -98,24 +119,21 @@ jobs:
             --output-certificate goodnotes-templates-assets.zip.crt \
             goodnotes-templates-assets.zip
 
-      - name: Get version
-        id: version
-        run: echo "version=$(node -p 'require("./package.json").version')" >> $GITHUB_OUTPUT
-
       - name: Create or update release
         uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
         with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: "goodnotes-templates v${{ steps.version.outputs.version }}"
+          tag_name: ${{ github.ref_name }}
+          name: "goodnotes-templates ${{ github.ref_name }}"
+          # Never replace assets already published under an existing tag.
+          overwrite_files: false
           body: |
             ## Pre-built Assets
 
-            Download `goodnotes-templates-assets.zip` for ready-to-use templates and stickers.
+            Download `goodnotes-templates-assets.zip` for ready-to-use template PDFs.
 
             **Contents:**
-            - 7 page types × 8 themes × 3 variants = 100+ PDF pages
-            - 15 sticker types × 8 themes = 700+ PNG stickers (300 DPI, transparent)
-            - manifest.json with file metadata
+            - One ready-to-use PDF per template pack, rendered by `scripts/render-all-packs.ts`
+            - `prax-journal.pdf` is the complete Praxis Ledger for one month (bookmarked, ~130 pages), built by `scripts/generate-journal.ts`
 
             **How to use:**
             1. Download and unzip
