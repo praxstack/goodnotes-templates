@@ -328,9 +328,15 @@ export async function renderHTMLToPDF(options: PuppeteerRenderOptions): Promise<
     // Load the HTML content
     // Increase timeout for large multi-page documents (100+ pages)
     const timeout = options.multiPage ? 120000 : 30000;
-    await page.setContent(html, {
-      waitUntil: 'networkidle0',
-      timeout,
+    // Puppeteer 25 removed `networkidle0` from setContent's `waitUntil`.
+    // Wait for `load`, then for 500 ms with zero in-flight requests: the
+    // same condition `networkidle0` expressed, within one shared deadline.
+    const deadline = Date.now() + timeout;
+    await page.setContent(html, { waitUntil: 'load', timeout });
+    await page.waitForNetworkIdle({
+      idleTime: 500,
+      concurrency: 0,
+      timeout: Math.max(1, deadline - Date.now()),
     });
 
     // Wait for fonts to load. Cast explicitly because this runs in the

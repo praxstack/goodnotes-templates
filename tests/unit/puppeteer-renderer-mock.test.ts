@@ -18,6 +18,7 @@
  *   page.setRequestInterception()
  *   page.on('request', cb)
  *   page.setContent(html, opts)
+ *   page.waitForNetworkIdle(opts)
  *   page.evaluate(fn)
  *   page.pdf(opts)               → Uint8Array
  *   page.close()
@@ -61,6 +62,7 @@ type PageStub = {
   setRequestInterception: ReturnType<typeof vi.fn>;
   on: ReturnType<typeof vi.fn>;
   setContent: ReturnType<typeof vi.fn>;
+  waitForNetworkIdle: ReturnType<typeof vi.fn>;
   evaluate: ReturnType<typeof vi.fn>;
   pdf: ReturnType<typeof vi.fn>;
   close: ReturnType<typeof vi.fn>;
@@ -124,6 +126,7 @@ function makePage(): PageStub {
     setContent: vi.fn(async (_html: string, _opts?: unknown) => {
       if (state.setContentThrows) throw state.setContentThrows;
     }),
+    waitForNetworkIdle: vi.fn().mockResolvedValue(undefined),
     evaluate: vi.fn().mockResolvedValue(undefined),
     pdf: vi.fn(async (opts: Record<string, unknown>) => {
       state.lastPdfOptions = { ...opts };
@@ -306,6 +309,42 @@ describe('renderHTMLToPDF · mocked Chromium · branch coverage', () => {
     });
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Color mode "nonexistent-mode" not found'));
     warnSpy.mockRestore();
+  });
+
+  it('waits for load, then 500 ms of network idle, before printing', async () => {
+    let page: PageStub | null = null;
+    const puppeteer = (await import('puppeteer')) as unknown as {
+      default: { launch: ReturnType<typeof vi.fn> };
+    };
+    puppeteer.default.launch.mockImplementationOnce(async () => {
+      state.launchCount += 1;
+      const br = makeBrowser();
+      br.newPage = vi.fn(async () => (page = makePage()));
+      state.currentBrowser = br;
+      return br;
+    });
+
+    await renderHTMLToPDF({
+      htmlPath: 'x.html',
+      htmlContent: '<!DOCTYPE html><head></head><body></body>',
+      dimensions: A4,
+    });
+
+    const p = page as unknown as PageStub;
+    expect(p.setContent).toHaveBeenCalledWith(expect.any(String), {
+      waitUntil: 'load',
+      timeout: 30000,
+    });
+    expect(p.waitForNetworkIdle).toHaveBeenCalledWith(
+      expect.objectContaining({ idleTime: 500, concurrency: 0 }),
+    );
+    const idleTimeout = (p.waitForNetworkIdle.mock.calls[0]![0] as { timeout: number }).timeout;
+    expect(idleTimeout).toBeGreaterThan(0);
+    expect(idleTimeout).toBeLessThanOrEqual(30000);
+    const order = (fn: ReturnType<typeof vi.fn>): number => fn.mock.invocationCallOrder[0]!;
+    expect(order(p.setContent)).toBeLessThan(order(p.waitForNetworkIdle));
+    expect(order(p.waitForNetworkIdle)).toBeLessThan(order(p.evaluate));
+    expect(order(p.evaluate)).toBeLessThan(order(p.pdf));
   });
 
   it('honors the request allow-list (continue vs abort)', async () => {
