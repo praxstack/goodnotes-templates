@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="80" viewBox="0 0 150 80">
+  <title>Crescent and evening clouds</title>
+  <g fill="none" stroke="#31556d" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M88 16c-13 1-22 10-22 22 0 13 10 22 23 22 8 0 15-4 19-10-3 1-6 2-10 2-12 0-21-9-21-21 0-6 4-12 11-15z"/>
+    <path d="M117 31v9m-4.5-4.5h9m-72 0v7m-3.5-3.5h7"/>
+    <circle cx="110" cy="18" r="1.25"/>
+  </g>
+  <g fill="none" stroke="#9ab9be" stroke-width=".85" stroke-linecap="round">
+    <path d="M7 58c17 0 28-6 43-6 9 0 12 2 18 4m33 5c18-1 26-6 43-6M10 67c20 0 30-6 46-6 17 0 23 7 41 7 17 0 29-7 45-7M27 73c13-1 21-4 30-4 17 0 23 7 40 7 15 0 27-6 35-6"/>
+    <circle cx="58" cy="22" r="1"/>
+    <circle cx="129" cy="25" r="1"/>
+  </g>
+</svg>
