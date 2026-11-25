@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="80" viewBox="0 0 150 80">
+  <title>Sunrise above a ridgeline</title>
+  <g fill="none" stroke="#31556d" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M57 53a19 19 0 0 1 38 0M75.9 28v-8m-17 14-5-5m39 5 5-5m-51 15-7-2m62 2 7-2"/>
+    <path d="M5 61c18-1 31-6 49-5 15 1 22 5 37 5 20 0 32-8 54-8"/>
+  </g>
+  <g fill="none" stroke="#9ab9be" stroke-width=".85" stroke-linecap="round">
+    <path d="M11 69c18 0 29-5 45-4 14 1 21 5 37 5 20 0 33-7 45-7M29 75c12-1 18-3 30-2 10 1 18 3 29 3m18-2c11-1 22-5 31-5"/>
+    <path d="M64 53a12 12 0 0 1 24 0m-19 0a7 7 0 0 1 14 0"/>
+  </g>
+</svg>
